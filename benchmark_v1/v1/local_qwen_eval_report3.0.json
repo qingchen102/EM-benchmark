@@ -1,0 +1,1187 @@
+{
+  "dataset": "dataset",
+  "num_samples": 100,
+  "jamming_classification_accuracy": 0.34,
+  "accuracy_by_snr_group": {
+    "Low SNR": 0.32142857142857145,
+    "Mid SNR": 0.23529411764705882,
+    "High SNR": 0.4473684210526316
+  },
+  "snr_group_counts": {
+    "Low SNR": 28,
+    "Mid SNR": 34,
+    "High SNR": 38
+  },
+  "tool_call_success_rate": 0.9949748743718593,
+  "total_tool_calls": 199,
+  "successful_tool_calls": 198,
+  "results": [
+    {
+      "file": "sample_00000.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Consider implementing a pulse blanking filter or pulse shaping techniques to mitigate the impact of pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00001.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or time-domain pulse removal techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00002.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00003.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No immediate action required; monitor for potential changes in signal characteristics."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00004.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement wideband filters or adaptive equalization techniques to mitigate dynamic frequency shifting in the spectrum."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00005.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Deploy adaptive filtering and use a signal tracker."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00006.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00007.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or cognitive radios that can adapt to changing spectrum conditions."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00008.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement adaptive filtering and nulling techniques to mitigate high-PAPR, short-duration pulses."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00009.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement adaptive filtering techniques capable of handling dynamic changes in frequency and consider using more robust spread spectrum methods."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00010.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement swept frequency jamming detection and mitigation techniques to address the varying jammer emissions. Consider using wideband receivers or adaptive filtering methods."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00011.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement PAPR thresholding and pulse identification in the receiver to mitigate the jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00012.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00013.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement anti-sweep jamming techniques such as adaptive filtering or swept-frequency nulling filters to mitigate interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00014.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00015.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "Continue routine operational checks."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00016.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement a dynamic filtering or adaptive receiver that can detect and mitigate sudden spikes in signal power. Synchronizing this mitigation strategy with the expected pulse patterns would be beneficial."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00017.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement anti-pulse techniques such as spectral nulling or advanced receivers with robust equalization to mitigate the jamming impact."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00018.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Employ swept jamming detection techniques and implement adaptive filtering methods to mitigate frequency drift."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00019.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement a PAPR-reduction technique or use a pulse-detection algorithm to mitigate the interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00020.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a dynamic frequency hopping scheme to avoid swept jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00021.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No immediate action required. Monitor the situation for potential changes."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00022.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00023.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband filtering techniques or use multi-channel adaptive interference mitigation."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00024.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement robust frequency-tracking techniques or swept noise cancellation algorithms to mitigate interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00025.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse suppression techniques such as threshold-based filtering to mitigate the high PAPR signals."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00026.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement anti-pulse countermeasures such as short-time Fourier Transform (STFT) based detection and mitigation of isolated high-energy pulses."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00027.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement advanced filtering or adaptive equalization techniques to mitigate pulse interference. Consider using time-domain spread spectrum methods if possible."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00028.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a dynamic spectrum sensing mechanism to adaptively filter out the sweeping signal, and consider using Doppler filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00029.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency-hopping spread spectrum to counteract sweeping jammers, along with low-PAPR modulation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00030.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency agility in your receiver to track and demodulate signals across the observed bandwidth. Consider using adaptive filtering techniques to mitigate sweeping attacks."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00031.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement frequency-hopping spread spectrum (FHSS) or direct sequence spread spectrum (DSSS) techniques to mitigate pulse attacks."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00032.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse detection filters or use dynamic time-domain analysis to mitigate intermittent high-power transmissions."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00033.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Consider implementing spread spectrum techniques or using matched filters to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00034.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Consider implementing swept jammer detection and mitigation techniques, such as adaptive spectral nulling or using wideband filters tuned to anticipated sweep frequencies."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00035.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Monitor frequency allocations and implement adaptive filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00036.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement anti-sweep filtering techniques and monitor for additional pulse jamming potential."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00037.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No immediate action required as the current interference appears normal."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00038.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement a PAPR reduction technique or consider pulse shaping to mitigate the effects of intense pulses in the signal."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00039.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Monitor and track peak frequency drift. Use robust filtering techniques at drifting frequencies."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00040.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00041.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use adaptive filtering techniques to counteract the sweeping nature of the jamming signal."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00042.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Consider implementing a broadband filter to reduce interference from the wide spectrum activity."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00043.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement adaptive filtering and dynamic spectrum sensing to handle the sweeping nature of the interference. Additionally, consider deploying more robust pulse detection algorithms to mitigate high-PAPR signals."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00044.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 4,
+      "tool_successes": 4
+    },
+    {
+      "file": "sample_00045.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement advanced filtering and adaptive interference cancellation. Consider using spread spectrum techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00046.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement dynamic spectrum sensing and adaptive filtering methods."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00047.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise filtering or use adaptive interference cancellation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00048.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Consider filtering techniques that can mitigate frequency hopping or swept spectral characteristics, and monitor signal sources for any unexpected transmissions."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00049.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement swept spectrum detection and filtering techniques to mitigate the effect of sweeping jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00050.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00051.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement narrowband filtering to combat jamming on specific frequencies. Additionally, consider implementing advanced time-domain techniques such as spread spectrum or chirp signal mitigation."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00052.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Consider implementing wideband interference mitigation techniques such as filtering or using software-defined radios with adaptive antenna systems to null out broadband noise."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00053.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Utilize a filter bank with real-time adaptation to dynamic wideband spectrum changes and implement adaptive filtering algorithms."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00054.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement swept jamming detection algorithms or use adaptive filtering techniques that can handle dynamic frequency modulation."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00055.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement adaptive filtering techniques to mitigate changes in the signal spectrum and consider increasing system robustness against frequency sweeps."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00056.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement filtering to reduce broad-band interference or consider directional antennas for better signal isolation."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00057.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Apply spectral filtering or advanced equalization techniques to mitigate wideband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00058.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "none",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "Continue monitoring for any changes in the spectrum and ensure that RF environment remains stable."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00059.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use spread spectrum modulation to counteract potential pulse jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00060.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement adaptive filtering techniques for pulse jamming mitigation. Also, enhance system resilience to account for potential swept jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00061.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Monitor and adjust the operating frequency to avoid the sweeping range of the interferer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00062.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Apply broadband noise filters to reduce interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00063.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement adaptive filtering and robust modulation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00064.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a multi-band filtering strategy with adaptive frequency hopping. Regularly monitor the spectrum."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00065.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency diversity techniques or adaptive antennas to mitigate against dynamic jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00066.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a dynamic frequency allocation algorithm to react to rapid frequency changes, or employ adaptive filtering techniques tuned for sweeping signals."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00067.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement a fast frequency adaptation algorithm coupled with advanced pulse filtering to counteract the jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00068.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement Time Hopping Spread Spectrum (THSP) or Fast Frequency Hopping to reduce the impact of pulse-based jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00069.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse jammer suppression filters or Adaptive Modulation and Coding techniques."
+      },
+      "tool_calls": 3,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00070.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 0,
+      "tool_successes": 0
+    },
+    {
+      "file": "sample_00071.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a jamming-resistant receiver algorithm with adaptive filtering or spectral awareness to deal with dynamic spectrum changes."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00072.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse detection filters and consider spread-spectrum communication."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00073.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse jamming detection and mitigation techniques such as adaptive filtering or advanced waveform filtering algorithms."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00074.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Consider implementing frequency hopping techniques or using adaptive filtering to counteract potential swept jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00075.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00076.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement real-time spectrum analysis with agile response mechanisms to counteract sweeping attacks."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00077.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Deploy a wideband noise jammer to counteract the broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00078.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement swept jammer mitigation strategies due to the dynamic spectrum changes. Also, consider employing techniques to reduce PAPR in your system."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00079.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement anti-sweep techniques such as frequency hopping or wideband filtering. Consider pulse shaping and mitigation for power spikes."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00080.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse detection and filtering techniques to reduce the impact of high-PAPR pulses."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00081.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement wideband filtering or use frequency-hopping spread spectrum to withstand the dynamic nature of swept jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00082.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping spread spectrum techniques or use adaptive filtering to manage drifting frequencies."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00083.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse-shaped noise cancellation techniques to mitigate the impact of pulse jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00084.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation needed at this time."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00085.npy",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency diversity techniques and adaptive filtering to handle dynamic frequency changes."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00086.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement PAPR reduction techniques and use wide pulse blanks (silent periods) to disrupt the signal."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00087.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse-shaping filters or frequency-selective receivers to mitigate the effects of high-PAPR signals."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00088.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement frequency hopping or using spread spectrum techniques to mitigate broad frequency range interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00089.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00090.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Adjust the receiver to filter out slowly varying frequency components or use software-defined radio techniques for adaptive filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00091.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement anti-sweep jamming techniques including adaptive filtering, spectral nulling, and consider spread spectrum methods."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00092.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse-shaping filters or use advanced equalization techniques to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00093.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise cancellation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00094.npy",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Use dynamic frequency hopping and a wideband receiver to mitigate the jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00095.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement a PAPR reduction technique or use a pulse blanker to mitigate the impact of pulsed interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00096.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement spectral filtering or dynamic spectrum access to mitigate broadband jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00097.npy",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Perform additional signal cleaning and filtering to reduce interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00098.npy",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement continuous frequency monitoring and consider using spread spectrum or frequency hopping techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00099.npy",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "unknown",
+      "correct": false,
+      "diagnosis": {},
+      "tool_calls": 0,
+      "tool_successes": 0
+    }
+  ]
+}
