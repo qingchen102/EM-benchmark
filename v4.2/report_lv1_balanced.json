@@ -1,0 +1,1320 @@
+{
+  "dataset": "dataset_lv1",
+  "num_samples": 100,
+  "jamming_classification_accuracy": 0.51,
+  "accuracy_by_snr_group": {
+    "Low SNR": 0.0,
+    "Mid SNR": 0.0,
+    "High SNR": 0.51
+  },
+  "snr_group_counts": {
+    "Low SNR": 0,
+    "Mid SNR": 0,
+    "High SNR": 100
+  },
+  "tool_call_success_rate": 1.0,
+  "total_tool_calls": 200,
+  "successful_tool_calls": 200,
+  "results": [
+    {
+      "file": "sample_00000.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency hopping or spread spectrum techniques to avoid the peak frequency."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00001.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use advanced filtering to mitigate the effect of pulse jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00002.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband interference mitigation techniques such as spectral nulling or adaptive filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00003.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00004.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency-hopping techniques to avoid the swept frequency range."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00005.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency tracking and filtering to address the swept nature of the signal."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00006.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use advanced filtering to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00007.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency hopping or use of spread spectrum techniques to avoid the dominant frequency."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00008.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or use adaptive equalization techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00009.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00010.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use a more robust modulation scheme to mitigate frequency drift and bandwidth issues."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00011.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping spread spectrum (FHSS) techniques to avoid the drifting frequencies."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00012.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "none",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00013.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a narrowband filter to mitigate swept interference or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00014.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a swept frequency filter or adaptive filtering techniques to mitigate the interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00015.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency hopping or use a wideband receiver to mitigate single-tone jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00016.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use adaptive filtering to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00017.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00018.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a narrowband filter to mitigate swept interference or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00019.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use adaptive filtering to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00020.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a narrowband filter to mitigate swept interference or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00021.npy",
+      "mod_type": "BPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filtering to reduce interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00022.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise suppression techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00023.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00024.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "single_tone",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency hopping spread spectrum (FHSS) techniques to mitigate single-tone jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00025.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or use adaptive filtering techniques to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00026.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband noise reduction techniques such as filtering and equalization."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00027.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise cancellation techniques to mitigate the impact of broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00028.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or use adaptive equalization techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00029.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement wideband interference mitigation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00030.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency tracking and adaptive filtering techniques to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00031.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or use adaptive filtering techniques to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00032.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "broadband",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise cancellation techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00033.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00034.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency agile receivers or use adaptive filtering techniques to mitigate frequency drift and bandwidth issues."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00035.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use a receiver with adaptive filtering to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00036.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "single_tone",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filter or equalization techniques to mitigate the effect of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00037.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filtering or nulling techniques to mitigate the impact of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00038.npy",
+      "mod_type": "BPSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Consider using frequency hopping or narrowband filters to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00039.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques to reduce PAPR and increase duty cycle."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00040.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement filtering or equalization techniques to mitigate single-tone interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00041.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00042.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filter or notch filter to mitigate high peak power."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00043.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use advanced equalization methods to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00044.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "broadband",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or use adaptive equalization techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00045.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques to reduce peak power and improve duty cycle."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00046.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Apply filters or equalization techniques to mitigate frequency drift. Consider using adaptive algorithms for dynamic bandwidth management."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00047.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency hopping or use spread spectrum techniques to avoid the dominant frequency."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00048.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Consider using a swept frequency filter or adaptive filtering techniques to mitigate this type of interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00049.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Adjust receiver filters to mitigate frequency drift or consider using a more robust modulation scheme."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00050.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement a filter to suppress the single-tone frequency or use adaptive equalization techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00051.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping spread spectrum (FHSS) techniques to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00052.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filter or notch filter to mitigate the high peak power."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00053.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "broadband",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise reduction techniques and consider using adaptive filtering to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00054.npy",
+      "mod_type": "BPSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a swept frequency filter or use adaptive filtering techniques to mitigate the interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00055.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency stabilization techniques to counteract the drift and reduce bandwidth usage."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00056.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement spectral nulling or frequency hopping techniques to mitigate the impact of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00057.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Consider using narrowband filters to reduce interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00058.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "single_tone",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement a narrowband filter to reduce the impact of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00059.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband noise reduction techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00060.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use adaptive filtering techniques to mitigate frequency drift issues."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00061.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "single_tone",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone mitigation techniques such as spectral nulling or filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00062.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required as the signal appears to be clean."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00063.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use adaptive filtering to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00064.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use a receiver with adaptive filtering to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00065.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Adjust receiver filters to mitigate frequency drift and consider using adaptive filtering techniques for bandwidth management."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00066.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a swept frequency filter or adaptive filtering techniques to mitigate the interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00067.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or use adaptive equalization techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00068.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or use adaptive filtering techniques to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00069.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters and adaptive equalization techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00070.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "none",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": ""
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00071.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency tracking and adaptive filtering techniques to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00072.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use adaptive filtering to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00073.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required as the signal appears clean in both spectral and time domain analysis."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00074.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping or use adaptive filtering techniques to mitigate frequency drift."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00075.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "none",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required as the signal is clean."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00076.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband interference mitigation techniques such as spectral nulling or adaptive filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00077.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00078.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise filtering techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00079.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency-hopping spread spectrum (FHSS) or direct sequence spread spectrum (DSSS) to mitigate against frequency drift and bandwidth issues."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00080.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Consider filtering techniques or adaptive equalization to mitigate single-tone interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00081.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency agility or use of chirp signals to avoid swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00082.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement wideband filtering or adaptive frequency hopping to mitigate the effect of swept jamming."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00083.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband noise reduction techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00084.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone mitigation techniques such as spectral nulling or filtering."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00085.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "broadband",
+      "predicted_jamming_type": "none",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00086.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques and use adaptive filtering to mitigate the impact of pulses."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00087.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or use adaptive filtering techniques to mitigate pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00088.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "single_tone",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement frequency filtering to reduce the impact of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00089.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement broadband noise reduction techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00090.npy",
+      "mod_type": "LFM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "none",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "none",
+        "mitigation": "No specific mitigation required."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00091.npy",
+      "mod_type": "OFDM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "broadband",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "broadband",
+        "mitigation": "Implement wideband filtering or use adaptive equalization techniques to mitigate broadband interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00092.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "pulse",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement time-domain pulse shaping techniques to mitigate the effect of pulse jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00093.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement a narrowband filter to mitigate swept interference or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00094.npy",
+      "mod_type": "16QAM",
+      "expected_jamming_type": "none",
+      "predicted_jamming_type": "swept",
+      "correct": false,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency tracking and adaptive filtering techniques to mitigate swept interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00095.npy",
+      "mod_type": "GFSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping techniques or use advanced filtering to mitigate the effect of pulse jammers."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00096.npy",
+      "mod_type": "OOK",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Consider using a filter to reduce the impact of the single-tone jammer."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00097.npy",
+      "mod_type": "64QAM",
+      "expected_jamming_type": "single_tone",
+      "predicted_jamming_type": "single_tone",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "single_tone",
+        "mitigation": "Implement single-tone filter or use adaptive filtering techniques."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00098.npy",
+      "mod_type": "FHSS",
+      "expected_jamming_type": "swept",
+      "predicted_jamming_type": "swept",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "swept",
+        "mitigation": "Implement frequency hopping spread spectrum (FHSS) synchronization to mitigate frequency drift issues."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    },
+    {
+      "file": "sample_00099.npy",
+      "mod_type": "QPSK",
+      "expected_jamming_type": "pulse",
+      "predicted_jamming_type": "pulse",
+      "correct": true,
+      "diagnosis": {
+        "jamming_type": "pulse",
+        "mitigation": "Implement pulse shaping filters or use adaptive filtering techniques to mitigate the impact of pulse interference."
+      },
+      "tool_calls": 2,
+      "tool_successes": 2
+    }
+  ]
+}
