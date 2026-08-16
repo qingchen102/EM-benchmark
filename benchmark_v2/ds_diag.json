@@ -1,0 +1,104 @@
+{
+  "dataset": ".",
+  "num_samples": 1,
+  "num_interferers_accuracy": 1.0,
+  "category_accuracy": 0.0,
+  "freq_accuracy": 0.0,
+  "bandwidth_accuracy": 0.0,
+  "doa_accuracy": 0.0,
+  "modulation_accuracy": null,
+  "freq_mae": null,
+  "doa_mae": null,
+  "bandwidth_mae_rel": null,
+  "category_accuracy_by_snr": {
+    "Low": null,
+    "Mid": 0.0,
+    "High": null
+  },
+  "snr_group_counts": {
+    "Low": 0,
+    "Mid": 1,
+    "High": 0
+  },
+  "missed_sources_total": 2,
+  "false_alarm_total": 2,
+  "avg_tool_calls_per_sample": 6.0,
+  "tool_call_rate": 1.0,
+  "results": [
+    {
+      "file": "sample_00000.npy",
+      "snr_db": 7.739233746429086,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "I've gathered the key measurements. Let me analyze them before producing the final answer.\n\n**Measurements summary:**\n- **Spectrum:** single dominant spectral peak at **-0.4463** (normalized, strongest), mixture 99% OBW = **0.9023** (very wide — consistent with a wideband LFM target plus a strong edge-of-band signal)\n- **Number of sources:** **3** (eigenvalue estimate 3, spectral peak count 1) → **2 interferers** (target is the 3rd source)\n- **DOA:** **-31°, 0°, 50°** → target at 0°, interferers",
+      "round_log": [
+        {
+          "elapsed_s": 2.6,
+          "content_len": 0,
+          "tool_calls": 3,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 5.0,
+          "content_len": 0,
+          "tool_calls": 2,
+          "names": [
+            "estimate_doa",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 4.1,
+          "content_len": 0,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 150.4,
+          "content_len": 1422,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "single_tone",
+            "freq_offset": -0.4463,
+            "bandwidth": 0.005,
+            "doa": -31.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "OFDM",
+            "freq_offset": 0.02,
+            "bandwidth": 0.08,
+            "doa": 50.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    }
+  ]
+}
