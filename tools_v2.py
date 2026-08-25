@@ -440,11 +440,21 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
     sources_candidates = []
     for m in merged:
         ratio = abs(m["freq"]) / tgt_bw if tgt_bw else None
+        # 类别边界提示：ratio/功率落在判定阈值附近时标记，提醒模型该候选的
+        # 类别对测量噪声敏感（全量诊断：σf=0.02 下规则命中率上限仅 0.89，
+        # 混淆集中在 0.5 / 2.0 / 10dB 边界）。边界半宽随目标带宽缩放
+        # （σ_ratio ≈ σf / tgt_bw）。
+        near_boundary = False
+        if ratio is not None:
+            dz = max(0.08, 1.5 * 0.02 / tgt_bw)
+            near_boundary = (abs(ratio - 0.5) < dz or abs(ratio - 2.0) < 4 * dz
+                             or abs(m["rel_db"] - 10.0) < 3.0)
         sources_candidates.append({
             "freq": round(m["freq"], 4),
             "bandwidth": round(m["bandwidth"], 4),
             "ratio_to_target_bw": round(float(ratio), 3) if ratio is not None else None,
             "power_ratio_approx_db": round(m["rel_db"], 1),   # 相对全局主峰（≈相对目标）
+            "near_category_boundary": bool(near_boundary),
         })
 
     peaks_list = [{"freq": round(m["freq"], 4), "rel_db": round(m["rel_db"], 1),
