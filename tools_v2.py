@@ -70,13 +70,41 @@ def _feature_vector(x):
     return np.array([measure_obw99(x), flat, drift, p2a, kurt, papr, duty])
 
 
-def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0):
-    """把间隔 < min_gap 的相邻峰合并为同一源（成型调制的频谱纹波）。
+def _valley_split(group, freq, psd, thr_db):
+    """按谱谷深度递归分裂峰组：相邻峰之间谷底比两者中较高者低 >= thr_db 视为异源。
+
+    固定间距分组（min_gap）无法区分"同一源的浅纹波"与"两个近距源的深谷"
+    （数据集允许两源频差 < 0.15、靠 DOA 分开）。真实异源之间频谱存在深谷，
+    而单源成型纹波间谷浅 —— 以谷深为判据更物理。
+    """
+    g = sorted(group, key=lambda p: p[0])
+    if len(g) < 2:
+        return [g]
+    for j in range(1, len(g)):
+        a, b = g[j - 1], g[j]
+        ia = int(np.argmin(np.abs(freq - a[0])))
+        ib = int(np.argmin(np.abs(freq - b[0])))
+        if ib - ia < 2:
+            continue
+        valley_db = float(10.0 * np.log10(float(np.min(psd[ia:ib + 1])) + 1e-300))
+        if max(a[1], b[1]) - valley_db >= float(thr_db):
+            return (_valley_split(g[:j], freq, psd, thr_db) +
+                    _valley_split(g[j:], freq, psd, thr_db))
+    return [g]
+
+
+def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0, split_valley_db=8.0):
+    """把间隔 < min_gap 的相邻峰合并为同一源（成型调制的频谱纹波），再按谱谷分裂。
 
     成型调制（QPSK/OFDM 等）的频谱内部有多个近等幅纹波峰，直接当独立峰会导致：
     源数虚高、频偏选错纹波（低估）、per-peak 带宽只切到单个纹波（严重低估）。
-    合并规则：频率间隔 < min_gap（0.1）视为同一源 —— 与真实源的分离约束
-    （FREQ_MIN_SEP=0.15）有安全距离。
+    两步：
+    1. 频率间隔 < min_gap（0.1）先归并 —— 与真实源分离约束（FREQ_MIN_SEP=0.15）
+       有安全距离；
+    2. 组内谱谷分裂：相邻峰谷底比较高峰低 >= split_valley_db（8dB；阈值扫描
+       7~14dB 权衡：越低覆盖越高但虚峰越多，8dB 时候选覆盖 0.39→0.64 而合并组
+       计数失配与 10dB 持平）→ 拆成不同源。修复近距双源被并成一组导致候选丢失/
+       中心拉偏的问题（离线诊断：未覆盖干扰中 94% 属此类偏斜）。
 
     返回 [{freq(组内功率加权中心), rel_db, bandwidth(-drop_db 轮廓跨度),
     num_peaks, span_idx(组最左/最右谱索引, 供 Hann 切片)}]，按幅度降序。
@@ -84,12 +112,16 @@ def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0):
     if not peaks:
         return []
     peaks = sorted(peaks, key=lambda p: p[0])
-    groups = [[peaks[0]]]
+    raw_groups = [[peaks[0]]]
     for p in peaks[1:]:
-        if p[0] - groups[-1][-1][0] < float(min_gap):
-            groups[-1].append(p)
+        if p[0] - raw_groups[-1][-1][0] < float(min_gap):
+            raw_groups[-1].append(p)
         else:
-            groups.append([p])
+            raw_groups.append([p])
+
+    groups = []
+    for g in raw_groups:
+        groups.extend(_valley_split(g, freq, psd, split_valley_db))
 
     out = []
     for g in groups:
@@ -268,7 +300,7 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
 
     # 按合并组切片（与 analyze_spectrum 同口径，-20dB 轮廓定切片宽度）
     raw_peaks = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    merged = _merge_peaks(raw_peaks[:24], freq, psd, drop_db=20.0)
+    merged = _merge_peaks(raw_peaks, freq, psd, drop_db=20.0)
     obw99 = measure_obw99(x)
     target_half = max(obw99 / 2.0, 0.05)     # 目标带半径（无先验时的保守估计）
     # 非目标带优先（干扰更可能在目标带外），其次按强度，最多 3 组
@@ -366,7 +398,7 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
     freq = np.fft.fftshift(np.fft.fftfreq(n, d=1.0))
 
     raw_peaks = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    merged = _merge_peaks(raw_peaks[:24], freq, psd)   # 纹波合并
+    merged = _merge_peaks(raw_peaks, freq, psd)   # 纹波合并
     merged = merged[:6]
     obw99 = measure_obw99(x)
     tgt_bw = None if target_bandwidth_normalized is None else max(float(target_bandwidth_normalized), 1e-9)
@@ -467,7 +499,7 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, An
 
     # 2) 纹波合并峰计数（与 analyze_spectrum 同口径）
     raw_all = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    n_merged = min(len(_merge_peaks(raw_all[:24], freq, psd)), max_sources)
+    n_merged = min(len(_merge_peaks(raw_all, freq, psd)), max_sources)
 
     # 3) MDL（多天线空间协方差）
     n_mdl = None

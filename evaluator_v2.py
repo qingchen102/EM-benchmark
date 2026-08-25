@@ -93,8 +93,11 @@ wideband sources — do not treat them as confirmed sources on their own.
 
 Interference category definition — use the per-source measurements that
 analyze_spectrum already computed (ratio_to_target_bw, power_ratio_approx_db):
-1. pulse:      detect_time_domain shows high PAPR AND low duty cycle AND periodic
-               bursts -> category "pulse"
+1. pulse:      requires ALL of detect_time_domain: papr_db >= 8 AND
+               pulse_duty_cycle <= 0.3 AND pulse_edge_count >= 4 (periodic
+               bursts). High PAPR alone does NOT imply pulse — strong
+               out-of-band or fading signals also elevate it; without burst
+               evidence, prefer blocking/adjacent/none over pulse.
 2. co_channel: ratio_to_target_bw < 0.5 (interferer inside the target band)
 3. blocking:   ratio_to_target_bw >= 0.5 AND power_ratio_approx_db >= 10 dB
                (strong out-of-band signal -> receiver LNA saturation)
