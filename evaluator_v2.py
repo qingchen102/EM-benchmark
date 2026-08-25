@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -77,18 +78,12 @@ Measurement-to-answer mapping (use the tool values directly):
                      the simpler/lower-order one (e.g. QPSK over OFDM); NEVER fall back to
                      a specific QAM order without evidence, and never guess 64QAM by default
 
-Source-count decision tree — num_sources_estimate (MDL, spatial eigenvalue method) is
-the primary and usually correct count. Adjust it ONLY in these two cases, using the
-other evidence:
-1. MDL OVERCOUNTS a noise eigenvalue or wideband ripple: if
-   merged_peak_count < mdl_estimate AND len(stable_peaks_deg) < merged_peak_count,
-   use merged_peak_count instead.
-2. MDL UNDERCOUNTS (strong interferer): if merged_peak_count > mdl_estimate AND
-   peaks_new_at_order3_deg is non-empty (a source visible only at MUSIC order 3),
-   use merged_peak_count.
-Otherwise keep num_sources_estimate. Never adjust the count on a single weak piece of
-evidence — one spectral peak or one DOA peak alone is NOT a source. If the evidence is
-consistent, do not second-guess it.
+Source count — estimate_num_sources returns num_sources_estimate (raw MDL) AND
+final_suggestion: the MDL value AFTER an over/under-count correction has already been
+applied by the tool, using merged spectral peaks and cross-order MUSIC peaks as
+evidence. Use final_suggestion as your source count (= 1 target + N interferers).
+Do NOT re-derive the correction yourself; override final_suggestion ONLY when
+multiple independent tools clearly contradict it.
 
 DOA usage — estimate_doa returns doa_estimates_deg for the requested num_sources, plus
 stable_peaks_deg (angles seen in BOTH the order-2 and order-3 runs, tolerance 5 deg;
@@ -132,6 +127,16 @@ Rules:
 - The final message must contain ONLY the JSON answer object and nothing else
   (no prose, no markdown fences, no second JSON block).
 """
+
+# repair 轮：模型最终回复缺有效 JSON 时（长推理截断/纯散文），追加一次无工具的
+# 强制格式回复。ds_run8 中 8/50 样本因此丢掉全部指标，此轮可挽回。
+REPAIR_PROMPT = (
+    "Your previous reply did not contain a valid final JSON answer. Reply NOW with "
+    "ONLY the final JSON object matching this schema — no prose, no markdown, no "
+    "reasoning, no tool calls:\n"
+    '{"num_interferers": <0|1|2>, "interferers": [{"category": "co_channel", '
+    '"modulation": "QPSK", "freq_offset": 0.1, "bandwidth": 0.05, "doa": 30.0}, ...]}'
+)
 
 
 def _extract_json(text: str) -> dict[str, Any]:
@@ -180,6 +185,19 @@ def _to_float(value, default=float("nan")):
     if not np.isfinite(v):
         return float(default)
     return v
+
+
+def _has_final_answer(pred: Any) -> bool:
+    """最终答案有效性：num_interferers 可解析为非负整数且 interferers 是 list。
+
+    缺 num_interferers（长推理无 JSON / 截断）的回复按无效处理，触发 repair 轮。
+    """
+    if not isinstance(pred, dict):
+        return False
+    n = _to_float(pred.get("num_interferers"), float("nan"))
+    if not np.isfinite(n) or n < 0:
+        return False
+    return isinstance(pred.get("interferers", []), list)
 
 
 def _format_observation(obs: dict) -> str:
@@ -267,6 +285,7 @@ class OpenAICompatibleAgent:
                 return _extract_json(raw), 0, raw, round_log
             except Exception:
                 return {}, 0, "", round_log
+        best_cand: dict[str, Any] = {}
         for _ in range(10):
             # 工具模式不加 max_tokens：ds-v4-flash 无限制时生成量巨大（极慢），
             # 加了又截断导致空答案 —— 先用 round_log 诊断每轮耗时/输出量，
@@ -288,9 +307,10 @@ class OpenAICompatibleAgent:
                 "names": names,
             })
             if not tool_calls:
-                # 无论是否有内容，直接作为最终答案尝试解析（空回复返回 {}，
-                # 不重试 —— 避免空转放大 API 调用次数导致单样本卡死）
-                return _extract_json(raw), calls, raw, round_log
+                best_cand = _extract_json(raw)
+                if _has_final_answer(best_cand):
+                    return best_cand, calls, raw, round_log
+                break                        # 无效答案（纯推理无 JSON）→ repair 轮
             calls += len(tool_calls)
             messages.append(message.model_dump() if hasattr(message, "model_dump")
                             else {"role": "assistant", "content": message.content,
@@ -309,8 +329,29 @@ class OpenAICompatibleAgent:
                 messages.append({"role": "tool", "tool_call_id": call.id,
                                  "name": call.function.name,
                                  "content": json.dumps(result)})
-        # 轮数耗尽仍无最终答案（工具调用循环不收敛）
-        return {}, calls, raw, round_log
+        # 轮数耗尽仍无最终答案（工具调用循环不收敛）或最终回复缺 JSON：
+        # repair 轮 —— 不带工具参数强制文本回复（模型无法继续调工具），限
+        # max_tokens 防止再次长推理。失败则回退最后一次解析结果。
+        try:
+            messages.append({"role": "user", "content": REPAIR_PROMPT})
+            t0 = _time.time()
+            response = self._create(
+                model=self.model, messages=messages,
+                temperature=0.2, seed=42, max_tokens=2048,
+            )
+            raw_rep = response.choices[0].message.content or ""
+            round_log.append({"phase": "repair",
+                              "elapsed_s": round(_time.time() - t0, 1),
+                              "content_len": len(raw_rep),
+                              "tool_calls": 0, "names": []})
+            cand = _extract_json(raw_rep)
+            if _has_final_answer(cand):
+                return cand, calls, raw_rep, round_log
+            if cand:
+                best_cand = cand
+        except Exception:
+            pass
+        return best_cand, calls, raw, round_log
 
 
 def _greedy_match(gt_interferers, pred_interferers):
@@ -365,6 +406,8 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
             "category_accuracy": 1.0, "freq_accuracy": 1.0,
             "bandwidth_accuracy": 1.0, "doa_accuracy": 1.0,
             "modulation_accuracy": None,
+            "mod_e2e_accuracy": None,
+            "mod_hits": 0, "mod_matched_total": 0, "mod_gt_total": 0,
             "freq_mae": None, "doa_mae": None, "bandwidth_mae_rel": None,
         }
     pairs, unmatched_g, unmatched_p = _greedy_match(gt_srcs, pred_srcs)
@@ -397,6 +440,10 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
                          max(g["bandwidth_normalized"], 1e-3))
 
     n_gt = max(gt_n, 1)
+    # 端到端调制口径：分母 = 该样本全部真实调制类 GT 干扰（未匹配计为错）。
+    # 现有 modulation_accuracy 分母只含匹配对 —— 跨 run 匹配数变化时不可比
+    # （ds_run6→8 matched 25→17，调制指标被分母假象抬高）。
+    mod_gt_total = sum(1 for g in gt_srcs if g.get("waveform_type") is None)
     return {
         "num_interferers_ok": bool(num_ok),
         "num_interferers_gt": gt_n,
@@ -409,6 +456,10 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
         "bandwidth_accuracy": bw_hit / n_gt,
         "doa_accuracy": doa_hit / n_gt,
         "modulation_accuracy": (mod_hit / mod_total) if mod_total else None,
+        "mod_e2e_accuracy": (mod_hit / mod_gt_total) if mod_gt_total else None,
+        "mod_hits": int(mod_hit),
+        "mod_matched_total": int(mod_total),
+        "mod_gt_total": int(mod_gt_total),
         "freq_mae": float(np.mean(freq_err)) if freq_err else None,
         "doa_mae": float(np.mean(doa_err)) if doa_err else None,
         "bandwidth_mae_rel": float(np.mean(bw_relerr)) if bw_relerr else None,
@@ -508,10 +559,25 @@ def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | Non
     return _aggregate(results, total)
 
 
+def _code_fingerprint() -> str:
+    """评估侧代码指纹（md5 前 12 位）：写入报告，跨 run 对比可精确归因版本。"""
+    h = hashlib.md5()
+    for name in ("evaluator_v2.py", "tools_v2.py"):
+        p = _ROOT / name
+        if p.exists():
+            h.update(p.read_bytes())
+    return h.hexdigest()[:12]
+
+
 def _aggregate(results, total):
     def mean(key, skip_none=True):
         vals = [r[key] for r in results if r.get(key) is not None]
         return float(np.mean(vals)) if vals else None
+
+    def _pooled_ratio(rows, num_key, den_key):
+        n = sum(int(r.get(num_key) or 0) for r in rows)
+        d = sum(int(r.get(den_key) or 0) for r in rows)
+        return (n / d) if d else None
 
     # 按 SNR 分组
     groups = {"Low": [], "Mid": [], "High": []}
@@ -524,6 +590,7 @@ def _aggregate(results, total):
 
     return {
         "dataset": str(Path(results[0]["file"]).parent) if results else "",
+        "code_fingerprint": _code_fingerprint(),
         "num_samples": int(total),
         "num_interferers_accuracy": float(np.mean([r["num_interferers_ok"] for r in results])),
         "category_accuracy": mean("category_accuracy"),
@@ -531,6 +598,10 @@ def _aggregate(results, total):
         "bandwidth_accuracy": mean("bandwidth_accuracy"),
         "doa_accuracy": mean("doa_accuracy"),
         "modulation_accuracy": mean("modulation_accuracy"),
+        # 端到端调制：全局 hits / 全局真实调制 GT 总数（跨 run 可比，不受匹配数影响）
+        "modulation_accuracy_e2e": _pooled_ratio(results, "mod_hits", "mod_gt_total"),
+        # 匹配对池化口径（对照 mean-of-ratios 的 modulation_accuracy，诊断分母效应用）
+        "modulation_accuracy_matched_pooled": _pooled_ratio(results, "mod_hits", "mod_matched_total"),
         "freq_mae": mean("freq_mae"),
         "doa_mae": mean("doa_mae"),
         "bandwidth_mae_rel": mean("bandwidth_mae_rel"),
@@ -574,9 +645,10 @@ def main():
                               progress=not args.no_progress, verbose=args.verbose)
     Path(args.output).write_text(json.dumps(report, indent=2, ensure_ascii=False),
                                  encoding="utf-8")
-    keys = ("num_samples", "num_interferers_accuracy", "category_accuracy",
-            "freq_accuracy", "bandwidth_accuracy", "doa_accuracy",
-            "modulation_accuracy", "freq_mae", "doa_mae", "bandwidth_mae_rel",
+    keys = ("code_fingerprint", "num_samples", "num_interferers_accuracy",
+            "category_accuracy", "freq_accuracy", "bandwidth_accuracy",
+            "doa_accuracy", "modulation_accuracy", "modulation_accuracy_e2e",
+            "freq_mae", "doa_mae", "bandwidth_mae_rel",
             "avg_tool_calls_per_sample", "tool_call_rate")
     print(json.dumps({k: report.get(k) for k in keys}, indent=2, ensure_ascii=False))
     print(f"Report -> {args.output}")

@@ -247,15 +247,22 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
     cand = tuple(sorted(set(candidates))) if candidates else _CANDIDATES
 
     def _distances(fv, bw):
-        """fv 与候选模板（均在带宽 bw 下生成）的归一化欧氏距离。"""
+        """fv 与候选模板（均在带宽 bw 下生成）的归一化欧氏距离，返回最近的 top-3。
+
+        只保留 top-3：10 个候选全量输出会显著膨胀上下文（3 切片 × 10 距离），
+        且长工具输出会诱导模型模仿性长推理；top-3 已足够支撑"最近模板 +
+        前两差距 < 0.15 时取更简单者"的判定规则。
+        """
         tpl = np.stack([_template_features(c, bw) for c in cand])
         lo, hi = tpl.min(axis=0), tpl.max(axis=0)
         span = np.maximum(hi - lo, 1e-6)
         fv_n = (fv - lo) / span
         tpl_n = (tpl - lo) / span
         dist = np.sqrt(((tpl_n - fv_n) ** 2).sum(axis=1))
-        return [{"template": cand[i],
+        rows = [{"template": cand[i],
                  "feature_distance": round(float(dist[i]), 2)} for i in range(len(cand))]
+        rows.sort(key=lambda r: r["feature_distance"])
+        return rows[:3]
 
     global_dist = _distances(_feature_vector(x), measure_obw99(x))
 
@@ -415,18 +422,37 @@ def _mdl_num_sources(evals, n_samples):
     return best_k
 
 
-def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, Any]:
-    """干扰源数量：MDL 为默认建议 + 三路证据（供决策树修正，不替 Agent 下硬结论）。
+def _music_cross_order_peaks(iq):
+    """MUSIC 2/3 阶空间谱峰提取（estimate_doa 与源数决策树共用）。
 
-    - num_sources_estimate: 默认建议 = MDL（多天线空间协方差特征值，经验上最可靠
-      的单通道，run4/离线验证）；无 MDL（单天线）时退化为纹波合并峰计数。
-    - mdl_estimate: MDL 信息论准则。强干扰（blocking，特征值 λ2/λ1 大）下可能低估；
-      低 SNR 弱源/宽带纹波下可能高估。
-    - spectral_peak_count: 显著谱峰计数（-6dB 相对主峰、最小间距 1/32）。
-      宽带目标（OFDM/QPSK 频谱起伏）会被误计为多峰 → 虚高。
-    - merged_peak_count: 纹波合并后的峰计数（间隔 < 0.1 合并，与 analyze_spectrum
-      的 sources_candidates 同口径）；重叠宽带源/强 blocker 会合并 → 低估。
-    - consistent: 三路是否一致。证据冲突时按 SYSTEM_PROMPT 的决策树修正。
+    返回 (stable_peaks_deg, peaks_new_at_order3_deg)：
+    - stable: 2 阶与 3 阶都出现（容差 5°）的角度 —— 真实源跨阶稳定；
+    - new3:   仅 3 阶出现的角度 —— 可能是第 3 源或过分辨伪峰。
+    """
+    from em_signal_simulator.visualization import music_spectrum
+    d2, s2 = music_spectrum(iq, num_sources=2)
+    d3, s3 = music_spectrum(iq, num_sources=3)
+    p2 = _extract_doa_peaks(d2, s2, max_n=3)
+    p3 = _extract_doa_peaks(d3, s3, max_n=3)
+    stable = [a for a in p2 if any(abs(a - b) <= 5.0 for b in p3)]
+    new3 = [b for b in p3 if not any(abs(a - b) <= 5.0 for a in p2)]
+    return stable, new3
+
+
+def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, Any]:
+    """干扰源数量：MDL 为默认建议，工具端预应用决策树给出 final_suggestion。
+
+    - num_sources_estimate: MDL 原始值（多天线空间协方差特征值）。强干扰
+      （blocking，特征值 λ2/λ1 大）下可能低估；低 SNR 弱源/宽带纹波下可能高估。
+    - final_suggestion: 在 MDL 上预应用决策树修正后的建议值（Agent 的首选依据）：
+      1) 高估修正: merged_peak_count < mdl_estimate 且跨阶稳定峰数 < merged
+         （宽带纹波把噪声特征值顶成信号）→ 用 merged_peak_count；
+      2) 低估修正: merged_peak_count > mdl_estimate 且 3 阶新峰非空
+         （强干扰压低 MDL）→ 用 merged_peak_count。
+      决策树需要跨工具证据（MUSIC 跨阶峰），由工具代做可避免模型逐条验证条件时
+      陷入元推理循环（ds_run8 中 8/50 样本因此未产出 JSON）。
+    - mdl_estimate / spectral_peak_count / merged_peak_count / consistent /
+      confidence: 支撑证据与一致性，供 Agent 覆盖 final_suggestion 时参考。
     """
     iq = _load_iq(sample_path)
     n = iq.shape[-1]
@@ -456,6 +482,22 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, An
     else:
         estimate = n_mdl
 
+    # 4) 决策树预计算（与评估 prompt 原两分支规则一致）：需要 MUSIC 跨阶证据
+    stable, new3 = [], []
+    if iq.ndim == 2 and iq.shape[0] >= 3:
+        try:
+            stable, new3 = _music_cross_order_peaks(iq)
+        except Exception:
+            stable, new3 = [], []
+
+    suggestion = int(estimate)
+    applied = None
+    if n_mdl is not None:
+        if n_merged < n_mdl and len(stable) < n_merged:
+            suggestion, applied = int(n_merged), "overcount_corrected"
+        elif n_merged > n_mdl and bool(new3):
+            suggestion, applied = int(n_merged), "undercount_corrected"
+
     consistent = (n_mdl is not None and n_mdl == n_peak and n_peak == n_merged)
     if consistent:
         confidence = 0.9
@@ -467,10 +509,14 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, An
         confidence = 0.5                            # 完全分歧，按决策树裁决
 
     return {
-        "num_sources_estimate": int(estimate),      # 默认建议 = MDL，决策树可修正
+        "num_sources_estimate": int(estimate),      # MDL 原始值
+        "final_suggestion": int(suggestion),        # 决策树修正后的建议值（首选）
+        "decision_tree_applied": applied,           # None / overcount_corrected / undercount_corrected
         "mdl_estimate": n_mdl,
         "spectral_peak_count": int(n_peak),
         "merged_peak_count": int(n_merged),
+        "stable_peaks_deg": [round(float(a), 1) for a in stable],
+        "peaks_new_at_order3_deg": [round(float(a), 1) for a in new3],
         "consistent": bool(consistent),
         "confidence": round(float(confidence), 2),
     }
@@ -519,12 +565,7 @@ def estimate_doa(sample_path: str, num_sources: int = 1) -> dict[str, Any]:
     stable, new3 = [], []
     if m >= 3:
         try:
-            d2, s2 = music_spectrum(iq, num_sources=2)
-            d3, s3 = music_spectrum(iq, num_sources=3)
-            p2 = _extract_doa_peaks(d2, s2, max_n=3)
-            p3 = _extract_doa_peaks(d3, s3, max_n=3)
-            stable = [a for a in p2 if any(abs(a - b) <= 5.0 for b in p3)]
-            new3 = [b for b in p3 if not any(abs(a - b) <= 5.0 for a in p2)]
+            stable, new3 = _music_cross_order_peaks(iq)
         except Exception:
             stable, new3 = [], []
 
@@ -589,9 +630,12 @@ TOOL_SCHEMAS_V2 = [
         "function": {
             "name": "estimate_num_sources",
             "description": ("Estimate the number of active sources (total, INCLUDING the target): "
-                            "num_sources_estimate is the primary default (MDL spatial eigenvalue method); "
-                            "mdl_estimate / spectral_peak_count / merged_peak_count are supporting evidence. "
-                            "Adjust the count ONLY per the decision-tree rules in the system prompt."),
+                            "final_suggestion is the preferred count (MDL after an automatic "
+                            "over/under-count correction using spectral and cross-order MUSIC "
+                            "evidence; decision_tree_applied tells whether it was corrected); "
+                            "num_sources_estimate / mdl_estimate / spectral_peak_count / "
+                            "merged_peak_count are supporting evidence. Do not re-derive the "
+                            "correction yourself."),
             "parameters": {
                 "type": "object",
                 "properties": {
