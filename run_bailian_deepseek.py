@@ -68,6 +68,7 @@ def main():
         max_samples=args.max_samples,
         progress=not args.no_progress,
         verbose=args.verbose,
+        checkpoint_path=args.output,   # 长跑定期存档，崩溃不丢已完成样本
     )
 
     report["agent_info"] = {

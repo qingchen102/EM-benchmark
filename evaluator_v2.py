@@ -472,7 +472,9 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
 
 
 def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | None = None,
-                     progress: bool = True, verbose: bool = False):
+                     progress: bool = True, verbose: bool = False,
+                     checkpoint_path: str | Path | None = None,
+                     checkpoint_every: int = 20):
     root = Path(dataset_dir)
     ground_truths = json.loads((root / "ground_truth.json").read_text(encoding="utf-8"))
     observations = json.loads((root / "observations.json").read_text(encoding="utf-8"))
@@ -529,6 +531,17 @@ def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | Non
             **score,
         })
         n_done += 1
+        # 定期存档：长跑（全量 500 约 6h）中途崩溃/断网不丢已完成样本
+        if checkpoint_path and n_done % max(int(checkpoint_every), 1) == 0:
+            try:
+                partial = {**_aggregate(results, total), "partial": True,
+                           "num_completed": n_done}
+                Path(checkpoint_path).write_text(
+                    json.dumps(partial, indent=2, ensure_ascii=False), encoding="utf-8")
+                msg = f"[checkpoint] saved {n_done}/{total} -> {checkpoint_path}"
+                (tqdm.write(msg) if tqdm else print(msg))
+            except OSError:
+                pass
         if tqdm:
             iterator.set_postfix({
                 "src_acc": f"{sum(r['num_interferers_ok'] for r in results)/n_done:.2f}",
@@ -647,7 +660,8 @@ def main():
         args.model, base_url=args.base_url, api_key=args.api_key,
         use_tools=not args.no_tools, reasoning_effort=args.reasoning_effort)
     report = evaluate_dataset(args.dataset_dir, agent, max_samples=args.max_samples,
-                              progress=not args.no_progress, verbose=args.verbose)
+                              progress=not args.no_progress, verbose=args.verbose,
+                              checkpoint_path=args.output)
     Path(args.output).write_text(json.dumps(report, indent=2, ensure_ascii=False),
                                  encoding="utf-8")
     keys = ("code_fingerprint", "num_samples", "num_interferers_accuracy",
