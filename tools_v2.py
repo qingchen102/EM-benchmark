@@ -260,6 +260,31 @@ def _band_slice(x, freq, psd, i_lo, i_hi):
     return x_bb, bw
 
 
+def _band_coherence(iq, freq, i_lo, i_hi):
+    """频带空间相干性：带限切片的空间协方差主特征值与其余均值之比。
+
+    物理判据（与 DOA 无关）：真实源（任意到达角）在各天线上的带限信号是
+    秩 1 相干的，lambda1/mean(lambda_rest) 远大于 1；噪声起伏包各天线独立，
+    比值接近 1。用于区分"弱真实源"与"噪声包" —— 两者的功率谱强度重叠
+    （-6~-10dB），单靠幅度地板不可分。
+    返回相干比；天线数 <2 时返回 inf（退化为无检验）。
+    """
+    if iq.ndim != 2 or iq.shape[0] < 2:
+        return float("inf")
+    n = iq.shape[-1]
+    m_ = int(i_hi) - int(i_lo) + 1
+    if m_ < 8:
+        return float("inf")
+    mask = np.zeros(n)
+    mask[int(i_lo):int(i_hi) + 1] = np.hanning(m_)
+    spec = np.fft.fftshift(np.fft.fft(iq, axis=-1), axes=-1)
+    y = np.fft.ifft(np.fft.ifftshift(spec * mask, axes=-1), axis=-1)
+    r_cov = (y @ y.conj().T) / y.shape[-1]
+    evals = np.sort(np.linalg.eigvalsh(r_cov))[::-1]
+    rest = float(np.mean(evals[1:])) + 1e-30
+    return float(evals[0]) / rest
+
+
 def _source_groups(raw_peaks, freq, psd, protect_radius=0.05,
                    floor_db=-10.0, top=6, drop_db=20.0):
     """候选源组公共管线：谱谷合并/分裂（含目标保护区）-> 强度地板 -> top-K。
@@ -575,11 +600,29 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3,
 
     suggestion = int(estimate)
     applied = None
+    # 可信组判定（用于低估修正）：强度可信(rel_db>=-6dB) 或 空间相干可信。
+    # 噪声包与弱真实源在功率谱上重叠（-6~-10dB），但真实源的带限切片在阵列上
+    # 秩 1 相干（全量校准：真实组相干比 p10=7.2，噪声包 p75=3.6），以
+    # lambda1/mean(rest) >= 4 为第二判据可同时保住弱源召回并剔除噪声包
+    # （ds_run11 幽灵干扰 / 漏报弱源的共同根因）。
+    groups_all = _source_groups(raw_all, freq, psd, protect_radius=protect, top=None)
+    n_credible = 0
+    for g_ in groups_all:
+        strong = g_["rel_db"] >= -6.0
+        coh = (_band_coherence(iq, freq, g_["span_idx"][0], g_["span_idx"][1])
+               if not strong else float("inf"))
+        if strong or coh >= 4.0:
+            n_credible += 1
+            if n_credible >= max_sources:
+                break
     if n_mdl is not None:
         if n_merged < n_mdl and len(stable) < n_merged:
             suggestion, applied = int(n_merged), "overcount_corrected"
-        elif n_merged > n_mdl and bool(new3):
-            suggestion, applied = int(n_merged), "undercount_corrected"
+        elif n_credible > n_mdl:
+            # 可信组（强或空间相干）多于 MDL 判定 -> 低估。不再要求 MUSIC 3 阶
+            # 新峰佐证：显著度过滤会同时砍掉弱真源的角度证据；相干检验已提供
+            # 独立于角度的确证。
+            suggestion, applied = int(n_credible), "undercount_corrected"
 
     consistent = (n_mdl is not None and n_mdl == n_peak and n_peak == n_merged)
     if consistent:
@@ -605,9 +648,23 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3,
     }
 
 
-def _extract_doa_peaks(doas, spec, max_n):
-    """从 MUSIC 空间谱提取显著峰（-30dB 阈值、最小间距 12°），返回角度列表。"""
-    rel = spec / (spec.max() + 1e-300)
+def _extract_doa_peaks(doas, spec, max_n, prominence_db=25.0):
+    """从 MUSIC 空间谱提取显著峰。
+
+    两道过滤：
+    - -30dB 相对主峰 + 最小间距 12°（原有）；
+    - 显著度：只保留与全局最高峰差 <= prominence_db 的峰。真源的空间谱峰远高
+      于噪声过分辨产生的浅峰 —— 无此过滤时，单源场景的 3 阶谱也会凑出 2 个
+      噪声角，喂给源数决策树的 undercount 分支造成误修正（ds_run11 干净样本
+      幽灵干扰根因：MDL 正确报 1，被 merged 虚高 + 假新峰联合覆盖成 3）。
+    返回角度列表（升序）。
+    """
+    spec = np.asarray(spec, dtype=float)
+    doas = np.asarray(doas, dtype=float)
+    mx = float(spec.max()) if spec.size else 0.0
+    if mx <= 0:
+        return []
+    rel = spec / mx
     mask = rel > 1e-3  # -30dB
     idx = np.where(mask)[0]
     peaks_idx = []
@@ -616,6 +673,7 @@ def _extract_doa_peaks(doas, spec, max_n):
         right = rel[i + 1] <= rel[i] if i < len(rel) - 1 else True
         if left and right:
             peaks_idx.append(i)
+    # 按幅度排序 -> 最小间距去重 -> 显著度地板
     peaks_idx.sort(key=lambda i: rel[i], reverse=True)
     chosen = []
     for i in peaks_idx:
@@ -623,6 +681,8 @@ def _extract_doa_peaks(doas, spec, max_n):
             chosen.append(i)
         if len(chosen) >= max_n:
             break
+    floor = 10.0 ** (-float(prominence_db) / 10.0)
+    chosen = [i for i in chosen if rel[i] >= floor]
     chosen.sort(key=lambda i: doas[i])
     return [float(doas[i]) for i in chosen]
 
