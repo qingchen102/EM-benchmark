@@ -110,7 +110,7 @@ python evaluator_v2.py dataset_v2 --model deepseek-chat --base-url https://api.d
 
 | 工具 | 功能 |
 |------|------|
-| `analyze_spectrum` | 多天线频谱：合并纹波后的源峰检测 + **每源 `sources_candidates`**（频偏/带宽/**ratio_to_target_bw**/**功率近似**，类别判定所需测量由工具算好） |
+| `analyze_spectrum` | 多天线频谱：合并纹波（+谱谷分裂区分近距双源）后的源峰检测 + **每源 `sources_candidates`**（频偏/带宽/**ratio_to_target_bw**/**功率近似**，类别判定所需测量由工具算好） |
 | `estimate_num_sources` | 源数估计：`num_sources_estimate`（MDL 空间特征值，默认建议）+ 三路证据（MDL/显著谱峰/纹波合并峰）与一致性，Agent 按决策树修正（MDL 高估看合并峰+DOA 稳定峰、低估看高阶新峰） |
 | `estimate_doa` | MUSIC 空间谱 DOA 估计（4 元 ULA，d=λ/2）；含跨阶稳定峰 `stable_peaks_deg` 与 3 阶新峰 `peaks_new_at_order3_deg`（区分真实源与过分辨伪峰） |
 | `detect_time_domain` | 时域特征：PAPR、脉冲占空比（脉冲类干扰） |
