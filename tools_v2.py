@@ -70,30 +70,39 @@ def _feature_vector(x):
     return np.array([measure_obw99(x), flat, drift, p2a, kurt, papr, duty])
 
 
-def _valley_split(group, freq, psd, thr_db):
+def _valley_split(group, freq, psd, thr_db, protect_radius=0.0):
     """按谱谷深度递归分裂峰组：相邻峰之间谷底比两者中较高者低 >= thr_db 视为异源。
 
     固定间距分组（min_gap）无法区分"同一源的浅纹波"与"两个近距源的深谷"
     （数据集允许两源频差 < 0.15、靠 DOA 分开）。真实异源之间频谱存在深谷，
     而单源成型纹波间谷浅 —— 以谷深为判据更物理。
+
+    protect_radius: 目标保护半径（通常 = 目标 OBW99/2）。中点落在保护区内
+    的峰对不分裂 —— 强宽带目标的内部谱零点（OFDM 子载波旁瓣/FHSS 跳频间隙）
+    谷也很深，无保护时会把自己劈成多组强碎片（离线复现：干净样本被报出
+    2 个幽灵干扰、单目标劈成 14 组）；目标中心/带宽是观测先验，带内本来
+    就无需分裂。
     """
     g = sorted(group, key=lambda p: p[0])
     if len(g) < 2:
         return [g]
     for j in range(1, len(g)):
         a, b = g[j - 1], g[j]
+        if abs((a[0] + b[0]) / 2.0) < float(protect_radius):
+            continue                                    # 目标带内不分裂
         ia = int(np.argmin(np.abs(freq - a[0])))
         ib = int(np.argmin(np.abs(freq - b[0])))
         if ib - ia < 2:
             continue
         valley_db = float(10.0 * np.log10(float(np.min(psd[ia:ib + 1])) + 1e-300))
         if max(a[1], b[1]) - valley_db >= float(thr_db):
-            return (_valley_split(g[:j], freq, psd, thr_db) +
-                    _valley_split(g[j:], freq, psd, thr_db))
+            return (_valley_split(g[:j], freq, psd, thr_db, protect_radius) +
+                    _valley_split(g[j:], freq, psd, thr_db, protect_radius))
     return [g]
 
 
-def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0, split_valley_db=8.0):
+def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0, split_valley_db=8.0,
+                 protect_radius=0.0):
     """把间隔 < min_gap 的相邻峰合并为同一源（成型调制的频谱纹波），再按谱谷分裂。
 
     成型调制（QPSK/OFDM 等）的频谱内部有多个近等幅纹波峰，直接当独立峰会导致：
@@ -121,7 +130,8 @@ def _merge_peaks(peaks, freq, psd, min_gap=0.1, drop_db=20.0, split_valley_db=8.
 
     groups = []
     for g in raw_groups:
-        groups.extend(_valley_split(g, freq, psd, split_valley_db))
+        groups.extend(_valley_split(g, freq, psd, split_valley_db,
+                                    protect_radius=protect_radius))
 
     out = []
     for g in groups:
@@ -250,7 +260,25 @@ def _band_slice(x, freq, psd, i_lo, i_hi):
     return x_bb, bw
 
 
-def estimate_modulation_features(sample_path: str, candidates: list | None = None) -> dict[str, Any]:
+def _source_groups(raw_peaks, freq, psd, protect_radius=0.05,
+                   floor_db=-10.0, top=6, drop_db=20.0):
+    """候选源组公共管线：谱谷合并/分裂（含目标保护区）-> 强度地板 -> top-K。
+
+    floor_db（默认 -10dB，相对全局主峰）：过滤噪声起伏包。低 SNR 样本上噪底
+    局部极大可达 -6~-14dB，无地板时会以"候选源"身份污染列表（ds_run10 干净
+    样本幽灵干扰的另一来源；r9 曾靠 [:24] 按频率截断碰巧抑制）。真实源组
+    p25 ≈ -1.7dB，-10dB 地板仅损失 ~1pp 覆盖。
+    """
+    merged = _merge_peaks(raw_peaks, freq, psd, drop_db=drop_db,
+                          protect_radius=protect_radius)
+    if floor_db is not None:
+        merged = [m for m in merged if m["rel_db"] >= float(floor_db)]
+    merged.sort(key=lambda d: -d["rel_db"])
+    return merged[:top] if top else merged
+
+
+def estimate_modulation_features(sample_path: str, candidates: list | None = None,
+                                 target_bandwidth_normalized: float | None = None) -> dict[str, Any]:
     """调制识别特征：全局特征 + 按合并源组切片的带宽自适应模板距离。
 
     只返回测量值（含模板特征距离），不做匹配结论——由 Agent 自行判断。
@@ -298,9 +326,13 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
 
     global_dist = _distances(_feature_vector(x), measure_obw99(x))
 
-    # 按合并组切片（与 analyze_spectrum 同口径，-20dB 轮廓定切片宽度）
+    # 按合并组切片（与 analyze_spectrum 同口径；谱谷分裂带目标保护区 + 强度地板，
+    # 先验缺失时保守用 0.05）
     raw_peaks = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    merged = _merge_peaks(raw_peaks, freq, psd, drop_db=20.0)
+    protect = (float(target_bandwidth_normalized) / 2.0
+               if target_bandwidth_normalized else 0.05)
+    merged = _source_groups(raw_peaks, freq, psd, drop_db=20.0,
+                            protect_radius=protect)
     obw99 = measure_obw99(x)
     target_half = max(obw99 / 2.0, 0.05)     # 目标带半径（无先验时的保守估计）
     # 非目标带优先（干扰更可能在目标带外），其次按强度，最多 3 组
@@ -398,10 +430,11 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
     freq = np.fft.fftshift(np.fft.fftfreq(n, d=1.0))
 
     raw_peaks = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    merged = _merge_peaks(raw_peaks, freq, psd)   # 纹波合并
-    merged = merged[:6]
     obw99 = measure_obw99(x)
     tgt_bw = None if target_bandwidth_normalized is None else max(float(target_bandwidth_normalized), 1e-9)
+    # 谱谷分裂的目标保护区 + 强度地板（公共管线）
+    protect = (tgt_bw / 2.0) if tgt_bw else 0.05
+    merged = _source_groups(raw_peaks, freq, psd, protect_radius=protect)
 
     # 每源一行的统一结构：freq / 带宽 / ratio（类别判定核心）/ 相对主峰功率近似
     sources_candidates = []
@@ -471,8 +504,13 @@ def _music_cross_order_peaks(iq):
     return stable, new3
 
 
-def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, Any]:
+def estimate_num_sources(sample_path: str, max_sources: int = 3,
+                         target_bandwidth_normalized: float | None = None) -> dict[str, Any]:
     """干扰源数量：MDL 为默认建议，工具端预应用决策树给出 final_suggestion。
+
+    target_bandwidth_normalized: 目标 OBW99 先验（评估器自动注入）。用于谱谷
+    分裂的目标保护区 —— 防止强宽带目标被自己的内部谱零点劈成多组碎片，
+    污染 merged_peak_count 与候选列表（ds_run10 干净样本幽灵干扰的根因）。
 
     - num_sources_estimate: MDL 原始值（多天线空间协方差特征值）。强干扰
       （blocking，特征值 λ2/λ1 大）下可能低估；低 SNR 弱源/宽带纹波下可能高估。
@@ -497,9 +535,12 @@ def estimate_num_sources(sample_path: str, max_sources: int = 3) -> dict[str, An
     n_peak = min(len(_find_peaks(psd, freq, rel_thresh_db=-6.0, min_sep=1.0 / 32.0)),
                  max_sources)
 
-    # 2) 纹波合并峰计数（与 analyze_spectrum 同口径）
+    # 2) 纹波合并峰计数（与 analyze_spectrum 同口径，含目标保护区）
     raw_all = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
-    n_merged = min(len(_merge_peaks(raw_all, freq, psd)), max_sources)
+    protect = (float(target_bandwidth_normalized) / 2.0
+               if target_bandwidth_normalized else 0.05)
+    n_merged = min(len(_source_groups(raw_all, freq, psd, protect_radius=protect,
+                                      top=None)), max_sources)
 
     # 3) MDL（多天线空间协方差）
     n_mdl = None

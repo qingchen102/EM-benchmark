@@ -322,8 +322,10 @@ class OpenAICompatibleAgent:
                 try:
                     args = json.loads(call.function.arguments or "{}")
                     args["sample_path"] = str(sample_path)
-                    # 自动注入目标带宽（来自 observation，模型无需自己传）
-                    if call.function.name == "analyze_spectrum":
+                    # 自动注入目标带宽先验（模型无需自己传）：频谱/源数工具用于
+                    # 谱谷分裂的目标保护区，调制工具用于切片选择
+                    if call.function.name in ("analyze_spectrum", "estimate_num_sources",
+                                              "estimate_modulation_features"):
                         args["target_bandwidth_normalized"] = observation.get(
                             "target_bandwidth_normalized")
                     result = TOOL_FUNCTIONS_V2[call.function.name](**args)
