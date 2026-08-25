@@ -1,0 +1,3108 @@
+{
+  "dataset": ".",
+  "num_samples": 50,
+  "num_interferers_accuracy": 0.64,
+  "category_accuracy": 0.34,
+  "freq_accuracy": 0.41,
+  "bandwidth_accuracy": 0.44,
+  "doa_accuracy": 0.56,
+  "modulation_accuracy": 0.13636363636363635,
+  "freq_mae": 0.028352878487098297,
+  "doa_mae": 2.8630775252120504,
+  "bandwidth_mae_rel": 0.6750248775206084,
+  "category_accuracy_by_snr": {
+    "Low": 0.3333333333333333,
+    "Mid": 0.2857142857142857,
+    "High": 0.4
+  },
+  "snr_group_counts": {
+    "Low": 9,
+    "Mid": 21,
+    "High": 20
+  },
+  "missed_sources_total": 35,
+  "false_alarm_total": 31,
+  "avg_tool_calls_per_sample": 5.14,
+  "tool_call_rate": 0.98,
+  "results": [
+    {
+      "file": "sample_00000.npy",
+      "snr_db": 7.739233746429086,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "I have all the measurements I need. Let me finalize the analysis.\n\n**Summary:**\n- **num_sources:** 3 → 2 interferers (target + 2)\n- **DOA:** -31°, 0° (target), 50°\n- **Interferer 1:** freq -0.4464, bandwidth 0.0498, strongest (0 dB), doa -31°, modulation 16QAM (closest per-peak distance 0.27)\n- **Interferer 2:** freq 0.1826, bandwidth 0.0273, weaker (-13.9 dB), doa 50°\n\n**Target bandwidth:** LFM target, estimated ~0.1.\n\n**Interferer 1** at -0.4464: ratio = 0.4464/0.1 = 4.46, but it's the stronge",
+      "round_log": [
+        {
+          "elapsed_s": 2.9,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 113,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 28.9,
+          "content_len": 14357,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 1026,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "16QAM",
+            "freq_offset": -0.4464,
+            "bandwidth": 0.0498,
+            "doa": -31.0
+          },
+          {
+            "category": "adjacent",
+            "modulation": "QPSK",
+            "freq_offset": 0.1826,
+            "bandwidth": 0.0273,
+            "doa": 50.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 1.0,
+      "freq_mae": 0.030558528348101105,
+      "doa_mae": 2.2086908545321933,
+      "bandwidth_mae_rel": 0.894109090909091
+    },
+    {
+      "file": "sample_00001.npy",
+      "snr_db": 5.236432494005134,
+      "num_sources": 2,
+      "tool_calls": 6,
+      "raw_output": "I have enough data. Let me finalize my analysis.\n\n**Summary:**\n- **num_sources = 3** → 2 interferers (target + 2)\n- **DOA:** [-15, 0.5, 55.5] → target at 0.5, interferers at -15 and 55.5\n- **Spectrum:** peak at 0.1112 (bandwidth 0.2783) as the main interferer candidate\n- **Time domain:** pulse_duty_cycle 0.01, PAPR 3.2 dB → strong pulse-type interference\n- **Per-peak distances:** peaks at 0.0039 (target) and 0.0635 (interferer)\n\nThe pulse duty cycle of 0.01 strongly indicates a pulse interferer.",
+      "round_log": [
+        {
+          "elapsed_s": 1.9,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.3,
+          "content_len": 105,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 14.3,
+          "content_len": 6439,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.8,
+          "content_len": 1273,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": 0.1112,
+            "bandwidth": 0.2783,
+            "doa": -15.0
+          },
+          {
+            "category": "adjacent",
+            "modulation": "64QAM",
+            "freq_offset": 0.0635,
+            "bandwidth": 0.28,
+            "doa": 55.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0523192096803512,
+      "doa_mae": 0.14050474139651215,
+      "bandwidth_mae_rel": 1.1082352941176472
+    },
+    {
+      "file": "sample_00002.npy",
+      "snr_db": 0.23224268498632838,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 2 → 1 interferer (2 - 1 target = 1)\n\n**Spectrum analysis:**\n- The main peak is at -0.3235 (peaks_excluding_center), which is the interferer candidate.\n- The target sits near 0 Hz. The interferer is at freq_offset = -0.3235.\n- The interferer bandwidth = 0.291.\n\n**Time domain:** PAPR = 3.2 dB, pulse_duty_cycle = 0.028 (very low duty cycle), pulse_edge_count = 27. This suggests a pulsed waveform.\n\n**Modulation features:** The per-peak templat",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 119,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.8,
+          "content_len": 1643,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3235,
+            "bandwidth": 0.291,
+            "doa": 12.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.06456390971155612,
+      "doa_mae": 1.9326890060274877,
+      "bandwidth_mae_rel": 2.386181818181818
+    },
+    {
+      "file": "sample_00003.npy",
+      "snr_db": -3.287016657127513,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the data:\n\n**Number of sources:** 2 → 1 interferer (2 - 1 target = 1)\n\n**Spectrum analysis:**\n- The main peak is at -0.3431 (excluding center). The target is near 0 Hz. The interferer peak is at -0.3431 with bandwidth 0.3018.\n- However, the per_peak_template_distances show peaks at -0.2275 and -0.1494. The spectrum analysis found a peak at -0.3431.\n\nWait, let me reconsider. The `peaks_excluding_center` found a peak at -0.3431 with bandwidth 0.3018. This is the interferer candidate",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 120,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 6.2,
+          "content_len": 2757,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3431,
+            "bandwidth": 0.3018,
+            "doa": -48.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00004.npy",
+      "snr_db": 13.86112211144735,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements.\n\n**Number of sources:** 2 → 1 interferer (target is 1 source).\n\n**Spectrum analysis:** The peaks excluding center are at -0.3495 and -0.1199. The target is near 0 Hz. The main peak is at -0.3495 (rel_db 0.0, strongest), and -0.1199 (rel_db -0.1). \n\nWait, the target should be near 0 Hz. But the peaks are at -0.3495 and -0.1199. The target QPSK signal is centered near 0 Hz. Hmm, but the spectrum shows peaks at negative frequencies. Let me reconsider.\n\nActually, the",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 71,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 92,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 22.6,
+          "content_len": 10632,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "64QAM",
+            "freq_offset": -0.3495,
+            "bandwidth": 0.1768,
+            "doa": 50.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0006888748880182205,
+      "doa_mae": 35.38663215247716,
+      "bandwidth_mae_rel": 0.37153939393939406
+    },
+    {
+      "file": "sample_00005.npy",
+      "snr_db": 11.100058474907605,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 3 sources estimated. Target is 1, so **2 interferers**.\n\n**Spectrum analysis:** The main peak is at -0.2479 (normalized), with bandwidth 0.4365. The peaks_excluding_center shows a peak at -0.2479. The target is near 0 Hz. The spectrum shows peaks at -0.2479 and -0.2441 (from per-peak distances). \n\nWait, the spectrum analysis shows only one peak at -0.2479. But the per-peak template distances show two peaks at -0.2656 and -0.2441. These are the ",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 113,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 14.4,
+          "content_len": 6585,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "QPSK",
+            "freq_offset": -0.2479,
+            "bandwidth": 0.4365,
+            "doa": -36.5
+          },
+          {
+            "category": "adjacent",
+            "modulation": "QPSK",
+            "freq_offset": -0.2441,
+            "bandwidth": 0.4365,
+            "doa": 25.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00006.npy",
+      "snr_db": 5.763287029438864,
+      "num_sources": 2,
+      "tool_calls": 6,
+      "raw_output": "I have all the data I need. Let me finalize my analysis.\n\n**Summary of measurements:**\n- **num_sources:** 3 → 2 interferers\n- **DOA:** -30°, 0° (target), 49° → interferers at -30° and 49°\n- **Spectrum:** main peak at -0.0378, per-peak bandwidth 0.1631, obw99 0.7773\n- **Per-peak interferer candidates:** -0.0898 and -0.0732\n- **Time domain:** PAPR 2.3 dB, pulse duty cycle 0.021 (very low), pulse edge count 22, peak-to-average ratio 16.1 dB\n- **Modulation:** per-peak distances closest to 64QAM/QPSK",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 115,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 17.1,
+          "content_len": 8047,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 3.3,
+          "content_len": 1331,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.0898,
+            "bandwidth": 0.1631,
+            "doa": -30.0
+          },
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.0732,
+            "bandwidth": 0.1631,
+            "doa": 49.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.031354134317367124,
+      "doa_mae": 0.10765114732760139,
+      "bandwidth_mae_rel": 0.26526060606060603
+    },
+    {
+      "file": "sample_00007.npy",
+      "snr_db": 7.501909332093339,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "I have enough data. Let me finalize the analysis.\n\n**Summary:**\n- **num_sources:** 3 → 2 interferers\n- **Interferer frequencies:** 0.303 and 0.319 (normalized)\n- **Bandwidth:** ~0.0586 for the main peak\n- **DOA:** -4.0 and 45.0 degrees\n- **Target LFM bandwidth:** 0.727 (OBW99)\n\n**Category calculation (ratio = |freq_offset| / target bandwidth):**\n- Interferer 1: 0.303 / 0.727 = 0.417 < 0.5 → **co_channel**\n- Interferer 2: 0.319 / 0.727 = 0.439 < 0.5 → **co_channel**\n\n**Modulation:** Per-peak dist",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 114,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 13.3,
+          "content_len": 5809,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 943,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": 0.303,
+            "bandwidth": 0.0586,
+            "doa": 45.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": 0.319,
+            "bandwidth": 0.0586,
+            "doa": -4.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.014450749494800463,
+      "doa_mae": 0.15219434124649212,
+      "bandwidth_mae_rel": 0.07154285714285713
+    },
+    {
+      "file": "sample_00008.npy",
+      "snr_db": 1.5394455321112144,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the data.\n\n**Number of sources:** 3 sources estimated → 2 interferers + 1 target.\n\n**DOA estimates:** -34°, 0° (target), 47°. So interferers at -34° and 47°.\n\n**Spectrum analysis:** The main peak is at -0.2433 with bandwidth 0.3848. The `peaks_excluding_center` shows only one peak at -0.2433. However, the per-peak template distances show peaks at -0.1064 and -0.0791. \n\nWait, let me reconsider. The spectrum analysis found a peak at -0.2433 (the strongest). The per-peak template dis",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 80,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 99,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 14.5,
+          "content_len": 6650,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.2433,
+            "bandwidth": 0.3848,
+            "doa": -34.0
+          },
+          {
+            "category": "none",
+            "modulation": "64QAM",
+            "freq_offset": -0.1064,
+            "bandwidth": 0.1,
+            "doa": 47.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.005659300358202085,
+      "doa_mae": 0.03614955408281162,
+      "bandwidth_mae_rel": 0.7440000000000001
+    },
+    {
+      "file": "sample_00009.npy",
+      "snr_db": 12.404984079401693,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 2 → 1 interferer (target is 1 source).\n\n**Spectrum analysis:** The main peak is at -0.2877 (normalized). The `peaks_excluding_center` shows a peak at -0.2877 with bandwidth 0.335. This is the interferer candidate. The target sits near 0 Hz.\n\nWait, the spectrum shows the main peak at -0.2877. The target is centered near 0 Hz. So the interferer is at freq_offset = -0.2877.\n\n**DOA:** Two DOA estimates: -53.5° and 0.0°. The target is at 0°, so",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 81,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 4.2,
+          "content_len": 1864,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.2877,
+            "bandwidth": 0.335,
+            "doa": -53.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.020766587843228546,
+      "doa_mae": 0.05966808718841321,
+      "bandwidth_mae_rel": 0.036404494382022416
+    },
+    {
+      "file": "sample_00010.npy",
+      "snr_db": 14.120034192579507,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 → 1 interferer (target + 1 interferer).\n\n**Spectrum analysis:**\n- Target near 0 Hz (freq -0.0006, bandwidth 0.1035)\n- Interferer peaks: +0.2253 (rel_db 0.0, bandwidth 0.0986) and -0.2231 (rel_db -1.7, bandwidth 0.0771)\n\nWait, there are two peaks excluding center: +0.2253 and -0.2231. But num_sources is 2. Hmm. The spectral_peak_count is 3 (including center). The eigenvalue estimate is 2. \n\nActually, the two interferer peaks at +0.2253 and -0.",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 106,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 16.0,
+          "content_len": 7178,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "FHSS",
+            "freq_offset": 0.2253,
+            "bandwidth": 0.0986,
+            "doa": -4.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.029923724203246183,
+      "doa_mae": 10.40477391905796,
+      "bandwidth_mae_rel": 0.5050666666666667
+    },
+    {
+      "file": "sample_00011.npy",
+      "snr_db": -2.4285959446160077,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\nThe `estimate_num_sources` returned 1 source estimate (eigenvalue estimate 1), but the spectral peak count is 3 and the DOA tool found 2 DOA peaks (0° and 44°). The time-domain features show a very low duty cycle (0.06) and high PAPR (6.4 dB), suggesting a pulsed signal.\n\nThe spectrum analysis shows a peak at -0.3346 with bandwidth 0.3262. However, the per-peak template distances show peaks at -0.2529 and -0.1699.\n\nLet me reconsider. The `num_sources_e",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 7.1,
+          "content_len": 3133,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3346,
+            "bandwidth": 0.3262,
+            "doa": 44.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00012.npy",
+      "snr_db": 0.016489162168921823,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 → 1 target + 1 interferer.\n\n**Spectrum analysis:**\n- Main peak at 0.2873 (rel_db 0.0) - this is the strongest peak, but the target should be near 0 Hz. Wait, the target is centered near 0 Hz. Let me reconsider.\n\nActually, the peaks_excluding_center shows peaks at 0.2873, -0.4501, -0.2718. The main peak is at 0.2873 with rel_db 0.0 (strongest). \n\nHmm, but the target is supposed to be near 0 Hz. The peak at 0.0324 is near center (rel_db -11.5).",
+      "round_log": [
+        {
+          "elapsed_s": 1.2,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 89,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 9.4,
+          "content_len": 4245,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "64QAM",
+            "freq_offset": 0.2873,
+            "bandwidth": 0.1816,
+            "doa": -47.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.037164542819718205,
+      "doa_mae": 0.20437022297852536,
+      "bandwidth_mae_rel": 0.03310222222222229
+    },
+    {
+      "file": "sample_00013.npy",
+      "snr_db": 12.29595174033173,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Num sources:** 3 sources total, so 2 interferers (target is 1).\n\n**Spectrum analysis:** The main peak is at -0.2308 with bandwidth 0.3701. The peaks_excluding_center shows -0.2308. The target is near 0 Hz, so the interferer is at -0.2308.\n\nWait, let me reconsider. The spectrum shows a main peak at -0.2308. The target should be near 0 Hz. The per_peak_template_distances show two peaks at -0.3154 and -0.2988.\n\nLet me reconsider. The num_sources is 3, so 2 interferers",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 114,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 15.9,
+          "content_len": 7632,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3154,
+            "bandwidth": 0.37,
+            "doa": -40.5
+          },
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.2988,
+            "bandwidth": 0.37,
+            "doa": 46.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00014.npy",
+      "snr_db": 11.61966637778223,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "The analysis shows only 1 source (the target). The number of sources estimate is 1, which means there are 0 interferers. The spectrum shows only one peak at 0 Hz (the target), no peaks excluding center. The DOA is 0 degrees (target).\n\nThe target modulation is OOK (closest match at 0.42 distance). There are no interferers detected.\n\n```json\n{\n  \"num_interferers\": 0,\n  \"interferers\": []\n}\n```",
+      "round_log": [
+        {
+          "elapsed_s": 1.2,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 393,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00015.npy",
+      "snr_db": 8.854867359303046,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 3 sources estimated. Target = 1, so **2 interferers**.\n\n**Spectrum analysis:**\n- Main peak at -0.206 (rel_db 0.0, strongest) - this is the interferer\n- Peak at -0.0037 (rel_db -13.0) - this is the target (near 0 Hz)\n- peaks_excluding_center: -0.206 with bandwidth 0.0811\n\nWait, the target is OFDM centered near 0 Hz. The peak at -0.0037 is the target (near 0 Hz). The peak at -0.206 is an interferer.\n\nBut there are 2 interferers. Let me reconsider",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 115,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 20.4,
+          "content_len": 9762,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "OOK",
+            "freq_offset": -0.206,
+            "bandwidth": 0.0811,
+            "doa": -40.5
+          },
+          {
+            "category": "adjacent",
+            "modulation": "64QAM",
+            "freq_offset": -0.2148,
+            "bandwidth": 0.0811,
+            "doa": -12.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.013128230825184967,
+      "doa_mae": 0.21100837661465022,
+      "bandwidth_mae_rel": 0.5281454545454545
+    },
+    {
+      "file": "sample_00016.npy",
+      "snr_db": 6.338336777587301,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now let me analyze the results.\n\n**Analysis:**\n\n- **num_sources_estimate** = 2, so there is **1 interferer** (target = 1 source).\n- **Spectrum**: The main peak is at -0.1363 (this is the interferer, since target is near 0 Hz). The target LFM signal is centered near 0 Hz. The peak bandwidth is 0.0898.\n- **DOA**: Two DOA estimates: -57.5° (interferer) and 0.0° (target).\n- **Time domain**: PAPR 5.1 dB, duty cycle 0.057 (very low duty cycle, ~5.7%), pulse edge count 19. This strongly indicates a **p",
+      "round_log": [
+        {
+          "elapsed_s": 1.2,
+          "content_len": 0,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.8,
+          "content_len": 81,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 6.6,
+          "content_len": 2534,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "OOK",
+            "freq_offset": -0.1363,
+            "bandwidth": 0.0898,
+            "doa": -57.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0001559048137959318,
+      "doa_mae": 0.09860038192526588,
+      "bandwidth_mae_rel": 0.0449454545454546
+    },
+    {
+      "file": "sample_00017.npy",
+      "snr_db": 11.901495855958032,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 3 sources estimated. Target is 1, so there are **2 interferers**.\n\n**DOA estimates:** -36°, 0°, 24°. The target is at 0° (centered). So interferers are at -36° and 24°.\n\n**Spectrum analysis:**\n- The main peak is at 0.1413 (normalized), with bandwidth 0.3311. But wait, the target is centered near 0 Hz. The `peaks_excluding_center` shows a peak at 0.1413. The `per_peak_template_distances` shows peaks at 0.0 (target) and 0.1396 (interferer).\n\nSo t",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 113,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 19.1,
+          "content_len": 8544,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": 0.1413,
+            "bandwidth": 0.3311,
+            "doa": -36.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": 0.1413,
+            "bandwidth": 0.3311,
+            "doa": 24.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.04612672494817291,
+      "doa_mae": 0.08135309486078768,
+      "bandwidth_mae_rel": 0.9264
+    },
+    {
+      "file": "sample_00018.npy",
+      "snr_db": 2.9861153843514554,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 3 total, so 2 interferers (target is 1).\n\n**Spectrum analysis:** The main peak is at -0.2964 with bandwidth 0.3623. The peaks_excluding_center shows the interferer at -0.2964. The per_peak template distances show two peaks at -0.373 and -0.3486.\n\nWait, let me reconsider. The target FHSS is centered near 0 Hz. The spectrum shows peaks at -0.2964 (main peak). The per_peak distances show peaks at -0.373 and -0.3486.\n\nActually, the analyze_spe",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 99,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 14.6,
+          "content_len": 6814,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "QPSK",
+            "freq_offset": -0.373,
+            "bandwidth": 0.3623,
+            "doa": 20.5
+          },
+          {
+            "category": "none",
+            "modulation": "QPSK",
+            "freq_offset": -0.3486,
+            "bandwidth": 0.3623,
+            "doa": 47.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00019.npy",
+      "snr_db": 3.407575914585216,
+      "num_sources": 2,
+      "tool_calls": 6,
+      "raw_output": "The DOA estimates are consistent: 0.5° (target) and 14.0° (interferer).\n\nLet me finalize my analysis:\n\n**Summary:**\n- **num_sources** = 2 → 1 interferer\n- **Target** (FHSS): main peak at 0.2315, bandwidth 0.3672, DOA 0.5°\n- **Interferer**: at -0.1809, bandwidth 0.0576, rel power -9.9 dB, DOA 14.0°\n\n**Category determination:**\n- freq_offset = 0.1809\n- target bandwidth = 0.3672\n- ratio = 0.1809 / 0.3672 = 0.49 < 0.5 → **co_channel**\n\n**Modulation:** The interferer is narrowband (bandwidth 0.0576).",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 0,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 74,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 14.7,
+          "content_len": 6457,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 839,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "nfm",
+            "freq_offset": -0.1809,
+            "bandwidth": 0.0576,
+            "doa": 14.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00020.npy",
+      "snr_db": 0.6015192526031861,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 sources estimated → 1 target + 1 interferer.\n\n**Spectrum analysis:**\n- Target near 0 Hz: freq -0.0023, bandwidth 0.1182\n- Interferer peaks excluding center: \n  - Peak at -0.4411, rel_db 0.0, bandwidth 0.0801\n  - Peak at 0.4208, rel_db -0.8, bandwidth 0.0684\n\nWait, there are two peaks excluding center. But num_sources says 2. Let me reconsider. The spectral_peak_count is 3 (including center). The eigenvalue estimate is 2. So there are 2 source",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 103,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 15.8,
+          "content_len": 7383,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "16QAM",
+            "freq_offset": -0.4411,
+            "bandwidth": 0.0801,
+            "doa": -13.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.001372719692169344,
+      "doa_mae": 0.09339355060026833,
+      "bandwidth_mae_rel": 0.07924210526315796
+    },
+    {
+      "file": "sample_00021.npy",
+      "snr_db": 10.622351776349419,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "The analysis shows only 1 source (the target). The number of sources estimate is 1, spectral peak count is 1, and there are no peaks excluding center. The DOA is 0 degrees (target). \n\nThe target is OOK (per-peak template distance 0.22 for OOK is the closest match). There are no interferers detected.\n\nThe num_sources_estimate is 1, which minus the target (1) = 0 interferers.\n\n```json\n{\n  \"num_interferers\": 0,\n  \"interferers\": []\n}\n```",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.4,
+          "content_len": 437,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00022.npy",
+      "snr_db": 2.3269383086415214,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "I have all the measurements I need. Let me compile the final analysis.\n\n**Summary:**\n- **num_sources = 3** → 2 interferers (target + 2)\n- **DOA:** -47°, -20° (interferers), 0° (target)\n- **Interferer frequencies:** -0.4023 and -0.3867 (from per-peak analysis)\n- **Target FHSS** has wide bandwidth (OBW99 ≈ 0.94)\n- **Interferer modulations:** 64QAM (distance 0.59) and QPSK (distance 0.69) are closest matches\n- **Pulse duty cycle** 0.033 with PAPR 3.3 dB — but this is likely the FHSS target's hoppin",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 80,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 109,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 13.8,
+          "content_len": 5751,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 1063,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": -0.4023,
+            "bandwidth": 0.2686,
+            "doa": -47.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "QPSK",
+            "freq_offset": -0.3867,
+            "bandwidth": 0.2686,
+            "doa": -20.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 1.0,
+      "freq_mae": 0.08866860798591747,
+      "doa_mae": 0.45234288339175777,
+      "bandwidth_mae_rel": 0.041842424242424264
+    },
+    {
+      "file": "sample_00023.npy",
+      "snr_db": 8.878661613147285,
+      "num_sources": 1,
+      "tool_calls": 0,
+      "raw_output": "I'll analyze the sample using the provided tools. Let me start by gathering measurements in parallel.\n</｜｜DSML｜｜tool_calls>",
+      "round_log": [
+        {
+          "elapsed_s": 0.7,
+          "content_len": 123,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {},
+      "num_interferers_ok": false,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": -1,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00024.npy",
+      "snr_db": 1.6053767333863078,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\n- **num_sources_estimate**: 2 → 1 interferer (target + 1 interferer)\n- **DOA**: [-26.0, 0.0] → target at 0°, interferer at -26°\n- **Spectrum**: The main peak is at -0.3372 (normalized), with bandwidth 0.4385. The target is near 0 Hz. The interferer is at freq_offset = -0.3372.\n- **Time domain**: PAPR 3.4 dB, pulse duty cycle 0.038 (very low), pulse edge count 34. This strongly suggests a pulsed waveform.\n- **Modulation features**: The global template d",
+      "round_log": [
+        {
+          "elapsed_s": 1.2,
+          "content_len": 0,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 84,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 4.1,
+          "content_len": 1757,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3372,
+            "bandwidth": 0.4385,
+            "doa": -26.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00025.npy",
+      "snr_db": -1.7855753353598436,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\n- **num_sources_estimate**: 1 (eigenvalue estimate). The spectral peak count is 3, but eigenvalue estimate is 1. This suggests 1 source total, meaning 0 interferers. However, let me reconsider.\n\nWait, the num_sources_estimate is 1, which means only 1 source (the target). So num_interferers = 1 - 1 = 0.\n\nLet me reconsider the spectrum analysis. The main peak is at -0.1582 with bandwidth 0.1689. The peaks_excluding_center shows -0.1582. But the target sh",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 68,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 112,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 4.6,
+          "content_len": 2150,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00026.npy",
+      "snr_db": 4.831978352098091,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 3 total, so 2 interferers (target = 1).\n\n**Spectrum analysis:** The main peak is at -0.2203 with bandwidth 0.5469. The target GFSK signal is near 0 Hz. The peaks_excluding_center shows a peak at -0.2203. The OBW99 is 0.9648 which is very wide.\n\nWait, the spectrum shows only one peak at -0.2203 with a very wide bandwidth (0.5469). The OBW99 is 0.9648, which is nearly the whole band. This suggests a strong broadband/wideband interferer.\n\nThe per-",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 0,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 84,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 9.2,
+          "content_len": 4331,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": -0.2203,
+            "bandwidth": 0.5469,
+            "doa": -35.5
+          },
+          {
+            "category": "co_channel",
+            "modulation": "64QAM",
+            "freq_offset": -0.2529,
+            "bandwidth": 0.5469,
+            "doa": 40.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.01631265284671174,
+      "doa_mae": 0.1526486089788932,
+      "bandwidth_mae_rel": 5.666971428571429
+    },
+    {
+      "file": "sample_00027.npy",
+      "snr_db": 8.954724329535706,
+      "num_sources": 1,
+      "tool_calls": 6,
+      "raw_output": "With 1 source, DOA is 0° (target). With 2 sources, DOA shows -51.5° and 0°. This confirms there's an interferer at -51.5°.\n\nGiven the pulse characteristics (PAPR 9.1 dB, duty cycle 0.119, pulse edge count 96), this is a pulse-type interferer. The num_sources_estimate of 1 is likely because the pulse has low duty cycle making it hard to detect as a separate source via eigenvalue method, but the spectral peak and DOA clearly show an interferer.\n\nLet me finalize the analysis:\n\n- **num_interferers**",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 9.4,
+          "content_len": 4127,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.1,
+          "content_len": 907,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.2742,
+            "bandwidth": 0.2988,
+            "doa": -51.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00028.npy",
+      "snr_db": 12.036678719643156,
+      "num_sources": 2,
+      "tool_calls": 6,
+      "raw_output": "Hmm, with num_sources=2, only one DOA peak at -14.5. But with num_sources=3, we got [-33, -14.5, -1.0]. \n\nLet me reconsider. The num_sources estimate was 3 (2 interferers + target). The DOA with 3 sources gives peaks at -33, -14.5, -1.0. The target is at -1.0 (near 0 deg). So the two interferers are at -33 and -14.5 deg.\n\nThe spectrum shows a main interferer peak at -0.284 with bandwidth 0.1582. There appear to be two interferers close in frequency around -0.28 to -0.34.\n\nLet me finalize with 2 ",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 107,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 17.1,
+          "content_len": 7386,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.0,
+          "content_len": 1299,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "QPSK",
+            "freq_offset": -0.284,
+            "bandwidth": 0.1582,
+            "doa": -33.0
+          },
+          {
+            "category": "none",
+            "modulation": "QPSK",
+            "freq_offset": -0.32,
+            "bandwidth": 0.1582,
+            "doa": -14.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 1.0,
+      "freq_mae": 0.03197480941390318,
+      "doa_mae": 0.0781090054190372,
+      "bandwidth_mae_rel": 0.19115294117647064
+    },
+    {
+      "file": "sample_00029.npy",
+      "snr_db": -3.999060592918622,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 → 1 interferer (2 - 1 target = 1 interferer).\n\n**Spectrum analysis:** The main peak is at -0.329 (peaks_excluding_center). The target should be near 0 Hz, but the spectrum shows a peak at -0.329. The per_peak_bandwidth for this peak is 0.2959.\n\nWait, the spectrum shows the main peak at -0.329 with obw99 of 0.9453. The peaks_excluding_center shows the interferer at -0.329 with bandwidth 0.2959.\n\nThe target is centered near 0 Hz. The interferer",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 119,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 5.8,
+          "content_len": 2554,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.329,
+            "bandwidth": 0.2959,
+            "doa": 13.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.05934528341933476,
+      "doa_mae": 9.891557557537425,
+      "bandwidth_mae_rel": 0.11397647058823528
+    },
+    {
+      "file": "sample_00030.npy",
+      "snr_db": -0.28402390374934416,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\n1. **num_sources_estimate**: 1 (eigenvalue estimate), but spectral_peak_count is 3. The eigenvalue estimate of 1 suggests the target is the dominant source. However, the spectrum shows a peak at -0.3323 with bandwidth 0.3193.\n\n2. **Spectrum**: The main peak is at -0.3323 (rel_db -8.2), which is the interferer candidate. The target should be near 0 Hz. The per-peak template distances show peaks at -0.0537 and -0.0371 (near center, these are likely the t",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 150,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 8.0,
+          "content_len": 3698,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3323,
+            "bandwidth": 0.3193,
+            "doa": -8.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00031.npy",
+      "snr_db": 13.063436218297209,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 2 → 1 interferer (target + 1 interferer)\n\n**Spectrum analysis:**\n- Main peak at 0.3146 (rel_db 0.0) - this is the interferer (strongest)\n- Target near 0 Hz at -0.0008 (rel_db -12.0)\n- The interferer is at freq_offset = 0.3146, bandwidth = 0.209\n- Target bandwidth = 0.0801\n\n**DOA:** Two DOA estimates: -13.5° and 0.0°. The target is at 0°, so the interferer is at -13.5°.\n\n**Interferer characterization:**\n- freq_offset = 0.3146\n- bandwidth = ",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 100,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 105,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 7.4,
+          "content_len": 3394,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "64QAM",
+            "freq_offset": 0.3146,
+            "bandwidth": 0.209,
+            "doa": -13.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0030722278004302606,
+      "doa_mae": 0.2849395400786747,
+      "bandwidth_mae_rel": 0.00950943396226411
+    },
+    {
+      "file": "sample_00032.npy",
+      "snr_db": -1.795143392504639,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 → 1 interferer (target is 1 source).\n\n**Spectrum analysis:** The main peak is at -0.3481 (normalized), which is the interferer candidate. The target sits near 0 Hz. The interferer is at freq_offset = -0.3481, bandwidth = 0.3066.\n\n**Time domain:** PAPR 3.6 dB, pulse duty cycle 0.035 (very low duty cycle), pulse edge count 36. This strongly suggests a pulsed waveform.\n\n**Modulation features:** The per-peak template distances show the peak at -0",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 81,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 5.6,
+          "content_len": 2601,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3481,
+            "bandwidth": 0.3066,
+            "doa": 12.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00033.npy",
+      "snr_db": 3.872844739253342,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "I have enough data. Let me finalize the analysis.\n\n**Summary of measurements:**\n- **num_sources = 3** → 2 interferers\n- **DOA**: target at -0.5°, interferers at -57.5° and -18.0°\n- **Spectrum peak**: 0.2555 (interferer), bandwidth 0.043\n- **Time domain**: duty cycle 0.032, 32 pulse edges, PAPR 1.5 dB → pulse-type signal\n- **Modulation features**: peak at 0.2559 closest to OOK (0.31), single_tone (0.35), GFSK (0.34)\n\n**Interferer 1** (at freq 0.2555, DOA -57.5°): This is a pulsed waveform (duty c",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 114,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 9.4,
+          "content_len": 3672,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 1144,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": 0.2555,
+            "bandwidth": 0.043,
+            "doa": -57.5
+          },
+          {
+            "category": "co_channel",
+            "modulation": "single_tone",
+            "freq_offset": 0.0,
+            "bandwidth": 0.04,
+            "doa": -18.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0006158892405560557,
+      "doa_mae": 0.02822892995384052,
+      "bandwidth_mae_rel": 0.3759999999999999
+    },
+    {
+      "file": "sample_00034.npy",
+      "snr_db": -4.91943513013913,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the data:\n\n**Key observations:**\n\n1. **Spectrum analysis**: The main peak is at -0.3584 (normalized), with bandwidth 0.2793. The OBW99 is 0.9922 (very wide). The peak is at -0.3584, which is displaced from center (0 Hz).\n\n2. **Num sources**: estimate is 1, but spectral_peak_count is 3. The eigenvalue estimate is 1. This suggests possibly 1 source (the target) plus maybe interferers.\n\n3. **Time domain**: PAPR 5.9 dB, pulse duty cycle 0.084 (very low), pulse edge count 70. This stro",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 97,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 5.9,
+          "content_len": 2706,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00035.npy",
+      "snr_db": 1.758991177674492,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\n1. **num_sources_estimate = 1**: The eigenvalue estimate is 1, meaning there's essentially 1 source. The spectral peak count is 3 but the eigenvalue method says 1. This suggests the target FHSS signal is the dominant source.\n\n2. **Spectrum**: The peak is at -0.3388 (normalized), which is the main peak. The target FHSS signal is centered near 0 Hz. The peak at -0.3388 is the interferer candidate. However, the num_sources estimate is 1, meaning there's o",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 100,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.5,
+          "content_len": 1526,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00036.npy",
+      "snr_db": -1.3873381755166103,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Spectrum analysis:**\n- Main peak at -0.2791 (normalized), bandwidth 0.25\n- obw99 = 0.9414 (very wide, suggesting broadband/OFDM-like signal)\n- The peak at -0.2791 is the interferer candidate (target sits near 0 Hz)\n\n**Num sources:** 2 sources → 1 target + 1 interferer\n\n**Time domain:** PAPR 6.8 dB, duty cycle 0.072 (very low duty cycle → pulse-like)\n\n**Modulation features:**\n- Global template distances: OFDM (0.66) and nfm (0.72) are closest\n- Per-peak distanc",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 68,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.2,
+          "content_len": 92,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 5.9,
+          "content_len": 2791,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.2791,
+            "bandwidth": 0.25,
+            "doa": 9.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00037.npy",
+      "snr_db": 9.08306063227139,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "The analysis shows:\n- num_sources_estimate = 1, which means only the target is present (1 source = target, 0 interferers)\n- DOA estimate is 0.0 deg (target at 0 deg)\n- The spectrum peak at -0.3132 with bandwidth 0.3105 is the target itself (OFDM, confirmed by global template distance 0.33 for OFDM)\n- The per-peak template distances show peaks at -0.3945 and -0.3672 which are part of the OFDM signal's spectral structure, not separate interferers\n\nSince num_sources_estimate = 1, there are 0 interf",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 89,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.4,
+          "content_len": 345,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 598,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00038.npy",
+      "snr_db": 4.7152208967573515,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "The analysis is clear:\n\n- **num_sources_estimate = 1**: Only one source detected (the target GFSK signal)\n- **Spectrum**: Only one peak near 0 Hz (the target), no peaks excluding center\n- **DOA**: Only one DOA at 0 degrees (the target)\n- **Time domain**: PAPR 4.0 dB, duty cycle 0.05 - but this is consistent with the GFSK target signal characteristics, not indicating a separate pulse interferer\n\nSince there's only 1 source detected (the target), there are **0 interferers**.\n\nThe per-peak template",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.3,
+          "content_len": 304,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 680,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00039.npy",
+      "snr_db": 5.034239143028163,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 2 → 1 interferer (2 - 1 target = 1 interferer)\n\n**Spectrum analysis:**\n- Peak at -0.3333 (normalized), rel_db -5.0, bandwidth 0.4824\n- The target is near 0 Hz. The peak at -0.3333 is the interferer.\n- freq_offset = -0.3333\n- bandwidth = 0.4824\n\n**Time domain:** PAPR 2.6 dB, pulse duty cycle 0.027 (very low), pulse edge count 28. This suggests a pulsed waveform.\n\n**Modulation features:**\n- Global template distances: nfm (0.46), LFM (0.53), ",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 119,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 6.4,
+          "content_len": 2766,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "pulse",
+            "modulation": "pulse",
+            "freq_offset": -0.3333,
+            "bandwidth": 0.4824,
+            "doa": -12.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00040.npy",
+      "snr_db": 9.597969905294352,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Number of sources:** 2 sources estimated. Target is 1, so **num_interferers = 1**.\n\n**Spectrum analysis:** The main peak is at -0.1796 (the interferer). The target is near 0 Hz. The interferer peak is at -0.1796 with bandwidth 0.2861.\n\nWait, the spectrum shows peaks_excluding_center at -0.1796. The target is OFDM centered near 0 Hz. The interferer is at -0.1796.\n\n**DOA:** Two DOA estimates: -45.0° and 0.0°. The target is at 0°, so the interferer is at **-45.0°**.\n\n",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.3,
+          "content_len": 81,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 9.0,
+          "content_len": 4046,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "QPSK",
+            "freq_offset": -0.1796,
+            "bandwidth": 0.2861,
+            "doa": -45.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00041.npy",
+      "snr_db": 14.08302205924009,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the measurements:\n\n**Number of sources:** 3 → 2 interferers (target + 2 interferers)\n\n**Spectrum analysis:** The main peak is at -0.3209 (the target should be near 0 Hz, but the spectrum shows peaks at -0.3209). The peaks_excluding_center shows -0.3209. However, the per_peak_template_distances show peaks at -0.4229 and -0.4072.\n\nWait, let me reconsider. The target is QPSK centered near 0 Hz. The spectrum shows peaks at -0.3209 (main peak). The per-peak distances show peaks at -0.4",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 68,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 84,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 27.4,
+          "content_len": 13482,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "BPSK",
+            "freq_offset": -0.4229,
+            "bandwidth": 0.43,
+            "doa": 18.0
+          },
+          {
+            "category": "blocking",
+            "modulation": "BPSK",
+            "freq_offset": -0.4072,
+            "bandwidth": 0.43,
+            "doa": 38.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00042.npy",
+      "snr_db": 10.479120971119267,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\nThe `estimate_num_sources` gives `num_sources_estimate: 1`, with eigenvalue estimate 1. This suggests only 1 source (the target OFDM). The spectral peak count of 3 is likely from the wideband OFDM spectrum splitting into multiple peaks.\n\nThe `analyze_spectrum` shows a single peak at -0.2814 with bandwidth 0.3369, and `peaks_excluding_center` also shows only that peak. The main peak is at -0.2814, not near 0 Hz. However, the target OFDM is centered near",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.6,
+          "content_len": 150,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.4,
+          "content_len": 1332,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00043.npy",
+      "snr_db": 8.045985254018213,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now let me analyze the results.\n\n**Number of sources:** 2 → 1 interferer (target is LFM at 0 Hz).\n\n**Spectrum analysis:**\n- The main peak is at 0.3156 (normalized), with bandwidth 0.0273.\n- The target LFM is centered near 0 Hz. The interferer is at freq_offset = 0.3156.\n- The spectrum shows peaks at 0.3115 and 0.3281 in the per-peak analysis (these are the two peaks of the interferer, likely a wideband signal).\n\nWait, let me reconsider. The `peaks_excluding_center` shows a peak at 0.3156. The ta",
+      "round_log": [
+        {
+          "elapsed_s": 1.5,
+          "content_len": 100,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 119,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 11.2,
+          "content_len": 4653,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "blocking",
+            "modulation": "OOK",
+            "freq_offset": 0.3156,
+            "bandwidth": 0.0273,
+            "doa": -33.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.003074320679307574,
+      "doa_mae": 0.03537237556506767,
+      "bandwidth_mae_rel": 0.0015999999999999506
+    },
+    {
+      "file": "sample_00044.npy",
+      "snr_db": -2.5486898065225683,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the data.\n\n**Number of sources:** 3 (num_sources_estimate = 3). Target is 1, so there are **2 interferers**.\n\n**Spectrum peaks (excluding center):**\n- Peak at 0.3064, rel_db 0.0, bandwidth 0.0732 (strongest)\n- Peak at 0.0519, rel_db -8.9, bandwidth 0.1943\n- Peak at -0.3477, rel_db -12.9, bandwidth 0.0547\n- Peak at -0.4844, rel_db -13.7, bandwidth 0.0273\n\nThe target is 64QAM centered near 0 Hz. The main peak at 0.3064 is the strongest (0 dB), which is likely the interferer. The tar",
+      "round_log": [
+        {
+          "elapsed_s": 1.7,
+          "content_len": 0,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 85,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 51.6,
+          "content_len": 24664,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {},
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": -1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00045.npy",
+      "snr_db": 6.462613138950113,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "The spectrum analysis consistently shows the main peak at -0.1704 with bandwidth 0.7109. Given the target is LFM centered near 0 Hz, the interferers are at -0.2832 and -0.2588 (from per-peak template distances).\n\nLet me reconsider the target bandwidth. The target LFM is centered near 0 Hz. The main peak at -0.1704 is the strongest signal. Given the target LFM bandwidth is wide (LFM sweeps across a band), and the interferers are at ~0.26-0.28 offset.\n\nGiven the target LFM bandwidth is approximate",
+      "round_log": [
+        {
+          "elapsed_s": 1.9,
+          "content_len": 89,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 110,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 32.7,
+          "content_len": 15066,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 1046,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "64QAM",
+            "freq_offset": -0.2832,
+            "bandwidth": 0.1,
+            "doa": 21.5
+          },
+          {
+            "category": "adjacent",
+            "modulation": "64QAM",
+            "freq_offset": -0.2588,
+            "bandwidth": 0.1,
+            "doa": 33.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "freq_mae": 0.0724663933860891,
+      "doa_mae": 0.9468272234242789,
+      "bandwidth_mae_rel": 0.4553191489361702
+    },
+    {
+      "file": "sample_00046.npy",
+      "snr_db": 13.11208553380624,
+      "num_sources": 2,
+      "tool_calls": 6,
+      "raw_output": "I have all the data I need. Let me finalize the analysis.\n\n**Summary:**\n- **Number of sources:** 2 → 1 target + 1 interferer\n- **Target (QPSK):** main peak at -0.1015, bandwidth 0.2939, DOA 0°\n- **Interferer:** at -0.3242, bandwidth 0.0381, rel_db -13.8 (weaker than target), DOA 29.5°\n\n**Category determination:**\n- freq_offset = 0.3242, target bandwidth = 0.2939\n- ratio = 0.3242 / 0.2939 = 1.10\n- Since 0.5 ≤ ratio < 2.0 and power is weaker (-13.8 dB) → **adjacent**\n\n**Modulation:** The interfere",
+      "round_log": [
+        {
+          "elapsed_s": 1.4,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.1,
+          "content_len": 102,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 13.0,
+          "content_len": 5684,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 900,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "single_tone",
+            "freq_offset": -0.3242,
+            "bandwidth": 0.0381,
+            "doa": 29.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00047.npy",
+      "snr_db": 9.836039892851211,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\nThe spectrum analysis shows a main peak at -0.278 with bandwidth 0.2939. The num_sources estimate is 1, meaning only the target is present (1 source = target). The spectral_peak_count is 3 but eigenvalue estimate is 1.\n\nThe target is OFDM. The global template distance for OFDM is 0.28, which is the closest match, confirming the target is OFDM.\n\nThe num_sources_estimate is 1, which means there is 1 source total, and since 1 source is the target, there are **0 interfer",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 70,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.9,
+          "content_len": 1132,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00048.npy",
+      "snr_db": 2.7539974457118905,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results.\n\n**Analysis:**\n\n- **num_sources_estimate**: 1 source. Since 1 source is the target, this means **num_interferers = 0**.\n\n- **Spectrum**: The main peak is at -0.0385 with bandwidth 0.6338. The `peaks_excluding_center` is empty, meaning no clear interferer peaks displaced from center. The target (FHSS) is near 0 Hz.\n\n- **Time domain**: PAPR 3.9 dB, pulse duty cycle 0.035, pulse edge count 36. This is consistent with FHSS (frequency hopping) which has some pulse-like cha",
+      "round_log": [
+        {
+          "elapsed_s": 1.3,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 0.9,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.9,
+          "content_len": 1131,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00049.npy",
+      "snr_db": 2.2570838455227253,
+      "num_sources": 1,
+      "tool_calls": 6,
+      "raw_output": "The num_sources estimate is 1 (eigenvalue estimate 1, confidence 0.6). This indicates only 1 source present, which is the target FHSS signal. The spectral peak count of 3 is likely due to the FHSS hopping nature creating multiple spectral peaks, but the eigenvalue method confirms only 1 actual source.\n\nTherefore, **num_interferers = 0**.\n\nThe target FHSS signal is confirmed by the global template distance (FHSS = 0.7, nfm = 0.69). The wide OBW (0.98) and pulse-like time-domain features are consi",
+      "round_log": [
+        {
+          "elapsed_s": 1.9,
+          "content_len": 88,
+          "tool_calls": 4,
+          "names": [
+            "analyze_spectrum",
+            "estimate_num_sources",
+            "detect_time_domain",
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 1.0,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.9,
+          "content_len": 1546,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.7,
+          "content_len": 595,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    }
+  ]
+}
