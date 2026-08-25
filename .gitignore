@@ -1,0 +1,6 @@
+# 含百炼 API Key，切勿提交到远程仓库
+run_v32.ps1
+_dryrun.log
+
+__pycache__/
+*.pyc
