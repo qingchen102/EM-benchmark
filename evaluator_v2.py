@@ -474,13 +474,19 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
 def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | None = None,
                      progress: bool = True, verbose: bool = False,
                      checkpoint_path: str | Path | None = None,
-                     checkpoint_every: int = 20):
+                     checkpoint_every: int = 20,
+                     prior_results: list[dict] | None = None):
+    """prior_results: 断点续跑 —— 上次部分完成的逐样本结果，原样前置，
+    已完成的文件跳过不再调用 API。"""
     root = Path(dataset_dir)
     ground_truths = json.loads((root / "ground_truth.json").read_text(encoding="utf-8"))
     observations = json.loads((root / "observations.json").read_text(encoding="utf-8"))
     obs_by_file = {r["file"]: r["observation"] for r in observations}
 
-    results = []
+    results = list(prior_results) if prior_results else []
+    done_files = {r["file"] for r in results}
+    if done_files:
+        print(f"[resume] 已完成 {len(done_files)} 个样本，跳过续跑")
     total = len(ground_truths)
     if max_samples is not None:
         ground_truths = ground_truths[:max_samples]
@@ -495,9 +501,10 @@ def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | Non
         tqdm = None
     iterator = tqdm(ground_truths, desc="Evaluating Agent", unit="sample") if tqdm else ground_truths
 
-    n_done = 0
     for rec in iterator:
         file_name = rec["file"]
+        if file_name in done_files:
+            continue
         gt = rec["ground_truth"]
         obs = obs_by_file.get(file_name, {})
         sample = root / file_name
@@ -530,7 +537,7 @@ def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | Non
             "prediction": pred,
             **score,
         })
-        n_done += 1
+        n_done = len(results)
         # 定期存档：长跑（全量 500 约 6h）中途崩溃/断网不丢已完成样本
         if checkpoint_path and n_done % max(int(checkpoint_every), 1) == 0:
             try:
@@ -654,14 +661,32 @@ def main():
                         choices=["low", "medium", "high"],
                         help="推理模型思考强度（v4 系列可用 low 大幅减少推理 token/耗时；"
                              "API 不支持时自动忽略）")
+    parser.add_argument("--resume", action="store_true",
+                        help="从输出文件中的部分结果续跑（配合定期存档；已完成的"
+                             "样本跳过，不重复调用 API）")
     args = parser.parse_args()
+
+    prior_results = None
+    if args.resume:
+        out_path = Path(args.output)
+        if out_path.exists():
+            try:
+                old = json.loads(out_path.read_text(encoding="utf-8"))
+                prior_results = old.get("results") or []
+                if not prior_results:
+                    print(f"[resume] {out_path} 无已完成结果，从头开始")
+            except (json.JSONDecodeError, OSError) as exc:
+                print(f"[resume] 存档读取失败（{exc}），从头开始")
+        else:
+            print(f"[resume] 找不到 {out_path}，从头开始")
 
     agent = None if args.offline else OpenAICompatibleAgent(
         args.model, base_url=args.base_url, api_key=args.api_key,
         use_tools=not args.no_tools, reasoning_effort=args.reasoning_effort)
     report = evaluate_dataset(args.dataset_dir, agent, max_samples=args.max_samples,
                               progress=not args.no_progress, verbose=args.verbose,
-                              checkpoint_path=args.output)
+                              checkpoint_path=args.output,
+                              prior_results=prior_results)
     Path(args.output).write_text(json.dumps(report, indent=2, ensure_ascii=False),
                                  encoding="utf-8")
     keys = ("code_fingerprint", "num_samples", "num_interferers_accuracy",
