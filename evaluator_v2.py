@@ -99,10 +99,17 @@ analyze_spectrum already computed (ratio_to_target_bw, power_ratio_approx_db):
                out-of-band or fading signals also elevate it; without burst
                evidence, prefer blocking/adjacent/none over pulse.
 2. co_channel: ratio_to_target_bw < 0.5 (interferer inside the target band)
-3. blocking:   ratio_to_target_bw >= 0.5 AND power_ratio_approx_db >= 10 dB
-               (strong out-of-band signal -> receiver LNA saturation)
-4. adjacent:   0.5 <= ratio_to_target_bw < 2.0 with weaker power
-5. none:       ratio_to_target_bw >= 2.0 with weaker power
+3. blocking:   ratio_to_target_bw >= 0.5 AND EITHER
+               power_ratio_approx_db >= 10 dB, OR
+               power_ratio_approx_db in [5, 10) TOGETHER WITH a compression
+               signature from detect_time_domain (papr_db <= 4 OR
+               clipping_fraction >= 0.02 — LNA saturation flattens waveform
+               peaks). Do NOT call blocking when measured power is below 5 dB,
+               even with a compression signature.
+4. adjacent:   0.5 <= ratio_to_target_bw < 2.0 with weaker power and no
+               compression signature
+5. none:       ratio_to_target_bw >= 2.0 with weaker power and no compression
+               signature
 Apply the first matching rule (pulse has priority).
 
 Output ONLY valid JSON with schema:
