@@ -1,0 +1,1825 @@
+{
+  "dataset": ".",
+  "code_fingerprint": "a6f7d7be778e",
+  "num_samples": 500,
+  "num_interferers_accuracy": 0.85,
+  "category_accuracy": 0.25,
+  "freq_accuracy": 0.325,
+  "bandwidth_accuracy": 0.25,
+  "doa_accuracy": 0.5,
+  "modulation_accuracy": 0.4166666666666667,
+  "modulation_accuracy_e2e": 0.2,
+  "modulation_accuracy_matched_pooled": 0.42857142857142855,
+  "freq_mae": 0.033493255478295854,
+  "doa_mae": 3.856497842545821,
+  "bandwidth_mae_rel": 0.5283377053447642,
+  "category_accuracy_by_snr": {
+    "Low": 0.5,
+    "Mid": 0.1,
+    "High": 0.375
+  },
+  "snr_group_counts": {
+    "Low": 2,
+    "Mid": 10,
+    "High": 8
+  },
+  "missed_sources_total": 16,
+  "false_alarm_total": 15,
+  "avg_tool_calls_per_sample": 5.1,
+  "tool_call_rate": 1.0,
+  "results": [
+    {
+      "file": "sample_00000.npy",
+      "snr_db": 7.739233746429086,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the results and construct the answer. Let me summarize what I've found:\n\n1. **Number of sources**: final_suggestion = 3 sources total (1 target + 2 interferers)\n2. **Spectrum analysis**: Found 1 source candidate at freq = -0.4464, bandwidth = 0.0498, ratio_to_target_bw = 0.635, power_ratio_approx_db = 0.0\n3. **DOA estimates**: [-31.0, 0.0, 50.0] degrees\n4. **Time-domain**: PAPR = 2.0 dB (< 8), pulse_duty_cycle = 0.011 (< 0.3), pulse_edge_count = 11 (≥ 4) - but PAPR is too l",
+      "round_log": [
+        {
+          "elapsed_s": 9.9,
+          "content_len": 147,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.7,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.7,
+          "content_len": 94,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 60,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 77,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 30.1,
+          "content_len": 4868,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "BPSK",
+            "freq_offset": -0.4464,
+            "bandwidth": 0.0498,
+            "doa": 50.0
+          },
+          {
+            "category": "none",
+            "modulation": "GFSK",
+            "freq_offset": 0.1,
+            "bandwidth": 0.05,
+            "doa": -31.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.0019450754903405643,
+      "doa_mae": 0.46933072667339104,
+      "bandwidth_mae_rel": 0.2748799999999999
+    },
+    {
+      "file": "sample_00001.npy",
+      "snr_db": 5.236432494005134,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data and create the JSON answer. Let me organize the information:\n\nFrom the spectrum analysis, I have 3 sources:\n1. freq: 0.1299, bandwidth: 0.1611, ratio_to_target_bw: 3.326, power_ratio_approx_db: 0.0\n2. freq: 0.0584, bandwidth: 0.0244, ratio_to_target_bw: 1.495, power_ratio_approx_db: -3.2\n3. freq: 0.0103, bandwidth: 0.0713, ratio_to_target_bw: 0.264, power_ratio_approx_db: -7.5\n\nThe target is GFSK with bandwidth 0.0390625. The target is likely centered near 0 Hz and",
+      "round_log": [
+        {
+          "elapsed_s": 4.0,
+          "content_len": 117,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.8,
+          "content_len": 148,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 77,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 96,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 56.1,
+          "content_len": 8619,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "BPSK",
+            "freq_offset": 0.1299,
+            "bandwidth": 0.1611,
+            "doa": 55.5
+          },
+          {
+            "category": "co_channel",
+            "modulation": "BPSK",
+            "freq_offset": 0.0103,
+            "bandwidth": 0.0713,
+            "doa": -15.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 1.0,
+      "mod_e2e_accuracy": 1.0,
+      "mod_hits": 1,
+      "mod_matched_total": 1,
+      "mod_gt_total": 1,
+      "freq_mae": 0.01408079031964879,
+      "doa_mae": 0.14050474139651215,
+      "bandwidth_mae_rel": 0.2129882352941176
+    },
+    {
+      "file": "sample_00002.npy",
+      "snr_db": 0.23224268498632838,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data and construct the answer. Let me review what I have:\n\nFrom analyze_spectrum:\n- Multiple sources detected: main peak at 0.2512 (likely target), others at -0.2665, 0.354, 0.3915, 0.0122, 0.4356\n- The target signal is BPSK with bandwidth 0.1328125 (given in prior)\n\nFrom estimate_num_sources:\n- final_suggestion = 3 sources total (1 target + 2 interferers)\n\nFrom estimate_doa:\n- Only 1 DOA estimate at 11.5° (but we need DOA for each interferer)\n- stable_peaks_deg shows 1",
+      "round_log": [
+        {
+          "elapsed_s": 2.9,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 138,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 146,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 83,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 21.7,
+          "content_len": 3368,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "BPSK",
+            "freq_offset": 0.0122,
+            "bandwidth": 0.4678,
+            "doa": 11.5
+          },
+          {
+            "category": "none",
+            "modulation": "OFDM",
+            "freq_offset": 0.354,
+            "bandwidth": 0.0469,
+            "doa": 11.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.06426016727955858,
+      "doa_mae": 2.5640202540441095,
+      "bandwidth_mae_rel": 0.8180848484848485
+    },
+    {
+      "file": "sample_00003.npy",
+      "snr_db": -3.287016657127513,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I have all the measurements I need. Let me analyze:\n\n1. **Number of interferers**: final_suggestion = 2 sources total, so 1 target + 1 interferer → num_interferers = 1\n\n2. **Analyzing the interferer**: \n   - From spectrum analysis, there are 2 sources:\n     - Source 1: freq = -0.084, bandwidth = 0.7578, ratio_to_target_bw = 0.652, power_ratio_approx_db = 0.0 dB\n     - Source 2: freq = 0.3794, bandwidth = 0.2412, ratio_to_target_bw = 2.943, power_ratio_approx_db = -6.5 dB\n   \n   The target is",
+      "round_log": [
+        {
+          "elapsed_s": 2.8,
+          "content_len": 140,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 89,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 107,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.7,
+          "content_len": 79,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.7,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 10.8,
+          "content_len": 1603,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "OFDM",
+            "freq_offset": 0.3794,
+            "bandwidth": 0.2412,
+            "doa": -48.5
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 2,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00004.npy",
+      "snr_db": 13.86112211144735,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "{\"num_interferers\": 2, \"interferers\": [{\"category\": \"adjacent\", \"modulation\": \"OFDM\", \"freq_offset\": -0.1113, \"bandwidth\": 0.0371, \"doa\": 14.0}, {\"category\": \"adjacent\", \"modulation\": \"OFDM\", \"freq_offset\": -0.1435, \"bandwidth\": 0.0537, \"doa\": 50.0}]}",
+      "round_log": [
+        {
+          "elapsed_s": 3.7,
+          "content_len": 88,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.9,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.6,
+          "content_len": 150,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.5,
+          "content_len": 195,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 46,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 48.2,
+          "content_len": 8073,
+          "tool_calls": 0,
+          "names": []
+        },
+        {
+          "phase": "repair",
+          "elapsed_s": 2.4,
+          "content_len": 251,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "OFDM",
+            "freq_offset": -0.1113,
+            "bandwidth": 0.0371,
+            "doa": 14.0
+          },
+          {
+            "category": "adjacent",
+            "modulation": "OFDM",
+            "freq_offset": -0.1435,
+            "bandwidth": 0.0537,
+            "doa": 50.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 1.0,
+      "mod_e2e_accuracy": 0.5,
+      "mod_hits": 1,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.05826185989139018,
+      "doa_mae": 0.11708977991838765,
+      "bandwidth_mae_rel": 0.6726857142857143
+    },
+    {
+      "file": "sample_00005.npy",
+      "snr_db": 11.100058474907605,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data. From the spectrum analysis, I have 6 source candidates, but the source count tool suggests 3 total sources. Looking at the spectrum peaks, the main target is at freq 0.0063 with bandwidth 0.1299. The other significant peaks are at:\n1. freq 0.1922, bandwidth 0.2842, ratio_to_target_bw = 1.64, power_ratio_approx_db = -0.8 dB\n2. freq -0.1041, bandwidth 0.082, ratio_to_target_bw = 0.888, power_ratio_approx_db = -1.6 dB\n3. freq -0.1758, bandwidth 0.0908, ratio_to_targe",
+      "round_log": [
+        {
+          "elapsed_s": 2.6,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.1,
+          "content_len": 88,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 136,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 84,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.9,
+          "content_len": 278,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 22.8,
+          "content_len": 3465,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "OFDM",
+            "freq_offset": 0.1922,
+            "bandwidth": 0.2842,
+            "doa": 25.0
+          },
+          {
+            "category": "adjacent",
+            "modulation": "BPSK",
+            "freq_offset": -0.1041,
+            "bandwidth": 0.082,
+            "doa": -36.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 2,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 2,
+      "mod_gt_total": 2,
+      "freq_mae": 0.034509243777654755,
+      "doa_mae": 0.40394328704445215,
+      "bandwidth_mae_rel": 0.5033913725490196
+    },
+    {
+      "file": "sample_00006.npy",
+      "snr_db": 5.763287029438864,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data and create the JSON answer. Let me organize the information:\n\nFrom the spectrum analysis:\n1. Source 1: freq = -0.0106, bandwidth = 0.083, ratio_to_target_bw = 0.246, power_ratio_approx_db = 0.0 dB (target)\n2. Source 2: freq = -0.0813, bandwidth = 0.0801, ratio_to_target_bw = 1.891, power_ratio_approx_db = -2.2 dB\n\nFrom DOA estimates: [-30.0, 0.0, 49.0] degrees\nFrom stable peaks: [-0.5, 49.0] degrees\nFrom peaks_new_at_order3_deg: [-30.0] degrees\n\nThe target is cente",
+      "round_log": [
+        {
+          "elapsed_s": 2.9,
+          "content_len": 121,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 134,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 69,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.7,
+          "content_len": 64,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 25.4,
+          "content_len": 4516,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "OFDM",
+            "freq_offset": -0.0813,
+            "bandwidth": 0.0801,
+            "doa": 49.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 1,
+      "freq_mae": 0.03945413431736712,
+      "doa_mae": 0.10765114732760139,
+      "bandwidth_mae_rel": 0.3786181818181818
+    },
+    {
+      "file": "sample_00007.npy",
+      "snr_db": 7.501909332093339,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Let me analyze the results:\n\n1. **Source count**: `final_suggestion` = 3 sources total (1 target + 2 interferers)\n2. **Spectrum analysis**: Shows only 1 source candidate at freq 0.303 with bandwidth 0.0586\n3. **DOA estimates**: Only 2 angles returned (-4.0°, 45.0°) even though we requested 3 sources\n4. **Stable peaks**: [-3.5°, 44.5°] - these are the real sources\n5. **Time domain**: PAPR = 3.9 dB (< 8 dB), pulse_duty_cycle = 0.011 (< 0.3), pulse_edge_count = 11 (≥ 4) - but PAPR is too low for pu",
+      "round_log": [
+        {
+          "elapsed_s": 3.2,
+          "content_len": 129,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 78,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 163,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 72,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 16.7,
+          "content_len": 2921,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "GFSK",
+            "freq_offset": 0.303,
+            "bandwidth": 0.0586,
+            "doa": 45.0
+          }
+        ]
+      },
+      "num_interferers_ok": false,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 2,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00008.npy",
+      "snr_db": 1.5394455321112144,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "{\"num_interferers\": 2, \"interferers\": [{\"category\": \"co_channel\", \"modulation\": \"BPSK\", \"freq_offset\": 0.0065, \"bandwidth\": 0.875, \"doa\": -34.0}, {\"category\": \"co_channel\", \"modulation\": \"BPSK\", \"freq_offset\": 0.0065, \"bandwidth\": 0.875, \"doa\": 47.0}]}",
+      "round_log": [
+        {
+          "elapsed_s": 3.0,
+          "content_len": 121,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 3.9,
+          "content_len": 393,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.7,
+          "content_len": 370,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 3.4,
+          "content_len": 361,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 3.9,
+          "content_len": 425,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 45.6,
+          "content_len": 8613,
+          "tool_calls": 0,
+          "names": []
+        },
+        {
+          "phase": "repair",
+          "elapsed_s": 2.9,
+          "content_len": 252,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "BPSK",
+            "freq_offset": 0.0065,
+            "bandwidth": 0.875,
+            "doa": -34.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "BPSK",
+            "freq_offset": 0.0065,
+            "bandwidth": 0.875,
+            "doa": 47.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.07556387509350848,
+      "doa_mae": 0.056352200725626744,
+      "bandwidth_mae_rel": 1.24
+    },
+    {
+      "file": "sample_00009.npy",
+      "snr_db": 12.404984079401693,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I have all the measurements I need. Let me analyze:\n\nFrom estimate_num_sources: final_suggestion = 2 sources total → num_interferers = 1\n\nFrom analyze_spectrum: \n- Source 1: freq = -0.2135, bandwidth = 0.3721, ratio_to_target_bw = 1.708, power_ratio_approx_db = 0.0 dB\n- Source 2: freq = -0.3913, bandwidth = 0.0713, ratio_to_target_bw = 3.13, power_ratio_approx_db = -6.9 dB\n\nFrom estimate_doa: doa_estimates_deg = [-53.5, 0.0]\n\nFrom detect_time_domain: papr_db = 4.4 (< 8), pulse_duty_cycle = 0",
+      "round_log": [
+        {
+          "elapsed_s": 3.3,
+          "content_len": 129,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.1,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.0,
+          "content_len": 144,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.1,
+          "content_len": 62,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 46,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 24.4,
+          "content_len": 3845,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "BPSK",
+            "freq_offset": -0.3913,
+            "bandwidth": 0.0713,
+            "doa": -53.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 1,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00010.npy",
+      "snr_db": 14.120034192579507,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data and construct the answer. Let me review what I have:\n\nFrom analyze_spectrum:\n1. 4 spectral peaks detected at frequencies: 0.2279, -0.2231, 0.3009, and -0.0006 (target near center)\n2. The target is at -0.0006 with bandwidth 0.1035\n3. Three interferer candidates at: 0.2279, -0.2231, 0.3009\n\nFrom estimate_num_sources:\n- final_suggestion = 3 sources total (1 target + 2 interferers)\n\nFrom estimate_doa:\n- Only 1 DOA peak at 6.0 degrees found even for 3 sources\n- This sug",
+      "round_log": [
+        {
+          "elapsed_s": 2.7,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 135,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.8,
+          "content_len": 144,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 85,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 20.8,
+          "content_len": 3037,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "GFSK",
+            "freq_offset": 0.2279,
+            "bandwidth": 0.0986,
+            "doa": 6.0
+          },
+          {
+            "category": "adjacent",
+            "modulation": "GFSK",
+            "freq_offset": -0.2231,
+            "bandwidth": 0.0771,
+            "doa": 6.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 2,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 0.5,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 1.0,
+      "mod_e2e_accuracy": 1.0,
+      "mod_hits": 2,
+      "mod_matched_total": 2,
+      "mod_gt_total": 2,
+      "freq_mae": 0.013931326512155784,
+      "doa_mae": 5.594077096811347,
+      "bandwidth_mae_rel": 0.33305098039215686
+    },
+    {
+      "file": "sample_00011.npy",
+      "snr_db": -2.4285959446160077,
+      "num_sources": 1,
+      "tool_calls": 6,
+      "raw_output": "Now I need to analyze the results. Let me review:\n\n1. **Source count**: `estimate_num_sources` gives `final_suggestion: 1` (total sources). This means 1 target + 0 interferers.\n\n2. **Spectral analysis**: Shows 6 spectral peaks, but the tool says `merged_peak_count: 3`. The strongest peak is at 0.0531 Hz (normalized) with bandwidth 0.3018.\n\n3. **DOA analysis**: With 1 source assumption, DOA is -0.5°. Stable peaks show only 0.0°, and peaks at -64.5° and 38.0° appear only at order 3 (likely artifac",
+      "round_log": [
+        {
+          "elapsed_s": 2.9,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.9,
+          "content_len": 196,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.5,
+          "content_len": 91,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 77,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.9,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 11.9,
+          "content_len": 2019,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": null,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 0,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00012.npy",
+      "snr_db": 0.016489162168921823,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data. From the spectrum analysis, I see two sources:\n1. Main peak at freq 0.2736 with bandwidth 0.1318\n2. Second peak at freq 0.3606 with bandwidth 0.1016\n\nThe target signal is BPSK centered near 0 Hz, but both peaks are at positive frequencies (0.2736 and 0.3606). This suggests the target might actually be at 0.2736 (since it's the stronger signal at 0 dB), and the interferer is at 0.3606.\n\nLet me check the interference categories:\n\nFor the interferer at 0.3606:\n- rati",
+      "round_log": [
+        {
+          "elapsed_s": 2.7,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 87,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 142,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 79,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.8,
+          "content_len": 311,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 17.4,
+          "content_len": 2822,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "none",
+            "modulation": "BPSK",
+            "freq_offset": 0.3606,
+            "bandwidth": 0.1016,
+            "doa": -47.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 1,
+      "freq_mae": 0.03613545718028177,
+      "doa_mae": 0.20437022297852536,
+      "bandwidth_mae_rel": 0.42200888888888893
+    },
+    {
+      "file": "sample_00013.npy",
+      "snr_db": 12.29595174033173,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the data. From the spectrum analysis, I see:\n1. Main peak at -0.1827 with bandwidth 0.4229 (this is likely the target OOK signal)\n2. Other peaks at: 0.1416 (bw 0.0156), 0.2556 (bw 0.0469), 0.1717 (bw 0.041), 0.2133 (bw 0.0332)\n\nFrom estimate_num_sources: final_suggestion = 3 sources total (1 target + 2 interferers)\n\nFrom DOA: doa_estimates_deg = [-40.5, -3.5, 46.5] for 3 sources\n\nFrom modulation features: per_peak_template_distances shows:\n- Peak at -0.1827 (target): best m",
+      "round_log": [
+        {
+          "elapsed_s": 3.3,
+          "content_len": 121,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.8,
+          "content_len": 89,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 108,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 71,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 3.6,
+          "content_len": 345,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 22.8,
+          "content_len": 3503,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "QPSK",
+            "freq_offset": 0.1416,
+            "bandwidth": 0.0156,
+            "doa": -40.5
+          },
+          {
+            "category": "none",
+            "modulation": "OFDM",
+            "freq_offset": 0.2556,
+            "bandwidth": 0.0469,
+            "doa": 46.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": 0.0,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.059293000238663324,
+      "doa_mae": 35.81102589508998,
+      "bandwidth_mae_rel": 0.9112533333333334
+    },
+    {
+      "file": "sample_00014.npy",
+      "snr_db": 11.61966637778223,
+      "num_sources": 1,
+      "tool_calls": 5,
+      "raw_output": "The modulation features show that per_peak_template_distances is empty (likely because there's only one source). The global_template_distances suggest GFSK has the smallest distance (0.79), followed by single_tone (0.87), then OFDM (1.16).\n\nNow I need to put this all together. Based on the analysis:\n1. `estimate_num_sources` gives `final_suggestion = 1` (1 source total)\n2. This means 1 target + 0 interferers (num_interferers = 0)\n3. The spectrum analysis shows only one source at 0 Hz with bandwi",
+      "round_log": [
+        {
+          "elapsed_s": 3.3,
+          "content_len": 126,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 4.3,
+          "content_len": 255,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.3,
+          "content_len": 228,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 173,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 4.6,
+          "content_len": 447,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 6.9,
+          "content_len": 1145,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 0,
+        "interferers": []
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 0,
+      "num_interferers_pred": 0,
+      "matched": 0,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": null,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 0,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00015.npy",
+      "snr_db": 8.854867359303046,
+      "num_sources": 3,
+      "tool_calls": 6,
+      "raw_output": "Now I have a clearer picture. The stable peaks are at -39.5° and -11.5°. Since the target is at/near 0°, and we have 2 DOA estimates, that suggests 2 interferers.\n\nBut spectrum analysis only found 1 source candidate. However, the ratio_to_target_bw = 0.26 (< 0.5) indicates co-channel interference. Since we have 2 DOA estimates but only 1 frequency peak, this could be:\n1. Two co-channel interferers at the same frequency but different DOAs\n2. One interferer with the spectrum analysis missing one\n\n",
+      "round_log": [
+        {
+          "elapsed_s": 3.4,
+          "content_len": 120,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 43,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.4,
+          "content_len": 76,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 133,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 45,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 8.4,
+          "content_len": 1190,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 8.3,
+          "content_len": 1504,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "OFDM",
+            "freq_offset": -0.206,
+            "bandwidth": 0.0811,
+            "doa": -39.5
+          },
+          {
+            "category": "co_channel",
+            "modulation": "OFDM",
+            "freq_offset": -0.206,
+            "bandwidth": 0.0811,
+            "doa": -11.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 1,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.5,
+      "freq_accuracy": 0.5,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.5,
+      "modulation_accuracy": 1.0,
+      "mod_e2e_accuracy": 0.5,
+      "mod_hits": 1,
+      "mod_matched_total": 1,
+      "mod_gt_total": 2,
+      "freq_mae": 0.004328230825184964,
+      "doa_mae": 0.7110083766146502,
+      "bandwidth_mae_rel": 0.5281454545454545
+    },
+    {
+      "file": "sample_00016.npy",
+      "snr_db": 6.338336777587301,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I have all the measurements I need. Let me analyze:\n\n1. **Number of interferers**: final_suggestion = 2 total sources, so num_interferers = 1 (2 total - 1 target)\n\n2. **Interferer analysis**:\n   - From spectrum analysis: freq = -0.1363, bandwidth = 0.0898\n   - ratio_to_target_bw = 0.194 (< 0.5) → co_channel interference (inside target band)\n   - power_ratio_approx_db = 0.0 dB (not strong enough for blocking)\n   - DOA = -57.5° (from DOA estimates, assuming target at 0°)\n   - Time-domain: PAPR",
+      "round_log": [
+        {
+          "elapsed_s": 2.9,
+          "content_len": 129,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 3.5,
+          "content_len": 104,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.4,
+          "content_len": 60,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.3,
+          "content_len": 84,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 10.3,
+          "content_len": 1310,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "BPSK",
+            "freq_offset": -0.1363,
+            "bandwidth": 0.0898,
+            "doa": -57.5
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 1,
+      "missed": 0,
+      "false_alarms": 0,
+      "category_accuracy": 1.0,
+      "freq_accuracy": 1.0,
+      "bandwidth_accuracy": 1.0,
+      "doa_accuracy": 1.0,
+      "modulation_accuracy": 1.0,
+      "mod_e2e_accuracy": 1.0,
+      "mod_hits": 1,
+      "mod_matched_total": 1,
+      "mod_gt_total": 1,
+      "freq_mae": 0.0001559048137959318,
+      "doa_mae": 0.09860038192526588,
+      "bandwidth_mae_rel": 0.0449454545454546
+    },
+    {
+      "file": "sample_00017.npy",
+      "snr_db": 11.901495855958032,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the results and construct the JSON answer. Let me review what we have:\n\nFrom analyze_spectrum:\n- Source 1: freq = 0.1829, bandwidth = 0.2021, ratio_to_target_bw = 1.561, power_ratio_approx_db = 0.0 dB\n- Source 2: freq = -0.0001, bandwidth = 0.1289, ratio_to_target_bw = 0.001, power_ratio_approx_db = -2.8 dB\n\nFrom estimate_num_sources: final_suggestion = 3 sources total (1 target + 2 interferers)\n\nFrom estimate_doa: doa_estimates_deg = [-36.0, 0.0, 24.0]\n\nFrom detect_time_do",
+      "round_log": [
+        {
+          "elapsed_s": 4.0,
+          "content_len": 146,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 3.1,
+          "content_len": 85,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.7,
+          "content_len": 141,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 68,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 95,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 35.6,
+          "content_len": 6050,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "adjacent",
+            "modulation": "BPSK",
+            "freq_offset": 0.1829,
+            "bandwidth": 0.2021,
+            "doa": -36.0
+          },
+          {
+            "category": "co_channel",
+            "modulation": "OFDM",
+            "freq_offset": -0.0001,
+            "bandwidth": 0.1289,
+            "doa": 24.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 2,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00018.npy",
+      "snr_db": 2.9861153843514554,
+      "num_sources": 3,
+      "tool_calls": 5,
+      "raw_output": "Now I need to analyze the results. From the spectrum analysis, I only see 1 source candidate at freq -0.0048 with bandwidth 0.8125. However, the source count tool suggests 3 sources total. The DOA estimates show 3 angles: 0.5°, 20.5°, and 47.0°. The stable peaks are at 19.5° and 46.0°, and 0.5° appears only at order 3.\n\nAccording to the instructions, peaks appearing at only one MUSIC order are usually over-resolution artifacts on wideband sources. The 0.5° peak appears only at order 3, so it mig",
+      "round_log": [
+        {
+          "elapsed_s": 3.8,
+          "content_len": 113,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 5.0,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 77,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 2.0,
+          "content_len": 62,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.8,
+          "content_len": 46,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 23.8,
+          "content_len": 4170,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 2,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "QPSK",
+            "freq_offset": -0.0048,
+            "bandwidth": 0.8125,
+            "doa": 20.5
+          },
+          {
+            "category": "co_channel",
+            "modulation": "QPSK",
+            "freq_offset": -0.0048,
+            "bandwidth": 0.8125,
+            "doa": 47.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 2,
+      "num_interferers_pred": 2,
+      "matched": 0,
+      "missed": 2,
+      "false_alarms": 2,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 2,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    },
+    {
+      "file": "sample_00019.npy",
+      "snr_db": 3.407575914585216,
+      "num_sources": 2,
+      "tool_calls": 5,
+      "raw_output": "Now I have all the information I need. Let me analyze:\n\nFrom analyze_spectrum:\n- Source 1: freq = 0.2315, bandwidth = 0.3672, ratio_to_target_bw = 0.289, power_ratio_approx_db = 0.0 dB\n- Source 2: freq = -0.1809, bandwidth = 0.0576, ratio_to_target_bw = 0.226, power_ratio_approx_db = -9.9 dB\n\nFrom estimate_num_sources: final_suggestion = 2 sources total (1 target + 1 interferer)\n\nFrom estimate_doa: DOA estimates = [0.5°, 14.0°]\n\nFrom detect_time_domain: papr_db = 3.1 (< 8), pulse_duty_cycle = 0.",
+      "round_log": [
+        {
+          "elapsed_s": 2.6,
+          "content_len": 129,
+          "tool_calls": 1,
+          "names": [
+            "analyze_spectrum"
+          ]
+        },
+        {
+          "elapsed_s": 2.2,
+          "content_len": 44,
+          "tool_calls": 1,
+          "names": [
+            "estimate_num_sources"
+          ]
+        },
+        {
+          "elapsed_s": 2.6,
+          "content_len": 144,
+          "tool_calls": 1,
+          "names": [
+            "estimate_doa"
+          ]
+        },
+        {
+          "elapsed_s": 1.6,
+          "content_len": 62,
+          "tool_calls": 1,
+          "names": [
+            "detect_time_domain"
+          ]
+        },
+        {
+          "elapsed_s": 1.7,
+          "content_len": 46,
+          "tool_calls": 1,
+          "names": [
+            "estimate_modulation_features"
+          ]
+        },
+        {
+          "elapsed_s": 17.4,
+          "content_len": 2784,
+          "tool_calls": 0,
+          "names": []
+        }
+      ],
+      "prediction": {
+        "num_interferers": 1,
+        "interferers": [
+          {
+            "category": "co_channel",
+            "modulation": "OFDM",
+            "freq_offset": -0.1809,
+            "bandwidth": 0.0576,
+            "doa": 14.0
+          }
+        ]
+      },
+      "num_interferers_ok": true,
+      "num_interferers_gt": 1,
+      "num_interferers_pred": 1,
+      "matched": 0,
+      "missed": 1,
+      "false_alarms": 1,
+      "category_accuracy": 0.0,
+      "freq_accuracy": 0.0,
+      "bandwidth_accuracy": 0.0,
+      "doa_accuracy": 0.0,
+      "modulation_accuracy": null,
+      "mod_e2e_accuracy": 0.0,
+      "mod_hits": 0,
+      "mod_matched_total": 0,
+      "mod_gt_total": 1,
+      "freq_mae": null,
+      "doa_mae": null,
+      "bandwidth_mae_rel": null
+    }
+  ],
+  "partial": true,
+  "num_completed": 20
+}
