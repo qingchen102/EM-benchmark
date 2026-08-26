@@ -244,15 +244,32 @@ class OpenAICompatibleAgent:
         self.reasoning_effort = reasoning_effort
 
     def _create(self, **kwargs):
-        """chat.completions.create 封装：推理模型可传 reasoning_effort 控制思考强度
-        （low 可大幅减少推理 token/耗时）；API 不支持该参数时自动降级重试。"""
-        if self.reasoning_effort:
+        """chat.completions.create 封装：
+        - 推理模型可传 reasoning_effort 控制思考强度（low 大幅减少 token/耗时），
+          API 不支持该参数时自动降级重试；
+        - 网络抖动 / 限流 / 服务端 5xx 指数退避重试 —— 数小时长跑必须扛得住
+          短暂断网（ds_run13 曾因一次 DNS 抖动整跑崩溃）。"""
+        import time as _t
+        max_attempts = 6
+        for attempt in range(max_attempts):
             try:
-                return self.client.chat.completions.create(
-                    **kwargs, reasoning_effort=self.reasoning_effort)
-            except Exception:
-                pass  # 参数不被支持 → 去掉该参数重试
-        return self.client.chat.completions.create(**kwargs)
+                if self.reasoning_effort:
+                    try:
+                        return self.client.chat.completions.create(
+                            **kwargs, reasoning_effort=self.reasoning_effort)
+                    except Exception:
+                        pass  # 参数不被支持 → 去掉该参数重试
+                return self.client.chat.completions.create(**kwargs)
+            except Exception as exc:
+                retryable = type(exc).__name__ in (
+                    "APIConnectionError", "APITimeoutError", "InternalServerError",
+                    "RateLimitError", "APIStatusError")
+                if not retryable or attempt == max_attempts - 1:
+                    raise
+                wait = min(60.0, 5.0 * (2 ** attempt))
+                print(f"[retry] {type(exc).__name__}: {wait:.0f}s 后第 "
+                      f"{attempt + 1}/{max_attempts - 1} 次重试...")
+                _t.sleep(wait)
 
     def diagnose(self, sample_path: Path, observation: dict) -> tuple[dict[str, Any], int, str, list]:
         """返回 (prediction, tool_call_count, raw_output, round_log)。
@@ -474,7 +491,7 @@ def _score_answer(gt: dict, pred: dict) -> dict[str, Any]:
 def evaluate_dataset(dataset_dir: str | Path, agent=None, max_samples: int | None = None,
                      progress: bool = True, verbose: bool = False,
                      checkpoint_path: str | Path | None = None,
-                     checkpoint_every: int = 20,
+                     checkpoint_every: int = 10,
                      prior_results: list[dict] | None = None):
     """prior_results: 断点续跑 —— 上次部分完成的逐样本结果，原样前置，
     已完成的文件跳过不再调用 API。"""
