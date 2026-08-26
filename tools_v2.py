@@ -462,9 +462,25 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
     merged = _source_groups(raw_peaks, freq, psd, protect_radius=protect)
 
     # 每源一行的统一结构：freq / 带宽 / ratio（类别判定核心）/ 相对主峰功率近似
+    # 功率参考 = 目标带内(|f|<=tgt_bw/2)的 PSD 积分功率，直接从频谱测量、
+    # 不依赖分组/地板。积分（而非峰值）才与 GT 的总功率比语义一致 —— 宽带
+    # 干扰的功率摊在宽频带上，峰值密度会系统性低估总功率。
+    # 此前用全局主峰作参考：blocking 干扰自身恒测得 0dB、永远够不到规则的
+    # >=10dB 线 —— 500 样本基线中 128 个 blocking 匹配对命中 0 的根因。
+    zone = max(tgt_bw / 2.0, 0.02) if tgt_bw else 0.05
+    iz = np.abs(freq) <= zone
+    ref_power = float(np.sum(psd[iz])) if iz.any() else float(np.max(psd))
+    ref_power = max(ref_power, 1e-30)
+
     sources_candidates = []
     for m in merged:
         ratio = abs(m["freq"]) / tgt_bw if tgt_bw else None
+        i_lo, i_hi = m["span_idx"]
+        band_power = float(np.sum(psd[max(i_lo, 0):min(i_hi, n - 1) + 1]))
+        # 标定：-20dB 轮廓积分系统性低估总功率（300 样本审计中位 -4.3dB，
+        # 轮廓裁掉裙边所致）。+4.5dB 使测量与 GT 总功率比语义对齐。
+        power_rel_target = float(
+            10.0 * np.log10(max(band_power, 1e-30) / ref_power)) + 4.5
         # 类别边界提示：ratio/功率落在判定阈值附近时标记，提醒模型该候选的
         # 类别对测量噪声敏感（全量诊断：σf=0.02 下规则命中率上限仅 0.89，
         # 混淆集中在 0.5 / 2.0 / 10dB 边界）。边界半宽随目标带宽缩放
@@ -473,12 +489,12 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
         if ratio is not None:
             dz = max(0.08, 1.5 * 0.02 / tgt_bw)
             near_boundary = (abs(ratio - 0.5) < dz or abs(ratio - 2.0) < 4 * dz
-                             or abs(m["rel_db"] - 10.0) < 3.0)
+                             or abs(power_rel_target - 10.0) < 3.0)
         sources_candidates.append({
             "freq": round(m["freq"], 4),
             "bandwidth": round(m["bandwidth"], 4),
             "ratio_to_target_bw": round(float(ratio), 3) if ratio is not None else None,
-            "power_ratio_approx_db": round(m["rel_db"], 1),   # 相对全局主峰（≈相对目标）
+            "power_ratio_approx_db": round(power_rel_target, 1),   # 相对目标功率
             "near_category_boundary": bool(near_boundary),
         })
 
@@ -734,10 +750,16 @@ def detect_time_domain(sample_path: str) -> dict[str, Any]:
     duty = float(np.mean(active))
     # 脉冲计数（活动段）
     edges = int(np.sum(np.diff(active.astype(int)) == 1)) if len(active) > 1 else 0
+    # 削顶比例：|x| 进入峰值 90% 邻域的样本占比。LNA 饱和（blocking 的物理
+    # 本质，Rapp 压缩）会把波形顶部压平 —— 全量审计：blocking 样本中位 0.027，
+    # 干净/无阻塞多源样本 0.008/0.011，是 blocking 的独立物理证据。
+    amp = np.abs(x)
+    clipping = float(np.mean(amp >= 0.9 * amp.max())) if len(amp) else 0.0
     return {
         "papr_db": round(float(papr_db), 1),
         "pulse_duty_cycle": round(float(duty), 3),
         "pulse_edge_count": int(edges),
+        "clipping_fraction": round(clipping, 4),
     }
 
 
