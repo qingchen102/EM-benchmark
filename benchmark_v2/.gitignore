@@ -4,3 +4,11 @@ _dryrun.log
 
 __pycache__/
 *.pyc
+
+# 本地保留、不入仓库的历史产物（git 历史中仍可找回）
+/ds_run[2-9].json
+/ds_run1[0-4].json
+/ds_diag.json
+/diag_full500.json
+/eval_offline_check.json
+/rebuild_observations.py
