@@ -11,8 +11,8 @@
 | 阶段 | 内容 | 状态 |
 |------|------|------|
 | **V1** | 单天线、4 种简单干扰类型，跑通评估链路，验证"Agent 能做信号分类" | ✅ 已完成（历史代码） |
-| **V2（当前）** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、复杂干扰类型（脉冲化 LFM / NFM / 周期脉冲串等）、物理保真（LNA 饱和 / 阵元失配 / 防折叠 / 带宽统一），完整评估链路（检测 / 分类 / 参数估计 / DOA） | ✅ 数据与评估侧均就绪 |
-| **V3（规划）** | 真实环境：多径衰落、IQ 不平衡、IMD3、真实采集数据 | ⏳ 未开始 |
+| **V2（当前）** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、复杂干扰类型（脉冲化 LFM / NFM / 周期脉冲串等）、物理保真（LNA 饱和 / 阵元失配 / 防折叠 / 带宽统一），完整评估链路（检测 / 分类 / 参数估计 / DOA） | ✅ 完成（500 样本最终基线 ds_run15） |
+| **V3（启动中）** | 真实环境：多径衰落、IQ 不平衡、IMD3、真实采集数据 | ⏳ P0 真实 IQ 采集管线启动中 |
 
 **V2 信号模型的核心修复**（详见 `simulation/README.md`）：
 
@@ -27,24 +27,29 @@
 ## 2. 目录结构
 
 ```text
-benchmark_v2/
-├── simulation/                       # 信号模型与数据生成
-│   ├── generate_dataset_v2.py        # 数据集生成 CLI
-│   ├── sanity_check_v2.py            # 全量验证脚本（90+ 项检查）
-│   ├── README.md                     # 信号模型详细文档（架构/算法/参数）
-│   ├── dataset/                      # 生成的数据集（.npy + 三个 JSON）
-│   └── em_signal_simulator/          # 信号模型库
-│       ├── baseband.py               # 目标基带波形（9 种调制 + OBW99 测量）
-│       ├── jamming.py                # 干扰波形（5 种类型）
-│       ├── channel.py                # 信道效应（频偏/阵列/LNA 饱和/失配/AWGN）
-│       ├── factory.py                # 样本工厂（多源叠加/分离修正/打标/元数据）
-│       └── visualization.py          # 时频图 + MUSIC 空间谱（VLM 支持）
-├── tools_v2.py                       # Agent 工具集（多天线频谱/源数/DOA/时域）
-├── evaluator_v2.py                   # v2 评估器（填空/选择题 + 评分报告）
-└── simulation.zip                    # 历史压缩包（可忽略）
+EM-benchmark/
+├── benchmark_v1/                     # V1 历史代码（单天线、4 类干扰）
+└── benchmark_v2/                     # V2（当前，本目录）
+    ├── dataset/                      # 500 样本冻结数据集（.npy + ground_truth/metadata/observations）
+    ├── simulation/                   # 信号模型与数据生成
+    │   ├── generate_dataset_v2.py    # 数据集生成 CLI
+    │   ├── sanity_check_v2.py        # 全量验证脚本（90+ 项检查）
+    │   ├── README.md                 # 信号模型详细文档（架构/算法/参数）
+    │   └── em_signal_simulator/      # 信号模型库
+    │       ├── baseband.py           # 目标基带波形（9 种调制 + OBW99 测量）
+    │       ├── jamming.py            # 干扰波形（5 种类型）
+    │       ├── channel.py            # 信道效应（频偏/阵列/LNA 饱和/失配/AWGN）
+    │       ├── factory.py            # 样本工厂（多源叠加/分离修正/打标/元数据）
+    │       └── visualization.py      # 时频图 + MUSIC 空间谱（VLM 支持）
+    ├── tools_v2.py                   # Agent 工具集（频谱/源数/DOA/时域/调制特征）
+    ├── evaluator_v2.py               # 评估器（存档/断点续跑/自动重试）
+    ├── run_bailian_deepseek.py       # 百炼 deepseek-v3.2 接入封装（enable_thinking=False）
+    ├── eval_mod_upperbound.py        # 调制特征上限离线验证（零 token，C40/C42 消融用）
+    ├── diag_offline_report.py        # 全量离线诊断（源数/频偏/类别/幽灵，零 token）
+    └── ds_run15.json                 # 500 样本最终基线结果
 ```
 
-> 约定：**信号模型**（数据生成）在 `simulation/em_signal_simulator/`；**评估侧代码**（`evaluator_v2.py`、`tools_v2.py`）直接位于根目录，与信号模型解耦。
+> 约定：**信号模型**（数据生成）在 `simulation/em_signal_simulator/`；**评估侧代码**（`evaluator_v2.py`、`tools_v2.py`）位于 `benchmark_v2/` 根目录，与信号模型解耦。
 
 ---
 
@@ -54,18 +59,18 @@ benchmark_v2/
 # 0) 依赖
 pip install numpy scipy matplotlib pillow openai tqdm
 
-# 1) 生成数据集（从 simulation/ 目录）
+# 1) 生成数据集（可选——仓库已自带冻结的 500 样本 dataset/，跳过此步可直接评估）
 cd simulation
-python simulation/generate_dataset_v2.py --count 500 --output-dir dataset \
+python generate_dataset_v2.py --count 500 --output-dir ../dataset \
     --num-sources random --snr-range -5 15 --num-workers 4
 
 # 2) 数据健康检查
-python simulation/sanity_check_v2.py
+python sanity_check_v2.py
 
-# 3) 评估（回到根目录）
+# 3) 评估（回到 benchmark_v2/ 根目录）
 cd ..
-python evaluator_v2.py dataset_v2 --offline                # 离线：验证评分管道（应满分）
-python evaluator_v2.py dataset_v2 --model deepseek-chat --base-url https://api.deepseek.com  # 在线评估
+python evaluator_v2.py dataset --offline                # 离线：验证评分管道（应满分）
+python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output ds_runX.json
 ```
 
 ---
@@ -135,9 +140,9 @@ python evaluator_v2.py dataset_v2 --model deepseek-chat --base-url https://api.d
 | 调制类型（可选） | 选择题 | 真实调制类干扰的调制准确率 |
 
 ```bash
-python evaluator_v2.py dataset_v2 --offline               # 验证评分管道（应全满分）
-python evaluator_v2.py dataset_v2 --model gpt-4o-mini --output eval_report_v2.json
-python evaluator_v2.py dataset_v2 --model ... --max-samples 200   # 抽样评估
+python evaluator_v2.py dataset --offline               # 验证评分管道（应全满分）
+python run_bailian_deepseek.py dataset --model deepseek-v3.2 --output eval_report.json
+python evaluator_v2.py dataset --model ... --max-samples 200   # 抽样评估
 ```
 
 评估器默认显示 **tqdm 进度条**（实时累计源数/类别准确率）；`--verbose` 逐样本打印，`--no-progress` 关闭进度条。
@@ -152,27 +157,27 @@ python evaluator_v2.py dataset_v2 --model ... --max-samples 200   # 抽样评估
 
 **调制双口径**：`modulation_accuracy`（仅匹配对）与 `modulation_accuracy_e2e`（分母=全部真实调制 GT 干扰，未匹配计错）。跨 run 对比请以 e2e 为准——匹配数波动会使 matched 口径失真。报告含 `code_fingerprint`（评估侧代码 md5 前 12 位），用于精确归因版本。
 
-### 5.3 云端 API 评估（DeepSeek，推荐）
+### 5.3 云端 API 评估（百炼 deepseek-v3.2 —— 本项目全部基线的实际配置）
 
 ```powershell
-$env:OPENAI_API_KEY = "sk-你的key"      # 或 --api-key 直接传
+# 方式一：薄封装（推荐）——自动注入 enable_thinking=False，输出名自动顺延 ds_run(N+1)
+python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output ds_runX.json
 
-python evaluator_v2.py dataset \
-    --model deepseek-chat \             # 推荐：快（~18s/样本），工具调用稳定
-    --base-url https://api.deepseek.com \
-    --max-samples 50 \                  # 先抽样试跑（--verbose 看单样本输出）
-    --output eval_report_ds.json
+# 方式二：直接评估（v3.2 非推理、默认关思考，可直接调 evaluator）
+python evaluator_v2.py dataset --model deepseek-v3.2 --base-url https://dashscope.aliyuncs.com/compatible-mode/v1 --max-samples 500 --output ds_run15.json
+
+# 500 样本全量约 5 小时：每 10 样本自动存档（partial: true），中断后同命令加 --resume 续跑
 ```
 
-**模型选择（DeepSeek 官方 API）**：
+**模型选择**：
 
-| 模型名 | 行为 | 单样本耗时 | 单样本 token | 建议 |
-|---|---|---|---|---|
-| **`deepseek-chat`** | 对话模型，工具调用快 | ~15~18s | ~6 千 | ✅ **首选**（50 样本约 15 分钟 / 30 万 tokens） |
-| `deepseek-v4-flash` | 深度推理模型 | ~155s | ~5 万 | ⚠️ 慢且烧 token（50 样本约 2 小时 / 数百万 tokens），仅用于对比"推理能力上限" |
+| 模型名 | 行为 | 建议 |
+|---|---|---|
+| **`deepseek-v3.2`**（百炼） | 非推理、默认关思考，~18s/样本，工具调用稳定 | ✅ **首选**（v2 全部基线均用它；官方 `deepseek-chat` 别名同期即指向 v3.2，已互验） |
+| `deepseek-v4-flash` 等推理模型 | 深度推理 | ⚠️ 工具模式下不限制输出会生成超长文本（单样本可达 2 分钟+），仅用于对比推理上限；可用 `--reasoning-effort low` 降低思考强度（API 不支持时自动忽略） |
 
-- 推理模型（如 v4-flash）可在命令中加 `--reasoning-effort low` 降低思考强度（API 不支持时自动忽略）；
-- API Key 在 platform.deepseek.com 创建（`sk-` 开头）；`--reasoning-effort` / `--max-samples` / `--verbose` 等参数见 `python evaluator_v2.py --help`。
+- API Key：阿里云百炼（DashScope）控制台创建，放环境变量 `OPENAI_API_KEY` 或写入一键脚本 `run_v32.ps1`（**含 Key，已 gitignore，勿提交远程**）；
+- `--resume` / `--max-samples` / `--verbose` 等参数见 `python evaluator_v2.py --help`。
 
 ---
 
@@ -226,7 +231,8 @@ cd simulation && python sanity_check_v2.py
 
 ## 10. 附录：V2 评估结果记录（截至 2026-08）
 
-> 数据集：同 seed 生成 50 样本（1 目标 + 0~2 干扰，SNR -5~15dB）；模型为 DeepSeek 官方 API。
+> 数据集：同 seed 生成，50 样本快速验证集 + 500 样本全量集（1 目标 + 0~2 干扰，SNR -5~15dB）。
+> 模型口径：所有 DeepSeek 行统一为百炼 **deepseek-v3.2**（非推理、默认关思考）。早期行标注的官方别名 `deepseek-chat` 当时段即指向 v3.2（已用官方 chat 与百炼 v3.2 互验，指标重合）。
 > 评估方式：填空/选择题，Agent 调用 5 个分析工具（频谱/源数/DOA/时域/调制特征）后作答。
 
 ### 10.1 各配置精度演进
@@ -234,27 +240,28 @@ cd simulation && python sanity_check_v2.py
 | 配置 | 模型 | 源数 | 类别 | 频偏 | 带宽 | DOA | 调制(e2e) | 耗时/token |
 |---|---|---|---|---|---|---|---|---|
 | 早期（4 工具，30 样本） | v4-flash | 0.63 | 0.28 | 0.53 | 0.32 | 0.67 | 0.02 | 40min / 65w |
-| 第 1 版（4 工具） | deepseek-chat | 0.60 | 0.34 | 0.43 | 0.30 | 0.67 | 0.00 | 15min / 30w |
-| 第 2 版（5 工具 + per-peak 带宽） | deepseek-chat | 0.56 | 0.36 | 0.41 | 0.28 | 0.59 | 0.04 | ~15min |
-| 第 3 版（5 工具 + 合并峰修复） | deepseek-chat | 0.64 | 0.34 | 0.41 | 0.44 | 0.56 | 0.14 | ~15min / 30w |
-| 第 4 版（repair 轮 + 谱谷分裂/保护/地板 + 决策树相干门，50 样本） | 百炼 deepseek-v3.2 | **0.72** | **0.48** | 0.59 | 0.46 | **0.64** | 0.32 / **0.19** | ~33min |
-| 第 4 版全量基线（500 样本，blocking 功率参考 bug 修复**前**） | 百炼 deepseek-v3.2 | 0.65 | 0.57 | 0.59 | 0.47 | **0.68** | 0.31 / 0.16 | 4h04m |
+| 第 1 版（4 工具） | deepseek-v3.2 | 0.60 | 0.34 | 0.43 | 0.30 | 0.67 | 0.00 | 15min / 30w |
+| 第 2 版（5 工具 + per-peak 带宽） | deepseek-v3.2 | 0.56 | 0.36 | 0.41 | 0.28 | 0.59 | 0.04 | ~15min |
+| 第 3 版（5 工具 + 合并峰修复） | deepseek-v3.2 | 0.64 | 0.34 | 0.41 | 0.44 | 0.56 | 0.14 | ~15min / 30w |
+| 第 4 版（repair 轮 + 谱谷分裂/保护/地板 + 决策树相干门，50 样本） | deepseek-v3.2 | **0.72** | **0.48** | 0.59 | 0.46 | **0.64** | 0.32 / **0.19** | ~33min |
+| 第 4 版全量基线（500 样本，blocking 功率参考 bug 修复**前**，ds_run13） | deepseek-v3.2 | 0.65 | 0.57 | 0.59 | 0.47 | **0.68** | 0.31 / 0.16 | 4h04m |
+| **第 5 版全量最终基线（500 样本，blocking 修复后，ds_run15）** | deepseek-v3.2 | **0.68** | **0.588** | **0.609** | 0.476 | **0.678** | 0.31 / **0.166** | ~5h |
 
 > 第 4 版修复链：①解析失败 repair 轮；②谱谷分裂 + 目标带保护 + 强度地板（候选覆盖 0.39→0.57）；③源数决策树内移工具端 + 空间相干可信门（消灭干净样本幽灵干扰）；④调制模板收窄到实际干扰池。
-> **第 5 版（r14，当前）**：blocking 功率参考 bug 修复（旧版以全局主峰为参考，blocking 恒测得 0dB、规则永不触发：r12 匹配对命中 **0/13**）+ 总功率标定 + 削顶比例特征。实测 r14@50：类别 0.48→**0.56**，blocking 匹配对命中 11/14=**79%**。
+> **第 5 版（当前）**：blocking 功率参考 bug 修复（旧版以全局主峰为参考，blocking 恒测得 0dB、规则永不触发：r12 匹配对命中 **0/13**）——功率参考改为**目标带内 PSD 积分** + 4.5dB 总功率标定（不依赖分组，同时解决强干扰下目标组被地板滤掉）；新增削顶比例特征（LNA 饱和的独立物理证据）。50 样本验证（r14）：类别 0.48→**0.56**，blocking 匹配对命中 11/14=**79%**；**500 样本最终基线（ds_run15）：类别 0.588（较 r13 +0.019）、源数 0.68、频偏命中 0.609、DOA MAE 3.63°（历史最佳）、调制 e2e 0.166**。
 > 已知代价与限制：①假 blocking 约 9 个/50 样本（其中 7 个为标定功率本身 ≥10dB 的测量模糊区，±4dB 精度 vs 10dB 门限的固有权衡）；②压缩特征在全信号/切片层面均无法区分真假 blocking（OOK 等目标频谱泄漏污染），仅作 5~10dB 边界带辅助证据；③宽带干扰候选覆盖 0.39、低 SNR 源数、16QAM@低SNR 幽灵为物理极限，待 V3。
 
 > 工具层参考精度：频偏估计 0.94（±0.02 容差）、DOA 1.00（±12°，INR≥8）、源数（MDL）0.80——即**工具测量本身很准，Agent 综合判断是主要损耗点**。
 
-### 10.2 关键指标细节（第 3 版）
+### 10.2 关键指标细节（最终基线 ds_run15，500 样本）
 
-- **参数估计数值精度**：频偏 MAE 0.028（容差 ±0.02，卡边缘）、DOA MAE 2.9°（容差 ±10°）、带宽相对误差 0.68；
-- **类别混淆主模式**：GT adjacent → 预测 pulse（8/15）、GT blocking → none（6/16）——模型存在"误报 pulse / 漏报强干扰"的偏置；
-- **按目标调制（源数准确率）**：LFM/FHSS/OOK 1.00/1.00/0.86（简单目标）vs 64QAM/16QAM 0.20/0.33（宽带成型目标，MDL 源数估计失效）；
-- **按 SNR**：类别在 Low/Mid/High 为 0.33/0.29/0.40，与 SNR 关系弱（模型综合问题）；源数 Low 0.22（物理极限）。
+- **参数估计数值精度**：频偏 MAE 0.0246（容差 ±0.02）、DOA MAE 3.63°（容差 ±10°，命中 0.678）、带宽命中 0.476（相对误差 0.599）；
+- **源数（源级匹配统计）**：漏检 231 / 误报 297；低 SNR 组为 MDL 物理极限；平均工具调用 5.06/样本，工具调用率 100%；
+- **类别按 SNR**：Low 0.524 / Mid 0.610 / High 0.599（n=104/200/196）——高 SNR 不高于 Mid，说明残余误差含系统性成分（blocking 假阳性、宽带纹波分裂），并非纯物理极限；
+- **调制识别**：e2e 0.166 vs 同数据集特征上限 0.266（`eval_mod_upperbound.py` 离线验证）——7 维特征下 QPSK/GFSK ~4%、LFM ~14%，升级方向为 C40/C42 高阶累积量 + 包络统计。
 
 ### 10.3 结论
 
-1. **工具偏置修复有效**：合并频谱纹波峰后，带宽 0.28→0.44、调制 0→0.14、源数 0.56→0.64；
-2. **剩余瓶颈**：类别（0.34）与调制（0.14）——分别来自模型规则综合弱（含 pulse 误报偏置）与多源混合下调制识别的物理限制；
-3. **建议方向**：a) 模型对比（v4-flash 高推理 vs chat）判断类别瓶颈归属；b) 类别规则/prompt 细化（v1 验证有效）；c) 容差校准（频偏 ±0.02 → 0.03 更贴合物理可达精度）。
+1. **结构性问题已根除**：blocking 永远 0 分的根因（全局主峰功率参考）修复后，类别 0.57→**0.588**@500、blocking 召回 0→**79%**，源数 0.65→0.68；
+2. **剩余瓶颈（均已定位）**：blocking 假阳性 ~18%（±4dB 测量精度 vs 10dB 门限的固有权衡）、宽带干扰候选覆盖 0.39（固定间距分组失效）、低 SNR 源数（MDL 物理极限）、调制 e2e 0.166/上限 0.266（7 维特征物理不可分）；
+3. **下一步（V3）**：仿真侧收益递减、继续打磨有过拟合仿真器风险——优先真实 IQ 采集管线（P0）与域适配（P1）；调制特征升级（C40/C42/包络统计）已有零 token 离线验证管线（`eval_mod_upperbound.py`），先在仿真侧消融定型。
