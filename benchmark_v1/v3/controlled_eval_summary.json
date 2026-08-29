@@ -1,0 +1,291 @@
+{
+  "total_combinations": 45,
+  "overall_accuracy": 0.37333333333333335,
+  "by_combination": {
+    "16QAM_broadband": {
+      "correct": 1,
+      "total": 10,
+      "accuracy": 0.1
+    },
+    "16QAM_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "16QAM_pulse": {
+      "correct": 7,
+      "total": 10,
+      "accuracy": 0.7
+    },
+    "16QAM_single_tone": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "16QAM_swept": {
+      "correct": 9,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "64QAM_broadband": {
+      "correct": 3,
+      "total": 10,
+      "accuracy": 0.3
+    },
+    "64QAM_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "64QAM_pulse": {
+      "correct": 6,
+      "total": 10,
+      "accuracy": 0.6
+    },
+    "64QAM_single_tone": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "64QAM_swept": {
+      "correct": 7,
+      "total": 10,
+      "accuracy": 0.7
+    },
+    "BPSK_broadband": {
+      "correct": 1,
+      "total": 10,
+      "accuracy": 0.1
+    },
+    "BPSK_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "BPSK_pulse": {
+      "correct": 6,
+      "total": 10,
+      "accuracy": 0.6
+    },
+    "BPSK_single_tone": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "BPSK_swept": {
+      "correct": 9,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "FHSS_broadband": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "FHSS_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "FHSS_pulse": {
+      "correct": 6,
+      "total": 10,
+      "accuracy": 0.6
+    },
+    "FHSS_single_tone": {
+      "correct": 1,
+      "total": 10,
+      "accuracy": 0.1
+    },
+    "FHSS_swept": {
+      "correct": 9,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "GFSK_broadband": {
+      "correct": 5,
+      "total": 10,
+      "accuracy": 0.5
+    },
+    "GFSK_none": {
+      "correct": 6,
+      "total": 10,
+      "accuracy": 0.6
+    },
+    "GFSK_pulse": {
+      "correct": 8,
+      "total": 10,
+      "accuracy": 0.8
+    },
+    "GFSK_single_tone": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "GFSK_swept": {
+      "correct": 8,
+      "total": 10,
+      "accuracy": 0.8
+    },
+    "LFM_broadband": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "LFM_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "LFM_pulse": {
+      "correct": 5,
+      "total": 10,
+      "accuracy": 0.5
+    },
+    "LFM_single_tone": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "LFM_swept": {
+      "correct": 8,
+      "total": 10,
+      "accuracy": 0.8
+    },
+    "OFDM_broadband": {
+      "correct": 2,
+      "total": 10,
+      "accuracy": 0.2
+    },
+    "OFDM_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "OFDM_pulse": {
+      "correct": 3,
+      "total": 10,
+      "accuracy": 0.3
+    },
+    "OFDM_single_tone": {
+      "correct": 4,
+      "total": 10,
+      "accuracy": 0.4
+    },
+    "OFDM_swept": {
+      "correct": 9,
+      "total": 10,
+      "accuracy": 0.9
+    },
+    "OOK_broadband": {
+      "correct": 3,
+      "total": 10,
+      "accuracy": 0.3
+    },
+    "OOK_none": {
+      "correct": 1,
+      "total": 10,
+      "accuracy": 0.1
+    },
+    "OOK_pulse": {
+      "correct": 8,
+      "total": 10,
+      "accuracy": 0.8
+    },
+    "OOK_single_tone": {
+      "correct": 3,
+      "total": 10,
+      "accuracy": 0.3
+    },
+    "OOK_swept": {
+      "correct": 1,
+      "total": 10,
+      "accuracy": 0.1
+    },
+    "QPSK_broadband": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "QPSK_none": {
+      "correct": 0,
+      "total": 10,
+      "accuracy": 0.0
+    },
+    "QPSK_pulse": {
+      "correct": 5,
+      "total": 10,
+      "accuracy": 0.5
+    },
+    "QPSK_single_tone": {
+      "correct": 4,
+      "total": 10,
+      "accuracy": 0.4
+    },
+    "QPSK_swept": {
+      "correct": 10,
+      "total": 10,
+      "accuracy": 1.0
+    }
+  },
+  "per_modulation": {
+    "BPSK": {
+      "accuracy": 0.36,
+      "total": 50
+    },
+    "QPSK": {
+      "accuracy": 0.38,
+      "total": 50
+    },
+    "16QAM": {
+      "accuracy": 0.38,
+      "total": 50
+    },
+    "64QAM": {
+      "accuracy": 0.36,
+      "total": 50
+    },
+    "GFSK": {
+      "accuracy": 0.54,
+      "total": 50
+    },
+    "OOK": {
+      "accuracy": 0.32,
+      "total": 50
+    },
+    "OFDM": {
+      "accuracy": 0.36,
+      "total": 50
+    },
+    "FHSS": {
+      "accuracy": 0.36,
+      "total": 50
+    },
+    "LFM": {
+      "accuracy": 0.3,
+      "total": 50
+    }
+  },
+  "per_jamming": {
+    "none": {
+      "accuracy": 0.07777777777777778,
+      "total": 90
+    },
+    "single_tone": {
+      "accuracy": 0.2222222222222222,
+      "total": 90
+    },
+    "swept": {
+      "accuracy": 0.7777777777777778,
+      "total": 90
+    },
+    "pulse": {
+      "accuracy": 0.6,
+      "total": 90
+    },
+    "broadband": {
+      "accuracy": 0.18888888888888888,
+      "total": 90
+    }
+  }
+}

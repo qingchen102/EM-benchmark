@@ -1,0 +1,9 @@
+# 基础信号处理与数学计算
+numpy>=1.22.0
+scipy>=1.8.0
+
+# 评估与可视化
+matplotlib>=3.5.0
+
+# 大模型 Agent 评估 (OpenAI & Qwen 兼容接口)
+openai>=1.0.0
