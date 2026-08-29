@@ -439,13 +439,20 @@ def _find_peaks(psd, freq, rel_thresh_db=-12.0, min_sep=1.0 / 64.0):
 
 
 def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
-                     target_bandwidth_normalized: float | None = None) -> dict[str, Any]:
-    """多天线频谱分析：合并纹波后的源峰检测 + 每源占用带宽 + 类别判定所需测量。
+                     target_bandwidth_normalized: float | None = None,
+                     use_spatial: bool = True) -> dict[str, Any]:
+    """多天线频谱分析：源峰检测 + 每源占用带宽/方位角 + 类别判定所需测量。
 
     只返回结构化测量值，无结论性文本。
-    - sources_candidates: 每源一行 {freq, bandwidth, ratio_to_target_bw, power_ratio_approx_db}
-      —— ratio 与功率近似由工具算好，模型直接读区间判定类别（co_channel/blocking/adjacent/none）
+    - sources_candidates: 每源一行 {freq, bandwidth, angle_deg, ratio_to_target_bw,
+      power_ratio_approx_db} —— ratio 与功率近似由工具算好，模型直接读区间判定
+      类别（co_channel/blocking/adjacent/none）。
+      use_spatial=True（默认）时候选由 MVDR 频率×角度联合分析提取
+      （spatial_candidates.py）：功率谱上熔住的源按方位角分辨，频点/功率在
+      各源自适应波束内测量；angle_deg 为候选源方位角（度，与 estimate_doa 同约定）。
+      False 时回退旧版合并谱一维找峰（无 angle_deg）。
     - peaks_normalized / per_peak_bandwidth / peaks_excluding_center：兼容字段
+      （始终来自合并一维谱，仅作参考证据）
     """
     iq = _load_iq(sample_path)
     x = _combine_channels(iq)
@@ -472,7 +479,7 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
     ref_power = float(np.sum(psd[iz])) if iz.any() else float(np.max(psd))
     ref_power = max(ref_power, 1e-30)
 
-    sources_candidates = []
+    legacy_candidates = []
     for m in merged:
         ratio = abs(m["freq"]) / tgt_bw if tgt_bw else None
         i_lo, i_hi = m["span_idx"]
@@ -490,13 +497,28 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
             dz = max(0.08, 1.5 * 0.02 / tgt_bw)
             near_boundary = (abs(ratio - 0.5) < dz or abs(ratio - 2.0) < 4 * dz
                              or abs(power_rel_target - 10.0) < 3.0)
-        sources_candidates.append({
+        legacy_candidates.append({
             "freq": round(m["freq"], 4),
             "bandwidth": round(m["bandwidth"], 4),
             "ratio_to_target_bw": round(float(ratio), 3) if ratio is not None else None,
             "power_ratio_approx_db": round(power_rel_target, 1),   # 相对目标功率
             "near_category_boundary": bool(near_boundary),
         })
+
+    # v6 候选层：默认走 MVDR 频率×角度联合分析。生成约束保证频谱熔住的源
+    # 在角度上可分，合并谱一维找峰丢掉了该维度（500 样本 A/B：候选覆盖
+    # 57%→87%，宽带 39%→72%，功率 MAE 4.8→1.8dB，幽灵 49→8，见
+    # diag_spatial_ab.py / diag_spatial_ab.json）。use_spatial=False 回退旧路径。
+    sources_candidates = legacy_candidates
+    candidate_source = "legacy_psd"
+    if use_spatial and iq.ndim == 2 and iq.shape[0] >= 2:
+        import spatial_candidates as _spatial  # 局部导入避免循环依赖
+        _sp = _spatial.spatial_candidates(
+            sample_path, target_modulation=target_modulation,
+            target_bandwidth_normalized=target_bandwidth_normalized)
+        if _sp.get("sources_candidates"):
+            sources_candidates = _sp["sources_candidates"]
+            candidate_source = "mvdr_freq_angle"
 
     peaks_list = [{"freq": round(m["freq"], 4), "rel_db": round(m["rel_db"], 1),
                    "num_peaks": m["num_peaks"]} for m in merged]
@@ -512,6 +534,7 @@ def analyze_spectrum(sample_path: str, target_modulation: str = "unknown",
         "num_antennas": int(iq.shape[0]) if iq.ndim == 2 else 1,
         "target_bandwidth_normalized": round(float(tgt_bw), 4) if tgt_bw else None,
         "sources_candidates": sources_candidates,
+        "candidate_source": candidate_source,
         "peaks_normalized": peaks_list,
         "main_peak_freq_normalized": round(merged[0]["freq"], 4) if merged else None,
         "obw99_normalized": round(float(obw99), 4),
@@ -776,7 +799,12 @@ TOOL_SCHEMAS_V2 = [
         "type": "function",
         "function": {
             "name": "analyze_spectrum",
-            "description": "Multi-antenna spectrum analysis: merged source peaks with per-source bandwidth, ratio to target bandwidth, and approximate power ratio (for interference category rules).",
+            "description": ("Multi-antenna spectrum analysis: per-source candidates resolved "
+                            "jointly in frequency AND angle (MVDR beam scan — sources fused in "
+                            "the raw power spectrum are separated by direction of arrival). Each "
+                            "candidate carries freq, bandwidth, angle_deg (bearing in degrees, "
+                            "same convention as estimate_doa), ratio_to_target_bw, and "
+                            "approximate power ratio (for interference category rules)."),
             "parameters": {
                 "type": "object",
                 "properties": {
