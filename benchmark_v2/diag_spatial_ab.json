@@ -1,0 +1,241 @@
+{
+ "n_samples": 500,
+ "arms": {
+  "legacy": {
+   "cov_total": [
+    290,
+    507
+   ],
+   "cov_overall": 0.572,
+   "cov_by_cat_inr": {
+    "('adjacent', '6~15dB')": [
+     22,
+     46
+    ],
+    "('adjacent', '<=6dB')": [
+     13,
+     36
+    ],
+    "('adjacent', '>15dB')": [
+     26,
+     43
+    ],
+    "('blocking', '6~15dB')": [
+     26,
+     58
+    ],
+    "('blocking', '<=6dB')": [
+     3,
+     4
+    ],
+    "('blocking', '>15dB')": [
+     51,
+     66
+    ],
+    "('co_channel', '6~15dB')": [
+     37,
+     92
+    ],
+    "('co_channel', '<=6dB')": [
+     7,
+     11
+    ],
+    "('co_channel', '>15dB')": [
+     62,
+     89
+    ],
+    "('none', '6~15dB')": [
+     23,
+     32
+    ],
+    "('none', '<=6dB')": [
+     6,
+     10
+    ],
+    "('none', '>15dB')": [
+     14,
+     20
+    ]
+   },
+   "cov_by_bw": {
+    "0.15~0.35": [
+     146,
+     262
+    ],
+    "<0.15": [
+     99,
+     130
+    ],
+    ">0.35": [
+     45,
+     115
+    ]
+   },
+   "clean_samples": 163,
+   "strong_ghost_samples": 49,
+   "power_err_raw_median": -0.79,
+   "power_err_raw_mae": 4.84,
+   "power_cal_implied_db": 0.79,
+   "power_err_cal_mae": 4.81,
+   "freq_err_mae": 0.0097
+  },
+  "spatial": {
+   "cov_total": [
+    439,
+    507
+   ],
+   "cov_overall": 0.866,
+   "cov_by_cat_inr": {
+    "('adjacent', '6~15dB')": [
+     34,
+     46
+    ],
+    "('adjacent', '<=6dB')": [
+     27,
+     36
+    ],
+    "('adjacent', '>15dB')": [
+     34,
+     43
+    ],
+    "('blocking', '6~15dB')": [
+     55,
+     58
+    ],
+    "('blocking', '<=6dB')": [
+     3,
+     4
+    ],
+    "('blocking', '>15dB')": [
+     61,
+     66
+    ],
+    "('co_channel', '6~15dB')": [
+     78,
+     92
+    ],
+    "('co_channel', '<=6dB')": [
+     11,
+     11
+    ],
+    "('co_channel', '>15dB')": [
+     83,
+     89
+    ],
+    "('none', '6~15dB')": [
+     28,
+     32
+    ],
+    "('none', '<=6dB')": [
+     8,
+     10
+    ],
+    "('none', '>15dB')": [
+     17,
+     20
+    ]
+   },
+   "cov_by_bw": {
+    "0.15~0.35": [
+     229,
+     262
+    ],
+    "<0.15": [
+     127,
+     130
+    ],
+    ">0.35": [
+     83,
+     115
+    ]
+   },
+   "clean_samples": 163,
+   "strong_ghost_samples": 8,
+   "power_err_raw_median": -0.3,
+   "power_err_raw_mae": 1.79,
+   "power_cal_implied_db": 0.3,
+   "power_err_cal_mae": 1.76,
+   "freq_err_mae": 0.0049,
+   "angle_err_median_deg": 0.6
+  },
+  "merged": {
+   "cov_total": [
+    460,
+    507
+   ],
+   "cov_overall": 0.907,
+   "cov_by_cat_inr": {
+    "('adjacent', '6~15dB')": [
+     36,
+     46
+    ],
+    "('adjacent', '<=6dB')": [
+     27,
+     36
+    ],
+    "('adjacent', '>15dB')": [
+     40,
+     43
+    ],
+    "('blocking', '6~15dB')": [
+     57,
+     58
+    ],
+    "('blocking', '<=6dB')": [
+     4,
+     4
+    ],
+    "('blocking', '>15dB')": [
+     63,
+     66
+    ],
+    "('co_channel', '6~15dB')": [
+     80,
+     92
+    ],
+    "('co_channel', '<=6dB')": [
+     11,
+     11
+    ],
+    "('co_channel', '>15dB')": [
+     84,
+     89
+    ],
+    "('none', '6~15dB')": [
+     31,
+     32
+    ],
+    "('none', '<=6dB')": [
+     9,
+     10
+    ],
+    "('none', '>15dB')": [
+     18,
+     20
+    ]
+   },
+   "cov_by_bw": {
+    "0.15~0.35": [
+     242,
+     262
+    ],
+    "<0.15": [
+     128,
+     130
+    ],
+    ">0.35": [
+     90,
+     115
+    ]
+   },
+   "clean_samples": 163,
+   "strong_ghost_samples": 49,
+   "power_err_raw_median": -0.67,
+   "power_err_raw_mae": 3.54,
+   "power_cal_implied_db": 0.67,
+   "power_err_cal_mae": 3.47,
+   "freq_err_mae": 0.0065,
+   "angle_err_median_deg": 0.6
+  }
+ }
+}
