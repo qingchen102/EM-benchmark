@@ -16,7 +16,7 @@ for _p in (_ROOT, _SIM_DIR):
     if str(_p) not in sys.path:
         sys.path.insert(0, str(_p))
 
-from em_signal_simulator.baseband import generate_baseband          # noqa: E402
+from em_signal_simulator.baseband import generate_baseband, MODULATIONS   # noqa: E402
 from em_signal_simulator.channel import apply_freq_offset           # noqa: E402
 from em_signal_simulator.jamming import generate_interferer_waveform  # noqa: E402
 import tools_v2                                                     # noqa: E402
@@ -24,7 +24,8 @@ import tools_v2                                                     # noqa: E402
 CLASSES = ["BPSK", "QPSK", "GFSK", "LFM", "OFDM",
            "nfm", "single_tone", "swept", "pulse", "broadband"]
 CLS_IDX = {c: i for i, c in enumerate(CLASSES)}
-MOD_CLASSES = {"BPSK", "QPSK", "GFSK", "LFM", "OFDM"}   # 走 baseband 生成
+MOD_CLASS_SET = set(MODULATIONS)                        # baseband 可生成的全部调制
+MOD_CLASSES = {"BPSK", "QPSK", "GFSK", "LFM", "OFDM"}   # 干扰池中的调制类（答题空间）
 LENGTH = 1024
 
 # 训练分布（与考卷隔离的证据，勿改动）
@@ -35,10 +36,14 @@ FOFF_RANGE = (-0.45, 0.45)
 
 
 def make_wave(name: str, rng: np.random.Generator, bw: float | None = None) -> np.ndarray:
-    """按类名生成一段干净（无噪声）复数基带波形。"""
+    """按类名生成一段干净（无噪声）复数基带波形。
+
+    baseband 支持的名字（含 16QAM/64QAM/OOK/FHSS 等目标调制）走 generate_baseband；
+    其余（nfm/single_tone/swept/pulse/broadband）走干扰波形生成器。
+    """
     if bw is None:
         bw = float(rng.uniform(*BW_RANGE))
-    if name in MOD_CLASSES:
+    if name in MOD_CLASS_SET:
         return generate_baseband(name, LENGTH, rng=rng, bandwidth_normalized=bw)
     kw = tools_v2._waveform_kw_for_bandwidth(name, bw)
     return generate_interferer_waveform(name, LENGTH, rng=rng, **kw)

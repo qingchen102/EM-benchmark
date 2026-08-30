@@ -23,6 +23,7 @@ for _p in (str(_ROOT), str(_ROOT / "simulation")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+from em_signal_simulator.baseband import MODULATIONS  # noqa: E402
 from em_signal_simulator.channel import apply_freq_offset  # noqa: E402
 
 from data_gen import CLASSES, CLS_IDX, LENGTH, SEED_BASE, make_wave, augment, to_input, slice_band
@@ -46,16 +47,46 @@ def gen_split(n_per_class: int, seed_offset: int, desc: str):
     return np.array(xs), np.array(ys), np.array(bws, dtype=np.float32)
 
 
-def build_batch(waves, bws, ys, idx, rng, device):
-    """在线增强：频偏 → 加噪 → 切片 → 归一化（与 oracle 第 2 级完全同视角）。"""
+def build_target_pool(n: int = 1500) -> tuple[np.ndarray, np.ndarray]:
+    """目标波形池（9 种调制，独立种子段 800k+）：混合增强时以 0dB 参考混入。"""
+    xs, bws = [], []
+    names = sorted(MODULATIONS)
+    for j in range(n):
+        rng = np.random.default_rng(SEED_BASE + 800_000 + j)
+        nm = names[j % len(names)]
+        bw = float(rng.uniform(0.05, 0.85))
+        xs.append(make_wave(nm, rng, bw=bw).astype(np.complex64))
+        bws.append(bw)
+    return np.array(xs), np.array(bws, dtype=np.float32)
+
+
+def build_batch(waves, bws, ys, idx, rng, device, tpool=None, mix_p=0.4):
+    """在线增强（v3 混合对齐）：
+    - 60% 纯干扰切片：频偏 → 加噪（SNR U(-10,20) 相对干扰功率）→ 切片；
+    - 40% 混合切片（部署视角）：目标（0dB，频偏 U(-0.08,0.08)）+ 干扰
+      （功率比 U(-5,15)dB）→ 加噪（SNR U(-5,15) 相对目标）→ 按干扰真值
+      位置切片——切片内含目标泄漏，与工具实际输出同分布。
+    """
     xs = []
     for i in idx:
         f_off = float(rng.uniform(-0.42, 0.42))
-        p = float(np.mean(np.abs(waves[i]) ** 2)) + 1e-30
-        snr = float(rng.uniform(-10.0, 20.0))
-        amp = np.sqrt(p * 10.0 ** (-snr / 10.0) / 2.0)
-        noise = amp * (rng.standard_normal(LENGTH) + 1j * rng.standard_normal(LENGTH))
-        x = apply_freq_offset(waves[i], f_off) + noise
+        use_mix = tpool is not None and rng.random() < mix_p
+        if use_mix:
+            ti = int(rng.integers(0, len(tpool)))
+            tf = float(rng.uniform(-0.08, 0.08))
+            ip = 10.0 ** (float(rng.uniform(-5.0, 15.0)) / 10.0)
+            snr = float(rng.uniform(-5.0, 15.0))
+            pt = float(np.mean(np.abs(tpool[ti]) ** 2)) + 1e-30
+            namp = np.sqrt(pt * 10.0 ** (-snr / 10.0) / 2.0)
+            noise = namp * (rng.standard_normal(LENGTH) + 1j * rng.standard_normal(LENGTH))
+            x = (apply_freq_offset(tpool[ti], tf)
+                 + np.sqrt(ip) * apply_freq_offset(waves[i], f_off) + noise)
+        else:
+            p = float(np.mean(np.abs(waves[i]) ** 2)) + 1e-30
+            snr = float(rng.uniform(-10.0, 20.0))
+            amp = np.sqrt(p * 10.0 ** (-snr / 10.0) / 2.0)
+            noise = amp * (rng.standard_normal(LENGTH) + 1j * rng.standard_normal(LENGTH))
+            x = apply_freq_offset(waves[i], f_off) + noise
         x_bb = slice_band(x, f_off, float(bws[i]))
         if x_bb is None:
             x_bb = x          # 切片失败（极窄带）时退化为全带含噪波形
@@ -84,6 +115,8 @@ def main():
     xtr, ytr, btr = gen_split(args.train_per_class, 0, "train")
     print("生成验证干净波形（独立种子段）…", flush=True)
     xva, yva, bva = gen_split(args.val_per_class, 900_000, "val")
+    print("生成目标波形池（混合增强用，独立种子段）…", flush=True)
+    tpool, _ = build_target_pool(1500)
 
     model = ModCNN().to(device)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
@@ -93,7 +126,7 @@ def main():
     # 固定验证批（一次性增强，保证各 epoch 可比）
     vrng = np.random.default_rng(777)
     all_idx = np.arange(len(xva))
-    vxt, vy = build_batch(xva, bva, yva, all_idx, vrng, device)
+    vxt, vy = build_batch(xva, bva, yva, all_idx, vrng, device, tpool=tpool)
 
     history, best = [], 0.0
     rng = np.random.default_rng(123)
@@ -107,7 +140,7 @@ def main():
             idx = order[start:start + args.batch]
             if len(idx) < args.batch:
                 idx = np.concatenate([idx, order[:args.batch - len(idx)]])
-            xb, yb = build_batch(xtr, btr, ytr, idx, rng, device)
+            xb, yb = build_batch(xtr, btr, ytr, idx, rng, device, tpool=tpool)
             opt.zero_grad()
             out = model(xb)
             loss = lossf(out, yb)

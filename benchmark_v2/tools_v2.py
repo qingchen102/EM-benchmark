@@ -404,10 +404,10 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
         return rows[:3]
 
     global_dist, cnn_global = _distances_any(x, _feature_vector(x), measure_obw99(x))
-    backend = "cnn" if cnn_global else "template"
+    cnn_used = [bool(cnn_global)]
 
-    # 按合并组切片（与 analyze_spectrum 同口径；谱谷分裂带目标保护区 + 强度地板，
-    # 先验缺失时保守用 0.05）
+    # v8 切片策略：优先按空间候选位置切片（v6 候选层的 freq/bw 精确，且覆盖
+    # 同频干扰——合并组会跳过与目标重叠的源），合并组切片补充/回退；上限 6 片
     raw_peaks = _find_peaks(psd, freq, rel_thresh_db=-14.0, min_sep=1.0 / 128.0)
     protect = (float(target_bandwidth_normalized) / 2.0
                if target_bandwidth_normalized else 0.05)
@@ -415,25 +415,55 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
                             protect_radius=protect)
     obw99 = measure_obw99(x)
     target_half = max(obw99 / 2.0, 0.05)     # 目标带半径（无先验时的保守估计）
-    # 非目标带优先（干扰更可能在目标带外），其次按强度，最多 3 组
-    merged_sorted = sorted(merged, key=lambda m: (abs(m["freq"]) <= target_half, -m["rel_db"]))
 
     per_peak = []
+    seen_pos = []
+
+    def _try_slice(f_center, bw0, angle=None, in_band=None):
+        if len(per_peak) >= 6 or any(abs(f_center - f) < 0.04 for f in seen_pos):
+            return
+        half = bw0 / 2.0 + 0.02
+        i_lo = max(int(np.searchsorted(freq, f_center - half)), 0)
+        i_hi = min(int(np.searchsorted(freq, f_center + half)), n - 1)
+        x_bb, bw_slice = _band_slice(x, freq, psd, i_lo, i_hi)
+        if x_bb is None:
+            return
+        seen_pos.append(float(f_center))
+        td, cnn_ok = _distances_any(x_bb, _feature_vector(x_bb), bw_slice)
+        cnn_used.append(bool(cnn_ok))
+        row = {
+            "peak_freq": round(float(f_center), 4),
+            "slice_obw99": round(float(bw_slice), 3),
+            "in_target_band": bool(abs(f_center) <= target_half) if in_band is None else bool(in_band),
+            "template_distances": td,
+        }
+        if angle is not None:
+            row["angle_deg"] = angle
+        per_peak.append(row)
+
+    # 1) 空间候选位置（freq/bw 精确，含同频干扰）
+    try:
+        import spatial_candidates as _spatial
+        _sp = _spatial.spatial_candidates(
+            sample_path, target_bandwidth_normalized=target_bandwidth_normalized)
+        for c in _sp.get("sources_candidates", []):
+            _try_slice(c["freq"], max(float(c["bandwidth"]), 0.03), c.get("angle_deg"))
+    except Exception:
+        pass
+
+    # 2) 合并组切片补充（非目标带优先）
+    merged_sorted = sorted(merged, key=lambda m: (abs(m["freq"]) <= target_half, -m["rel_db"]))
     for m in merged_sorted:
-        if len(per_peak) >= 3:
+        if len(per_peak) >= 6:
             break
         i_lo, i_hi = m["span_idx"]
         x_bb, bw_slice = _band_slice(x, freq, psd, i_lo, i_hi)
         if x_bb is None:
             continue
-        td, cnn_slice = _distances_any(x_bb, _feature_vector(x_bb), bw_slice)
-        backend = backend if cnn_global or cnn_slice else "template"
-        per_peak.append({
-            "peak_freq": round(float(m["freq"]), 4),
-            "slice_obw99": round(float(bw_slice), 3),
-            "in_target_band": bool(abs(m["freq"]) <= target_half),
-            "template_distances": td,
-        })
+        f_c = float(np.mean(freq[i_lo:i_hi + 1]))
+        _try_slice(f_c, float(bw_slice))
+
+    backend = "cnn" if any(cnn_used) else "template"
 
     return {
         "spectral_flatness": round(float(flat), 3),
