@@ -29,6 +29,7 @@ from model import ModCNN  # noqa: E402
 
 GATE_CLEAN = 0.85
 GATE_SLICE = 0.50
+GATE_TOOLVIEW = 0.65   # v8 新增：工具实际切片视角（estimate_modulation_features 全链路）
 
 
 def load_model(path):
@@ -76,7 +77,7 @@ def level2_slices(model):
     sys_path_setup()
     import tools_v2
     gt_data = json.loads((ROOT / "dataset" / "ground_truth.json").read_text(encoding="utf-8"))
-    pairs, inr_cells = [], {}
+    pairs = []
     for rec in gt_data:
         iq = np.load(ROOT / "dataset" / rec["file"])
         x = tools_v2._combine_channels(iq)
@@ -90,7 +91,7 @@ def level2_slices(model):
                 continue
             pred, _ = predict(model, [x_bb])
             pairs.append((label, CLASSES[pred[0]], s.get("inr_db", 99)))
-    return pairs, inr_cells
+    return pairs
 
 
 def slice_band(x, f_center, bw, pad=0.02):
@@ -113,6 +114,28 @@ def sys_path_setup():
     for p in (str(ROOT), str(ROOT / "simulation")):
         if p not in sys.path:
             sys.path.insert(0, p)
+
+
+def level3_toolview():
+    """第 3 级 工具视角：调用真实 estimate_modulation_features 全链路，
+    每条调制类 GT 干扰匹配最近切片的 top-1（v7 基线 = 0.424）。"""
+    import tools_v2
+    gt_data = json.loads((ROOT / "dataset" / "ground_truth.json").read_text(encoding="utf-8"))
+    pairs = []
+    for rec in gt_data:
+        out = tools_v2.estimate_modulation_features(str(ROOT / "dataset" / rec["file"]))
+        peaks = out["per_peak_template_distances"]
+        for s in rec["ground_truth"]["sources"][1:]:
+            label = s.get("modulation") or s.get("waveform_type")
+            if label not in CLS_IDX or not peaks:
+                continue
+            f0 = s["freq_offset_normalized"]
+            best = min(peaks, key=lambda p: abs(p["peak_freq"] - f0))
+            if abs(best["peak_freq"] - f0) > 0.05:
+                continue
+            pairs.append((label, best["template_distances"][0]["template"],
+                          s.get("inr_db", 99)))
+    return pairs
 
 
 def report(title, pairs):
@@ -138,8 +161,16 @@ def main():
     p1 = level1_clean(model, args.per_class)
     a1 = report("第 1 级 干净波形上限（独立种子，无噪声）", p1)
 
-    p2, _ = level2_slices(model)
+    p2 = level2_slices(model)
     a2 = report("第 2 级 冻结集 GT 切片（10 类全干扰）", p2)
+
+    p3 = level3_toolview()
+    a3 = report("第 3 级 工具视角（estimate_modulation_features 全链路）", p3)
+    for lo, hi in ((0, 6), (6, 15), (15, 999)):
+        sel = [(g, p) for g, p, inr in p3 if lo <= inr < hi]
+        if sel:
+            h = sum(1 for g, p in sel if g == p)
+            print(f"  工具视角 INR {lo}~{hi}dB: {h}/{len(sel)} = {h/len(sel):.3f}")
 
     # 调制类子集：与旧上限 0.282/0.331 同口径
     mods = {"BPSK", "QPSK", "GFSK", "LFM", "OFDM"}
@@ -153,11 +184,15 @@ def main():
             h = sum(1 for g, p in sel if g == p)
             print(f"  INR {lo}~{hi}dB: {h}/{len(sel)} = {h/len(sel):.3f}")
 
-    verdict = ("PASS" if (a1 >= GATE_CLEAN and a2 >= GATE_SLICE) else "FAIL")
-    print(f"\n门槛: clean>={GATE_CLEAN}, slice>={GATE_SLICE} -> 验收: {verdict}")
+    verdict = ("PASS" if (a1 >= GATE_CLEAN and a2 >= GATE_SLICE
+                          and a3 >= GATE_TOOLVIEW) else "FAIL")
+    print(f"\n门槛: clean>={GATE_CLEAN}, slice>={GATE_SLICE}, "
+          f"toolview>={GATE_TOOLVIEW} -> 验收: {verdict}")
     (HERE / "oracle_result.json").write_text(json.dumps({
         "clean_acc": round(a1, 4), "slice_acc": round(a2, 4),
-        "mod_only_slice_acc": round(asub, 4), "gate": {"clean": GATE_CLEAN, "slice": GATE_SLICE},
+        "toolview_acc": round(a3, 4),
+        "mod_only_slice_acc": round(asub, 4),
+        "gate": {"clean": GATE_CLEAN, "slice": GATE_SLICE, "toolview": GATE_TOOLVIEW},
         "verdict": verdict}, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
