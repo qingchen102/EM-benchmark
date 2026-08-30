@@ -1,0 +1,10 @@
+{
+ "clean_acc": 0.8733,
+ "slice_acc": 0.6884,
+ "mod_only_slice_acc": 0.8389,
+ "gate": {
+  "clean": 0.85,
+  "slice": 0.5
+ },
+ "verdict": "PASS"
+}
