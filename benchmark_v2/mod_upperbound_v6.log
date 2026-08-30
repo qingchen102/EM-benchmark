@@ -1,0 +1,94 @@
+候选集: ['BPSK', 'GFSK', 'LFM', 'OFDM', 'QPSK', 'broadband', 'nfm', 'pulse', 'single_tone', 'swept']
+
+
+=== [baseline] 第 1 级：干净波形上限: top-1 命中 54/90 = 0.600 ===
+混淆 (GT -> Pred):
+  BPSK   -> BPSK         x18 OK
+  GFSK   -> QPSK         x14   
+  GFSK   -> nfm          x3   
+  GFSK   -> BPSK         x1   
+  LFM    -> LFM          x15 OK
+  LFM    -> BPSK         x3   
+  OFDM   -> OFDM         x18 OK
+  QPSK   -> BPSK         x12   
+  QPSK   -> QPSK         x3 OK
+  QPSK   -> OFDM         x3   
+
+=== [cumulants] 第 1 级：干净波形上限: top-1 命中 59/90 = 0.656 ===
+混淆 (GT -> Pred):
+  BPSK   -> BPSK         x18 OK
+  GFSK   -> nfm          x9   
+  GFSK   -> QPSK         x9   
+  LFM    -> LFM          x18 OK
+  OFDM   -> OFDM         x18 OK
+  QPSK   -> OFDM         x5   
+  QPSK   -> QPSK         x5 OK
+  QPSK   -> nfm          x4   
+  QPSK   -> GFSK         x4   
+
+=== [full] 第 1 级：干净波形上限: top-1 命中 59/90 = 0.656 ===
+混淆 (GT -> Pred):
+  BPSK   -> BPSK         x18 OK
+  GFSK   -> QPSK         x12   
+  GFSK   -> nfm          x3   
+  GFSK   -> GFSK         x3 OK
+  LFM    -> LFM          x9 OK
+  LFM    -> nfm          x6   
+  LFM    -> GFSK         x3   
+  OFDM   -> OFDM         x18 OK
+  QPSK   -> QPSK         x11 OK
+  QPSK   -> OFDM         x5   
+  QPSK   -> LFM          x2   
+
+============================================================
+  baseline   clean=0.600
+  cumulants  clean=0.656
+  full       clean=0.656
+
+=== [baseline] 第 2 级：数据集 GT 切片上限 (kseeds=5): top-1 命中 143/507 = 0.282 ===
+混淆 (GT -> Pred):
+  BPSK   -> BPSK         x70 OK
+  BPSK   -> OFDM         x29   
+  BPSK   -> QPSK         x1   
+  GFSK   -> BPSK         x62   
+  GFSK   -> QPSK         x37   
+  GFSK   -> OFDM         x5   
+  GFSK   -> nfm          x1   
+  LFM    -> OFDM         x50   
+  LFM    -> BPSK         x46   
+  LFM    -> LFM          x3 OK
+  LFM    -> QPSK         x1   
+  OFDM   -> OFDM         x66 OK
+  OFDM   -> BPSK         x29   
+  OFDM   -> QPSK         x1   
+  QPSK   -> BPSK         x88   
+  QPSK   -> OFDM         x14   
+  QPSK   -> QPSK         x4 OK
+
+=== [cumulants] 第 2 级：数据集 GT 切片上限 (kseeds=5): top-1 命中 168/507 = 0.331 ===
+混淆 (GT -> Pred):
+  BPSK   -> OFDM         x49   
+  BPSK   -> nfm          x16   
+  BPSK   -> GFSK         x13   
+  BPSK   -> BPSK         x11 OK
+  BPSK   -> QPSK         x11   
+  GFSK   -> QPSK         x44   
+  GFSK   -> GFSK         x25 OK
+  GFSK   -> nfm          x23   
+  GFSK   -> OFDM         x13   
+  LFM    -> OFDM         x65   
+  LFM    -> LFM          x21 OK
+  LFM    -> nfm          x7   
+  LFM    -> QPSK         x6   
+  LFM    -> GFSK         x1   
+  OFDM   -> OFDM         x77 OK
+  OFDM   -> QPSK         x9   
+  OFDM   -> nfm          x8   
+  OFDM   -> GFSK         x2   
+  QPSK   -> QPSK         x34 OK
+  QPSK   -> OFDM         x32   
+  QPSK   -> nfm          x26   
+  QPSK   -> GFSK         x14   
+
+结论：在线调制准确率应介于 clean 上限与切片上限之间；
+若 upgraded 变体 clean 显著高于 baseline 且 >= 0.80，才值得接入 tools_v2 工具层。
