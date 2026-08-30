@@ -12,7 +12,7 @@
 |------|------|------|
 | **V1** | 单天线、4 种简单干扰类型，跑通评估链路，验证"Agent 能做信号分类" | ✅ 已完成（历史代码） |
 | **V2（当前）** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、复杂干扰类型（脉冲化 LFM / NFM / 周期脉冲串等）、物理保真（LNA 饱和 / 阵元失配 / 防折叠 / 带宽统一），完整评估链路（检测 / 分类 / 参数估计 / DOA） | ✅ 完成（v6 空间候选层，500 样本基线 ds_run17） |
-| **V3（启动中）** | 真实环境：多径衰落、IQ 不平衡、IMD3、真实采集数据 | ⏳ P0 真实 IQ 采集管线启动中 |
+| **V3（规划）** | 真实环境建模：多径衰落、IQ 不平衡、IMD3、低空场景（参考 S-ICDF 等低空电磁数据集的建模思路） | ⏳ 规划中 |
 
 **V2 信号模型的核心修复**（详见 `simulation/README.md`）：
 
@@ -72,7 +72,7 @@ python sanity_check_v2.py
 # 3) 评估（回到 benchmark_v2/ 根目录）
 cd ..
 python evaluator_v2.py dataset --offline                # 离线：验证评分管道（应满分）
-python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output ds_runX.json
+python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output results.json
 ```
 
 ---
@@ -123,11 +123,11 @@ python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --
 | `detect_time_domain` | 时域特征：PAPR、脉冲占空比、脉冲边沿数、**削顶比例 `clipping_fraction`**（LNA 饱和压平波峰，blocking 的独立物理证据：blocking 样本中位 0.027 vs 其他 ~0.01） |
 | `estimate_modulation_features` | 调制识别特征：频谱平坦度/频率漂移/峰均比/幅度峰度 + 与 **10 种候选模板**（数据集实际干扰池）的带宽自适应特征距离（Hann 切片解旋，模板同带宽生成，仅返回最近 top-3） |
 
-工具设计沿用 v1 多轮测试验证有效的特征（频谱平坦度→宽带、分段频率漂移→扫频、峰均比→单音、PAPR/占空比→脉冲），且**只忠实返回测量值、不含任何结论性文本（无 expert_insight）**——判断完全交给 Agent。类别判定所需的 `ratio`（干扰频偏/目标带宽）、目标参考功率与边界提示由工具直接计算输出，模型读区间即可，无需自行算术。
+工具设计沿用 v1 验证有效的特征（频谱平坦度→宽带、分段频率漂移→扫频、峰均比→单音、PAPR/占空比→脉冲），且**只忠实返回测量值、不含任何结论性文本**——判断完全交给 Agent。类别判定所需的 `ratio`（干扰频偏/目标带宽）、目标参考功率与边界提示由工具直接计算输出，模型读区间即可，无需自行算术。
 
 评估 Prompt 会注入完整先验（采样率、中心频率、半波长阵列间距、**目标调制与目标带宽（OBW99）**、观测长度）并明确归一化约定（频偏/带宽相对采样率、DOA 单位度）；目标带宽先验同时注入三个测量工具用于谱谷保护/切片。
 
-参考精度（40 样本验证）：频偏估计命中率 0.94（±0.02 容差）、DOA 命中率 1.00（±12°，INR≥8 时）、源数估计 0.80。调制识别在多源混合场景下物理偏难（干扰与目标频带重叠时不可分离），模板匹配仅供参考特征。
+工具层参考精度（500 样本离线诊断，`diag_offline_report.py` / `diag_spatial_ab.py`）：候选覆盖率 0.87、功率测量 MAE 1.8 dB、频点 MAE 0.005、角度中位误差 0.6°。调制识别为已知短板：多源混叠下手工特征物理受限（同数据集离线上限仅 0.27，`eval_mod_upperbound.py` 可复现），模板匹配仅作参考证据。
 
 ### 5.2 评估器（`evaluator_v2.py`）
 
@@ -153,20 +153,20 @@ python evaluator_v2.py dataset --model ... --max-samples 200   # 抽样评估
 - **定期存档**：每 10 个样本自动写入输出文件（`partial: true`），崩溃/断网最多丢最近 10 个样本；
 - **断点续跑**：同命令加 `--resume`，已完成样本直接跳过、不重复调用 API；
 - **网络重试**：连接错误/限流/服务端 5xx 指数退避自动重试（5s→60s，最多 5 次），短暂断网不再中断整跑；
-- **repair 轮**：模型最终回复缺有效 JSON 时追加一次无工具的强制格式调用（历史上曾单轮丢失 8/50 样本的全部指标）。
+- **repair 轮**：模型最终回复缺有效 JSON 时追加一次无工具的强制格式调用，避免整样本指标丢失。
 
 **信息隔离**：Agent 只能看到 `observations.json` 先验与 `.npy` 路径；真值仅在评估侧从 `ground_truth.json` 读取。
 
-**调制双口径**：`modulation_accuracy`（仅匹配对）与 `modulation_accuracy_e2e`（分母=全部真实调制 GT 干扰，未匹配计错）。跨 run 对比请以 e2e 为准——匹配数波动会使 matched 口径失真。报告含 `code_fingerprint`（评估侧代码 md5 前 12 位），用于精确归因版本。
+**调制双口径**：`modulation_accuracy`（仅匹配对）与 `modulation_accuracy_e2e`（分母=全部真实调制 GT 干扰，未匹配计错）。对比不同结果文件时请以 e2e 为准——匹配数波动会使 matched 口径失真。报告含 `code_fingerprint`（评估侧代码 md5 前 12 位），用于精确归因版本。
 
-### 5.3 云端 API 评估（百炼 deepseek-v3.2 —— 本项目全部基线的实际配置）
+### 5.3 云端 API 评估（阿里云百炼）
 
 ```powershell
-# 方式一：薄封装（推荐）——自动注入 enable_thinking=False，输出名自动顺延 ds_run(N+1)
-python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output ds_runX.json
+# 方式一：薄封装（推荐）——自动注入 enable_thinking=False，保证非推理配置一致
+python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --output results.json
 
-# 方式二：直接评估（v3.2 非推理、默认关思考，可直接调 evaluator）
-python evaluator_v2.py dataset --model deepseek-v3.2 --base-url https://dashscope.aliyuncs.com/compatible-mode/v1 --max-samples 500 --output ds_run15.json
+# 方式二：直接评估（deepseek-v3.2 非推理、默认关思考，可直接调 evaluator）
+python evaluator_v2.py dataset --model deepseek-v3.2 --base-url https://dashscope.aliyuncs.com/compatible-mode/v1 --max-samples 500 --output results.json
 
 # 500 样本全量约 5 小时：每 10 样本自动存档（partial: true），中断后同命令加 --resume 续跑
 ```
@@ -175,10 +175,10 @@ python evaluator_v2.py dataset --model deepseek-v3.2 --base-url https://dashscop
 
 | 模型名 | 行为 | 建议 |
 |---|---|---|
-| **`deepseek-v3.2`**（百炼） | 非推理、默认关思考，~18s/样本，工具调用稳定 | ✅ **首选**（v2 全部基线均用它；官方 `deepseek-chat` 别名同期即指向 v3.2，已互验） |
+| **`deepseek-v3.2`**（百炼） | 非推理、默认关思考，~18s/样本，工具调用稳定 | ✅ **首选** |
 | `deepseek-v4-flash` 等推理模型 | 深度推理 | ⚠️ 工具模式下不限制输出会生成超长文本（单样本可达 2 分钟+），仅用于对比推理上限；可用 `--reasoning-effort low` 降低思考强度（API 不支持时自动忽略） |
 
-- API Key：阿里云百炼（DashScope）控制台创建，放环境变量 `OPENAI_API_KEY` 或写入一键脚本 `run_v32.ps1`（**含 Key，已 gitignore，勿提交远程**）；
+- API Key：在阿里云百炼（DashScope）控制台创建，通过环境变量 `OPENAI_API_KEY` 或 `--api-key` 传入。请勿将 Key 写入任何会提交到仓库的文件；
 - `--resume` / `--max-samples` / `--verbose` 等参数见 `python evaluator_v2.py --help`。
 
 ---
@@ -234,7 +234,7 @@ cd simulation && python sanity_check_v2.py
 ## 10. 附录：V2 评估结果记录（截至 2026-08）
 
 > 数据集：同 seed 生成，50 样本快速验证集 + 500 样本全量集（1 目标 + 0~2 干扰，SNR -5~15dB）。
-> 模型口径：所有 DeepSeek 行统一为百炼 **deepseek-v3.2**（非推理、默认关思考）。早期行标注的官方别名 `deepseek-chat` 当时段即指向 v3.2（已用官方 chat 与百炼 v3.2 互验，指标重合）。
+> 模型：deepseek-v3.2（阿里云百炼，非推理、默认关思考），所有 DeepSeek 行同口径。
 > 评估方式：填空/选择题，Agent 调用 5 个分析工具（频谱/源数/DOA/时域/调制特征）后作答。
 
 ### 10.1 各配置精度演进
