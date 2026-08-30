@@ -11,7 +11,7 @@
 | 阶段 | 内容 | 状态 |
 |------|------|------|
 | **V1** | 单天线、4 种简单干扰类型，跑通评估链路，验证"Agent 能做信号分类" | ✅ 已完成（历史代码） |
-| **V2（当前）** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、复杂干扰类型（脉冲化 LFM / NFM / 周期脉冲串等）、物理保真（LNA 饱和 / 阵元失配 / 防折叠 / 带宽统一），完整评估链路（检测 / 分类 / 参数估计 / DOA） | ✅ 完成（v6 空间候选层，500 样本基线 ds_run17） |
+| **V2（当前）** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、复杂干扰信号体制（真实辐射体简化建模：WiFi/LTE/蓝牙/雷达/GPS + 脉冲串/NFM 等）、物理保真（LNA 饱和 / 阵元失配 / 防折叠 / 带宽统一），完整评估链路（检测 / 分类 / 参数估计 / DOA） | ✅ 完成（v6 空间候选层，500 样本基线 ds_run17） |
 | **V3（规划）** | 真实环境建模：多径衰落、IQ 不平衡、IMD3、低空场景（参考 S-ICDF 等低空电磁数据集的建模思路） | ⏳ 规划中 |
 
 **V2 信号模型的核心修复**（详见 `simulation/README.md`）：
@@ -87,6 +87,16 @@ python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --
 | `observations.json` | Agent 可见先验（接收机参数、目标调制、样本长度） | Agent Prompt 输入 |
 | `ground_truth.json` | 评估真值（源数、类别、CFO/DOA/带宽/功率/INR、LNA 状态） | 评估系统专用 |
 
+**干扰池构成与标签轴**：每个干扰由真实辐射体简化建模——用其代表性调制生成信号（WiFi→OFDM、LTE/基站→QPSK、蓝牙→GFSK、雷达→LFM、GPS/遥测→DSSS/BPSK，完整辐射体表见 `simulation/README.md`），另有模拟调频（NFM）与 4 种未调制简单波形（单音/扫频/脉冲串/宽带噪声）。每个源带三个独立标签轴：
+
+| 标签轴 | 回答的问题 | 字段 |
+|------|------|------|
+| 干扰类别 | 在频谱什么位置、多强、构成什么威胁 | `v2_category`（同频/邻道/脉冲/阻塞/none） |
+| 信号体制 | 它是什么信号 | `modulation`（调制方式）+ `waveform_type`（未调制波形） |
+| 辐射体来源 | 现实中对应什么设备 | `display_name`（如 Bluetooth_GFSK，仅评估侧可见，信息隔离） |
+
+> 注：当前"调制识别"任务本质是**辐射体溯源的简化代理**——每种辐射体 ↔ 一种代表性调制，一对一。真实世界中调制与设备并非一一对应，跳频（真实蓝牙为 FHSS）、突发包结构等旁证尚未建模，为 V3 扩展方向。
+
 主要 CLI 参数：
 
 | 参数 | 默认 | 说明 |
@@ -94,7 +104,7 @@ python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --
 | `--count` / `--output-dir` | 100 / `dataset_v2` | 数量与输出目录 |
 | `--num-sources` | random | 总源数 1/2/3 或随机 |
 | `--modulation` | random | 目标调制（9 种） |
-| `--interferer-type` | random | 干扰类型（真实调制 5 种 / 波形 5 种） |
+| `--interferer-type` | random | 干扰池（真实辐射体 5 种：WiFi/LTE/蓝牙/雷达/GPS/遥测；简单波形 5 种：单音/扫频/脉冲串/宽带噪声/NFM） |
 | `--snr-range` / `--fixed-snr` | -5~15 | SNR（**= 目标/噪声**，干扰不参与） |
 | `--target-bandwidth` | None | 目标占用带宽（归一化，须 <1.0） |
 | `--interferer-bandwidth-range` | 0.05~0.6 | 干扰带宽采样范围 |
@@ -121,7 +131,7 @@ python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --
 | `estimate_num_sources` | 源数估计：`num_sources_estimate`（MDL 原始值）与 **`final_suggestion`**（决策树已在工具端预应用：高估看合并峰+稳定峰；低估看"可信组"——强组或**空间相干组**（带限切片 λ1/其余均值 ≥4，真源 p10=7.2 vs 噪声包 p75=3.6），MUSIC 峰经 25dB 显著度过滤） |
 | `estimate_doa` | MUSIC 空间谱 DOA 估计（4 元 ULA，d=λ/2）；含跨阶稳定峰 `stable_peaks_deg` 与 3 阶新峰 `peaks_new_at_order3_deg`（区分真实源与过分辨伪峰） |
 | `detect_time_domain` | 时域特征：PAPR、脉冲占空比、脉冲边沿数、**削顶比例 `clipping_fraction`**（LNA 饱和压平波峰，blocking 的独立物理证据：blocking 样本中位 0.027 vs 其他 ~0.01） |
-| `estimate_modulation_features` | 调制识别特征：频谱平坦度/频率漂移/峰均比/幅度峰度 + 与 **10 种候选模板**（数据集实际干扰池）的带宽自适应特征距离（Hann 切片解旋，模板同带宽生成，仅返回最近 top-3） |
+| `estimate_modulation_features` | **信号体制识别**（答案空间 10 类 = 5 种辐射体调制 BPSK/QPSK/GFSK/LFM/OFDM + 模拟调频 NFM + 4 种简单波形）：频谱平坦度/频率漂移/峰均比/幅度峰度 + 与候选模板的带宽自适应特征距离（Hann 切片解旋，模板同带宽生成，仅返回最近 top-3）。调制为辐射体溯源的简化代理（见第 4 节标签轴说明） |
 
 工具设计沿用 v1 验证有效的特征（频谱平坦度→宽带、分段频率漂移→扫频、峰均比→单音、PAPR/占空比→脉冲），且**只忠实返回测量值、不含任何结论性文本**——判断完全交给 Agent。类别判定所需的 `ratio`（干扰频偏/目标带宽）、目标参考功率与边界提示由工具直接计算输出，模型读区间即可，无需自行算术。
 
