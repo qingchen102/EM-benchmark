@@ -302,9 +302,54 @@ def _source_groups(raw_peaks, freq, psd, protect_radius=0.05,
     return merged[:top] if top else merged
 
 
+_MOD_CNN_CACHE: dict = {}
+
+
+def _mod_cnn_distances(x_bb, cand):
+    """学习型分类器后端（mod_classifier CNN）：切片 → softmax → 距离 = 1 − 概率。
+
+    "最小 feature_distance 胜出"的语义与模板法完全一致（距离最小 = 概率最大），
+    Agent 侧判定逻辑不变。torch / checkpoint 缺失时返回 None，调用方回退模板法。
+    """
+    try:
+        if "model" not in _MOD_CNN_CACHE:
+            import torch
+            ck_path = Path(__file__).resolve().parent / "mod_classifier" / "checkpoint.pt"
+            ck = torch.load(ck_path, map_location="cpu", weights_only=False)
+            cdir = str(ck_path.parent)
+            if cdir not in sys.path:
+                sys.path.insert(0, cdir)
+            from model import ModCNN
+            net = ModCNN()
+            net.load_state_dict(ck["model"])
+            net.eval()
+            _MOD_CNN_CACHE.update(model=net, classes=list(ck["classes"]), torch=torch)
+        model = _MOD_CNN_CACHE["model"]
+        classes = _MOD_CNN_CACHE["classes"]
+        torch = _MOD_CNN_CACHE["torch"]
+        x = np.asarray(x_bb, dtype=np.complex64)
+        rms = np.sqrt(np.mean(np.abs(x) ** 2)) + 1e-6
+        x = x / rms
+        inp = torch.from_numpy(np.stack([x.real, x.imag]).astype(np.float32)).unsqueeze(0)
+        with torch.no_grad():
+            probs = torch.softmax(model(inp)[0], dim=0)
+        rows = [{"template": c,
+                 "feature_distance": round(max(1.0 - float(probs[classes.index(c)]), 0.0), 3)
+                 if c in classes else 0.99} for c in cand]
+        rows.sort(key=lambda r: r["feature_distance"])
+        return rows[:3]
+    except Exception:
+        return None
+
+
 def estimate_modulation_features(sample_path: str, candidates: list | None = None,
-                                 target_bandwidth_normalized: float | None = None) -> dict[str, Any]:
+                                 target_bandwidth_normalized: float | None = None,
+                                 use_cnn: bool = True) -> dict[str, Any]:
     """调制识别特征：全局特征 + 按合并源组切片的带宽自适应模板距离。
+
+    use_cnn=True（默认）时距离由学习型分类器（mod_classifier CNN）计算：
+    feature_distance = 1 − softmax 概率，语义与模板法一致；False 或加载失败
+    时回退手工特征模板法（backend 字段标记实际使用的后端）。
 
     只返回测量值（含模板特征距离），不做匹配结论——由 Agent 自行判断。
 
@@ -331,6 +376,15 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
 
     cand = tuple(sorted(set(candidates))) if candidates else _CANDIDATES
 
+    # v7 后端：学习型分类器（mod_classifier CNN，两级 oracle 验收 clean 0.873 /
+    # 切片 0.688 过闸）计算距离 = 1 − softmax 概率；语义与模板法一致
+    # （最小距离胜出），Agent 判定逻辑不变。torch/权重缺失时自动回退模板法。
+    def _distances_any(x_sig, fv, bw):
+        d = _mod_cnn_distances(x_sig, cand) if use_cnn else None
+        if d is not None:
+            return d, True
+        return _distances(fv, bw), False
+
     def _distances(fv, bw):
         """fv 与候选模板（均在带宽 bw 下生成）的归一化欧氏距离，返回最近的 top-3。
 
@@ -349,7 +403,8 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
         rows.sort(key=lambda r: r["feature_distance"])
         return rows[:3]
 
-    global_dist = _distances(_feature_vector(x), measure_obw99(x))
+    global_dist, cnn_global = _distances_any(x, _feature_vector(x), measure_obw99(x))
+    backend = "cnn" if cnn_global else "template"
 
     # 按合并组切片（与 analyze_spectrum 同口径；谱谷分裂带目标保护区 + 强度地板，
     # 先验缺失时保守用 0.05）
@@ -371,11 +426,13 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
         x_bb, bw_slice = _band_slice(x, freq, psd, i_lo, i_hi)
         if x_bb is None:
             continue
+        td, cnn_slice = _distances_any(x_bb, _feature_vector(x_bb), bw_slice)
+        backend = backend if cnn_global or cnn_slice else "template"
         per_peak.append({
             "peak_freq": round(float(m["freq"]), 4),
             "slice_obw99": round(float(bw_slice), 3),
             "in_target_band": bool(abs(m["freq"]) <= target_half),
-            "template_distances": _distances(_feature_vector(x_bb), bw_slice),
+            "template_distances": td,
         })
 
     return {
@@ -387,6 +444,7 @@ def estimate_modulation_features(sample_path: str, candidates: list | None = Non
         "pulse_duty_cycle": round(float(duty), 3),
         "obw99_normalized": round(float(obw99), 3),
         "candidates": list(cand),
+        "backend": backend,
         "global_template_distances": global_dist,
         "per_peak_template_distances": per_peak,
     }
