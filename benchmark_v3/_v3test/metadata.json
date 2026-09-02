@@ -1,0 +1,303 @@
+[
+ {
+  "file": "sample_00000.npy",
+  "sample_id": "sample_00000",
+  "ground_truth": {
+   "sample_id": "sample_00000",
+   "num_sources": 3,
+   "num_samples": 1024,
+   "snr_db": 10.0,
+   "bandwidth_definition": "obw99",
+   "receiver": {
+    "center_frequency_hz": 2400000000.0,
+    "sampling_rate_hz": 20000000.0,
+    "wavelength_m": 0.125,
+    "antenna_spacing_m": 0.0625
+   },
+   "lna_saturation": {
+    "applied": true,
+    "model": "rapp",
+    "a_sat": 2.0,
+    "p": 2.0,
+    "saturation_db": 6.0
+   },
+   "array_mismatch": {
+    "gain_error_std": 0.0,
+    "phase_error_std_deg": 0.0
+   },
+   "channel_v3": true,
+   "sources": [
+    {
+     "source_id": 0,
+     "role": "target",
+     "modulation": "QPSK",
+     "power_ratio_db": 0.0,
+     "freq_offset_normalized": 0.0,
+     "freq_offset_hz": 0.0,
+     "doa_degree": 0.0,
+     "bandwidth_normalized": 0.25105328057151594
+    },
+    {
+     "source_id": 1,
+     "role": "interferer",
+     "modulation": "single_tone",
+     "emitter": "GNSS_jam",
+     "intent": "malicious",
+     "is_jamming": true,
+     "v2_category": "blocking",
+     "scene": "GNSS 压制（窄带扫频覆盖导航频段）",
+     "power_ratio_db": 3.2944981254937606,
+     "freq_offset_normalized": -0.0019367531408109855,
+     "freq_offset_hz": -38735.06281621971,
+     "doa_degree": -44.120034037266166,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 13.29449812549376
+    },
+    {
+     "source_id": 2,
+     "role": "interferer",
+     "modulation": "broadband",
+     "emitter": "Microwave",
+     "intent": "incidental",
+     "is_jamming": false,
+     "v2_category": "co_channel",
+     "scene": "微波炉（2.4G 宽带间歇噪）",
+     "power_ratio_db": 17.96876905507473,
+     "freq_offset_normalized": 0.001445839671507001,
+     "freq_offset_hz": 28916.79343014002,
+     "doa_degree": 28.249742901364556,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 27.96876905507473
+    }
+   ]
+  }
+ },
+ {
+  "file": "sample_00001.npy",
+  "sample_id": "sample_00001",
+  "ground_truth": {
+   "sample_id": "sample_00001",
+   "num_sources": 3,
+   "num_samples": 1024,
+   "snr_db": 10.0,
+   "bandwidth_definition": "obw99",
+   "receiver": {
+    "center_frequency_hz": 2400000000.0,
+    "sampling_rate_hz": 20000000.0,
+    "wavelength_m": 0.125,
+    "antenna_spacing_m": 0.0625
+   },
+   "lna_saturation": {
+    "applied": true,
+    "model": "rapp",
+    "a_sat": 2.0,
+    "p": 2.0,
+    "saturation_db": 6.0
+   },
+   "array_mismatch": {
+    "gain_error_std": 0.0,
+    "phase_error_std_deg": 0.0
+   },
+   "channel_v3": true,
+   "sources": [
+    {
+     "source_id": 0,
+     "role": "target",
+     "modulation": "QPSK",
+     "power_ratio_db": 0.0,
+     "freq_offset_normalized": 0.0,
+     "freq_offset_hz": 0.0,
+     "doa_degree": 0.0,
+     "bandwidth_normalized": 0.16142807323026623
+    },
+    {
+     "source_id": 1,
+     "role": "interferer",
+     "modulation": "single_tone",
+     "emitter": "GNSS_jam",
+     "intent": "malicious",
+     "is_jamming": true,
+     "v2_category": "blocking",
+     "scene": "GNSS 压制（窄带扫频覆盖导航频段）",
+     "power_ratio_db": 11.93604784203963,
+     "freq_offset_normalized": 0.005605832805931046,
+     "freq_offset_hz": 112116.65611862091,
+     "doa_degree": 9.218463588796993,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 21.936047842039628
+    },
+    {
+     "source_id": 2,
+     "role": "interferer",
+     "modulation": "broadband",
+     "emitter": "Microwave",
+     "intent": "incidental",
+     "is_jamming": false,
+     "v2_category": "co_channel",
+     "scene": "微波炉（2.4G 宽带间歇噪）",
+     "power_ratio_db": 14.499199329309208,
+     "freq_offset_normalized": -0.002447602412232225,
+     "freq_offset_hz": -48952.0482446445,
+     "doa_degree": 27.155376334411685,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 24.499199329309207
+    }
+   ]
+  }
+ },
+ {
+  "file": "sample_00002.npy",
+  "sample_id": "sample_00002",
+  "ground_truth": {
+   "sample_id": "sample_00002",
+   "num_sources": 3,
+   "num_samples": 1024,
+   "snr_db": 10.0,
+   "bandwidth_definition": "obw99",
+   "receiver": {
+    "center_frequency_hz": 2400000000.0,
+    "sampling_rate_hz": 20000000.0,
+    "wavelength_m": 0.125,
+    "antenna_spacing_m": 0.0625
+   },
+   "lna_saturation": {
+    "applied": true,
+    "model": "rapp",
+    "a_sat": 2.0,
+    "p": 2.0,
+    "saturation_db": 6.0
+   },
+   "array_mismatch": {
+    "gain_error_std": 0.0,
+    "phase_error_std_deg": 0.0
+   },
+   "channel_v3": true,
+   "sources": [
+    {
+     "source_id": 0,
+     "role": "target",
+     "modulation": "QPSK",
+     "power_ratio_db": 0.0,
+     "freq_offset_normalized": 0.0,
+     "freq_offset_hz": 0.0,
+     "doa_degree": 0.0,
+     "bandwidth_normalized": 0.22782694548605859
+    },
+    {
+     "source_id": 1,
+     "role": "interferer",
+     "modulation": "single_tone",
+     "emitter": "GNSS_jam",
+     "intent": "malicious",
+     "is_jamming": true,
+     "v2_category": "blocking",
+     "scene": "GNSS 压制（窄带扫频覆盖导航频段）",
+     "power_ratio_db": 4.990615564195184,
+     "freq_offset_normalized": 0.004363646934419067,
+     "freq_offset_hz": 87272.93868838134,
+     "doa_degree": -5.366457577193529,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 14.990615564195185
+    },
+    {
+     "source_id": 2,
+     "role": "interferer",
+     "modulation": "broadband",
+     "emitter": "Microwave",
+     "intent": "incidental",
+     "is_jamming": false,
+     "v2_category": "co_channel",
+     "scene": "微波炉（2.4G 宽带间歇噪）",
+     "power_ratio_db": 10.022079516290244,
+     "freq_offset_normalized": 0.002531764965836099,
+     "freq_offset_hz": 50635.29931672198,
+     "doa_degree": 9.90171023133881,
+     "bandwidth_normalized": 0.988,
+     "inr_db": 20.022079516290244
+    }
+   ]
+  }
+ },
+ {
+  "file": "sample_00003.npy",
+  "sample_id": "sample_00003",
+  "ground_truth": {
+   "sample_id": "sample_00003",
+   "num_sources": 1,
+   "num_samples": 1024,
+   "snr_db": 10.0,
+   "bandwidth_definition": "obw99",
+   "receiver": {
+    "center_frequency_hz": 2400000000.0,
+    "sampling_rate_hz": 20000000.0,
+    "wavelength_m": 0.125,
+    "antenna_spacing_m": 0.0625
+   },
+   "lna_saturation": {
+    "applied": true,
+    "model": "rapp",
+    "a_sat": 2.0,
+    "p": 2.0,
+    "saturation_db": 6.0
+   },
+   "array_mismatch": {
+    "gain_error_std": 0.0,
+    "phase_error_std_deg": 0.0
+   },
+   "channel_v3": true,
+   "sources": [
+    {
+     "source_id": 0,
+     "role": "target",
+     "modulation": "QPSK",
+     "power_ratio_db": 0.0,
+     "freq_offset_normalized": 0.0,
+     "freq_offset_hz": 0.0,
+     "doa_degree": 0.0,
+     "bandwidth_normalized": 0.3963181070269496
+    }
+   ]
+  }
+ },
+ {
+  "file": "sample_00004.npy",
+  "sample_id": "sample_00004",
+  "ground_truth": {
+   "sample_id": "sample_00004",
+   "num_sources": 1,
+   "num_samples": 1024,
+   "snr_db": 10.0,
+   "bandwidth_definition": "obw99",
+   "receiver": {
+    "center_frequency_hz": 2400000000.0,
+    "sampling_rate_hz": 20000000.0,
+    "wavelength_m": 0.125,
+    "antenna_spacing_m": 0.0625
+   },
+   "lna_saturation": {
+    "applied": true,
+    "model": "rapp",
+    "a_sat": 2.0,
+    "p": 2.0,
+    "saturation_db": 6.0
+   },
+   "array_mismatch": {
+    "gain_error_std": 0.0,
+    "phase_error_std_deg": 0.0
+   },
+   "channel_v3": true,
+   "sources": [
+    {
+     "source_id": 0,
+     "role": "target",
+     "modulation": "QPSK",
+     "power_ratio_db": 0.0,
+     "freq_offset_normalized": 0.0,
+     "freq_offset_hz": 0.0,
+     "doa_degree": 0.0,
+     "bandwidth_normalized": 0.55088746740731
+    }
+   ]
+  }
+ }
+]

@@ -23,16 +23,24 @@ def apply_multipath(x: np.ndarray, rng: np.random.Generator,
                     doa_spread_deg: float = 30.0, los_doa_deg: float = 0.0) -> np.ndarray:
     """空地多径：x 的直射径（LOS，原样保留）+ n_paths 条散射回波。
 
-    每条回波：随机 DOA（LOS ± doa_spread）、分数时延（FFT 相位斜坡实现）、
-    多普勒（复指数）、逐径瑞利衰落系数、逐径衰减。
+    **功率归一化（修复 P1-4）**：每径回波功率按 echo_power_db 衰减，且为保持
+    总能量守恒（总功率 = 直射径 + 各回波），回波由直射径能量"让渡"，不额外
+    抬高接收总功率——避免把混合信号能量无谓抬高 10dB 造成 SNR/INR 语义错乱。
+
     x: (M, L) 阵列信号；返回同形状。
     """
     m, n = x.shape
     t = np.arange(n)
-    y = x.copy()
     f = np.fft.fftfreq(n)
+    # 直射径能量占比：1 径→0.8、2 径→0.65、3 径→0.55（回波合计守恒）
+    los_frac = {1: 0.80, 2: 0.65, 3: 0.55}.get(n_paths, 0.55)
+    echo_total = 1.0 - los_frac
+    y = np.sqrt(los_frac) * x.copy()
+    # 各回波功率归一化：让 (Σ 回波功率) = echo_total，避免能量无谓抬高
+    p_ref = float(np.mean(np.abs(x) ** 2)) + 1e-30
     for k in range(n_paths):
-        pw = 10.0 ** (rng.uniform(*echo_power_db) / 10.0 - 0.6 * k)
+        pw = 10 ** (rng.uniform(*echo_power_db) / 10.0)          # 相对衰减
+        # 归一化使总回波功率 = echo_total，逐径按相对衰减分配
         delay = rng.uniform(0.02, delay_norm_max) * n
         fd = rng.uniform(-dopp_norm_max, dopp_norm_max)
         doa = los_doa_deg + rng.uniform(-doa_spread_deg, doa_spread_deg)
@@ -41,7 +49,11 @@ def apply_multipath(x: np.ndarray, rng: np.random.Generator,
         fading = (rng.standard_normal() + 1j * rng.standard_normal()) / np.sqrt(2.0)
         dopp = np.exp(1j * 2.0 * np.pi * fd * t)
         steer = _steer(doa, m)
-        y += np.sqrt(pw) * fading * steer[:, None] * xd[None, :] * dopp[None, :]
+        echo = np.sqrt(pw) * fading * steer[:, None] * xd[None, :] * dopp[None, :]
+        # 逐径功率标定到 echo_total/n_paths 相对直射径
+        pe = float(np.mean(np.abs(echo) ** 2)) + 1e-30
+        echo = echo * np.sqrt((echo_total / n_paths) * p_ref / pe)
+        y = y + echo
     return y
 
 
