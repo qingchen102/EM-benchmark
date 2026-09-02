@@ -12,7 +12,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE / "simulation"))
-sys.path.insert(0, str(HERE.parent / "benchmark_v2" / "benchmark_v2"))
+sys.path.insert(0, str(HERE.parent / "benchmark_v2"))
 
 from em_signal_simulator_v3 import emitters  # noqa: E402
 from factory_v3 import build_sample  # noqa: E402
