@@ -65,3 +65,23 @@ def apply_phase_noise(x: np.ndarray, rng: np.random.Generator,
     sigma = np.deg2rad(rng.uniform(0.2, sigma_max_deg))
     phi = np.cumsum(sigma * rng.standard_normal(x.shape[1]))
     return x * np.exp(1j * phi)[None, :]
+
+
+def apply_imd3(x: np.ndarray, rng: np.random.Generator,
+               ip3_db: float = 12.0, return_imd: bool = False):
+    """三阶互调（IMD3）：强源经接收链非线性产生 2f1±f2 / 2f2±f1 带外杂散。
+
+    当有 ≥2 个强干扰（尤其强阻塞）时，其非线性互调产物可落在目标带内，
+    是可观测杂散的重要来源。ip3_db 越小非线性越强、互调越显著。
+    x: (M, L)；返回含 IMD 杂散后的信号；return_imd=True 时额外返回 IMD 分量。
+    """
+    m, n = x.shape
+    # 每根天线同一非线性系数（公共链路），对整阵逐样本压缩
+    imd = np.empty_like(x)
+    a3 = 10.0 ** (-ip3_db / 20.0)          # 三阶系数（相对线性项）
+    for a in range(m):
+        imd[a] = a3 * x[a] * np.abs(x[a]) ** 2
+    y = x + imd
+    if return_imd:
+        return y, imd
+    return y
