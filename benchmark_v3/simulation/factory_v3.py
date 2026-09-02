@@ -60,19 +60,24 @@ def build_sample(emitter_names: list[str], target_mod: str = "QPSK",
     target_bw = float(rng.uniform(0.15, 0.60))
     target = generate_baseband(target_mod, n, rng=rng, bandwidth_normalized=target_bw)
     target = apply_freq_offset(target, 0.0)
+    # 目标频率归一化（0dB 基准，修复 P1-3：v2 目标 RMS=1.0，v3 曾直接丢原始 target）
+    target = target / np.sqrt(np.mean(np.abs(target) ** 2) + 1e-30)
 
     # 阵列合成：目标 0dB + 各干扰按 INR 缩放，各自 DOA 导向
-    x = _steer_matrix(doas[0], m_ant) * (target / np.sqrt(np.mean(np.abs(target) ** 2)))
+    x = _steer_matrix(doas[0], m_ant) * target
     meta_interferers = []
     for k, ename in enumerate(emitter_names):
         e = generate_emitter(ename, rng, length=n)
         w = e["iq"] / (np.sqrt(np.mean(np.abs(e["iq"]) ** 2) + 1e-30))
-        w = apply_freq_offset(w, float(np.clip(rng.uniform(-0.45, 0.45), -0.45, 0.45)))
+        # 生成器返回带实测元数据，不再丢弃（含调制/带宽/意图）
+        f_off = float(np.clip(rng.uniform(-0.45, 0.45), -0.45, 0.45))
+        w = apply_freq_offset(w, f_off)
         scale = np.sqrt(10.0 ** (inr_db[k] / 10.0))
         x = x + _steer_matrix(doas[k + 1], m_ant) * (scale * w)[None, :]
         meta_interferers.append({
             "emitter": ename, "modulation": e["modulation"],
-            "freq_offset_normalized": float(np.clip(w.freq_offset if hasattr(w, "freq_offset") else 0.0, -0.5, 0.5)),
+            "intent": e["intent"], "is_jamming": e["is_jamming"],
+            "freq_offset_normalized": f_off,          # 修复 P0-1：用实际注入的偏移，非 0
             "doa_degree": float(doas[k + 1]), "inr_db": float(inr_db[k]),
             "bandwidth_normalized": e["bandwidth_normalized"],
         })

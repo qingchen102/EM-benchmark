@@ -211,12 +211,36 @@ EMITTERS = {
 }
 
 
+# 敌我意图（v3 新任务轴）三级：malicious 恶意 / incidental 无意 / benign 无害
+# - malicious：明确用于破坏的对抗源（压制/欺骗/ECM）
+# - incidental：非针对本系统的共存/偶发干扰（微波炉/DECT/Zigbee）
+# - benign：正常合法信号（通信/广播/导航/图传/雷达/遥控），多为背景辐射体
+INTENT = {
+    "Bluetooth_FHSS":   "benign",
+    "WiFi_burst":       "benign",
+    "LTE_QPSK":         "benign",
+    "DECT":             "incidental",
+    "Zigbee":           "incidental",
+    "UAV_video_OFDM":   "benign",
+    "UAV_RC_hopping":   "benign",
+    "Radar_pulsed_LFM": "benign",
+    "GPS_DSSS":         "benign",
+    "GNSS_jam":         "malicious",
+    "GNSS_spoof":       "malicious",
+    "Microwave":        "incidental",
+    "TV_broadcast":     "benign",
+    "Chirp_jam":        "malicious",
+    "Noise_jam":        "malicious",
+    "Tone_jam":         "malicious",
+}
+
+
 def generate_emitter(name: str, rng: np.random.Generator, length: int = 1024, **kw) -> dict:
     """按辐射体名生成波形 + 实测 OBW99 元数据（修复骨架版 P0-2：带宽不再用名义常数）。
 
     - emitters 的生成器签名为 (rng, length, **kw)；bw 若传入会在生成器内使用
       （仅对接受 bw 参数者生效），否则用默认。
-    - **带宽、调制标号、是否对抗性**都来自实测/注册表，供 GT 使用（与 v2 OBW99 一致）。
+    - **带宽、调制标号、意图**都来自实测/注册表，供 GT 使用（与 v2 OBW99 一致）。
     """
     gen, mod, scene = EMITTERS[name]
     iq = gen(rng, length, **kw)
@@ -224,10 +248,10 @@ def generate_emitter(name: str, rng: np.random.Generator, length: int = 1024, **
     obw = float(measure_obw99(iq)) if measure_obw99(iq) > 0 else 1.0
     if obw > 1.0:
         obw = 1.0
+    intent = INTENT.get(name, "benign")
     return {"iq": iq, "emitter": name, "modulation": mod,
             "bandwidth_normalized": round(obw, 3), "scene": scene,
-            "is_jamming": name in ("GNSS_jam", "GNSS_spoof", "Chirp_jam",
-                                   "Noise_jam", "Tone_jam")}
+            "intent": intent, "is_jamming": intent == "malicious"}
 
 
 if __name__ == "__main__":
