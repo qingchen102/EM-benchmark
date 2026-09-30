@@ -91,9 +91,10 @@ def gen_radar_pulsed_lfm(rng, length, pri=(25, 60), duty=0.35, bw=0.45):
 
 # ---------------- 导航（修复角色：GNSS 也可能是被压制/被欺骗的受害者） ----------------
 def gen_gps_dsss(rng, length, chip_rate=0.08):
-    n_chips = int(np.ceil(length * chip_rate))
+    rep = max(int(round(1.0 / chip_rate)), 1)
+    n_chips = int(np.ceil(length / rep))
     chips = rng.choice([-1.0, 1.0], size=n_chips)
-    return np.repeat(chips, int(round(1.0 / chip_rate)))[:length].astype(np.complex128)
+    return np.repeat(chips, rep)[:length].astype(np.complex128)
 
 
 def gen_gnss_jam(rng, length, bw=0.02):
