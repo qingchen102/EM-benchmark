@@ -189,7 +189,7 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 | `benchmark_v2/README.md` | V2：架构、CLI、评估链路、基线结果（ds_run19） |
 | `benchmark_v2/simulation/README.md` | V2 信号模型细节（架构 / 算法 / 参数 / 元数据字段） |
 | `benchmark_v3/README.md` | V3：设计决策、16 辐射体覆盖矩阵、信道、工具链与基线、Roadmap |
-| `HANDOVER.md` | AI 接力交接：目标、已证伪路线、工程陷阱、诊断工具箱 |
+| `benchmark_v3/docs/BENCHMARK_STATUS_2026-10-08.md` | **全档现状报告**：D1–D4 逐字段实测、跑分可信度分级、结构性缺口、四条合格性判定 |
 | `benchmark_v3/adapters/cityrf_source.py` | V3 源 → 平台信道的融合适配器（含使用说明） |
 | `benchmark_v3/城市低空电磁信号仿真平台/README.md` | 物理平台独立文档（启动 / 能力 / 限制） |
 
@@ -202,6 +202,7 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 - [x] **D2 QA 重生成 + agent 全量基线**（2026-10-03）：detection 0.860 / kind 0.412 / pos 0.459 / intent 0.682（注册口径，50 样本）。
 - [ ] **伙伴召回**：tool-view 条件准确率当前 **0.473**（2026-10-08 清缓存实测，差 0.027 未过 0.50 门限；clean 0.860 / GT-slice 0.738 两层已过）卡在“50% 认领的真值共道伙伴未进候选集”——属召回问题。
 - [x] **D1/S0 虚警根治**（2026-10-08）：残差峰判据重修（局部底 + 窄窗空间相干门控）+ 聚类定带解耦；D1×S0 agent detection **0.083 → 1.00**（20/20 计数精确），D2 聚类级不退化。
+- [x] **全档现状审计**（2026-10-08）：D1–D4 逐字段实测 + 跑分可信度分级 → `benchmark_v3/docs/BENCHMARK_STATUS_2026-10-08.md`。查出三条结构性缺口：D3/D4 同源几何（目标位置 50/50 相同）、D2 实际固定 2 源（文案称 2–3）、D3/D4 零 agent 数据。
 - [ ] **"难度 × 站数"成绩矩阵全量**（D1–D4 × S0–S2；D2×S2 已完成）。
 - [ ] **S0 弱证据报告判别**（单站场景虚警-欠报摆动，需置信度校准）。
 - [ ] **信道效应开关消融**（量化多径/NLoS 贡献的难度）。

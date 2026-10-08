@@ -1,0 +1,133 @@
+{
+ "timestamp": "2026-10-08",
+ "dataset_version": "QA2-config (deep-overlap quota, seed0 92000, |du|>=2/M, min_vis=3)",
+ "snapshot_ref": "dataset_d2_meta_qa2",
+ "config": {
+  "generator": "gen_dataset.py QA 三约束（>=3站LoS可见 |Δu|>=2/M 有符号u 共享可见站 |Δu|>=2/M 对间判据）",
+  "clustering": "band-aware u-NMS(>0.85 同频带合并) + 40m 位置 NMS + perp_rms/deflation/triads 排序 + per-candidate 提取集(top-K=2)；**定带用宽带 legacy 峰**（见 tool_change_2026_10_08）",
+  "extraction": "全 own(K=1) 恢复→联合 LS 复活(频带重叠+去相关双条件)→per-candidate top-K=2",
+  "cnn": "RadCNN 19 类（QA2 数据集无需重训：BW/SNR 口径未变）",
+  "harness": "evaluator_v2 最后一轮 tool_choice=none + 消息注入",
+  "pairing": "match() 两段配对（位置优先 ≤50m + 频偏兜底 gate=0.45MHz）",
+  "tolerances": "FREQ_TOL=0.02(40kHz) / POS_GATE_M=50 / DOA_TOL_DEG=10（已注册口径，未改动）"
+ },
+ "tool_change_2026_10_08": {
+  "what": "残差峰判据重修（D1/S0 虚警根治）+ 聚类定带与对外峰清单解耦 + RANSAC 回退链",
+  "why": "旧判据（整通带 PSD 全局中位底 + >=5 bin 连段）把**参考回放那 ~0.15% 的失配能量**（通带内平坦 ~-88 dB，真热噪声底 -131 dB，跨阵元不相干）与目标滚降段并成 ~850 kHz 宽的假强峰（46~49 dB）→ D1 干净样本 agent 报出 2~6 个幻影干扰；同时弱真源被压掉 → 漏报。",
+  "how": [
+   "噪声底改局部中位滤波（300 kHz 窗），不被目标滚降段带偏",
+   "新增窄窗空间相干门控：λ1/Σλ(±20 kHz) >= 0.6（真源=点源≈1，失配能量≈0.13，8 元阵白噪 0.125）",
+   "对外 residual_peaks 只暴露门控后的窄带峰，新增 coherence 字段（agent 可见）",
+   "聚类内部定带改用 residual_peaks_legacy（宽带）：下游 per-candidate 提取集靠 band_hz 宽度判共道，窄带会让真共道伙伴判不出重叠（D2 召回实测 54%→36%）",
+   "RANSAC 增加回退链：trio(定带) → trio(整通带) → duo(整通带, 2D 方位线)，修端射区(|u|→1)使 3D 交点 z 越界而整样本报错（d2_00000）"
+  ],
+  "env_switch": "DSH_PEAK_LEGACY=1 可切回旧判据做 A/B（仅供复核）",
+  "zero_token_gates": {
+   "D1_tool_regression_20samples": "A 无干扰 8 样本虚警 0%（旧判据同口径 5 样本有峰）；B 有干扰 12/12 召回、位置中位 2 m、频偏(带中心)中位 10 kHz",
+   "D1_agent_visible_peaks_12samples": "干净样本 5 个 → 报出 0 个峰（旧判据 50 个假峰）；有干扰样本真源覆盖 7/7",
+   "D2_cluster_20samples": "真源召回 22/39 = 56%（旧判据 54%）/ 假簇率 52%（旧判据 53%）——不退化，略优",
+   "D2_smoke_s2_tools_4samples": "通过（含聚类+提取断言、stdout 污染哨兵）",
+   "D1_GT_replay": "eval_dataset.py ../dataset_d1 全 1.0（评分管道未受影响）"
+  },
+  "not_done": [
+   "D2 gate 五指标未重跑：gate 脚本不在本工作区，需按其口径复现后对比"
+  ]
+ },
+ "d1_s0_agent_regression_2026_10_08": {
+  "answers_dir": "dataset_d1/answers_S0_agent_fix20",
+  "date": "2026-10-08",
+  "n": 20,
+  "model": "deepseek-v3.2 (百炼)",
+  "detection_hit": 1.0,
+  "detection_within1": 1.0,
+  "detect_abs_err": 0.0,
+  "kind_hits": 0.5,
+  "freq_hits": 1.0,
+  "freq_aes": 0.0056,
+  "doa_hits": 0.75,
+  "doa_aes": 16.0092,
+  "oracle_assoc": {"assoc_pairs": 12, "P_kind_assoc": 0.5, "freq_hits_oracle": 1.0},
+  "baseline_before_fix": {
+   "answers_dir": "dataset_d1/answers_S0_agent_regress5",
+   "n": 12,
+   "detection_hit": 0.083,
+   "note": "修前：干净样本虚报 2~5 个、有干扰样本全部漏报；逐样本记录见 README.private §17.1"
+  },
+  "per_sample_check": "20/20 计数精确（干净样本全部报 0、有干扰样本全部报 1）；doa_hits 0.75 = 前后瓣镜像对猜中率（原理性，单站不可解）；freq MAE 0.0056×4MHz ≈ 22 kHz（容差 ±80 kHz）",
+  "remaining_issue": "kind 漏在 tone/noise 混淆（16 个真 noise 里多数被报成 tone）——这是**调制仪器的既有盲区**（v2 十类模板库对窄带噪声无效），与本次虚警修复无关；见 README.private §10 遗留",
+  "note": "本轮改动（残差峰判据重修 + 定带解耦 + RANSAC 回退链）的最终验收口径。旧答案已备份至 dataset_d1/_backup_answers_20261008/。"
+ },
+ "gate_toolview": {
+  "recall_all_visible": 0.551,
+  "false_cluster_rate": 0.63,
+  "conditional_kind_acc": 0.481,
+  "answerable_recall_ge3station": 0.581,
+  "e2e_detect_x_kind": 0.265,
+  "note": "gate FAIL（条件 47.3%<50%），差 2.7pp。**本组为 2026-10-08 实测（`python oracle16.py`，已清 D2 _agent_cache 后重建），是当前代码的唯一有效口径。**",
+  "_history_2026_10_03": {
+   "conditional_kind_acc": 0.481,
+   "recall_all_visible": 0.551,
+   "false_cluster_rate": 0.63,
+   "answerable_recall_ge3station": 0.581,
+   "note": "旧记录值，与 2026-10-08 实测（0.473/0.561/0.623/0.591）有 ±1pp 级差异。**已核实不是工具改动造成的**：`DSH_PEAK_LEGACY=1`（旧判据路径）与当前代码给出**逐位相同**的 gate 输出；差异来自 10-03 与 10-08 之间的工作区代码/缓存状态，属历史口径，引用时必须标注。"
+  },
+  "provenance": {
+   "entry": "cd benchmark_v3/adapters/rad_cls && python oracle16.py —— 三级预注册门限 clean>=0.85 / GT-slice>=0.50 / tool-view>=0.50",
+   "depends_on": [
+    "rad_cls/rad_classifier/checkpoint.pt（~640KB，**被 .gitignore 排除、从未入库**；丢了用 `python train16.py --epochs 25 --n-per-class 300` 重训，GPU ~30 分钟）",
+    "dataset_d2/_agent_cache/ 的 resid_*.npy（2026-10-08 已给 gate_gt_slice 加现场重建，不再隐式依赖上一次工具运行）",
+    "capture_tools._result_cache（**进程内**、每样本一份；A/B 对比必须换进程。另有 disk cache：resid_{st}.npy 与 ridge_{st}.json）"
+   ],
+   "known_gotchas": [
+    "gate_gt_slice 旧行为在残差缓存缺失时静默 continue → 分母 0/0、指标 0.000 但打印 gate=0.5（2026-10-08 已修：现场重建 + 分母为 0 时明报告警）",
+    "工具一改（如 2026-10-08 定带解耦）gate 数字就会变，**必须重跑、不能引用旧值**"
+   ],
+   "raw_2026_10_08": {
+    "clean": "0.860 [980/1140]",
+    "gt_slice": "0.738 [59/80]",
+    "tool_view_recall": "0.561 [55/98]",
+    "tool_view_far": "0.623 [91/146]",
+    "tool_view_cond_acc": "0.473 [26/55]",
+    "tool_view_e2e": "0.265",
+    "answerable_recall": "0.591 [55/93]",
+    "sources_gate_recall": "0.541",
+    "verdict": "clean PASS / GT-slice PASS / tool-view FAIL"
+   }
+  }
+ },
+ "agent_full_50": {
+  "answers_dir": "answers_S2_agent_full",
+  "detection_hit": 0.86,
+  "kind_hits": 0.412,
+  "freq_hits": 0.2,
+  "pos_hits": 0.459,
+  "intent_hits": 0.682,
+  "pairing": "修正后两段配对（位置优先）",
+  "note": "历史报告的 kind 0.353/freq 0.212 系旧配对口径；pos 0.247 系旧 match。**本组为 2026-10-03 口径，未在 2026-10-08 工具改动后重跑。**"
+ },
+ "closed_lines": [
+  "频偏精测（三估计器+oracle 带切 42% 全撞墙——方向-频率解耦）",
+  "位置精化（oracle +3.4pp 到不了 50%）",
+  "duo 交会作为**默认**（2D 两线必然相交无拒绝力，召回 25.8% < trio 29.2%；注：2026-10-08 起 duo 仅作为 trio 无解时的最后一级回退，见 tool_change_2026_10_08）",
+  "双字段门限（confidence 与 perp_rms 非独立）",
+  "全局中位底+连段的残差峰判据（对参考失配能量无免疫力 → D1/S0 虚警；2026-10-08 已替换）"
+ ],
+ "next": [
+  "D1×S0 agent 20 样本 API 回归（验证 2026-10-08 工具改动的最终口径）",
+  "D2 gate 五指标重跑（确认聚类级不退化传导到 gate）",
+  "伙伴召回（漏损 50%）下版本课题",
+  "S0 doa_aes 95.2° 镜象折叠待查",
+  "z-2D 口径写规范"
+ ],
+ "d1_tool_regression": {
+  "date": "2026-10-08",
+  "samples": 20,
+  "A_clean_false_alarm": "0%（工具级；2026-10-08 更换峰判据后复测仍为 0%）",
+  "B_with_interferer": {
+   "recall": "12/12 = 100%",
+   "pos_err_median_m": 2,
+   "freq_err_median_khz": 10
+  },
+  "note": "两级保障：deflation_db<15 候选滤除（2026-10-07）+ 残差峰局部底/相干门控（2026-10-08）。注意 deflation 只对 D1 有效（D2 假候选 defl 中位 37.5 dB）。"
+ }
+}

@@ -7,6 +7,11 @@ benchmark_v3/dataset_d*/_agent_cache/
 benchmark_v3/adapters/rad_cls/rad_classifier/
 # 旧数据集备份（大体积，仅本地留存，非代码）
 benchmark_v3/_old_dataset_*/
+# 旧 agent 缓存备份（清缓存重建时留档）
+benchmark_v3/dataset_d*/_agent_cache_pre_*/
+# 数据集主体不入库（GB 级 IQ/缓存），但基线数字必须入库——它是“防前态过期”核心机制
+benchmark_v3/dataset_d*/*
+!benchmark_v3/dataset_d*/BASELINE.json
 # 私人笔记，勿提交/上传
 /README.private.md
 _dryrun.log
