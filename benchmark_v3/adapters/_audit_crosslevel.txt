@@ -3,12 +3,12 @@ A. 跨难度目标位置是否同一批（gen_dataset: seed = seed0 + i，seed0 
 ==============================================================================
   d1 vs d2: 目标位置相同 0/50
   d2 vs d3: 目标位置相同 0/50
-  d3 vs d4: 目标位置相同 50/50
+  d3 vs d4: 目标位置相同 0/50
   d1 vs d4: 目标位置相同 0/50
 
-  各档 seed 序列前 5: d1=[31000, 31001, 31002, 31003, 31004] | d2=[92000, 92001, 92002, 92003, 92004] | d3=[31000, 31001, 31002, 31003, 31004] | d4=[31000, 31001, 31002, 31003, 31004]
+  各档 seed 序列前 5: d1=[31000, 31001, 31002, 31003, 31004] | d2=[92000, 92001, 92002, 92003, 92004] | d3=[64003, 66004, 62006, 62007, 62008] | d4=[72000, 72002, 73003, 72004, 72005]
   seed 序列是否逐位相同(d1 vs d2): False
-  seed 序列是否逐位相同(d3 vs d4): True
+  seed 序列是否逐位相同(d3 vs d4): False
 
 ==============================================================================
 B. D4 声称新增的困难（IMD3 / 阵元相关噪声 / 机动多普勒）是否落地
@@ -33,7 +33,7 @@ B. D4 声称新增的困难（IMD3 / 阵元相关噪声 / 机动多普勒）是�
 [d4 d4_00000]
   frontend 键: ['colored_bandwidth_hz', 'colored_noise_db', 'colored_noise_enabled', 'correlated_noise_enabled', 'filter_taps', 'gain_db', 'iip3_dbm', 'imd3_enabled', 'impulse_noise_enabled', 'impulse_power_db', 'impulse_rate_hz', 'impulse_width_us', 'noise_correlation', 'noise_enabled', 'noise_figure_db', 'phase_noise_deg', 'phase_noise_enabled', 'soft_limit_input_dbm', 'temperature_k']
     imd3_enabled = True
-    iip3_dbm = 12.481806755082285
+    iip3_dbm = 5.517665877774441
   receiver 键: ['antenna', 'bandwidth_hz', 'frontend', 'id', 'orientation_rad', 'position_m', 'tuning_offset_hz']
   d1_truth 顶层键: ['achieved', 'difficulty', 'envelope', 'interference_events', 'interferers', 'noise', 'receivers', 'sample_id', 'scene_type', 'schema_version', 'seed', 'station_subsets', 'target']
   target 键: ['emitter', 'freq_offset_hz', 'per_station', 'position_m', 'power_dbm', 'role']
@@ -67,11 +67,14 @@ C. 现有结果覆盖的 (难度 × 站数) 格
     eval_report_S2.json [S2] n=50 det=0.94 kind=0.5417 freq=0.9583 pos=0.4583
 
 [d2]
-  eval_report: ['eval_report_S2.json']
+  eval_report: ['eval_report_S2.json', 'eval_report_S2_agent_full.json']
   answers 目录: ['answers_S2_agent_full', 'answers_agent_check', 'answers_agent_check2', 'answers_agent_check3', 'answers_agent_check4', 'answers_agent_check5']
     eval_report_S2.json [S0] n=5 det=0.6 kind=0.5714 freq=0.1429 doa=0.2857 intent=0.714
     eval_report_S2.json [S1] n=5 det=0.8 kind=0.4444 freq=0.1111 pos=0.3333 intent=0.667
     eval_report_S2.json [S2] n=5 det=0.8 kind=0.4444 freq=0.1111 pos=0.3333 intent=0.667
+    eval_report_S2_agent_full.json [S0] n=50 det=0.58 kind=0.4853 freq=0.2353 doa=0.3529 intent=0.735
+    eval_report_S2_agent_full.json [S1] n=50 det=0.86 kind=0.4118 freq=0.2 pos=0.4588 intent=0.682
+    eval_report_S2_agent_full.json [S2] n=50 det=0.86 kind=0.4118 freq=0.2 pos=0.4588 intent=0.682
 
 [d3]
   eval_report: 无

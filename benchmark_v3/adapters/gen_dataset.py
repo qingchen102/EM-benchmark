@@ -493,13 +493,42 @@ def _math_erfc(x: float) -> float:
     return math.erfc(x / np.sqrt(2))
 
 
+def _index_entry(t: dict, out_name: str) -> dict:
+    """index.json 的单样本条目（正常生成与 --resume 跳过共用同一口径）。
+
+    seed 一律取**真值里的实际 seed**（= seed0 + 候选序号 [+ 1000*QA 重试次数]）。
+    旧四档数据集里 index 记的是名义 seed0+i，当时 QA 不重试、两者恰好相等；
+    一旦 QA 重试或有 --qa-skip 跳号，名义值就无法复现该样本，故以真值为准。
+    """
+    snrs = [v["snr_db"] for v in t["target"]["per_station"].values()]
+    return {"id": out_name, "seed": t["seed"],
+            "target": {"emitter": t["target"]["emitter"],
+                       "snr_db_range": [min(snrs), max(snrs)]},
+            "interferers": [{"kind": g["kind"],
+                             "inr_db_range": [min(v["inr_db"] for v in g["per_station"].values()),
+                                              max(v["inr_db"] for v in g["per_station"].values())]}
+                            for g in t["interferers"]]}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--difficulty", choices=["d1", "d2", "d3", "d4"], default="d1")
     ap.add_argument("--count", type=int, default=50)
     ap.add_argument("--out", default=None)
     ap.add_argument("--seed0", type=int, default=31000)
+    ap.add_argument("--resume", action="store_true",
+                    help="跳过已完整生成的样本（断点续跑；不改变任何 RNG 语义）")
+    ap.add_argument("--qa-skip", action="store_true",
+                    help="单个候选连续 6 次 QA/RT 失败时不中断，跳过该候选继续下一个；"
+                         "配合 --count 用一个大候选池凑满 --want 条（与 --resume 互斥）")
+    ap.add_argument("--want", type=int, default=None,
+                    help="需要凑满的样本数（默认 = --count）")
     args = ap.parse_args()
+    if args.qa_skip and args.resume:
+        # 跳过候选会让 seed↔槽位映射不可复原（候选序号从 0 重来、已消费的 seed 会被重复使用）
+        ap.error("--qa-skip 与 --resume 互斥：跳过候选后候选序号↔槽位的映射不可复原")
+    if args.want is not None and args.want > args.count:
+        ap.error(f"--want ({args.want}) 不能大于 --count ({args.count})：候选池不够大")
     if args.out is None:
         args.out = str(_V3 / f"dataset_{args.difficulty}")
 
@@ -519,7 +548,7 @@ def main() -> None:
                           "interferer": ("50%无/50%单音或窄带噪声, 全站INR≥3dB(最远站反推), "
                                          "Hz域分离: |f|-bw/2≥目标半宽+50kHz 且 通带内裕量≥50kHz"
                                          if args.difficulty == "d1" else
-                                         ("2-3共存辐射体(蓝牙/WiFi/微波炉/Zigbee/DECT), 全站INR≥3dB, "
+                                         ("2共存辐射体(蓝牙/WiFi/微波炉/Zigbee/DECT), 全站INR≥3dB, "
                                           "共道重叠+可辨识性约束(深度重叠源对必须角度可分)"
                                           if args.difficulty == "d2" else
                                           ("1-2恶意压制(扫频/噪声/单音)+50%共存源, 全站INR≥3dB, "
@@ -530,16 +559,31 @@ def main() -> None:
                                           else "sionna_rt 城市真实建筑(多径/遮挡)"),
                           "noise": "thermal only"},
              "samples": []}
-    for i in range(args.count):
-        seed = args.seed0 + i
-        out = out_root / f"{args.difficulty}_{i:05d}" / "capture"
+    want = args.want or args.count
+    accepted = 0
+    cand = 0
+    while cand < args.count and accepted < want:
+        seed = args.seed0 + cand
+        cand += 1
+        # 输出槽位按**已接受**数命名（连续无空洞），候选序号单独推进：
+        # 某个候选的 QA 几何达不到就跳过去用下一个 seed0 候选，而不是整个重跑换 seed0。
+        out = out_root / f"{args.difficulty}_{accepted:05d}" / "capture"
+        if args.resume and (out / "private" / "d1_truth.json").exists():
+            # 断点续跑：直接复用磁盘上已完成的真值重建 index 条目（不动 RNG）
+            t_done = json.loads((out / "private" / "d1_truth.json").read_text(encoding="utf-8"))
+            index["samples"].append(_index_entry(t_done, f"{args.difficulty}_{accepted:05d}"))
+            print(f"  [{accepted + 1}/{want}] {args.difficulty}_{accepted:05d} 已存在，跳过")
+            accepted += 1
+            continue
+        spec = None
         for attempt in range(6):             # RT 偶发越界/遮挡/QA坏几何 → 整样本重采样
             try:
-                spec = build_sample(i, seed + 1000 * attempt, placer, args.difficulty)
+                spec = build_sample(accepted, seed + 1000 * attempt, placer, args.difficulty)
             except RuntimeError as e:        # QA 约束不满足=该目标几何下可见区稀缺
                 if attempt == 5:
-                    raise
-                print(f"    [{args.difficulty}_{i:05d}] 第{attempt+1}次 QA 布点失败"
+                    spec = None
+                    break
+                print(f"    [{args.difficulty}_{accepted:05d}] 第{attempt+1}次 QA 布点失败"
                       f"（{str(e)[:50]}），换 seed 重试 …")
                 continue
             if out.exists():
@@ -549,8 +593,17 @@ def main() -> None:
                 break
             except (ValueError, RuntimeError) as e:
                 if attempt == 5:
-                    raise
+                    spec = None
+                    break
                 print(f"    [{spec['out_name']}] 第{attempt+1}次布设失败（{str(e)[:60]}），重采样 …")
+        if spec is None:
+            if not args.qa_skip:
+                raise RuntimeError(
+                    f"{args.difficulty} 候选 seed={seed} 连续 6 次失败（QA 或 RT 布设）；"
+                    f"加 --qa-skip 可放弃该候选继续凑数")
+            print(f"  !! 放弃候选 {cand}/{args.count}（seed={seed}，QA/RT 连续 6 次失败），"
+                  f"当前 {accepted}/{want}")
+            continue
         truth = spec["truth"]
         # 合作目标先验写入 public（平台 schema 预留字段）：Agent 只读 public 即可拿到
         # 合法先验（型号+名义带宽），信息隔离边界=考卷上印什么，而非运行器私下读 private。
@@ -587,24 +640,22 @@ def main() -> None:
             json.dumps(truth, ensure_ascii=False, indent=1), encoding="utf-8")
         t = truth
         snrs = [v["snr_db"] for v in t["target"]["per_station"].values()]
-        index["samples"].append({
-            "id": spec["out_name"], "seed": seed,
-            "target": {"emitter": t["target"]["emitter"],
-                       "snr_db_range": [min(snrs), max(snrs)]},
-            "interferers": [{"kind": g["kind"],
-                             "inr_db_range": [min(v["inr_db"] for v in g["per_station"].values()),
-                                              max(v["inr_db"] for v in g["per_station"].values())]}
-                            for g in t["interferers"]]})
-        print(f"  [{i+1}/{args.count}] {spec['out_name']}  "
+        index["samples"].append(_index_entry(t, spec["out_name"]))
+        print(f"  [{accepted + 1}/{want}] {spec['out_name']}  "
               f"SNR {min(snrs):.0f}~{max(snrs):.0f}dB  "
               f"干扰={len(t['interferers'])}个:"
               + (",".join(g["kind"] for g in t["interferers"]) or "无"))
+        accepted += 1
     (out_root / "index.json").write_text(
         json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
     snr_all = [s["target"]["snr_db_range"] for s in index["samples"]]
     n_if = sum(1 for s in index["samples"] if s["interferers"])
-    print(f"完成 {args.count} 条：SNR {min(a for a,_ in snr_all):.0f}~{max(b for _,b in snr_all):.0f} dB，"
-          f"含干扰 {n_if} 条 / 无干扰 {args.count-n_if} 条；S0/S1/S2 由 station_subsets 切分。")
+    print(f"完成 {accepted} 条（候选池 {cand}）："
+          f"SNR {min(a for a,_ in snr_all):.0f}~{max(b for _,b in snr_all):.0f} dB，"
+          f"含干扰 {n_if} 条 / 无干扰 {accepted-n_if} 条；S0/S1/S2 由 station_subsets 切分。")
+    if accepted < want:
+        raise RuntimeError(f"候选池用尽（{args.count} 个）只凑到 {accepted}/{want} 条；"
+                           f"加大 --count 重跑")
 
 
 if __name__ == "__main__":
