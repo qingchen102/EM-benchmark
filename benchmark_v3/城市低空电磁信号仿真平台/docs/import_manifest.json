@@ -1,0 +1,862 @@
+[
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\analysis.py",
+    "destination": "src\\cityrf\\analysis.py",
+    "sha256": "961ee770ea017288894e17c7e225b156d51c2e4d8e0f46c171daaaf696fdb92d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\audit.py",
+    "destination": "src\\cityrf\\audit.py",
+    "sha256": "e9f15ae9c69356db53102ef7f7514675f576aeb849fbe9a0c4fa89213fe0aa8e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\channels.py",
+    "destination": "src\\cityrf\\channels.py",
+    "sha256": "246fee4cc0d542b06c9938370da3777128f99cbcd2bb78e8c5a114c246931935"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\cli.py",
+    "destination": "src\\cityrf\\cli.py",
+    "sha256": "7ae62650f70a6dda21a0f494301e4b9cfa06c2dbd1f7b2a084342d9b74834b7a"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\config.py",
+    "destination": "src\\cityrf\\config.py",
+    "sha256": "0b62d245ed30087852a26aff7d88e1b516e1ed7a52b3aaa353892288f18236bc"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\export.py",
+    "destination": "src\\cityrf\\export.py",
+    "sha256": "888f40d51349c7b44e9d5cc899350ab3f43955469966aa1c7fd48441c3a1bb61"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\receiver.py",
+    "destination": "src\\cityrf\\receiver.py",
+    "sha256": "81e9d799b3eb2da61f122b00893ebd027e824612b05daca5c92fcaa1fb6e3424"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\replay.py",
+    "destination": "src\\cityrf\\replay.py",
+    "sha256": "d04e68c8492e8d803db2a4a36a5c5ef9c232273acabdaf67d63811b9babccce4"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\runner.py",
+    "destination": "src\\cityrf\\runner.py",
+    "sha256": "4984e1ece7e7881b1d9b17a55cf85dcab9c2b7b92b8c600b5b032dfafbc6477c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\sionna_backend.py",
+    "destination": "src\\cityrf\\sionna_backend.py",
+    "sha256": "11f4b55c9e75ca45f9d875a687544f6eb24d497c08d7abc20eab309ddfe35c92"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\waveforms.py",
+    "destination": "src\\cityrf\\waveforms.py",
+    "sha256": "4daa399d053adb2380d62d687857e6d7645b710786f6ebef25558c634adf024a"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\__init__.py",
+    "destination": "src\\cityrf\\__init__.py",
+    "sha256": "9e6c309bc2b875edd151901b329ab2875308493d650d5f065b5463a7df5f66b5"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\__main__.py",
+    "destination": "src\\cityrf\\__main__.py",
+    "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\analysis_api.py",
+    "destination": "src\\cityrf\\baselines\\analysis_api.py",
+    "sha256": "26b05466674f3001ebc7694d17c1e4744c12e63c2e3218d1173e3f21c11906dc"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\checked_features.py",
+    "destination": "src\\cityrf\\baselines\\checked_features.py",
+    "sha256": "6eb31729e57fc0adbb7d1433a282aebae0f18453c8416a6c1539313289835879"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\checked_signal.py",
+    "destination": "src\\cityrf\\baselines\\checked_signal.py",
+    "sha256": "7d58339f4044c4aad1370693b3e8ce9d4d6e955d743bbcb253f3879306517011"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\checked_spatial.py",
+    "destination": "src\\cityrf\\baselines\\checked_spatial.py",
+    "sha256": "2a3f22aaa20c9fcfd36edeb8898040917532e30fb2055d74dee4e03efaff6b85"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\detection.py",
+    "destination": "src\\cityrf\\baselines\\detection.py",
+    "sha256": "1153a3b0184ade50e70433bf2c8d7fc38e36d75373cf0fbb69286ca9ff3490a1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\evaluate.py",
+    "destination": "src\\cityrf\\baselines\\evaluate.py",
+    "sha256": "e8ee7c6bdc6170b4814d0ddeeefe0e954bba186e265c8c52035d311bec931fcd"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\localization.py",
+    "destination": "src\\cityrf\\baselines\\localization.py",
+    "sha256": "a83881d7cc5c16f7bd45edc8c0821316cbd44e61c5d50a7de49aa972ed164ee1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\multipath.py",
+    "destination": "src\\cityrf\\baselines\\multipath.py",
+    "sha256": "3bd3cd09825b1a737ac3302cba6286865332346d910625ed0a19cc31f59177e5"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\reflection.py",
+    "destination": "src\\cityrf\\baselines\\reflection.py",
+    "sha256": "123ddffdc6bbacb95d6bdd585a63a091521be3e2c23e8682efa8baffdda3bd22"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\runner.py",
+    "destination": "src\\cityrf\\baselines\\runner.py",
+    "sha256": "447d1555b4edf211740fbd97f3c2559f6e67fbe72d63cb3d865632b96f1c19fb"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\spatial.py",
+    "destination": "src\\cityrf\\baselines\\spatial.py",
+    "sha256": "6e2ce7f6f8b58cd3167e6daf55e79f52ec9c4ceed210bdeec4c9b4e813345f34"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\__init__.py",
+    "destination": "src\\cityrf\\baselines\\__init__.py",
+    "sha256": "358ebedc6230c88a93c5cd871b991a44344ed7c71da1a98cb095638a0aefe256"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\baselines\\__main__.py",
+    "destination": "src\\cityrf\\baselines\\__main__.py",
+    "sha256": "d04dedd2f963e77c09fc8c47e063de2fd6d04da985a02148ab4236a746b81a77"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\PROVENANCE.json",
+    "destination": "src\\cityrf\\legacy\\PROVENANCE.json",
+    "sha256": "2a80a4c1b819b6a97330e47d7ebc43bf4725bcb22f544cb667aaa07752b2355e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\session.py",
+    "destination": "src\\cityrf\\legacy\\session.py",
+    "sha256": "7f92dcd051a1a4a9654ee2bd830c03baa5bf6779fdb52a720060bad8a469eb5e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\__init__.py",
+    "destination": "src\\cityrf\\legacy\\__init__.py",
+    "sha256": "32876933cade277775707f579bec9d17046f3bdf4016669232fc7444c049ef90"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\detection.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\detection.py",
+    "sha256": "86760e29572e3921aa1db25d14f27356b6821e58d35ab4babee8f5f0a1a17f35"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\estimation.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\estimation.py",
+    "sha256": "95768c20e3f2c2db0b0f4363e0578cba4ed1a850937afbcadd7ae91ca28e7dee"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\representations.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\representations.py",
+    "sha256": "829cddd8feca92377a0fcd6e9d05d696228824cc0f961f8ede124223597a5593"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\selection.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\selection.py",
+    "sha256": "3189bb0195099cb48867e0d845bc5a1ebb4d7f1e4a9b04b535a3ef11898bf917"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\spatial.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\spatial.py",
+    "sha256": "04a1e115b476634c9887355b00129869e2146f5ff8c876876cf8aac4893fdf80"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\dsp\\__init__.py",
+    "destination": "src\\cityrf\\legacy\\dsp\\__init__.py",
+    "sha256": "becb1360ae804307b1cfbf5bd7ac795569c9bd6762653c51674bb3afb20ff7d4"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\runtime\\artifact_store.py",
+    "destination": "src\\cityrf\\legacy\\runtime\\artifact_store.py",
+    "sha256": "9f981953043e0f4b123356c7857f32648386682b165282912f082f992efcb278"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\runtime\\iq_repository.py",
+    "destination": "src\\cityrf\\legacy\\runtime\\iq_repository.py",
+    "sha256": "68f2dcb527248569d2a42edbdaac293570cd0b99a849ac419dffda994f088879"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\runtime\\__init__.py",
+    "destination": "src\\cityrf\\legacy\\runtime\\__init__.py",
+    "sha256": "79a33489bd8b496bcba0856030e0b132f2606e81a684de139d6e93f04767bc32"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\schemas\\manifest.py",
+    "destination": "src\\cityrf\\legacy\\schemas\\manifest.py",
+    "sha256": "334fc5b1cddd452d944ec8a8c191541ed252181e35156f605e67a99b7f56daad"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\schemas\\selection.py",
+    "destination": "src\\cityrf\\legacy\\schemas\\selection.py",
+    "sha256": "789f3d6b8378e9befd2d275ee7bc3123eb40731e676e6334f2816353dc746f3b"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\schemas\\task.py",
+    "destination": "src\\cityrf\\legacy\\schemas\\task.py",
+    "sha256": "67d799b772e6a4c90e9781e5a4c5927afaffd29cad8b7a4a3246a4d8358c8232"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\schemas\\tool_result.py",
+    "destination": "src\\cityrf\\legacy\\schemas\\tool_result.py",
+    "sha256": "e5ff27ae5908aade81bd7ab493d9f3f77b247ab167f740dd39df8fe0d0c28475"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\schemas\\__init__.py",
+    "destination": "src\\cityrf\\legacy\\schemas\\__init__.py",
+    "sha256": "989789a13f63d2565c2c2cdf536722c4e059c06df3a1364e4f13fb10322f4a55"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\detection.py",
+    "destination": "src\\cityrf\\legacy\\tools\\detection.py",
+    "sha256": "aba3cfca6b5ede671be7625ea96ca78e5465950186a7e38cad7801ce1cb2cf18"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\estimation.py",
+    "destination": "src\\cityrf\\legacy\\tools\\estimation.py",
+    "sha256": "5cb68be2c6d0136348183e5bb7624cc924c1799c7d89e1891b414bf07d215277"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\inspection.py",
+    "destination": "src\\cityrf\\legacy\\tools\\inspection.py",
+    "sha256": "236346657b8ab6faeb986f98add6ca7e115b8a661199b96cdbd9df9342439a2e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\representations.py",
+    "destination": "src\\cityrf\\legacy\\tools\\representations.py",
+    "sha256": "420a0567e32d9bf30ec0165dbcb8802204145f7353e1e1855adc06693dcd0b46"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\spatial.py",
+    "destination": "src\\cityrf\\legacy\\tools\\spatial.py",
+    "sha256": "6b7c29a4ea8275527582de608926a9b23ca7d08cfa94fc1211c6e70bd9bd4373"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\src\\cityrf\\legacy\\tools\\__init__.py",
+    "destination": "src\\cityrf\\legacy\\tools\\__init__.py",
+    "sha256": "c93521f705113369a6ac84f3470e76ad16dcdeb43d0dc1047def17a13c25e4ed"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\examples\\free_space.json",
+    "destination": "examples\\free_space.json",
+    "sha256": "ee85e23b1f23265f655d3cfb13b72a446c23a227ce1bb9d272fd06b88a728e2d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\examples\\munich.json",
+    "destination": "examples\\munich.json",
+    "sha256": "378314af1ff5fbbc414f049c1b9b546c68d06672804dedea56b1b895822e9b58"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\examples\\three_scenes\\case01.json",
+    "destination": "examples\\three_scenes\\case01.json",
+    "sha256": "58a687fb026f1b44261a772dd5335abf3afdba64d4bc6080f376e55db84302ad"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\examples\\three_scenes\\case02.json",
+    "destination": "examples\\three_scenes\\case02.json",
+    "sha256": "1d4cb24a7198f52a906c41aa308646a606b8da540c5552eb1bae48aff2b261c1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\examples\\three_scenes\\case03.json",
+    "destination": "examples\\three_scenes\\case03.json",
+    "sha256": "c23e55b9ae9e0aa3f819e026c9abab8ab9176717e8e27f643cabcdee1b064954"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\priors\\munich_geometry\\geometry.json",
+    "destination": "priors\\munich_geometry\\geometry.json",
+    "sha256": "5fb7a3f787c386076f19bb23da08de33f312bd672f98e88730972e0ee35cfdbd"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\priors\\munich_geometry\\mesh.npz",
+    "destination": "priors\\munich_geometry\\mesh.npz",
+    "sha256": "bcbddb9c74dddc1a601ade16a751ad74d9a3d4dd6b7592fcc1e3b808a614e823"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\priors\\munich_geometry\\validation.json",
+    "destination": "priors\\munich_geometry\\validation.json",
+    "sha256": "2189257760f0f49bbc478a8e8760c81ab43b8f6ef35db4e041c37cbe5bcd877a"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_core.py",
+    "destination": "tests\\test_core.py",
+    "sha256": "110dc40a442928c159140a409807addcccbab1dedd61344261dcd690df2fc724"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_cross.py",
+    "destination": "tests\\test_cross.py",
+    "sha256": "05cef6e4031a50c56e97d2301742a3679e04d6d37f2f618139a5cce873894dfc"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_planar.py",
+    "destination": "tests\\test_planar.py",
+    "sha256": "6f8c40c328d7dd4d23accbdcec04b198dde8374588c55f6cf17d31e4fd93f912"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_physics.py",
+    "destination": "tests\\test_physics.py",
+    "sha256": "250422eed78fde59b856c8e5d76709b1c101ee8f9e37fa8b07b01b4132ac7a99"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_rt.py",
+    "destination": "tests\\test_rt.py",
+    "sha256": "201c4e61331b1897178c879aa4b42b8436a6818e27a5c65e00cb9e0dfc82c1fb"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_replay.py",
+    "destination": "tests\\test_replay.py",
+    "sha256": "234300b81443c9d2f40538473abb5689415f7ccbef7e28f3ce3ca880226e10a1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_runner.py",
+    "destination": "tests\\test_runner.py",
+    "sha256": "f10606c0661346f2813a3e9651180b8a8370d0ba2380b1f0f5e2868add21605d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_audit.py",
+    "destination": "tests\\test_audit.py",
+    "sha256": "ca39c0aa8f0c92fdd39ae0785720e02f468779206779c91fda8aefb9afc2527c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_bridge.py",
+    "destination": "tests\\test_bridge.py",
+    "sha256": "7783384ecb79a47b0e48c711281e7b216057db72b48fba6a9b6c19aede253c44"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_classical.py",
+    "destination": "tests\\test_classical.py",
+    "sha256": "3b64c2ea65479368572a7fc0993081aad15238d545d7531f51d8b962e50a8789"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_multipath.py",
+    "destination": "tests\\test_multipath.py",
+    "sha256": "609c58ca8d7e91d07473989cee367ce64ddee301d5931b0a271d63a692ec73d5"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_reflection.py",
+    "destination": "tests\\test_reflection.py",
+    "sha256": "5a07c023554878b2737c68e14eef1ca060044476cea5b12d1de1d26a573d782c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\test_checked_algorithms.py",
+    "destination": "tests\\test_checked_algorithms.py",
+    "sha256": "b3d20e381103c1c11818d600327c2de5bc9bfb693071d8692fda6f4f436864ad"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\legacy\\conftest.py",
+    "destination": "tests\\legacy\\conftest.py",
+    "sha256": "2e818a29167ebdeb5ada4f8d00840644eb8fa6716f3b47d8975af340add2d08a"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\legacy\\test_detection_tools.py",
+    "destination": "tests\\legacy\\test_detection_tools.py",
+    "sha256": "00c2a96309e4c4c01248e78c2285845221166c095d38396b77cd54d961cfd688"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\legacy\\test_estimation_tools.py",
+    "destination": "tests\\legacy\\test_estimation_tools.py",
+    "sha256": "be3107f9e7ba18a396312a9c07a44a16fc823b17f784374a865f477615802c46"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\legacy\\test_representation_tools.py",
+    "destination": "tests\\legacy\\test_representation_tools.py",
+    "sha256": "2c425a5d6cbdcd2831aedd2799676ec5bbe4fbf0cb4d4ff9a0138d272b0c6115"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tests\\legacy\\test_spatial_tools.py",
+    "destination": "tests\\legacy\\test_spatial_tools.py",
+    "sha256": "3e354df726e931029e365cf8b039110367757c15e295d78379334254bfa93267"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\setup_rt.sh",
+    "destination": "tools\\setup_rt.sh",
+    "sha256": "a022de5bea251fa123444a8aa030ec1174eb9f7c08d4d21a847becd2a759114b"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\render_report.py",
+    "destination": "tools\\render_report.py",
+    "sha256": "d210790cfeed23cec659b64b5b470aa31e288914b86210b1f5b75d6dc85b4860"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\render_arrays.py",
+    "destination": "tools\\render_arrays.py",
+    "sha256": "a8c4a85a174cc27decec2cd9336e95936a2576d7af4dbc33c00571b35910726f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\probe_rt.py",
+    "destination": "tools\\probe_rt.py",
+    "sha256": "70c1af15c049fbe70df72426f4f7ae795b7b263ae599aba844222e00866dc08f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\probe_munich_positions.py",
+    "destination": "tools\\probe_munich_positions.py",
+    "sha256": "97110be39fbb1f52933fdd61f87a60d294cf3425d454491db0a152ffc57c4504"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\tools\\report_classical.py",
+    "destination": "tools\\report_classical.py",
+    "sha256": "d5f0006b2d7b4ff9b90b545edc1845ac870bc1bfa2ca9dc7cc7ad03531de3e3c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\scripts\\run_three_scene_simulations.py",
+    "destination": "scripts\\run_three_scene_simulations.py",
+    "sha256": "6509ea3db8df5c5f82bab92e8111ea4dd7b313f87a7d392331f9dd450e03e171"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\scripts\\prepare_three_scene_artifacts.py",
+    "destination": "scripts\\prepare_three_scene_artifacts.py",
+    "sha256": "9e35f20f5f03f86cbc71abf578bab072cace12e4c4d6b631423a7ddb3ef77523"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\scripts\\probe_three_scene_placement.py",
+    "destination": "scripts\\probe_three_scene_placement.py",
+    "sha256": "f019403c56c67e7201f3ab701aee1a4bb82a37bfbde2774b0c0e5b189363b876"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\scripts\\check_exported_geometry.py",
+    "destination": "scripts\\check_exported_geometry.py",
+    "sha256": "cc27e45fdb693847a01428ac07eb0d9c376deae434aa7aa39e3ce2d8184d561b"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\docs\\design.md",
+    "destination": "docs\\original\\design.md",
+    "sha256": "dfb647d007999da8c3a2b11088a117519c4aba638b6c8ba3268de77dd6847749"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\docs\\cross-arrays.md",
+    "destination": "docs\\original\\cross-arrays.md",
+    "sha256": "95b05093ee950dccc4e11bb923f55d643938c6b96645a9f96ab4221beb0dfe99"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\docs\\acceptance.md",
+    "destination": "docs\\original\\acceptance.md",
+    "sha256": "46687e63a3ebaf6819af2c172fdb6da6f467ab5d933b55046004b2b0d8eb9737"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\README.md",
+    "destination": "docs\\original\\README.md",
+    "sha256": "215b1766227312b965027dc86722d2890569ae566dfdb95711b15dbaf297488d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\requirements-rt.lock.txt",
+    "destination": "requirements-rt.lock.txt",
+    "sha256": "7f6b776cffd3360695cb8dc3fffbc8b414c4a7496745589c01c4072fc2781844"
+  },
+  {
+    "source": "LEMMO\\experiments\\city_multistation\\configs\\A.json",
+    "destination": "examples\\complex\\A.json",
+    "sha256": "c5bf0aa972cc26b9301b0df036d91e9cf6fdfa36cf5257d2802daf614803b5e3"
+  },
+  {
+    "source": "LEMMO\\experiments\\city_multistation\\configs\\B.json",
+    "destination": "examples\\complex\\B.json",
+    "sha256": "97e625bf020d63a2d9e03aeacdb342b96140e9194fba659e896c85b71cabe499"
+  },
+  {
+    "source": "LEMMO\\experiments\\city_multistation\\configs\\C.json",
+    "destination": "examples\\complex\\C.json",
+    "sha256": "1d72830125594e690214e84a05da2cb1c7802b0339159c4ab81424cd52283db4"
+  },
+  {
+    "source": "LEMMO\\experiments\\city_multistation\\configs\\C_compressed.json",
+    "destination": "examples\\complex\\C_compressed.json",
+    "sha256": "f9154cf4c8e04e64c03a2935a129282d628d2543689010cfba0c619299e97803"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\audit.json",
+    "destination": "runs\\example_case01\\capture\\audit.json",
+    "sha256": "2c63420ad8e942c609dfe813d35fb7ce8b4efb877a4e3d95bba99b9e1d7f4937"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\run_summary.json",
+    "destination": "runs\\example_case01\\capture\\run_summary.json",
+    "sha256": "bf2ecf906bd687fbc4cf8badce1a520598939c32853ad1c4816314ead1af6404"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_1_station_a.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_1_station_a.npz",
+    "sha256": "892451c9a7e19fc4dae8e5ca5b0f92b4deae23131b16e37d74a262443acc07a3"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_1_station_b.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_1_station_b.npz",
+    "sha256": "5293558fc8c5e04bb5eb98915f7f20d34988bd279e3cf9eab1a5e1d2547b7d2c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_1_station_c.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_1_station_c.npz",
+    "sha256": "4fd128e0dcd8f7a9ed236a62bc767f814cc6f31ecaf0aef7e8e7404945056927"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_2_station_a.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_2_station_a.npz",
+    "sha256": "d87ea417d4e8fca2f62590f19fc6d09b5a9aef1aeaf0d0574e602ba4b7b076b1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_2_station_b.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_2_station_b.npz",
+    "sha256": "055029095261e862bcb49b00c21abf592c37fc32dad797c9edb408d17081642f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_2_station_c.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_2_station_c.npz",
+    "sha256": "6342924c1ddd0aeba47e22c4638e31f94b7358a14f0a6b705c1157f6cc459341"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_3_station_a.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_3_station_a.npz",
+    "sha256": "f2987232715bf9a060b96073e719c6b504fa08c4396d2e40f02ed7e8c2f7e6f7"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_3_station_b.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_3_station_b.npz",
+    "sha256": "92dd2b32fc59159b19ed1a73e526670b1a36ad4078690d6a9013d050fb809409"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\channel_target_3_station_c.npz",
+    "destination": "runs\\example_case01\\capture\\private\\channel_target_3_station_c.npz",
+    "sha256": "cb7f4d584923ee450ae6aea59d34f782fe26abe32431ac310e0531251b911bcc"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\scenario.json",
+    "destination": "runs\\example_case01\\capture\\private\\scenario.json",
+    "sha256": "b20ecbf25879c96e941ba29251726556e552d048fc044a9cb8708d831ae07e3c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\private\\truth.json",
+    "destination": "runs\\example_case01\\capture\\private\\truth.json",
+    "sha256": "bca3b76a08aba35bac788a5d5296f43774f4833a06cbfbae3dfe4dd57267c862"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\iq_station_a.npy",
+    "destination": "runs\\example_case01\\capture\\public\\iq_station_a.npy",
+    "sha256": "fdd3ae52f35aa278210aea21b86d91bc610ae29e37f3fc950a2d39ea54b78903"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\iq_station_b.npy",
+    "destination": "runs\\example_case01\\capture\\public\\iq_station_b.npy",
+    "sha256": "85d518edc447777dc5fcd0e429ebbe2747b051d7638fb3e155eea64125afd825"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\iq_station_c.npy",
+    "destination": "runs\\example_case01\\capture\\public\\iq_station_c.npy",
+    "sha256": "d56fef709dc9bd4f5e2628eeae955ba00c1f6b24ece669d7217a82b9263f873e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\observations.json",
+    "destination": "runs\\example_case01\\capture\\public\\observations.json",
+    "sha256": "48dd5736c4d51b3bd31b40146bf698da8197149075d7d56bcb7a0121e4ef51e8"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\all_stations.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\all_stations.png",
+    "sha256": "8337dbff42ec1c81267c8c1ba5010baca673c59ad1ce52d754cc0c9ca0678039"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\plot_parameters.json",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\plot_parameters.json",
+    "sha256": "e13e82eaaff660af63f54f90bed1c491d3848fa319a188f79c08f7f7348aab27"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\README_zh.md",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\README_zh.md",
+    "sha256": "bc9d20c30c4347198960dad84b39199e589bc6728af8c34e355a13cf5043df9f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "sha256": "fa2106df9bd041cb88b149e747b408e89eb66d55d760ced85951cd6b50e173ac"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_a_spectrogram.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_a_spectrogram.png",
+    "sha256": "1e2486106e26b2d9f7e310c912de8f0bf8bcabc043e3a70f0e1dec29e0f27955"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_a_spectrum.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_a_spectrum.png",
+    "sha256": "056d7d4f11e65fbbe0bb5009ee3742aeb757289e052e941f76fa039e4a69750d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "sha256": "927863688e95c14a5269796d931730df57ee469b46143a080bd9044431b0f260"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_b_spectrogram.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_b_spectrogram.png",
+    "sha256": "da07beb898db94cacd2680b70ed4065eb12d40e41f80d03501d8f4de0785ef44"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_b_spectrum.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_b_spectrum.png",
+    "sha256": "7c74c416b70928e0f743d84890b1c41529aecf82bd37200289d6ac28693b1472"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "sha256": "d1cf1eecb3302d3a3ab0115a389e8ae6034c3c25330ae6b7ab1f18ba4b4f1c72"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_c_spectrogram.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_c_spectrogram.png",
+    "sha256": "f0cf9fc075528540c017973a7460ab1ddcd55db6415a4ec22bdb24a68f364582"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case01\\capture\\public\\plots\\station_c_spectrum.png",
+    "destination": "runs\\example_case01\\capture\\public\\plots\\station_c_spectrum.png",
+    "sha256": "e4e1e0cf156c4353e53c99ea204da3bf0ab26768657f6838dfdd5a4e8e508330"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\audit.json",
+    "destination": "runs\\example_case02\\capture\\audit.json",
+    "sha256": "97326895d4f14ed66be2c6fad0efd41ff99e725e0c1a077c513f7f76ff2797a6"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\run_summary.json",
+    "destination": "runs\\example_case02\\capture\\run_summary.json",
+    "sha256": "de3ada118b970e087058fbfbe13c9b3fc096f890301964d0a6c3117c3085fc71"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\private\\channel_target_1_station_a.npz",
+    "destination": "runs\\example_case02\\capture\\private\\channel_target_1_station_a.npz",
+    "sha256": "df819b84f112c51f8c95dc20fa25464e1ddda502fdc03d44d0f69ea76baaf79c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\private\\channel_target_1_station_b.npz",
+    "destination": "runs\\example_case02\\capture\\private\\channel_target_1_station_b.npz",
+    "sha256": "ed3aae70c8384f13e5c5d3aead199da1d9b569fd8ff7925c847dc85170cfb053"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\private\\channel_target_1_station_c.npz",
+    "destination": "runs\\example_case02\\capture\\private\\channel_target_1_station_c.npz",
+    "sha256": "01be70069e540c36fe21555d29b2fe840b80069246bae910d14ee214841184e9"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\private\\scenario.json",
+    "destination": "runs\\example_case02\\capture\\private\\scenario.json",
+    "sha256": "d0349d32aacfd7ac0242930ef0ff606ccac392c307a5a6adfece5934ae6f201d"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\private\\truth.json",
+    "destination": "runs\\example_case02\\capture\\private\\truth.json",
+    "sha256": "bd194d420bb90153b3b308785f8265e51492959b903b80aaeb0c53afe85d7c18"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\iq_station_a.npy",
+    "destination": "runs\\example_case02\\capture\\public\\iq_station_a.npy",
+    "sha256": "5e1ac328c11768bcb5636cd861fa5c366cb273f8cb2e250df1efbb2e1ad65fac"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\iq_station_b.npy",
+    "destination": "runs\\example_case02\\capture\\public\\iq_station_b.npy",
+    "sha256": "5cf081fc1ebb4a28a52f6175c7fad47f77651ae010dc7a55771a57e74fdfc489"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\iq_station_c.npy",
+    "destination": "runs\\example_case02\\capture\\public\\iq_station_c.npy",
+    "sha256": "502fc5b620965b6973a3c61a8ab960b4a8c7443797e1316ec65e217a006455af"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\observations.json",
+    "destination": "runs\\example_case02\\capture\\public\\observations.json",
+    "sha256": "4bcd657141ab7563ec282078633f03ef081eef21aa9d64ef5f4f6ef75f1c4627"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\all_stations.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\all_stations.png",
+    "sha256": "97695f1cb49dc32efeff1583a9e00fb74bf2bcaae157527b7aaafe3f753051bf"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\plot_parameters.json",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\plot_parameters.json",
+    "sha256": "6b857613ca2dd9ccff0c0bedcf447fd968a4c6626f767cf3fd2363e4697243c2"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\README_zh.md",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\README_zh.md",
+    "sha256": "bc9d20c30c4347198960dad84b39199e589bc6728af8c34e355a13cf5043df9f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "sha256": "7be70148ec1e79a3ddbeb233776b89ea6cf79ddd34a069f2c26a426f68f546b3"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_a_spectrogram.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_a_spectrogram.png",
+    "sha256": "83f202721f065de6612585fc4c5b49a83a5e28e0b956524f78dade5c86c7eea7"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_a_spectrum.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_a_spectrum.png",
+    "sha256": "de718f53c9fee1dbd3db65f6e4e2169b7de15b176515bc29437c12e288e5193e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "sha256": "2b876ece51813168fa34f78956ec6cd08e8376469db6dd2e58d4070f0f6301a8"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_b_spectrogram.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_b_spectrogram.png",
+    "sha256": "fbcba118dc3f072db531d44cfa89fcf9ecb1dc5a39f0d1162c694fc42c77962c"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_b_spectrum.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_b_spectrum.png",
+    "sha256": "031417836084ccd384bf5ba4c06554641068dc5aecec61b8bc060e84673637c5"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "sha256": "a8e8abaea1fdf41fdeeb5c5e1d20e40cf38a15f2a6d4e7e0f700b1221ebbb1c3"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_c_spectrogram.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_c_spectrogram.png",
+    "sha256": "277c432c84347216173614ded6d58c5f28af3a596b1a8fb76438ed3b89fc3f9e"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case02\\capture\\public\\plots\\station_c_spectrum.png",
+    "destination": "runs\\example_case02\\capture\\public\\plots\\station_c_spectrum.png",
+    "sha256": "4969d662e745b18ceacafacf7ed9f41cbbcfa84f75a5069e918b3c0e9f71b8a2"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\audit.json",
+    "destination": "runs\\example_case03\\capture\\audit.json",
+    "sha256": "8c327add366aa1b8603adfc7a8764c230736b6f927dd8ac28b7dd3cd8f9c44cd"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\run_summary.json",
+    "destination": "runs\\example_case03\\capture\\run_summary.json",
+    "sha256": "6133ab9dcaa2bb3b4d9422d6864c315fec08d80ed0872d37f05bdfbfc5d5d9be"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_authorized_tx_station_a.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_authorized_tx_station_a.npz",
+    "sha256": "d87ea417d4e8fca2f62590f19fc6d09b5a9aef1aeaf0d0574e602ba4b7b076b1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_authorized_tx_station_b.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_authorized_tx_station_b.npz",
+    "sha256": "4c5a0219f412e046021db38c388c7825ed9716a146ba572b4a1ad985f500df6b"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_authorized_tx_station_c.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_authorized_tx_station_c.npz",
+    "sha256": "619e717804aac4e30bcdc3fe6e727f03e770689de9bd5e76c604bc0634118e8a"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_unknown_tx_station_a.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_unknown_tx_station_a.npz",
+    "sha256": "71c10e5cfe7430b149be9c371a81cd16644cfb7c63bc6e3eabb1658033feba28"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_unknown_tx_station_b.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_unknown_tx_station_b.npz",
+    "sha256": "67ee89fa6fbd2d1fa622126cf4767dc44b3e24f4a6de4336d1e001c12cbd3790"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\channel_unknown_tx_station_c.npz",
+    "destination": "runs\\example_case03\\capture\\private\\channel_unknown_tx_station_c.npz",
+    "sha256": "009d003bbb2bd54d5bdee904948043122d4246b42156684a8232a2165c1e7d40"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\scenario.json",
+    "destination": "runs\\example_case03\\capture\\private\\scenario.json",
+    "sha256": "31ea4081a58b292101b6558b2d88b691d541b6303592b255492bedd5235031ed"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\private\\truth.json",
+    "destination": "runs\\example_case03\\capture\\private\\truth.json",
+    "sha256": "ebed1b3504881e3cf797bc06e03176270a7344c1b9fa88e105ab8326aaf52d5f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\iq_station_a.npy",
+    "destination": "runs\\example_case03\\capture\\public\\iq_station_a.npy",
+    "sha256": "d4ac6c8c95a70ca14e553dab2872fc29aa57e2036542bf7877372ee951e14ef2"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\iq_station_b.npy",
+    "destination": "runs\\example_case03\\capture\\public\\iq_station_b.npy",
+    "sha256": "3c1388752a13d5170fe57297076ed36bce50faee7e8f69f22c58481675689ebd"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\iq_station_c.npy",
+    "destination": "runs\\example_case03\\capture\\public\\iq_station_c.npy",
+    "sha256": "7f4cc8fe804ee8a78989e101b0364889456f650328687162d52389e16ac05276"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\observations.json",
+    "destination": "runs\\example_case03\\capture\\public\\observations.json",
+    "sha256": "2fb8e7895efbbdc1af35010e2ef61f47ab8089d36efa1c662930354353532aa0"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\all_stations.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\all_stations.png",
+    "sha256": "40d5673fb62dbc17c7f8fe1633e236c381acfd81a8d8cd847f96b45446d75d86"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\plot_parameters.json",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\plot_parameters.json",
+    "sha256": "82b2097d5f6f617fccb41a1d5b056d5b0f9ff72cdcfbdb85a0cc118b67c14beb"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\README_zh.md",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\README_zh.md",
+    "sha256": "bc9d20c30c4347198960dad84b39199e589bc6728af8c34e355a13cf5043df9f"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_a_spectral_data.npz",
+    "sha256": "9cdf3fbe08292f7d6ff50c3b53a2fa5c21fbdf4b705236b3c6a73ae43e4cde33"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_a_spectrogram.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_a_spectrogram.png",
+    "sha256": "420d4a29c6323ccb368759356eafd185e4dfafc6724bc362d6ed4897eff0a712"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_a_spectrum.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_a_spectrum.png",
+    "sha256": "35aa23f6ff2ca7bf537c2946aaa23a2fad976272a3cbde2d2c248fda6f56e0a9"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_b_spectral_data.npz",
+    "sha256": "7ddde5e09661da1772fbdc2406361791c502eea53598893b9b8d0a8186722ad1"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_b_spectrogram.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_b_spectrogram.png",
+    "sha256": "2d2285c607fdbd604cc16ea19163831c0c6631f7e5e72184169d80bd90e57f20"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_b_spectrum.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_b_spectrum.png",
+    "sha256": "1b02ddc4007a23b921a1db1d96c6554e495724063163dd81b5e3f8f1b8601798"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_c_spectral_data.npz",
+    "sha256": "55d7507bfe9141ecdcd23b640f04f891218f3e2583cc09d4fc83a9a788d4c75b"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_c_spectrogram.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_c_spectrogram.png",
+    "sha256": "177492cb8f6ba2990bb2be4afdbc0e2ddf020d3528399f11b3e006028abde5c9"
+  },
+  {
+    "source": "agent\\静态城市多点仿真干扰分析Agent\\results\\three_scenes_027\\case03\\capture\\public\\plots\\station_c_spectrum.png",
+    "destination": "runs\\example_case03\\capture\\public\\plots\\station_c_spectrum.png",
+    "sha256": "60a21896d71d866459f03066e571739fe23725307b68000b2eb7ef0a37bccec6"
+  }
+]

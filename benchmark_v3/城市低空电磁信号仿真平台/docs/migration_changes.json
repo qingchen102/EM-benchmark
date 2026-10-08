@@ -1,0 +1,30 @@
+{
+  "changed_after_copy": [
+    {
+      "path": "tests\\test_multipath.py",
+      "original_sha256": "609c58ca8d7e91d07473989cee367ce64ddee301d5931b0a271d63a692ec73d5",
+      "current_sha256": "7822d8c3be9c70fb5690cf1efb2bcaa797a598f8d5b0477946336940e7b62ce0"
+    },
+    {
+      "path": "tests\\test_reflection.py",
+      "original_sha256": "5a07c023554878b2737c68e14eef1ca060044476cea5b12d1de1d26a573d782c",
+      "current_sha256": "21caa4cbeff91a4b8f75ae91200ca68cb80fff9ec3be4a1f73ee8f71c2aedaa7"
+    },
+    {
+      "path": "tests\\test_checked_algorithms.py",
+      "original_sha256": "b3d20e381103c1c11818d600327c2de5bc9bfb693071d8692fda6f4f436864ad",
+      "current_sha256": "cdfd7a925f7246eb6fea81363c0b706a6ca68cded8b45da9fb35103847ba8378"
+    },
+    {
+      "path": "tools\\setup_rt.sh",
+      "original_sha256": "a022de5bea251fa123444a8aa030ec1174eb9f7c08d4d21a847becd2a759114b",
+      "current_sha256": "aa41eae9e434ef601dcb847153c39f3c9116ccf50a245b84db163f77cc3f6993"
+    },
+    {
+      "path": "tools\\render_report.py",
+      "original_sha256": "d210790cfeed23cec659b64b5b470aa31e288914b86210b1f5b75d6dc85b4860",
+      "current_sha256": "d8384fefaec1c9e424fb34f8e9c61a37330b256255ea27e155794b860b999627"
+    }
+  ],
+  "core_modules_unchanged": true
+}

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "urban-lowalt-rf"
+version = "0.3.0"
+description = "Urban low-altitude multi-station RF simulation workbench"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2.3,<3", "scipy>=1.16,<2", "pydantic>=2.12,<3"]
+
+[project.optional-dependencies]
+web = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "matplotlib>=3.9,<4"]
+rt = ["sionna-rt==2.1.0"]
+test = ["pytest>=9,<10", "httpx>=0.27,<1"]
+
+[project.scripts]
+cityrf = "cityrf.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"cityrf.legacy" = ["PROVENANCE.json"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+markers = ["rt: requires Sionna RT and RUN_RT_TESTS=1"]

@@ -1,0 +1,29 @@
+{
+ "schema_version": "1.0",
+ "scene": "hangzhou",
+ "coordinate_frame": "ENU at AOI centre (x east, y north, z up), metres, not georeferenced",
+ "origin_latlon": [
+  30.27,
+  120.16749999999999
+ ],
+ "bbox_swne": [
+  30.25,
+  120.145,
+  30.29,
+  120.19
+ ],
+ "building_count": 3737,
+ "triangle_count": 73313,
+ "materials": {
+  "buildings": "itu-radio-material concrete",
+  "ground": "itu-radio-material concrete"
+ },
+ "heights": {
+  "buildings": 3737,
+  "height_tagged": 25,
+  "height_synthetic": 3712
+ },
+ "height_model": "OSM height/building:levels 优先；缺失部分按占地分层合成（低层5-12m/多层9-24m/大型15-35m/4%塔楼40-120m），按 osm_id 可复现",
+ "source": "© OpenStreetMap contributors (ODbL)",
+ "note": "RT 使用同目录 scene.xml；本文件仅供几何校验与网页显示"
+}

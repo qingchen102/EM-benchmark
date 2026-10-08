@@ -1,0 +1,78 @@
+{
+  "source_project": "基本干扰分析功能Agent/src/interference_agent",
+  "transformation": "Namespace interference_agent -> cityrf.legacy; minimal package initializers; no registry/harness/trace/benchmarks.",
+  "files": {
+    "dsp/__init__.py": {
+      "original_sha256": "c7ef80588b9997fea7bd4d602f923c68847fbf639edb20f9cd410c05d96d6a13",
+      "copied_sha256": "becb1360ae804307b1cfbf5bd7ac795569c9bd6762653c51674bb3afb20ff7d4"
+    },
+    "dsp/detection.py": {
+      "original_sha256": "369fdc2466cb902167335f3183fb3d6a7f19d265949049b89972dc71c58c6277",
+      "copied_sha256": "86760e29572e3921aa1db25d14f27356b6821e58d35ab4babee8f5f0a1a17f35"
+    },
+    "dsp/estimation.py": {
+      "original_sha256": "e5667ceef3ec866e98d533c20125631f1ddd2a89e7a554fb8003abf5e03c552e",
+      "copied_sha256": "95768c20e3f2c2db0b0f4363e0578cba4ed1a850937afbcadd7ae91ca28e7dee"
+    },
+    "dsp/representations.py": {
+      "original_sha256": "46ae154196d14602f75dc76e81fb023f038b38490440f79ef4273958cfa80c8e",
+      "copied_sha256": "829cddd8feca92377a0fcd6e9d05d696228824cc0f961f8ede124223597a5593"
+    },
+    "dsp/selection.py": {
+      "original_sha256": "960741ea5e7829a2582b385c436d6cf31ee2509e32f2d8e54fbb2b67ad7024f4",
+      "copied_sha256": "3189bb0195099cb48867e0d845bc5a1ebb4d7f1e4a9b04b535a3ef11898bf917"
+    },
+    "dsp/spatial.py": {
+      "original_sha256": "b31f429ef90fe9e3a1f928f528ade814a033601d167dbd419a8eef262a81256d",
+      "copied_sha256": "04a1e115b476634c9887355b00129869e2146f5ff8c876876cf8aac4893fdf80"
+    },
+    "runtime/artifact_store.py": {
+      "original_sha256": "cc1fac9956a4b71e77c1e077bb749a0b83b83eead1cc4b7ffcbbc284a23d9065",
+      "copied_sha256": "9f981953043e0f4b123356c7857f32648386682b165282912f082f992efcb278"
+    },
+    "runtime/iq_repository.py": {
+      "original_sha256": "051ddd6f20e33f0f6a2e1d68f5216f1408c9d4ccf2758b31ac62e288269a8aa3",
+      "copied_sha256": "68f2dcb527248569d2a42edbdaac293570cd0b99a849ac419dffda994f088879"
+    },
+    "schemas/__init__.py": {
+      "original_sha256": "5856d5875bc2d2eb403815b778270997ffed7e6c6be20f6cd73d8fa35551d9e4",
+      "copied_sha256": "989789a13f63d2565c2c2cdf536722c4e059c06df3a1364e4f13fb10322f4a55"
+    },
+    "schemas/manifest.py": {
+      "original_sha256": "e019a343e2a8c2632d23706c0fa168925f9390f4b35d40669ef82fe255c0d044",
+      "copied_sha256": "334fc5b1cddd452d944ec8a8c191541ed252181e35156f605e67a99b7f56daad"
+    },
+    "schemas/selection.py": {
+      "original_sha256": "466f2b6ef38fb0e52069784b69bab03d21c977775cf1ccab35b2c96b1318ce00",
+      "copied_sha256": "789f3d6b8378e9befd2d275ee7bc3123eb40731e676e6334f2816353dc746f3b"
+    },
+    "schemas/task.py": {
+      "original_sha256": "bba172e1f3ddb22d082fa31547fd58ee1b49a868f484085d17c4b3a1720ba0f9",
+      "copied_sha256": "67d799b772e6a4c90e9781e5a4c5927afaffd29cad8b7a4a3246a4d8358c8232"
+    },
+    "schemas/tool_result.py": {
+      "original_sha256": "7dbe84d67cbcfa798b18dbecb07bd64bccb116ff6641863ef03d1579e87b0463",
+      "copied_sha256": "e5ff27ae5908aade81bd7ab493d9f3f77b247ab167f740dd39df8fe0d0c28475"
+    },
+    "tools/detection.py": {
+      "original_sha256": "571d651b2ae5f499b60379bd1b22771b4cf1207021997fcdaeb6531d45f7267b",
+      "copied_sha256": "aba3cfca6b5ede671be7625ea96ca78e5465950186a7e38cad7801ce1cb2cf18"
+    },
+    "tools/estimation.py": {
+      "original_sha256": "25c6f22a004929a83a779b41251b138969824d96ef509b966f595440cd95c63d",
+      "copied_sha256": "5cb68be2c6d0136348183e5bb7624cc924c1799c7d89e1891b414bf07d215277"
+    },
+    "tools/inspection.py": {
+      "original_sha256": "a3ed15ec6a679d69f7641692dcd81633cc99896e9a40522de7be79ccfff81959",
+      "copied_sha256": "236346657b8ab6faeb986f98add6ca7e115b8a661199b96cdbd9df9342439a2e"
+    },
+    "tools/representations.py": {
+      "original_sha256": "ce7eb37ebe1341e297e90f836b4d1137c6769afef8dd1f2bca1f78d6ba7e39f9",
+      "copied_sha256": "420a0567e32d9bf30ec0165dbcb8802204145f7353e1e1855adc06693dcd0b46"
+    },
+    "tools/spatial.py": {
+      "original_sha256": "73421970106c3ddc98bfbe76e2ce423d73b862d28d3d795290ffed6615a9c305",
+      "copied_sha256": "6b7c29a4ea8275527582de608926a9b23ca7d08cfa94fc1211c6e70bd9bd4373"
+    }
+  }
+}

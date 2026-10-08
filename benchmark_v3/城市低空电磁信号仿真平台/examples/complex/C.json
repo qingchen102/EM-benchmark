@@ -1,0 +1,287 @@
+{
+  "schema_version": "1.2",
+  "name": "case_C",
+  "seed": 202609153,
+  "duration_s": 0.05,
+  "sample_rate_hz": 8000000.0,
+  "carrier_frequency_hz": 2400000000.0,
+  "max_working_mb": 4096,
+  "emitters": [
+    {
+      "id": "uav_a",
+      "position_m": [
+        -150.0,
+        -100.0,
+        45.0
+      ],
+      "orientation_rad": [
+        0,
+        0,
+        0
+      ],
+      "platform_id": "drone_a",
+      "role": "communication",
+      "power_dbm": 8.0,
+      "components": [
+        {
+          "kind": "ofdm",
+          "weight": 1,
+          "offset_hz": -1000000.0,
+          "bandwidth_hz": 720000.0,
+          "symbol_rate_hz": 25000,
+          "phase_rad": 0,
+          "pulse_period_s": null,
+          "duty_cycle": 1,
+          "pulse_start_s": 0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "uav_b",
+      "position_m": [
+        150.0,
+        -80.0,
+        55.0
+      ],
+      "orientation_rad": [
+        0,
+        0,
+        0
+      ],
+      "platform_id": "drone_b",
+      "role": "communication",
+      "power_dbm": 6.0,
+      "components": [
+        {
+          "kind": "qpsk",
+          "weight": 1,
+          "offset_hz": 1120000.0,
+          "bandwidth_hz": 600000.0,
+          "symbol_rate_hz": 200000.0,
+          "phase_rad": 0,
+          "pulse_period_s": null,
+          "duty_cycle": 1,
+          "pulse_start_s": 0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "source_c",
+      "position_m": [
+        0.0,
+        -100.0,
+        25.0
+      ],
+      "orientation_rad": [
+        0,
+        0,
+        0
+      ],
+      "platform_id": null,
+      "role": "interference",
+      "power_dbm": 38.0,
+      "components": [
+        {
+          "kind": "noise",
+          "weight": 1,
+          "offset_hz": 2250000.0,
+          "bandwidth_hz": 800000.0,
+          "symbol_rate_hz": 25000,
+          "phase_rad": 0,
+          "pulse_period_s": null,
+          "duty_cycle": 1,
+          "pulse_start_s": 0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "source_d",
+      "position_m": [
+        -80.0,
+        40.0,
+        25.0
+      ],
+      "orientation_rad": [
+        0,
+        0,
+        0
+      ],
+      "platform_id": null,
+      "role": "interference",
+      "power_dbm": -5.0,
+      "components": [
+        {
+          "kind": "chirp",
+          "weight": 1,
+          "offset_hz": 1120000.0,
+          "bandwidth_hz": 800000.0,
+          "symbol_rate_hz": 25000,
+          "phase_rad": 0,
+          "pulse_period_s": 0.01,
+          "duty_cycle": 0.25,
+          "pulse_start_s": 0,
+          "chirp_period_s": 0.005
+        }
+      ]
+    }
+  ],
+  "receivers": [
+    {
+      "id": "station_a",
+      "position_m": [
+        80.0,
+        60.0,
+        5.0
+      ],
+      "orientation_rad": [
+        0,
+        0,
+        0
+      ],
+      "antenna": {
+        "geometry_type": "cross",
+        "num_rows": null,
+        "num_cols": null,
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      },
+      "tuning_offset_hz": 0,
+      "bandwidth_hz": 6000000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290,
+        "noise_enabled": true,
+        "gain_db": 0,
+        "soft_limit_input_dbm": -58.0,
+        "filter_taps": 129
+      }
+    },
+    {
+      "id": "station_b",
+      "position_m": [
+        0.0,
+        100.0,
+        5.0
+      ],
+      "orientation_rad": [
+        0.7,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "cross",
+        "num_rows": null,
+        "num_cols": null,
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      },
+      "tuning_offset_hz": 0,
+      "bandwidth_hz": 6000000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290,
+        "noise_enabled": true,
+        "gain_db": 0,
+        "soft_limit_input_dbm": -46.0,
+        "filter_taps": 129
+      }
+    },
+    {
+      "id": "station_c",
+      "position_m": [
+        100.0,
+        0.0,
+        20.0
+      ],
+      "orientation_rad": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "cross",
+        "num_rows": null,
+        "num_cols": null,
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      },
+      "tuning_offset_hz": 0,
+      "bandwidth_hz": 6000000.0,
+      "frontend": {
+        "noise_figure_db": 5,
+        "temperature_k": 290,
+        "noise_enabled": true,
+        "gain_db": 0,
+        "soft_limit_input_dbm": null,
+        "filter_taps": 129
+      }
+    }
+  ],
+  "propagation": {
+    "backend": "sionna_rt",
+    "rt_variant": "llvm_ad_mono_polarized",
+    "scene": "munich",
+    "max_depth": 3,
+    "samples_per_src": 100000,
+    "max_num_paths_per_src": 100000,
+    "los": true,
+    "specular_reflection": true,
+    "diffuse_reflection": false,
+    "refraction": false,
+    "diffraction": true,
+    "tap_delays_s": [
+      0
+    ],
+    "tap_gains_real": [
+      1
+    ],
+    "tap_gains_imag": [
+      0
+    ]
+  },
+  "tasks": [
+    {
+      "id": "link_a",
+      "receiver_ids": [
+        "station_a",
+        "station_b",
+        "station_c"
+      ],
+      "desired_emitter_ids": [
+        "uav_a"
+      ],
+      "protected_center_offset_hz": -1000000.0,
+      "protected_bandwidth_hz": 720000.0,
+      "instruction": "Analyze interference using the public IQ observations. Distinguish paths from physical emitters."
+    },
+    {
+      "id": "link_b",
+      "receiver_ids": [
+        "station_a",
+        "station_b",
+        "station_c"
+      ],
+      "desired_emitter_ids": [
+        "uav_b"
+      ],
+      "protected_center_offset_hz": 1120000.0,
+      "protected_bandwidth_hz": 600000.0,
+      "instruction": "Analyze interference using the public IQ observations. Distinguish paths from physical emitters."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+ "name": "hangzhou",
+ "format": "float32 little endian triangles[N,3,3]",
+ "triangle_count": 73313,
+ "bounds": [
+  [
+   -2296.4619140625,
+   -2275.609619140625,
+   0.0
+  ],
+  [
+   2329.034912109375,
+   2291.206787109375,
+   132.0
+  ]
+ ],
+ "source": "© OpenStreetMap contributors (ODbL); LoD1 extrusion"
+}

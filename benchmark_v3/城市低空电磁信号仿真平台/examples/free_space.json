@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.2",
+  "name": "free-space-reference",
+  "seed": 42,
+  "duration_s": 0.05,
+  "sample_rate_hz": 2000000,
+  "carrier_frequency_hz": 2400000000,
+  "emitters": [
+    {
+      "id": "uav_a",
+      "platform_id": "drone_a",
+      "role": "communication",
+      "position_m": [
+        -150,
+        -100,
+        45
+      ],
+      "power_dbm": 20,
+      "components": [
+        {
+          "kind": "ofdm",
+          "bandwidth_hz": 180000,
+          "offset_hz": -250000
+        }
+      ]
+    },
+    {
+      "id": "uav_b",
+      "platform_id": "drone_b",
+      "role": "communication",
+      "position_m": [
+        150,
+        -80,
+        55
+      ],
+      "power_dbm": 17,
+      "components": [
+        {
+          "kind": "qpsk",
+          "bandwidth_hz": 150000,
+          "symbol_rate_hz": 50000,
+          "offset_hz": 280000
+        }
+      ]
+    },
+    {
+      "id": "source_c",
+      "role": "interference",
+      "position_m": [
+        0,
+        -100,
+        25
+      ],
+      "power_dbm": 8,
+      "components": [
+        {
+          "kind": "noise",
+          "bandwidth_hz": 140000,
+          "offset_hz": -250000
+        }
+      ]
+    },
+    {
+      "id": "source_d",
+      "role": "interference",
+      "position_m": [
+        -80,
+        40,
+        25
+      ],
+      "power_dbm": 12,
+      "components": [
+        {
+          "kind": "chirp",
+          "bandwidth_hz": 250000,
+          "offset_hz": 250000,
+          "pulse_period_s": 0.002,
+          "duty_cycle": 0.3,
+          "weight": 0.7
+        },
+        {
+          "kind": "tone",
+          "offset_hz": 50000,
+          "weight": 0.3
+        }
+      ]
+    }
+  ],
+  "receivers": [
+    {
+      "id": "station_a",
+      "position_m": [
+        80,
+        60,
+        5
+      ],
+      "bandwidth_hz": 1500000,
+      "antenna": {
+        "geometry_type": "cross",
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "horizontal_spacing_wavelengths": 0.5,
+        "vertical_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      }
+    },
+    {
+      "id": "station_b",
+      "position_m": [
+        0,
+        100,
+        5
+      ],
+      "orientation_rad": [
+        0.7,
+        0,
+        0
+      ],
+      "bandwidth_hz": 1500000,
+      "antenna": {
+        "geometry_type": "cross",
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "horizontal_spacing_wavelengths": 0.5,
+        "vertical_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      }
+    },
+    {
+      "id": "station_c",
+      "position_m": [
+        100,
+        0,
+        20
+      ],
+      "orientation_rad": [
+        -0.5,
+        0,
+        0
+      ],
+      "bandwidth_hz": 1500000,
+      "antenna": {
+        "geometry_type": "cross",
+        "horizontal_elements": 8,
+        "vertical_elements": 8,
+        "horizontal_spacing_wavelengths": 0.5,
+        "vertical_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V"
+      }
+    }
+  ],
+  "propagation": {
+    "backend": "free_space"
+  },
+  "tasks": [
+    {
+      "id": "link_a",
+      "receiver_ids": [
+        "station_a",
+        "station_b",
+        "station_c"
+      ],
+      "desired_emitter_ids": [
+        "uav_a"
+      ],
+      "protected_center_offset_hz": -250000,
+      "protected_bandwidth_hz": 180000
+    },
+    {
+      "id": "link_b",
+      "receiver_ids": [
+        "station_a",
+        "station_b",
+        "station_c"
+      ],
+      "desired_emitter_ids": [
+        "uav_b"
+      ],
+      "protected_center_offset_hz": 280000,
+      "protected_bandwidth_hz": 150000
+    }
+  ]
+}

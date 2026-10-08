@@ -1,0 +1,5 @@
+{
+  "rays": 36,
+  "max_hit_error_m": 9.547926530105894e-05,
+  "scope": "Geometry only; no simulated source angles or paths used"
+}
