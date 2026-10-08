@@ -186,6 +186,56 @@ def gen_tone_jam(rng, length, bw=0.0):
     return np.exp(1j * 2.0 * np.pi * f * np.arange(length))
 
 
+# ---------------- 脉冲噪声家族（工业无意辐射，场景卡 7/11/6） ----------------
+# 与 Microwave（间歇宽带 burst）的区别在时域结构：簇/周期/工频同步。
+
+def gen_welder(rng, length, bw=0.30):
+    """电焊机：弧光脉冲簇——簇内密集短弧段，簇间长静默（工件更换）。"""
+    x = np.zeros(length, dtype=complex)
+    pos = 0
+    while pos < length:
+        gap = int(rng.integers(1500, 5000))              # 簇间长静默
+        pos += gap
+        n_arcs = int(rng.integers(3, 9))                 # 簇内弧段数
+        for _ in range(n_arcs):
+            d = int(rng.integers(30, 160))               # 单弧段（强宽带）
+            if pos >= length:
+                break
+            seg = (rng.standard_normal(d) + 1j * rng.standard_normal(d))
+            x[pos:pos + d] += seg * rng.uniform(0.6, 1.0)
+            pos += d + int(rng.integers(10, 60))         # 弧段间隔（引弧间隙）
+    return x
+
+
+def gen_vfd_noise(rng, length, bw=0.25):
+    """变频器/开关电源：周期性窄脉冲簇（开关频率稳定，谐波梳状谱）。"""
+    x = np.zeros(length, dtype=complex)
+    period = int(rng.integers(40, 120))                  # 开关周期（35–100 kHz）
+    pw = max(int(period * rng.uniform(0.05, 0.15)), 2)   # 脉宽
+    jitter = max(period // 20, 1)
+    pos = int(rng.integers(0, period))
+    while pos < length:
+        d = min(pw + int(rng.integers(-2, 3)), length - pos)
+        x[pos:pos + d] += (rng.standard_normal(d) + 1j * rng.standard_normal(d)) \
+            * rng.uniform(0.7, 1.0)
+        pos += period + int(rng.integers(-jitter, jitter + 1))
+    return x
+
+
+def gen_corona(rng, length, bw=0.20, fs=4e6):
+    """高压电晕放电：工频同步的间歇放电爆发（10ms 半周期内 1–2 段嘶嘶爆发）。"""
+    x = np.zeros(length, dtype=complex)
+    half_cycle = int(fs / 100)                            # 100 Hz（工频倍频）
+    n_bursts = max(int(round(length / fs * 1e3 / 5)), 1)  # 每 ~5ms 一个放电段
+    centers = np.sort(rng.integers(0, length, size=n_bursts))
+    for c in centers:
+        d = int(rng.integers(200, 900))                   # 放电段长（50–225 µs）
+        s0, s1 = max(c - d // 2, 0), min(c + d // 2, length)
+        seg = (rng.standard_normal(s1 - s0) + 1j * rng.standard_normal(s1 - s0))
+        x[s0:s1] += seg * rng.uniform(0.5, 1.0)
+    return x
+
+
 # ---------------- 辐射体注册表（城市低空覆盖矩阵） ----------------
 # 与骨架版相比：新增微波炉/DECT/Zigbee/GNSS压制/GNSS欺骗/图传私有OFDM/广播电视/扫频压制
 EMITTERS = {
@@ -211,12 +261,16 @@ EMITTERS = {
     "Chirp_jam":        (gen_chirp_jam,       "LFM",  "扫频式电子对抗（ECM）"),
     "Noise_jam":        (gen_noise_jam,       "broadband", "噪声式压制干扰"),
     "Tone_jam":         (gen_tone_jam,        "single_tone", "单音压制干扰"),
+    # 工业脉冲噪声家族（场景卡 7/11，无意辐射）
+    "Welder":           (gen_welder,          "broadband", "电焊机（弧光脉冲簇）"),
+    "VFD_noise":        (gen_vfd_noise,       "broadband", "变频器/开关电源（周期脉冲簇）"),
+    "Corona":           (gen_corona,          "broadband", "高压电晕放电（工频同步爆发）"),
 }
 
 
 # 敌我意图（v3 新任务轴）三级：malicious 恶意 / incidental 无意 / benign 无害
 # - malicious：明确用于破坏的对抗源（压制/欺骗/ECM）
-# - incidental：非针对本系统的共存/偶发干扰（微波炉/DECT/Zigbee）
+# - incidental：非针对本系统的共存/偶发干扰（微波炉/DECT/Zigbee/工业脉冲）
 # - benign：正常合法信号（通信/广播/导航/图传/雷达/遥控），多为背景辐射体
 INTENT = {
     "Bluetooth_FHSS":   "benign",
@@ -235,6 +289,10 @@ INTENT = {
     "Chirp_jam":        "malicious",
     "Noise_jam":        "malicious",
     "Tone_jam":         "malicious",
+    # 工业脉冲噪声家族（无意辐射）
+    "Welder":           "incidental",
+    "VFD_noise":        "incidental",
+    "Corona":           "incidental",
 }
 
 

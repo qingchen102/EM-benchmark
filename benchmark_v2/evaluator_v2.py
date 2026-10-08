@@ -313,14 +313,26 @@ class OpenAICompatibleAgent:
             except Exception:
                 return {}, 0, "", round_log
         best_cand: dict[str, Any] = {}
-        for _ in range(10):
+        for round_i in range(10):
             # 工具模式不加 max_tokens：ds-v4-flash 无限制时生成量巨大（极慢），
             # 加了又截断导致空答案 —— 先用 round_log 诊断每轮耗时/输出量，
             # 定位后再决定是否/如何限制
+            # 最后一轮强制 tool_choice="none"（2026-10-03）：模型会无视 prompt
+            # 的轮次纪律把预算耗在测量上、一次都不写答案——硬保险让它在同一
+            # 上下文里物理上无法再调工具，只能输出最终 JSON。
             t0 = _time.time()
+            # 最后一轮追加显式作答指令：实测模型在 tool_choice="none" 下仍会
+            # "续写调查计划"而不是输出 JSON——消息注入是配对的另一半保险。
+            _msgs = messages
+            if round_i == 9:
+                _msgs = list(messages) + [{
+                    "role": "user",
+                    "content": ("TOOL BUDGET EXHAUSTED. Output your final JSON answer "
+                                "NOW using the evidence already gathered. No prose.")}]
             response = self._create(
-                model=self.model, messages=messages,
-                tools=TOOL_SCHEMAS_V2, tool_choice="auto",
+                model=self.model, messages=_msgs,
+                tools=TOOL_SCHEMAS_V2 if round_i < 9 else None,
+                tool_choice="auto" if round_i < 9 else "none",
                 temperature=0.2, seed=42,
             )
             message = response.choices[0].message

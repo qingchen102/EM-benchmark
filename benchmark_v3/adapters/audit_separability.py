@@ -33,6 +33,7 @@ COARSE = {
     "Bluetooth_FHSS": "hop", "UAV_RC_hopping": "hop",
     "DECT": "tdma",
     "WiFi_burst": "burst", "Zigbee": "burst", "Microwave": "burst",
+    "Welder": "burst", "VFD_noise": "burst", "Corona": "burst",
     "Chirp_jam": "sweep", "Radar_pulsed_LFM": "pulse",
     "Tone_jam": "tone", "tone": "tone", "noise": "noise",
 }
