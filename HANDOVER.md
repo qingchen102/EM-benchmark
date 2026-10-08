@@ -243,6 +243,24 @@ def ")` 返回 -1 曾把文件拼成双份。
 召回分母是**任一站 INR≥3dB 可见**（与 `eval_dataset::interferer_visible_at` 同口径）。
 工具一改（如 2026-10-08 的定带解耦），这组数字就会变——**必须重跑，不能引用旧值**。
 
+### 8.2 仓库提交状态提醒（2026-10-08）
+
+**别假定工作区代码已在 git 里。** 截至本次交接：
+
+- ✅ 已提交：`oracle16.py`（gate harness + 可复现性修复）、`HANDOVER.md`、`benchmark_v3/README.md`、
+  本轮 15 个 `_diag_*.py` 诊断脚本（commit `a510533` / `847b32c`）。
+- ❌ **仍未提交**（改动量很大、含两句会话的结果，须自行确认后再提交）：
+  `benchmark_v3/adapters/capture_tools.py`（~1200 行变动）、
+  `run_capture_agent.py`（~115 行，含 S0 recipe 与 prompt）、
+  `eval_dataset.py`（match 两段配对）、`gen_dataset.py` / `audit_separability.py` /
+  `rad_cls/{data_gen16,train16}.py` / `simulation/.../emitters.py`。
+  → **D1/S0 虚警修复本身就活在这些未提交文件里**；换机器/清工作区前先 commit。
+- ❌ 未跟踪：`dataset_d*/`（含所有 answers/评测报告/BASELINE.json）、`docs/`、
+  `projects/`、`.workbuddy/`。数据集体积大，入不入库是个待定决策。
+
+**继承一个脏工作区时的第一件事**：`git status` + 逐个文件确认“这是谁改的、能不能复现”，
+再动任何数字。本轮就是靠这个发现 10-04~10-08 五天工作没进任何 README。
+
 ## 9. 未解问题（按价值排序）
 
 1. **伙伴召回**（50% 漏损）——D2 条件准确率最后 1.9pp 的唯一来源。
