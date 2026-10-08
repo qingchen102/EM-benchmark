@@ -1,6 +1,6 @@
 {
- "timestamp": "2026-10-08",
- "dataset_version": "QA2-config (deep-overlap quota, seed0 92000, |du|>=2/M, min_vis=3)",
+ "timestamp": "2026-10-09",
+ "dataset_version": "QA2-config (deep-overlap quota, seed0 92000, |du|>=2/M, min_vis=3) + noise_menu_2026_10_08（四档按站配方菜单 + frozen-channel 重放，见 noise_menus_2026_10_09）",
  "snapshot_ref": "dataset_d2_meta_qa2",
  "config": {
   "generator": "gen_dataset.py QA 三约束（>=3站LoS可见 |Δu|>=2/M 有符号u 共享可见站 |Δu|>=2/M 对间判据）",
@@ -33,6 +33,64 @@
    "D2 gate 五指标未重跑：gate 脚本不在本工作区，需按其口径复现后对比"
   ]
  },
+ "noise_uniform_2026_10_08（已被替换，保留作对照）": {
+  "what": "接收机噪声按物理真实性分档（不再是四档统一白热噪）。档位表 = adapters/noise_profiles.py；落地工具 = adapters/regen_noise.py。",
+  "profiles": {
+   "d1": "无（保持干净；实测抬底 -0.04 dB）——它是唯一被证明能精准测能力的档，留作归因参照",
+   "d2": "colored_noise_db=0.0 / colored_bandwidth_hz=200e3 + phase_noise_deg=1.0 + correlated_noise_enabled=True / noise_correlation=0.2（实测抬底 +5.41 dB）",
+   "d3": "colored 5.0 dB/200e3 + impulse_noise_enabled=True / impulse_rate_hz=200.0 / impulse_power_db=25.0 / impulse_width_us=5.0 + phase_noise_deg=1.5（+9.62 dB）",
+   "d4": "同 d3 但 phase_noise_deg=2.0；另 IMD3 enabled / iip3_dbm U(5,15) / correlated ρ=0.3 由 gen_dataset.py 既有代码给（+9.62 dB）"
+  },
+  "how": "打开平台 Frontend 早已写好但一直关着的噪声开关 + frozen-channel 重放（channel_*.npz）。平台源码零改动、不重跑 RT（~1.5-2 s/样本）；噪声先于 IMD3 与带通，会被前端非线性/滤波真实处理（后处理叠加做不到）。D1（空档位）重放与原样本逐位恒等（max|Δ|=0，200 个阵列文件）。",
+  "truth_schema_change": "d1_truth.json 的 noise 块改为实测值（model/nf_db/noise_floor_dbm(逐站中位)/profile/effective_output_noise_w/per_station/measurement/note）；interferers[j].per_station[sK].inr_db 与 target.per_station[sK].snr_db 改按**逐站实测底**重算；interference_events[*].env_over_noise_db/impact_class 同步重算；index.json 的 snr_db_range/inr_db_range 同步刷新。truth.json 每站 receiver 新增 effective_output_noise_w/_dbm/noise_only_per_element_w/noise_measurement。",
+  "consumers_updated": "oracle16.py 的 gate_gt_slice 与 gate_tool_view 改读 effective_output_noise_w（旧数据集回退 expected_output_noise_w）→ 可见性筛查 pr-nz>=3.0 变严（且**分母随之变**），gate 五指标已重定标（见 gate_toolview 的 2026-10-08/09 条与 noise_menus_2026_10_09）。",
+  "key_finding": "【噪声是真实性/时域结构旋钮，不是难度旋钮】clean→colored 0/5/10/15 dB→加脉冲共 7 档扫描：把底抬 +19 dB，capture_tools 的峰输出几乎不变（d2_00001 真3/假15 恒定；d3_00000 2/2→2/0；d4_00000 0/0→0/0）。原因：残差底由**参考直减失配能量（~-88 dBm）**主导，比热噪底 -131 dB 高 ~19 dB。真正瓶颈是残差提取链路的泄漏底。",
+  "measurement_method": "零输入 receive() 复现同一份噪声实现（种子只由 seed/rx.id/阵元号 决定），与平台解析式吻合到 0.05 dB（D1：-106.95/-106.93 实测 vs -106.94 解析 vs -106.90 旧真值）。D4 开 IMD3 时零输入是噪声下界/SNR 上界。",
+  "verification": "_verify_noise_regen.py：D1 max|Δ|=0.000e+00（逐位恒等）/ -0.04 dB；D2 2.636e-04 / +5.41 dB；D3 1.358e-04 / +9.62 dB；D4 1.277e-04 / +9.62 dB；四档总功率只变 +0.00~+0.05 dB。索引 snr_db_range/inr_db_range 与真值逐位一致（d1 [22.85,25.89] / d2 [22.18,24.5] / d3 [-7.25,1.11] / d4 [-8.54,-0.65]）。",
+  "baseline_json_maintenance": "必须重算 run_summary.json 的 hashes（cityrf.audit.audit_run 会逐条核对，否则 replay_scenario 拒绝该样本）。",
+  "backup": "加噪前四档在 benchmark_v3/_pre_noise_20261010/dataset_d{1..4}（含各自 _agent_cache），可秒级回滚；.gitignore 已排除。",
+  "label_note": "本节原键名 noise_profiles_2026_10_10 —— 实际构造于 2026-10-08 夜（本轮工作的日期标签曾写成 10-10，2026-10-09 更正）。它是**已被替换**的旧均匀档位（每档一个固定档、对所有站相同），保留作历史对照：六根受控对照显示它损失 GT切片 −0.224 / 条件 −0.092 / e2e −0.102（见 noise_menus_2026_10_09）。"
+ },
+ "noise_menus_2026_10_09": {
+  "what": "四档噪声改为「热噪永开 + colored/impulse/correlated 按站确定性抽签」（配方菜单），取代旧均匀档位。档位表 = adapters/noise_profiles.py（刻度常量 + MENUS + plan_sample 抽签），落地工具 = adapters/regen_noise.py。",
+  "why_by_station": "一个样本里的 4 个站是 4 台不同位置的接收机。按样本随机会让 station_a 系统性偏干净，直接污染 S0→S1→S2 信息增益曲线；按站抽签后四站位置的配方分布逐站完全相同（_check_noise_plan.py 实测）。",
+  "menus_slots_of_10": {
+   "d1": {"thermal": 10},
+   "d2": {"thermal": 6, "colored": 4},
+   "d3": {"thermal": 4, "colored": 3, "impulse": 3},
+   "d4": {"thermal": 2, "colored": 2, "impulse": 3, "correlated": 3}
+  },
+  "scales": "colored: d2 −8.0 / d3,d4 −5.0 dB，带宽 200 kHz；impulse: 200 Hz / 25 dB / 5 µs（duty 1e-3）；correlated: ρ=0.05；phase: d2–d4 均 0.01°（每采样点步长）。",
+  "draw_rule": "10 个槽位按权重等间距撒点；站间步长 7、样本间步长 3（均与 10 互素）→ 同一样本内 4 站取 4 个**不同**槽；每个站位置在 50 样本上遍历 10 个槽各 5 次（配方占比 == 菜单权重），且各样本的配方构成不同（不是一个构成复制 50 遍）。",
+  "measured_lift_db": {"d2_colored": 1.45, "d3_colored": 2.54, "d3_impulse": 1.18, "d4_colored": 2.53, "d4_impulse": 1.2, "d4_correlated": 0.0},
+  "audit": "_check_noise_landed.py 全绿：逐样本配方与 plan_sample 逐位一致；实测底 vs 解析抬升差 <0.1 dB；noise_floor_dbm 样本间跨度 0.04 dB（中位 -106.94）；派生 INR/SNR 392/392 + 276/276 + 500/500 + 200/200 全一致（`benchmark_v3/_regen_noise/_check_landed.txt`）。",
+  "platform_audit_2026_10_08": [
+   "receiver.py _colored() 把有色噪声**归一到时域单位平均功率**（不是谱密度）：colored_noise_db 的语义是“有色分量总功率/热噪总功率”，而它集中在 ±100 kHz、热噪摊在 ±2 MHz → **0 dB 已把带内底抬 +5.45 dB**（实测 rise ≈ 10log10(1+2.47·10^(db/10))，斜率 0.87 dB/dB）。不是 bug，但语义必须写明。",
+   "receiver.py phase_noise_deg 是**每采样点**相位步长 σ（exp(1j·cumsum) 随机游走），不是总相位：0.01° → 10 ms 内积分 2° RMS（合理）；旧档位 1.0° → 200° RMS、瞬时频偏随机游走 ±MHz，等于把本振做坏 100 倍。",
+   "colored/impulse/phase 三个开关**不受 noise_enabled 总开关管辖**（共模白噪在 `if n0:` 内，n0=0 时自动关）→ 造“无噪声参考”时只关总开关会漏三项。run_capture_agent._build_target_reference 已修为**只关加性四项、保留 phase 与 IMD3**：数据与参考走同一台接收机、同一时刻，相位误差是**共享乘性项**，关掉反而在残差里留目标残影（A 模型实测：D2 召回崩到 0.173）。"
+  ],
+  "verdict_table_2026_10_08": {
+   "method": "同一份 d2 + 官方 gate，六根受控对照（adapters/_ab_model_c.py，零 API；日志 benchmark_v3/_ab_d2/_driver5.log）",
+   "rows": [
+    "R0_pre_noise 无噪声：GT切片 0.738 [59/80] / 召回 0.561 / 假簇 0.623 / 条件 0.473 / e2e 0.265",
+    "R1_full_profile 旧均匀档位（colored 0 dB + phase 1.0° + ρ0.2）：GT切片 0.514 [38/74] / 0.429 / 0.656 / 条件 0.381 / e2e 0.163",
+    "R2_V7_final 新刻度均匀（colored −5 dB + phase 0.01° + ρ0.05）：GT切片 0.753 [58/77] / 0.541 / 0.558 / 条件 0.453 / e2e 0.245",
+    "R3_colored_only 只开 colored 0 dB：GT切片 0.770 [57/74] / 0.520 / 0.579 / 条件 0.471 / e2e 0.245",
+    "R4_phase10 只开 phase 1.0°：GT切片 0.463 [37/80] **FAIL** / 召回 0.429 [42/98] / 假簇 0.734 [116/158] / 条件 0.310 [13/42] / e2e 0.133（单项即最坏，比旧全档位还差）",
+    "R5_phase02 只开 phase 0.2°：GT切片 0.738 [59/80] PASS（与无噪声逐位相同）/ 召回 0.480 [47/98] / 假簇 0.691 [105/152] / 条件 0.468 [22/47] / e2e 0.224",
+    "现行数据（菜单，phase 0.01° + 按站 colored/impulse/correlated）：GT切片 0.746 [53/71] / 0.510 / 0.612 / 条件 0.480 / e2e 0.245 / 可解 0.543（官方 gate，_gate_new_d2_live.log）"
+   ],
+   "conclusion": "旧档位损失 GT切片 −0.224 / 条件 −0.092 / e2e −0.102；换成菜单档位后与无噪声只差 ±2pp（假簇率反而改善 6.5pp）。伤害**几乎全部来自 phase**，且随步长单调：1.0° → GT切片 0.463 FAIL、召回 0.429、条件 0.310（单项即最坏，比旧全档位还差）；0.2° → GT切片回到 0.738 但召回 −8pp（0.480）、假簇 +6.8pp（0.691）；0.01° → 落在噪声内。根因：平台 `phase_noise_deg` 是**每采样点**相位步长（1.0° → 10 ms 内积分 200° RMS、瞬时频偏随机游走 ±MHz）。colored 0 dB 几乎无害（条件 0.471 vs 无噪声 0.473）。→ **噪声是真实性/时域结构旋钮，不是难度旋钮**；调节旋钮时**优先控 phase**。",
+   "denominator_caveat": "GT 切片的可见性筛查（pr − nz >= 3.0）改读**逐站实测底**后，噪声越重的档被排除的“临界可见”条目越多（80 → 77 → 74 → 71）；排除的不是随机样本而是临界点，**跨配方/跨版本比较必须带分母**。"
+  },
+  "cnn_retrain": "**不需要**：新数据 GT 切片 0.746 ≈ 无噪声 0.738，且训练分布（rad_cls/data_gen16.py 的热噪 + 接收滤波）未被本次改动触碰。若后续 kind 指标异常，优先回查此处。",
+  "artifacts": {
+   "pre_noise_backup": "benchmark_v3/_pre_noise_20261010/dataset_d{1..4}（目录名带创建时的 10-10 标签，实际备份于 2026-10-08/09 夜；与 _regen_d34 的 iq_station_a.npy 逐字节相同）",
+   "old_uniform_backup": "benchmark_v3/_old_noise_profile_20261010/dataset_d{2,3,4}（换装前的旧档位数据 + 旧 _agent_cache）",
+   "new_data": "benchmark_v3/_regen_noise/dataset_d{2,3,4} → 已换装为现行 benchmark_v3/dataset_d{2,3,4}；D1 未重放（已是纯热噪、逐位恒等）",
+   "ab_logs": "benchmark_v3/_ab_d2/（_driver5.log = 六根判决表；_gate_new_d2_live.log = 现行数据官方 gate）"
+  }
+ },
  "d1_s0_agent_regression_2026_10_08": {
   "answers_dir": "dataset_d1/answers_S0_agent_fix20",
   "date": "2026-10-08",
@@ -58,18 +116,31 @@
   "note": "本轮改动（残差峰判据重修 + 定带解耦 + RANSAC 回退链）的最终验收口径。旧答案已备份至 dataset_d1/_backup_answers_20261008/。"
  },
  "gate_toolview": {
-  "recall_all_visible": 0.551,
-  "false_cluster_rate": 0.63,
-  "conditional_kind_acc": 0.481,
-  "answerable_recall_ge3station": 0.581,
-  "e2e_detect_x_kind": 0.265,
-  "note": "gate FAIL（条件 47.3%<50%），差 2.7pp。**本组为 2026-10-08 实测（`python oracle16.py`，已清 D2 _agent_cache 后重建），是当前代码的唯一有效口径。**",
-  "_history_2026_10_03": {
-   "conditional_kind_acc": 0.481,
-   "recall_all_visible": 0.551,
-   "false_cluster_rate": 0.63,
-   "answerable_recall_ge3station": 0.581,
-   "note": "旧记录值，与 2026-10-08 实测（0.473/0.561/0.623/0.591）有 ±1pp 级差异。**已核实不是工具改动造成的**：`DSH_PEAK_LEGACY=1`（旧判据路径）与当前代码给出**逐位相同**的 gate 输出；差异来自 10-03 与 10-08 之间的工作区代码/缓存状态，属历史口径，引用时必须标注。"
+  "recall_all_visible": 0.51,
+  "false_cluster_rate": 0.612,
+  "conditional_kind_acc": 0.48,
+  "answerable_recall_ge3station": 0.543,
+  "e2e_detect_x_kind": 0.245,
+  "clean_16class": 0.86,
+  "gt_slice": 0.746,
+  "note": "gate FAIL（条件 48.0% < 50%），差 2.0pp。**本组为 2026-10-08/09 夜换装菜单噪声后的实测口径（`cd benchmark_v3/adapters/rad_cls && python oracle16.py`，清缓存重建），是当前数据的唯一有效口径。** 分母：GT 切片 [53/71]、可解子集 [50/92]、clean [980/1140]。",
+  "_history_2026_10_08": {
+   "recall_all_visible": 0.561,
+   "false_cluster_rate": 0.623,
+   "conditional_kind_acc": 0.473,
+   "answerable_recall_ge3station": 0.591,
+   "e2e_detect_x_kind": 0.265,
+   "clean_16class": 0.86,
+   "gt_slice": 0.738,
+   "raw": "clean 0.860 [980/1140] / GT切片 0.738 [59/80] / 召回 0.561 [55/98] / 假簇 0.623 [91/146] / 条件 0.473 [26/55] / e2e 0.265 / 可解子集 0.591 [55/93]",
+   "note": "换装菜单噪声**之前**（旧均匀档位数据）的实测口径，测于 2026-10-08；换装后重测见本级顶层数字。两轮差异在 ±4pp 内，座落在同一个仪器瓶颈上。",
+   "_history_2026_10_03": {
+    "conditional_kind_acc": 0.481,
+    "recall_all_visible": 0.551,
+    "false_cluster_rate": 0.63,
+    "answerable_recall_ge3station": 0.581,
+    "note": "10-03 记录值，与 10-08 实测（0.473/0.561/0.623/0.591）有 ±1pp 级差异；已核实不是工具改动造成（DSH_PEAK_LEGACY=1 与当前代码给出**逐位相同**输出），属历史口径，引用必须标注。"
+   }
   },
   "provenance": {
    "entry": "cd benchmark_v3/adapters/rad_cls && python oracle16.py —— 三级预注册门限 clean>=0.85 / GT-slice>=0.50 / tool-view>=0.50",
@@ -82,7 +153,7 @@
     "gate_gt_slice 旧行为在残差缓存缺失时静默 continue → 分母 0/0、指标 0.000 但打印 gate=0.5（2026-10-08 已修：现场重建 + 分母为 0 时明报告警）",
     "工具一改（如 2026-10-08 定带解耦）gate 数字就会变，**必须重跑、不能引用旧值**"
    ],
-   "raw_2026_10_08": {
+   "raw_2026_10_08_pre_menu_swap": {
     "clean": "0.860 [980/1140]",
     "gt_slice": "0.738 [59/80]",
     "tool_view_recall": "0.561 [55/98]",
@@ -113,11 +184,11 @@
   "全局中位底+连段的残差峰判据（对参考失配能量无免疫力 → D1/S0 虚警；2026-10-08 已替换）"
  ],
  "next": [
-  "D1×S0 agent 20 样本 API 回归（验证 2026-10-08 工具改动的最终口径）",
-  "D2 gate 五指标重跑（确认聚类级不退化传导到 gate）",
-  "伙伴召回（漏损 50%）下版本课题",
+  "D3/D4 首次 agent 基线（数据已就位；用户口径：等题目敲定后再跑）",
+  "伙伴召回（漏损 34.5%：源真载频落在候选共道带之外被硬掩蔽——下版本重做提取链路）",
   "S0 doa_aes 95.2° 镜象折叠待查",
-  "z-2D 口径写规范"
+  "z-2D 口径写规范",
+  "长窗题三件套（数据层 + 19 个生成器物理时基 + 时域工具重标定）作为下一阶段目标"
  ],
  "d1_tool_regression": {
   "date": "2026-10-08",

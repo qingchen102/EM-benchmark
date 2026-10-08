@@ -1,0 +1,58 @@
+﻿== 16 辐射体分类器 oracle（gate: clean0.85/slice0.5/toolview0.5）==
+  clean (独立种子, 训练同链路): 0.860  [980/1140]  gate=0.85
+  GT切片 (GT位置LS提取后分类): 0.738  [59/80]  gate=0.5
+== 判定: clean PASS | GT切片 PASS
+== clean 混淆矩阵 ==
+  混淆矩阵 (GT行 × pred列, 顶行/左列=类名):
+       Bluet  WiFi_  Micro  Zigbe   DECT  LTE_Q  UAV_v  UAV_R  Radar  GPS_D  GNSS_  GNSS_  TV_br  Chirp  Noise  Tone_  Welde  VFD_n  Coron
+  Bluetooth_FH     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  WiFi_burst        0     47      0      3      0      0      0      0      0      0      0      0      0      0      0      1      4      0      5
+  Microwave         0      0     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Zigbee            0      1      0     58      0      0      0      0      0      0      0      0      0      0      0      0      0      0      1
+  DECT              0      0      0      0     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  LTE_QPSK          0      0      0      0      0     59      0      0      0      0      0      0      1      0      0      0      0      0      0
+  UAV_video_OF      0      0      0      0      0      0     40      0      0      0      0      0     20      0      0      0      0      0      0
+  UAV_RC_hoppi      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0      0      0      0      0
+  Radar_pulsed      0      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0      0      0      0
+  GPS_DSSS          0      0      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0      0      0
+  GNSS_jam          0      0      0      0      0      0      0      0      0      0     59      0      0      0      0      0      0      1      0
+  GNSS_spoof        0      0      0      0      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0
+  TV_broadcast      0      0      0      0      0      0     41      0      0      0      0      0     17      0      2      0      0      0      0
+  Chirp_jam         0      0      0      0      0      0      0      0      0      0      0      0      0     60      0      0      0      0      0
+  Noise_jam         0      0      0      0      0      2      3      0      0      0      0      0      3      0     52      0      0      0      0
+  Tone_jam          0      0      0      0      0      2      0      0      0      0      0      0      5     14     11     26      2      0      0
+  Welder            0     18      0      2      0      0      0      0      0      0      0      0      0      0     11      0     29      0      0
+  VFD_noise         0      0      0      0      0      0      0      0      0      0      0      0      0      0      1      0      0     59      0
+  Corona            0      1      0      2      0      0      0      0      0      0      0      0      0      0      2      0      1      0     54
+== GT切片 混淆矩阵 ==
+  混淆矩阵 (GT行 × pred列, 顶行/左列=类名):
+       Bluet  WiFi_  Micro  Zigbe   DECT  LTE_Q  UAV_v  UAV_R  Radar  GPS_D  GNSS_  GNSS_  TV_br  Chirp  Noise  Tone_  Welde  VFD_n  Coron
+  Bluetooth_FH      6      0      0      0      0      0      0      0      0      0      1      0      0      0      0      0      0      0      0
+  WiFi_burst        0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      2      0      7
+  Microwave         0      0     11      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Zigbee            0      0      0      6      0      0      0      0      0      0      0      0      0      0      0      0      5      0      1
+  DECT              0      0      0      0     11      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  LTE_QPSK          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  UAV_video_OF      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  UAV_RC_hoppi      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Radar_pulsed      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GPS_DSSS          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GNSS_jam          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GNSS_spoof        0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  TV_broadcast      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Chirp_jam         0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Noise_jam         0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Tone_jam          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Welder            0      3      0      0      0      0      0      0      0      0      0      0      0      0      0      0      5      0      0
+  VFD_noise         0      0      0      0      0      0      0      0      0      0      0      0      0      0      1      0      0      8      0
+  Corona            0      0      0      0      0      0      0      0      0      0      0      0      0      1      0      0      0      0     12
+  tool-view (完整链路, 前50样本, 主指标=candidates):
+    per-source 召回 : 0.561  [55/98]
+    假簇率          : 0.623  [91/146 簇]
+    条件分类准确率  : 0.473  [26/55]
+    端到端/干扰     : 0.265  (gate: 召回≥0.5 且 条件≥0.5)
+    [可解子集召回   : 0.591  [55/93] —— 分母=≥3站可见（trio 硬上限），与全可见口径并列报
+    [次要] sources 门槛栏: 召回 0.541  簇数 143
+== 判定: tool-view FAIL
+未达标：不接入工具箱，回到训练调参（增加变体/epoch/容量）
+EXIT=0

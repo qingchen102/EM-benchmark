@@ -9,6 +9,18 @@ benchmark_v3/adapters/rad_cls/rad_classifier/
 benchmark_v3/_old_dataset_*/
 benchmark_v3/_regen_d34/
 benchmark_v3/_probe_d*/
+# 加噪重生成（2026-10-08/09 夜）：旧数据备份 + 中间产物
+benchmark_v3/_pre_noise_20261010/
+benchmark_v3/_regen_noise/
+benchmark_v3/_old_noise_profile_20261010/
+benchmark_v3/_smoke_menu_d2/
+benchmark_v3/adapters/_probe_peaks_cache/
+benchmark_v3/adapters/_verify_cache/
+# 损失分解变体（2026-10-08/09 夜，零 API 消融：单旋钮重放 + 官方 gate；单档数据 GB 级故整目录排除）
+benchmark_v3/_ab_d2/
+# 汇报 PPT 分析残留（含他人 PPT 原文）
+_ppt_dump.txt
+_ppt_ref_dump.txt
 # 旧 agent 缓存备份（清缓存重建时留档）
 benchmark_v3/dataset_d*/_agent_cache_pre_*/
 # 数据集主体不入库（GB 级 IQ/缓存），但基线数字必须入库——它是“防前态过期”核心机制
@@ -20,3 +32,13 @@ _dryrun.log
 .workbuddy/
 __pycache__/
 *.pyc
+# 编辑器/工具残留（2026-10-08/09 夜）
+.zcode/
+_dump_ppt.py
+_dump_ref.py
+# 平台融合 DEMO 运行输出（非代码）
+benchmark_v3/_fusion_*/
+# Office 锁文件
+~$*.pptx
+# v1/v2 数据集输出（非代码）
+benchmark_v1/*/dataset*/
