@@ -155,19 +155,59 @@ def score_answer(ans: dict, gt_list: list[dict], slevel: str) -> dict:
     return r
 
 
-def match(pred: list[dict], gt_list: list[dict], gate: float | None = 0.45) -> list[tuple]:
-    """贪心频偏匹配。gate=None 时无门槛取最近（oracle 关联用）。"""
-    pairs, used = [], set()
-    for g in gt_list:
+def _pos_dist_m(p: dict, g: dict) -> float | None:
+    """候选/答案位置与 GT 位置的 2D 距离（m）。任一方缺位置返回 None。"""
+    pp = p.get("position_m") or p.get("position_xy_m")
+    gp = g.get("position_m")
+    if not pp or not gp or len(gp) < 2:
+        return None
+    try:
+        return float(np.hypot(float(pp[0]) - float(gp[0]),
+                              float(pp[1]) - float(gp[1])))
+    except (TypeError, ValueError):
+        return None
+
+
+def match(pred: list[dict], gt_list: list[dict],
+          gate: float | None = 0.45) -> list[tuple]:
+    """贪心两段配对（2026-10-03 修正）：**位置优先、频偏兜底**。
+
+    旧版纯频偏最近配对——频偏是结构上最弱且不可提取的轴（三估计器 + oracle
+    带切上限 42% 全撞墙），配对错位会污染 kind/intent 计分（u-NMS 后 kind
+    0.556→0.444 的假象即此）。修正：位置可信（两侧都有位置）的 GT 先按
+    位置距离 ≤50 m 贪心配对（与 pos_hits 的 50 m 口径一致），剩余 GT 再按
+    频偏 gate 配对。gate=None（oracle 关联）= 位置优先 + 频偏最近兜底。
+    """
+    pairs, used_pred = [], set()
+    used_gt = set()
+    # ---- 第一段：位置优先（双侧都有位置才参与）----
+    pos_cand = []
+    for i_g, g in enumerate(gt_list):
+        for i_p, p in enumerate(pred):
+            d = _pos_dist_m(p, g)
+            if d is not None and d <= 50.0:
+                pos_cand.append((d, i_p, i_g))
+    pos_cand.sort()
+    for d, i_p, i_g in pos_cand:
+        if i_p in used_pred or i_g in used_gt:
+            continue
+        used_pred.add(i_p); used_gt.add(i_g)
+        pairs.append((pred[i_p], gt_list[i_g]))
+    # ---- 第二段：频偏兜底（gate 适用于此段；位置段不受 gate 限制——
+    #      50 m 位置本身就是强证据）----
+    for i_g, g in enumerate(gt_list):
+        if i_g in used_gt:
+            continue
         best, bi = None, None
         for i, p in enumerate(pred):
-            if i in used:
+            if i in used_pred:
                 continue
             d = abs(p.get("freq_offset_hz", 0) - g["freq_offset_hz"]) / 2e6
             if best is None or d < best:
                 best, bi = d, i
         if bi is not None and best is not None and (gate is None or best <= gate):
-            used.add(bi)
+            used_pred.add(bi)
+            used_gt.add(i_g)
             pairs.append((pred[bi], g))
     return pairs
 

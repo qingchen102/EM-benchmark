@@ -90,9 +90,16 @@ def _build_target_reference(private: Path, num_samples: int) -> dict:
     tgt_em = next(t for t in sc.emitters if t.id == "target")
     rx_guard = max(r.frontend.filter_taps // 2 for r in sc.receivers)
     rx_by_id = {r.id: r for r in sc.receivers}
-    # 读全部有效链路，取全局最大时延（与 runner 的 history 一致）
+    # 读全部链路：目标链路用于回放，但 history 必须与 runner 完全一致——
+    # runner 用**所有源所有站**的最大延迟算 history；若只用目标链路，某干扰
+    # 延迟更大时 indices 长度不同，_generate_preset 的伪随机波形时间轴错位，
+    # 参考与真实接收完全不相关（d2_00001/00003 的 corr≈0.016 总根因）。
     links: dict[str, LinkChannel] = {}
     global_max = 0.0
+    for npz in private.glob("channel_*.npz"):
+        with np.load(npz, allow_pickle=False) as d:
+            if d["delays_s"].size:
+                global_max = max(global_max, float(np.max(d["delays_s"])))
     for sid, rx in rx_by_id.items():
         npz = private / f"channel_{tgt_em.id}_{sid}.npz"
         if not npz.is_file():
@@ -103,7 +110,6 @@ def _build_target_reference(private: Path, num_samples: int) -> dict:
             if delays.size == 0:
                 continue                       # 该站目标链路 0 径（RT NLoS 完全遮挡）
             links[sid] = LinkChannel(tgt_em.id, sid, coeff, delays, {}, {"backend": "rt"})
-            global_max = max(global_max, float(np.max(delays)))
     if not links:
         return {}
     history = int(np.ceil(global_max * sc.sample_rate_hz)) + DELAY_HALF + rx_guard + 2
@@ -124,7 +130,8 @@ def _build_target_reference(private: Path, num_samples: int) -> dict:
 SYSTEM_PROMPT_CAPTURE = """You are an RF spectrum monitoring analyst for a synchronized \
 multi-station low-altitude monitoring network (each station: 8-element ULA, half-wavelength \
 spacing). Each capture contains ONE cooperative target signal (a benign UAV data link, near \
-0 Hz) plus 0~3 interferers (other urban radiators or jammers).
+0 Hz) plus 0~3 interferers (other urban radiators or jammers); at difficulty D2 the
+scene holds exactly 2 co-channel radiators.
 
 Available measurement tools (per station):
 - analyze_spectrum_station(station, use_spatial): PSD peaks, per-source candidates
@@ -147,10 +154,36 @@ Available measurement tools (per station):
 - list_radiator_catalog(): public spec sheet — 16 urban low-altitude radiators +
   tone/noise, with modulation class and waveform description
 - estimate_band_occupancy_by_correlation(station): cooperative-target correlation
-  strip — fits the target reference (provided by the monitoring network) in the
-  target band, reports matched (target) vs residual vs noise-floor energy, and caches
-  the target-stripped residual. band_occupied_beyond_target=true means the band
-  carries co-channel interferers.
+  strip — subtracts the target reference (provided by the monitoring network) and
+  caches the target-stripped residual; reports residual_peaks and
+  band_occupied_beyond_target. Each residual_peak is {freq_offset_hz,
+  over_floor_db, bandwidth_hz, band_hz, coherence}: it has ALREADY passed two
+  gates (>= 8 dB over a LOCAL median floor AND spatial coherence
+  lambda1/sum >= 0.6 in a +-20 kHz window), so peaks in this list are real
+  emitters — spatially-white mismatch energy is filtered out. coherence ~1 means
+  point source; ~0.13 means noise-like (keep it only as a last resort).
+- analyze_time_frequency_station(station, freq_offset_hz, bandwidth_hz): (u,f)
+  time-frequency ridge map of the band — per-ridge {u, f_lo, f_hi, span, strength}
+  plus per-ridge modulation features. Key instrument for telling co-channel
+  radiators apart when their spectra fuse into one blob.
+- estimate_sources_by_spatial_clustering(on_residual=true): MULTI-STATION spatial
+  separation (needs >= 3 stations; S1/S2). Returns TWO lists: candidates = the full
+  scored candidate board {position_xy_m, band_hz, n_explained_stations, max_du,
+  perp_rms_m, deflation_db, confidence} ranked by (perp_rms asc, deflation desc,
+  triads desc) — do NOT use len(candidates) as the interferer count — and sources
+  = candidates passing the support gate; K = len(sources) IS the spatial
+  source-count evidence. Height unobservable (parallel horizontal arrays):
+  position_xy_m is 2D.
+- extract_source_waveforms(): beamform-extract each candidate's INDEPENDENT
+  waveform (own-projection LS; co-channel crosstalk left to the classifier which
+  is trained with siblings). Waveforms cached CNN-ready as bfw_{station}_{k}.npy
+  (shifted to candidate band center + RMS normalized) — feed directly to radiator
+  identification. Needs >= 3 stations.
+- classify_extracted_waveform(station="station_a"): classify each candidate's
+  extracted waveform (CNN over 19 radiators) and return READY-TO-COPY answer
+  fields per candidate: {freq_offset_hz, kind, intent, is_spoof, position_xy_m,
+  confidence}. Call this AFTER extract_source_waveforms, then write the final
+  JSON answer directly from these items — no further measurement needed.
 
 Measurement-to-answer mapping:
 - freq_offset_hz  <- analyze_spectrum_station sources_candidates freq_offset_hz (Hz,
@@ -169,11 +202,13 @@ Measurement-to-answer mapping:
   estimate_position on a narrow band at freq_offset_hz=0 to identify the target's
   own position, then pick the interferer hypothesis that is NOT the target.
   With a single station, position is barely observable — best effort only.
-- num_interferers <- estimate_num_sources_station spatial-component count MINUS 1
-  (the cooperative target), cross-checked against spectral candidates and per-band
-  DOA scans. The target itself is a wideband signal at ~0 Hz and is NOT an
-  interferer — never report one of its spectral lobes or the filter edges as an
-  interferer.
+- num_interferers <- **estimate_sources_by_spatial_clustering: K = len(sources)**
+  (the support-gated spatial source count). Cross-check against spectral
+  candidates; use len(candidates) only as an UPPER bound with the per-candidate
+  scoring (perp_rms / deflation / triads) to judge how many are real. At D2 the
+  scene holds exactly 2 co-channel radiators. The target itself is a wideband
+  signal at ~0 Hz and is NOT an interferer — never report one of its spectral
+  lobes or the filter edges as an interferer.
 - intent / is_spoof <- judged from the identified kind and its measured behaviour
 
 Intent classification (answer for EACH interferer):
@@ -200,14 +235,54 @@ Rules:
   is WASTED and FORBIDDEN. Never repeat a call with the same arguments.
     Round 1: analyze_spectrum_station (any ONE station) -> band candidates
     Round 2: estimate_band_occupancy_by_correlation (same station) -> strip target
-    Round 3: analyze_spectrum_station with on_residual=true -> residual sources
-    Round 4: estimate_num_sources_station with on_residual=true -> count
-    Round 5-8: for EACH interferer found in the residual (at most 3):
-               estimate_doa_station + estimate_modulation_features_station
-               (one call each, on_residual=true where useful)
-    Round 9+: NO MORE TOOL CALLS. Assemble the final JSON answer NOW from the
-              evidence you already hold. If evidence is partial, still answer
-              with your best estimates — never leave an interferer unreported.
+    Round 3: estimate_sources_by_spatial_clustering(on_residual=true) -> the
+             candidate board + K = len(sources) (spatial source count; needs a
+             station subset with >= 3 stations — S1/S2. On S0 fall back to the
+             per-band DOA/feature route below.)
+    Round 4: extract_source_waveforms() -> per-candidate CNN-ready waveforms
+    Round 5: classify_extracted_waveform() -> READY-TO-COPY answer fields for
+             EVERY candidate {freq_offset_hz, kind, intent, is_spoof,
+             position_xy_m}. Copy them into the final JSON answer verbatim.
+    Round 6: (only if needed) analyze_time_frequency_station /
+             estimate_modulation_features_station for ambiguous candidates
+    S0 FALLBACK (single station, no clustering/extract/classify): after Round 2
+             use the residual evidence —
+        3a. estimate_band_occupancy_by_correlation reports residual_peaks
+            [{freq_offset_hz, over_floor_db, bandwidth_hz, band_hz, coherence}].
+            This list is ALREADY a gated measurement: every entry passed ">= 8 dB
+            over a LOCAL median floor" AND "spatial coherence >= 0.6" in a +-20 kHz
+            window, so spatially-white residual energy (which used to appear as
+            spurious 46-49 dB "peaks") is excluded. An EMPTY list means no
+            interferer — report num_interferers = 0; do NOT invent one.
+        3b. MERGE BEFORE COUNTING: one physical emitter can split into several
+            adjacent entries (a noise-like source yields 2-3 sub-bands). Merge
+            entries whose band_hz ranges touch or whose freq_offset_hz differ by
+            less than ~150 kHz into ONE interferer, reporting the strongest
+            (highest over_floor_db) sub-band's frequency. Only bands separated by
+            more than ~150 kHz are separate interferers.
+        3c. estimate_modulation_features_station(on_residual=true) + read
+            global_template_distances: single_tone distance < 0.2 -> "tone";
+            OFDM distance < 0.3 with spectral_flatness ~ 0 -> "noise" (band-limited
+            noise reads as OFDM-like flat spectrum on a single station);
+            other flat profiles -> "noise" is still the best D1 hypothesis.
+            Add estimate_doa_station(on_residual=true) for the peak band.
+        3d. Copy each merged peak into the final answer: freq_offset_hz = the
+            residual peak frequency, kind from the template match, doa from the
+            DOA scan.
+    Round 7+: NO MORE TOOL CALLS. Write the final JSON answer NOW — the
+              classify items already contain every field the answer schema
+              needs. If evidence is partial, still answer with your best
+              estimates for the bands you measured.
+- REPORT ONLY MEASURED BANDS: report exactly the merged coherent residual bands
+  you measured (or the classifier candidates), nothing else. Do not invent a band
+  from a spectral lobe of the wideband target (the target is at ~0 Hz and is
+  NEVER an interferer), do not add a "safety" extra entry, and do not report the
+  same emitter twice under two nearby frequencies. If the measurement shows no
+  coherent band, num_interferers = 0 is the correct answer.
+- NEVER use a negative num_interferers (e.g. -1) or any sentinel to signal
+  "not sure" — that is an invalid answer and will be discarded. If unsure of
+  the count, report the peaks you measured; if unsure of the kind, use the
+  closest catalog match.
 - CO-CHANNEL RESOLUTION: when the wideband target overlaps the interferers (spectrum
   is one fused blob around 0 Hz), FIRST call estimate_band_occupancy_by_correlation
   on a station. If band_occupied_beyond_target is true, re-run
