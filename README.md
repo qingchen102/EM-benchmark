@@ -63,7 +63,7 @@
 |---|---|---|---|
 | **V1** | 单天线、4 类简单干扰 | 跑通「Agent 能做信号分类」的完整评估链路 | ✅ 历史封版 |
 | **V2** | 4 阵元 ULA、多源（1 目标 + 0~2 干扰）、真实辐射体简化（调制）+ 物理保真（LNA 饱和 / 阵元失配 / 防折叠 / OBW99 统一） | 检测 / 分类 / 参数估计 / DOA / 体制识别 | ✅ 封版（v8，ds_run19） |
-| **V3** | **低空环境仿真**：16 个城市低空辐射体 + 多径 / IQ 不平衡 / 相位噪声 / IMD3 信道 + 敌我意图 / 辐射体溯源答案轴；分级数据集 D1–D4 × 观测条件 S0–S2 已生成（各 50 条）；信道后端可接入物理仿真平台 | V2 全部任务 + 辐射体溯源 + 敌我意图 + 分级评测（D1–D4 × S0–S2） | ✅ 生成器闭合 + 评估器就绪 + 四级数据集落地（见 `benchmark_v3/README.md` §7） |
+| **V3** | **低空环境仿真**：16 个城市低空辐射体 + 多径 / IQ 不平衡 / 相位噪声 / IMD3 信道 + 敌我意图 / 辐射体溯源答案轴；分级数据集 D1–D4 × 观测条件 S0–S2 已生成（各 50 条）；D2 已按 QA 三约束重生成（≥3 站可见 / 共道对 \|Δu\|≥2/M / 深重叠配额）；12 件多站分离工具 + CNN 溯源分类器落地；**D2×S2 agent 全量基线出炉**（detection 0.860 / kind 0.412 / pos 0.459，注册口径） | V2 全部任务 + 辐射体溯源 + 敌我意图 + 分级评测（D1–D4 × S0–S2） | ✅ 生成器闭合 + 数据集 QA 化 + agent 全量基线（见 `benchmark_v3/README.md` §6 末、`benchmark_v3/dataset_d2/BASELINE.json`） |
 | **V4（规划）** | **真实数据**（真实 SDR 采集） | 同 V3 | ⏳ |
 
 > **V3 的信号模型是"更真实的低空环境仿真"，不是真实采集**——真实采集留到 V4。
@@ -134,8 +134,8 @@ python adapters/cityrf_source.py simple    # 单站回归：1 目标 + 2 干扰
 
 # 真实多径（Sionna RT，须在 WSL 里用平台的 .venv-rt；LLVM 依赖系统 libLLVM-17）
 wsl -d Ubuntu -e bash -lc 'export LD_LIBRARY_PATH=/usr/lib/llvm-17/lib:$LD_LIBRARY_PATH; \
-  /mnt/d/srtp/benchmark_v2/benchmark_v3/城市低空电磁信号仿真平台/.venv-rt/bin/python \
-  /mnt/d/srtp/benchmark_v2/benchmark_v3/adapters/cityrf_source.py rt'
+  /mnt/d/srtp/EM-benchmark/benchmark_v3/城市低空电磁信号仿真平台/.venv-rt/bin/python \
+  /mnt/d/srtp/EM-benchmark/benchmark_v3/adapters/cityrf_source.py rt'
 ```
 
 自由空间输出在 `benchmark_v3/_fusion_multi/`；真实多径输出在 `benchmark_v3/_fusion_rt/`。`public/` 是给 Agent 的多站观测（不含答案轴），`private/` 是逐个 (tx,rx) 信道 / 真值，外加 `fusion_truth.json`（辐射体名 / 敌我意图）。`rt` 模式用慕尼黑场景里已验证「天顶可见」的坐标（随机布点会被楼挡掉、求解失败）。
@@ -188,7 +188,8 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 | `benchmark_v1/README.md` | V1 历史文档 |
 | `benchmark_v2/README.md` | V2：架构、CLI、评估链路、基线结果（ds_run19） |
 | `benchmark_v2/simulation/README.md` | V2 信号模型细节（架构 / 算法 / 参数 / 元数据字段） |
-| `benchmark_v3/README.md` | V3：设计决策、16 辐射体覆盖矩阵、信道、Roadmap |
+| `benchmark_v3/README.md` | V3：设计决策、16 辐射体覆盖矩阵、信道、工具链与基线、Roadmap |
+| `HANDOVER.md` | AI 接力交接：目标、已证伪路线、工程陷阱、诊断工具箱 |
 | `benchmark_v3/adapters/cityrf_source.py` | V3 源 → 平台信道的融合适配器（含使用说明） |
 | `benchmark_v3/城市低空电磁信号仿真平台/README.md` | 物理平台独立文档（启动 / 能力 / 限制） |
 
@@ -196,7 +197,12 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 
 ## 8. Roadmap
 
-- **V3 定稿**：确定辐射体清单、信道参数、溯源粒度终稿；难度分级（信道效应开关消融）。
-- **融合样本接回评分**：把 `adapters` 产生的融合样本接回 V3 三 JSON / `eval_v3.py`，让评分闭环直接消费更真实信道数据。
-- **物理平台 Sionna RT 后端**：在 WSL + Sionna RT 2.1.0 环境启用 `sionna_rt`，获得真实多径；对比 free_space vs RT 对 DOA / 定位任务的影响。
-- **V3 → V4**：真实 SDR 采集，替换仿真信号源为真实捕获；保住考卷 / 答案轴 / 阅卷接口不变。
+- [x] **V3 定稿**：辐射体清单（19 类含工业脉冲家族）、信道参数、溯源粒度定稿；D1–D4 分级数据集落地。
+- [x] **物理平台 Sionna RT 后端**：D2–D4 已用（WSL Ubuntu + `.venv-rt`，仓库搬家后 `.pth` 已修，调用方式见 `benchmark_v3/README.md`）。
+- [x] **D2 QA 重生成 + agent 全量基线**（2026-10-03）：detection 0.860 / kind 0.412 / pos 0.459 / intent 0.682（注册口径，50 样本）。
+- [ ] **伙伴召回**：tool-view 条件准确率当前 **0.473**（2026-10-08 清缓存实测，差 0.027 未过 0.50 门限；clean 0.860 / GT-slice 0.738 两层已过）卡在“50% 认领的真值共道伙伴未进候选集”——属召回问题。
+- [x] **D1/S0 虚警根治**（2026-10-08）：残差峰判据重修（局部底 + 窄窗空间相干门控）+ 聚类定带解耦；D1×S0 agent detection **0.083 → 1.00**（20/20 计数精确），D2 聚类级不退化。
+- [ ] **"难度 × 站数"成绩矩阵全量**（D1–D4 × S0–S2；D2×S2 已完成）。
+- [ ] **S0 弱证据报告判别**（单站场景虚警-欠报摆动，需置信度校准）。
+- [ ] **信道效应开关消融**（量化多径/NLoS 贡献的难度）。
+- [ ] **V3 → V4**：真实 SDR 采集，替换仿真信号源为真实捕获；保住考卷 / 答案轴 / 阅卷接口不变。
