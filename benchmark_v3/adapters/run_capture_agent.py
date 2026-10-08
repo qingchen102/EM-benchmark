@@ -121,7 +121,19 @@ def _build_target_reference(private: Path, num_samples: int) -> dict:
         arrival = apply_channel(wave, indices[0], link, sc.sample_rate_hz,
                                 num_samples + 2 * rx_guard, output_start=-rx_guard)
         clean = rx_by_id[sid].model_copy(deep=True)
-        clean.frontend.noise_enabled = False
+        # 关掉**加性**噪声：`noise_enabled`（热噪 + 共模白噪）、`colored_noise_enabled`、
+        # `impulse_noise_enabled`、`correlated_noise_enabled`。后三者**不受
+        # `noise_enabled` 管辖**（`receiver.py:60 / :69`），只置 master 会让它们漏进
+        # 这份所谓"无噪声"的参考里（2026-10-10 发现）。
+        # **相位噪声 `phase_noise_enabled` 故意保留**：它是本振的乘性相位误差，与数据
+        # 走的是同一台接收机、同一时刻、同一 realization（种子只由
+        # `(seed, rx.id, indices)` 决定）→ 目标项在直减里精确抵消，只有干扰项保留
+        # 同一份相位调制。关掉它反而让被照射的目标在残差里留下残影：
+        # 实测 D2 tool-view 召回 0.367→0.173、假簇 0.623→0.879（作废的 A 模型）。
+        # `imd3_enabled` 同样保留：参考与数据应走同一条非线性链。
+        for _fname in ("noise_enabled", "colored_noise_enabled",
+                       "impulse_noise_enabled", "correlated_noise_enabled"):
+            setattr(clean.frontend, _fname, False)
         y, _ = receive(arrival, clean, sc.sample_rate_hz, sc.seed, start_index=-rx_guard)
         refs[sid] = np.ascontiguousarray(y[:, rx_guard:rx_guard + num_samples]).astype(complex)
     return refs

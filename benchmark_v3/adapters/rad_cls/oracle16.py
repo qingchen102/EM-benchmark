@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -31,7 +32,9 @@ GATE_CLEAN = 0.85
 GATE_SLICE = 0.50
 GATE_TOOLVIEW = 0.50
 
-D2_ROOT = _HERE.parent.parent / "dataset_d2"
+D2_ROOT = Path(os.environ.get("DSH_D2_ROOT") or (_HERE.parent.parent / "dataset_d2")).resolve()
+# DSH_D2_ROOT 覆写入口（2026-10-10）：用于“加噪前 vs 加噪后”同代码 A/B。
+# 不改任何门限，只换数据根目录（其下需有 index.json 与 <sid>/capture/）。
 
 
 def load_model():
@@ -101,12 +104,18 @@ def gate_gt_slice(model):
         obs = json.loads((cap / "public" / "observations.json").read_text(encoding="utf-8"))
         truth = json.loads((cap / "private" / "d1_truth.json").read_text(encoding="utf-8"))
         resid_p = D2_ROOT / "_agent_cache" / s["id"] / "resid_station_a.npy"
-        if not resid_p.exists():
+        resid = None
+        if resid_p.exists():
+            resid = np.load(resid_p).astype(np.complex128)
+        else:
             # 2026-10-08（审查者抓出的可复现缺口）：残差缓存在**清缓存后会消失**，
             # 旧行为直接 `continue` → 全部样本被跳过、分母 0/0、指标 0.000 却仍打印
             # gate=0.5 判 FAIL（静默跳过小样本会虚高，全跳过则变成无意义的 0/0）。
-            # 改为**现场重建**：与 gate_tool_view 同口径建 ctx 并跑一次目标剥离，
+            # 改为**现场重建**：与 gate_tool_view 同口径建 ctx 并直接调目标剥离，
             # 使 gate 自给自足（不再依赖上一次工具运行的产物）。
+            # 2026-10-10 修：原先进的是 `estimate_band_occupancy_by_correlation`，它**不写**
+            # `resid_station_a.npy`（写盘的是 `_strip_target_at_station`）→ 清缓存后仍报
+            # `FileNotFoundError`。改为直接调剥离函数并用它的返回值。
             try:
                 import capture_tools as ct
                 import run_capture_agent as rca
@@ -121,11 +130,10 @@ def gate_gt_slice(model):
                     target_bw_normalized=0.25,
                     aoi_center=[0, 0], target_reference=refs)
                 ct.set_context(ctx)
-                ct.estimate_band_occupancy_by_correlation("station_a")
+                resid = np.asarray(ct._strip_target_at_station("station_a"), np.complex128)
             except Exception as exc:                          # noqa: BLE001
                 print(f"    [gt-slice] {s['id']} 残差重建失败，跳过：{str(exc)[:60]}")
                 continue
-        resid = np.load(resid_p).astype(np.complex128)
         fs = obs["receivers"][0]["sample_rate_hz"]
         rec = next(r for r in obs["receivers"] if r["receiver_id"] == "station_a")
         off = np.asarray(rec["element_offsets_world_m"], float)
@@ -137,7 +145,10 @@ def gate_gt_slice(model):
         # 用 truth.json 的 runner 实测端口功率判定。
         full = json.loads((cap / "private" / "truth.json").read_text(encoding="utf-8"))
         st_full = next(s2 for s2 in full["stations"] if s2["receiver_id"] == "station_a")
-        noise_dbm = 10 * np.log10(st_full["receiver"]["expected_output_noise_w"]) + 30
+        # 2026-10-10：真值新增"实测噪声"字段 `effective_output_noise_w`（噪声先于 IMD3/软限幅，
+        # 平台自标的 `expected_output_noise_w` 只含白热噪）。优先用实测值，旧数据集回退旧字段。
+        _rx = st_full["receiver"]
+        noise_dbm = 10 * np.log10(_rx.get("effective_output_noise_w") or _rx["expected_output_noise_w"]) + 30
         pw_dbm = {s2["emitter_id"]: 10 * np.log10(float(np.mean(s2["mean_port_power_w"])) + 1e-30) + 30
                   for s2 in st_full["sources"]}
         visible = []
@@ -213,7 +224,10 @@ def gate_tool_view(model, n_samples=50):
     import capture_tools as ct
     import run_capture_agent as rca
 
-    D2 = _HERE.parent.parent / "dataset_d2"
+    D2 = D2_ROOT          # 2026-10-10 修：原先这里另写了一份硬编码 dataset_d2 路径，
+    # 导致模块级 D2_ROOT / DSH_D2_ROOT 覆写只对 gate_gt_slice 生效、
+    # 三级 gate 可能跑在不同数据集上（且 A/B 无法隔离 tool-view）。
+    # 三级 gate 必须共用唯一数据根。
     idx = json.loads((D2 / "index.json").read_text(encoding="utf-8"))
     C_LIGHT = 299792458.0
     recall_n = recall_d = 0
@@ -251,7 +265,8 @@ def gate_tool_view(model, n_samples=50):
         for x in full["stations"]:
             if x["receiver_id"] not in allowed:
                 continue
-            nz = 10 * np.log10(x["receiver"]["expected_output_noise_w"]) + 30
+            _rx = x["receiver"]
+            nz = 10 * np.log10(_rx.get("effective_output_noise_w") or _rx["expected_output_noise_w"]) + 30
             for i_g in range(len(truth["interferers"])):
                 eid = "interferer_%d" % (i_g + 1)
                 src_x = next((y for y in x["sources"] if y["emitter_id"] == eid), None)
