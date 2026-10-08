@@ -1,0 +1,143 @@
+==============================================================================
+A. D3 vs D4 的真实差异（frontend 全字段 + envelope 文本）
+==============================================================================
+
+[d3] frontend 全字段:
+    colored_bandwidth_hz = 200000.0
+    colored_noise_db = 0.0
+    colored_noise_enabled = False
+    correlated_noise_enabled = False
+    filter_taps = 129
+    gain_db = 0.0
+    iip3_dbm = 10.0
+    imd3_enabled = False
+    impulse_noise_enabled = False
+    impulse_power_db = 20.0
+    impulse_rate_hz = 200.0
+    impulse_width_us = 5.0
+    noise_correlation = 0.3
+    noise_enabled = True
+    noise_figure_db = 5.0
+    phase_noise_deg = 1.0
+    phase_noise_enabled = False
+    soft_limit_input_dbm = None
+    temperature_k = 290.0
+  emitters 数 2；字段: ['components', 'id', 'orientation_rad', 'platform_id', 'position_m', 'power_dbm', 'preset', 'rf_offset_hz', 'role', 'velocity_mps']
+    emitter role=communication velocity=[0.0, 0.0, 0.0]
+    emitter role=interference velocity=[0.0, 0.0, 0.0]
+  truth.difficulty = D3
+  truth.envelope   = 楼后NLoS低SNR+恶意压制干扰+共存混合+城市RT
+  truth.noise      = {"model": "thermal", "nf_db": 5.0, "noise_floor_dbm": -106.9}
+  interference_events (1): [{"event_id": "E1", "source_id": "interferer_1", "mechanism": "jam", "victim_id": "target_uav_rx", "aimed": true, "power_at_victim_dbm": -79.33, "env_over_noise_db": 27.6, "impact_class": "severe"}]
+
+[d4] frontend 全字段:
+    colored_bandwidth_hz = 200000.0
+    colored_noise_db = 0.0
+    colored_noise_enabled = False
+    correlated_noise_enabled = True
+    filter_taps = 129
+    gain_db = 0.0
+    iip3_dbm = 12.481806755082285
+    imd3_enabled = True
+    impulse_noise_enabled = False
+    impulse_power_db = 20.0
+    impulse_rate_hz = 200.0
+    impulse_width_us = 5.0
+    noise_correlation = 0.3
+    noise_enabled = True
+    noise_figure_db = 5.0
+    phase_noise_deg = 1.0
+    phase_noise_enabled = False
+    soft_limit_input_dbm = None
+    temperature_k = 290.0
+  emitters 数 3；字段: ['components', 'id', 'orientation_rad', 'platform_id', 'position_m', 'power_dbm', 'preset', 'rf_offset_hz', 'role', 'velocity_mps']
+    emitter role=communication velocity=[-23.66321150534062, -12.764586200991769, 0.0]
+    emitter role=interference velocity=[0.0, 0.0, 0.0]
+    emitter role=interference velocity=[0.0, 0.0, 0.0]
+  truth.difficulty = D4
+  truth.envelope   = 欺骗+强阻塞非线性+机动多普勒+相关噪声+NLoS+城市RT
+  truth.noise      = {"model": "thermal", "nf_db": 5.0, "noise_floor_dbm": -106.9}
+  interference_events (2): [{"event_id": "E1", "source_id": "interferer_1", "mechanism": "jam", "victim_id": "target_uav_rx", "aimed": true, "power_at_victim_dbm": -80.81, "env_over_noise_db": 26.1, "impact_class": "severe"}, {"event_id": "E2", "source_id": "interferer_2", "mechanism": "spoof", "victim_id": "target_uav_rx", "aimed": true, "power_at_victim_dbm": -78.44, "env_over_noise_db": 28.5, "impact_class": "severe"}]
+
+==============================================================================
+B. D2 现有 agent 结果的真实覆盖（HANDOVER 的 det 0.860 从哪来）
+==============================================================================
+  D2 数据集样本数: 50
+    answers_agent_check: 6 个答案文件
+    answers_agent_check2: 6 个答案文件
+    answers_agent_check3: 6 个答案文件
+    answers_agent_check4: 6 个答案文件
+    answers_agent_check5: 6 个答案文件
+    answers_S2_agent_full: 51 个答案文件
+  eval_report_S2.json 顶层键: ['S0', 'S1', 'S2', 'oracle_assoc']
+    [S0] n=5 覆盖样本: (报告未存 id 列表)
+    [S1] n=5 覆盖样本: (报告未存 id 列表)
+    [S2] n=5 覆盖样本: (报告未存 id 列表)
+  → 结论：D2 有据可查的 agent 评测只有 5 个样本；HANDOVER 记录的 0.860/0.412/... 若无对应 answers 目录即为**已丢失的历史数字**。
+
+==============================================================================
+C. D1 修后 20 样本 agent：det=1.0 但 S1/S2 pos=0.0 的核对
+==============================================================================
+  answers 文件数: 21
+
+  样本            GT数   报数  报的kind / GT kind
+  d1_00000        1    1  ['tone'] / ['tone']
+  d1_00001        0    0  [] / []
+  d1_00002        0    0  [] / []
+  d1_00003        1    1  ['tone'] / ['noise']
+  d1_00004        1    1  ['tone'] / ['noise']
+  d1_00005        1    1  ['noise'] / ['noise']
+  d1_00006        0    0  [] / []
+  d1_00007        1    1  ['tone'] / ['tone']
+  d1_00008        1    1  ['tone'] / ['noise']
+  d1_00009        0    0  [] / []
+  d1_00010        1    1  ['tone'] / ['noise']
+  d1_00011        0    0  [] / []
+  d1_00012        0    0  [] / []
+  d1_00013        0    0  [] / []
+  d1_00014        1    1  ['noise'] / ['noise']
+  d1_00015        1    1  ['tone'] / ['tone']
+  d1_00016        1    1  ['tone'] / ['noise']
+  d1_00017        0    0  [] / []
+  d1_00018        1    1  ['tone'] / ['tone']
+  d1_00019        1    1  ['tone'] / ['noise']
+
+  计数相符: 20/20
+
+  [d1_00000] 原文: {
+ "num_interferers": 1,
+ "interferers": [
+  {
+   "freq_offset_hz": 590000.0,
+   "kind": "tone",
+   "intent": "malicious",
+   "is_spoof": false,
+   "doa_deg": 48.9,
+   "position_m": [
+    0.0,
+    0.0
+   ]
+  }
+ ]
+}
+
+  [d1_00003] 原文: {
+ "num_interferers": 1,
+ "interferers": [
+  {
+   "freq_offset_hz": 630000.0,
+   "kind": "tone",
+   "intent": "malicious",
+   "is_spoof": false,
+   "doa_deg": -29.1,
+   "position_m": [
+    0.0,
+    0.0
+   ]
+  }
+ ]
+}
+
+  _run_log.json 类型 list 长度 20
+    首条键: ['detection_hit', 'elapsed_s', 'prediction', 'raw_output', 'round_log', 'sample_id', 'tool_calls']
+    首条内容: {"sample_id": "d1_00000", "tool_calls": 8, "elapsed_s": 43.6, "round_log": [{"elapsed_s": 4.8, "content_len": 231, "tool_calls": 1, "names": ["analyze_spectrum_station"]}, {"elapsed_s": 1.8, "content_len": 94, "tool_calls": 1, "names": ["estimate_band_occupancy_by_correlation"]}, {"elapsed_s": 4.0, "content_len": 552, "tool_calls": 1, "names": ["estimate_modulation_features_station"]}, {"elapsed_s": 4.4, "content_len": 291, "tool_calls": 1, "names": ["estimate_doa_station"]}, {"elapsed_s": 3.0, 

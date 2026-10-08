@@ -1,0 +1,82 @@
+==============================================================================
+A. 跨难度目标位置是否同一批（gen_dataset: seed = seed0 + i，seed0 默认 31000）
+==============================================================================
+  d1 vs d2: 目标位置相同 0/50
+  d2 vs d3: 目标位置相同 0/50
+  d3 vs d4: 目标位置相同 50/50
+  d1 vs d4: 目标位置相同 0/50
+
+  各档 seed 序列前 5: d1=[31000, 31001, 31002, 31003, 31004] | d2=[92000, 92001, 92002, 92003, 92004] | d3=[31000, 31001, 31002, 31003, 31004] | d4=[31000, 31001, 31002, 31003, 31004]
+  seed 序列是否逐位相同(d1 vs d2): False
+  seed 序列是否逐位相同(d3 vs d4): True
+
+==============================================================================
+B. D4 声称新增的困难（IMD3 / 阵元相关噪声 / 机动多普勒）是否落地
+==============================================================================
+
+[d3 d3_00000]
+  frontend 键: ['colored_bandwidth_hz', 'colored_noise_db', 'colored_noise_enabled', 'correlated_noise_enabled', 'filter_taps', 'gain_db', 'iip3_dbm', 'imd3_enabled', 'impulse_noise_enabled', 'impulse_power_db', 'impulse_rate_hz', 'impulse_width_us', 'noise_correlation', 'noise_enabled', 'noise_figure_db', 'phase_noise_deg', 'phase_noise_enabled', 'soft_limit_input_dbm', 'temperature_k']
+    imd3_enabled = False
+    iip3_dbm = 10.0
+  receiver 键: ['antenna', 'bandwidth_hz', 'frontend', 'id', 'orientation_rad', 'position_m', 'tuning_offset_hz']
+  d1_truth 顶层键: ['achieved', 'difficulty', 'envelope', 'interference_events', 'interferers', 'noise', 'receivers', 'sample_id', 'scene_type', 'schema_version', 'seed', 'station_subsets', 'target']
+  target 键: ['emitter', 'freq_offset_hz', 'per_station', 'position_m', 'power_dbm', 'role']
+  interferer[0] 键: ['bandwidth_hz', 'freq_offset_hz', 'intent', 'kind', 'mode', 'per_station', 'position_m', 'power_dbm', 'role']
+    关键字 'imd3': d1_truth=False  scenario.json=True
+    关键字 'iip3': d1_truth=False  scenario.json=True
+    关键字 'rho': d1_truth=False  scenario.json=False
+    关键字 'doppler': d1_truth=False  scenario.json=False
+    关键字 'velocity': d1_truth=False  scenario.json=True
+    关键字 'speed': d1_truth=False  scenario.json=False
+    关键字 'correlat': d1_truth=False  scenario.json=True
+
+[d4 d4_00000]
+  frontend 键: ['colored_bandwidth_hz', 'colored_noise_db', 'colored_noise_enabled', 'correlated_noise_enabled', 'filter_taps', 'gain_db', 'iip3_dbm', 'imd3_enabled', 'impulse_noise_enabled', 'impulse_power_db', 'impulse_rate_hz', 'impulse_width_us', 'noise_correlation', 'noise_enabled', 'noise_figure_db', 'phase_noise_deg', 'phase_noise_enabled', 'soft_limit_input_dbm', 'temperature_k']
+    imd3_enabled = True
+    iip3_dbm = 12.481806755082285
+  receiver 键: ['antenna', 'bandwidth_hz', 'frontend', 'id', 'orientation_rad', 'position_m', 'tuning_offset_hz']
+  d1_truth 顶层键: ['achieved', 'difficulty', 'envelope', 'interference_events', 'interferers', 'noise', 'receivers', 'sample_id', 'scene_type', 'schema_version', 'seed', 'station_subsets', 'target']
+  target 键: ['emitter', 'freq_offset_hz', 'per_station', 'position_m', 'power_dbm', 'role']
+  interferer[0] 键: ['bandwidth_hz', 'freq_offset_hz', 'intent', 'kind', 'mode', 'per_station', 'position_m', 'power_dbm', 'role']
+    关键字 'imd3': d1_truth=False  scenario.json=True
+    关键字 'iip3': d1_truth=False  scenario.json=True
+    关键字 'rho': d1_truth=False  scenario.json=False
+    关键字 'doppler': d1_truth=False  scenario.json=False
+    关键字 'velocity': d1_truth=False  scenario.json=True
+    关键字 'speed': d1_truth=False  scenario.json=False
+    关键字 'correlat': d1_truth=False  scenario.json=True
+
+==============================================================================
+C. 现有结果覆盖的 (难度 × 站数) 格
+==============================================================================
+
+[d1]
+  eval_report: ['eval_report.json', 'eval_report_S0.json', 'eval_report_S1.json', 'eval_report_S2.json']
+  answers 目录: ['answers_S0', 'answers_S0_agent_fix20', 'answers_S0_agent_regress', 'answers_S0_agent_regress2', 'answers_S0_agent_regress3', 'answers_S0_agent_regress4', 'answers_S0_agent_regress5', 'answers_S1', 'answers_S2', 'answers_s0_probe']
+    eval_report.json [S0] n=50 det=1.0 kind=1.0 freq=1.0 doa=1.0
+    eval_report.json [S1] n=50 det=1.0 kind=1.0 freq=1.0 pos=1.0
+    eval_report.json [S2] n=50 det=1.0 kind=1.0 freq=1.0 pos=1.0
+    eval_report_S0.json [S0] n=20 det=1.0 kind=0.5 freq=1.0 doa=0.75
+    eval_report_S0.json [S1] n=20 det=1.0 kind=0.5 freq=1.0 pos=0.0
+    eval_report_S0.json [S2] n=20 det=1.0 kind=0.5 freq=1.0 pos=0.0
+    eval_report_S1.json [S0] n=50 det=0.9 kind=0.5652 freq=0.9565 doa=0.7826
+    eval_report_S1.json [S1] n=50 det=0.9 kind=0.5652 freq=0.9565 pos=0.6087
+    eval_report_S1.json [S2] n=50 det=0.9 kind=0.5652 freq=0.9565 pos=0.6087
+    eval_report_S2.json [S0] n=50 det=0.94 kind=0.5417 freq=0.9583 doa=0.7917
+    eval_report_S2.json [S1] n=50 det=0.94 kind=0.5417 freq=0.9583 pos=0.4583
+    eval_report_S2.json [S2] n=50 det=0.94 kind=0.5417 freq=0.9583 pos=0.4583
+
+[d2]
+  eval_report: ['eval_report_S2.json']
+  answers 目录: ['answers_S2_agent_full', 'answers_agent_check', 'answers_agent_check2', 'answers_agent_check3', 'answers_agent_check4', 'answers_agent_check5']
+    eval_report_S2.json [S0] n=5 det=0.6 kind=0.5714 freq=0.1429 doa=0.2857 intent=0.714
+    eval_report_S2.json [S1] n=5 det=0.8 kind=0.4444 freq=0.1111 pos=0.3333 intent=0.667
+    eval_report_S2.json [S2] n=5 det=0.8 kind=0.4444 freq=0.1111 pos=0.3333 intent=0.667
+
+[d3]
+  eval_report: 无
+  answers 目录: 无
+
+[d4]
+  eval_report: 无
+  answers 目录: 无
