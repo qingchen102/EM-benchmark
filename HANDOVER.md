@@ -245,21 +245,31 @@ def ")` 返回 -1 曾把文件拼成双份。
 
 ### 8.2 仓库提交状态提醒（2026-10-08）
 
-**别假定工作区代码已在 git 里。** 截至本次交接：
+**别假定工作区代码已在 git 里。** 2026-10-08 已把当时全部在跟踪范围内、
+只活在工作区的改动固化入库（commit `a510533` → `d60a4e6`，共 7 个），此后
+**已跟踪文件的工作区是干净的。** 包含：gate harness + 可复现性修复、共 48 个
+`_diag_*.py` 诊断脚本（§8 工具箱全部到位）、`capture_tools.py` /
+`run_capture_agent.py` / `eval_dataset.py`（含 D1/S0 虚警修复本体）、
+`gen_dataset.py` / `rad_cls/{data_gen16,train16}.py` / `emitters.py` /
+`audit_separability.py` / `benchmark_v2/evaluator_v2.py` / 两份 README /
+`docs/{场景设计规范,开源信号模型资料汇编}.md`。
 
-- ✅ 已提交：`oracle16.py`（gate harness + 可复现性修复）、`HANDOVER.md`、`benchmark_v3/README.md`、
-  本轮 15 个 `_diag_*.py` 诊断脚本（commit `a510533` / `847b32c`）。
-- ❌ **仍未提交**（改动量很大、含两句会话的结果，须自行确认后再提交）：
-  `benchmark_v3/adapters/capture_tools.py`（~1200 行变动）、
-  `run_capture_agent.py`（~115 行，含 S0 recipe 与 prompt）、
-  `eval_dataset.py`（match 两段配对）、`gen_dataset.py` / `audit_separability.py` /
-  `rad_cls/{data_gen16,train16}.py` / `simulation/.../emitters.py`。
-  → **D1/S0 虚警修复本身就活在这些未提交文件里**；换机器/清工作区前先 commit。
-- ❌ 未跟踪：`dataset_d*/`（含所有 answers/评测报告/BASELINE.json）、`docs/`、
-  `projects/`、`.workbuddy/`。数据集体积大，入不入库是个待定决策。
+**刻意不入库**：`_rebuild_extract.py` / `_rewrite_cluster.py` + `_extract_fn.txt`
+（一次性文本补丁脚本体，断言早已失效、payload 还是乱码，留着只会误导）。
+
+**仍未纳入版本管理的（体积原因，待你拍板）**：
+
+- `benchmark_v3/dataset_d*/`：IQ + answers + `eval_report_*.json` + **`BASELINE.json`**。
+  约 GB 级，IQ 不适合入库；但 **`BASELINE.json` 建议单独入库**（几 KB，是本项目
+  “防前态过期”的核心机制，丢了他数字就无源）。
+- `benchmark_v3/docs/`（规范文本，纯文字，**建议入库**）。
+- `projects/`、`study/`、`.workbuddy/`（个人/自学材料，按 §10 不动）。
+- `checkpoint.pt`：按 `.gitignore` 既有策略（二进制可重训）继续不入库，
+  复现见 §8.1（用户 2026-10-08 确认采用此方案）。
 
 **继承一个脏工作区时的第一件事**：`git status` + 逐个文件确认“这是谁改的、能不能复现”，
 再动任何数字。本轮就是靠这个发现 10-04~10-08 五天工作没进任何 README。
+
 
 ## 9. 未解问题（按价值排序）
 
