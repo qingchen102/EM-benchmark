@@ -1,0 +1,45 @@
+{
+ "S0": {
+  "n": 50,
+  "detection_hit": 0.94,
+  "detection_within1": 0.97,
+  "detect_abs_err": 0.06,
+  "kind_hits": 0.5417,
+  "freq_hits": 0.9583,
+  "freq_aes": 0.0025,
+  "doa_hits": 0.7917,
+  "doa_aes": 25.5567,
+  "spoof_fa_rate": 0.0
+ },
+ "S1": {
+  "n": 50,
+  "detection_hit": 0.94,
+  "detection_within1": 0.97,
+  "detect_abs_err": 0.06,
+  "kind_hits": 0.5417,
+  "freq_hits": 0.9583,
+  "freq_aes": 0.0025,
+  "pos_hits": 0.4583,
+  "pos_errs": 367.337,
+  "spoof_fa_rate": 0.0
+ },
+ "S2": {
+  "n": 50,
+  "detection_hit": 0.94,
+  "detection_within1": 0.97,
+  "detect_abs_err": 0.06,
+  "kind_hits": 0.5417,
+  "freq_hits": 0.9583,
+  "freq_aes": 0.0025,
+  "pos_hits": 0.4583,
+  "pos_errs": 367.337,
+  "spoof_fa_rate": 0.0
+ },
+ "oracle_assoc": {
+  "assoc_pairs": 24,
+  "P_kind_assoc": 0.542,
+  "freq_hits_oracle": 0.958,
+  "freq_ae_oracle": 0.0025,
+  "spoof_fa_oracle": 0.0
+ }
+}

@@ -1,0 +1,47 @@
+﻿{
+ "S0": {
+  "n": 50,
+  "detection_hit": 0.96,
+  "detection_within1": 0.98,
+  "detect_abs_err": 0.04,
+  "kind_hits": 0.44,
+  "freq_hits": 0.96,
+  "freq_aes": 0.0023,
+  "doa_hits": 0.64,
+  "doa_aes": 44.34,
+  "spoof_fa_rate": 0.0
+ },
+ "S1": {
+  "n": 50,
+  "detection_hit": 0.96,
+  "detection_within1": 0.98,
+  "detect_abs_err": 0.04,
+  "kind_hits": 0.44,
+  "freq_hits": 0.96,
+  "freq_aes": 0.0023,
+  "pos_hits": 0.0,
+  "pos_errs": 1353.6701,
+  "spoof_fa_rate": 0.0
+ },
+ "S2": {
+  "n": 50,
+  "detection_hit": 0.96,
+  "detection_within1": 0.98,
+  "detect_abs_err": 0.04,
+  "kind_hits": 0.44,
+  "freq_hits": 0.96,
+  "freq_aes": 0.0023,
+  "pos_hits": 0.0,
+  "pos_errs": 1353.6701,
+  "spoof_fa_rate": 0.0
+ },
+ "oracle_assoc": {
+  "assoc_pairs": 25,
+  "P_kind_assoc": 0.44,
+  "freq_hits_oracle": 0.96,
+  "freq_ae_oracle": 0.0023,
+  "spoof_fa_oracle": 0.0
+ }
+}
+saved -> _eval_d1_answers_S0.json
+

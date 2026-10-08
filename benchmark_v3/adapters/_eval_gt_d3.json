@@ -1,0 +1,86 @@
+{
+ "S0": {
+  "n": 50,
+  "detection_hit": 1.0,
+  "detection_within1": 1.0,
+  "detect_abs_err": 0.0,
+  "kind_hits": 1.0,
+  "freq_hits": 1.0,
+  "freq_aes": 0.0,
+  "doa_hits": 1.0,
+  "doa_aes": 0.0,
+  "intent_accuracy": 1.0,
+  "intent_pairs": 51,
+  "intent_by_gt": {
+   "malicious": [
+    36,
+    36
+   ],
+   "incidental": [
+    14,
+    14
+   ],
+   "benign": [
+    1,
+    1
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S1": {
+  "n": 50,
+  "detection_hit": 1.0,
+  "detection_within1": 1.0,
+  "detect_abs_err": 0.0,
+  "kind_hits": 1.0,
+  "freq_hits": 1.0,
+  "freq_aes": 0.0,
+  "pos_hits": 1.0,
+  "pos_errs": 0.0,
+  "intent_accuracy": 1.0,
+  "intent_pairs": 69,
+  "intent_by_gt": {
+   "malicious": [
+    48,
+    48
+   ],
+   "incidental": [
+    20,
+    20
+   ],
+   "benign": [
+    1,
+    1
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S2": {
+  "n": 50,
+  "detection_hit": 1.0,
+  "detection_within1": 1.0,
+  "detect_abs_err": 0.0,
+  "kind_hits": 1.0,
+  "freq_hits": 1.0,
+  "freq_aes": 0.0,
+  "pos_hits": 1.0,
+  "pos_errs": 0.0,
+  "intent_accuracy": 1.0,
+  "intent_pairs": 69,
+  "intent_by_gt": {
+   "malicious": [
+    48,
+    48
+   ],
+   "incidental": [
+    20,
+    20
+   ],
+   "benign": [
+    1,
+    1
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ }
+}

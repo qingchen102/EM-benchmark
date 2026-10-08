@@ -1,0 +1,82 @@
+{
+ "S0": {
+  "n": 50,
+  "detection_hit": 0.58,
+  "detection_within1": 0.71,
+  "detect_abs_err": 0.58,
+  "kind_hits": 0.4853,
+  "freq_hits": 0.2353,
+  "freq_aes": 0.1728,
+  "doa_hits": 0.3529,
+  "doa_aes": 80.8668,
+  "intent_accuracy": 0.735,
+  "intent_pairs": 68,
+  "intent_by_gt": {
+   "benign": [
+    1,
+    16
+   ],
+   "incidental": [
+    49,
+    52
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S1": {
+  "n": 50,
+  "detection_hit": 0.86,
+  "detection_within1": 0.89,
+  "detect_abs_err": 0.22,
+  "kind_hits": 0.4118,
+  "freq_hits": 0.2,
+  "freq_aes": 0.1727,
+  "pos_hits": 0.4588,
+  "pos_errs": 266.1349,
+  "intent_accuracy": 0.682,
+  "intent_pairs": 85,
+  "intent_by_gt": {
+   "incidental": [
+    57,
+    67
+   ],
+   "benign": [
+    1,
+    18
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S2": {
+  "n": 50,
+  "detection_hit": 0.86,
+  "detection_within1": 0.89,
+  "detect_abs_err": 0.22,
+  "kind_hits": 0.4118,
+  "freq_hits": 0.2,
+  "freq_aes": 0.1727,
+  "pos_hits": 0.4588,
+  "pos_errs": 266.1349,
+  "intent_accuracy": 0.682,
+  "intent_pairs": 85,
+  "intent_by_gt": {
+   "incidental": [
+    57,
+    67
+   ],
+   "benign": [
+    1,
+    18
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "oracle_assoc": {
+  "assoc_pairs": 89,
+  "P_kind_assoc": 0.393,
+  "P_intent_assoc": 0.685,
+  "freq_hits_oracle": 0.191,
+  "freq_ae_oracle": 0.1901,
+  "spoof_fa_oracle": 0.0
+ }
+}

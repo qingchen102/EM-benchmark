@@ -1,0 +1,84 @@
+﻿{
+ "S0": {
+  "n": 5,
+  "detection_hit": 0.6,
+  "detection_within1": 0.7,
+  "detect_abs_err": 0.6,
+  "kind_hits": 0.7143,
+  "freq_hits": 0.1429,
+  "freq_aes": 0.2419,
+  "doa_hits": 0.2857,
+  "doa_aes": 52.4786,
+  "intent_accuracy": 0.714,
+  "intent_pairs": 7,
+  "intent_by_gt": {
+   "benign": [
+    0,
+    2
+   ],
+   "incidental": [
+    5,
+    5
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S1": {
+  "n": 5,
+  "detection_hit": 0.8,
+  "detection_within1": 0.9,
+  "detect_abs_err": 0.2,
+  "kind_hits": 0.5556,
+  "freq_hits": 0.1111,
+  "freq_aes": 0.198,
+  "pos_hits": 0.5556,
+  "pos_errs": 473.6443,
+  "intent_accuracy": 0.667,
+  "intent_pairs": 9,
+  "intent_by_gt": {
+   "incidental": [
+    6,
+    7
+   ],
+   "benign": [
+    0,
+    2
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "S2": {
+  "n": 5,
+  "detection_hit": 0.8,
+  "detection_within1": 0.9,
+  "detect_abs_err": 0.2,
+  "kind_hits": 0.5556,
+  "freq_hits": 0.1111,
+  "freq_aes": 0.198,
+  "pos_hits": 0.5556,
+  "pos_errs": 473.6443,
+  "intent_accuracy": 0.667,
+  "intent_pairs": 9,
+  "intent_by_gt": {
+   "incidental": [
+    6,
+    7
+   ],
+   "benign": [
+    0,
+    2
+   ]
+  },
+  "spoof_fa_rate": 0.0
+ },
+ "oracle_assoc": {
+  "assoc_pairs": 9,
+  "P_kind_assoc": 0.556,
+  "P_intent_assoc": 0.667,
+  "freq_hits_oracle": 0.111,
+  "freq_ae_oracle": 0.198,
+  "spoof_fa_oracle": 0.0
+ }
+}
+saved -> _eval_d2_answers_agent_check5.json
+
