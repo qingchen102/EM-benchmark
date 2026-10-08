@@ -24,7 +24,7 @@ for _p in (str(_HERE), str(_HERE.parent.parent / "simulation")):
 
 import torch  # noqa: E402
 
-from data_gen16 import CLASSES16, CLS_IDX, LENGTH, SEED_BASE, gen_wave16, simulate_residual, to_input  # noqa: E402
+from data_gen16 import CLASSES16, CLS_IDX, LENGTH, SEED_BASE, gen_wave16, simulate_beamformed_train, to_input  # noqa: E402
 from model16 import RadCNN  # noqa: E402
 
 OUT = _HERE / "rad_classifier"
@@ -75,8 +75,8 @@ def main() -> None:
             batch_x, batch_y = [], []
             for j in perm[i:i + args.batch]:
                 rng = np.random.default_rng(SEED_BASE + 3000 + ep * 100000 + j)
-                sim = simulate_residual(xs[j].astype(np.complex128), rng,
-                                        n_sib=int(rng.integers(0, 3)))
+                sim = simulate_beamformed_train(xs[j].astype(np.complex128), ys[j],
+                                                xs, ys, rng)
                 batch_x.append(to_input(sim))
                 batch_y.append(ys[j])
             xb = torch.from_numpy(np.stack(batch_x)).to(device)
@@ -93,8 +93,8 @@ def main() -> None:
         with torch.no_grad():
             for i in range(0, len(vx), args.batch):
                 rng = np.random.default_rng(SEED_BASE + 4000 + i)
-                vb = [to_input(simulate_residual(vx[j].astype(np.complex128), rng,
-                                                 n_sib=int(rng.integers(0, 3))))
+                vb = [to_input(simulate_beamformed_train(vx[j].astype(np.complex128), vy[j],
+                                                         vx, vy, rng))
                       for j in range(i, min(i + args.batch, len(vx)))]
                 xb = torch.from_numpy(np.stack(vb)).to(device)
                 pred = model(xb).argmax(dim=1).cpu().numpy()
