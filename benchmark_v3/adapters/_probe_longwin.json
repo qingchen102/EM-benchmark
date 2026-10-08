@@ -1,0 +1,334 @@
+[
+ {
+  "sample": "d2_00001",
+  "ds": "dataset_d2",
+  "dur_s": 0.01,
+  "n": 40000,
+  "replay_s": 1.463,
+  "kinds": [
+   "DECT",
+   "Bluetooth_FHSS"
+  ],
+  "bitexact_max_abs_diff": 0.0,
+  "iq_shape": [
+   8,
+   40000
+  ],
+  "time_frequency": [
+   {
+    "kind": "DECT",
+    "gt_f0_hz": -674886,
+    "gt_bw_hz": 129614,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.42,
+     "frame_power_cv": 0.78,
+     "hop_channel_count": 2,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 2,
+     "transitions": 53,
+     "hop_rate_hz": 5300.0,
+     "dwell_us": 188.68,
+     "frame_us": 8.0
+    }
+   },
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -176452,
+    "gt_bw_hz": 606924,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.0,
+     "frame_power_cv": 0.33,
+     "hop_channel_count": 9,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 6,
+     "transitions": 496,
+     "hop_rate_hz": 49600.0,
+     "dwell_us": 20.16,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 31.0
+   }
+  ]
+ },
+ {
+  "sample": "d2_00001",
+  "ds": "dataset_d2",
+  "dur_s": 0.1,
+  "n": 400000,
+  "replay_s": 16.435,
+  "kinds": [
+   "DECT",
+   "Bluetooth_FHSS"
+  ],
+  "iq_shape": [
+   8,
+   400000
+  ],
+  "time_frequency": [
+   {
+    "kind": "DECT",
+    "gt_f0_hz": -674886,
+    "gt_bw_hz": 129614,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.436,
+     "frame_power_cv": 0.82,
+     "hop_channel_count": 2,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 2,
+     "transitions": 467,
+     "hop_rate_hz": 4670.0,
+     "dwell_us": 214.13,
+     "frame_us": 8.0
+    }
+   },
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -176452,
+    "gt_bw_hz": 606924,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.0,
+     "frame_power_cv": 0.33,
+     "hop_channel_count": 9,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 6,
+     "transitions": 5278,
+     "hop_rate_hz": 52780.0,
+     "dwell_us": 18.95,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 33.0
+   }
+  ]
+ },
+ {
+  "sample": "d2_00001",
+  "ds": "dataset_d2",
+  "dur_s": 0.5,
+  "n": 2000000,
+  "replay_s": 86.91,
+  "kinds": [
+   "DECT",
+   "Bluetooth_FHSS"
+  ],
+  "iq_shape": [
+   8,
+   2000000
+  ],
+  "time_frequency": [
+   {
+    "kind": "DECT",
+    "gt_f0_hz": -674886,
+    "gt_bw_hz": 129614,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.433,
+     "frame_power_cv": 0.82,
+     "hop_channel_count": 2,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 2,
+     "transitions": 2322,
+     "hop_rate_hz": 4644.0,
+     "dwell_us": 215.33,
+     "frame_us": 8.0
+    }
+   },
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -176452,
+    "gt_bw_hz": 606924,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.0,
+     "frame_power_cv": 0.33,
+     "hop_channel_count": 9,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 6,
+     "transitions": 26486,
+     "hop_rate_hz": 52972.0,
+     "dwell_us": 18.88,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 33.1
+   }
+  ]
+ },
+ {
+  "sample": "d2_00005",
+  "ds": "dataset_d2",
+  "dur_s": 0.01,
+  "n": 40000,
+  "replay_s": 0.817,
+  "kinds": [
+   "Bluetooth_FHSS",
+   "Zigbee"
+  ],
+  "bitexact_max_abs_diff": 0.0,
+  "iq_shape": [
+   8,
+   40000
+  ],
+  "time_frequency": [
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -43619,
+    "gt_bw_hz": 512310,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.254,
+     "frame_power_cv": 7.92,
+     "hop_channel_count": 8,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 5,
+     "transitions": 626,
+     "hop_rate_hz": 62600.0,
+     "dwell_us": 15.97,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 39.1
+   },
+   {
+    "kind": "Zigbee",
+    "gt_f0_hz": 47442,
+    "gt_bw_hz": 785585,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.253,
+     "frame_power_cv": 7.73,
+     "hop_channel_count": 9,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 7,
+     "transitions": 528,
+     "hop_rate_hz": 52800.0,
+     "dwell_us": 18.94,
+     "frame_us": 8.0
+    }
+   }
+  ]
+ },
+ {
+  "sample": "d2_00005",
+  "ds": "dataset_d2",
+  "dur_s": 0.1,
+  "n": 400000,
+  "replay_s": 11.42,
+  "kinds": [
+   "Bluetooth_FHSS",
+   "Zigbee"
+  ],
+  "iq_shape": [
+   8,
+   400000
+  ],
+  "time_frequency": [
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -43619,
+    "gt_bw_hz": 512310,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.248,
+     "frame_power_cv": 25.14,
+     "hop_channel_count": 8,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 5,
+     "transitions": 6444,
+     "hop_rate_hz": 64440.0,
+     "dwell_us": 15.52,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 40.3
+   },
+   {
+    "kind": "Zigbee",
+    "gt_f0_hz": 47442,
+    "gt_bw_hz": 785585,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.249,
+     "frame_power_cv": 24.53,
+     "hop_channel_count": 9,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 7,
+     "transitions": 5356,
+     "hop_rate_hz": 53560.0,
+     "dwell_us": 18.67,
+     "frame_us": 8.0
+    }
+   }
+  ]
+ },
+ {
+  "sample": "d2_00005",
+  "ds": "dataset_d2",
+  "dur_s": 0.5,
+  "n": 2000000,
+  "replay_s": 88.033,
+  "kinds": [
+   "Bluetooth_FHSS",
+   "Zigbee"
+  ],
+  "iq_shape": [
+   8,
+   2000000
+  ],
+  "time_frequency": [
+   {
+    "kind": "Bluetooth_FHSS",
+    "gt_f0_hz": -43619,
+    "gt_bw_hz": 512310,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.243,
+     "frame_power_cv": 56.27,
+     "hop_channel_count": 8,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 4,
+     "transitions": 32060,
+     "hop_rate_hz": 64120.0,
+     "dwell_us": 15.6,
+     "frame_us": 8.0
+    },
+    "real_hop_rate_hz": 1600.0,
+    "hop_rate_ratio_vs_real": 40.1
+   },
+   {
+    "kind": "Zigbee",
+    "gt_f0_hz": 47442,
+    "gt_bw_hz": 785585,
+    "tool_fingerprint(win64/hop32)": {
+     "duty": 0.246,
+     "frame_power_cv": 54.89,
+     "hop_channel_count": 8,
+     "frame_us": 16.0
+    },
+    "hop_stats(win32/hop8)": {
+     "n_channels": 7,
+     "transitions": 26565,
+     "hop_rate_hz": 53130.0,
+     "dwell_us": 18.82,
+     "frame_us": 8.0
+    }
+   }
+  ]
+ }
+]

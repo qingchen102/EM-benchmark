@@ -1,0 +1,42 @@
+候选样本（含时域结构源）：96 个
+  dataset_d2/d2_00001  score=3  kinds=['DECT', 'Bluetooth_FHSS']
+  dataset_d2/d2_00005  score=3  kinds=['Bluetooth_FHSS', 'Zigbee']
+  dataset_d2/d2_00011  score=3  kinds=['Bluetooth_FHSS', 'WiFi_burst']
+  dataset_d2/d2_00022  score=3  kinds=['Microwave', 'Bluetooth_FHSS']
+  dataset_d2/d2_00034  score=3  kinds=['Corona', 'Bluetooth_FHSS']
+  dataset_d2/d2_00035  score=3  kinds=['Bluetooth_FHSS', 'Microwave']
+
+==============================================================================
+样本 dataset_d2/d2_00001  源=['DECT', 'Bluetooth_FHSS']  fs=4.00 MHz  原始窗=10.0 ms  链路=12
+  -- dur= 10.0 ms  n=   40,000  预估 IQ=     9.8 MB  重放   1.46 s  磁盘     0.0 MB  [ok]
+     bit-exact 自检：shape=(8, 40000)  max|Δ|=0.000e+00  逐位相同 ✅
+     [DECT           ] f0=  -674.9kHz bw= 129.6kHz  工具指纹 duty=0.420 cv=0.78 hop_ch= 2 | 细帧 2 信道     53 跳  跳速=      5300 Hz  驻留=188.68 µs
+     [Bluetooth_FHSS ] f0=  -176.5kHz bw= 606.9kHz  工具指纹 duty=0.000 cv=0.33 hop_ch= 9 | 细帧 6 信道    496 跳  跳速=     49600 Hz  驻留=20.16 µs  (真实 1600 Hz → ×31.0)
+  -- dur=100.0 ms  n=  400,000  预估 IQ=    97.7 MB  重放  16.44 s  磁盘     0.1 MB  [ok]
+     [DECT           ] f0=  -674.9kHz bw= 129.6kHz  工具指纹 duty=0.436 cv=0.82 hop_ch= 2 | 细帧 2 信道    467 跳  跳速=      4670 Hz  驻留=214.13 µs
+     [Bluetooth_FHSS ] f0=  -176.5kHz bw= 606.9kHz  工具指纹 duty=0.000 cv=0.33 hop_ch= 9 | 细帧 6 信道   5278 跳  跳速=     52780 Hz  驻留=18.95 µs  (真实 1600 Hz → ×33.0)
+  -- dur=500.0 ms  n=2,000,000  预估 IQ=   488.3 MB  重放  86.91 s  磁盘     0.5 MB  [ok]
+     [DECT           ] f0=  -674.9kHz bw= 129.6kHz  工具指纹 duty=0.433 cv=0.82 hop_ch= 2 | 细帧 2 信道   2322 跳  跳速=      4644 Hz  驻留=215.33 µs
+     [Bluetooth_FHSS ] f0=  -176.5kHz bw= 606.9kHz  工具指纹 duty=0.000 cv=0.33 hop_ch= 9 | 细帧 6 信道  26486 跳  跳速=     52972 Hz  驻留=18.88 µs  (真实 1600 Hz → ×33.1)
+
+==============================================================================
+样本 dataset_d2/d2_00005  源=['Bluetooth_FHSS', 'Zigbee']  fs=4.00 MHz  原始窗=10.0 ms  链路=12
+  -- dur= 10.0 ms  n=   40,000  预估 IQ=     9.8 MB  重放   0.82 s  磁盘     0.0 MB  [ok]
+     bit-exact 自检：shape=(8, 40000)  max|Δ|=0.000e+00  逐位相同 ✅
+     [Bluetooth_FHSS ] f0=   -43.6kHz bw= 512.3kHz  工具指纹 duty=0.254 cv=7.92 hop_ch= 8 | 细帧 5 信道    626 跳  跳速=     62600 Hz  驻留=15.97 µs  (真实 1600 Hz → ×39.1)
+     [Zigbee         ] f0=    47.4kHz bw= 785.6kHz  工具指纹 duty=0.253 cv=7.73 hop_ch= 9 | 细帧 7 信道    528 跳  跳速=     52800 Hz  驻留=18.94 µs
+  -- dur=100.0 ms  n=  400,000  预估 IQ=    97.7 MB  重放  11.42 s  磁盘     0.1 MB  [ok]
+     [Bluetooth_FHSS ] f0=   -43.6kHz bw= 512.3kHz  工具指纹 duty=0.248 cv=25.14 hop_ch= 8 | 细帧 5 信道   6444 跳  跳速=     64440 Hz  驻留=15.52 µs  (真实 1600 Hz → ×40.3)
+     [Zigbee         ] f0=    47.4kHz bw= 785.6kHz  工具指纹 duty=0.249 cv=24.53 hop_ch= 9 | 细帧 7 信道   5356 跳  跳速=     53560 Hz  驻留=18.67 µs
+  -- dur=500.0 ms  n=2,000,000  预估 IQ=   488.3 MB  重放  88.03 s  磁盘     0.5 MB  [ok]
+     [Bluetooth_FHSS ] f0=   -43.6kHz bw= 512.3kHz  工具指纹 duty=0.243 cv=56.27 hop_ch= 8 | 细帧 4 信道  32060 跳  跳速=     64120 Hz  驻留=15.6 µs  (真实 1600 Hz → ×40.1)
+     [Zigbee         ] f0=    47.4kHz bw= 785.6kHz  工具指纹 duty=0.246 cv=54.89 hop_ch= 8 | 细帧 7 信道  26565 跳  跳速=     53130 Hz  驻留=18.82 µs
+
+==============================================================================
+汇总：跳速是否随窗长变化？（若恒定 → 拉长窗长不会让跳频变物理）
+  d2_00001  dur= 10.0 ms  Bluetooth_FHSS   跳速=     49600 Hz  驻留=20.16 µs  hop_ch=9
+  d2_00001  dur=100.0 ms  Bluetooth_FHSS   跳速=     52780 Hz  驻留=18.95 µs  hop_ch=9
+  d2_00001  dur=500.0 ms  Bluetooth_FHSS   跳速=     52972 Hz  驻留=18.88 µs  hop_ch=9
+  d2_00005  dur= 10.0 ms  Bluetooth_FHSS   跳速=     62600 Hz  驻留=15.97 µs  hop_ch=8
+  d2_00005  dur=100.0 ms  Bluetooth_FHSS   跳速=     64440 Hz  驻留=15.52 µs  hop_ch=8
+  d2_00005  dur=500.0 ms  Bluetooth_FHSS   跳速=     64120 Hz  驻留=15.6 µs  hop_ch=8
