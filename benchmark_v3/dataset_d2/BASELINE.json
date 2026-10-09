@@ -55,14 +55,35 @@
   "what": "四档噪声改为「热噪永开 + colored/impulse/correlated 按站确定性抽签」（配方菜单），取代旧均匀档位。档位表 = adapters/noise_profiles.py（刻度常量 + MENUS + plan_sample 抽签），落地工具 = adapters/regen_noise.py。",
   "why_by_station": "一个样本里的 4 个站是 4 台不同位置的接收机。按样本随机会让 station_a 系统性偏干净，直接污染 S0→S1→S2 信息增益曲线；按站抽签后四站位置的配方分布逐站完全相同（_check_noise_plan.py 实测）。",
   "menus_slots_of_10": {
-   "d1": {"thermal": 10},
-   "d2": {"thermal": 6, "colored": 4},
-   "d3": {"thermal": 4, "colored": 3, "impulse": 3},
-   "d4": {"thermal": 2, "colored": 2, "impulse": 3, "correlated": 3}
+   "d1": {
+    "thermal": 10
+   },
+   "d2": {
+    "thermal": 6,
+    "colored": 4
+   },
+   "d3": {
+    "thermal": 4,
+    "colored": 3,
+    "impulse": 3
+   },
+   "d4": {
+    "thermal": 2,
+    "colored": 2,
+    "impulse": 3,
+    "correlated": 3
+   }
   },
   "scales": "colored: d2 −8.0 / d3,d4 −5.0 dB，带宽 200 kHz；impulse: 200 Hz / 25 dB / 5 µs（duty 1e-3）；correlated: ρ=0.05；phase: d2–d4 均 0.01°（每采样点步长）。",
   "draw_rule": "10 个槽位按权重等间距撒点；站间步长 7、样本间步长 3（均与 10 互素）→ 同一样本内 4 站取 4 个**不同**槽；每个站位置在 50 样本上遍历 10 个槽各 5 次（配方占比 == 菜单权重），且各样本的配方构成不同（不是一个构成复制 50 遍）。",
-  "measured_lift_db": {"d2_colored": 1.45, "d3_colored": 2.54, "d3_impulse": 1.18, "d4_colored": 2.53, "d4_impulse": 1.2, "d4_correlated": 0.0},
+  "measured_lift_db": {
+   "d2_colored": 1.45,
+   "d3_colored": 2.54,
+   "d3_impulse": 1.18,
+   "d4_colored": 2.53,
+   "d4_impulse": 1.2,
+   "d4_correlated": 0.0
+  },
   "audit": "_check_noise_landed.py 全绿：逐样本配方与 plan_sample 逐位一致；实测底 vs 解析抬升差 <0.1 dB；noise_floor_dbm 样本间跨度 0.04 dB（中位 -106.94）；派生 INR/SNR 392/392 + 276/276 + 500/500 + 200/200 全一致（`benchmark_v3/_regen_noise/_check_landed.txt`）。",
   "platform_audit_2026_10_08": [
    "receiver.py _colored() 把有色噪声**归一到时域单位平均功率**（不是谱密度）：colored_noise_db 的语义是“有色分量总功率/热噪总功率”，而它集中在 ±100 kHz、热噪摊在 ±2 MHz → **0 dB 已把带内底抬 +5.45 dB**（实测 rise ≈ 10log10(1+2.47·10^(db/10))，斜率 0.87 dB/dB）。不是 bug，但语义必须写明。",
@@ -104,7 +125,11 @@
   "freq_aes": 0.0056,
   "doa_hits": 0.75,
   "doa_aes": 16.0092,
-  "oracle_assoc": {"assoc_pairs": 12, "P_kind_assoc": 0.5, "freq_hits_oracle": 1.0},
+  "oracle_assoc": {
+   "assoc_pairs": 12,
+   "P_kind_assoc": 0.5,
+   "freq_hits_oracle": 1.0
+  },
   "baseline_before_fix": {
    "answers_dir": "dataset_d1/answers_S0_agent_regress5",
    "n": 12,
@@ -164,7 +189,8 @@
     "sources_gate_recall": "0.541",
     "verdict": "clean PASS / GT-slice PASS / tool-view FAIL"
    }
-  }
+  },
+  "reverified_2026_10_09": "同日在两套数据上各跑一次 oracle16.py 复核（_gate_d2_postnoise.txt / _gate_d2_prenoise.txt）：postnoise = 0.510/0.612/0.480/0.543/0.245（与本节正式值逐位相同）、prenoise = 0.561/0.623/0.473/0.591/0.265（与 _history_2026_10_08 逐位相同）→ 噪声菜单没有动到 gate 口径。gate 不走 evaluator_v2，故与峰清单泄漏无关。"
  },
  "agent_full_50": {
   "answers_dir": "answers_S2_agent_full",
@@ -174,7 +200,7 @@
   "pos_hits": 0.459,
   "intent_hits": 0.682,
   "pairing": "修正后两段配对（位置优先）",
-  "note": "历史报告的 kind 0.353/freq 0.212 系旧配对口径；pos 0.247 系旧 match。**本组为 2026-10-03 口径，未在 2026-10-08 工具改动后重跑。**"
+  "note": "**【2026-10-09 更正】这 0.86 不是模型能力，是工具返回值泄漏的产物。**capture_tools.estimate_band_occupancy_by_correlation 为 D1 虚警根治同时返回两条清单（对外门控版 residual_peaks / 仅供聚类内部定带的 residual_peaks_legacy），而 evaluator_v2.py:367-372 把工具返回值整体 json.dumps 回灌给模型 → agent 直接抄旧宽带清单：本目录 answers_S2_agent_full 的答案频率与 legacy 清单前两名逐位相同（d2_00001 −678400/520100、d2_00009 661200/−207700、d2_00000 328300/−483200，见 benchmark_v3/_an_d2_oldnew_trace.txt）。泄漏已由 52a2f42 修复（capture_tools.AGENT_HIDDEN_KEYS + _agent_facing）。"
  },
  "closed_lines": [
   "频偏精测（三估计器+oracle 带切 42% 全撞墙——方向-频率解耦）",
@@ -200,5 +226,35 @@
    "freq_err_median_khz": 10
   },
   "note": "两级保障：deflation_db<15 候选滤除（2026-10-07）+ 残差峰局部底/相干门控（2026-10-08）。注意 deflation 只对 D1 有效（D2 假候选 defl 中位 37.5 dB）。"
+ },
+ "agent_layer1_2026_10_09": {
+  "answers_dir": "answers_S2_agent_layer1",
+  "date": "2026-10-09",
+  "n": 50,
+  "model": "deepseek-v3.2（百炼）",
+  "detection_hit": 0.48,
+  "detection_within1": 0.57,
+  "detect_abs_err": 0.86,
+  "kind_hits": 0.4821,
+  "freq_hits": 0.2143,
+  "freq_aes": 0.1787,
+  "pos_hits": 0.5357,
+  "pos_errs": 232.0,
+  "intent_hits": 0.768,
+  "spoof_fa": 0.0,
+  "layer1b": {
+   "answers_dir": "answers_S2_agent_layer1b",
+   "detection_hit": 0.48,
+   "detection_within1": 0.57,
+   "detect_abs_err": 0.86,
+   "kind_hits": 0.4464,
+   "freq_hits": 0.1964,
+   "freq_aes": 0.1822,
+   "pos_hits": 0.5,
+   "pos_errs": 273.72,
+   "intent_hits": 0.768,
+   "spoof_fa": 0.0
+  },
+  "note": "数据层已排除：聚类 A/B 上 K 33/50 相同、ΣK 119→109；全量证据 A/B 上门控峰条数相同 43/50、逐条强度差 ≤1.0 dB 41/50、时频指纹 ≤5% 41/50（见 _diag_d2_cluster_ab.txt / _diag_d2_evidence_magnitude.txt）。真瓶颈是仪器缺「同源并合」：estimate_sources_by_spatial_clustering 的 K = len(sources) 与 GT 源数精确匹配仅 13/50（旧数据）/ 16/50（新数据），而 prompt 却要求照抄 K；agent 的应对是拒答（layer1b 50 样本里 15 个把 num_interferers 写成被禁哨兵 -1，再被 run_capture_agent._sanitize 静默清成 0）。注意：layer1 与 layer1b 都跑在泄漏修复（capture_tools.py mtime 14:04）之前（layer1 12:02–13:14、layer1b 13:41–14:16）；**修复后的 D2 从未跑过 agent**。layer1b 与 layer1 的唯一差别是去掉事件日志 prompt 段落，结果同为 0.48 → 段落不是变量。eval_report_S2.json 现为 layer1b 的报告（layer1 的同名报告已被覆盖）。"
  }
 }

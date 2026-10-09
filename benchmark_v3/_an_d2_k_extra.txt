@@ -1,0 +1,182 @@
+[d2_00001] GT=2 matched=1 extra=4 未匹配GT=1  cand=5 K=5
+    extra k=0 pos=(-2089,237) bw=852k n_exp=2 maxdu=0.00 def=29.0 | 最近 GT  213.1m | 最近matched  218.3m overlap=n corr=0.62 (k'=1)
+    extra k=2 pos=(-2371,213) bw=851k n_exp=2 maxdu=0.00 def=27.2 | 最近 GT  317.7m | 最近matched  401.0m overlap=Y corr=0.56 (k'=1)
+    extra k=3 pos=(-2132,80) bw=837k n_exp=2 maxdu=0.01 def=28.0 | 最近 GT   79.9m | 最近matched  381.1m overlap=Y corr=0.59 (k'=1)
+    extra k=4 pos=(-2162,-44) bw=852k n_exp=3 maxdu=0.03 def=40.1 | 最近 GT   52.1m | 最近matched  508.9m overlap=n corr=0.54 (k'=1)
+    GT#0 位置=(-2135,0) kind=DECT 最近候选 52.1m
+[d2_00002] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=1 pos=(-592,560) bw=852k n_exp=2 maxdu=0.02 def=36.7 | 最近 GT  629.7m | 最近matched  778.2m overlap=Y corr=0.28 (k'=0)
+    GT#1 位置=(-1218,490) kind=Corona 最近候选 199.5m
+[d2_00003] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=1 pos=(897,609) bw=851k n_exp=3 maxdu=0.04 def=41.3 | 最近 GT   75.0m | 最近matched   72.7m overlap=Y corr=0.69 (k'=0)
+    GT#1 位置=(317,561) kind=Corona 最近候选 581.8m
+[d2_00004] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=0 pos=(-1475,-1842) bw=851k n_exp=3 maxdu=0.04 def=29.8 | 最近 GT   87.3m | 最近matched   97.0m overlap=Y corr=0.84 (k'=1)
+    GT#0 位置=(-1406,-1895) kind=WiFi_burst 最近候选 87.3m
+[d2_00005] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(2094,-872) bw=851k n_exp=2 maxdu=0.04 def=15.6 | 最近 GT  441.3m | 最近matched  660.5m overlap=Y corr=0.45 (k'=0)
+    extra k=2 pos=(2472,-871) bw=844k n_exp=2 maxdu=0.05 def=16.1 | 最近 GT  792.0m | 最近matched 1037.8m overlap=Y corr=0.74 (k'=0)
+    GT#0 位置=(1711,-1090) kind=Bluetooth_FHSS 最近候选 335.0m
+[d2_00006] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=2
+    extra k=1 pos=(-2267,2029) bw=854k n_exp=3 maxdu=0.02 def=45.6 | 最近 GT  170.7m | 最近matched  763.6m overlap=n corr=0.40 (k'=0)
+    extra k=2 pos=(-2026,1564) bw=856k n_exp=2 maxdu=0.04 def=23.9 | 最近 GT  260.1m | 最近matched  259.4m overlap=Y corr=0.78 (k'=0)
+    GT#0 位置=(-2149,2152) kind=Zigbee 最近候选 170.7m
+[d2_00007] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=1 pos=(13,385) bw=855k n_exp=3 maxdu=0.04 def=34.1 | 最近 GT  334.0m | 最近matched  338.2m overlap=Y corr=0.60 (k'=0)
+    GT#0 位置=(606,677) kind=VFD_noise 最近候选 661.6m
+[d2_00008] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=0 pos=(-474,2232) bw=861k n_exp=3 maxdu=0.00 def=57.1 | 最近 GT  638.3m | 最近matched  822.8m overlap=Y corr=0.67 (k'=2)
+    extra k=1 pos=(108,2232) bw=861k n_exp=3 maxdu=0.00 def=57.1 | 最近 GT  236.9m | 最近matched  240.2m overlap=Y corr=0.81 (k'=2)
+    GT#1 位置=(-116,1704) kind=VFD_noise 最近候选 573.8m
+[d2_00009] GT=2 matched=1 extra=0 未匹配GT=1  cand=1 K=1
+    GT#1 位置=(-1792,958) kind=WiFi_burst 最近候选 977.2m
+[d2_00010] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=1
+    extra k=1 pos=(2044,-916) bw=850k n_exp=2 maxdu=0.01 def=50.9 | 最近 GT  243.7m | 最近matched  249.3m overlap=Y corr=0.52 (k'=0)
+    GT#0 位置=(1972,-1294) kind=DECT 最近候选 385.6m
+[d2_00011] GT=2 matched=2 extra=2 未匹配GT=0  cand=4 K=2
+    extra k=1 pos=(2050,-477) bw=842k n_exp=2 maxdu=0.04 def=43.6 | 最近 GT   86.7m | 最近matched   97.4m overlap=Y corr=0.70 (k'=2)
+    extra k=3 pos=(3021,-1461) bw=844k n_exp=3 maxdu=0.02 def=50.5 | 最近 GT 1329.6m | 最近matched 1325.3m overlap=n corr=0.34 (k'=2)
+[d2_00012] GT=2 matched=0 extra=2 未匹配GT=2  cand=2 K=2
+    extra k=0 pos=(1381,1848) bw=856k n_exp=3 maxdu=0.00 | 最近 GT  556.2m | 无 matched 候选
+    extra k=1 pos=(2991,1825) bw=856k n_exp=3 maxdu=0.01 | 最近 GT  963.0m | 无 matched 候选
+    GT#0 位置=(1935,1899) kind=DECT 最近候选 556.2m
+    GT#1 位置=(2054,2047) kind=Corona 最近候选 701.5m
+[d2_00013] GT=2 matched=0 extra=2 未匹配GT=2  cand=2 K=2
+    extra k=0 pos=(2300,-757) bw=852k n_exp=3 maxdu=0.00 | 最近 GT   84.1m | 无 matched 候选
+    extra k=1 pos=(1514,-1269) bw=400k n_exp=3 maxdu=0.02 | 最近 GT  578.9m | 无 matched 候选
+    GT#0 位置=(2261,-832) kind=Welder 最近候选 84.1m
+    GT#1 位置=(1712,-1813) kind=Zigbee 最近候选 578.9m
+[d2_00014] GT=2 matched=0 extra=1 未匹配GT=2  cand=1 K=1
+    extra k=0 pos=(2195,-1231) bw=850k n_exp=3 maxdu=0.03 | 最近 GT  280.2m | 无 matched 候选
+    GT#0 位置=(2133,-256) kind=Microwave 最近候选 977.2m
+    GT#1 位置=(2241,-1508) kind=DECT 最近候选 280.2m
+[d2_00015] GT=2 matched=1 extra=0 未匹配GT=1  cand=1 K=1
+    GT#1 位置=(682,1351) kind=DECT 最近候选 142.8m
+[d2_00016] GT=2 matched=1 extra=3 未匹配GT=1  cand=4 K=2
+    extra k=0 pos=(-2152,-1714) bw=852k n_exp=3 maxdu=0.05 def=34.5 | 最近 GT  463.3m | 最近matched  521.7m overlap=n corr=0.51 (k'=1)
+    extra k=2 pos=(-2151,-1649) bw=855k n_exp=2 maxdu=0.03 def=40.1 | 最近 GT  528.2m | 最近matched  548.9m overlap=Y corr=0.32 (k'=1)
+    extra k=3 pos=(-2070,-1655) bw=832k n_exp=2 maxdu=0.03 def=24.6 | 最近 GT  455.7m | 最近matched  475.6m overlap=Y corr=0.32 (k'=1)
+    GT#0 位置=(-2236,-2170) kind=Zigbee 最近候选 463.3m
+[d2_00017] GT=2 matched=1 extra=3 未匹配GT=1  cand=4 K=2
+    extra k=1 pos=(1917,991) bw=846k n_exp=2 maxdu=0.01 def=30.0 | 最近 GT  498.1m | 最近matched  499.6m overlap=Y corr=0.50 (k'=0)
+    extra k=2 pos=(1432,1059) bw=267k n_exp=3 maxdu=0.04 def=31.6 | 最近 GT   83.8m | 最近matched   85.2m overlap=Y corr=0.71 (k'=0)
+    extra k=3 pos=(2049,1127) bw=846k n_exp=2 maxdu=0.02 def=37.1 | 最近 GT  647.7m | 最近matched  649.4m overlap=Y corr=0.30 (k'=0)
+    GT#0 位置=(2136,302) kind=DECT 最近候选 722.9m
+[d2_00019] GT=2 matched=0 extra=1 未匹配GT=2  cand=1 K=1
+    extra k=0 pos=(1291,1290) bw=853k n_exp=3 maxdu=0.03 | 最近 GT   54.9m | 无 matched 候选
+    GT#0 位置=(1789,931) kind=Corona 最近候选 614.1m
+    GT#1 位置=(1345,1299) kind=DECT 最近候选 54.9m
+[d2_00020] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(-2162,-321) bw=855k n_exp=3 maxdu=0.03 def=37.6 | 最近 GT  112.0m | 最近matched  210.4m overlap=Y corr=0.68 (k'=0)
+    extra k=2 pos=(-1689,-267) bw=852k n_exp=3 maxdu=0.03 def=30.4 | 最近 GT  266.2m | 最近matched  266.4m overlap=Y corr=0.41 (k'=0)
+    GT#1 位置=(-2223,-415) kind=DECT 最近候选 112.0m
+[d2_00021] GT=2 matched=1 extra=0 未匹配GT=1  cand=1 K=1
+    GT#1 位置=(1174,1244) kind=Welder 最近候选 667.4m
+[d2_00022] GT=2 matched=2 extra=1 未匹配GT=0  cand=3 K=3
+    extra k=2 pos=(393,-249) bw=2k n_exp=3 maxdu=0.03 def=30.9 | 最近 GT  185.3m | 最近matched  195.8m overlap=n corr=0.79 (k'=0)
+[d2_00023] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(-796,1496) bw=843k n_exp=3 maxdu=0.03 def=37.8 | 最近 GT   55.1m | 最近matched  805.3m overlap=Y corr=0.32 (k'=0)
+    extra k=2 pos=(-628,1433) bw=843k n_exp=2 maxdu=0.04 def=32.4 | 最近 GT  125.8m | 最近matched  681.5m overlap=Y corr=0.35 (k'=0)
+    GT#0 位置=(-749,1467) kind=Zigbee 最近候选 55.1m
+[d2_00024] GT=2 matched=0 extra=1 未匹配GT=2  cand=1 K=1
+    extra k=0 pos=(-2543,-1678) bw=831k n_exp=2 maxdu=0.02 | 最近 GT  566.3m | 无 matched 候选
+    GT#0 位置=(-2095,-1253) kind=Corona 最近候选 617.8m
+    GT#1 位置=(-1979,-1622) kind=Zigbee 最近候选 566.3m
+[d2_00026] GT=1 matched=1 extra=3 未匹配GT=0  cand=4 K=3
+    extra k=1 pos=(-360,-2166) bw=854k n_exp=2 maxdu=0.02 def=30.3 | 最近 GT  349.8m | 最近matched  364.0m overlap=Y corr=0.62 (k'=0)
+    extra k=2 pos=(-115,-2192) bw=854k n_exp=2 maxdu=0.03 def=19.2 | 最近 GT  104.1m | 最近matched  118.4m overlap=n corr=0.75 (k'=0)
+    extra k=3 pos=(240,-2112) bw=850k n_exp=1 maxdu=0.03 def=17.6 | 最近 GT  260.9m | 最近matched  247.0m overlap=Y corr=0.59 (k'=0)
+[d2_00027] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=0 pos=(-804,-1807) bw=857k n_exp=3 maxdu=0.04 def=33.3 | 最近 GT  143.3m | 最近matched  155.6m overlap=Y corr=0.73 (k'=1)
+    extra k=2 pos=(-1650,-1461) bw=851k n_exp=3 maxdu=0.05 def=31.8 | 最近 GT  695.8m | 最近matched  779.7m overlap=Y corr=0.23 (k'=1)
+    GT#1 位置=(-1390,-2106) kind=DECT 最近候选 517.3m
+[d2_00028] GT=2 matched=0 extra=6 未匹配GT=2  cand=6 K=5
+    extra k=0 pos=(-1421,-1239) bw=853k n_exp=2 maxdu=0.01 | 最近 GT  422.0m | 无 matched 候选
+    extra k=1 pos=(-1532,-1081) bw=847k n_exp=1 maxdu=0.00 | 最近 GT  228.8m | 无 matched 候选
+    extra k=2 pos=(-1891,-1490) bw=853k n_exp=2 maxdu=0.03 | 最近 GT  183.8m | 无 matched 候选
+    extra k=3 pos=(-1556,-1028) bw=853k n_exp=2 maxdu=0.04 | 最近 GT  172.3m | 无 matched 候选
+    extra k=4 pos=(-742,-707) bw=853k n_exp=2 maxdu=0.02 | 最近 GT  943.0m | 无 matched 候选
+    extra k=5 pos=(-1997,-1964) bw=847k n_exp=2 maxdu=0.05 | 最近 GT  307.6m | 无 matched 候选
+    GT#0 位置=(-1666,-895) kind=Zigbee 最近候选 172.3m
+    GT#1 位置=(-1896,-1673) kind=Microwave 最近候选 183.8m
+[d2_00029] GT=2 matched=2 extra=1 未匹配GT=0  cand=3 K=1
+    extra k=2 pos=(-828,-309) bw=852k n_exp=2 maxdu=0.05 def=24.0 | 最近 GT  117.5m | 最近matched  117.8m overlap=n corr=0.74 (k'=0)
+[d2_00030] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=1
+    extra k=1 pos=(0,-436) bw=852k n_exp=2 maxdu=0.01 def=32.6 | 最近 GT   61.3m | 最近matched  230.3m overlap=Y corr=0.82 (k'=0)
+    GT#0 位置=(47,-475) kind=DECT 最近候选 61.3m
+[d2_00031] GT=2 matched=2 extra=2 未匹配GT=0  cand=4 K=3
+    extra k=2 pos=(-1464,-913) bw=828k n_exp=4 maxdu=0.03 def=46.2 | 最近 GT  191.1m | 最近matched  192.3m overlap=Y corr=0.83 (k'=0)
+    extra k=3 pos=(-1730,-1154) bw=828k n_exp=2 maxdu=0.03 def=47.6 | 最近 GT  169.8m | 最近matched  168.5m overlap=Y corr=0.54 (k'=0)
+[d2_00032] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=1
+    extra k=1 pos=(1062,-810) bw=860k n_exp=1 maxdu=0.00 def=45.3 | 最近 GT  371.5m | 最近matched  754.4m overlap=Y corr=0.32 (k'=0)
+    extra k=2 pos=(896,-946) bw=853k n_exp=1 maxdu=0.03 def=38.6 | 最近 GT  202.8m | 最近matched  968.2m overlap=Y corr=0.33 (k'=0)
+    GT#1 位置=(700,-894) kind=Corona 最近候选 202.8m
+[d2_00033] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(-2563,1017) bw=3528k n_exp=3 maxdu=0.02 def=46.1 | 最近 GT 1303.0m | 最近matched 1436.5m overlap=Y corr=0.56 (k'=0)
+    extra k=2 pos=(-3115,590) bw=3528k n_exp=2 maxdu=0.03 def=29.8 | 最近 GT 1937.0m | 最近matched 2056.8m overlap=Y corr=0.30 (k'=0)
+    GT#0 位置=(-1270,1180) kind=Corona 最近候选 147.3m
+[d2_00034] GT=2 matched=0 extra=2 未匹配GT=2  cand=2 K=1
+    extra k=0 pos=(2142,1471) bw=845k n_exp=2 maxdu=0.00 | 最近 GT   73.2m | 无 matched 候选
+    extra k=1 pos=(2435,1779) bw=854k n_exp=3 maxdu=0.00 | 最近 GT  320.8m | 无 matched 候选
+    GT#0 位置=(2213,1548) kind=Corona 最近候选 104.7m
+    GT#1 位置=(2083,1515) kind=Bluetooth_FHSS 最近候选 73.2m
+[d2_00035] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=1
+    extra k=1 pos=(-246,-289) bw=845k n_exp=3 maxdu=0.05 def=24.0 | 最近 GT  458.7m | 最近matched 1591.3m overlap=n corr=0.52 (k'=0)
+    GT#1 位置=(-703,-246) kind=Microwave 最近候选 458.7m
+[d2_00036] GT=2 matched=2 extra=1 未匹配GT=0  cand=3 K=3
+    extra k=2 pos=(2062,-152) bw=825k n_exp=3 maxdu=0.04 def=38.3 | 最近 GT  478.9m | 最近matched  481.4m overlap=Y corr=0.55 (k'=1)
+[d2_00037] GT=2 matched=1 extra=3 未匹配GT=1  cand=4 K=4
+    extra k=1 pos=(1039,-712) bw=849k n_exp=3 maxdu=0.01 def=46.4 | 最近 GT  958.9m | 最近matched 1084.3m overlap=Y corr=0.58 (k'=0)
+    extra k=2 pos=(1238,-646) bw=850k n_exp=3 maxdu=0.02 def=40.3 | 最近 GT 1162.7m | 最近matched 1292.2m overlap=n corr=0.35 (k'=0)
+    extra k=3 pos=(1282,-642) bw=849k n_exp=3 maxdu=0.02 def=30.9 | 最近 GT 1206.8m | 最近matched 1335.9m overlap=Y corr=0.33 (k'=0)
+    GT#0 位置=(82,-769) kind=Microwave 最近候选 174.9m
+[d2_00038] GT=2 matched=1 extra=0 未匹配GT=1  cand=1 K=1
+    GT#0 位置=(1582,-1652) kind=Zigbee 最近候选 184.8m
+[d2_00039] GT=2 matched=1 extra=3 未匹配GT=1  cand=4 K=4
+    extra k=0 pos=(388,-734) bw=851k n_exp=3 maxdu=0.00 def=41.9 | 最近 GT  165.1m | 最近matched  186.8m overlap=n corr=0.57 (k'=1)
+    extra k=2 pos=(436,-643) bw=851k n_exp=3 maxdu=0.04 def=36.5 | 最近 GT  184.2m | 最近matched  179.3m overlap=n corr=0.59 (k'=1)
+    extra k=3 pos=(340,-827) bw=856k n_exp=3 maxdu=0.03 def=31.9 | 最近 GT   67.2m | 最近matched  245.3m overlap=Y corr=0.48 (k'=1)
+    GT#0 位置=(280,-858) kind=VFD_noise 最近候选 67.2m
+[d2_00040] GT=2 matched=0 extra=1 未匹配GT=2  cand=1 K=1
+    extra k=0 pos=(-1510,-657) bw=838k n_exp=3 maxdu=0.01 | 最近 GT  161.3m | 无 matched 候选
+    GT#0 位置=(-1277,-401) kind=Corona 最近候选 346.3m
+    GT#1 位置=(-1363,-591) kind=Zigbee 最近候选 161.3m
+[d2_00041] GT=2 matched=2 extra=2 未匹配GT=0  cand=4 K=4
+    extra k=2 pos=(610,-332) bw=861k n_exp=3 maxdu=0.02 def=50.8 | 最近 GT  441.5m | 最近matched  430.2m overlap=Y corr=0.44 (k'=1)
+    extra k=3 pos=(2448,-724) bw=856k n_exp=3 maxdu=0.03 def=52.1 | 最近 GT  486.0m | 最近matched  487.8m overlap=n corr=0.57 (k'=0)
+[d2_00042] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=1 pos=(722,1533) bw=849k n_exp=3 maxdu=0.04 def=36.8 | 最近 GT  359.1m | 最近matched  378.9m overlap=Y corr=0.77 (k'=0)
+    GT#1 位置=(890,2182) kind=Zigbee 最近候选 371.4m
+[d2_00043] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(-520,1135) bw=2k n_exp=2 maxdu=0.04 def=26.5 | 最近 GT   56.4m | 最近matched  154.6m overlap=n corr=0.95 (k'=0)
+    extra k=2 pos=(-576,1130) bw=2k n_exp=2 maxdu=0.02 def=31.5 | 最近 GT   87.5m | 最近matched   98.4m overlap=n corr=0.82 (k'=0)
+    GT#1 位置=(-514,1191) kind=Bluetooth_FHSS 最近候选 56.4m
+[d2_00044] GT=2 matched=2 extra=3 未匹配GT=0  cand=5 K=5
+    extra k=2 pos=(-1093,-2087) bw=854k n_exp=3 maxdu=0.03 def=44.5 | 最近 GT  328.8m | 最近matched  327.3m overlap=Y corr=0.69 (k'=0)
+    extra k=3 pos=(124,-2184) bw=853k n_exp=2 maxdu=0.03 def=16.0 | 最近 GT  892.8m | 最近matched  894.3m overlap=Y corr=0.57 (k'=0)
+    extra k=4 pos=(-1905,-2079) bw=854k n_exp=3 maxdu=0.04 def=41.4 | 最近 GT  286.1m | 最近matched  292.4m overlap=Y corr=0.84 (k'=1)
+[d2_00045] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=2
+    extra k=1 pos=(-677,-842) bw=843k n_exp=2 maxdu=0.04 def=24.3 | 最近 GT  216.8m | 最近matched  838.0m overlap=Y corr=0.55 (k'=0)
+    GT#0 位置=(-809,-670) kind=Microwave 最近候选 216.8m
+[d2_00046] GT=2 matched=1 extra=0 未匹配GT=1  cand=1 K=1
+    GT#0 位置=(-1713,-2153) kind=Microwave 最近候选 33.5m
+[d2_00047] GT=2 matched=1 extra=2 未匹配GT=1  cand=3 K=3
+    extra k=1 pos=(1124,102) bw=854k n_exp=3 maxdu=0.03 def=50.4 | 最近 GT  215.3m | 最近matched  480.5m overlap=Y corr=0.51 (k'=0)
+    extra k=2 pos=(1584,363) bw=858k n_exp=3 maxdu=0.04 def=31.3 | 最近 GT  111.4m | 最近matched   87.8m overlap=Y corr=0.77 (k'=0)
+    GT#0 位置=(1332,45) kind=Corona 最近候选 215.3m
+[d2_00048] GT=2 matched=0 extra=2 未匹配GT=2  cand=2 K=2
+    extra k=0 pos=(-2017,-1422) bw=851k n_exp=3 maxdu=0.03 | 最近 GT  131.6m | 无 matched 候选
+    extra k=1 pos=(-2052,-1575) bw=59k n_exp=2 maxdu=0.02 | 最近 GT   71.1m | 无 matched 候选
+    GT#0 位置=(-1986,-1550) kind=Welder 最近候选 71.1m
+    GT#1 位置=(-1072,-1430) kind=Zigbee 最近候选 944.4m
+[d2_00049] GT=2 matched=1 extra=1 未匹配GT=1  cand=2 K=0
+    extra k=1 pos=(2930,-1550) bw=846k n_exp=2 maxdu=0.00 def=47.1 | 最近 GT 1328.7m | 最近matched 1474.9m overlap=Y corr=0.57 (k'=0)
+    GT#1 位置=(1698,-2048) kind=Microwave 最近候选 520.9m
+
+=== 汇总（dataset_d2 全 50 样本，S2 四站口径）===
+GT 可见源 98  matched 50 (0.510)  extra 79  未匹配 GT 48
+extra 中：过支持门 64/79；与最近 matched 候选 位置<40m 0、<100m 6、<200m 15；频带重叠 46；导向互相关>0.85 1
+extra 到最近 GT 距离：n=79 中位 260.9 p90 946.2 max 1937.0
+extra 到最近 matched 候选距离：n=61 中位 401.0 p90 1292.2 max 2056.8
+extra 带宽：n=79 中位 851300.0 p90 856520.0 max 3528000.0
+未匹配 GT 到最近候选距离：n=48 中位 216.0 p90 677.6 max 977.2
