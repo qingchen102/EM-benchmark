@@ -59,3 +59,7 @@ projects/ppt/*/images/
 projects/ppt/*/svg_final/
 # 临时渲染/检查产物
 _tmp_*
+# deck 派生物（2026-10-10）：exports/ 是每次导出的 pptx，backup/ 是 ppt-master 的中间备份；成品另存为 projects/ppt/v3_benchmark_progress_<date>.pptx
+projects/ppt/*/exports/
+projects/ppt/*/backup/
+projects/ppt/*/validation/em_benchmark_v3_*.report.json

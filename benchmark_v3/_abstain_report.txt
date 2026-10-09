@@ -1,0 +1,31 @@
+拒答（禁用哨兵 -1）审计 + "排除拒答"口径（2026-10-09 夜）
+
+生成方式：`python -u eval_dataset.py <root> --answers <dir>`（新增键 abstain_n /
+abstain_rate / detection_hit_excl_abstain / detection_denom_excl_abstain），逐档跑
+一遍；拒答判据优先取答案文件自带的 abstained 字段（runner 本轮新写入），缺失时回退
+到 answers 目录里 _run_log.json 的 raw_output（模型原话）。
+
+run                lv      n   detect   abstain  excl_abst   denom_excl
+----------------------------------------------------------------------------
+D1 x S0            S0     50    0.960         -          -            -
+D2 x S2 带宽修前     S2     50    0.480         4      0.522           46
+D2 x S2 带宽修后     S2     50    0.440        20      0.733           30
+D3 x S2 带宽修前     S2     50    0.400        10      0.475           40
+D4 x S2 带宽修前     S2     50    0.240        15      0.343           35
+
+口径说明
+- detection_hit 仍是注册口径，**未改动**：拒答按 0 计、仍算未命中。新增的两个数只是
+  把"拒答"从分母里单列出来，便于区分"模型不会检"与"模型不愿答"。
+- abstain_n = 模型写了负 num_interferers（prompt 明令禁止）被 _sanitize 清成 0 的
+  样本数；excl_abst = 把这些样本移出分母后的 detection（= "真的作答时"的检测率）。
+- caveat ①：D2 带宽修前那一轮的 _run_log.json 只含续跑末轮的 15 条记录（D1 / D2 带宽
+  修后 / D3 / D4 各 50 条），故其 abstain_n=4 是**下界**。拒答样本必然 detection=0，
+  把它们移出分母只会让比率上升 → 0.522 是下界。
+- caveat ②：D3/D4 跑的是**带宽修复前**的数据（现数据已重放换装），其数值不可与
+  D1/D2 直接并列；换装后 D3/D4 尚无 agent 基线。
+- 解释：拒答率随难度单调上升（D1 0% → D3 20% → D4 30% → D2 40%），而 D1 是单站、
+  且半数样本真值本就是 0 —— 说明模型有能力遵守"必须给 0..3"的契约，只是在证据含糊
+  时选择违约。以 D2 带宽修后为例：22 次未命中里 20 次是拒答，排除后检测率 0.733，
+  与仪器侧"可解子集"上限 0.685 同量级 → 题面与仪器站得住，丢掉的分主要在答案契约。
+- 本轮 prompt 已就此加固（禁负哨兵的三种措辞改成"按 0 计并判错、无二次询问"），重跑
+  结果见 `_api_noneg_d2.log` / `_api_noneg_d1.log` 与后续的 eval_report。

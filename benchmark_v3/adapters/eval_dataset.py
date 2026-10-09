@@ -22,6 +22,11 @@
                       "intent": "malicious|incidental|benign", # T3 意图（可选）
                       "is_spoof": bool}, ...]}                 # T3 欺骗（可选）
 
+可选元字段：abstained(bool) —— 模型写了负哨兵（= 拒答，prompt 明令禁止）时由
+runner 置真。评测端额外报 abstain_n / abstain_rate / detection_hit_excl_abstain，
+但 **detection_hit 仍是含拒答的注册口径**；旧答案目录没有该字段时，靠同目录
+_run_log.json 的 raw_output 反推（见 _load_abstain_ids）。
+
 缺省 --answers：从 GT 构造"该 S 级可见性下的理想答案"回放，验证评分管道（应全 1.0，
 含意图/欺骗轴）。
 """
@@ -29,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -244,11 +250,50 @@ def assoc_answer(ans: dict, all_gt: list[dict]) -> dict:
     return r
 
 
+_SENT_RE = re.compile(r'"num_interferers"\s*:\s*(-?\d+)')
+
+
+def _load_abstain_ids(answers_dir: Path | None) -> set[str]:
+    """从答案目录旁的 `_run_log.json` 里找出“模型写了负哨兵”的样本 id。
+
+    背景：capture prompt 明写 "NEVER use a negative num_interferers (e.g. -1) or
+    any sentinel"，而 run_capture_agent._sanitize 会把任意负数清成 0 —— 于是一次
+    拒答在 detection 上与“判定无干扰”不可区分，且必然判错。本函数只做统计口径的
+    拆分（答案文件里若已带 abstained 字段则优先用它），不改变 detection_hit。
+    续跑过的目录 `_run_log.json` 可能只含末轮记录 → 覆盖面可能 < n。
+    """
+    if answers_dir is None:
+        return set()
+    p = answers_dir / "_run_log.json"
+    if not p.exists():
+        return set()
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    recs = d if isinstance(d, list) else d.get("runs", [])
+    out: set[str] = set()
+    for r in recs if isinstance(recs, list) else []:
+        if not isinstance(r, dict):
+            continue
+        sid = r.get("sample_id")
+        if not sid:
+            continue
+        if r.get("abstained") is True:
+            out.add(str(sid))
+            continue
+        m = _SENT_RE.search(r.get("raw_output") or "")
+        if m and int(m.group(1)) < 0:
+            out.add(str(sid))
+    return out
+
+
 def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
     root = Path(root)
     answers_dir = Path(answers_dir) if answers_dir else None
     idx = json.loads((root / "index.json").read_text(encoding="utf-8"))
     subsets = idx["observation_subsets"]
+    abstain_ids = _load_abstain_ids(answers_dir)
     matrix: dict[str, dict] = {s: {} for s in subsets}
     unknown_kinds: set[str] = set()
     assoc_pool: dict = {}
@@ -263,6 +308,8 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
             if not ans_p.exists():
                 continue                       # 部分运行（早停/断点）缺答案的样本跳过
             ans_obj = json.loads(ans_p.read_text(encoding="utf-8"))
+        abstained = isinstance(ans_obj, dict) and (
+            ans_obj.get("abstained") is True or s["id"] in abstain_ids)
         if ans_obj is not None:
             # oracle-association 池化：与 S 级无关（全 GT 列表），每样本一次
             for k, v in assoc_answer(ans_obj, truth.get("interferers", [])).items():
@@ -279,6 +326,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
             ans = ans_obj if ans_obj is not None else offline_answer(truth, stations)
             r = score_answer(ans, gt_list, slevel)
             m = matrix[slevel]
+            m.setdefault("abstain", []).append(1 if abstained else 0)
             for k, v in r.items():
                 if isinstance(v, list):        # 逐干扰对的 hits/aes：展平聚合
                     m.setdefault(k, []).extend(v)
@@ -298,6 +346,8 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
     for slevel, m in matrix.items():
         row = {"n": len(next(iter(m.values()))) if m else 0}
         # T3 池化指标：先取出原始计数，报告里写成比率（分母为 0 的级别不出现）
+        det_hits = m.pop("detection_hit", [])
+        abst_flags = m.pop("abstain", [])
         intent_hits = m.pop("intent_hits", [])
         intent_by_gt = m.pop("intent_by_gt", None)
         s_gt = m.pop("spoof_gt", [])
@@ -307,6 +357,15 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
         for k, vals in m.items():
             row[k] = (round(float(np.mean(vals)), 3) if k.endswith("_hit")
                       else round(float(np.mean(vals)), 4))
+        if det_hits:
+            row["detection_hit"] = round(float(np.mean(det_hits)), 3)      # 注册口径：含拒答
+        if abst_flags and any(abst_flags):
+            keep = [d for d, a in zip(det_hits, abst_flags) if not a]
+            row["abstain_n"] = int(sum(abst_flags))
+            row["abstain_rate"] = round(float(np.mean(abst_flags)), 3)
+            if keep:
+                row["detection_hit_excl_abstain"] = round(float(np.mean(keep)), 3)
+                row["detection_denom_excl_abstain"] = len(keep)
         if intent_hits:
             row["intent_accuracy"] = round(float(np.mean(intent_hits)), 3)
             row["intent_pairs"] = len(intent_hits)

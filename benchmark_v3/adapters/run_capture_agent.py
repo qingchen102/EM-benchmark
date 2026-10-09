@@ -240,6 +240,8 @@ Output ONLY valid JSON with schema:
                   "doa_deg": <world azimuth, deg>, "position_m": [<x_m>, <y_m>]}, ...]}
 Rules:
 - num_interferers must equal the number of entries in interferers.
+- num_interferers MUST be a NON-NEGATIVE integer. It is parsed literally: a negative
+  value (e.g. -1) is read as 0 and scored as a WRONG answer; there is no re-ask.
 - ALWAYS include every key per interferer (doa_deg / position_m best effort even
   when only one station is available).
 - HARD TOOL BUDGET — you have at most 10 rounds and you MUST follow this recipe.
@@ -284,7 +286,8 @@ Rules:
     Round 7+: NO MORE TOOL CALLS. Write the final JSON answer NOW — the
               classify items already contain every field the answer schema
               needs. If evidence is partial, still answer with your best
-              estimates for the bands you measured.
+              estimates for the bands you measured. Before emitting, check that
+              num_interferers is a non-negative integer (0 is a valid answer).
 - REPORT ONLY MEASURED BANDS: report exactly the merged coherent residual bands
   you measured (or the classifier candidates), nothing else. Do not invent a band
   from a spectral lobe of the wideband target (the target is at ~0 Hz and is
@@ -292,9 +295,10 @@ Rules:
   same emitter twice under two nearby frequencies. If the measurement shows no
   coherent band, num_interferers = 0 is the correct answer.
 - NEVER use a negative num_interferers (e.g. -1) or any sentinel to signal
-  "not sure" — that is an invalid answer and will be discarded. If unsure of
-  the count, report the peaks you measured; if unsure of the kind, use the
-  closest catalog match.
+  "not sure": it is parsed as 0 and recorded as a WRONG answer (there is no
+  clarification round). If the evidence is partial, commit to the bands you
+  measured; if unsure of the kind, use the closest catalog match. Reporting too
+  few interferers is still a real attempt; -1 is a guaranteed miss.
 - CO-CHANNEL RESOLUTION: when the wideband target overlaps the interferers (spectrum
   is one fused blob around 0 Hz), FIRST call estimate_band_occupancy_by_correlation
   on a station. If band_occupied_beyond_target is true, re-run
@@ -394,8 +398,15 @@ def _to_f(value, default=None):
 
 
 def _sanitize(pred: dict) -> dict:
-    """把模型答案清洗成 eval_dataset 认可的 schema（缺字段不伪造，评分端按口径处理）。"""
+    """把模型答案清洗成 eval_dataset 认可的 schema（缺字段不伪造，评分端按口径处理）。
+
+    `abstained`：模型写了负数（= prompt 明令禁止的哨兵 -1）时为 True。负数会被清成
+    0，于是在 detection 上与“判定无干扰”不可区分且必然判错——所以把这次拒答单列
+    出来，评测端可同时报“含拒答 / 排除拒答”两个 detection
+    （见 eval_dataset._load_abstain_ids 与报告里的 abstain_n）。
+    """
     n_raw = _to_f(pred.get("num_interferers"), 0.0) if isinstance(pred, dict) else 0.0
+    abstained = bool(n_raw is not None and n_raw < 0)
     n = max(0, int(n_raw or 0))
     items_raw = pred.get("interferers") if isinstance(pred, dict) else None
     items_raw = items_raw if isinstance(items_raw, list) else []
@@ -418,7 +429,7 @@ def _sanitize(pred: dict) -> dict:
             if x is not None and y is not None:
                 it["position_m"] = [x, y]
         items.append(it)
-    return {"num_interferers": n, "interferers": items}
+    return {"num_interferers": n, "interferers": items, "abstained": abstained}
 
 
 # ---- monkey-patch：capture 域 prompt / 观测格式 / 工具（零改 v2 冻结文件） ----

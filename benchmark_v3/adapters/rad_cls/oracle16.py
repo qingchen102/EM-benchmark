@@ -11,8 +11,10 @@
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -35,6 +37,53 @@ GATE_TOOLVIEW = 0.50
 D2_ROOT = Path(os.environ.get("DSH_D2_ROOT") or (_HERE.parent.parent / "dataset_d2")).resolve()
 # DSH_D2_ROOT 覆写入口（2026-10-10）：用于“加噪前 vs 加噪后”同代码 A/B。
 # 不改任何门限，只换数据根目录（其下需有 index.json 与 <sid>/capture/）。
+#
+# 2026-10-10 测量卫生：gate 曾直接复用 agent 运行留下的 `_agent_cache/<sid>/`，而里面的
+# 残差/波束文件是**上一次工具运行**的产物（此后工具已改：泄漏修复 52a2f42、波形带限
+# 修复 57f1669）→ 同一个 checkpoint 会因为“缓存是新的还是旧的”得到不同分数（实测 GT
+# 切片 0.746 [53/71]/129 簇 ↔ 0.613 [49/80]/142 簇，分母在 71/78/80 间漂）。缓存只是
+# 记忆化，换命名空间在语义上等价 → gate 用自己的 `_gate_cache/<sid>/`，并盖一枚来源
+# 指纹（工具源码 + checkpoint），指纹一变就整目录重建，杜绝“陈旧缓存静默改分母”。
+GATE_CACHE = D2_ROOT / "_gate_cache"
+_STAMP_FILES = (_ADAPTERS / "capture_tools.py",
+                _ADAPTERS / "run_capture_agent.py",
+                _HERE / "data_gen16.py")
+
+
+def _md5(p: Path) -> str:
+    return hashlib.md5(p.read_bytes()).hexdigest() if p.exists() else "-"
+
+
+def ensure_gate_cache() -> None:
+    """gate 私有的缓存命名空间；来源指纹变了就整目录重建（自愈，不靠人手清缓存）。"""
+    stamp = {"files": {p.name: _md5(p) for p in _STAMP_FILES},
+             "checkpoint": _md5(_HERE / "rad_classifier" / "checkpoint.pt"),
+             "root": str(D2_ROOT)}
+    sp = GATE_CACHE / "_stamp.json"
+    old = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
+    stale = old is None or old.get("stamp") != stamp
+    if stale and GATE_CACHE.exists():
+        shutil.rmtree(GATE_CACHE, ignore_errors=True)
+        print(f"    [gate-cache] 来源指纹变化 → 重建 {GATE_CACHE}")
+    GATE_CACHE.mkdir(parents=True, exist_ok=True)
+    sp.write_text(json.dumps({"stamp": stamp, "note": "gate 私有缓存；指纹不匹配即整目录重建"},
+                             ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def _target_ref_state(cap: Path, station: str = "station_a") -> str:
+    """该站目标参考的可用性：'ok' | 'invisible' | 'missing'。
+
+    `_build_target_reference` 只在 `private/channel_{target}_{station}.npz` 存在
+    且 `delays_s` 非空时才纳入该站。`invisible`（0 径）表示 RT 判定该站**完全
+    看不到目标**（被建筑遮挡）：此时该站原始 IQ 本身不含目标分量，带限原始 IQ
+    即残差（与 `strip_target_all_stations` 的降级约定一致，2026-09-29 修）。
+    `missing` 是链路文件缺失，属数据/挂载异常，必须跳过而不是静默降级。
+    """
+    npz = cap / "private" / f"channel_target_{station}.npz"
+    if not npz.is_file():
+        return "missing"
+    with np.load(npz, allow_pickle=False) as d:
+        return "ok" if int(d["delays_s"].size) > 0 else "invisible"
 
 
 def load_model():
@@ -96,6 +145,7 @@ def gate_gt_slice(model):
     口径 = 评测链路的"提取后波形"（与训练分布对齐）；空间聚类定位误差另计
     （此处用 GT 位置，是提取正确性上限评测）。"""
     correct = total = 0
+    n_invisible = n_no_ref = 0
     idx = json.loads((D2_ROOT / "index.json").read_text(encoding="utf-8"))
     conf = np.zeros((len(CLASSES16), len(CLASSES16)))
     C = 299792458.0
@@ -103,9 +153,26 @@ def gate_gt_slice(model):
         cap = D2_ROOT / s["id"] / "capture"
         obs = json.loads((cap / "public" / "observations.json").read_text(encoding="utf-8"))
         truth = json.loads((cap / "private" / "d1_truth.json").read_text(encoding="utf-8"))
-        resid_p = D2_ROOT / "_agent_cache" / s["id"] / "resid_station_a.npy"
+        ref_state = _target_ref_state(cap)
+        if ref_state == "missing":
+            n_no_ref += 1
+            print(f"    [gt-slice] {s['id']} station_a 目标链路文件缺失 → 跳过（不计入分母）")
+            continue
+        resid_p = GATE_CACHE / s["id"] / "resid_station_a.npy"
         resid = None
-        if resid_p.exists():
+        if ref_state == "invisible":
+            # 目标在该站 0 径（被建筑完全遮挡）：原始 IQ 不含目标分量，带限原始 IQ 即残差。
+            # 刻意**不读缓存**——工具的降级路径会往同一文件名写“按候选带限”的版本，
+            # 口径与本函数（整通带 ±0.45fs）不同；现场按本函数口径重建并落盘，
+            # 使冷/热缓存两跑的分母与内容逐位一致（2026-10-10 第二处测量卫生修复）。
+            n_invisible += 1
+            _fs0 = obs["receivers"][0]["sample_rate_hz"]
+            iq_a = np.load(cap / "public" / "iq_station_a.npy").astype(np.complex128)
+            f_a = np.fft.fftfreq(iq_a.shape[1], 1.0 / _fs0)
+            m_a = np.abs(f_a) <= _fs0 * 0.45
+            resid = np.fft.ifft(np.fft.fft(iq_a, axis=1) * m_a, axis=1)
+            np.save(resid_p, resid.astype(np.complex64))
+        elif resid_p.exists():
             resid = np.load(resid_p).astype(np.complex128)
             if np.asarray(resid).ndim != 2:          # 2026-10-09：历史降级路径写过
                 print(                                 # 1-D 文件（d2_00043），读取端
@@ -128,7 +195,7 @@ def gate_gt_slice(model):
                     cap / "private", obs["receivers"][0]["shape"][1])
                 ctx = ct.ToolContext(
                     capture_dir=cap / "public",
-                    cache_dir=D2_ROOT / "_agent_cache" / s["id"],
+                    cache_dir=GATE_CACHE / s["id"],
                     allowed_stations=[r["receiver_id"] for r in obs["receivers"]],
                     fs=obs["receivers"][0]["sample_rate_hz"],
                     fc=obs["receivers"][0]["center_frequency_hz"],
@@ -199,6 +266,9 @@ def gate_gt_slice(model):
         return 0.0, conf
     acc = correct / total
     print(f"  GT切片 (GT位置LS提取后分类): {acc:.3f}  [{correct}/{total}]  gate={GATE_SLICE}")
+    if n_invisible or n_no_ref:
+        print(f"    [gt-slice] 口径说明：{n_invisible} 个样本 station_a 目标 0 径（用带限原始 IQ 当残差，"
+              f"与工具降级约定一致）；{n_no_ref} 个样本目标链路文件缺失（已跳过、不计入分母）")
     return acc, conf
 
 
@@ -257,7 +327,7 @@ def gate_tool_view(model, n_samples=50):
         allowed = [r["receiver_id"] for r in obs["receivers"]]
         aoi = np.mean([r["receiver_position_m"] for r in obs["receivers"]], axis=0).tolist()
         ctx = ct.ToolContext(capture_dir=cap / "public",
-                             cache_dir=D2 / "_agent_cache" / sid,
+                             cache_dir=GATE_CACHE / sid,
                              allowed_stations=allowed,
                              fs=obs["receivers"][0]["sample_rate_hz"],
                              fc=obs["receivers"][0]["center_frequency_hz"],
@@ -342,7 +412,7 @@ def gate_tool_view(model, n_samples=50):
             used_kg.add(k); used_gg.add(i_g)
             src_recall_n += 1
         for i_g, (k, _d) in claimed.items():
-            wf = D2 / "_agent_cache" / sid / ("bfw_station_a_%d.npy" % k)
+            wf = GATE_CACHE / sid / ("bfw_station_a_%d.npy" % k)
             if not wf.exists():
                 continue
             # bfw 缓存已由工具落盘为 CNN-ready 口径（变频到候选带中心+RMS 归一）
@@ -389,6 +459,7 @@ def gate_tool_view(model, n_samples=50):
 
 def main():
     model, _ = load_model()
+    ensure_gate_cache()
     print(f"== 16 辐射体分类器 oracle（gate: clean{GATE_CLEAN}/slice{GATE_SLICE}/toolview{GATE_TOOLVIEW}）==")
     a1, c1 = gate_clean(model)
     a2, c2 = gate_gt_slice(model)
