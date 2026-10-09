@@ -17,7 +17,7 @@ benchmark_v3/_smoke_menu_d2/
 benchmark_v3/adapters/_probe_peaks_cache/
 benchmark_v3/_smoke_regen_wiring/
 # 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
-benchmark_v3/_api_*.log
+benchmark_v3/_api_*
 benchmark_v3/adapters/_verify_cache/
 # 损失分解变体（2026-10-08/09 夜，零 API 消融：单旋钮重放 + 官方 gate；单档数据 GB 级故整目录排除）
 benchmark_v3/_ab_d2/

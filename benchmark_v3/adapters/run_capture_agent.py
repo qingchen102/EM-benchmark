@@ -232,14 +232,6 @@ Intent classification (answer for EACH interferer):
   link / radar / RC link)
 - is_spoof: true ONLY for a GNSS spoofing emitter (legitimate GNSS-like structure
   with wrong parameters); otherwise false
-- Cooperative-link event log: the observation may list interference events reported
-  by the cooperative ground station's own link monitor. Each entry is public evidence
-  that a radiator is degrading the cooperative link, and its mechanism (jam / spoof /
-  ...) is direct behavioural evidence for the intent axis — a reported jamming or
-  spoofing event means a deliberate emitter is present in the scene. The log is a
-  PARTIAL view (it only sees radiators that reach the cooperative link), so NEVER use
-  it as the source census: still measure the residual/spatial source count. Do not
-  copy event ids into the answer; answer with the interferers you measured.
 
 Output ONLY valid JSON with schema:
 {"num_interferers": <0..3>,
@@ -314,6 +306,31 @@ Rules:
   keep calling tools without producing the answer.
 - The final message must contain ONLY the JSON answer object and nothing else.
 """
+
+# —— 公开层（2026-10-10）：事件日志段落。刻意与主 prompt 分离：只在样本真的带
+# interference_events 时注入，否则 D1/D2 的 system prompt 与公开层之前逐字相同
+# （历史基线可直接比较）。
+EVENT_LOG_PROMPT_CAPTURE = (
+    "- Cooperative-link event log: the observation may list interference events reported\n"
+    "  by the cooperative ground station's own link monitor. Each entry is public evidence\n"
+    "  that a radiator is degrading the cooperative link, and its mechanism (jam / spoof /\n"
+    "  ...) is direct behavioural evidence for the intent axis — a reported jamming or\n"
+    "  spoofing event means a deliberate emitter is present in the scene. The log is a\n"
+    "  PARTIAL view (it only sees radiators that reach the cooperative link), so NEVER use\n"
+    "  it as the source census: still measure the residual/spatial source count. Do not\n"
+    "  copy event ids into the answer; answer with the interferers you measured.\n")
+_EVENT_LOG_ANCHOR = "  with wrong parameters); otherwise false\n"
+
+
+def system_prompt_for(events) -> str:
+    """带事件日志段落的 system prompt；无事件时返回基础 prompt（逐字等于公开层之前）。"""
+    if not events:
+        return SYSTEM_PROMPT_CAPTURE
+    out = SYSTEM_PROMPT_CAPTURE.replace(
+        _EVENT_LOG_ANCHOR, _EVENT_LOG_ANCHOR + EVENT_LOG_PROMPT_CAPTURE, 1)
+    assert out != SYSTEM_PROMPT_CAPTURE, "event-log anchor missing in SYSTEM_PROMPT_CAPTURE"
+    return out
+
 
 REPAIR_PROMPT_CAPTURE = (
     "Your previous reply did not contain a valid final JSON answer. Reply NOW with "
@@ -482,6 +499,9 @@ def run(dataset_root: Path, slevel: str, answers_dir: Path, agent,
                  "events": (obs_json.get("interference_events") or []),
                  "events_note": obs_json.get("interference_events_note"),
                  "aoi_center": aoi, "fs": fs, "fc": fc, "num_samples": num_samples}
+        # 公开层：事件日志段落只在样本真有事件时注入（D1/D2 无事件 → prompt 与公开层
+        # 之前逐字相同，历史基线可直接比较）。
+        ev2.SYSTEM_PROMPT = system_prompt_for(prior["events"])
 
         t0 = time.time()
         pred_raw, calls, raw, round_log = agent.diagnose(capture, prior)
