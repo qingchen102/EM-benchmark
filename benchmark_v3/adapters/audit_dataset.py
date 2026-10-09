@@ -7,7 +7,7 @@
   v1-5b 干扰可检测性：逐站 INR ≥ 3 dB（D1 包络要求"看得见"）
   v2-a  奈奎斯特防折叠：|offset| + bw/2 < 0.48·fs（fs 逐样本读 config）
   v2-d  通带内裕量（仅 D1）：|f| + bw/2 ≤ 接收通带半宽 − 50kHz
-  v2-b  SNR 语义 = 目标接收功率/噪声底（逐站）
+  v2-b  SNR 语义 = 目标接收功率/噪声底（逐站）【尚未实现，仅留档】
   v2-c  信息隔离：observations.json 不含 emitter/intent/真值参数
   gen   IQ 有限、形状=(阵元, 采样数)、每站齐全
 """
@@ -36,7 +36,7 @@ def audit(root: str | Path, d2: bool = False) -> dict:
         cfg_by_id = {e["id"]: e for e in cfg["emitters"]}
         ach = truth.get("achieved", {})
         nz = truth["noise"]["noise_floor_dbm"]
-        fs = float(cfg["sample_rate_hz"])                       # 逐样本（D1=4e6，D2–D4=2e6）
+        fs = float(cfg["sample_rate_hz"])                       # 逐样本（四档实测均为 4e6）
         rx_half = float(cfg["receivers"][0]["bandwidth_hz"]) / 2
         tgt_bw = float(cfg_by_id["target"]["components"][0]["bandwidth_hz"])
 

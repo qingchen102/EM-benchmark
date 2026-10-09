@@ -1,0 +1,9 @@
+== 统计 ==
+  samples: 50
+  sep_ok: 27
+  inr_ok: 108
+  inr_low_stations: 0
+  iso_ok: 50
+  iq_ok: 50
+== 问题按代码 ==
+  无 ✅

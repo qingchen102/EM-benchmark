@@ -1,0 +1,61 @@
+
+================ dataset_d1  (50 样本 / 77 源) ================
+A 防折叠   带宽半宽 |f0|+BW/2 归一化: max 0.1886  p90 0.1853  中位 0.0000
+           越过接收通带(±0.405): 0 个源 ' []
+           越过奈奎斯特(±0.5)  : 0 个源 ' []
+C 可检测性 干扰中至少一站 INR<3dB 的源: 0/27（目标不计入）
+B 分离性   双侧可见源对 0
+           重叠>50%: 同粗类 0 / 跨粗类 0（跨粗类不要求可分）
+           QA 约束 2 违例(同粗类 且 min|Δu|<0.25): 0  []
+           v2 口径违例(|Δf|<0.15 且 ΔDOA<15°): 0
+D 阵列     观测顶层键 ['cooperative_sources', 'receivers', 'schema_version', 'tasks']
+           {'calibrated': True, 'num_cols': 8, 'spacing_wl': 0.5, 'gain_error_std_db': 0.0, 'phase_error_std_deg': 0.0, 'tuning_offset_hz': None}
+
+================ dataset_d2  (50 样本 / 148 源) ================
+A 防折叠   带宽半宽 |f0|+BW/2 归一化: max 0.1935  p90 0.1780  中位 0.1049
+           越过接收通带(±0.405): 0 个源 ' []
+           越过奈奎斯特(±0.5)  : 0 个源 ' []
+C 可检测性 干扰中至少一站 INR<3dB 的源: 0/98（目标不计入）
+B 分离性   双侧可见源对 48
+           重叠>50%: 同粗类 2 / 跨粗类 14（跨粗类不要求可分）
+           QA 约束 2 违例(同粗类 且 min|Δu|<0.25): 1  [('d2_00008', 'ifw1', 'ifw2', 0.131)]
+           v2 口径违例(|Δf|<0.15 且 ΔDOA<15°): 1
+             d2_00043 ifw1/ifw2  Δf 0.142  ΔDOA 6.7°  min|Δu| 0.001  重叠 0.00  同粗类 False
+           同粗类重叠对 min|Δu|: 中位 0.487  min 0.131  p10 0.202
+D 阵列     观测顶层键 ['cooperative_sources', 'receivers', 'schema_version', 'tasks']
+           {'calibrated': True, 'num_cols': 8, 'spacing_wl': 0.5, 'gain_error_std_db': 0.0, 'phase_error_std_deg': 0.0, 'tuning_offset_hz': None}
+
+================ dataset_d3  (50 样本 / 119 源) ================
+A 防折叠   带宽半宽 |f0|+BW/2 归一化: max 0.1955  p90 0.1774  中位 0.0946
+           越过接收通带(±0.405): 0 个源 ' []
+           越过奈奎斯特(±0.5)  : 0 个源 ' []
+C 可检测性 干扰中至少一站 INR<3dB 的源: 0/69（目标不计入）
+B 分离性   双侧可见源对 21
+           重叠>50%: 同粗类 0 / 跨粗类 9（跨粗类不要求可分）
+           QA 约束 2 违例(同粗类 且 min|Δu|<0.25): 0  []
+           v2 口径违例(|Δf|<0.15 且 ΔDOA<15°): 5
+             d3_00008 ifw1/ifw2  Δf 0.103  ΔDOA 6.9°  min|Δu| 0.027  重叠 0.00  同粗类 False
+             d3_00009 ifw1/ifw2  Δf 0.013  ΔDOA 6.0°  min|Δu| 0.034  重叠 0.85  同粗类 False
+             d3_00018 ifw1/ifw2  Δf 0.003  ΔDOA 11.2°  min|Δu| 0.003  重叠 1.00  同粗类 False
+             d3_00041 ifw1/ifw2  Δf 0.118  ΔDOA 3.9°  min|Δu| 0.006  重叠 0.00  同粗类 False
+             d3_00047 ifw1/ifw2  Δf 0.009  ΔDOA 5.4°  min|Δu| 0.005  重叠 1.00  同粗类 False
+D 阵列     观测顶层键 ['cooperative_sources', 'interference_events', 'interference_events_note', 'receivers', 'schema_version', 'tasks']
+           {'calibrated': True, 'num_cols': 8, 'spacing_wl': 0.5, 'gain_error_std_db': 0.0, 'phase_error_std_deg': 0.0, 'tuning_offset_hz': None}
+
+================ dataset_d4  (50 样本 / 175 源) ================
+A 防折叠   带宽半宽 |f0|+BW/2 归一化: max 0.1936  p90 0.1848  中位 0.1219
+           越过接收通带(±0.405): 0 个源 ' []
+           越过奈奎斯特(±0.5)  : 0 个源 ' []
+C 可检测性 干扰中至少一站 INR<3dB 的源: 0/125（目标不计入）
+B 分离性   双侧可见源对 100
+           重叠>50%: 同粗类 0 / 跨粗类 27（跨粗类不要求可分）
+           QA 约束 2 违例(同粗类 且 min|Δu|<0.25): 0  []
+           v2 口径违例(|Δf|<0.15 且 ΔDOA<15°): 19
+             d4_00002 ifw1/ifw2  Δf 0.059  ΔDOA 9.8°  min|Δu| 0.05  重叠 0.23  同粗类 False
+             d4_00003 ifw1/ifw2  Δf 0.130  ΔDOA 13.7°  min|Δu| 0.008  重叠 0.00  同粗类 True
+             d4_00003 ifw1/ifw3  Δf 0.070  ΔDOA 14.7°  min|Δu| 0.01  重叠 0.33  同粗类 False
+             d4_00003 ifw2/ifw3  Δf 0.060  ΔDOA 2.8°  min|Δu| 0.015  重叠 0.08  同粗类 False
+             d4_00009 ifw1/ifw2  Δf 0.088  ΔDOA 0.1°  min|Δu| 0.0  重叠 0.00  同粗类 True
+             d4_00010 ifw1/ifw2  Δf 0.099  ΔDOA 11.6°  min|Δu| 0.006  重叠 0.07  同粗类 True
+D 阵列     观测顶层键 ['cooperative_sources', 'interference_events', 'interference_events_note', 'receivers', 'schema_version', 'tasks']
+           {'calibrated': True, 'num_cols': 8, 'spacing_wl': 0.5, 'gain_error_std_db': 0.0, 'phase_error_std_deg': 0.0, 'tuning_offset_hz': None}

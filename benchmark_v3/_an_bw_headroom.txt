@@ -1,0 +1,17 @@
+﻿档      样本   源数     通带±kHz    滤波      完整落带内     边缘被截     最宽源kHz     源BW中位kHz
+d1     50   27        810    11         27        0      162.4         97.2
+d2     50   98        810    11         98        0      786.8        456.0
+d3     50   69        810    11         69        0      781.3        406.2
+d4     50  125        810    11        125        0      794.6        383.1
+
+--- 工具口径：D2 聚类候选的 band_hz 宽度（同带候选是否同一数值）---
+
+[参考] d2_00001 truth.receiver 键: ['effective_output_noise_dbm', 'effective_output_noise_w', 'equivalent_noise_bandwidth_hz', 'expected_output_noise_w', 'filter_edge_guard_samples', 'frontend_model', 'input_composite_power_w', 'noise_expectation_scope', 'noise_measurement', 'noise_only_per_element_w', 'noise_psd_w_per_hz']
+[参考] d2_00001 public 接收机通带: 1620000.0
+[参考] 采样率: None  中心频率: None
+
+--- 每样本源数分布 / 共道重叠 ---
+  d1: 每样本 0源:23, 1源:27   共道重叠源 = 0/27   → 独占带源 = 27/27
+  d2: 每样本 1源:2, 2源:48   共道重叠源 = 54/98   → 独占带源 = 44/98
+  d3: 每样本 0源:2, 1源:27, 2源:21   共道重叠源 = 20/69   → 独占带源 = 49/69
+  d4: 每样本 2源:25, 3源:25   共道重叠源 = 73/125   → 独占带源 = 52/125
