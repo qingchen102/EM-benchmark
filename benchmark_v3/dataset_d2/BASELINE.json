@@ -210,7 +210,7 @@
   "全局中位底+连段的残差峰判据（对参考失配能量无免疫力 → D1/S0 虚警；2026-10-08 已替换）"
  ],
  "next": [
-  "D3/D4 首次 agent 基线（数据已就位；用户口径：等题目敲定后再跑）",
+  "D3/D4 首次 agent 基线——**已于 2026-10-09 完成**（D3×S2 det 0.40 / D4×S2 det 0.24，见顶层 agent_baselines_all_levels_2026_10_09）",
   "伙伴召回（漏损 34.5%：源真载频落在候选共道带之外被硬掩蔽——下版本重做提取链路）",
   "S0 doa_aes 95.2° 镜象折叠待查",
   "z-2D 口径写规范",
@@ -256,5 +256,16 @@
    "spoof_fa": 0.0
   },
   "note": "数据层已排除：聚类 A/B 上 K 33/50 相同、ΣK 119→109；全量证据 A/B 上门控峰条数相同 43/50、逐条强度差 ≤1.0 dB 41/50、时频指纹 ≤5% 41/50（见 _diag_d2_cluster_ab.txt / _diag_d2_evidence_magnitude.txt）。真瓶颈是仪器缺「同源并合」：estimate_sources_by_spatial_clustering 的 K = len(sources) 与 GT 源数精确匹配仅 13/50（旧数据）/ 16/50（新数据），而 prompt 却要求照抄 K；agent 的应对是拒答（layer1b 50 样本里 15 个把 num_interferers 写成被禁哨兵 -1，再被 run_capture_agent._sanitize 静默清成 0）。注意：layer1 与 layer1b 都跑在泄漏修复（capture_tools.py mtime 14:04）之前（layer1 12:02–13:14、layer1b 13:41–14:16）；**修复后的 D2 从未跑过 agent**。layer1b 与 layer1 的唯一差别是去掉事件日志 prompt 段落，结果同为 0.48 → 段落不是变量。eval_report_S2.json 现为 layer1b 的报告（layer1 的同名报告已被覆盖）。"
+ }
+ "agent_baselines_all_levels_2026_10_09": {
+  "n_per_level": 50,
+  "note": "四档注册口径基线（各 50 样本）。D1 是 S0 单站、D2–D4 是 S2 四站，detection 口径不同。freq_aes 的归一化基数恒为 2e6（eval_dataset.py:127/205/229），四档容差均 ±40 kHz；早前把 freq_aes 乘采集带宽得到的 kHz 值全部偏大 2 倍。",
+  "rows": {
+   "D1_S0": {"answers_dir": "dataset_d1/answers_S0_agent_layer1", "detection_hit": 0.96, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0068, "doa_hits": 0.48, "intent": 0.93},
+   "D2_S2": {"answers_dir": "dataset_d2/answers_S2_agent_layer1", "detection_hit": 0.48, "kind_hits": 0.4821, "freq_hits": 0.2143, "freq_aes": 0.1787, "pos_hits": 0.5357, "pos_errs": 232.0, "intent": 0.768, "spoof_fa": 0.0},
+   "D3_S2": {"answers_dir": "dataset_d3/answers_S2_agent_layer1", "detection_hit": 0.4, "kind_hits": 0.3721, "freq_hits": 0.0465, "freq_aes": 0.1371, "pos_hits": 0.3721, "pos_errs": 533.89, "intent": 0.814},
+   "D4_S2": {"answers_dir": "dataset_d4/answers_S2_agent_layer1", "detection_hit": 0.24, "kind_hits": 0.26, "freq_hits": 0.1, "freq_aes": 0.1642, "pos_hits": 0.32, "pos_errs": 643.57, "intent": 0.76, "spoof_hit": 0.2, "spoof_fa": 0.2, "oracle_assoc_pairs": 55, "P_kind_assoc": 0.218, "P_intent_assoc": 0.764, "freq_ae_oracle": 0.205}
+  },
+  "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 的 DOA 0.48 是单站前后瓣镜像上限、kind 0.60 是 tone/noise 仪器盲区；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。"
  }
 }

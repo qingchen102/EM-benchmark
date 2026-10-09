@@ -45,3 +45,9 @@ benchmark_v3/_fusion_*/
 ~$*.pptx
 # v1/v2 数据集输出（非代码）
 benchmark_v1/*/dataset*/
+# 汇报 PPT 工程（2026-10-09）：只入库图表工厂 projects/make_figs_v3.py 与产物 projects/figs_v3/
+_tmp_pptmaster_probe/
+_proposal_text.txt
+_ppt_ref_style.txt
+_ppt_slide_text.txt
+projects/srtp_*/

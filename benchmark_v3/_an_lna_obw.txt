@@ -1,0 +1,99 @@
+==============================================================================
+前端非线性余量 + 实际占用带宽（只读体检）
+接收通带 ±810 kHz   奈奎斯特 ±2000 kHz   窗长 40000 点 @ 4.0 MHz
+==============================================================================
+
+### d1   样本 50
+A 前端口复合输入功率: 中位 -79.0 dBm   最弱 -94.5   最强 -69.0   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -81.6 dBm  最强 -69.1 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：79.0 dB
+  → 若开 imd3，三阶互调产物约 -227.0 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -69 dBm 量级
+  [warn] d1_00000/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00003/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00004/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00005/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00007/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00008/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00010/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00014/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00015/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00016/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00018/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+  [warn] d1_00019/interferer_1 波形复现失败: v3 辐射体 'None' 不可用（未找到 v3 辐射体库或名称不存在）
+
+### d2   样本 50
+A 前端口复合输入功率: 中位 -79.2 dBm   最弱 -103.0   最强 -64.8   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -89.6 dBm  最强 -64.8 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：74.8 dB
+  → 若开 imd3，三阶互调产物约 -214.4 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -65 dBm 量级
+  [warn] d2_00006/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+  [warn] d2_00013/interferer_1 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 37 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 478 kHz  (min 107, max 786)
+  实测 OBW99: 中位 2052 kHz  (min 107, max 3964)
+  实测/标称 比值: 中位 5.34  max 37.09
+  频带最外沿 |f|: 中位 1294 kHz  max 1987 kHz
+  → 越接收通带(810 kHz) 的源: 27/37   越奈奎斯特(2000 kHz): 0/37
+    d2_00002 interferer_2 Corona           标称    703 kHz | 实测    -1976 ~     1987 kHz (宽 3963)
+    d2_00007 interferer_1 VFD_noise        标称    415 kHz | 实测    -1983 ~     1981 kHz (宽 3964)
+    d2_00008 interferer_2 VFD_noise        标称    550 kHz | 实测    -1979 ~     1982 kHz (宽 3962)
+    d2_00014 interferer_1 Microwave        标称    561 kHz | 实测    -1977 ~     1981 kHz (宽 3958)
+    d2_00004 interferer_2 VFD_noise        标称    475 kHz | 实测    -1980 ~     1978 kHz (宽 3958)
+
+### d3   样本 50
+A 前端口复合输入功率: 中位 -87.7 dBm   最弱 -103.0   最强 -58.1   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -96.1 dBm  最强 -58.1 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：68.1 dB
+  → 若开 imd3，三阶互调产物约 -194.3 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -58 dBm 量级
+  [warn] d3_00004/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+  [warn] d3_00016/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 28 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 371 kHz  (min 111, max 735)
+  实测 OBW99: 中位 401 kHz  (min 0, max 3965)
+  实测/标称 比值: 中位 0.96  max 32.93
+  频带最外沿 |f|: 中位 554 kHz  max 1984 kHz
+  → 越接收通带(810 kHz) 的源: 11/28   越奈奎斯特(2000 kHz): 0/28
+    d3_00018 interferer_2 Corona           标称    713 kHz | 实测    -1981 ~     1984 kHz (宽 3965)
+    d3_00005 interferer_1 Noise_jam        标称    160 kHz | 实测    -1978 ~     1982 kHz (宽 3960)
+    d3_00015 interferer_1 Noise_jam        标称    129 kHz | 实测    -1982 ~     1978 kHz (宽 3960)
+    d3_00004 interferer_1 Noise_jam        标称    149 kHz | 实测    -1979 ~     1981 kHz (宽 3960)
+    d3_00001 interferer_1 Noise_jam        标称    124 kHz | 实测    -1980 ~     1978 kHz (宽 3958)
+
+### d4   样本 50
+A 前端口复合输入功率: 中位 -84.7 dBm   最弱 -103.0   最强 -61.0   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -93.4 dBm  最强 -62.9 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：71.0 dB
+  → 若开 imd3，三阶互调产物约 -203.0 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -61 dBm 量级
+  [warn] d4_00007/interferer_3 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 51 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 404 kHz  (min 104, max 795)
+  实测 OBW99: 中位 3449 kHz  (min 0, max 3964)
+  实测/标称 比值: 中位 8.45  max 34.26
+  频带最外沿 |f|: 中位 1824 kHz  max 1989 kHz
+  → 越接收通带(810 kHz) 的源: 39/51   越奈奎斯特(2000 kHz): 0/51
+    d4_00004 interferer_3 Corona           标称    499 kHz | 实测    -1973 ~     1989 kHz (宽 3962)
+    d4_00016 interferer_1 Noise_jam        标称    416 kHz | 实测    -1980 ~     1984 kHz (宽 3964)
+    d4_00006 interferer_1 Noise_jam        标称    158 kHz | 实测    -1984 ~     1977 kHz (宽 3960)
+    d4_00007 interferer_1 Noise_jam        标称    135 kHz | 实测    -1980 ~     1983 kHz (宽 3963)
+    d4_00011 interferer_1 Noise_jam        标称    116 kHz | 实测    -1983 ~     1978 kHz (宽 3961)
+
+### 按辐射体种类的 实测/标称 带宽比
+  Bluetooth_FHSS     n=  5  比值 中位 4.96  max 14.94
+  Chirp_jam          n= 16  比值 中位 0.96  max 0.96
+  Corona             n= 10  比值 中位 7.94  max 37.09
+  DECT               n= 10  比值 中位 0.25  max 0.96
+  GNSS_spoof         n= 20  比值 中位 9.00  max 29.29
+  Microwave          n=  7  比值 中位 8.18  max 10.15
+  Noise_jam          n= 16  比值 中位 24.18  max 34.26
+  Tone_jam           n=  8  比值 中位 0.00  max 0.00
+  VFD_noise          n=  8  比值 中位 9.67  max 31.51
+  WiFi_burst         n=  6  比值 中位 4.08  max 11.24
+  Zigbee             n= 10  比值 中位 2.55  max 7.17
