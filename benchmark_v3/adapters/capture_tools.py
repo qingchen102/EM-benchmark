@@ -20,6 +20,7 @@
 """
 from __future__ import annotations
 
+import functools
 import json
 import sys
 from pathlib import Path
@@ -1641,7 +1642,28 @@ def estimate_sources_by_spatial_clustering(freq_offset_hz: float | None = None,
                      "passing the support gate; K = len(sources) is the spatial "
                      "source-count evidence. Height unobservable (parallel horizontal "
                      "arrays), localization is 2D by design.")}
+# ---------------- 对外工具表：剥离仅供内部使用的字段 ----------------
+# `estimate_band_occupancy_by_correlation` 必须同时算两条峰清单：
+#   residual_peaks        —— 门控后的对外清单（agent 读这条）
+#   residual_peaks_legacy —— 旧宽带口径，**只给聚类内部定带**用（见本文件 1309 行注释）
+# 但工具返回值是 `json.dumps(result)` 原样回灌给模型的（benchmark_v2/evaluator_v2.py:367-372），
+# 于是 2026-10-08 起 agent 其实**同时**看到两条互相矛盾的清单：一条 3~6 条窄峰（8~22 dB），
+# 一条 850 kHz 宽、46~80 dB 的旧口径宽带。实测后果：D2/S2 的 detection 0.86 → 0.48。
+# 这里在**对外工具表**这一层剥掉内部字段，函数本身与聚类内部调用都不变。
+AGENT_HIDDEN_KEYS = ("residual_peaks_legacy",)
 
+
+def _agent_facing(fn):
+    """包一层：从对外工具返回值里剥掉 AGENT_HIDDEN_KEYS 指定的内部字段（原地 pop）。"""
+    @functools.wraps(fn)
+    def wrapper(*args, **kwargs):
+        out = fn(*args, **kwargs)
+        if isinstance(out, dict):
+            for key in AGENT_HIDDEN_KEYS:
+                out.pop(key, None)
+        return out
+
+    return wrapper
 
 TOOL_FUNCTIONS = {
     "analyze_spectrum_station": analyze_spectrum_station,
@@ -1651,7 +1673,8 @@ TOOL_FUNCTIONS = {
     "detect_time_domain_station": detect_time_domain_station,
     "estimate_modulation_features_station": estimate_modulation_features_station,
     "list_radiator_catalog": list_radiator_catalog,
-    "estimate_band_occupancy_by_correlation": estimate_band_occupancy_by_correlation,
+    "estimate_band_occupancy_by_correlation":
+        _agent_facing(estimate_band_occupancy_by_correlation),
     "analyze_time_frequency_station": analyze_time_frequency_station,
     "estimate_sources_by_spatial_clustering": estimate_sources_by_spatial_clustering,
     "extract_source_waveforms": extract_source_waveforms,

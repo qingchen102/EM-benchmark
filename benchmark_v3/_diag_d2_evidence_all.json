@@ -1,0 +1,6154 @@
+{
+ "d2_00000": {
+  "OLD": {
+   "sid": "d2_00000",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 1,
+   "gt_kinds": [
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    369.9
+   ],
+   "gated": [
+    [
+     330.0,
+     10.8
+    ]
+   ],
+   "legacy": [
+    [
+     -853.3,
+     10.5
+    ],
+    [
+     -483.2,
+     47.9
+    ],
+    [
+     328.3,
+     62.0
+    ],
+    [
+     851.9,
+     13.0
+    ],
+    [
+     852.7,
+     11.8
+    ],
+    [
+     853.9,
+     11.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.469,
+    "burst_count_per_window": 256.0,
+    "frame_power_cv": 0.88,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00000",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 1,
+   "gt_kinds": [
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    369.9
+   ],
+   "gated": [
+    [
+     330.0,
+     10.8
+    ]
+   ],
+   "legacy": [
+    [
+     -853.3,
+     10.5
+    ],
+    [
+     -483.2,
+     47.9
+    ],
+    [
+     328.3,
+     62.0
+    ],
+    [
+     851.9,
+     13.0
+    ],
+    [
+     852.7,
+     11.8
+    ],
+    [
+     853.9,
+     11.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.469,
+    "burst_count_per_window": 256.0,
+    "frame_power_cv": 0.88,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00001": {
+  "OLD": {
+   "sid": "d2_00001",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -674.9,
+    -176.5
+   ],
+   "gated": [
+    [
+     -670.1,
+     22.4
+    ],
+    [
+     -290.1,
+     11.4
+    ],
+    [
+     300.0,
+     10.8
+    ],
+    [
+     330.0,
+     14.2
+    ],
+    [
+     550.0,
+     14.9
+    ],
+    [
+     760.0,
+     10.3
+    ]
+   ],
+   "legacy": [
+    [
+     -857.0,
+     21.5
+    ],
+    [
+     -853.1,
+     28.0
+    ],
+    [
+     -678.4,
+     80.4
+    ],
+    [
+     520.1,
+     65.1
+    ],
+    [
+     851.0,
+     21.6
+    ],
+    [
+     852.0,
+     21.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.474,
+    "burst_count_per_window": 255.0,
+    "frame_power_cv": 0.89,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00001",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -674.9,
+    -176.5
+   ],
+   "gated": [
+    [
+     -670.1,
+     22.4
+    ],
+    [
+     -290.1,
+     11.4
+    ],
+    [
+     300.0,
+     10.8
+    ],
+    [
+     330.0,
+     14.2
+    ],
+    [
+     550.0,
+     14.9
+    ],
+    [
+     760.0,
+     10.4
+    ]
+   ],
+   "legacy": [
+    [
+     -857.0,
+     21.0
+    ],
+    [
+     -853.1,
+     27.5
+    ],
+    [
+     -678.4,
+     79.9
+    ],
+    [
+     520.1,
+     64.6
+    ],
+    [
+     851.0,
+     21.1
+    ],
+    [
+     852.0,
+     20.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.496,
+    "burst_count_per_window": 257.0,
+    "frame_power_cv": 0.89,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00002": {
+  "OLD": {
+   "sid": "d2_00002",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    185.5,
+    134.6
+   ],
+   "gated": [
+    [
+     -750.1,
+     10.7
+    ],
+    [
+     -300.1,
+     9.0
+    ],
+    [
+     -70.1,
+     8.7
+    ],
+    [
+     750.0,
+     8.5
+    ]
+   ],
+   "legacy": [
+    [
+     -856.1,
+     13.0
+    ],
+    [
+     -855.4,
+     13.8
+    ],
+    [
+     -853.4,
+     14.2
+    ],
+    [
+     -665.1,
+     56.3
+    ],
+    [
+     82.0,
+     57.0
+    ],
+    [
+     854.7,
+     15.9
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.472,
+    "burst_count_per_window": 249.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00002",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    185.5,
+    134.6
+   ],
+   "gated": [
+    [
+     -750.1,
+     10.7
+    ],
+    [
+     -300.1,
+     9.0
+    ],
+    [
+     750.0,
+     8.5
+    ]
+   ],
+   "legacy": [
+    [
+     -855.4,
+     13.4
+    ],
+    [
+     -665.1,
+     55.9
+    ],
+    [
+     82.0,
+     56.8
+    ],
+    [
+     854.7,
+     15.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.475,
+    "burst_count_per_window": 243.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00003": {
+  "OLD": {
+   "sid": "d2_00003",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    327.4,
+    -141.9
+   ],
+   "gated": [
+    [
+     -1500.1,
+     9.5
+    ],
+    [
+     -820.1,
+     9.7
+    ],
+    [
+     -400.1,
+     9.0
+    ],
+    [
+     570.0,
+     8.6
+    ],
+    [
+     800.0,
+     11.1
+    ],
+    [
+     1000.0,
+     9.6
+    ]
+   ],
+   "legacy": [
+    [
+     -754.3,
+     66.9
+    ],
+    [
+     463.5,
+     66.3
+    ],
+    [
+     853.4,
+     24.3
+    ],
+    [
+     854.8,
+     19.4
+    ],
+    [
+     855.5,
+     19.2
+    ],
+    [
+     857.6,
+     20.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.467,
+    "burst_count_per_window": 270.0,
+    "frame_power_cv": 3.51,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00003",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    327.4,
+    -141.9
+   ],
+   "gated": [
+    [
+     -1500.1,
+     9.5
+    ],
+    [
+     -820.1,
+     9.7
+    ],
+    [
+     -400.1,
+     9.0
+    ],
+    [
+     570.0,
+     8.6
+    ],
+    [
+     800.0,
+     11.1
+    ],
+    [
+     1000.0,
+     9.6
+    ]
+   ],
+   "legacy": [
+    [
+     -754.3,
+     66.9
+    ],
+    [
+     463.5,
+     66.3
+    ],
+    [
+     853.4,
+     24.2
+    ],
+    [
+     854.8,
+     19.4
+    ],
+    [
+     855.5,
+     19.2
+    ],
+    [
+     857.6,
+     20.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.468,
+    "burst_count_per_window": 270.0,
+    "frame_power_cv": 3.5,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00004": {
+  "OLD": {
+   "sid": "d2_00004",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    307.9,
+    497.5
+   ],
+   "gated": [
+    [
+     -550.1,
+     8.2
+    ],
+    [
+     -400.1,
+     9.5
+    ],
+    [
+     -30.1,
+     12.6
+    ],
+    [
+     780.0,
+     14.0
+    ]
+   ],
+   "legacy": [
+    [
+     -844.6,
+     21.6
+    ],
+    [
+     -842.7,
+     23.9
+    ],
+    [
+     -842.3,
+     23.2
+    ],
+    [
+     -841.1,
+     23.1
+    ],
+    [
+     -234.1,
+     49.9
+    ],
+    [
+     413.5,
+     50.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.408,
+    "burst_count_per_window": 301.0,
+    "frame_power_cv": 0.78,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00004",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    307.9,
+    497.5
+   ],
+   "gated": [
+    [
+     -680.1,
+     8.0
+    ],
+    [
+     -550.1,
+     8.2
+    ],
+    [
+     -400.1,
+     9.5
+    ],
+    [
+     -30.1,
+     12.5
+    ],
+    [
+     780.0,
+     13.9
+    ]
+   ],
+   "legacy": [
+    [
+     -844.6,
+     21.6
+    ],
+    [
+     -842.7,
+     23.9
+    ],
+    [
+     -842.3,
+     23.1
+    ],
+    [
+     -841.1,
+     23.0
+    ],
+    [
+     -234.1,
+     50.0
+    ],
+    [
+     413.5,
+     50.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.409,
+    "burst_count_per_window": 300.0,
+    "frame_power_cv": 0.78,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00005": {
+  "OLD": {
+   "sid": "d2_00005",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -43.6,
+    47.4
+   ],
+   "gated": [
+    [
+     -730.1,
+     14.9
+    ],
+    [
+     -560.1,
+     14.6
+    ],
+    [
+     -530.1,
+     10.8
+    ],
+    [
+     300.0,
+     10.5
+    ],
+    [
+     670.0,
+     13.2
+    ],
+    [
+     710.0,
+     10.2
+    ]
+   ],
+   "legacy": [
+    [
+     -848.6,
+     19.4
+    ],
+    [
+     -847.2,
+     17.5
+    ],
+    [
+     -54.9,
+     69.9
+    ],
+    [
+     61.8,
+     68.8
+    ],
+    [
+     851.1,
+     22.8
+    ],
+    [
+     854.5,
+     18.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.519,
+    "burst_count_per_window": 230.0,
+    "frame_power_cv": 7.42,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00005",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -43.6,
+    47.4
+   ],
+   "gated": [
+    [
+     -730.1,
+     14.9
+    ],
+    [
+     -560.1,
+     14.7
+    ],
+    [
+     -530.1,
+     10.8
+    ],
+    [
+     300.0,
+     10.5
+    ],
+    [
+     670.0,
+     13.2
+    ],
+    [
+     710.0,
+     10.2
+    ]
+   ],
+   "legacy": [
+    [
+     -848.6,
+     19.4
+    ],
+    [
+     -847.2,
+     17.6
+    ],
+    [
+     -54.9,
+     69.9
+    ],
+    [
+     61.8,
+     68.8
+    ],
+    [
+     851.1,
+     22.9
+    ],
+    [
+     854.5,
+     18.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.517,
+    "burst_count_per_window": 231.0,
+    "frame_power_cv": 7.41,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00006": {
+  "OLD": {
+   "sid": "d2_00006",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    632.9,
+    190.4
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.484,
+    "burst_count_per_window": 247.0,
+    "frame_power_cv": 0.99,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00006",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    632.9,
+    190.4
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.515,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.91,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00007": {
+  "OLD": {
+   "sid": "d2_00007",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    -121.4,
+    -671.9
+   ],
+   "gated": [
+    [
+     -1120.1,
+     8.8
+    ],
+    [
+     -760.1,
+     11.3
+    ],
+    [
+     -570.1,
+     9.5
+    ],
+    [
+     30.0,
+     9.0
+    ],
+    [
+     750.0,
+     13.3
+    ],
+    [
+     790.0,
+     12.6
+    ]
+   ],
+   "legacy": [
+    [
+     -856.4,
+     22.9
+    ],
+    [
+     -852.8,
+     27.9
+    ],
+    [
+     -118.2,
+     66.1
+    ],
+    [
+     317.2,
+     66.6
+    ],
+    [
+     855.4,
+     24.0
+    ],
+    [
+     857.2,
+     20.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.504,
+    "burst_count_per_window": 283.0,
+    "frame_power_cv": 0.8,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00007",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    -121.4,
+    -671.9
+   ],
+   "gated": [
+    [
+     -760.1,
+     11.4
+    ],
+    [
+     -570.1,
+     9.5
+    ],
+    [
+     30.0,
+     8.4
+    ],
+    [
+     750.0,
+     13.3
+    ],
+    [
+     790.0,
+     12.5
+    ]
+   ],
+   "legacy": [
+    [
+     -856.4,
+     22.8
+    ],
+    [
+     -852.8,
+     27.8
+    ],
+    [
+     -118.2,
+     65.9
+    ],
+    [
+     317.2,
+     66.4
+    ],
+    [
+     855.4,
+     23.8
+    ],
+    [
+     857.2,
+     20.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.486,
+    "burst_count_per_window": 278.0,
+    "frame_power_cv": 0.8,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00008": {
+  "OLD": {
+   "sid": "d2_00008",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -129.1,
+    63.0
+   ],
+   "gated": [
+    [
+     -1090.1,
+     8.4
+    ],
+    [
+     -790.1,
+     10.5
+    ],
+    [
+     -100.1,
+     8.3
+    ],
+    [
+     -30.1,
+     9.4
+    ],
+    [
+     790.0,
+     9.1
+    ]
+   ],
+   "legacy": [
+    [
+     -857.2,
+     20.2
+    ],
+    [
+     -855.5,
+     24.3
+    ],
+    [
+     -316.5,
+     66.2
+    ],
+    [
+     364.5,
+     66.4
+    ],
+    [
+     854.8,
+     24.0
+    ],
+    [
+     857.5,
+     20.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.487,
+    "burst_count_per_window": 287.0,
+    "frame_power_cv": 0.81,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00008",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -129.1,
+    63.0
+   ],
+   "gated": [
+    [
+     -1090.1,
+     8.4
+    ],
+    [
+     -790.1,
+     10.5
+    ],
+    [
+     -100.1,
+     8.3
+    ],
+    [
+     -30.1,
+     9.4
+    ],
+    [
+     790.0,
+     9.1
+    ]
+   ],
+   "legacy": [
+    [
+     -857.2,
+     20.2
+    ],
+    [
+     -855.5,
+     24.2
+    ],
+    [
+     -316.5,
+     66.2
+    ],
+    [
+     364.5,
+     66.3
+    ],
+    [
+     854.8,
+     24.0
+    ],
+    [
+     857.5,
+     20.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.49,
+    "burst_count_per_window": 287.0,
+    "frame_power_cv": 0.81,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00009": {
+  "OLD": {
+   "sid": "d2_00009",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    48.9,
+    69.0
+   ],
+   "gated": [
+    [
+     -730.1,
+     9.1
+    ],
+    [
+     300.0,
+     8.1
+    ],
+    [
+     760.0,
+     8.7
+    ],
+    [
+     790.0,
+     8.7
+    ]
+   ],
+   "legacy": [
+    [
+     -854.7,
+     16.8
+    ],
+    [
+     -853.8,
+     21.2
+    ],
+    [
+     -207.7,
+     58.4
+    ],
+    [
+     661.2,
+     59.6
+    ],
+    [
+     853.2,
+     19.1
+    ],
+    [
+     854.0,
+     19.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.524,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00009",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    48.9,
+    69.0
+   ],
+   "gated": [
+    [
+     -730.1,
+     9.2
+    ],
+    [
+     300.0,
+     8.2
+    ],
+    [
+     760.0,
+     8.7
+    ],
+    [
+     790.0,
+     8.7
+    ]
+   ],
+   "legacy": [
+    [
+     -854.7,
+     16.8
+    ],
+    [
+     -853.8,
+     21.2
+    ],
+    [
+     -207.7,
+     58.4
+    ],
+    [
+     661.2,
+     59.6
+    ],
+    [
+     853.2,
+     19.1
+    ],
+    [
+     854.0,
+     18.9
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.521,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00010": {
+  "OLD": {
+   "sid": "d2_00010",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    288.1,
+    116.0
+   ],
+   "gated": [
+    [
+     -810.1,
+     9.4
+    ],
+    [
+     -20.1,
+     9.7
+    ],
+    [
+     70.0,
+     9.6
+    ],
+    [
+     440.0,
+     8.2
+    ],
+    [
+     760.0,
+     9.3
+    ]
+   ],
+   "legacy": [
+    [
+     -828.1,
+     33.5
+    ],
+    [
+     -490.9,
+     50.8
+    ],
+    [
+     403.2,
+     49.7
+    ],
+    [
+     827.1,
+     35.4
+    ],
+    [
+     834.9,
+     30.5
+    ],
+    [
+     837.0,
+     30.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.562,
+    "burst_count_per_window": 223.0,
+    "frame_power_cv": 1.23,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00010",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    288.1,
+    116.0
+   ],
+   "gated": [
+    [
+     -810.1,
+     9.4
+    ],
+    [
+     -20.1,
+     9.7
+    ],
+    [
+     70.0,
+     9.6
+    ],
+    [
+     440.0,
+     8.2
+    ],
+    [
+     760.0,
+     9.3
+    ]
+   ],
+   "legacy": [
+    [
+     -828.1,
+     33.6
+    ],
+    [
+     -490.9,
+     50.9
+    ],
+    [
+     403.2,
+     49.7
+    ],
+    [
+     827.1,
+     35.4
+    ],
+    [
+     834.9,
+     30.5
+    ],
+    [
+     837.0,
+     30.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.561,
+    "burst_count_per_window": 224.0,
+    "frame_power_cv": 1.23,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00011": {
+  "OLD": {
+   "sid": "d2_00011",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    456.5,
+    -428.0
+   ],
+   "gated": [
+    [
+     -460.1,
+     11.1
+    ],
+    [
+     -240.1,
+     13.8
+    ],
+    [
+     -50.1,
+     14.2
+    ],
+    [
+     150.0,
+     12.4
+    ],
+    [
+     560.0,
+     12.6
+    ],
+    [
+     800.0,
+     13.4
+    ]
+   ],
+   "legacy": [
+    [
+     -452.7,
+     61.5
+    ],
+    [
+     562.0,
+     63.3
+    ],
+    [
+     841.7,
+     22.9
+    ],
+    [
+     843.1,
+     24.8
+    ],
+    [
+     844.7,
+     21.4
+    ],
+    [
+     848.9,
+     19.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.471,
+    "burst_count_per_window": 291.0,
+    "frame_power_cv": 0.76,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00011",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    456.5,
+    -428.0
+   ],
+   "gated": [
+    [
+     -460.1,
+     11.2
+    ],
+    [
+     -240.1,
+     13.8
+    ],
+    [
+     -50.1,
+     13.6
+    ],
+    [
+     150.0,
+     12.4
+    ],
+    [
+     560.0,
+     12.5
+    ],
+    [
+     800.0,
+     13.4
+    ]
+   ],
+   "legacy": [
+    [
+     -452.7,
+     61.6
+    ],
+    [
+     562.0,
+     63.4
+    ],
+    [
+     841.7,
+     23.0
+    ],
+    [
+     843.1,
+     24.9
+    ],
+    [
+     844.7,
+     21.5
+    ],
+    [
+     848.9,
+     19.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.465,
+    "burst_count_per_window": 287.0,
+    "frame_power_cv": 0.78,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00012": {
+  "OLD": {
+   "sid": "d2_00012",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    60.4,
+    -494.5
+   ],
+   "gated": [
+    [
+     -800.1,
+     11.1
+    ],
+    [
+     -40.1,
+     9.9
+    ],
+    [
+     -10.1,
+     14.4
+    ],
+    [
+     70.0,
+     15.2
+    ],
+    [
+     480.0,
+     9.6
+    ],
+    [
+     790.0,
+     10.3
+    ]
+   ],
+   "legacy": [
+    [
+     -459.1,
+     66.9
+    ],
+    [
+     46.7,
+     82.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.439,
+    "burst_count_per_window": 282.0,
+    "frame_power_cv": 0.76,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00012",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    60.4,
+    -494.5
+   ],
+   "gated": [
+    [
+     -800.1,
+     11.1
+    ],
+    [
+     -40.1,
+     9.8
+    ],
+    [
+     -10.1,
+     10.8
+    ],
+    [
+     70.0,
+     15.4
+    ],
+    [
+     480.0,
+     9.6
+    ],
+    [
+     790.0,
+     10.3
+    ]
+   ],
+   "legacy": [
+    [
+     -459.1,
+     66.6
+    ],
+    [
+     46.7,
+     82.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.431,
+    "burst_count_per_window": 282.0,
+    "frame_power_cv": 0.75,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00013": {
+  "OLD": {
+   "sid": "d2_00013",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    105.8,
+    -223.8
+   ],
+   "gated": [
+    [
+     -420.1,
+     8.6
+    ],
+    [
+     -370.1,
+     9.6
+    ],
+    [
+     -70.1,
+     8.7
+    ]
+   ],
+   "legacy": [
+    [
+     -552.7,
+     21.9
+    ],
+    [
+     -488.1,
+     22.5
+    ],
+    [
+     -460.8,
+     23.7
+    ],
+    [
+     -347.4,
+     42.2
+    ],
+    [
+     -20.5,
+     27.3
+    ],
+    [
+     1.2,
+     23.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.502,
+    "burst_count_per_window": 230.0,
+    "frame_power_cv": 0.89,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00013",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    105.8,
+    -223.8
+   ],
+   "gated": [
+    [
+     -420.1,
+     8.6
+    ],
+    [
+     -370.1,
+     9.6
+    ],
+    [
+     -70.1,
+     8.7
+    ]
+   ],
+   "legacy": [
+    [
+     -552.7,
+     21.9
+    ],
+    [
+     -488.1,
+     22.5
+    ],
+    [
+     -460.8,
+     23.7
+    ],
+    [
+     -347.4,
+     42.2
+    ],
+    [
+     -20.7,
+     27.3
+    ],
+    [
+     1.2,
+     23.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.504,
+    "burst_count_per_window": 232.0,
+    "frame_power_cv": 0.89,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00014": {
+  "OLD": {
+   "sid": "d2_00014",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -74.3,
+    272.0
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.2
+    ],
+    [
+     -740.1,
+     8.3
+    ],
+    [
+     -10.1,
+     8.6
+    ],
+    [
+     270.0,
+     17.4
+    ],
+    [
+     720.0,
+     8.0
+    ]
+   ],
+   "legacy": [
+    [
+     -838.3,
+     21.7
+    ],
+    [
+     -837.5,
+     21.1
+    ],
+    [
+     -835.6,
+     20.4
+    ],
+    [
+     -834.8,
+     22.6
+    ],
+    [
+     -579.1,
+     44.0
+    ],
+    [
+     276.1,
+     62.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.51,
+    "burst_count_per_window": 245.0,
+    "frame_power_cv": 0.85,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00014",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -74.3,
+    272.0
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.1
+    ],
+    [
+     -740.1,
+     8.3
+    ],
+    [
+     -10.1,
+     8.3
+    ],
+    [
+     270.0,
+     17.3
+    ]
+   ],
+   "legacy": [
+    [
+     -838.3,
+     21.7
+    ],
+    [
+     -837.5,
+     21.0
+    ],
+    [
+     -835.6,
+     20.4
+    ],
+    [
+     -834.8,
+     22.5
+    ],
+    [
+     -579.1,
+     43.9
+    ],
+    [
+     276.1,
+     62.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.508,
+    "burst_count_per_window": 245.0,
+    "frame_power_cv": 0.85,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00015": {
+  "OLD": {
+   "sid": "d2_00015",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    686.7,
+    -683.8
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.441,
+    "burst_count_per_window": 258.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00015",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    686.7,
+    -683.8
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.441,
+    "burst_count_per_window": 258.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00016": {
+  "OLD": {
+   "sid": "d2_00016",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    665.1,
+    362.5
+   ],
+   "gated": [
+    [
+     -730.1,
+     8.4
+    ],
+    [
+     650.0,
+     12.4
+    ],
+    [
+     730.0,
+     8.8
+    ]
+   ],
+   "legacy": [
+    [
+     -849.7,
+     10.0
+    ],
+    [
+     -848.6,
+     11.8
+    ],
+    [
+     -233.8,
+     53.9
+    ],
+    [
+     694.6,
+     62.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.472,
+    "burst_count_per_window": 248.0,
+    "frame_power_cv": 3.05,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00016",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    665.1,
+    362.5
+   ],
+   "gated": [
+    [
+     -730.1,
+     8.4
+    ],
+    [
+     650.0,
+     12.4
+    ],
+    [
+     730.0,
+     8.8
+    ]
+   ],
+   "legacy": [
+    [
+     -849.4,
+     9.1
+    ],
+    [
+     -848.6,
+     11.0
+    ],
+    [
+     -846.5,
+     13.7
+    ],
+    [
+     -57.3,
+     53.4
+    ],
+    [
+     694.6,
+     61.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.464,
+    "burst_count_per_window": 263.0,
+    "frame_power_cv": 1.29,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00017": {
+  "OLD": {
+   "sid": "d2_00017",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    242.0,
+    -205.7
+   ],
+   "gated": [
+    [
+     -770.1,
+     8.8
+    ],
+    [
+     50.0,
+     9.7
+    ],
+    [
+     240.0,
+     13.6
+    ],
+    [
+     750.0,
+     8.8
+    ],
+    [
+     830.0,
+     9.8
+    ]
+   ],
+   "legacy": [
+    [
+     -844.2,
+     14.7
+    ],
+    [
+     -474.0,
+     41.8
+    ],
+    [
+     239.1,
+     55.1
+    ],
+    [
+     818.5,
+     26.2
+    ],
+    [
+     827.5,
+     27.4
+    ],
+    [
+     836.3,
+     15.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.48,
+    "burst_count_per_window": 258.0,
+    "frame_power_cv": 1.07,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00017",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    242.0,
+    -205.7
+   ],
+   "gated": [
+    [
+     -770.1,
+     8.8
+    ],
+    [
+     50.0,
+     9.4
+    ],
+    [
+     240.0,
+     13.6
+    ],
+    [
+     750.0,
+     8.8
+    ],
+    [
+     830.0,
+     9.8
+    ]
+   ],
+   "legacy": [
+    [
+     -844.2,
+     14.7
+    ],
+    [
+     -474.0,
+     41.8
+    ],
+    [
+     239.1,
+     55.2
+    ],
+    [
+     818.5,
+     26.3
+    ],
+    [
+     827.5,
+     27.4
+    ],
+    [
+     836.3,
+     15.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.486,
+    "burst_count_per_window": 267.0,
+    "frame_power_cv": 1.05,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00018": {
+  "OLD": {
+   "sid": "d2_00018",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    -118.0,
+    683.8
+   ],
+   "gated": [
+    [
+     -740.1,
+     10.5
+    ],
+    [
+     -640.1,
+     9.0
+    ],
+    [
+     -290.1,
+     8.5
+    ],
+    [
+     620.0,
+     8.0
+    ],
+    [
+     700.0,
+     8.0
+    ],
+    [
+     790.0,
+     10.7
+    ]
+   ],
+   "legacy": [
+    [
+     -820.5,
+     17.8
+    ],
+    [
+     -290.1,
+     41.8
+    ],
+    [
+     44.6,
+     40.1
+    ],
+    [
+     822.5,
+     16.7
+    ],
+    [
+     824.2,
+     16.2
+    ],
+    [
+     829.8,
+     16.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.464,
+    "burst_count_per_window": 292.0,
+    "frame_power_cv": 9.68,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00018",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    -118.0,
+    683.8
+   ],
+   "gated": [
+    [
+     -740.1,
+     10.5
+    ],
+    [
+     -640.1,
+     9.0
+    ],
+    [
+     -290.1,
+     8.5
+    ],
+    [
+     620.0,
+     8.0
+    ],
+    [
+     790.0,
+     10.7
+    ]
+   ],
+   "legacy": [
+    [
+     -820.5,
+     17.8
+    ],
+    [
+     -290.1,
+     41.8
+    ],
+    [
+     44.6,
+     40.1
+    ],
+    [
+     822.5,
+     16.8
+    ],
+    [
+     824.2,
+     16.2
+    ],
+    [
+     829.8,
+     16.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.466,
+    "burst_count_per_window": 293.0,
+    "frame_power_cv": 9.68,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00019": {
+  "OLD": {
+   "sid": "d2_00019",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -128.8,
+    -66.2
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.631,
+    "burst_count_per_window": 85.0,
+    "frame_power_cv": 2.18,
+    "hop_channel_count": 2.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00019",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -128.8,
+    -66.2
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.633,
+    "burst_count_per_window": 85.0,
+    "frame_power_cv": 2.18,
+    "hop_channel_count": 2.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00020": {
+  "OLD": {
+   "sid": "d2_00020",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    169.7,
+    -316.2
+   ],
+   "gated": [
+    [
+     -820.1,
+     10.1
+    ],
+    [
+     -790.1,
+     11.2
+    ],
+    [
+     -760.1,
+     8.5
+    ],
+    [
+     -70.1,
+     11.0
+    ],
+    [
+     780.0,
+     9.0
+    ]
+   ],
+   "legacy": [
+    [
+     -852.8,
+     20.2
+    ],
+    [
+     -672.0,
+     60.8
+    ],
+    [
+     16.3,
+     60.4
+    ],
+    [
+     850.9,
+     24.3
+    ],
+    [
+     852.6,
+     19.7
+    ],
+    [
+     853.6,
+     18.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.455,
+    "burst_count_per_window": 292.0,
+    "frame_power_cv": 0.79,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00020",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    169.7,
+    -316.2
+   ],
+   "gated": [
+    [
+     -820.1,
+     10.1
+    ],
+    [
+     -790.1,
+     11.2
+    ],
+    [
+     -760.1,
+     8.5
+    ],
+    [
+     -70.1,
+     11.0
+    ],
+    [
+     780.0,
+     9.1
+    ]
+   ],
+   "legacy": [
+    [
+     -852.8,
+     20.3
+    ],
+    [
+     -672.0,
+     60.8
+    ],
+    [
+     16.3,
+     60.4
+    ],
+    [
+     850.9,
+     24.3
+    ],
+    [
+     852.6,
+     19.7
+    ],
+    [
+     853.6,
+     18.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.452,
+    "burst_count_per_window": 292.0,
+    "frame_power_cv": 0.79,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00021": {
+  "OLD": {
+   "sid": "d2_00021",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    108.2,
+    103.9
+   ],
+   "gated": [
+    [
+     110.0,
+     31.3
+    ]
+   ],
+   "legacy": [
+    [
+     -844.9,
+     13.0
+    ],
+    [
+     -3.6,
+     41.5
+    ],
+    [
+     112.2,
+     75.5
+    ],
+    [
+     844.8,
+     13.2
+    ],
+    [
+     845.6,
+     10.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.54,
+    "burst_count_per_window": 181.0,
+    "frame_power_cv": 1.54,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00021",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    108.2,
+    103.9
+   ],
+   "gated": [
+    [
+     110.0,
+     29.4
+    ]
+   ],
+   "legacy": [
+    [
+     -844.9,
+     12.9
+    ],
+    [
+     -1.0,
+     45.6
+    ],
+    [
+     112.2,
+     75.5
+    ],
+    [
+     844.8,
+     13.2
+    ],
+    [
+     845.6,
+     10.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.565,
+    "burst_count_per_window": 198.0,
+    "frame_power_cv": 1.32,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00022": {
+  "OLD": {
+   "sid": "d2_00022",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -55.0,
+    45.0
+   ],
+   "gated": [
+    [
+     -270.1,
+     8.4
+    ]
+   ],
+   "legacy": [
+    [
+     -857.4,
+     14.3
+    ],
+    [
+     -856.7,
+     16.1
+    ],
+    [
+     -49.3,
+     64.5
+    ],
+    [
+     137.4,
+     64.3
+    ],
+    [
+     855.9,
+     16.1
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.496,
+    "burst_count_per_window": 231.0,
+    "frame_power_cv": 1.13,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00022",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -55.0,
+    45.0
+   ],
+   "gated": [
+    [
+     -270.1,
+     8.4
+    ]
+   ],
+   "legacy": [
+    [
+     -858.1,
+     13.7
+    ],
+    [
+     -856.7,
+     15.7
+    ],
+    [
+     -49.3,
+     64.3
+    ],
+    [
+     137.4,
+     64.0
+    ],
+    [
+     855.9,
+     16.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.51,
+    "burst_count_per_window": 244.0,
+    "frame_power_cv": 1.11,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00023": {
+  "OLD": {
+   "sid": "d2_00023",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -102.5,
+    426.1
+   ],
+   "gated": [
+    [
+     420.0,
+     29.9
+    ]
+   ],
+   "legacy": [
+    [
+     -846.4,
+     12.2
+    ],
+    [
+     -844.8,
+     12.1
+    ],
+    [
+     -116.9,
+     46.4
+    ],
+    [
+     434.7,
+     74.6
+    ],
+    [
+     843.3,
+     12.6
+    ],
+    [
+     844.4,
+     12.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.422,
+    "burst_count_per_window": 284.0,
+    "frame_power_cv": 0.78,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00023",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -102.5,
+    426.1
+   ],
+   "gated": [
+    [
+     420.0,
+     30.0
+    ]
+   ],
+   "legacy": [
+    [
+     -846.4,
+     12.2
+    ],
+    [
+     -844.8,
+     12.1
+    ],
+    [
+     -116.9,
+     46.4
+    ],
+    [
+     434.7,
+     74.6
+    ],
+    [
+     843.3,
+     12.6
+    ],
+    [
+     844.4,
+     12.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.422,
+    "burst_count_per_window": 284.0,
+    "frame_power_cv": 0.78,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00024": {
+  "OLD": {
+   "sid": "d2_00024",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -632.2,
+    -41.5
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -853.0,
+     12.4
+    ],
+    [
+     -55.1,
+     47.9
+    ],
+    [
+     530.0,
+     47.8
+    ],
+    [
+     852.9,
+     12.0
+    ],
+    [
+     854.1,
+     10.5
+    ],
+    [
+     854.8,
+     9.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.479,
+    "burst_count_per_window": 249.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00024",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -632.2,
+    -41.5
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -853.0,
+     12.4
+    ],
+    [
+     -55.1,
+     47.9
+    ],
+    [
+     530.0,
+     47.8
+    ],
+    [
+     852.9,
+     12.0
+    ],
+    [
+     854.1,
+     10.5
+    ],
+    [
+     854.8,
+     9.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.474,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00025": {
+  "OLD": {
+   "sid": "d2_00025",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -173.8,
+    629.5
+   ],
+   "gated": [
+    [
+     -740.1,
+     9.4
+    ],
+    [
+     -300.1,
+     8.7
+    ],
+    [
+     750.0,
+     8.1
+    ]
+   ],
+   "legacy": [
+    [
+     -842.6,
+     22.0
+    ],
+    [
+     -841.3,
+     21.3
+    ],
+    [
+     -312.9,
+     50.0
+    ],
+    [
+     408.3,
+     50.6
+    ],
+    [
+     843.1,
+     24.4
+    ],
+    [
+     845.8,
+     21.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.474,
+    "burst_count_per_window": 254.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00025",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -173.8,
+    629.5
+   ],
+   "gated": [
+    [
+     -740.1,
+     9.4
+    ],
+    [
+     -300.1,
+     8.7
+    ],
+    [
+     750.0,
+     8.1
+    ]
+   ],
+   "legacy": [
+    [
+     -842.6,
+     22.0
+    ],
+    [
+     -841.3,
+     21.4
+    ],
+    [
+     -312.9,
+     50.0
+    ],
+    [
+     408.3,
+     50.6
+    ],
+    [
+     843.1,
+     24.4
+    ],
+    [
+     845.8,
+     21.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.471,
+    "burst_count_per_window": 254.0,
+    "frame_power_cv": 0.86,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00026": {
+  "OLD": {
+   "sid": "d2_00026",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 1,
+   "gt_kinds": [
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    -638.9
+   ],
+   "gated": [
+    [
+     -350.1,
+     8.6
+    ],
+    [
+     -20.1,
+     9.0
+    ],
+    [
+     760.0,
+     9.4
+    ]
+   ],
+   "legacy": [
+    [
+     -858.8,
+     17.4
+    ],
+    [
+     -854.5,
+     27.8
+    ],
+    [
+     -395.8,
+     63.9
+    ],
+    [
+     706.1,
+     62.6
+    ],
+    [
+     852.7,
+     25.8
+    ],
+    [
+     856.9,
+     17.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.464,
+    "burst_count_per_window": 254.0,
+    "frame_power_cv": 0.85,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00026",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 1,
+   "gt_kinds": [
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    -638.9
+   ],
+   "gated": [
+    [
+     -350.1,
+     8.6
+    ],
+    [
+     760.0,
+     9.4
+    ]
+   ],
+   "legacy": [
+    [
+     -854.5,
+     27.5
+    ],
+    [
+     -395.8,
+     63.6
+    ],
+    [
+     706.1,
+     62.3
+    ],
+    [
+     852.7,
+     25.5
+    ],
+    [
+     853.6,
+     23.3
+    ],
+    [
+     856.9,
+     17.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.481,
+    "burst_count_per_window": 257.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00027": {
+  "OLD": {
+   "sid": "d2_00027",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -156.9,
+    -693.8
+   ],
+   "gated": [
+    [
+     -700.1,
+     25.0
+    ],
+    [
+     800.0,
+     12.2
+    ]
+   ],
+   "legacy": [
+    [
+     -692.5,
+     85.0
+    ],
+    [
+     744.7,
+     65.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.452,
+    "burst_count_per_window": 270.0,
+    "frame_power_cv": 2.22,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00027",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "DECT"
+   ],
+   "gt_f0_khz": [
+    -156.9,
+    -693.8
+   ],
+   "gated": [
+    [
+     -700.1,
+     24.9
+    ],
+    [
+     800.0,
+     12.2
+    ]
+   ],
+   "legacy": [
+    [
+     -692.5,
+     84.8
+    ],
+    [
+     744.7,
+     65.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.492,
+    "burst_count_per_window": 263.0,
+    "frame_power_cv": 1.9,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00028": {
+  "OLD": {
+   "sid": "d2_00028",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    -162.0,
+    200.5
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -854.5,
+     10.6
+    ],
+    [
+     -853.2,
+     13.2
+    ],
+    [
+     -340.9,
+     49.9
+    ],
+    [
+     343.5,
+     49.8
+    ],
+    [
+     854.8,
+     12.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.499,
+    "burst_count_per_window": 248.0,
+    "frame_power_cv": 0.9,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00028",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    -162.0,
+    200.5
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -854.5,
+     10.6
+    ],
+    [
+     -853.2,
+     13.2
+    ],
+    [
+     -340.9,
+     49.9
+    ],
+    [
+     343.5,
+     49.8
+    ],
+    [
+     854.8,
+     12.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.497,
+    "burst_count_per_window": 248.0,
+    "frame_power_cv": 0.9,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00029": {
+  "OLD": {
+   "sid": "d2_00029",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    178.0,
+    -623.8
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -856.2,
+     13.0
+    ],
+    [
+     -854.3,
+     21.1
+    ],
+    [
+     -588.6,
+     59.0
+    ],
+    [
+     420.8,
+     58.3
+    ],
+    [
+     854.9,
+     18.1
+    ],
+    [
+     856.3,
+     15.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.565,
+    "burst_count_per_window": 234.0,
+    "frame_power_cv": 1.05,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00029",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    178.0,
+    -623.8
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -856.0,
+     13.0
+    ],
+    [
+     -854.3,
+     21.1
+    ],
+    [
+     -588.6,
+     59.0
+    ],
+    [
+     420.8,
+     58.3
+    ],
+    [
+     854.9,
+     18.1
+    ],
+    [
+     856.3,
+     15.0
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.566,
+    "burst_count_per_window": 234.0,
+    "frame_power_cv": 1.05,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00030": {
+  "OLD": {
+   "sid": "d2_00030",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    -474.5,
+    -617.4
+   ],
+   "gated": [
+    [
+     -810.1,
+     9.8
+    ],
+    [
+     -460.1,
+     15.5
+    ]
+   ],
+   "legacy": [
+    [
+     -473.7,
+     81.0
+    ],
+    [
+     97.0,
+     62.6
+    ],
+    [
+     853.8,
+     10.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.496,
+    "burst_count_per_window": 283.0,
+    "frame_power_cv": 0.8,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00030",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    -474.5,
+    -617.4
+   ],
+   "gated": [
+    [
+     -810.1,
+     9.8
+    ],
+    [
+     -460.1,
+     15.5
+    ]
+   ],
+   "legacy": [
+    [
+     -473.7,
+     81.0
+    ],
+    [
+     97.0,
+     62.6
+    ],
+    [
+     853.8,
+     10.4
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.496,
+    "burst_count_per_window": 283.0,
+    "frame_power_cv": 0.8,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00031": {
+  "OLD": {
+   "sid": "d2_00031",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    157.5,
+    262.4
+   ],
+   "gated": [
+    [
+     -790.1,
+     8.2
+    ]
+   ],
+   "legacy": [
+    [
+     -584.8,
+     30.6
+    ],
+    [
+     -517.9,
+     29.8
+    ],
+    [
+     -434.7,
+     30.1
+    ],
+    [
+     -207.6,
+     32.3
+    ],
+    [
+     286.1,
+     32.6
+    ],
+    [
+     667.1,
+     31.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.404,
+    "burst_count_per_window": 294.0,
+    "frame_power_cv": 0.82,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00031",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    157.5,
+    262.4
+   ],
+   "gated": [
+    [
+     -790.1,
+     8.2
+    ]
+   ],
+   "legacy": [
+    [
+     -584.8,
+     30.6
+    ],
+    [
+     -434.7,
+     30.1
+    ],
+    [
+     -207.6,
+     32.3
+    ],
+    [
+     -66.0,
+     30.0
+    ],
+    [
+     286.1,
+     32.6
+    ],
+    [
+     667.1,
+     31.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.397,
+    "burst_count_per_window": 284.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00032": {
+  "OLD": {
+   "sid": "d2_00032",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    292.7,
+    413.5
+   ],
+   "gated": [
+    [
+     -770.1,
+     11.3
+    ],
+    [
+     -630.1,
+     9.0
+    ],
+    [
+     -50.1,
+     9.8
+    ],
+    [
+     -10.1,
+     11.0
+    ],
+    [
+     20.0,
+     12.2
+    ],
+    [
+     60.0,
+     9.4
+    ]
+   ],
+   "legacy": [
+    [
+     -873.9,
+     11.3
+    ],
+    [
+     -855.6,
+     20.2
+    ],
+    [
+     -852.4,
+     16.3
+    ],
+    [
+     -727.0,
+     64.3
+    ],
+    [
+     93.9,
+     64.1
+    ],
+    [
+     855.0,
+     20.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.458,
+    "burst_count_per_window": 255.0,
+    "frame_power_cv": 5.4,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00032",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "WiFi_burst",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    292.7,
+    413.5
+   ],
+   "gated": [
+    [
+     -770.1,
+     11.3
+    ],
+    [
+     -630.1,
+     9.0
+    ],
+    [
+     -50.1,
+     9.9
+    ],
+    [
+     -10.1,
+     11.1
+    ],
+    [
+     20.0,
+     12.5
+    ],
+    [
+     60.0,
+     9.3
+    ]
+   ],
+   "legacy": [
+    [
+     -873.9,
+     11.2
+    ],
+    [
+     -855.6,
+     20.2
+    ],
+    [
+     -852.4,
+     16.3
+    ],
+    [
+     -727.0,
+     64.3
+    ],
+    [
+     93.9,
+     64.1
+    ],
+    [
+     855.0,
+     20.5
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.455,
+    "burst_count_per_window": 232.0,
+    "frame_power_cv": 5.15,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00033": {
+  "OLD": {
+   "sid": "d2_00033",
+   "tag": "OLD",
+   "ref_stations": [],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    657.5,
+    -673.5
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.56,
+    "burst_count_per_window": 188.0,
+    "frame_power_cv": 3.14,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00033",
+   "tag": "NEW",
+   "ref_stations": [],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    657.5,
+    -673.5
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.56,
+    "burst_count_per_window": 188.0,
+    "frame_power_cv": 3.14,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00034": {
+  "OLD": {
+   "sid": "d2_00034",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    65.9,
+    136.4
+   ],
+   "gated": [
+    [
+     -780.1,
+     10.5
+    ],
+    [
+     -370.1,
+     10.8
+    ],
+    [
+     -180.1,
+     10.5
+    ],
+    [
+     -20.1,
+     10.9
+    ],
+    [
+     220.0,
+     9.9
+    ],
+    [
+     800.0,
+     10.3
+    ]
+   ],
+   "legacy": [
+    [
+     -848.0,
+     23.0
+    ],
+    [
+     -846.3,
+     20.6
+    ],
+    [
+     -344.2,
+     61.2
+    ],
+    [
+     233.3,
+     62.0
+    ],
+    [
+     854.1,
+     21.5
+    ],
+    [
+     854.9,
+     19.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.516,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00034",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    65.9,
+    136.4
+   ],
+   "gated": [
+    [
+     -780.1,
+     10.4
+    ],
+    [
+     -370.1,
+     10.8
+    ],
+    [
+     -180.1,
+     10.5
+    ],
+    [
+     -20.1,
+     10.9
+    ],
+    [
+     220.0,
+     9.9
+    ],
+    [
+     800.0,
+     10.3
+    ]
+   ],
+   "legacy": [
+    [
+     -848.0,
+     23.1
+    ],
+    [
+     -846.3,
+     20.6
+    ],
+    [
+     -344.2,
+     61.2
+    ],
+    [
+     233.3,
+     62.1
+    ],
+    [
+     854.1,
+     21.5
+    ],
+    [
+     854.9,
+     19.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.515,
+    "burst_count_per_window": 252.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00035": {
+  "OLD": {
+   "sid": "d2_00035",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    328.6,
+    -90.4
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.488,
+    "burst_count_per_window": 255.0,
+    "frame_power_cv": 0.94,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00035",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    328.6,
+    -90.4
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.491,
+    "burst_count_per_window": 257.0,
+    "frame_power_cv": 0.94,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00036": {
+  "OLD": {
+   "sid": "d2_00036",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    -180.4,
+    -485.3
+   ],
+   "gated": [
+    [
+     -800.1,
+     8.4
+    ],
+    [
+     -770.1,
+     9.4
+    ],
+    [
+     -330.1,
+     11.3
+    ],
+    [
+     -280.1,
+     8.7
+    ],
+    [
+     590.0,
+     10.1
+    ]
+   ],
+   "legacy": [
+    [
+     -723.1,
+     28.3
+    ],
+    [
+     -282.8,
+     40.3
+    ],
+    [
+     24.5,
+     31.5
+    ],
+    [
+     167.1,
+     28.0
+    ],
+    [
+     334.1,
+     28.3
+    ],
+    [
+     505.5,
+     28.1
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.468,
+    "burst_count_per_window": 263.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00036",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    -180.4,
+    -485.3
+   ],
+   "gated": [
+    [
+     -800.1,
+     8.4
+    ],
+    [
+     -770.1,
+     9.4
+    ],
+    [
+     -330.1,
+     11.3
+    ],
+    [
+     -280.1,
+     8.7
+    ],
+    [
+     590.0,
+     10.1
+    ]
+   ],
+   "legacy": [
+    [
+     -723.1,
+     28.3
+    ],
+    [
+     -282.8,
+     40.3
+    ],
+    [
+     24.2,
+     31.8
+    ],
+    [
+     167.1,
+     28.0
+    ],
+    [
+     333.4,
+     28.3
+    ],
+    [
+     505.5,
+     28.1
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.465,
+    "burst_count_per_window": 261.0,
+    "frame_power_cv": 0.87,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00037": {
+  "OLD": {
+   "sid": "d2_00037",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -74.7,
+    116.9
+   ],
+   "gated": [
+    [
+     -820.1,
+     8.3
+    ],
+    [
+     -790.1,
+     10.7
+    ],
+    [
+     530.0,
+     8.6
+    ],
+    [
+     740.0,
+     9.1
+    ],
+    [
+     840.0,
+     8.1
+    ]
+   ],
+   "legacy": [
+    [
+     -849.5,
+     20.5
+    ],
+    [
+     -848.1,
+     20.6
+    ],
+    [
+     -846.8,
+     22.8
+    ],
+    [
+     -101.3,
+     55.4
+    ],
+    [
+     536.6,
+     54.8
+    ],
+    [
+     848.7,
+     20.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.48,
+    "burst_count_per_window": 270.0,
+    "frame_power_cv": 0.81,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00037",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -74.7,
+    116.9
+   ],
+   "gated": [
+    [
+     -820.1,
+     8.2
+    ],
+    [
+     -790.1,
+     10.7
+    ],
+    [
+     530.0,
+     8.5
+    ],
+    [
+     740.0,
+     9.1
+    ],
+    [
+     840.0,
+     8.2
+    ]
+   ],
+   "legacy": [
+    [
+     -849.5,
+     20.3
+    ],
+    [
+     -848.1,
+     20.4
+    ],
+    [
+     -846.8,
+     22.6
+    ],
+    [
+     -101.3,
+     54.9
+    ],
+    [
+     536.6,
+     54.5
+    ],
+    [
+     851.3,
+     17.9
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.511,
+    "burst_count_per_window": 279.0,
+    "frame_power_cv": 0.81,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00038": {
+  "OLD": {
+   "sid": "d2_00038",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    338.3,
+    42.1
+   ],
+   "gated": [
+    [
+     -340.1,
+     8.9
+    ],
+    [
+     -210.1,
+     8.3
+    ],
+    [
+     270.0,
+     11.6
+    ],
+    [
+     760.0,
+     11.5
+    ]
+   ],
+   "legacy": [
+    [
+     179.7,
+     30.6
+    ],
+    [
+     216.1,
+     34.4
+    ],
+    [
+     271.0,
+     44.2
+    ],
+    [
+     426.3,
+     39.3
+    ],
+    [
+     477.8,
+     29.7
+    ],
+    [
+     506.1,
+     28.1
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.482,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00038",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Zigbee",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    338.3,
+    42.1
+   ],
+   "gated": [
+    [
+     -340.1,
+     8.9
+    ],
+    [
+     -210.1,
+     8.3
+    ],
+    [
+     270.0,
+     11.6
+    ],
+    [
+     760.0,
+     11.5
+    ]
+   ],
+   "legacy": [
+    [
+     179.7,
+     30.6
+    ],
+    [
+     216.1,
+     34.4
+    ],
+    [
+     271.0,
+     44.2
+    ],
+    [
+     426.3,
+     39.3
+    ],
+    [
+     478.2,
+     29.7
+    ],
+    [
+     506.1,
+     28.1
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.482,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 0.84,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00039": {
+  "OLD": {
+   "sid": "d2_00039",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    -698.5,
+    81.2
+   ],
+   "gated": [
+    [
+     -1530.1,
+     9.2
+    ],
+    [
+     -800.1,
+     9.1
+    ],
+    [
+     -760.1,
+     12.8
+    ],
+    [
+     190.0,
+     9.0
+    ],
+    [
+     720.0,
+     8.6
+    ],
+    [
+     770.0,
+     9.4
+    ]
+   ],
+   "legacy": [
+    [
+     -858.3,
+     18.8
+    ],
+    [
+     -851.9,
+     30.4
+    ],
+    [
+     -475.0,
+     68.4
+    ],
+    [
+     734.9,
+     67.2
+    ],
+    [
+     856.1,
+     20.2
+    ],
+    [
+     857.2,
+     16.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.497,
+    "burst_count_per_window": 256.0,
+    "frame_power_cv": 0.9,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00039",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "VFD_noise",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    -698.5,
+    81.2
+   ],
+   "gated": [
+    [
+     -1530.1,
+     9.1
+    ],
+    [
+     -800.1,
+     9.0
+    ],
+    [
+     -760.1,
+     12.8
+    ],
+    [
+     190.0,
+     9.0
+    ],
+    [
+     720.0,
+     8.6
+    ],
+    [
+     770.0,
+     9.4
+    ]
+   ],
+   "legacy": [
+    [
+     -858.3,
+     18.8
+    ],
+    [
+     -851.9,
+     30.4
+    ],
+    [
+     -475.0,
+     68.4
+    ],
+    [
+     734.9,
+     67.2
+    ],
+    [
+     856.1,
+     20.2
+    ],
+    [
+     857.2,
+     16.2
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.501,
+    "burst_count_per_window": 256.0,
+    "frame_power_cv": 0.9,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00040": {
+  "OLD": {
+   "sid": "d2_00040",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    253.3,
+    -437.6
+   ],
+   "gated": [
+    [
+     -770.1,
+     9.7
+    ],
+    [
+     -20.1,
+     9.6
+    ],
+    [
+     30.0,
+     9.6
+    ],
+    [
+     410.0,
+     8.8
+    ]
+   ],
+   "legacy": [
+    [
+     -473.0,
+     37.4
+    ],
+    [
+     29.4,
+     33.1
+    ],
+    [
+     222.6,
+     34.2
+    ],
+    [
+     410.0,
+     34.0
+    ],
+    [
+     501.4,
+     33.9
+    ],
+    [
+     607.1,
+     33.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.436,
+    "burst_count_per_window": 286.0,
+    "frame_power_cv": 0.77,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00040",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    253.3,
+    -437.6
+   ],
+   "gated": [
+    [
+     -770.1,
+     9.7
+    ],
+    [
+     -20.1,
+     9.6
+    ],
+    [
+     30.0,
+     9.6
+    ],
+    [
+     410.0,
+     8.8
+    ]
+   ],
+   "legacy": [
+    [
+     -473.0,
+     37.4
+    ],
+    [
+     29.4,
+     33.1
+    ],
+    [
+     222.6,
+     34.2
+    ],
+    [
+     410.0,
+     34.0
+    ],
+    [
+     501.4,
+     33.9
+    ],
+    [
+     607.1,
+     33.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.435,
+    "burst_count_per_window": 287.0,
+    "frame_power_cv": 0.77,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00041": {
+  "OLD": {
+   "sid": "d2_00041",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    167.0,
+    187.9
+   ],
+   "gated": [
+    [
+     -730.1,
+     11.7
+    ],
+    [
+     -540.1,
+     12.8
+    ],
+    [
+     -150.1,
+     9.1
+    ],
+    [
+     470.0,
+     10.0
+    ],
+    [
+     510.0,
+     9.2
+    ],
+    [
+     710.0,
+     9.1
+    ]
+   ],
+   "legacy": [
+    [
+     -856.4,
+     14.0
+    ],
+    [
+     -854.4,
+     14.4
+    ],
+    [
+     -148.1,
+     63.1
+    ],
+    [
+     657.7,
+     63.8
+    ],
+    [
+     851.7,
+     25.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.545,
+    "burst_count_per_window": 196.0,
+    "frame_power_cv": 1.69,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00041",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Bluetooth_FHSS",
+    "Corona"
+   ],
+   "gt_f0_khz": [
+    167.0,
+    187.9
+   ],
+   "gated": [
+    [
+     -730.1,
+     11.7
+    ],
+    [
+     -540.1,
+     12.8
+    ],
+    [
+     -150.1,
+     9.0
+    ],
+    [
+     470.0,
+     10.0
+    ],
+    [
+     510.0,
+     9.2
+    ],
+    [
+     710.0,
+     9.0
+    ]
+   ],
+   "legacy": [
+    [
+     -856.4,
+     13.9
+    ],
+    [
+     -854.4,
+     14.3
+    ],
+    [
+     -513.7,
+     62.9
+    ],
+    [
+     657.7,
+     63.6
+    ],
+    [
+     851.7,
+     25.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.523,
+    "burst_count_per_window": 221.0,
+    "frame_power_cv": 1.49,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00042": {
+  "OLD": {
+   "sid": "d2_00042",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -653.9,
+    675.5
+   ],
+   "gated": [
+    [
+     10.0,
+     10.1
+    ],
+    [
+     40.0,
+     8.3
+    ],
+    [
+     640.0,
+     15.1
+    ],
+    [
+     690.0,
+     13.3
+    ]
+   ],
+   "legacy": [
+    [
+     -847.2,
+     13.9
+    ],
+    [
+     -845.1,
+     19.8
+    ],
+    [
+     -843.1,
+     19.6
+    ],
+    [
+     -456.9,
+     46.4
+    ],
+    [
+     696.0,
+     63.9
+    ],
+    [
+     850.1,
+     15.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.459,
+    "burst_count_per_window": 243.0,
+    "frame_power_cv": 0.93,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00042",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -653.9,
+    675.5
+   ],
+   "gated": [
+    [
+     640.0,
+     15.1
+    ],
+    [
+     690.0,
+     13.3
+    ]
+   ],
+   "legacy": [
+    [
+     -847.2,
+     13.9
+    ],
+    [
+     -845.1,
+     19.9
+    ],
+    [
+     -843.1,
+     19.6
+    ],
+    [
+     -70.2,
+     46.9
+    ],
+    [
+     696.0,
+     63.9
+    ],
+    [
+     850.1,
+     15.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.456,
+    "burst_count_per_window": 239.0,
+    "frame_power_cv": 0.93,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00043": {
+  "OLD": {
+   "sid": "d2_00043",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -60.8,
+    -629.6
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.586,
+    "burst_count_per_window": 150.0,
+    "frame_power_cv": 6.93,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00043",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_b",
+    "station_c"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Bluetooth_FHSS"
+   ],
+   "gt_f0_khz": [
+    -60.8,
+    -629.6
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.584,
+    "burst_count_per_window": 150.0,
+    "frame_power_cv": 6.93,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00044": {
+  "OLD": {
+   "sid": "d2_00044",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    171.8,
+    643.6
+   ],
+   "gated": [
+    [
+     160.0,
+     9.0
+    ]
+   ],
+   "legacy": [
+    [
+     -819.9,
+     12.2
+    ],
+    [
+     -819.3,
+     11.0
+    ],
+    [
+     -813.3,
+     11.9
+    ],
+    [
+     -422.3,
+     46.8
+    ],
+    [
+     186.4,
+     52.9
+    ],
+    [
+     833.6,
+     25.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.504,
+    "burst_count_per_window": 213.0,
+    "frame_power_cv": 14.45,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00044",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "DECT",
+    "WiFi_burst"
+   ],
+   "gt_f0_khz": [
+    171.8,
+    643.6
+   ],
+   "gated": [
+    [
+     160.0,
+     9.0
+    ]
+   ],
+   "legacy": [
+    [
+     -819.9,
+     12.1
+    ],
+    [
+     -819.3,
+     11.0
+    ],
+    [
+     -813.3,
+     11.9
+    ],
+    [
+     -422.3,
+     46.8
+    ],
+    [
+     186.4,
+     52.9
+    ],
+    [
+     833.6,
+     25.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.504,
+    "burst_count_per_window": 213.0,
+    "frame_power_cv": 14.45,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00045": {
+  "OLD": {
+   "sid": "d2_00045",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -296.3,
+    66.2
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.471,
+    "burst_count_per_window": 237.0,
+    "frame_power_cv": 0.88,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00045",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "VFD_noise"
+   ],
+   "gt_f0_khz": [
+    -296.3,
+    66.2
+   ],
+   "gated": [],
+   "legacy": [],
+   "tf": {
+    "duty_cycle": 0.471,
+    "burst_count_per_window": 237.0,
+    "frame_power_cv": 0.88,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00046": {
+  "OLD": {
+   "sid": "d2_00046",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    691.1,
+    -229.5
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.4
+    ],
+    [
+     -80.1,
+     10.6
+    ],
+    [
+     730.0,
+     8.9
+    ]
+   ],
+   "legacy": [
+    [
+     -853.2,
+     19.9
+    ],
+    [
+     -566.1,
+     58.1
+    ],
+    [
+     573.7,
+     58.7
+    ],
+    [
+     848.0,
+     27.7
+    ],
+    [
+     850.4,
+     25.4
+    ],
+    [
+     856.1,
+     17.8
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.432,
+    "burst_count_per_window": 304.0,
+    "frame_power_cv": 0.74,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00046",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Microwave",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    691.1,
+    -229.5
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.4
+    ],
+    [
+     -80.1,
+     10.5
+    ],
+    [
+     730.0,
+     8.9
+    ]
+   ],
+   "legacy": [
+    [
+     -853.2,
+     19.8
+    ],
+    [
+     -566.1,
+     58.0
+    ],
+    [
+     573.7,
+     58.6
+    ],
+    [
+     848.0,
+     27.6
+    ],
+    [
+     850.4,
+     25.3
+    ],
+    [
+     856.1,
+     17.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.433,
+    "burst_count_per_window": 303.0,
+    "frame_power_cv": 0.74,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00047": {
+  "OLD": {
+   "sid": "d2_00047",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    695.1,
+    85.8
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -857.6,
+     15.5
+    ],
+    [
+     -284.8,
+     61.7
+    ],
+    [
+     534.9,
+     61.8
+    ],
+    [
+     854.2,
+     19.0
+    ],
+    [
+     856.7,
+     13.6
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.477,
+    "burst_count_per_window": 274.0,
+    "frame_power_cv": 0.82,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00047",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Welder"
+   ],
+   "gt_f0_khz": [
+    695.1,
+    85.8
+   ],
+   "gated": [],
+   "legacy": [
+    [
+     -857.6,
+     15.7
+    ],
+    [
+     -284.8,
+     61.7
+    ],
+    [
+     534.9,
+     61.8
+    ],
+    [
+     854.2,
+     18.8
+    ],
+    [
+     856.7,
+     13.3
+    ],
+    [
+     857.5,
+     10.9
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.461,
+    "burst_count_per_window": 254.0,
+    "frame_power_cv": 0.85,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00048": {
+  "OLD": {
+   "sid": "d2_00048",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -378.3,
+    636.0
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.8
+    ],
+    [
+     450.0,
+     8.3
+    ],
+    [
+     560.0,
+     9.2
+    ],
+    [
+     620.0,
+     15.8
+    ],
+    [
+     820.0,
+     8.6
+    ]
+   ],
+   "legacy": [
+    [
+     233.4,
+     31.3
+    ],
+    [
+     243.7,
+     31.6
+    ],
+    [
+     289.9,
+     33.8
+    ],
+    [
+     326.8,
+     36.8
+    ],
+    [
+     647.8,
+     62.4
+    ],
+    [
+     806.5,
+     35.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.536,
+    "burst_count_per_window": 235.0,
+    "frame_power_cv": 2.35,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00048",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Welder",
+    "Zigbee"
+   ],
+   "gt_f0_khz": [
+    -378.3,
+    636.0
+   ],
+   "gated": [
+    [
+     -790.1,
+     9.8
+    ],
+    [
+     450.0,
+     8.3
+    ],
+    [
+     560.0,
+     9.2
+    ],
+    [
+     620.0,
+     15.8
+    ],
+    [
+     820.0,
+     8.6
+    ]
+   ],
+   "legacy": [
+    [
+     233.4,
+     31.3
+    ],
+    [
+     243.7,
+     31.6
+    ],
+    [
+     289.9,
+     33.8
+    ],
+    [
+     326.8,
+     36.8
+    ],
+    [
+     647.8,
+     62.4
+    ],
+    [
+     806.5,
+     35.3
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.537,
+    "burst_count_per_window": 235.0,
+    "frame_power_cv": 2.36,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ },
+ "d2_00049": {
+  "OLD": {
+   "sid": "d2_00049",
+   "tag": "OLD",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    -440.6,
+    -112.2
+   ],
+   "gated": [
+    [
+     20.0,
+     11.7
+    ]
+   ],
+   "legacy": [
+    [
+     -849.7,
+     19.5
+    ],
+    [
+     -847.4,
+     22.9
+    ],
+    [
+     -35.3,
+     54.4
+    ],
+    [
+     468.9,
+     56.2
+    ],
+    [
+     847.2,
+     20.5
+    ],
+    [
+     848.2,
+     20.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.5,
+    "burst_count_per_window": 252.0,
+    "frame_power_cv": 1.82,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  },
+  "NEW": {
+   "sid": "d2_00049",
+   "tag": "NEW",
+   "ref_stations": [
+    "station_a",
+    "station_b",
+    "station_c",
+    "station_d"
+   ],
+   "gt_n": 2,
+   "gt_kinds": [
+    "Corona",
+    "Microwave"
+   ],
+   "gt_f0_khz": [
+    -440.6,
+    -112.2
+   ],
+   "gated": [
+    [
+     20.0,
+     11.7
+    ]
+   ],
+   "legacy": [
+    [
+     -849.7,
+     19.4
+    ],
+    [
+     -847.4,
+     22.9
+    ],
+    [
+     -35.3,
+     54.4
+    ],
+    [
+     468.9,
+     56.1
+    ],
+    [
+     847.2,
+     20.5
+    ],
+    [
+     848.2,
+     20.7
+    ]
+   ],
+   "tf": {
+    "duty_cycle": 0.499,
+    "burst_count_per_window": 251.0,
+    "frame_power_cv": 1.82,
+    "hop_channel_count": 3.0
+   },
+   "tf_error": null
+  }
+ }
+}

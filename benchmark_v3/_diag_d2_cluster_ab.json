@@ -1,0 +1,4463 @@
+{
+ "d2_00000": {
+  "OLD": {
+   "sid": "d2_00000",
+   "tag": "OLD",
+   "gt_n": 1,
+   "n_intersections": 5508,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 6,
+   "support": {
+    "n_explained_min": 1,
+    "max_du_max": 0.3,
+    "n_usable_stations": 2
+   },
+   "src_bands_khz": [
+    [
+     -1764,
+     1764
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1764,
+     1764,
+     1,
+     0.018
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00000",
+   "tag": "NEW",
+   "gt_n": 1,
+   "n_intersections": 5508,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 6,
+   "support": {
+    "n_explained_min": 1,
+    "max_du_max": 0.3,
+    "n_usable_stations": 2
+   },
+   "src_bands_khz": [
+    [
+     -1764,
+     1764
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1764,
+     1764,
+     1,
+     0.018
+    ]
+   ]
+  }
+ },
+ "d2_00001": {
+  "OLD": {
+   "sid": "d2_00001",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 151,
+   "n_candidates": 5,
+   "n_sources": 5,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     95,
+     946
+    ],
+    [
+     -1104,
+     -252
+    ],
+    [
+     95,
+     946
+    ],
+    [
+     -88,
+     749
+    ],
+    [
+     -1104,
+     -252
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     95,
+     946,
+     3,
+     0.008
+    ],
+    [
+     -1104,
+     -252,
+     2,
+     0.001
+    ],
+    [
+     95,
+     946,
+     2,
+     0.002
+    ],
+    [
+     -88,
+     749,
+     2,
+     0.005
+    ],
+    [
+     -1104,
+     -252,
+     3,
+     0.033
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00001",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 151,
+   "n_candidates": 5,
+   "n_sources": 5,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -1104,
+     -252
+    ],
+    [
+     95,
+     946
+    ],
+    [
+     95,
+     946
+    ],
+    [
+     -88,
+     749
+    ],
+    [
+     -1104,
+     -252
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1104,
+     -252,
+     2,
+     0.001
+    ],
+    [
+     95,
+     946,
+     3,
+     0.008
+    ],
+    [
+     95,
+     946,
+     2,
+     0.002
+    ],
+    [
+     -88,
+     749,
+     2,
+     0.005
+    ],
+    [
+     -1104,
+     -252,
+     3,
+     0.034
+    ]
+   ]
+  }
+ },
+ "d2_00002": {
+  "OLD": {
+   "sid": "d2_00002",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 60,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -344,
+     508
+    ],
+    [
+     -745,
+     97
+    ],
+    [
+     -1091,
+     -239
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -344,
+     508,
+     2,
+     0.003
+    ],
+    [
+     -745,
+     97,
+     2,
+     0.003
+    ],
+    [
+     -1091,
+     -239,
+     3,
+     0.037
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00002",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 49,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 1,
+    "max_du_max": 0.3,
+    "n_usable_stations": 2
+   },
+   "src_bands_khz": [
+    [
+     -344,
+     508
+    ],
+    [
+     -1091,
+     -239
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -344,
+     508,
+     2,
+     0.003
+    ],
+    [
+     -1091,
+     -239,
+     2,
+     0.023
+    ]
+   ]
+  }
+ },
+ "d2_00003": {
+  "OLD": {
+   "sid": "d2_00003",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 12,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     37,
+     890
+    ],
+    [
+     37,
+     890
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     37,
+     890,
+     3,
+     0.031
+    ],
+    [
+     37,
+     890,
+     3,
+     0.049
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00003",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 36,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -526,
+     325
+    ],
+    [
+     -526,
+     325
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -526,
+     325,
+     3,
+     0.029
+    ],
+    [
+     -526,
+     325,
+     3,
+     0.044
+    ]
+   ]
+  }
+ },
+ "d2_00004": {
+  "OLD": {
+   "sid": "d2_00004",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 364,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -706,
+     139
+    ],
+    [
+     -512,
+     335
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -706,
+     139,
+     3,
+     0.004
+    ],
+    [
+     -512,
+     335,
+     2,
+     0.02
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00004",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 372,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -412,
+     438
+    ],
+    [
+     -412,
+     438
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -412,
+     438,
+     3,
+     0.041
+    ],
+    [
+     -412,
+     438,
+     2,
+     0.018
+    ]
+   ]
+  }
+ },
+ "d2_00005": {
+  "OLD": {
+   "sid": "d2_00005",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 38,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -174,
+     669
+    ],
+    [
+     -174,
+     669
+    ],
+    [
+     -364,
+     487
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -174,
+     669,
+     2,
+     0.043
+    ],
+    [
+     -174,
+     669,
+     2,
+     0.034
+    ],
+    [
+     -364,
+     487,
+     2,
+     0.044
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00005",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 38,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -174,
+     669
+    ],
+    [
+     -364,
+     487
+    ],
+    [
+     -174,
+     669
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -174,
+     669,
+     2,
+     0.043
+    ],
+    [
+     -364,
+     487,
+     2,
+     0.044
+    ],
+    [
+     -174,
+     669,
+     2,
+     0.048
+    ]
+   ]
+  }
+ },
+ "d2_00006": {
+  "OLD": {
+   "sid": "d2_00006",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 92,
+   "n_candidates": 3,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1025,
+     -168
+    ],
+    [
+     250,
+     1103
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1025,
+     -168,
+     3,
+     0.009
+    ],
+    [
+     250,
+     1103,
+     3,
+     0.02
+    ],
+    [
+     -1025,
+     -168,
+     2,
+     0.045
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00006",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 92,
+   "n_candidates": 3,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1025,
+     -168
+    ],
+    [
+     250,
+     1103
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1025,
+     -168,
+     3,
+     0.009
+    ],
+    [
+     250,
+     1103,
+     3,
+     0.02
+    ],
+    [
+     -1025,
+     -168,
+     2,
+     0.045
+    ]
+   ]
+  }
+ },
+ "d2_00007": {
+  "OLD": {
+   "sid": "d2_00007",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 108,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -544,
+     308
+    ],
+    [
+     -424,
+     400
+    ],
+    [
+     -424,
+     400
+    ],
+    [
+     -544,
+     308
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -544,
+     308,
+     3,
+     0.002
+    ],
+    [
+     -424,
+     400,
+     3,
+     0.028
+    ],
+    [
+     -424,
+     400,
+     3,
+     0.043
+    ],
+    [
+     -544,
+     308,
+     3,
+     0.035
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00007",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 130,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -544,
+     308
+    ],
+    [
+     -110,
+     745
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -544,
+     308,
+     3,
+     0.025
+    ],
+    [
+     -110,
+     745,
+     3,
+     0.035
+    ]
+   ]
+  }
+ },
+ "d2_00008": {
+  "OLD": {
+   "sid": "d2_00008",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 180,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -691,
+     168
+    ],
+    [
+     -691,
+     168
+    ],
+    [
+     -754,
+     104
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -691,
+     168,
+     3,
+     0.001
+    ],
+    [
+     -691,
+     168,
+     3,
+     0.001
+    ],
+    [
+     -754,
+     104,
+     3,
+     0.001
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00008",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 142,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     63,
+     923
+    ],
+    [
+     63,
+     923
+    ],
+    [
+     63,
+     923
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     63,
+     923,
+     3,
+     0.001
+    ],
+    [
+     63,
+     923,
+     3,
+     0.001
+    ],
+    [
+     63,
+     923,
+     3,
+     0.001
+    ]
+   ]
+  }
+ },
+ "d2_00009": {
+  "OLD": {
+   "sid": "d2_00009",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 21,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -398,
+     448
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -398,
+     448,
+     3,
+     0.034
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00009",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 21,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -398,
+     448
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -398,
+     448,
+     3,
+     0.034
+    ]
+   ]
+  }
+ },
+ "d2_00010": {
+  "OLD": {
+   "sid": "d2_00010",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 147,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -916,
+     -66
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -916,
+     -66,
+     4,
+     0.016
+    ],
+    [
+     -142,
+     708,
+     2,
+     0.014
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00010",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 147,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -916,
+     -66
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -916,
+     -66,
+     4,
+     0.017
+    ],
+    [
+     -142,
+     708,
+     2,
+     0.014
+    ]
+   ]
+  }
+ },
+ "d2_00011": {
+  "OLD": {
+   "sid": "d2_00011",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 194,
+   "n_candidates": 4,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -874,
+     -31
+    ],
+    [
+     -874,
+     -31
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -874,
+     -31,
+     3,
+     0.002
+    ],
+    [
+     835,
+     841,
+     0,
+     1.0
+    ],
+    [
+     141,
+     983,
+     2,
+     0.021
+    ],
+    [
+     -874,
+     -31,
+     3,
+     0.019
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00011",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 185,
+   "n_candidates": 4,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -874,
+     -31
+    ],
+    [
+     -874,
+     -31
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -874,
+     -31,
+     3,
+     0.002
+    ],
+    [
+     141,
+     983,
+     2,
+     0.036
+    ],
+    [
+     835,
+     841,
+     0,
+     1.0
+    ],
+    [
+     -874,
+     -31,
+     3,
+     0.019
+    ]
+   ]
+  }
+ },
+ "d2_00012": {
+  "OLD": {
+   "sid": "d2_00012",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 19,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -887,
+     -31
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -887,
+     -31,
+     3,
+     0.007
+    ],
+    [
+     -887,
+     -31,
+     2,
+     0.021
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00012",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 13,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -887,
+     -31
+    ],
+    [
+     -887,
+     -31
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -887,
+     -31,
+     3,
+     0.002
+    ],
+    [
+     -887,
+     -31,
+     3,
+     0.007
+    ]
+   ]
+  }
+ },
+ "d2_00013": {
+  "OLD": {
+   "sid": "d2_00013",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 141,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -619,
+     232
+    ],
+    [
+     -279,
+     574
+    ],
+    [
+     -547,
+     -147
+    ],
+    [
+     -30,
+     -11
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -619,
+     232,
+     3,
+     0.012
+    ],
+    [
+     -279,
+     574,
+     3,
+     0.018
+    ],
+    [
+     -547,
+     -147,
+     3,
+     0.017
+    ],
+    [
+     -30,
+     -11,
+     4,
+     0.014
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00013",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 208,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -279,
+     574
+    ],
+    [
+     -547,
+     -147
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -279,
+     574,
+     3,
+     0.004
+    ],
+    [
+     -547,
+     -147,
+     3,
+     0.017
+    ]
+   ]
+  }
+ },
+ "d2_00014": {
+  "OLD": {
+   "sid": "d2_00014",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 16,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -149,
+     701
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -149,
+     701,
+     3,
+     0.025
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00014",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 16,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -149,
+     701
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -149,
+     701,
+     3,
+     0.025
+    ]
+   ]
+  }
+ },
+ "d2_00015": {
+  "OLD": {
+   "sid": "d2_00015",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 43,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     588,
+     749
+    ],
+    [
+     -640,
+     -633
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     588,
+     749,
+     3,
+     0.029
+    ],
+    [
+     -640,
+     -633,
+     3,
+     0.04
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00015",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 28,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     589,
+     748
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     589,
+     748,
+     3,
+     0.029
+    ]
+   ]
+  }
+ },
+ "d2_00016": {
+  "OLD": {
+   "sid": "d2_00016",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 136,
+   "n_candidates": 4,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     267,
+     1122
+    ],
+    [
+     -649,
+     183
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     267,
+     1122,
+     3,
+     0.048
+    ],
+    [
+     -649,
+     183,
+     3,
+     0.033
+    ],
+    [
+     -354,
+     501,
+     2,
+     0.032
+    ],
+    [
+     -649,
+     183,
+     2,
+     0.033
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00016",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 137,
+   "n_candidates": 4,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     220,
+     1073
+    ],
+    [
+     -649,
+     183
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     220,
+     1073,
+     3,
+     0.047
+    ],
+    [
+     -649,
+     183,
+     3,
+     0.033
+    ],
+    [
+     -354,
+     501,
+     2,
+     0.031
+    ],
+    [
+     -649,
+     183,
+     2,
+     0.033
+    ]
+   ]
+  }
+ },
+ "d2_00017": {
+  "OLD": {
+   "sid": "d2_00017",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 138,
+   "n_candidates": 5,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     478,
+     745
+    ],
+    [
+     -184,
+     662
+    ],
+    [
+     478,
+     745
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     478,
+     745,
+     3,
+     0.004
+    ],
+    [
+     -184,
+     662,
+     3,
+     0.005
+    ],
+    [
+     -899,
+     -50,
+     2,
+     0.011
+    ],
+    [
+     478,
+     745,
+     3,
+     0.038
+    ],
+    [
+     -899,
+     -50,
+     2,
+     0.046
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00017",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 107,
+   "n_candidates": 4,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     478,
+     745
+    ],
+    [
+     478,
+     745
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     478,
+     745,
+     3,
+     0.004
+    ],
+    [
+     -184,
+     662,
+     2,
+     0.01
+    ],
+    [
+     478,
+     745,
+     3,
+     0.038
+    ],
+    [
+     -184,
+     662,
+     2,
+     0.023
+    ]
+   ]
+  }
+ },
+ "d2_00018": {
+  "OLD": {
+   "sid": "d2_00018",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 77,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -683,
+     141
+    ],
+    [
+     -106,
+     150
+    ],
+    [
+     -544,
+     -86
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -683,
+     141,
+     4,
+     0.001
+    ],
+    [
+     -106,
+     150,
+     4,
+     0.001
+    ],
+    [
+     -544,
+     -86,
+     3,
+     0.029
+    ],
+    [
+     -368,
+     457,
+     1,
+     0.021
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00018",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 74,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -107,
+     150
+    ],
+    [
+     -544,
+     -86
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -107,
+     150,
+     4,
+     0.003
+    ],
+    [
+     -544,
+     -86,
+     3,
+     0.002
+    ]
+   ]
+  }
+ },
+ "d2_00019": {
+  "OLD": {
+   "sid": "d2_00019",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 9,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -44,
+     809
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -44,
+     809,
+     3,
+     0.031
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00019",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 12,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -44,
+     809
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -44,
+     809,
+     3,
+     0.032
+    ]
+   ]
+  }
+ },
+ "d2_00020": {
+  "OLD": {
+   "sid": "d2_00020",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 51,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -743,
+     112
+    ],
+    [
+     -743,
+     112
+    ],
+    [
+     -1098,
+     -246
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -743,
+     112,
+     3,
+     0.031
+    ],
+    [
+     -743,
+     112,
+     3,
+     0.033
+    ],
+    [
+     -1098,
+     -246,
+     3,
+     0.029
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00020",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 51,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -743,
+     112
+    ],
+    [
+     -743,
+     112
+    ],
+    [
+     -1098,
+     -246
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -743,
+     112,
+     3,
+     0.032
+    ],
+    [
+     -743,
+     112,
+     3,
+     0.034
+    ],
+    [
+     -1098,
+     -246,
+     3,
+     0.029
+    ]
+   ]
+  }
+ },
+ "d2_00021": {
+  "OLD": {
+   "sid": "d2_00021",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 54,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -310,
+     534
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -310,
+     534,
+     3,
+     0.012
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00021",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 54,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -310,
+     534
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -310,
+     534,
+     3,
+     0.012
+    ]
+   ]
+  }
+ },
+ "d2_00022": {
+  "OLD": {
+   "sid": "d2_00022",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 120,
+   "n_candidates": 5,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -289,
+     563
+    ],
+    [
+     -855,
+     -852
+    ],
+    [
+     -855,
+     -852
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -476,
+     378,
+     2,
+     0.004
+    ],
+    [
+     -289,
+     563,
+     3,
+     0.03
+    ],
+    [
+     -855,
+     -852,
+     3,
+     0.008
+    ],
+    [
+     -855,
+     -852,
+     3,
+     0.032
+    ],
+    [
+     -874,
+     -20,
+     2,
+     0.029
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00022",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 110,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -289,
+     563
+    ],
+    [
+     -855,
+     -852
+    ],
+    [
+     -855,
+     -852
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -289,
+     563,
+     3,
+     0.029
+    ],
+    [
+     -855,
+     -852,
+     3,
+     0.008
+    ],
+    [
+     -855,
+     -852,
+     3,
+     0.033
+    ]
+   ]
+  }
+ },
+ "d2_00023": {
+  "OLD": {
+   "sid": "d2_00023",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 187,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     14,
+     856
+    ],
+    [
+     -538,
+     306
+    ],
+    [
+     -538,
+     306
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     14,
+     856,
+     2,
+     0.011
+    ],
+    [
+     -538,
+     306,
+     3,
+     0.031
+    ],
+    [
+     -538,
+     306,
+     2,
+     0.043
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00023",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 187,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     14,
+     856
+    ],
+    [
+     -538,
+     306
+    ],
+    [
+     -538,
+     306
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     14,
+     856,
+     2,
+     0.003
+    ],
+    [
+     -538,
+     306,
+     3,
+     0.032
+    ],
+    [
+     -538,
+     306,
+     2,
+     0.04
+    ]
+   ]
+  }
+ },
+ "d2_00024": {
+  "OLD": {
+   "sid": "d2_00024",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 39,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -383,
+     425
+    ],
+    [
+     -130,
+     714
+    ],
+    [
+     -383,
+     425
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -383,
+     425,
+     3,
+     0.013
+    ],
+    [
+     -130,
+     714,
+     2,
+     0.024
+    ],
+    [
+     -383,
+     425,
+     2,
+     0.032
+    ],
+    [
+     -481,
+     371,
+     1,
+     0.01
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00024",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 18,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -394,
+     436
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -394,
+     436,
+     2,
+     0.018
+    ]
+   ]
+  }
+ },
+ "d2_00025": {
+  "OLD": {
+   "sid": "d2_00025",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 35,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -13,
+     829
+    ],
+    [
+     -733,
+     107
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -13,
+     829,
+     3,
+     0.009
+    ],
+    [
+     -733,
+     107,
+     3,
+     0.047
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00025",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 35,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -13,
+     829
+    ],
+    [
+     -733,
+     107
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -13,
+     829,
+     3,
+     0.009
+    ],
+    [
+     -733,
+     107,
+     3,
+     0.047
+    ]
+   ]
+  }
+ },
+ "d2_00026": {
+  "OLD": {
+   "sid": "d2_00026",
+   "tag": "OLD",
+   "gt_n": 1,
+   "n_intersections": 93,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -823,
+     31
+    ],
+    [
+     -823,
+     31
+    ],
+    [
+     279,
+     1133
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -823,
+     31,
+     3,
+     0.005
+    ],
+    [
+     -823,
+     31,
+     2,
+     0.016
+    ],
+    [
+     279,
+     1133,
+     2,
+     0.032
+    ],
+    [
+     -1039,
+     -189,
+     1,
+     0.028
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00026",
+   "tag": "NEW",
+   "gt_n": 1,
+   "n_intersections": 98,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -823,
+     31
+    ],
+    [
+     -823,
+     31
+    ],
+    [
+     279,
+     1133
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -823,
+     31,
+     3,
+     0.012
+    ],
+    [
+     -823,
+     31,
+     2,
+     0.016
+    ],
+    [
+     279,
+     1133,
+     2,
+     0.032
+    ],
+    [
+     -1039,
+     -189,
+     1,
+     0.026
+    ]
+   ]
+  }
+ },
+ "d2_00027": {
+  "OLD": {
+   "sid": "d2_00027",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 139,
+   "n_candidates": 5,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -122,
+     736
+    ],
+    [
+     -391,
+     459
+    ],
+    [
+     316,
+     1174
+    ],
+    [
+     -122,
+     736
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -122,
+     736,
+     3,
+     0.029
+    ],
+    [
+     -391,
+     459,
+     1,
+     0.005
+    ],
+    [
+     -391,
+     459,
+     3,
+     0.041
+    ],
+    [
+     316,
+     1174,
+     3,
+     0.033
+    ],
+    [
+     -122,
+     736,
+     2,
+     0.03
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00027",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 155,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -122,
+     736
+    ],
+    [
+     -122,
+     736
+    ],
+    [
+     -391,
+     459
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -122,
+     736,
+     3,
+     0.036
+    ],
+    [
+     -122,
+     736,
+     2,
+     0.009
+    ],
+    [
+     -391,
+     459,
+     3,
+     0.046
+    ]
+   ]
+  }
+ },
+ "d2_00028": {
+  "OLD": {
+   "sid": "d2_00028",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 111,
+   "n_candidates": 6,
+   "n_sources": 6,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -84,
+     771
+    ],
+    [
+     -376,
+     477
+    ],
+    [
+     -767,
+     86
+    ],
+    [
+     -767,
+     86
+    ],
+    [
+     -583,
+     265
+    ],
+    [
+     -84,
+     771
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -84,
+     771,
+     2,
+     0.025
+    ],
+    [
+     -376,
+     477,
+     2,
+     0.032
+    ],
+    [
+     -767,
+     86,
+     2,
+     0.044
+    ],
+    [
+     -767,
+     86,
+     2,
+     0.031
+    ],
+    [
+     -583,
+     265,
+     2,
+     0.047
+    ],
+    [
+     -84,
+     771,
+     2,
+     0.028
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00028",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 126,
+   "n_candidates": 6,
+   "n_sources": 5,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -376,
+     477
+    ],
+    [
+     -767,
+     86
+    ],
+    [
+     -767,
+     86
+    ],
+    [
+     -767,
+     86
+    ],
+    [
+     -583,
+     265
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -376,
+     477,
+     2,
+     0.013
+    ],
+    [
+     -583,
+     265,
+     1,
+     0.0
+    ],
+    [
+     -767,
+     86,
+     2,
+     0.029
+    ],
+    [
+     -767,
+     86,
+     2,
+     0.035
+    ],
+    [
+     -767,
+     86,
+     2,
+     0.022
+    ],
+    [
+     -583,
+     265,
+     2,
+     0.046
+    ]
+   ]
+  }
+ },
+ "d2_00029": {
+  "OLD": {
+   "sid": "d2_00029",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 46,
+   "n_candidates": 3,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     349,
+     1203
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     349,
+     1203,
+     3,
+     0.006
+    ],
+    [
+     -6,
+     848,
+     2,
+     0.01
+    ],
+    [
+     -796,
+     56,
+     2,
+     0.048
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00029",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 39,
+   "n_candidates": 3,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     349,
+     1203
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     349,
+     1203,
+     3,
+     0.006
+    ],
+    [
+     -6,
+     848,
+     2,
+     0.005
+    ],
+    [
+     -796,
+     56,
+     2,
+     0.048
+    ]
+   ]
+  }
+ },
+ "d2_00030": {
+  "OLD": {
+   "sid": "d2_00030",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 36,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -900,
+     -48
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -900,
+     -48,
+     1,
+     0.012
+    ],
+    [
+     -900,
+     -48,
+     2,
+     0.011
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00030",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 41,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -900,
+     -48
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -464,
+     387,
+     1,
+     0.02
+    ],
+    [
+     -900,
+     -48,
+     2,
+     0.011
+    ]
+   ]
+  }
+ },
+ "d2_00031": {
+  "OLD": {
+   "sid": "d2_00031",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 107,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -250,
+     579
+    ],
+    [
+     -619,
+     204
+    ],
+    [
+     -436,
+     390
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -250,
+     579,
+     4,
+     0.002
+    ],
+    [
+     -619,
+     204,
+     4,
+     0.002
+    ],
+    [
+     -436,
+     390,
+     4,
+     0.035
+    ],
+    [
+     -250,
+     579,
+     2,
+     0.027
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00031",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 77,
+   "n_candidates": 4,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -150,
+     680
+    ],
+    [
+     -619,
+     204
+    ],
+    [
+     -250,
+     579
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -150,
+     680,
+     4,
+     0.001
+    ],
+    [
+     -619,
+     204,
+     4,
+     0.002
+    ],
+    [
+     -250,
+     579,
+     4,
+     0.034
+    ],
+    [
+     -250,
+     579,
+     2,
+     0.025
+    ]
+   ]
+  }
+ },
+ "d2_00032": {
+  "OLD": {
+   "sid": "d2_00032",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 112,
+   "n_candidates": 3,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1153,
+     -301
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1153,
+     -301,
+     4,
+     0.002
+    ],
+    [
+     -154,
+     706,
+     1,
+     0.003
+    ],
+    [
+     -333,
+     520,
+     1,
+     0.032
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00032",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 105,
+   "n_candidates": 3,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -615,
+     235
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -615,
+     235,
+     4,
+     0.005
+    ],
+    [
+     -154,
+     706,
+     1,
+     0.003
+    ],
+    [
+     -333,
+     520,
+     1,
+     0.032
+    ]
+   ]
+  }
+ },
+ "d2_00033": {
+  "OLD": {
+   "sid": "d2_00033",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 34,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 1,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -1764,
+     1764
+    ],
+    [
+     -1764,
+     1764
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1764,
+     1764,
+     3,
+     0.006
+    ],
+    [
+     -1764,
+     1764,
+     3,
+     0.016
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00033",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 34,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 1,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -1764,
+     1764
+    ],
+    [
+     -1764,
+     1764
+    ],
+    [
+     -1764,
+     1764
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1764,
+     1764,
+     3,
+     0.006
+    ],
+    [
+     -1764,
+     1764,
+     3,
+     0.022
+    ],
+    [
+     -1764,
+     1764,
+     2,
+     0.026
+    ]
+   ]
+  }
+ },
+ "d2_00034": {
+  "OLD": {
+   "sid": "d2_00034",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 75,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -402,
+     446
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -402,
+     446,
+     3,
+     0.006
+    ],
+    [
+     -193,
+     660,
+     2,
+     0.041
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00034",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 74,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -193,
+     660
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -767,
+     78,
+     2,
+     0.002
+    ],
+    [
+     -193,
+     660,
+     3,
+     0.004
+    ]
+   ]
+  }
+ },
+ "d2_00035": {
+  "OLD": {
+   "sid": "d2_00035",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 84,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -192,
+     652
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     843,
+     847,
+     0,
+     1.0
+    ],
+    [
+     -192,
+     652,
+     3,
+     0.05
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00035",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 76,
+   "n_candidates": 2,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -192,
+     652
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     843,
+     847,
+     0,
+     1.0
+    ],
+    [
+     -192,
+     652,
+     3,
+     0.049
+    ]
+   ]
+  }
+ },
+ "d2_00036": {
+  "OLD": {
+   "sid": "d2_00036",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 120,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1154,
+     -292
+    ],
+    [
+     -402,
+     447
+    ],
+    [
+     -402,
+     447
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1154,
+     -292,
+     4,
+     0.017
+    ],
+    [
+     -402,
+     447,
+     3,
+     0.001
+    ],
+    [
+     -402,
+     447,
+     3,
+     0.035
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00036",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 114,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1154,
+     -292
+    ],
+    [
+     -720,
+     105
+    ],
+    [
+     -720,
+     105
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1154,
+     -292,
+     4,
+     0.017
+    ],
+    [
+     -720,
+     105,
+     3,
+     0.001
+    ],
+    [
+     -720,
+     105,
+     3,
+     0.035
+    ]
+   ]
+  }
+ },
+ "d2_00037": {
+  "OLD": {
+   "sid": "d2_00037",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 47,
+   "n_candidates": 3,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -650,
+     199
+    ],
+    [
+     -650,
+     199
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1181,
+     -332,
+     2,
+     0.007
+    ],
+    [
+     -650,
+     199,
+     3,
+     0.014
+    ],
+    [
+     -650,
+     199,
+     3,
+     0.022
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00037",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 68,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1181,
+     -332
+    ],
+    [
+     -650,
+     199
+    ],
+    [
+     112,
+     961
+    ],
+    [
+     -1181,
+     -332
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1181,
+     -332,
+     3,
+     0.009
+    ],
+    [
+     -650,
+     199,
+     3,
+     0.013
+    ],
+    [
+     112,
+     961,
+     3,
+     0.023
+    ],
+    [
+     -1181,
+     -332,
+     3,
+     0.023
+    ]
+   ]
+  }
+ },
+ "d2_00038": {
+  "OLD": {
+   "sid": "d2_00038",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 89,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -791,
+     49
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -791,
+     49,
+     4,
+     0.005
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00038",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 64,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     384,
+     468
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     384,
+     468,
+     3,
+     0.011
+    ]
+   ]
+  }
+ },
+ "d2_00039": {
+  "OLD": {
+   "sid": "d2_00039",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 93,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -900,
+     -50
+    ],
+    [
+     307,
+     1163
+    ],
+    [
+     -1136,
+     -284
+    ],
+    [
+     307,
+     1163
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -900,
+     -50,
+     3,
+     0.002
+    ],
+    [
+     307,
+     1163,
+     3,
+     0.018
+    ],
+    [
+     -1136,
+     -284,
+     3,
+     0.046
+    ],
+    [
+     307,
+     1163,
+     3,
+     0.035
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00039",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 97,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -900,
+     -50
+    ],
+    [
+     307,
+     1163
+    ],
+    [
+     -900,
+     -50
+    ],
+    [
+     307,
+     1163
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -900,
+     -50,
+     3,
+     0.003
+    ],
+    [
+     307,
+     1163,
+     3,
+     0.018
+    ],
+    [
+     -900,
+     -50,
+     3,
+     0.044
+    ],
+    [
+     307,
+     1163,
+     3,
+     0.034
+    ]
+   ]
+  }
+ },
+ "d2_00040": {
+  "OLD": {
+   "sid": "d2_00040",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 23,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -196,
+     642
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -196,
+     642,
+     3,
+     0.005
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00040",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 23,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -196,
+     642
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -196,
+     642,
+     3,
+     0.005
+    ]
+   ]
+  }
+ },
+ "d2_00041": {
+  "OLD": {
+   "sid": "d2_00041",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 107,
+   "n_candidates": 5,
+   "n_sources": 5,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     229,
+     1086
+    ],
+    [
+     -902,
+     -41
+    ],
+    [
+     -1148,
+     -295
+    ],
+    [
+     229,
+     1086
+    ],
+    [
+     -1148,
+     -295
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     229,
+     1086,
+     4,
+     0.003
+    ],
+    [
+     -902,
+     -41,
+     3,
+     0.008
+    ],
+    [
+     -1148,
+     -295,
+     3,
+     0.032
+    ],
+    [
+     229,
+     1086,
+     3,
+     0.028
+    ],
+    [
+     -1148,
+     -295,
+     3,
+     0.038
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00041",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 103,
+   "n_candidates": 4,
+   "n_sources": 4,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -1148,
+     -295
+    ],
+    [
+     -900,
+     -40
+    ],
+    [
+     -900,
+     -40
+    ],
+    [
+     230,
+     1086
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -1148,
+     -295,
+     4,
+     0.004
+    ],
+    [
+     -900,
+     -40,
+     3,
+     0.016
+    ],
+    [
+     -900,
+     -40,
+     3,
+     0.022
+    ],
+    [
+     230,
+     1086,
+     3,
+     0.028
+    ]
+   ]
+  }
+ },
+ "d2_00042": {
+  "OLD": {
+   "sid": "d2_00042",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 169,
+   "n_candidates": 3,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -883,
+     -31
+    ],
+    [
+     -883,
+     -31
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -83,
+     772,
+     2,
+     0.001
+    ],
+    [
+     -883,
+     -31,
+     3,
+     0.015
+    ],
+    [
+     -883,
+     -31,
+     3,
+     0.033
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00042",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 121,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -484,
+     359
+    ],
+    [
+     271,
+     1121
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -484,
+     359,
+     3,
+     0.019
+    ],
+    [
+     271,
+     1121,
+     3,
+     0.037
+    ]
+   ]
+  }
+ },
+ "d2_00043": {
+  "OLD": {
+   "sid": "d2_00043",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 107,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -855,
+     -853
+    ],
+    [
+     -184,
+     666
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -855,
+     -853,
+     3,
+     0.016
+    ],
+    [
+     -184,
+     666,
+     3,
+     0.002
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00043",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 112,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -841,
+     15
+    ],
+    [
+     -855,
+     -853
+    ],
+    [
+     -855,
+     -853
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -841,
+     15,
+     2,
+     0.001
+    ],
+    [
+     -855,
+     -853,
+     2,
+     0.037
+    ],
+    [
+     -855,
+     -853,
+     2,
+     0.022
+    ]
+   ]
+  }
+ },
+ "d2_00044": {
+  "OLD": {
+   "sid": "d2_00044",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 90,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -619,
+     230
+    ],
+    [
+     -619,
+     230
+    ],
+    [
+     -260,
+     594
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -619,
+     230,
+     3,
+     0.013
+    ],
+    [
+     -619,
+     230,
+     3,
+     0.032
+    ],
+    [
+     -260,
+     594,
+     3,
+     0.008
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00044",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 91,
+   "n_candidates": 5,
+   "n_sources": 5,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -866,
+     -13
+    ],
+    [
+     -260,
+     594
+    ],
+    [
+     -260,
+     594
+    ],
+    [
+     -866,
+     -13
+    ],
+    [
+     -260,
+     594
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -866,
+     -13,
+     3,
+     0.001
+    ],
+    [
+     -260,
+     594,
+     3,
+     0.013
+    ],
+    [
+     -260,
+     594,
+     3,
+     0.032
+    ],
+    [
+     -866,
+     -13,
+     2,
+     0.029
+    ],
+    [
+     -260,
+     594,
+     3,
+     0.04
+    ]
+   ]
+  }
+ },
+ "d2_00045": {
+  "OLD": {
+   "sid": "d2_00045",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 48,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -794,
+     46
+    ],
+    [
+     -794,
+     46
+    ],
+    [
+     -656,
+     187
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -794,
+     46,
+     3,
+     0.016
+    ],
+    [
+     -794,
+     46,
+     2,
+     0.031
+    ],
+    [
+     -656,
+     187,
+     2,
+     0.041
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00045",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 49,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     -794,
+     46
+    ],
+    [
+     -656,
+     187
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -794,
+     46,
+     3,
+     0.036
+    ],
+    [
+     -656,
+     187,
+     2,
+     0.043
+    ]
+   ]
+  }
+ },
+ "d2_00046": {
+  "OLD": {
+   "sid": "d2_00046",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 248,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -992,
+     -140
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -992,
+     -140,
+     4,
+     0.032
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00046",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 251,
+   "n_candidates": 1,
+   "n_sources": 1,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     151,
+     997
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     151,
+     997,
+     4,
+     0.025
+    ]
+   ]
+  }
+ },
+ "d2_00047": {
+  "OLD": {
+   "sid": "d2_00047",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 113,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     108,
+     962
+    ],
+    [
+     221,
+     1074
+    ],
+    [
+     -430,
+     428
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     108,
+     962,
+     3,
+     0.017
+    ],
+    [
+     221,
+     1074,
+     3,
+     0.025
+    ],
+    [
+     -430,
+     428,
+     3,
+     0.039
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00047",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 93,
+   "n_candidates": 3,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     108,
+     962
+    ],
+    [
+     221,
+     1074
+    ],
+    [
+     -430,
+     428
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     108,
+     962,
+     3,
+     0.025
+    ],
+    [
+     221,
+     1074,
+     3,
+     0.025
+    ],
+    [
+     -430,
+     428,
+     3,
+     0.038
+    ]
+   ]
+  }
+ },
+ "d2_00048": {
+  "OLD": {
+   "sid": "d2_00048",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 63,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     223,
+     1074
+    ],
+    [
+     -900,
+     -48
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     223,
+     1074,
+     3,
+     0.027
+    ],
+    [
+     -900,
+     -48,
+     2,
+     0.023
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00048",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 61,
+   "n_candidates": 2,
+   "n_sources": 2,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 2,
+    "max_du_max": 0.3,
+    "n_usable_stations": 3
+   },
+   "src_bands_khz": [
+    [
+     223,
+     1074
+    ],
+    [
+     297,
+     356
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     223,
+     1074,
+     3,
+     0.027
+    ],
+    [
+     297,
+     356,
+     2,
+     0.02
+    ]
+   ]
+  }
+ },
+ "d2_00049": {
+  "OLD": {
+   "sid": "d2_00049",
+   "tag": "OLD",
+   "gt_n": 2,
+   "n_intersections": 43,
+   "n_candidates": 5,
+   "n_sources": 3,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [
+    [
+     -928,
+     -74
+    ],
+    [
+     -928,
+     -74
+    ],
+    [
+     46,
+     892
+    ]
+   ],
+   "cand_bands_khz": [
+    [
+     -458,
+     388,
+     2,
+     0.005
+    ],
+    [
+     -458,
+     388,
+     2,
+     0.004
+    ],
+    [
+     -928,
+     -74,
+     3,
+     0.035
+    ],
+    [
+     -928,
+     -74,
+     3,
+     0.04
+    ],
+    [
+     46,
+     892,
+     3,
+     0.035
+    ]
+   ]
+  },
+  "NEW": {
+   "sid": "d2_00049",
+   "tag": "NEW",
+   "gt_n": 2,
+   "n_intersections": 32,
+   "n_candidates": 2,
+   "n_sources": 0,
+   "n_bands": 4,
+   "support": {
+    "n_explained_min": 3,
+    "max_du_max": 0.3,
+    "n_usable_stations": 4
+   },
+   "src_bands_khz": [],
+   "cand_bands_khz": [
+    [
+     -458,
+     388,
+     2,
+     0.005
+    ],
+    [
+     -325,
+     521,
+     2,
+     0.004
+    ]
+   ]
+  }
+ }
+}
