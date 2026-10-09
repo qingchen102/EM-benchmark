@@ -232,6 +232,14 @@ Intent classification (answer for EACH interferer):
   link / radar / RC link)
 - is_spoof: true ONLY for a GNSS spoofing emitter (legitimate GNSS-like structure
   with wrong parameters); otherwise false
+- Cooperative-link event log: the observation may list interference events reported
+  by the cooperative ground station's own link monitor. Each entry is public evidence
+  that a radiator is degrading the cooperative link, and its mechanism (jam / spoof /
+  ...) is direct behavioural evidence for the intent axis — a reported jamming or
+  spoofing event means a deliberate emitter is present in the scene. The log is a
+  PARTIAL view (it only sees radiators that reach the cooperative link), so NEVER use
+  it as the source census: still measure the residual/spatial source count. Do not
+  copy event ids into the answer; answer with the interferers you measured.
 
 Output ONLY valid JSON with schema:
 {"num_interferers": <0..3>,
@@ -346,6 +354,20 @@ def _format_observation_capture(obs: dict) -> str:
         "Conventions: freq_offset_hz in Hz relative to receiver center; doa_deg in "
         "world azimuth (atan2(y,x)) degrees; position_m in world meters [x, y].",
     ]
+    events = obs.get("events") or []
+    if events:
+        lines.append(
+            f"Cooperative-link event log: {len(events)} event(s) reported by the "
+            "cooperative ground station's own link monitor (public evidence):")
+        for e in events:
+            bits = [f"{e.get('event_id')}: source {e.get('source_id')}"]
+            if e.get("mechanism"):
+                bits.append(f"mechanism {e['mechanism']}")
+            if e.get("impact_class"):
+                bits.append(f"impact {e['impact_class']}")
+            lines.append("  " + ", ".join(bits))
+        if obs.get("events_note"):
+            lines.append("  note: " + str(obs["events_note"]))
     return "\n".join(lines)
 
 
@@ -457,6 +479,8 @@ def run(dataset_root: Path, slevel: str, answers_dir: Path, agent,
                                 or sid.split("_")[0].upper()),
                  "target_emitter": tgt_preset,
                  "target_bw_hz": tgt_bw_norm * fs, "target_bw_normalized": tgt_bw_norm,
+                 "events": (obs_json.get("interference_events") or []),
+                 "events_note": obs_json.get("interference_events_note"),
                  "aoi_center": aoi, "fs": fs, "fc": fc, "num_samples": num_samples}
 
         t0 = time.time()

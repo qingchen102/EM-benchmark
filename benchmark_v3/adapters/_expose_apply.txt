@@ -1,0 +1,24 @@
+﻿== dataset_d1 ==  mechanism=full
+  样本 50  含事件 0  公开事件 0 条  改写文件 50  未变 0
+  cooperative_sources 公开先验已恢复 50 个样本
+  IQ 完整性自证：检查 50  未变 50
+  信息隔离/字段自查：通过（无黑名单命中、无屏蔽字段、无越界字段）
+== dataset_d2 ==  mechanism=full
+  样本 50  含事件 0  公开事件 0 条  改写文件 50  未变 0
+  cooperative_sources 公开先验已恢复 50 个样本
+  IQ 完整性自证：检查 50  未变 50
+  信息隔离/字段自查：通过（无黑名单命中、无屏蔽字段、无越界字段）
+== dataset_d3 ==  mechanism=full
+  样本 50  含事件 48  公开事件 48 条  改写文件 50  未变 0
+  cooperative_sources 公开先验已恢复 50 个样本
+  IQ 完整性自证：检查 50  未变 50
+  机理分布 {'jam': 48}
+  公开字段组合 {'event_id,impact_class,mechanism,source_id': 48}
+  信息隔离/字段自查：通过（无黑名单命中、无屏蔽字段、无越界字段）
+== dataset_d4 ==  mechanism=full
+  样本 50  含事件 50  公开事件 100 条  改写文件 50  未变 0
+  cooperative_sources 公开先验已恢复 50 个样本
+  IQ 完整性自证：检查 50  未变 50
+  机理分布 {'jam': 50, 'spoof': 50}
+  公开字段组合 {'event_id,impact_class,mechanism,source_id': 100}
+  信息隔离/字段自查：通过（无黑名单命中、无屏蔽字段、无越界字段）

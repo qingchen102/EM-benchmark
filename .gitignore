@@ -15,6 +15,7 @@ benchmark_v3/_regen_noise/
 benchmark_v3/_old_noise_profile_20261010/
 benchmark_v3/_smoke_menu_d2/
 benchmark_v3/adapters/_probe_peaks_cache/
+benchmark_v3/_smoke_regen_wiring/
 benchmark_v3/adapters/_verify_cache/
 # 损失分解变体（2026-10-08/09 夜，零 API 消融：单旋钮重放 + 官方 gate；单档数据 GB 级故整目录排除）
 benchmark_v3/_ab_d2/

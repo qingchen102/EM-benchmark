@@ -1,0 +1,406 @@
+﻿preset 带宽受理表（accepts_bw, meas）——只列目标预设：
+
+tier sample     preset                comp_bw  pub_nom         fs  norm_pub norm_priv   diff
+d1   d1_00000   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00001   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00002   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00003   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00004   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00005   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00006   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00007   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00008   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00009   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00010   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00011   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00012   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00013   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00014   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00015   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00016   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00017   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00018   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00019   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00020   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00021   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00022   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00023   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00024   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00025   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00026   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00027   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00028   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00029   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00030   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00031   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00032   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00033   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00034   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00035   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00036   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00037   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00038   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00039   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00040   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00041   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00042   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00043   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00044   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00045   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00046   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d1   d1_00047   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00048   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d1   d1_00049   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00000   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00001   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00002   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00003   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00004   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00005   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00006   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00007   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00008   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00009   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00010   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00011   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00012   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00013   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00014   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00015   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00016   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00017   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00018   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00019   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00020   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00021   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00022   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00023   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00024   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00025   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00026   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00027   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00028   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00029   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00030   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00031   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00032   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00033   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00034   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00035   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00036   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00037   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00038   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00039   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00040   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00041   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00042   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00043   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00044   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d2   d2_00045   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00046   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00047   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00048   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d2   d2_00049   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00000   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00001   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00002   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00003   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00004   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00005   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00006   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00007   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00008   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00009   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00010   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00011   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00012   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00013   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00014   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00015   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00016   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00017   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00018   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00019   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00020   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00021   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00022   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00023   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00024   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00025   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00026   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00027   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00028   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00029   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00030   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00031   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00032   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00033   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00034   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00035   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00036   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00037   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00038   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00039   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00040   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00041   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00042   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00043   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00044   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00045   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00046   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00047   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d3   d3_00048   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d3   d3_00049   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00000   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00001   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00002   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00003   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00004   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00005   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00006   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00007   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00008   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00009   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00010   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00011   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00012   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00013   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00014   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00015   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00016   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00017   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00018   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00019   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00020   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00021   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00022   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00023   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00024   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00025   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00026   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00027   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00028   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00029   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00030   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00031   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00032   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00033   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00034   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00035   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00036   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00037   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00038   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00039   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00040   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00041   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00042   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00043   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00044   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00045   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00046   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00047   UAV_video_OFDM      1000000.0     None    4000000    0.2500    0.2500 0.0e+00
+d4   d4_00048   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+d4   d4_00049   LTE_QPSK            1000000.0     None    4000000    0.3520    0.3520 0.0e+00
+
+不等价样本数 = 0 / 200
+bw_table 中目标预设条目：
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  UAV_video_OFDM     -> (True, 0.602)
+  LTE_QPSK           -> (False, 0.352)
+  LTE_QPSK           -> (False, 0.352)

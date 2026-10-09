@@ -553,7 +553,13 @@ def main() -> int:
 
     if out and not args.measure_only and per_sample_index:
         patch_index(src, out, per_sample_index)
-
+        # 平台 replay 会整体重写 public/observations.json（把公开先验冲空），所以重放后
+        # 必须重做公开层：受害者层投影 + cooperative_sources 公开先验 + run_summary 摘要。
+        # 机理粒度写死 full；之后可用 `expose_evidence.py --mechanism coarse|none` 原地改。
+        import expose_evidence as ee
+        est = ee.process(out, "full", False, True)
+        print(f"[public] 受害者层/公开先验：事件 {est['events']} 条  恢复 {est['coop_restored']} 样本"
+              f"  摘要同步 {est['hashes_refreshed']}  隔离问题 {len(est['problems'])} 条")
     print(f"\n[done] {len(results)} 样本  总耗时 {time.time() - t_all:.1f}s")
     if args.report:
         Path(args.report).write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")

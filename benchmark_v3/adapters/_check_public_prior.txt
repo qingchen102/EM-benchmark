@@ -1,0 +1,15 @@
+﻿tier   样本   格式OK   先验OK     带宽等价     带事件键    事件数  链路遥测站
+d1     50     50     50       50        0      0  ['station_a', 'station_b', 'station_c', 'station_d']
+d2     50     50     50       50        0      0  ['station_a', 'station_b', 'station_c', 'station_d']
+d3     50     50     50       50       48     48  ['station_a', 'station_b', 'station_c', 'station_d']
+d4     50     50     50       50       50    100  ['station_a', 'station_b', 'station_c', 'station_d']
+
+--- d4_00000 的 Agent 观测文本（真实格式化函数，节选末段）---
+Target prior: cooperative UAV link, preset None, nominal OBW99 = 1000 kHz (0.25 normalized), near 0 Hz, benign
+Conventions: freq_offset_hz in Hz relative to receiver center; doa_deg in world azimuth (atan2(y,x)) degrees; position_m in world meters [x, y].
+Cooperative-link event log: 2 event(s) reported by the cooperative ground station's own link monitor (public evidence):
+  E1: source interferer_1, mechanism jam, impact severe
+  E2: source interferer_2, mechanism spoof, impact severe
+  note: cooperative-link event log: each entry is an interference event reported by the cooperative ground station's own link-quality monitor (public evidence). An entry proves that a radiator is degrading the cooperative link, and its mechanism is direct behavioural evidence. This log is a PARTIAL view: it only sees radiators that reach the cooperative link, so it is NOT a census of the scene. Aiming and target-identity fields are withheld.
+
+问题 0 条

@@ -196,6 +196,16 @@ python smoke_capture_tools.py ../dataset_dX dX_00000   # 考生侧仪器冒烟�
 python run_capture_agent.py ../dataset_dX --slevel S0 --resume   # 答案写 answers_S0/，跑完自动出矩阵
 ```
 
+### 公开层：受害者层证据 + 合作链路先验（2026-10-10 落地）
+
+`capture/public/observations.json` 是 Agent 除 IQ 外唯一可见的“题面”。此前它只含 `receivers/tasks/cooperative_sources`，而 `cooperative_sources` 在**平台 replay 时被整体冲空**（`cityrf/runner.py:102-104` 用 `export.write_json` 重写整个文件）——四档 200 个样本的公开先验全部丢失，`run_capture_agent.py` 因此一直走 `private/scenario.json` 的回退分支。现由 `adapters/expose_evidence.py` 在**任何 replay 之后**统一投影两层：
+
+1. **受害者层（规范 §7）**：`interference_events` 公开 `event_id / source_id / mechanism / impact_class`，**屏蔽** `aimed / victim_id / power_at_victim_dbm / env_over_noise_db`（GT 字段，供“从行为推断意图”）。机理粒度由 `--mechanism full|coarse|none` 切换：`full` 直出 `jam|spoof`（D4 会因此暴露“是否欺骗”），`coarse` 统一写 `interference`，`none` 不写。字段定义集中在 `adapters/evidence_layer.py`（单点可审计 + 隔离黑名单自查）。
+2. **合作链路先验**：`cooperative_sources = [{preset, nominal_bandwidth_hz, link_quality_per_station, note}]`，由 `gen_dataset.py:cooperative_sources_prior()` 生成、`expose_evidence.py --coop`（默认开）恢复。
+
+**口径中性已验证**：`_probe_prior.py` 对 200 个样本证明 public/private 两路带宽先验逐位相同（`不等价 0/200`）——恢复先验只增加信息，不改 `_target_bw_normalized`，不动 IQ 与答案键。**摘要必须同步**：`run_summary.json` 摘了 run root 下每个文件，改写 public 后必须刷新（`_refresh_summary_hash` 幂等自愈，与内容改写解耦），否则数据集自带对账失败——`_check_summary_hashes.py` 实测修前 3676 项中失效 **200**（全是 `public/observations.json`）、修后 **0**。`regen_noise.py` 主流程尾部已接上该投影，重放后自动完成公开层（`_smoke_regen_wiring` 实测：与已发布数据的 `observations.json` / `iq_station_a.npy` 逐字节相同，仅 `solve_seconds/total_seconds` 计时字段不同）。
+
+实测（`_expose_apply.txt` / `_check_public_prior.txt`）：D1/D2 **无** `interference_events` 键、D3 **48/50** 样本共 48 条（全 jam）、D4 **50/50** 样本共 100 条（50 jam + 50 spoof）；**IQ 200/200 逐字节未变**、幂等复跑改写 0。
 ### 多站分离工具链与 Agent 基线（2026-10-03 更新）
 
 **工具链（capture_tools.py，12 件）**：频谱/源数/DOA/多站定位/时域/调制特征/辐射体手册/目标剥离（参考直减，整通带）/**多站空间聚类**（逐带 RANSAC 锥面交会 → 候选打分 → band-aware u 空间 NMS；candidates/sources 双栏，K=len(sources) 才是源数证据）/**波束提取**（per-candidate top-K=2 提取集，落盘即 CNN-ready）/**时频脊线图**（窄子带滑窗 MUSIC，特征值显著性）/**体制分类**（CNN 19 类直出答案字段）。已证伪并关闭的实验（双字段门限、峰独占、duo 交会、频偏精测、位置精化）记录于 `dataset_d2/BASELINE.json` 的 closed_lines。
@@ -227,7 +237,8 @@ python run_capture_agent.py ../dataset_dX --slevel S0 --resume   # 答案写 ans
 - [x] **全档现状审计 + 合格性判定**（2026-10-08，见 `docs/BENCHMARK_STATUS_2026-10-08.md`）：结构/题目/多维度合格，但**当时**不可用于给模型打分（仪器假簇 0.62 > 召回 0.56；D2/D1 多站数字过期；D3/D4 零 agent 数据）
 - [x] **数据侧欠账还清 + D2 仪器线收口**（2026-10-09，见 `docs/BENCHMARK_STATUS_2026-10-09.md`）：D3/D4 补 QA 三约束重生成并换数据（≥3 站 17.6%/16.1% → **91.3%/96.0%**）、四档几何分离（d3 vs d4 目标位置重合 0/50）、D2 envelope 文案修正；gate 五指标定标，载频/方向分辨带两条路线证伪后 `capture_tools.py` 回退。**合格性更新**：D1 已可打分，D2 有天花板问题（oracle 配对下体制 0.393/频偏 0.191），D3/D4 缺 agent 基线
 - [x] **噪声按站分档落地（配方菜单）**（2026-10-08/09 夜）：热噪永开 + colored/impulse/correlated **按站**确定性抽签（D1 纯热噪 / D2 6:4 / D3 4:3:3 / D4 2:2:3:3），frozen-channel 重放落地（平台源码零改动、不重跑 RT、D1 重放逐位恒等）；平台噪声三个坑查清并修 `_build_target_reference`；真值改按逐站实测底重算 INR/SNR。六根受控对照：旧档位 GT切片 0.514 / 条件 0.381 → 新档位 0.753 / 0.453 ≈ 无噪声 0.738 / 0.473。**结论：噪声是真实性旋钮、不是难度旋钮。**
-- [ ] **D3/D4 首次 agent 基线**（数据已就位，当前最大的信息空白）——用户口径（m02623）：“**基线等题目确定再说**”
+- [x] **公开层（受害者层 + 合作链路先验）落地**（2026-10-10）：查到 `cooperative_sources` 被平台 replay 冲空（200/200）→ 新增 `evidence_layer.py`（§7 投影，单点可审计）+ `expose_evidence.py`（落盘 + `--mechanism full|coarse|none` + `--coop`），D3 48 条 / D4 100 条事件进 Agent 提示，摘要同步幂等自愈（失效 200→0）；`regen_noise.py` 尾部已接投影
+- [ ] **D3/D4 首次 agent 基线**（数据与题面均已就位；2026-10-10 用户批准跑一次全量：D1×S0 50 + D2/D3/D4×S2 各 50）——用户口径（m02623）：“**基线等题目确定再说**”
 - [ ] **D2 天花板归因**（仪器提取不够好 vs 真值“频偏参考点”口径与仪器输出不可比）
 - [ ] **D1 定位“三站 0.609 > 四站 0.458”异常复查**（疑似融合/配对在第四站引入错误）
 - [ ] "难度 × 站数"成绩矩阵全量跑通（D1×S0 已有，D2×S0–S2 已有；D3/D4 全部待跑）

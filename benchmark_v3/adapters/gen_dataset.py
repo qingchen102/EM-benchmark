@@ -37,6 +37,7 @@ from cityrf.config import (Antenna, Component, Emitter, Frontend,  # noqa: E402
                            Propagation, Receiver, Scenario)
 from cityrf.runner import run_scenario  # noqa: E402
 from em_signal_simulator_v3.emitters import INTENT  # noqa: E402  # 敌我意图映射（T3 答案轴）
+import evidence_layer  # noqa: E402  # 受害者层公开视图（规范 v1.0 §7）
 
 FS_HZ = 4e6                          # 全难度统一采集带宽（2026-09-28：D2–D4 对齐 D1，
                                      # 目标 1 MHz 不再被通带拦腰截断；Hz 域物理量不变）
@@ -493,6 +494,28 @@ def _math_erfc(x: float) -> float:
     return math.erfc(x / np.sqrt(2))
 
 
+def cooperative_sources_prior(truth: dict) -> dict:
+    """合作目标先验（考卷上印的合法先验）：型号 + 名义带宽 + 合作链路质量遥测。
+
+    平台 runner 每次 replay 都会整体重写 observations.json（`cityrf/runner.py:102`），
+    抹掉本函数写入的字段；因此 `benchmark_v3/adapters/expose_evidence.py --coop`
+    负责在 replay 之后把它恢复回 public。两条路径的 `_target_bw_normalized` 已用
+    `_probe_prior.py` 对全部 200 个样本核对逐位相同（等价的理由：目标 preset 的
+    组件带宽恒为 TGT_BANDWIDTH_HZ，或该 preset 不受理带宽参数）。
+    """
+    return {
+        "source_id": "target", "role": "cooperative_target",
+        "preset": truth["target"]["emitter"],
+        "nominal_bandwidth_hz": TGT_BANDWIDTH_HZ,
+        "link_quality_per_station": _link_quality_telemetry(truth),
+        "note": ("cooperative UAV link monitored by this network (public prior). "
+                 "link_quality_per_station = the cooperative ground-station's OWN "
+                 "measurements of its video-downlink reception quality (expected "
+                 "uncoded QPSK symbol-error-rate and per-station SINR estimate). "
+                 "Degradation indicates co-channel interference on the link."),
+    }
+
+
 def _index_entry(t: dict, out_name: str) -> dict:
     """index.json 的单样本条目（正常生成与 --resume 跳过共用同一口径）。
 
@@ -609,16 +632,13 @@ def main() -> None:
         # 合法先验（型号+名义带宽），信息隔离边界=考卷上印什么，而非运行器私下读 private。
         obs_p = out / "public" / "observations.json"
         obs = json.loads(obs_p.read_text(encoding="utf-8"))
-        obs["cooperative_sources"] = [{
-            "source_id": "target", "role": "cooperative_target",
-            "preset": truth["target"]["emitter"],
-            "nominal_bandwidth_hz": TGT_BANDWIDTH_HZ,
-            "link_quality_per_station": _link_quality_telemetry(truth),
-            "note": ("cooperative UAV link monitored by this network (public prior). "
-                     "link_quality_per_station = the cooperative ground-station's OWN "
-                     "measurements of its video-downlink reception quality (expected "
-                     "uncoded QPSK symbol-error-rate and per-station SINR estimate). "
-                     "Degradation indicates co-channel interference on the link.")}]
+        obs["cooperative_sources"] = [cooperative_sources_prior(truth)]
+        # 受害者层公开视图（场景设计规范 v1.0 §7）：机理 + 影响等级可见，
+        # aimed / victim / 链路预算屏蔽（取舍与理由见 evidence_layer.py）。
+        # 无事件（D1/D2）时不写 key，历史 observations.json 保持逐字节一致。
+        n_ev = evidence_layer.attach_public_events(obs, truth)
+        if n_ev:
+            print(f"    [{truth['sample_id']}] 受害者层公开事件 {n_ev} 条 -> observations.json")
         obs_p.write_text(json.dumps(obs, ensure_ascii=False, indent=1), encoding="utf-8")
         if args.difficulty != "d1":
             # RT 实测可见性回填（2026-09-28 起对全部 RT 难度生效；此前只对 d2 回填是
