@@ -89,6 +89,8 @@ EM-benchmark/                        # 仓库根
 │   └── 城市低空电磁信号仿真平台/     # 并入的物理级射频仿真工作台（Sionna RT + 慕尼黑城市几何）
 ├── run_v32.ps1                      # （本地运行脚本，含 API key，已 gitignore）
 ├── projects/                        # 汇报与出图项目（个人使用）
+│   ├── make_figs_v3.py / figs_v3/   # 图表工厂与 7 张数据图（可入库，供汇报复用）
+│   └── ppt/                          # 汇报 PPT 工程（ppt-master：spec + svg_output + 导出 pptx）
 └── study/                           # 学习 / 自学材料（个人使用）
 ```
 
@@ -193,7 +195,8 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 | `benchmark_v3/docs/BENCHMARK_STATUS_2026-10-09.md` | **最新全档现状报告**：D1–D4 逐字段实测、跑分可信度、已修复/仍存在的缺口、四条合格性判定、D2 仪器瓶颈收口与 11 条已证伪路线 |
 | `benchmark_v3/adapters/cityrf_source.py` | V3 源 → 平台信道的融合适配器（含使用说明） |
 | `benchmark_v3/城市低空电磁信号仿真平台/README.md` | 物理平台独立文档（启动 / 能力 / 限制） |
-
+| `projects/ppt/em_benchmark_v3_ppt169_20261009/` | 汇报 PPT 工程（`design_spec.md` / `spec_lock.md` / `svg_output/` 22 页 + `validation/` 门禁报告）；重建命令见 `ppt-master-最小可用操作手册.md` |
+| `ppt-master-最小可用操作手册.md` | ppt-master 工具链的最小可用中文手册（命令、SVG 契约、非交互过 Stage-1） |
 ---
 
 ## 8. Roadmap
@@ -209,6 +212,7 @@ python -m webui.server --port 8765                    # 网页工作台 http://1
 - [x] **公开层（受害者层证据 + 合作链路先验）落地**（2026-10-10）：规范 §7 要求的“Agent 可见机理与行为证据”此前**一条都没暴露**（真值 D3 48 条 / D4 100 条 `interference_events` 全被关在 private）。查出根因：`cooperative_sources` 与一切后期附加的 public 字段会被**平台 replay 整体冲空**（`cityrf/runner.py:102-104` 重写整个 `observations.json`，四档 200/200 命中），`run_capture_agent.py` 因此长期走 private 回退分支。新增 `adapters/evidence_layer.py`（单点可审计的 §7 投影：公开 `event_id/source_id/mechanism/impact_class`，屏蔽 `aimed/victim_id/power_at_victim_dbm/env_over_noise_db`，机理粒度 `full|coarse|none` 一键切换）+ `adapters/expose_evidence.py`（落盘、幂等、附隔离黑名单与 IQ 逐字节自证）；`regen_noise.py` 尾部接上投影（重放后自动完成公开层）。**口径中性已证**：`_probe_prior.py` 证明 public/private 两路带宽先验 200/200 逐位相同。**摘要自愈**：改写 public 必须同步 `run_summary.json`（修前 3676 项中失效 **200**，修后 **0**）。
 - [x] **四档 agent 基线全部跑通**（2026-10-09）：D1×S0 **0.96**（48/50，体制 0.60 / 载频 0.96 / DOA 0.48 / 意图 0.93）、D2×S2 **0.48**（体制 0.482 / 载频 0.214 / 定位 0.536 / 意图 0.768）、D3×S2 **0.40**（体制 0.372 / 载频 0.047 / 定位 0.372（534 m）/ 意图 0.814）、D4×S2 **0.24**（体制 0.260 / 载频 0.100 / 定位 0.320（644 m）/ 意图 0.760 / 欺骗命中 0.20 虚警 0.20）；**梯度单调（0.96→0.48→0.40→0.24）且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）**。口径注意：频偏误差的归一化基数恒为 2e6（四档容差均 ±40 kHz）；S0 单站 vs S2 四站，detection 口径不同、跨档比较需注明。逐档基线表见 `benchmark_v3/README.md` §6。
 - [x] **D2 天花板归因**（2026-10-09 收口）：不是口径不可比，而是**仪器定位精度 ±100~300 m 撞 50 m 门限 + 共道带未在频率上分流**；「同源并合」与「窄带秩枚举」两条后续路线均被证据证伪并关闭
+- [x] **汇报 PPT + 图表工厂**（2026-10-09）：`projects/make_figs_v3.py` 产出 7 张数据图（`projects/figs_v3/`），pptx-master 全链路（spec → 22 页 SVG → final gate 0 error → `finalize_svg` → `svg_to_pptx`）产出 22 页汇报 PPT（`projects/ppt/v3_benchmark_progress_20261009.pptx`）；提纲 = 背景与题目定义 / 数据基座四档 / 仪器层 / 评测口径与四档结果 / 问题·证伪·下一步（含真实数据采集规划）。注意：频偏误差归一化基数恒为 2e6。
 - [ ] **D1 定位异常复查**（三站 0.609 > 四站 0.458，疑似融合/配对在第四站引入错误）
 - [ ] "难度 × 站数"成绩矩阵全量（D1–D4 × S0–S2；D1/D2 已有，D3/D4 待跑）
 - [ ] **S0 弱证据报告判别**（单站场景虚警-欠报摆动，需置信度校准）。

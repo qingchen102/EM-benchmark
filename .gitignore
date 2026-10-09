@@ -51,3 +51,8 @@ _proposal_text.txt
 _ppt_ref_style.txt
 _ppt_slide_text.txt
 projects/srtp_*/
+# 汇报 PPT 工程派生件（2026-10-09）：images/ 是 projects/figs_v3 的副本，svg_final/ 由 finalize_svg 生成
+projects/ppt/*/images/
+projects/ppt/*/svg_final/
+# 临时渲染/检查产物
+_tmp_*
