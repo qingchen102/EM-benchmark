@@ -155,6 +155,40 @@ def measure_thermal_only(cfg: Scenario, guard: int) -> dict:
 # 真值回写
 # ---------------------------------------------------------------------------
 
+def refresh_achieved(cap: Path, key: dict) -> int:
+    """按平台新 truth.json 重算答案键的 `achieved`（RT 实测可见性回填）。
+
+    与 `gen_dataset.py` 主循环里的 achieved 回填逐字同口径。重放模式下答案键是从源样本
+    拷来的，其中的 achieved 属**旧波形**；带宽修好（软带限）后接收功率的采样实现变了，
+    尖峰型源可差 1~5 dB，会让 `≥3 站可见` 的记录与实际数据不一致。故重放后重算。
+
+    返回刷新的（源×站）条数。
+    """
+    tp = cap / "private" / "truth.json"
+    if not tp.exists():
+        return 0
+    trt = json.loads(tp.read_text(encoding="utf-8"))
+    kmap = {r["id"]: f"s{i}" for i, r in enumerate(key.get("receivers") or [])}
+    ach: dict[str, dict] = {}
+    n = 0
+    for st in trt.get("stations") or []:
+        sk = kmap.get(st["receiver_id"])
+        if sk is None:
+            continue
+        for src in st.get("sources") or []:
+            pw = float(np.mean(src["mean_port_power_w"]))
+            ach.setdefault(src["emitter_id"], {})[sk] = {
+                "pr_dbm": round(10 * np.log10(pw + 1e-30) + 30, 2),
+                "path_count": src["path_count"],
+                "path_azimuths_deg": [round(np.degrees(a), 1)
+                                     for a in src["geometry"]["arrival_azimuth_rad"][:6]],
+            }
+            n += 1
+    if ach:
+        key["achieved"] = ach
+    return n
+
+
 def patch_truth(cap: Path, src_priv: Path, meas: dict, difficulty: str,
                 applied: dict, plan: dict | None = None,
                 thermal: dict | None = None) -> dict:
@@ -195,6 +229,7 @@ def patch_truth(cap: Path, src_priv: Path, meas: dict, difficulty: str,
     recv_order = [r["id"] for r in tk["receivers"]]
     nz_by_station = {rid: meas[rid]["effective_output_noise_dbm"] for rid in recv_order if rid in meas}
     old_nz = float((tk.get("noise") or {}).get("noise_floor_dbm", -106.9))
+    n_ach = refresh_achieved(cap, tk)
 
     tk["noise"] = {
         "model": nprof.model_label(difficulty),
@@ -249,6 +284,7 @@ def patch_truth(cap: Path, src_priv: Path, meas: dict, difficulty: str,
         "rise_db": round(nz - old_nz, 2),
         "per_station_dbm": {k: round(v, 2) for k, v in nz_by_station.items()},
         "events": events,
+        "achieved_refreshed": n_ach,
     }
 
 

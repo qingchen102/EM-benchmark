@@ -237,3 +237,45 @@ seed 逐位相同(d3 vs d4) = False
 | 受控对照台（24 变体） | `benchmark_v3/adapters/_diag_d2_off.py` | `_diag_d2_off.json` / `_diag_d2_off_run.txt` |
 | 候选带 vs 真载频 | `benchmark_v3/adapters/_probe_dirband.py`、`_probe_dbstat.py` | `_probe_dbstat.txt` |
 | 残差 / 相干度剖面 | `benchmark_v3/adapters/_probe_rawres.py`、`_probe_cohprof.py` | 标准输出 |
+
+---
+
+## 补充（2026-10-09 深夜）：波形带限修复 → 四档重放换装 → CNN 重训 → 新 gate
+
+本文件前面所有数字都定稿于「波形带宽不受控」的旧数据。当晚发现并修掉这个真 bug（`user m04889` 点的第二件事），因为它是**题目不一致**（题目写“窄带”、实际波形糊满半个通带），不是“分数低”。
+
+### 修了什么
+- 病灶：`cityrf.waveforms._generate_preset` 只给「受理 `bw` 形参」的生成器传带宽，而 19 类生成器几乎都有 `bw` 却完全不用 → 实测 **OBW99 是设计值的 4~24 倍**，d2/d3/d4 分别有 **27/11/39 个干扰源频带越出接收通带**（±810 kHz）。
+- 三处：`emitters.py` 加软带限 + `BW_EXEMPT={Tone_jam}` + 统一 `bandwidth_normalized` 入口；平台 `waveforms.py:_generate_preset` 补传（只对 `role==interference`）；`cityrf_source.v3_generate` 同口径对齐。
+- 效果（零 API）：**越通带 27/11/39 → 0/0/0**；比值中位 **5.34/0.96/8.45 → 0.89/0.86/0.88**；生成器口径自检 **53/57 = 93%**。
+
+### 数据怎么换的
+- 带宽只改波形合成，不改几何/信道/QA → 用 **frozen-channel 重放**（`regen_noise.py --src … --out …`）换装，**不重跑 RT**：d2 67.2s / d3 64.7s / d4 77.8s。
+- 总功率中位变化 **+0.02/+0.01/+0.32 dB**（平台按 `power_dbm` 定标）→ INR/SNR 标签口径仍有效；新增 `refresh_achieved()` 修掉答案键里随源拷贝而来的旧 `achieved`（**4.70 dB → 0.00**）；QA/难度/噪声统计**与换装前逐项相同**。
+- 旧数据与旧 agent 答案备份：`benchmark_v3/_pre_bw_20261009/dataset_d{2,3,4}`。
+
+### 新 gate（决定性的表）
+| 口径 | 新（带宽修复 + CNN 0.882） | 旧（带宽修前，菜单噪声） | 门限 |
+|---|---|---|---|
+| clean（16 类） | **0.878 [1001/1140] PASS** | 0.860 | 0.85 |
+| GT 切片 | **0.563 [40/71] PASS** | 0.746 [53/71]※ | 0.5 |
+| tool-view 召回 | **0.653 [64/98]** | 0.510 [50/98] | — |
+| tool-view 假簇 | **0.540 [75/139]** | 0.612 [79/129] | — |
+| tool-view 条件（体制） | **0.438 [28/64] FAIL** | 0.480 [24/50] | 0.5 |
+| 端到端 | **0.286** | 0.245 | — |
+| 可解子集召回 | 0.685 [63/92] | 0.543 [50/92] | — |
+
+※ 旧 GT 切片值属「旧合成分布 + 旧 CNN」口径；旧 CNN 配旧数据 0.613 [49/80]，新 CNN 配旧数据 0.474 [37/78] —— 新 CNN 与旧波形数据不匹配，与带宽修复后的 0.563 才是配对口径。
+
+### 一句话
+带宽受控后**召回与假簇双双过门限**（这是“题目写窄带实际糊满通带”直接造成的），**唯一未过的是体制识别（条件分类 0.438 vs 0.5，差 6.2pp）**，与长期存在的 tone/noise 混淆、共道未在频率上分流一致；**clean 首次过预注册 0.85**。
+
+### 对本文件其它数字的影响
+- 本文件所有 **D2/D3/D4 agent 指标（含 D2×S2 0.48、D3 0.40、D4 0.24）均跑在带宽修前数据 + 泄漏修复后的工具上 → 对现行数据不再有效**，需逐档重取（API 纪律：只允许点状重跑）。D1 未重放（逐位恒等）故 D1 数字仍有效。
+- CNN 已因训练分布变化重训：**val_acc 0.843 → 0.882**（第一轮 25×300、第二轮 40×500）；旧权重留在 `rad_classifier/checkpoint_pre_bw_20261009.pt` 与 `checkpoint_bw_20261009.pt`。
+- 机器可读版与完整证据链：`benchmark_v3/dataset_d2/BASELINE.json` 的 `bw_fix_2026_10_09` 块（含 `gate_effect` / `evidence` / `artifacts`）。
+
+### 已知未决
+1. **gate 的 `_agent_cache` 依赖（测量卫生）**：同一 checkpoint 下，清空缓存 GT=0.746 [53/71]、129 簇；读 API 期缓存 GT=0.613 [49/80]、142 簇 → 分母在 71/78/80 间漂，需让 gate 只在 scratch 目录重建。
+2. **7 个样本的 `station_a` 目标参考不可用**（`[gt-slice] target reference not available`，d2_00006/15/19/33/35/43/45）→ GT 切片分母 71 而非 78/80，从噪声换装起就存在。
+3. `BASELINE.json` 的 **`HEAD` 版本本身就是非法 JSON**（`agent_full_50` 后缺逗号，`892ebdf` 引入）—— 本轮已修，但说明要加“改完就 `json.load` 校验”的习惯。

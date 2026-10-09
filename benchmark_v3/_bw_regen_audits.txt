@@ -1,0 +1,200 @@
+﻿### A) 逐源带宽审计（重生成树）
+==============================================================================
+前端非线性余量 + 实际占用带宽（只读体检）
+接收通带 ±810 kHz   奈奎斯特 ±2000 kHz   窗长 40000 点 @ 4.0 MHz
+==============================================================================
+
+### d2   样本 50
+A 前端口复合输入功率: 中位 -79.1 dBm   最弱 -103.0   最强 -64.8   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -89.5 dBm  最强 -64.8 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：74.8 dB
+  → 若开 imd3，三阶互调产物约 -214.4 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -65 dBm 量级
+  [warn] d2_00006/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+  [warn] d2_00013/interferer_1 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 37 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 478 kHz  (min 107, max 786)
+  实测 OBW99: 中位 427 kHz  (min 96, max 689)
+  实测/标称 比值: 中位 0.89  max 1.48
+  频带最外沿 |f|: 中位 446 kHz  max 762 kHz
+  → 越接收通带(810 kHz) 的源: 0/37   越奈奎斯特(2000 kHz): 0/37
+    d2_00015 interferer_1 Zigbee           标称    175 kHz | 实测      607 ~      762 kHz (宽 156)
+    d2_00015 interferer_2 DECT             标称    130 kHz | 实测     -740 ~     -628 kHz (宽 112)
+    d2_00016 interferer_1 Zigbee           标称    160 kHz | 实测      593 ~      736 kHz (宽 142)
+    d2_00018 interferer_2 Corona           标称    107 kHz | 实测      635 ~      731 kHz (宽 96)
+    d2_00001 interferer_1 DECT             标称    130 kHz | 实测     -730 ~     -619 kHz (宽 111)
+
+### d3   样本 50
+A 前端口复合输入功率: 中位 -87.7 dBm   最弱 -103.0   最强 -58.1   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -96.2 dBm  最强 -58.1 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：68.1 dB
+  → 若开 imd3，三阶互调产物约 -194.3 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -58 dBm 量级
+  [warn] d3_00004/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+  [warn] d3_00016/interferer_2 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 28 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 371 kHz  (min 111, max 735)
+  实测 OBW99: 中位 282 kHz  (min 0, max 630)
+  实测/标称 比值: 中位 0.86  max 0.91
+  频带最外沿 |f|: 中位 497 kHz  max 772 kHz
+  → 越接收通带(810 kHz) 的源: 0/28   越奈奎斯特(2000 kHz): 0/28
+    d3_00009 interferer_1 Noise_jam        标称    190 kHz | 实测     -772 ~     -602 kHz (宽 171)
+    d3_00017 interferer_1 Chirp_jam        标称    132 kHz | 实测      637 ~      751 kHz (宽 114)
+    d3_00001 interferer_1 Noise_jam        标称    124 kHz | 实测     -719 ~     -607 kHz (宽 112)
+    d3_00000 interferer_2 DECT             标称    111 kHz | 实测      625 ~      718 kHz (宽 93)
+    d3_00005 interferer_1 Noise_jam        标称    160 kHz | 实测      563 ~      706 kHz (宽 143)
+
+### d4   样本 50
+A 前端口复合输入功率: 中位 -84.7 dBm   最弱 -103.0   最强 -61.0   （n=200 站次）
+  单源(阵元均值)口功率: 中位 -93.5 dBm  最强 -62.9 dBm
+  receiver.frontend_model = ['linear']
+  → 最强输入距平台默认 IIP3(10 dBm)：71.0 dB
+  → 若开 imd3，三阶互调产物约 -202.9 dBm（远低于本底）
+  → soft_limit_input_dbm 未设置；要触发压缩需把门限设到 ≈ -61 dBm 量级
+  [warn] d4_00007/interferer_3 波形复现失败: operands could not be broadcast together with shapes (70,) (92,) (70,) 
+B 实际占用带宽 (99%) 复现 51 个源（平台同一条生成路径，无标称滤波）
+  标称带宽: 中位 404 kHz  (min 104, max 795)
+  实测 OBW99: 中位 316 kHz  (min 0, max 682)
+  实测/标称 比值: 中位 0.88  max 0.94
+  频带最外沿 |f|: 中位 500 kHz  max 763 kHz
+  → 越接收通带(810 kHz) 的源: 0/51   越奈奎斯特(2000 kHz): 0/51
+    d4_00003 interferer_2 GNSS_spoof       标称    198 kHz | 实测     -763 ~     -588 kHz (宽 175)
+    d4_00006 interferer_3 Bluetooth_FHSS   标称    200 kHz | 实测      578 ~      760 kHz (宽 182)
+    d4_00013 interferer_3 WiFi_burst       标称    172 kHz | 实测      598 ~      760 kHz (宽 161)
+    d4_00000 interferer_2 GNSS_spoof       标称    155 kHz | 实测     -754 ~     -617 kHz (宽 137)
+    d4_00009 interferer_1 Noise_jam        标称    167 kHz | 实测     -750 ~     -601 kHz (宽 149)
+
+### 按辐射体种类的 实测/标称 带宽比
+  Bluetooth_FHSS     n=  5  比值 中位 0.92  max 0.92
+  Chirp_jam          n= 16  比值 中位 0.86  max 0.87
+  Corona             n= 10  比值 中位 0.89  max 0.90
+  DECT               n= 10  比值 中位 0.84  max 0.86
+  GNSS_spoof         n= 20  比值 中位 0.87  max 0.88
+  Microwave          n=  7  比值 中位 0.91  max 0.91
+  Noise_jam          n= 16  比值 中位 0.90  max 0.90
+  Tone_jam           n=  8  比值 中位 0.00  max 0.00
+  VFD_noise          n=  8  比值 中位 0.90  max 0.90
+  WiFi_burst         n=  6  比值 中位 0.93  max 1.48
+  Zigbee             n= 10  比值 中位 0.88  max 0.91
+
+[写出] D:\srtp\EM-benchmark\benchmark_v3\_an_lna_obw_after_bw_regen.txt
+### B) 数据集验收（旧 vs 新）
+==============================================================================
+### 旧D2
+    D:\srtp\EM-benchmark\benchmark_v3\dataset_d2
+    index 样本 50   目录 54
+    完整样本 50   不完整 4 ['_agent_cache(iq=0,truth=False)', '_agent_cache_pre_gateab(iq=0,truth=False)', 'answers_S2_agent_layer1(iq=0,truth=False)', 'answers_S2_agent_layer1b(iq=0,truth=False)']
+    无干扰样本 0
+    干扰总数 98   种类 {'Corona': 17, 'Zigbee': 16, 'DECT': 13, 'Microwave': 13, 'VFD_noise': 11, 'WiFi_burst': 10, 'Welder': 10, 'Bluetooth_FHSS': 8}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 5, 3: 63, 4: 30}
+    ≥3 站可见占比 94.9%   <3 站（白占仿真时间）5.1%
+    [S0] 键内干扰均值 1.60  分布 {0: 4, 1: 12, 2: 34}  '报0即正确' 8.0%
+    [S1] 键内干扰均值 1.96  分布 {1: 2, 2: 48}  '报0即正确' 0.0%
+    [S2] 键内干扰均值 1.96  分布 {1: 2, 2: 48}  '报0即正确' 0.0%
+==============================================================================
+### 新D2
+    D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d2
+    index 样本 50   目录 50
+    完整样本 50   不完整 0 []
+    无干扰样本 0
+    干扰总数 98   种类 {'Corona': 17, 'Zigbee': 16, 'DECT': 13, 'Microwave': 13, 'VFD_noise': 11, 'WiFi_burst': 10, 'Welder': 10, 'Bluetooth_FHSS': 8}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 5, 3: 63, 4: 30}
+    ≥3 站可见占比 94.9%   <3 站（白占仿真时间）5.1%
+    [S0] 键内干扰均值 1.60  分布 {0: 4, 1: 12, 2: 34}  '报0即正确' 8.0%
+    [S1] 键内干扰均值 1.96  分布 {1: 2, 2: 48}  '报0即正确' 0.0%
+    [S2] 键内干扰均值 1.96  分布 {1: 2, 2: 48}  '报0即正确' 0.0%
+==============================================================================
+### 旧D3
+    D:\srtp\EM-benchmark\benchmark_v3\dataset_d3
+    index 样本 50   目录 52
+    完整样本 50   不完整 2 ['_agent_cache(iq=0,truth=False)', 'answers_S2_agent_layer1(iq=0,truth=False)']
+    无干扰样本 2
+    干扰总数 69   种类 {'Chirp_jam': 22, 'Noise_jam': 13, 'Tone_jam': 13, 'VFD_noise': 5, 'DECT': 4, 'Welder': 3, 'Corona': 3, 'Zigbee': 3, 'Microwave': 2, 'WiFi_burst': 1}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 6, 3: 54, 4: 9}
+    ≥3 站可见占比 91.3%   <3 站（白占仿真时间）8.7%
+    [S0] 键内干扰均值 1.02  分布 {0: 13, 1: 23, 2: 14}  '报0即正确' 26.0%
+    [S1] 键内干扰均值 1.38  分布 {0: 2, 1: 27, 2: 21}  '报0即正确' 4.0%
+    [S2] 键内干扰均值 1.38  分布 {0: 2, 1: 27, 2: 21}  '报0即正确' 4.0%
+==============================================================================
+### 新D3
+    D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d3
+    index 样本 50   目录 50
+    完整样本 50   不完整 0 []
+    无干扰样本 2
+    干扰总数 69   种类 {'Chirp_jam': 22, 'Noise_jam': 13, 'Tone_jam': 13, 'VFD_noise': 5, 'DECT': 4, 'Welder': 3, 'Corona': 3, 'Zigbee': 3, 'Microwave': 2, 'WiFi_burst': 1}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 6, 3: 54, 4: 9}
+    ≥3 站可见占比 91.3%   <3 站（白占仿真时间）8.7%
+    [S0] 键内干扰均值 1.02  分布 {0: 13, 1: 23, 2: 14}  '报0即正确' 26.0%
+    [S1] 键内干扰均值 1.38  分布 {0: 2, 1: 27, 2: 21}  '报0即正确' 4.0%
+    [S2] 键内干扰均值 1.38  分布 {0: 2, 1: 27, 2: 21}  '报0即正确' 4.0%
+==============================================================================
+### 旧D4
+    D:\srtp\EM-benchmark\benchmark_v3\dataset_d4
+    index 样本 50   目录 52
+    完整样本 50   不完整 2 ['_agent_cache(iq=0,truth=False)', 'answers_S2_agent_layer1(iq=0,truth=False)']
+    无干扰样本 0
+    干扰总数 125   种类 {'GNSS_spoof': 50, 'Noise_jam': 19, 'Chirp_jam': 17, 'Tone_jam': 14, 'Zigbee': 7, 'Microwave': 5, 'VFD_noise': 3, 'Bluetooth_FHSS': 3, 'WiFi_burst': 3, 'Corona': 2, 'Welder': 1, 'DECT': 1}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 5, 3: 95, 4: 25}
+    ≥3 站可见占比 96.0%   <3 站（白占仿真时间）4.0%
+    [S0] 键内干扰均值 2.00  分布 {0: 4, 1: 9, 2: 20, 3: 17}  '报0即正确' 8.0%
+    [S1] 键内干扰均值 2.50  分布 {2: 25, 3: 25}  '报0即正确' 0.0%
+    [S2] 键内干扰均值 2.50  分布 {2: 25, 3: 25}  '报0即正确' 0.0%
+==============================================================================
+### 新D4
+    D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d4
+    index 样本 50   目录 50
+    完整样本 50   不完整 0 []
+    无干扰样本 0
+    干扰总数 125   种类 {'GNSS_spoof': 50, 'Noise_jam': 19, 'Chirp_jam': 17, 'Tone_jam': 14, 'Zigbee': 7, 'Microwave': 5, 'VFD_noise': 3, 'Bluetooth_FHSS': 3, 'WiFi_burst': 3, 'Corona': 2, 'Welder': 1, 'DECT': 1}
+    RT 实测可见站数分布（全部干扰, >=3dB）{2: 5, 3: 95, 4: 25}
+    ≥3 站可见占比 96.0%   <3 站（白占仿真时间）4.0%
+    [S0] 键内干扰均值 2.00  分布 {0: 4, 1: 9, 2: 20, 3: 17}  '报0即正确' 8.0%
+    [S1] 键内干扰均值 2.50  分布 {2: 25, 3: 25}  '报0即正确' 0.0%
+    [S2] 键内干扰均值 2.50  分布 {2: 25, 3: 25}  '报0即正确' 0.0%
+### C) 噪声落档位审计（重生成树）
+== dataset_d2  50 样本 / 200 站  (D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d2)
+  ① 配方逐位复现: 全部一致 ✓
+  ② 配方分布: thermal 0.600 / colored 0.400   （槽位权重应为 thermal 0.60 / colored 0.40)
+      station_a: {'thermal': 30, 'colored': 20}
+      station_b: {'thermal': 30, 'colored': 20}
+      station_c: {'thermal': 30, 'colored': 20}
+      station_d: {'colored': 20, 'thermal': 30}
+  ③ 实测底（按配方分组，参照底 -106.94 dBm）:
+      colored    n= 80   -105.489 dBm [ -105.512,  -105.461]  抬 +1.45 dB (解析 +1.43) ✓
+      thermal    n=120   -106.943 dBm [ -106.971,  -106.911]  抬 +0.00 dB (解析 +0.00) ✓
+  ④ noise_floor_dbm（纯热噪参照底）: 中位 -106.94 dBm  跨度 0.040 dB（每样本各一次噪声 realization，故有微弱抖动）✓
+  ⑤ index: noise_profiles=thermal+colored+phase  noise_menus=[('thermal', 0.6), ('colored', 0.4)]
+  ⑥ 派生字段重算: INR 392/392 一致，SNR 200/200 一致  ✓
+== dataset_d3  50 样本 / 200 站  (D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d3)
+  ① 配方逐位复现: 全部一致 ✓
+  ② 配方分布: thermal 0.400 / impulse 0.300 / colored 0.300   （槽位权重应为 thermal 0.40 / colored 0.30 / impulse 0.30)
+      station_a: {'impulse': 15, 'thermal': 20, 'colored': 15}
+      station_b: {'impulse': 15, 'thermal': 20, 'colored': 15}
+      station_c: {'impulse': 15, 'thermal': 20, 'colored': 15}
+      station_d: {'thermal': 20, 'impulse': 15, 'colored': 15}
+  ③ 实测底（按配方分组，参照底 -106.94 dBm）:
+      colored    n= 60   -104.407 dBm [ -104.433,  -104.373]  抬 +2.54 dB (解析 +2.51) ✓
+      impulse    n= 60   -105.759 dBm [ -105.928,  -105.520]  抬 +1.18 dB (解析 +1.19) ✓
+      thermal    n= 80   -106.943 dBm [ -106.984,  -106.917]  抬 +0.00 dB (解析 +0.00) ✓
+  ④ noise_floor_dbm（纯热噪参照底）: 中位 -106.94 dBm  跨度 0.030 dB（每样本各一次噪声 realization，故有微弱抖动）✓
+  ⑤ index: noise_profiles=thermal+colored+impulse+phase  noise_menus=[('thermal', 0.4), ('colored', 0.3), ('impulse', 0.3)]
+  ⑥ 派生字段重算: INR 276/276 一致，SNR 200/200 一致  ✓
+== dataset_d4  50 样本 / 200 站  (D:\srtp\EM-benchmark\benchmark_v3\_regen_bw\dataset_d4)
+  ① 配方逐位复现: 全部一致 ✓
+  ② 配方分布: correlated 0.300 / impulse 0.300 / thermal 0.200 / colored 0.200   （槽位权重应为 thermal 0.20 / colored 0.20 / impulse 0.30 / correlated 0.30)
+      station_a: {'correlated': 15, 'colored': 10, 'impulse': 15, 'thermal': 10}
+      station_b: {'thermal': 10, 'correlated': 15, 'colored': 10, 'impulse': 15}
+      station_c: {'correlated': 15, 'thermal': 10, 'colored': 10, 'impulse': 15}
+      station_d: {'impulse': 15, 'correlated': 15, 'thermal': 10, 'colored': 10}
+  ③ 实测底（按配方分组，参照底 -106.94 dBm）:
+      colored    n= 40   -104.407 dBm [ -104.434,  -104.387]  抬 +2.53 dB (解析 +2.51) ✓
+      correlated n= 60   -106.939 dBm [ -106.969,  -106.913]  抬 +0.00 dB (解析 +0.00) ✓
+      impulse    n= 60   -105.742 dBm [ -106.001,  -105.521]  抬 +1.20 dB (解析 +1.19) ✓
+      thermal    n= 40   -106.941 dBm [ -106.965,  -106.919]  抬 +0.00 dB (解析 +0.00) ✓
+  ④ noise_floor_dbm（纯热噪参照底）: 中位 -106.94 dBm  跨度 0.040 dB（每样本各一次噪声 realization，故有微弱抖动）✓
+  ⑤ index: noise_profiles=thermal+colored+impulse+correlated+phase  noise_menus=[('thermal', 0.2), ('colored', 0.2), ('impulse', 0.3), ('correlated', 0.3)]
+  ⑥ 派生字段重算: INR 500/500 一致，SNR 200/200 一致  ✓
+
+== 总计: 全部通过 ✓

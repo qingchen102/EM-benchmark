@@ -45,27 +45,23 @@ SEED_BASE = 900_000                 # 独立种子段（评测用 31000+/其他�
 
 def gen_wave16(name: str, rng: np.random.Generator,
                length: int = LENGTH, bw: float | None = None) -> np.ndarray:
-    """按辐射体名生成干净波形；生成器对短包长脆弱 → 换 seed 重抽保护。"""
+    """按辐射体名生成干净波形，并把设计带宽交给 generate_emitter 统一落带。
+
+    bw=None 时在 BW_RANGE 内随机取（与评测口径 0.075–0.2 对齐）；生成器对短包长
+    脆弱 → 换 seed 重抽保护。2026-10-09：改走 bandwidth_normalized 入口，使不设
+    bw 形参的类（蓝牙 / WiFi / Zigbee / …）也落在同一带宽分布上——否则它们训练
+    时是全带宽、评测时是带限，重演“训练视角 ≠ 评测视角”。
+    """
     bw = float(rng.uniform(*BW_RANGE)) if bw is None else bw
     for _ in range(40):
         try:
             return generate_emitter(name, rng, length=length,
-                                    **({"bw": bw} if _accepts_bw(name) else {}))["iq"]
+                                    bandwidth_normalized=bw)["iq"]
         except ValueError:
             continue
     raise RuntimeError(f"generate_emitter({name}) 反复失败")
 
 
-_ACCEPT_BW_CACHE: dict[str, bool] = {}
-
-
-def _accepts_bw(name: str) -> bool:
-    import inspect
-    from em_signal_simulator_v3.emitters import EMITTERS
-    if name not in _ACCEPT_BW_CACHE:
-        gen = EMITTERS[name][0]
-        _ACCEPT_BW_CACHE[name] = "bw" in inspect.signature(gen).parameters
-    return _ACCEPT_BW_CACHE[name]
 
 
 # 接收机滤波（2026-10-02 根因修复）：真实评测输入全部过了平台 receiver 的

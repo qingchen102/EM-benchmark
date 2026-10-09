@@ -1,0 +1,22 @@
+﻿BW_RANGE=(0.06, 0.28)  越界判据=[0.5*lo, 1.5*hi]
+Bluetooth_FHSS     obw=0.102  (0.102, 0.070, 0.231)
+WiFi_burst         obw=0.207  (0.207, 0.207, 0.113)
+Microwave          obw=0.065  (0.065, 0.064, 0.074)
+Zigbee             obw=0.155  (0.155, 0.158, 0.061)
+DECT               obw=0.058  (0.158, 0.056, 0.058)
+LTE_QPSK           obw=0.176  (0.176, 0.205, 0.166)
+UAV_video_OFDM     obw=0.074  (0.222, 0.074, 0.074)
+UAV_RC_hopping     obw=0.175  (0.175, 0.141, 0.260)
+Radar_pulsed_LFM   obw=0.120  (0.038, 0.167, 0.120)
+GPS_DSSS           obw=0.149  (0.242, 0.149, 0.059)
+GNSS_jam           obw=0.086  (0.057, 0.186, 0.086)
+GNSS_spoof         obw=0.118  (0.120, 0.118, 0.097)
+TV_broadcast       obw=0.134  (0.224, 0.134, 0.070)
+Chirp_jam          obw=0.232  (0.232, 0.242, 0.160)
+Noise_jam          obw=0.156  (0.243, 0.156, 0.068)
+Tone_jam           obw=0.001  (0.004, 0.000, 0.001)   <-- 越界
+Welder             obw=0.191  (0.000, 0.197, 0.191)
+VFD_noise          obw=0.084  (0.059, 0.084, 0.182)
+Corona             obw=0.148  (0.222, 0.148, 0.073)
+越界 1/19
+simulate_residual ok: shape=(4096,) finite=True

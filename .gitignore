@@ -16,6 +16,9 @@ benchmark_v3/_old_noise_profile_20261010/
 benchmark_v3/_smoke_menu_d2/
 benchmark_v3/adapters/_probe_peaks_cache/
 benchmark_v3/_smoke_regen_wiring/
+# 带宽重生成（2026-10-09 夜）：带宽修好前的数据集备份 + 冻结信道重放中间产物
+benchmark_v3/_pre_bw_20261009/
+benchmark_v3/_regen_bw/
 # 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
 benchmark_v3/_api_*
 benchmark_v3/adapters/_verify_cache/

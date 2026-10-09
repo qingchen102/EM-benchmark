@@ -107,7 +107,12 @@ def gate_gt_slice(model):
         resid = None
         if resid_p.exists():
             resid = np.load(resid_p).astype(np.complex128)
-        else:
+            if np.asarray(resid).ndim != 2:          # 2026-10-09：历史降级路径写过
+                print(                                 # 1-D 文件（d2_00043），读取端
+                    f"    [gt-slice] {s['id']} 残差缓存形状异常 "  # 必须自愈而不是崩掉
+                    f"{np.asarray(resid).shape}，现场重建")
+                resid = None
+        if resid is None:
             # 2026-10-08（审查者抓出的可复现缺口）：残差缓存在**清缓存后会消失**，
             # 旧行为直接 `continue` → 全部样本被跳过、分母 0/0、指标 0.000 却仍打印
             # gate=0.5 判 FAIL（静默跳过小样本会虚高，全跳过则变成无意义的 0/0）。
@@ -159,6 +164,9 @@ def gate_gt_slice(model):
                 visible.append(g)
         gts = visible
         if len(gts) < 1:
+            continue
+        if np.asarray(resid).ndim != 2:
+            print(f"    [gt-slice] {s['id']} 残差不可用，跳过")
             continue
         n = resid.shape[1]
         # 2026-10-02：残差缓存已带限 ±500k，**不再做二次窄带 brick 切**——

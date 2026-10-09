@@ -1,0 +1,77 @@
+﻿device=cuda
+== 生成干净波形池 ==
+  [1000] Bluetooth_FHSS: 300  (1s)
+  [1000] WiFi_burst: 300  (2s)
+  [1000] Microwave: 300  (2s)
+  [1000] Zigbee: 300  (3s)
+  [1000] DECT: 300  (3s)
+  [1000] LTE_QPSK: 300  (4s)
+  [1000] UAV_video_OFDM: 300  (5s)
+  [1000] UAV_RC_hopping: 300  (7s)
+  [1000] Radar_pulsed_LFM: 300  (8s)
+  [1000] GPS_DSSS: 300  (8s)
+  [1000] GNSS_jam: 300  (9s)
+  [1000] GNSS_spoof: 300  (9s)
+  [1000] TV_broadcast: 300  (10s)
+  [1000] Chirp_jam: 300  (11s)
+  [1000] Noise_jam: 300  (11s)
+  [1000] Tone_jam: 300  (12s)
+  [1000] Welder: 300  (12s)
+  [1000] VFD_noise: 300  (13s)
+  [1000] Corona: 300  (13s)
+  [2000] Bluetooth_FHSS: 60  (0s)
+  [2000] WiFi_burst: 60  (1s)
+  [2000] Microwave: 60  (1s)
+  [2000] Zigbee: 60  (1s)
+  [2000] DECT: 60  (1s)
+  [2000] LTE_QPSK: 60  (1s)
+  [2000] UAV_video_OFDM: 60  (1s)
+  [2000] UAV_RC_hopping: 60  (2s)
+  [2000] Radar_pulsed_LFM: 60  (2s)
+  [2000] GPS_DSSS: 60  (2s)
+  [2000] GNSS_jam: 60  (2s)
+  [2000] GNSS_spoof: 60  (2s)
+  [2000] TV_broadcast: 60  (2s)
+  [2000] Chirp_jam: 60  (2s)
+  [2000] Noise_jam: 60  (2s)
+  [2000] Tone_jam: 60  (2s)
+  [2000] Welder: 60  (2s)
+  [2000] VFD_noise: 60  (2s)
+  [2000] Corona: 60  (3s)
+python : D:\srtp\EM-benchmark\benchmark_v3\adapters\rad_cls\train16.py:88: UserWarning: Converting a tensor with requir
+es_grad=True to a scalar may lead to unexpected behavior.
+所在位置 行:1 字符: 160
++ ... NG="utf-8"; python -u train16.py --epochs 25 --n-per-class 300 2>&1 | ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\srtp\EM-benc...ected behavior.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\cs
+rc\autograd\generated\python_variable_methods.cpp:837.)
+  losses.append(float(loss))
+[epoch 1/25] loss=1.955 val_acc=0.572
+[epoch 2/25] loss=1.288 val_acc=0.648
+[epoch 3/25] loss=1.051 val_acc=0.663
+[epoch 4/25] loss=0.931 val_acc=0.718
+[epoch 5/25] loss=0.882 val_acc=0.750
+[epoch 6/25] loss=0.813 val_acc=0.725
+[epoch 7/25] loss=0.734 val_acc=0.746
+[epoch 8/25] loss=0.709 val_acc=0.772
+[epoch 9/25] loss=0.653 val_acc=0.762
+[epoch 10/25] loss=0.613 val_acc=0.792
+[epoch 11/25] loss=0.617 val_acc=0.768
+[epoch 12/25] loss=0.578 val_acc=0.811
+[epoch 13/25] loss=0.579 val_acc=0.821
+[epoch 14/25] loss=0.600 val_acc=0.812
+[epoch 15/25] loss=0.536 val_acc=0.814
+[epoch 16/25] loss=0.527 val_acc=0.825
+[epoch 17/25] loss=0.514 val_acc=0.832
+[epoch 18/25] loss=0.529 val_acc=0.832
+[epoch 19/25] loss=0.505 val_acc=0.825
+[epoch 20/25] loss=0.476 val_acc=0.835
+[epoch 21/25] loss=0.525 val_acc=0.825
+[epoch 22/25] loss=0.483 val_acc=0.836
+[epoch 23/25] loss=0.475 val_acc=0.839
+[epoch 24/25] loss=0.497 val_acc=0.839
+[epoch 25/25] loss=0.488 val_acc=0.843
+best val_acc=0.843 -> D:\srtp\EM-benchmark\benchmark_v3\adapters\rad_cls\rad_classifier\checkpoint.pt
