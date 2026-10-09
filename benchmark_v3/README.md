@@ -139,6 +139,29 @@ benchmark_v3/
 > **② D3/D4 几何**：D3 用 seed0=61000、D4 用 seed0=72000 重生成，目标位置重合 **0/50**、seed 序列不同（`_audit_crosslevel.py`）→ 两档现可作独立样本统计。
 > **③ 同轮补记**：D3/D4 原数据是 QA 三约束进代码库（`91caa6e`，10-08）**之前**生成的，干扰“≥3 站可见”只有 17.6%/16.1%（**82~84% 的干扰四站全收不到 = 不可解**）；候选择优重生成后为 **91.3%/96.0%**（干扰数 69/125）。
 
+### 辐射体带宽落地（2026-10-09，应答「生成器带宽补全」）
+
+**病灶**：19 类辐射体的生成器几乎都有 `bw` 形参却**完全不用**；平台路径 `src/cityrf/waveforms.py:_generate_preset` 又只给「受理 `bw` 形参」的生成器传带宽 → 实测 99% 占用带宽（OBW99）是设计值的 **4~24 倍**，d2/d3/d4 分别有 **27/37、11/28、39/51** 个干扰源频带越出接收通带（±810 kHz）：题目里写的「300~800 kHz 窄带干扰」实际常常糊满半个通带。
+
+**修法（三处）**：
+1. `simulation/em_signal_simulator_v3/emitters.py`：新增 `band_limit(iq, bw)`（软带限，过渡带 `min(0.05, 0.06·bw)`，`BW_MIN=1e-3`）与 `BW_EXEMPT={Tone_jam}`（纯点频豁免）；6 个噪声/工业类生成器逐个落带，`gen_gnss_spoof` 按带宽反推码率，`gen_dect` 新增 `bw` 形参；`generate_emitter(..., bandwidth_normalized=)` 统一入口：对 `bw`/`band`/`pkt_bw` 三个形参名自动注入，生成后兜底软带限，返回新增 `bandwidth_requested_normalized` / `bandwidth_applied`（`bandwidth_normalized` 仍是**实测** OBW99）。
+2. 平台 `src/cityrf/waveforms.py:_generate_preset`：把组件标称带宽同时以 `bandwidth_normalized` 传下去（**四档数据集走的正是这条路径**：`gen_dataset.py:615 → runner.run_scenario → cityrf.waveforms.generate`），只对 `role == "interference"` 生效——目标不动（其公开先验 `target_bw_normalized` 取自实测表 ≈0.352，加带限反而不一致，且会动到参考直减与四档基线）。
+3. `adapters/cityrf_source.py:v3_generate`：同口径补上（该路径服务于 `run_fusion*`，防止以后换路径再丢带宽）。
+
+**验收（零 API，三根对照）**：
+
+| 口径 | 复现源数 | d2 越通带 / 比值中位 | d3 越通带 / 比值中位 | d4 越通带 / 比值中位 |
+|---|---|---|---|---|
+| 修前（`_an_lna_obw.txt`） | 37/28/51 | 27/37 · 5.34（max 37.09） | 11/28 · 0.96（max 32.93） | 39/51 · 8.45（max 34.26） |
+| 只改生成器（`_an_lna_obw_after_emitters.txt`） | 37/28/51 | 12/37 · 1.08（max 7.49） | 0/28 · 0.93（max 2.25） | 25/51 · 2.55（max 14.94） |
+| 生成器 + 平台路径（`_an_lna_obw_after_waveforms.txt`） | 37/28/51 | **0/37 · 0.89（max 1.48）** | **0/28 · 0.86（max 0.91）** | **0/51 · 0.88（max 0.94）** |
+
+第二根对照是**关键证据**：只修生成器时，带 `bw` 形参的类（Noise_jam 0.92、VFD 0.93、Corona 0.91、 Chirp_jam 0.96、DECT 0.99）已归位，而蓝牙 4.96 / WiFi 4.08 / Zigbee 2.55 / 微波炉 2.25 / GNSS 欺骗 7.31 照旧——因为它们**没有 `bw` 形参**，平台路径根本传不进去；必须在 `_generate_preset` 里补 `bandwidth_normalized` 才覆盖全部 19 类。
+生成器口径另有独立自检 `adapters/_an_emit_bw.py`（19 类 × 请求 150/400/700 kHz，每格 5 种子取中位）：**53/57 = 93.0%** 跟住请求（判据 |实测−请求| ≤ max(25% 请求, 60 kHz)）；未跟住的 4 例 = Tone_jam ×3（设计豁免）与 `Radar_pulsed_LFM` 请求 150 kHz → 32 kHz（稀疏脉冲串的边界情形）。
+
+**遗留（已记录，本轮未动）**：① 目标的组件标称 1 MHz vs 实测 ~1.4 MHz——公开先验按实测表给 0.352，故先验自洽；要改必须连先验、参考直减与四档基线一起重做；② `Tone_jam` 无带宽语义（豁免，真值带宽一律用实测值）；③ 窄请求下的 `Radar_pulsed_LFM` 边界情形。
+**四档数据集要等下一次重生成才会带上新带宽**（波形、`_build_target_reference` 残差与 CNN 训练分布 `rad_cls/data_gen16.py` 会同批变化 → 与 CNN 重训、四档基线一起安排）。
+
 ### 噪声档位（2026-10-08/09 夜大修：改成「配方菜单 + 按站抽签」）
 
 接收机噪声不再是四档统一的“热噪声”，而是按**物理真实性**分档。档位表 = `benchmark_v3/adapters/noise_profiles.py`（唯一真实来源：刻度常数 + 菜单 + 抽签规则），落地工具 = `benchmark_v3/adapters/regen_noise.py`（frozen-channel 重放）。

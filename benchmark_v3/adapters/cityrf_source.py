@@ -54,7 +54,18 @@ def v3_generate(tx, fs: float, indices, seed: int) -> np.ndarray:
     # 确定性随机源：由平台 seed + 发射源 id 派生，保证可复现
     rng = np.random.default_rng((seed ^ 0x9E3779B9 ^ zlib.crc32(tx.id.encode())) & 0xFFFFFFFF)
     if tx.id in EMITTERS:
-        iq = generate_emitter(tx.id, rng, length=len(n))["iq"]
+        # 2026-10-09 带宽落地：与平台路径 waveforms._generate_preset 同一口径 —— 干扰源按
+        # 组件标称带宽（设计值）软带限。注意：**四档数据集不走这条路径**（gen_dataset.py:615
+        # 直接调 runner.run_scenario → 平台 generate → _generate_preset），本路径服务于
+        # run_fusion / run_fusion_multi（source_at 把 tx.id 设成辐射体名）。两处口径保持一致，
+        # 以免以后换路径时又丢带宽。目标不动：它参与参考直减，且公开先验取实测表。
+        # Tone_jam 由 emitters.BW_EXEMPT 豁免（纯点频没有带宽语义）。
+        bw_hz = None
+        if tx.role == "interference" and tx.components:
+            bw_hz = getattr(tx.components[0], "bandwidth_hz", None)
+        bw_norm = None if not bw_hz else min(max(float(bw_hz) / float(fs), 1e-3), 1.0)
+        iq = generate_emitter(tx.id, rng, length=len(n),
+                              bandwidth_normalized=bw_norm)["iq"]
     elif tx.id == "target_qpsk":
         iq = generate_baseband("QPSK", len(n), rng=rng, bandwidth_normalized=0.5)
     else:

@@ -159,8 +159,18 @@ def _generate_preset(tx, fs, n, seed):
     rng = np.random.default_rng((seed ^ 0x9E3779B9 ^ zlib.crc32(name.encode())) & 0xFFFFFFFF)
     c = tx.components[0]
     gen = EMITTERS[name][0]
-    kw = {"bw": max(c.bandwidth_hz / fs, 1e-6)} if "bw" in inspect.signature(gen).parameters else {}
-    out = generate_emitter(name, rng, length=len(n), **kw)
+    # 带宽（2026-10-09「生成器带宽补全」）：数据集走的就是这条路径（gen_dataset.py:615
+    # 直接调 runner.run_scenario），而它以前只给「受理 bw 形参」的生成器传 bw → 噪声类/
+    # 工业脉冲类/微波炉等完全忽略、蓝牙/锯齿/Zigbee 等带外溢出，实测 OBW99 是标称的 4~24
+    # 倍且 d2/d3/d4 分别有 12/0/25 个源的频带越出接收通带（benchmark_v3/_an_lna_obw.txt）。
+    # `bandwidth_normalized` 由 generate_emitter 统一兜底（软带限），覆盖全部 19 类。
+    # 只对 role=interference 生效：目标的公开先验 target_bw_normalized 取自实测表（≈0.352），
+    # 一旦给目标也加带限反而会与先验不一致，且会动到参考直减链路的基线。
+    bw_norm = None
+    if getattr(tx, "role", None) == "interference":
+        bw_norm = max(c.bandwidth_hz / fs, 1e-6)
+    kw = {"bw": bw_norm} if (bw_norm is not None and "bw" in inspect.signature(gen).parameters) else {}
+    out = generate_emitter(name, rng, length=len(n), bandwidth_normalized=bw_norm, **kw)
     iq = np.asarray(out["iq"], dtype=complex)
     if len(iq) != len(n):                    # 防御：个别生成器长度不足时补零/截断
         iq = np.pad(iq, (0, max(0, len(n) - len(iq))))[:len(n)]

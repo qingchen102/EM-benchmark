@@ -16,6 +16,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import inspect
+
 import numpy as np
 
 _V2SIM = Path(__file__).resolve().parents[3] / "benchmark_v2" / "simulation"
@@ -24,6 +26,36 @@ for _p in (str(_V2SIM), str(_V2SIM.parent)):
         sys.path.insert(0, _p)
 
 from em_signal_simulator.baseband import generate_baseband, measure_obw99  # noqa: E402
+
+# ---------------- 带宽落地：让实测 OBW99 跟住请求带宽（2026-10-09 新增） ----------------
+# 背景：`benchmark_v3/_an_lna_obw.txt` 体检出多类辐射体完全忽略 bw —— Noise_jam 实测/标称
+# 24.2×、VFD 9.7×、GNSS_spoof 9.0×、Microwave 8.2×、Corona 7.9×、Bluetooth 5.0×、WiFi 4.1×、
+# Zigbee 2.6×；DECT 反向只有 0.25×；且 d2/d3/d4 分别有 27/37、11/28、39/51 个源的频带越出
+# 接收通带(±810 kHz)。这里做两件事：① 给忽略 bw 的生成器补上真实带限；
+# ② 在 generate_emitter 里用「结构性参数 + 软带限」双保险兜住全部 19 类。
+BW_TAPER = 0.05   # 软带限过渡带宽度上限（归一化到 fs；实际会限到半带宽的一半）
+BW_MIN = 1e-3
+# 语义上「没有带宽」的类：纯点频。给它做带限会把单音直接抹掉（实测 OBW99 变成噪声），
+# 因此豁免——保持生成器原样，真值侧带宽一律用实测值（≈ 窗泄漏宽度）。
+BW_EXEMPT = frozenset({"Tone_jam"})
+
+
+def band_limit(iq, bw, taper=BW_TAPER):
+    """Hann 软带限到 |f| <= bw/2（bw = 归一化全宽）。
+
+    请求宽度大于信号自身结构宽度时只会削旁瓣；小于时把两侧能量压掉，
+    使 `measure_obw99` 跟住请求带宽。输入为复基带一维数组。
+    """
+    x = np.asarray(iq)
+    if x.size == 0:
+        return x
+    b = float(np.clip(bw, BW_MIN, 1.0))
+    # 过渡带必须远窄于半带宽：否则软带限的斜坡会外溢，实测 OBW99 ≈ 请求 + 过渡带
+    t = max(min(taper, 0.06 * b), 1e-6)
+    f = np.abs(np.fft.fftfreq(x.shape[-1]))
+    # 掩模：f <= b/2 - t 全通、f >= b/2 全阻（斜坡宽 = t），使实测 OBW99 落在 b 内
+    soft = np.clip((b / 2.0 - f) / t, 0.0, 1.0)
+    return np.fft.ifft(np.fft.fft(x) * soft)
 
 
 # ---------------- 蓝牙类（v2 已证） ----------------
@@ -109,12 +141,12 @@ def gen_gnss_jam_impl(rng, length, bw, cli):
     t = np.arange(dur)
     shift = float(rng.uniform(0, 0.01))
     x[:dur] += np.exp(1j * 2.0 * np.pi * (f * t + 0.5 * shift * t * t))
-    return x
+    return band_limit(x, bw)
 
 
 def gen_gnss_spoof(rng, length, bw=0.12):
     """GNSS 欺骗：含 GPS 扩频码（合法结构）但在错误频偏/时延，需源级区分。"""
-    return gen_gps_dsss(rng, length, chip_rate=0.12)
+    return gen_gps_dsss(rng, length, chip_rate=float(np.clip(bw / 1.6, 0.01, 0.5)))
 
 
 # ---------------- 城市日用/商用信号 ----------------
@@ -126,19 +158,22 @@ def gen_microwave(rng, length, burst=(40, 120), gap=(60, 140), bw=0.30):
         d = min(int(rng.integers(*burst)), length - pos)
         seg = rng.standard_normal(d) + 1j * rng.standard_normal(d)
         # 宽带噪声近似高斯，无调制结构
-        x[pos:pos + d] += seg
+        x[pos:pos + d] += band_limit(seg, bw)
         pos += d + int(rng.integers(*gap))
         if pos >= length:
             break
     return x
 
 
-def gen_dect(rng, length, n_frames=3, frame=0.55, dwell_frame=0.4):
+def gen_dect(rng, length, n_frames=3, frame=0.55, dwell_frame=0.4, bw=None):
     """DECT 无绳电话：TDMA 帧突发（固定帧长 ~0.55，随机帧起始）。"""
     x = np.zeros(length, dtype=complex)
     for k in range(n_frames):
         d = int(frame * length)
-        seg = generate_baseband("GFSK", d, rng=rng, bandwidth_normalized=0.05)
+        # GFSK 的 bandwidth_normalized 是赋形带宽，实测 OBW99 约为它的 0.55 倍
+        # （实测标定，见 _an_emit_bw.txt）→ 反向放大 1.8 倍才能让实测跟住请求值
+        g = 0.05 if bw is None else float(np.clip(bw * 1.8, BW_MIN, 0.45))
+        seg = generate_baseband("GFSK", d, rng=rng, bandwidth_normalized=g)
         start = int(rng.integers(0, length // 8))
         x[start:start + d] += seg if start + d <= length else seg[:length - start]
     return x
@@ -177,7 +212,8 @@ def gen_swept_baseband(rng, length, bw, period):
 
 def gen_noise_jam(rng, length, bw=0.6):
     """噪声式压制：宽带高斯（噪声干扰）。"""
-    return (rng.standard_normal(length) + 1j * rng.standard_normal(length)) / np.sqrt(2.0)
+    x = (rng.standard_normal(length) + 1j * rng.standard_normal(length)) / np.sqrt(2.0)
+    return band_limit(x, bw)
 
 
 def gen_tone_jam(rng, length, bw=0.0):
@@ -204,7 +240,7 @@ def gen_welder(rng, length, bw=0.30):
             seg = (rng.standard_normal(d) + 1j * rng.standard_normal(d))
             x[pos:pos + d] += seg * rng.uniform(0.6, 1.0)
             pos += d + int(rng.integers(10, 60))         # 弧段间隔（引弧间隙）
-    return x
+    return band_limit(x, bw)
 
 
 def gen_vfd_noise(rng, length, bw=0.25):
@@ -219,7 +255,7 @@ def gen_vfd_noise(rng, length, bw=0.25):
         x[pos:pos + d] += (rng.standard_normal(d) + 1j * rng.standard_normal(d)) \
             * rng.uniform(0.7, 1.0)
         pos += period + int(rng.integers(-jitter, jitter + 1))
-    return x
+    return band_limit(x, bw)
 
 
 def gen_corona(rng, length, bw=0.20, fs=4e6):
@@ -233,7 +269,7 @@ def gen_corona(rng, length, bw=0.20, fs=4e6):
         s0, s1 = max(c - d // 2, 0), min(c + d // 2, length)
         seg = (rng.standard_normal(s1 - s0) + 1j * rng.standard_normal(s1 - s0))
         x[s0:s1] += seg * rng.uniform(0.5, 1.0)
-    return x
+    return band_limit(x, bw)
 
 
 # ---------------- 辐射体注册表（城市低空覆盖矩阵） ----------------
@@ -296,23 +332,48 @@ INTENT = {
 }
 
 
-def generate_emitter(name: str, rng: np.random.Generator, length: int = 1024, **kw) -> dict:
+def generate_emitter(name: str, rng: np.random.Generator, length: int = 1024,
+                     bandwidth_normalized=None, **kw) -> dict:
     """按辐射体名生成波形 + 实测 OBW99 元数据（修复骨架版 P0-2：带宽不再用名义常数）。
 
-    - emitters 的生成器签名为 (rng, length, **kw)；bw 若传入会在生成器内使用
-      （仅对接受 bw 参数者生效），否则用默认。
+    - emitters 的生成器签名为 (rng, length, **kw)。
+    - **bandwidth_normalized 给定时**（= 设计要求的归一化全宽，2026-10-09 新增）：
+      ① 对接受 `bw` 的生成器传 `bw=bandwidth_normalized`；
+      ② 对接受 `band` / `pkt_bw`（跳频/突发的窗口总跨度）的传同一个值；
+      ③ 无论生成器是否结构化支持，生成后一律 `band_limit` 到该宽度（软带限兜底）；
+      ④ `BW_EXEMPT` 里的类（纯点频）豁免不搞——给它带限会把单音抹掉。
+      这样「设计带宽 == 实测 OBW99」，真值带宽可以放心用实测值。
     - **带宽、调制标号、意图**都来自实测/注册表，供 GT 使用（与 v2 OBW99 一致）。
     """
     gen, mod, scene = EMITTERS[name]
+    req = None if bandwidth_normalized is None else float(
+        np.clip(bandwidth_normalized, BW_MIN, 1.0))
+    req_eff = None if name in BW_EXEMPT else req
+    if req_eff is not None:
+        try:
+            params = inspect.signature(gen).parameters
+        except (TypeError, ValueError):
+            params = {}
+        if "bw" in params:
+            kw.setdefault("bw", req_eff)
+        for pname in ("band", "pkt_bw"):
+            if pname in params:
+                kw.setdefault(pname, req_eff)
     iq = gen(rng, length, **kw)
+    if req_eff is not None:
+        iq = band_limit(iq, req_eff)
     # 实测占用带宽：对纯无结构宽带用 OBW99 会虚高，这里统一测一次并 clamp
     obw = float(measure_obw99(iq)) if measure_obw99(iq) > 0 else 1.0
     if obw > 1.0:
         obw = 1.0
     intent = INTENT.get(name, "benign")
-    return {"iq": iq, "emitter": name, "modulation": mod,
-            "bandwidth_normalized": round(obw, 3), "scene": scene,
-            "intent": intent, "is_jamming": intent == "malicious"}
+    out = {"iq": iq, "emitter": name, "modulation": mod,
+           "bandwidth_normalized": round(obw, 3), "scene": scene,
+           "intent": intent, "is_jamming": intent == "malicious"}
+    if req is not None:
+        out["bandwidth_requested_normalized"] = round(req, 4)
+        out["bandwidth_applied"] = req_eff is not None
+    return out
 
 
 if __name__ == "__main__":
