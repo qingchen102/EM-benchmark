@@ -20,12 +20,16 @@
                       "position_m": [x, y],                    # S1/S2 评定位
                       "kind": "...",                           # T2 体制/溯源
                       "intent": "malicious|incidental|benign", # T3 意图（可选）
-                      "is_spoof": bool}, ...]}                 # T3 欺骗（可选）
+                     "is_spoof": bool}, ...]}                 # T3 欺骗（可选）
+（2026-10-11 起：**Agent 侧不再输出 `num_interferers`** —— 契约里没有计数字段，runner 用
+`len(interferers)` 派生（见 run_capture_agent.py 的 has_final_answer_capture / _sanitize）。
+评分端读的仍是下面这个由 runner 写出的文件格式，注册口径不变。）
 
-可选元字段：abstained(bool) —— 模型写了负哨兵（= 拒答，prompt 明令禁止）时由
-runner 置真。评测端额外报 abstain_n / abstain_rate / detection_hit_excl_abstain，
-但 **detection_hit 仍是含拒答的注册口径**；旧答案目录没有该字段时，靠同目录
-_run_log.json 的 raw_output 反推（见 _load_abstain_ids）。
+可选元字段：abstained(bool) —— 计数不可用且没列出任何干扰条目（= 真拒答）时由 runner
+置真；count_field_invalid(bool) —— 计数字段坏（负数哨兵 / 非数字）但列出了条目，按条目数
+计分。评测端额外报 abstain_n / abstain_rate / detection_hit_excl_abstain 与
+count_field_invalid_n，但 **detection_hit 仍是含拒答的注册口径**；旧答案目录没有该字段时，
+靠同目录 _run_log.json 的 raw_output 反推（见 _load_abstain_ids）。
 
 缺省 --answers：从 GT 构造"该 S 级可见性下的理想答案"回放，验证评分管道（应全 1.0，
 含意图/欺骗轴）。
@@ -310,6 +314,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
             ans_obj = json.loads(ans_p.read_text(encoding="utf-8"))
         abstained = isinstance(ans_obj, dict) and (
             ans_obj.get("abstained") is True or s["id"] in abstain_ids)
+        cfi = isinstance(ans_obj, dict) and ans_obj.get("count_field_invalid") is True
         if ans_obj is not None:
             # oracle-association 池化：与 S 级无关（全 GT 列表），每样本一次
             for k, v in assoc_answer(ans_obj, truth.get("interferers", [])).items():
@@ -327,6 +332,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
             r = score_answer(ans, gt_list, slevel)
             m = matrix[slevel]
             m.setdefault("abstain", []).append(1 if abstained else 0)
+            m.setdefault("cfi", []).append(1 if cfi else 0)
             for k, v in r.items():
                 if isinstance(v, list):        # 逐干扰对的 hits/aes：展平聚合
                     m.setdefault(k, []).extend(v)
@@ -348,6 +354,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
         # T3 池化指标：先取出原始计数，报告里写成比率（分母为 0 的级别不出现）
         det_hits = m.pop("detection_hit", [])
         abst_flags = m.pop("abstain", [])
+        cfi_flags = m.pop("cfi", [])
         intent_hits = m.pop("intent_hits", [])
         intent_by_gt = m.pop("intent_by_gt", None)
         s_gt = m.pop("spoof_gt", [])
@@ -366,6 +373,11 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
             if keep:
                 row["detection_hit_excl_abstain"] = round(float(np.mean(keep)), 3)
                 row["detection_denom_excl_abstain"] = len(keep)
+        if cfi_flags and any(cfi_flags):
+            # 计数字段写坏但模型确实列出了条目：旧 runner 会把它们清成 0，本口径计数不变，
+            # 只把“摘要写错”这件事单列出来（提醒：该修 prompt，不是改分数）
+            row["count_field_invalid_n"] = int(sum(cfi_flags))
+            row["count_field_invalid_rate"] = round(float(np.mean(cfi_flags)), 3)
         if intent_hits:
             row["intent_accuracy"] = round(float(np.mean(intent_hits)), 3)
             row["intent_pairs"] = len(intent_hits)

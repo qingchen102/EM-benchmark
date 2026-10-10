@@ -1,0 +1,13 @@
+﻿PASS patched_validator
+PASS empty_ok_when_no_candidate
+PASS empty_invalid_when_candidates
+PASS nonempty_ok
+PASS count_only_invalid
+PASS not_dict_invalid
+PASS reset_clears
+PASS recorder_candidates
+PASS recorder_passthrough
+PASS recorder_classify
+PASS recorder_kwargs_passthrough
+
+all passed

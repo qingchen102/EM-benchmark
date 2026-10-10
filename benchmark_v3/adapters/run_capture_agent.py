@@ -214,13 +214,15 @@ Measurement-to-answer mapping:
   estimate_position on a narrow band at freq_offset_hz=0 to identify the target's
   own position, then pick the interferer hypothesis that is NOT the target.
   With a single station, position is barely observable — best effort only.
-- num_interferers <- **estimate_sources_by_spatial_clustering: K = len(sources)**
-  (the support-gated spatial source count). Cross-check against spectral
-  candidates; use len(candidates) only as an UPPER bound with the per-candidate
-  scoring (perp_rms / deflation / triads) to judge how many are real. At D2 the
-  scene holds exactly 2 co-channel radiators. The target itself is a wideband
-  signal at ~0 Hz and is NOT an interferer — never report one of its spectral
-  lobes or the filter edges as an interferer.
+- interferers     <- the entries you actually measured: start from
+  classify_extracted_waveform's ready-to-copy items, cross-check with the spectral
+  candidates, and MERGE entries describing the same physical radiator (same band_hz
+  plus nearby bearing/position; a noise-like source can split into 2-3 adjacent
+  sub-bands). At D2 two co-channel ISM radiators are present by design, but the raw
+  candidate board may list echoes or fused bands, so len(candidates) is an UPPER
+  bound, never the answer. The target itself is a wideband signal at ~0 Hz and is
+  NOT an interferer — never report one of its spectral lobes or the filter edges as
+  an interferer.
 - intent / is_spoof <- judged from the identified kind and its measured behaviour
 
 Intent classification (answer for EACH interferer):
@@ -234,12 +236,21 @@ Intent classification (answer for EACH interferer):
   with wrong parameters); otherwise false
 
 Output ONLY valid JSON with schema:
-{"num_interferers": <0..3>,
- "interferers": [{"freq_offset_hz": <Hz>, "kind": "<exact catalog name>",
+{"interferers": [{"freq_offset_hz": <Hz>, "kind": "<exact catalog name>",
                   "intent": "malicious|incidental|benign", "is_spoof": <bool>,
-                  "doa_deg": <world azimuth, deg>, "position_m": [<x_m>, <y_m>]}, ...]}
+                  "doa_deg": <world azimuth, deg>, "position_m": [<x_m>, <y_m>]}, ...],
+ "confidence": "high|low"}
 Rules:
-- num_interferers must equal the number of entries in interferers.
+- There is NO num_interferers field: the harness sets the count to len(interferers).
+  Do not output any count, sentinel or placeholder.
+- The interferers list MUST NOT be empty when you measured candidates: if
+  estimate_sources_by_spatial_clustering / extract_source_waveforms /
+  classify_extracted_waveform returned any candidate, list the ones you judge real
+  (merge duplicates of the same radiator). An empty list is correct ONLY when the
+  gated residual peak list was empty (no interferer visible).
+- Ambiguous evidence is still an answer: commit your best list and set
+  "confidence": "low". A committed best guess is scored on its merits; a missing or
+  empty answer is a guaranteed miss.
 - ALWAYS include every key per interferer (doa_deg / position_m best effort even
   when only one station is available).
 - HARD TOOL BUDGET — you have at most 10 rounds and you MUST follow this recipe.
@@ -248,9 +259,9 @@ Rules:
     Round 1: analyze_spectrum_station (any ONE station) -> band candidates
     Round 2: estimate_band_occupancy_by_correlation (same station) -> strip target
     Round 3: estimate_sources_by_spatial_clustering(on_residual=true) -> the
-             candidate board + K = len(sources) (spatial source count; needs a
-             station subset with >= 3 stations — S1/S2. On S0 fall back to the
-             per-band DOA/feature route below.)
+             candidate board (needs a station subset with >= 3 stations — S1/S2).
+             len(candidates) / len(sources) are UPPER bounds, never the count; S0
+             falls back to the per-band DOA/feature route below.)
     Round 4: extract_source_waveforms() -> per-candidate CNN-ready waveforms
     Round 5: classify_extracted_waveform() -> READY-TO-COPY answer fields for
              EVERY candidate {freq_offset_hz, kind, intent, is_spoof,
@@ -265,7 +276,7 @@ Rules:
             over a LOCAL median floor" AND "spatial coherence >= 0.6" in a +-20 kHz
             window, so spatially-white residual energy (which used to appear as
             spurious 46-49 dB "peaks") is excluded. An EMPTY list means no
-            interferer — report num_interferers = 0; do NOT invent one.
+            interferer — answer with an empty interferers list; do NOT invent one.
         3b. MERGE BEFORE COUNTING: one physical emitter can split into several
             adjacent entries (a noise-like source yields 2-3 sub-bands). Merge
             entries whose band_hz ranges touch or whose freq_offset_hz differ by
@@ -284,17 +295,18 @@ Rules:
     Round 7+: NO MORE TOOL CALLS. Write the final JSON answer NOW — the
               classify items already contain every field the answer schema
               needs. If evidence is partial, still answer with your best
-              estimates for the bands you measured.
+              estimates for the bands you measured and set "confidence": "low".
+              Never leave the interferers list empty after extracting candidates.
 - REPORT ONLY MEASURED BANDS: report exactly the merged coherent residual bands
   you measured (or the classifier candidates), nothing else. Do not invent a band
   from a spectral lobe of the wideband target (the target is at ~0 Hz and is
   NEVER an interferer), do not add a "safety" extra entry, and do not report the
   same emitter twice under two nearby frequencies. If the measurement shows no
-  coherent band, num_interferers = 0 is the correct answer.
-- NEVER use a negative num_interferers (e.g. -1) or any sentinel to signal
-  "not sure" — that is an invalid answer and will be discarded. If unsure of
-  the count, report the peaks you measured; if unsure of the kind, use the
-  closest catalog match.
+  coherent band, an empty interferers list is the correct answer.
+- Do NOT output a num_interferers field at all: the harness counts your interferers
+  list. Uncertainty goes in "confidence": "low", while the list, the bands and the
+  kinds stay your best measured values. Never answer with an empty list when you
+  extracted candidates — that is a guaranteed miss.
 - CO-CHANNEL RESOLUTION: when the wideband target overlaps the interferers (spectrum
   is one fused blob around 0 Hz), FIRST call estimate_band_occupancy_by_correlation
   on a station. If band_occupied_beyond_target is true, re-run
@@ -336,9 +348,16 @@ REPAIR_PROMPT_CAPTURE = (
     "Your previous reply did not contain a valid final JSON answer. Reply NOW with "
     "ONLY the final JSON object matching this schema — no prose, no markdown, no "
     "reasoning, no tool calls:\n"
-    '{"num_interferers": 1, "interferers": [{"freq_offset_hz": 150000.0, '
-    '"kind": "Zigbee", "intent": "incidental", "is_spoof": false, '
-    '"doa_deg": 35.0, "position_m": [-650.0, -1410.0]}]}'
+    '{"interferers": [{"freq_offset_hz": 150000.0, "kind": "Zigbee", '
+    '"intent": "incidental", "is_spoof": false, "doa_deg": 35.0, '
+    '"position_m": [-650.0, -1410.0]}], "confidence": "high"}\n'
+    "There is NO num_interferers field: the harness counts the interferers list. "
+    "If your measurement already returned candidates (see the "
+    "estimate_sources_by_spatial_clustering / extract_source_waveforms / "
+    "classify_extracted_waveform outputs above), the list MUST NOT be empty — copy "
+    "the items you judge real, merging duplicates of the same radiator. An empty "
+    "list is correct ONLY if the gated residual peak list was empty. If you are "
+    'unsure, commit your best entries and set "confidence": "low".'
 )
 
 INTENTS = ("malicious", "incidental", "benign")
@@ -396,15 +415,34 @@ def _to_f(value, default=None):
 def _sanitize(pred: dict) -> dict:
     """把模型答案清洗成 eval_dataset 认可的 schema（缺字段不伪造，评分端按口径处理）。
 
-    `abstained`：模型写了负数（= prompt 明令禁止的哨兵 -1）时为 True。负数会被清成
-    0，于是在 detection 上与“判定无干扰”不可区分且必然判错——所以把这次拒答单列
-    出来，评测端可同时报“含拒答 / 排除拒答”两个 detection
-    （见 eval_dataset._load_abstain_ids 与报告里的 abstain_n）。
+    `abstained`：计数字段不可用（负数哨兵 / 非数字 / 缺失）**且一条干扰条目都没列**时为
+    True —— 即真正的“拒答”，评测端单列出 abstain_n / detection_hit_excl_abstain。
+    `count_field_invalid`：模型**确实写了**一个坏计数（负数哨兵 / 非数字）但 `interferers`
+    里有条目 —— 说明模型测到了东西只是摘要写错；这种答案按条目数计。
+    2026-10-10 起答案契约不再要求计数字段（`num_interferers = len(interferers)` 由 harness
+    从列表派生），因此“缺计数”不再算 count_field_invalid。`confidence` 若有则原样带出。
     """
-    n_raw = _to_f(pred.get("num_interferers"), 0.0) if isinstance(pred, dict) else 0.0
-    abstained = bool(n_raw is not None and n_raw < 0)
-    n = max(0, int(n_raw or 0))
+    raw_n = pred.get("num_interferers") if isinstance(pred, dict) else None
+    n_raw = _to_f(raw_n)
     items_raw = pred.get("interferers") if isinstance(pred, dict) else None
+    items_raw = items_raw if isinstance(items_raw, list) else []
+    count_ok = n_raw is not None and n_raw >= 0
+    # 计数字段坏了（负数哨兵 / 非数字 / 缺失）但模型确实列出了干扰条目：按条目数计，
+    # 2026-10-10：契约已去掉计数字段，答案以 `interferers` 列表为准（n = len(items)）。
+    # 只有模型**主动写了**一个坏计数（负数哨兵 / 非数字）时才标记 count_field_invalid；
+    # 绝不因为摘要字段写错就把整份测量丢掉（旧版 d4_00006 写了 "III"，items_raw[:n]
+    # 把它 2 条真测量清空）。显式计数仅在列表为空时保留（“声称 N 个但一条没列”）。
+    count_field_invalid = (raw_n is not None) and (not count_ok) and len(items_raw) > 0
+    if items_raw:
+        n = len(items_raw)
+    elif count_ok:
+        n = int(n_raw)
+    else:
+        n = 0
+    # 2026-10-11：契约已无计数字段，**空列表本身是合法答案**（“测到的确为零”）。
+    # 只有「工具已给出候选、模型却交空列表」才是真拒答（repair 轮也没救回来）；
+    # 旧写法 `(not count_ok) and not items_raw` 会把 D1/D3 的零干扰样本误标成拒答。
+    abstained = (not items_raw) and (_EVIDENCE.get("candidates", 0) > 0)
     items_raw = items_raw if isinstance(items_raw, list) else []
     items = []
     for p in items_raw[:n]:
@@ -425,7 +463,12 @@ def _sanitize(pred: dict) -> dict:
             if x is not None and y is not None:
                 it["position_m"] = [x, y]
         items.append(it)
-    return {"num_interferers": n, "interferers": items, "abstained": abstained}
+    out = {"num_interferers": n, "interferers": items, "abstained": abstained,
+           "count_field_invalid": count_field_invalid}
+    conf = str(pred.get("confidence", "")).strip().lower() if isinstance(pred, dict) else ""
+    if conf in ("high", "low"):
+        out["confidence"] = conf
+    return out
 
 
 # ---- monkey-patch：capture 域 prompt / 观测格式 / 工具（零改 v2 冻结文件） ----
@@ -434,6 +477,67 @@ ev2.REPAIR_PROMPT = REPAIR_PROMPT_CAPTURE
 ev2._format_observation = _format_observation_capture
 ev2.TOOL_FUNCTIONS_V2 = capture_tools.TOOL_FUNCTIONS
 ev2.TOOL_SCHEMAS_V2 = capture_tools.TOOL_SCHEMAS
+
+# —— 反拒答增强（2026-10-10）：记录工具证据 + 校验“测到候选就不许交空列表”。
+# 背景：D2/D3/D4 约 1/3~2/5 的样本在被迫作答轮写 `{"num_interferers": -1,
+# "interferers": []}`（契约外哨兵），被 _sanitize 清成 0 → detection 归零。
+# 修法（结构性，而非在 prompt 里点名禁止哨兵——实测那条路会反噬）：
+#   ① 答案契约去掉计数字段，计数由 harness 从 interferers 列表派生；
+#   ② 校验器：本次测量抽到了候选（聚类 candidates>=1）就要求列表非空，
+#      否则触发 repair 轮（repair prompt 让模型回抄自己的工具输出）。
+_EVIDENCE: dict = {"candidates": 0, "classify": None, "peaks": []}
+
+
+def _reset_evidence() -> None:
+    _EVIDENCE["candidates"] = 0
+    _EVIDENCE["classify"] = None
+    _EVIDENCE["peaks"] = []
+
+
+def _record_evidence(name: str, out) -> None:
+    if not isinstance(out, dict) or out.get("error"):
+        return
+    if name == "estimate_sources_by_spatial_clustering":
+        _EVIDENCE["candidates"] = len(out.get("candidates") or [])
+    elif name == "classify_extracted_waveform":
+        _EVIDENCE["classify"] = out
+    elif name == "estimate_band_occupancy_by_correlation":
+        _EVIDENCE["peaks"] = [p.get("freq_offset_hz") for p in (out.get("residual_peaks") or [])
+                              if isinstance(p, dict)]
+
+
+def _recording_tools(table: dict) -> dict:
+    """包住工具表，把每次输出记进 _EVIDENCE（供校验器/诊断用，不改工具行为）。"""
+    wrapped = {}
+    for nm, fn in table.items():
+        def _make(fn=fn, nm=nm):
+            def _call(*args, **kwargs):
+                out = fn(*args, **kwargs)
+                _record_evidence(nm, out)
+                return out
+            return _call
+        wrapped[nm] = _make()
+    return wrapped
+
+
+def has_final_answer_capture(pred) -> bool:
+    """v3 答案有效性：interferers 必须是列表；本次测到候选时不得交空列表。
+
+    与 v2 `_has_final_answer` 的差别：不再要求 `num_interferers` 可解析（契约已去掉
+    该字段），改为“列表为主”；并在聚类抽到候选时把空列表判为无效 → 触发 repair 轮。
+    """
+    if not isinstance(pred, dict):
+        return False
+    items = pred.get("interferers")
+    if not isinstance(items, list):
+        return False
+    if len(items) == 0:
+        return _EVIDENCE["candidates"] <= 0
+    return True
+
+
+ev2.TOOL_FUNCTIONS_V2 = _recording_tools(capture_tools.TOOL_FUNCTIONS)
+ev2._has_final_answer = has_final_answer_capture
 
 
 def run(dataset_root: Path, slevel: str, answers_dir: Path, agent,
@@ -510,6 +614,7 @@ def run(dataset_root: Path, slevel: str, answers_dir: Path, agent,
         # 之前逐字相同，历史基线可直接比较）。
         ev2.SYSTEM_PROMPT = system_prompt_for(prior["events"])
 
+        _reset_evidence()
         t0 = time.time()
         pred_raw, calls, raw, round_log = agent.diagnose(capture, prior)
         pred = _sanitize(pred_raw)

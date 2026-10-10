@@ -1,0 +1,168 @@
+{
+  "old": {
+    "dir": "D:\\srtp\\EM-benchmark\\benchmark_v3\\dataset_d2\\answers_S2_agent_bwfix",
+    "n": 50,
+    "n_answered": 50,
+    "detection_hit": 0.44,
+    "abstain_n": 20,
+    "abstain_rate": 0.4,
+    "excl_detection": 0.733,
+    "denom_excl": 30,
+    "count_field_invalid_n": 0,
+    "low_conf_n": 0,
+    "count_dist": {
+      "0": 22,
+      "1": 4,
+      "2": 22,
+      "3": 2
+    },
+    "gt_dist": {
+      "1": 2,
+      "2": 48
+    }
+  },
+  "new": {
+    "dir": "D:\\srtp\\EM-benchmark\\benchmark_v3\\dataset_d2\\answers_S2_agent_noneg",
+    "n": 50,
+    "n_answered": 50,
+    "detection_hit": 0.44,
+    "abstain_n": 19,
+    "abstain_rate": 0.38,
+    "excl_detection": 0.71,
+    "denom_excl": 31,
+    "count_field_invalid_n": 0,
+    "low_conf_n": 0,
+    "count_dist": {
+      "0": 19,
+      "1": 6,
+      "2": 22,
+      "3": 3
+    },
+    "gt_dist": {
+      "1": 2,
+      "2": 48
+    }
+  },
+  "changed": [
+    [
+      "d2_00001",
+      0,
+      2,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00006",
+      2,
+      0,
+      2,
+      false,
+      true
+    ],
+    [
+      "d2_00007",
+      0,
+      2,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00008",
+      0,
+      3,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00010",
+      2,
+      0,
+      2,
+      false,
+      true
+    ],
+    [
+      "d2_00015",
+      3,
+      2,
+      2,
+      false,
+      false
+    ],
+    [
+      "d2_00018",
+      3,
+      2,
+      2,
+      false,
+      false
+    ],
+    [
+      "d2_00019",
+      1,
+      0,
+      2,
+      false,
+      true
+    ],
+    [
+      "d2_00027",
+      0,
+      3,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00030",
+      0,
+      1,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00035",
+      2,
+      0,
+      2,
+      false,
+      true
+    ],
+    [
+      "d2_00036",
+      0,
+      1,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00040",
+      0,
+      1,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00045",
+      0,
+      3,
+      2,
+      true,
+      false
+    ],
+    [
+      "d2_00048",
+      2,
+      0,
+      2,
+      false,
+      true
+    ]
+  ]
+}
