@@ -4,7 +4,9 @@
 > 面向问题：**① 效果如何　② 场景是否有意义与多样性　③ 仅就仿真而言，它现在算不算一个合格的 benchmark**
 > 数据来源：本报告所有数字均由 `benchmark_v3/adapters/` 下的脚本现场重算（脚本名与产物文件名逐条标注），无一处引自记忆或旧文档。
 >
-> ⚠️ **口径提示（2026-10-10 补）**：§2–§8 是 2026-10-09 的快照。此后依次发生了**波形带限修复 → 四档重放换装 → CNN 重训（val_acc 0.882）→ D1 补换**。**现行四档 agent 基线**（各 50 样本、注册口径；**2026-10-10 夜拒答结构性修复后**）为 **D1×S0 0.92 / D2×S2 0.54 / D3×S2 0.48 / D4×S2 0.36，四档拒答全部为 0**（修复前为 0.96 / 0.44 / 0.46 / 0.22，拒答 0/20/16/18、排除后 0.96/0.733/0.618/0.344），机制与证据见文末「补充（2026-10-10 夜）」，机制与证据见文末「补充（2026-10-09 深夜）」与「补充（2026-10-10）」，数字的机器可读版本在 `benchmark_v3/dataset_d2/BASELINE.json`。正文里“D2 四站 0.86”“D3/D4 零考生成绩”等说法**均已过时**，保留原样只作为 10-09 那一天的记录。
+> ⚠️ **口径提示（2026-10-10 补）**：§2–§8 是 2026-10-09 的快照。此后依次发生了**波形带限修复 → 四档重放换装 → CNN 重训（val_acc 0.882）→ D1 补换 → 拒答结构性修复**。**现行四档 agent 基线**（各 50 样本、注册口径；**2026-10-11 拒答修复后**）为 **D1×S0 0.92 / D2×S2 0.54 / D3×S2 0.48 / D4×S2 0.36，四档拒答全部为 0**（修复前为 0.96 / 0.44 / 0.46 / 0.22，拒答 0/20/16/18、排除后 0.96/0.733/0.618/0.344），机制与证据见文末「补充（2026-10-10 夜）」与「补充（2026-10-10）」，数字的机器可读版本在 `benchmark_v3/dataset_d2/BASELINE.json`。正文里“D2 四站 0.86”“D3/D4 零考生成绩”等说法**均已过时**，保留原样只作为 10-09 那一天的记录。
+>
+> ⚠️ **路径提示（2026-10-11）**：仓库做过一次大清理。本报告中出现的 `benchmark_v3/_regen_*`、`_stale_*`、`_old_*`、`_ab_d2`、`_v3test`、`dataset_d2_meta_qa2` 等一次性目录**已删除**；仅 `benchmark_v3/_archive/_pre_bw_20261009/` 与 `_archive/_pre_noise_20261010/` 保留。诊断脚本已归到 `benchmark_v3/adapters/diag/` 与 `diag/legacy/`，原始输出统一在 `benchmark_v3/evidence/`（见 `benchmark_v3/adapters/diag/README.md`）。
 ---
 
 ## 0. 三句话结论
@@ -102,7 +104,7 @@
 
 也就是说：**D2 的体制/频偏轴上，即使把考生的配对错误全部抹掉，也就 0.39 / 0.19。** 这不是考生的问题，是"用现有仪器 + 现有标签口径，这道题在这些轴上本身就考不高"。含义很重要：拿 D2 的 0.412 去和 D1 的 0.50 比会误导——两个天花板完全不同。
 
-**顺手纠正一个假警报**：`_audit_gaps.txt` 曾写“D2 有据可查的 agent 评测只有 5 个样本……HANDOVER 的 0.860/0.412/… 若无对应 answers 即为**已丢失的历史数字**”。**不成立**：`benchmark_v3/dataset_d2/answers_S2_agent_full`（50 样本）本轮重评**逐项复现**上述注册值（det 0.860 / kind 0.412 / freq 0.200 / pos 0.459 / intent 0.682）。那条审计当时跑在 50 样本重评落盘之前。
+**顺手纠正一个假警报**：`benchmark_v3/evidence/_audit_gaps.txt` 曾写“D2 有据可查的 agent 评测只有 5 个样本……HANDOVER 的 0.860/0.412/… 若无对应 answers 即为**已丢失的历史数字**”。**不成立**：`benchmark_v3/dataset_d2/answers_S2_agent_full`（50 样本）本轮重评**逐项复现**上述注册值（det 0.860 / kind 0.412 / freq 0.200 / pos 0.459 / intent 0.682）。那条审计当时跑在 50 样本重评落盘之前。
 
 ### 4.3 D3/D4——数据已就位，**零考生成绩**
 
@@ -116,7 +118,7 @@ D1 的 `answers_S0` 在 S1/S2 下 `pos_hits = 0.0`（`pos_errs` 1353 m）**不�
 
 ## 5. 跨档几何是否分离（原问题 1）
 
-`_audit_crosslevel.py` 复跑结果（`_audit_crosslevel.txt`）：
+`_audit_crosslevel.py` 复跑结果（`benchmark_v3/evidence/_audit_crosslevel.txt`）：
 
 ```
 d1 vs d2: 目标位置相同 0/50      d2 vs d3: 0/50
@@ -162,9 +164,9 @@ seed 逐位相同(d3 vs d4) = False
 ### 8.1 已确认的机理（读码 + 实测）
 
 - **共道多源被"掩蔽"切开**：`capture_tools.py:977 _beamform_extract_station(station, src_positions, lo, hi, diag_load=0.05)` 会按候选频带硬掩蔽（`mask=(f>=max(lo,-fs*0.45))&(f<=min(hi,fs*0.45))`）。
-- **候选频带是"共道多源并集"，不是任何单个源的频带**：`_probe_dirband.py` 实测（`_diag_d2_off.json` 的 55 对认领）→ **34.5%（19/55）的源真载频落在候选带之外**，被掩蔽直接切掉，典型样本 d2_00001 的蓝牙源约 **95% 能量在分类前就没了**。
+- **候选频带是"共道多源并集"，不是任何单个源的频带**：`_probe_dirband.py` 实测（`benchmark_v3/evidence/_diag_d2_off.json` 的 55 对认领）→ **34.5%（19/55）的源真载频落在候选带之外**，被掩蔽直接切掉，典型样本 d2_00001 的蓝牙源约 **95% 能量在分类前就没了**。
 - **残差本身不干净**：d2_00001 参考直减只压了 **16.5 dB**（D1 同类样本能达到干净噪声底），残留是 11~12 dB 起伏的平坦能量，**不对准任何真值载频**。
-- **CNN 对搬频不敏感（决定性 A/B）**：装上"每源载频估计"后跑全 gate，与回退成带中心**逐位相同**（`_gate_after_carrier_fix.txt` vs `_gate_after_carrier_revert.txt`）→ ≤400 kHz 的频移对体制判别没有影响。
+- **CNN 对搬频不敏感（决定性 A/B）**：装上"每源载频估计"后跑全 gate，与回退成带中心**逐位相同**（`benchmark_v3/evidence/_gate_after_carrier_fix.txt` vs `benchmark_v3/evidence/_gate_after_carrier_revert.txt`）→ ≤400 kHz 的频移对体制判别没有影响。
 
 ### 8.2 受控对照台（`_diag_d2_off.py`，54/55 对认领，n=55 → 1 对 = 1.8pp）
 
@@ -231,15 +233,15 @@ seed 逐位相同(d3 vs d4) = False
 
 | 用途 | 脚本 | 产物 |
 |---|---|---|
-| 四档构成 / 可见性 / 答案键 | `benchmark_v3/adapters/_audit_regen.py` | `_audit_regen.txt` |
-| 跨档几何与困难设定 | `benchmark_v3/adapters/_audit_crosslevel.py` | `_audit_crosslevel.txt` |
-| envelope 文案 vs 数据 | `benchmark_v3/adapters/_check_envelope.py` | `_check_envelope.txt` |
+| 四档构成 / 可见性 / 答案键 | `benchmark_v3/adapters/diag/legacy/_audit_regen.py` | `benchmark_v3/evidence/_audit_regen.txt` |
+| 跨档几何与困难设定 | `benchmark_v3/adapters/diag/legacy/_audit_crosslevel.py` | `benchmark_v3/evidence/_audit_crosslevel.txt` |
+| envelope 文案 vs 数据 | `benchmark_v3/adapters/diag/legacy/_check_envelope.py` | `benchmark_v3/evidence/_check_envelope.txt` |
 | 各 answers 目录重评 | `eval_dataset.py <root> --answers <dir>` | `_eval_d{1,2}_*.json` |
 | D3/D4 真值回放自洽 | `eval_dataset.py ../dataset_d{3,4}` | `_eval_gt_d{3,4}.json` |
-| gate 五指标 | `cd benchmark_v3/adapters/rad_cls; python -u oracle16.py` | `_gate_after_carrier_revert.txt` |
-| 受控对照台（24 变体） | `benchmark_v3/adapters/_diag_d2_off.py` | `_diag_d2_off.json` / `_diag_d2_off_run.txt` |
-| 候选带 vs 真载频 | `benchmark_v3/adapters/_probe_dirband.py`、`_probe_dbstat.py` | `_probe_dbstat.txt` |
-| 残差 / 相干度剖面 | `benchmark_v3/adapters/_probe_rawres.py`、`_probe_cohprof.py` | 标准输出 |
+| gate 五指标 | `cd benchmark_v3/adapters/rad_cls; python -u oracle16.py` | `benchmark_v3/evidence/_gate_after_carrier_revert.txt` |
+| 受控对照台（24 变体） | `benchmark_v3/adapters/diag/legacy/_diag_d2_off.py` | `benchmark_v3/evidence/_diag_d2_off.json` / `benchmark_v3/evidence/_diag_d2_off_run.txt` |
+| 候选带 vs 真载频 | `benchmark_v3/adapters/diag/legacy/_probe_dirband.py`、`_probe_dbstat.py` | `benchmark_v3/evidence/_probe_dbstat.txt` |
+| 残差 / 相干度剖面 | `benchmark_v3/adapters/diag/legacy/_probe_rawres.py`、`_probe_cohprof.py` | 标准输出 |
 
 ---
 
@@ -255,7 +257,7 @@ seed 逐位相同(d3 vs d4) = False
 ### 数据怎么换的
 - 带宽只改波形合成，不改几何/信道/QA → 用 **frozen-channel 重放**（`regen_noise.py --src … --out …`）换装，**不重跑 RT**：d2 67.2s / d3 64.7s / d4 77.8s。
 - 总功率中位变化 **+0.02/+0.01/+0.32 dB**（平台按 `power_dbm` 定标）→ INR/SNR 标签口径仍有效；新增 `refresh_achieved()` 修掉答案键里随源拷贝而来的旧 `achieved`（**4.70 dB → 0.00**）；QA/难度/噪声统计**与换装前逐项相同**。
-- 旧数据与旧 agent 答案备份：`benchmark_v3/_pre_bw_20261009/dataset_d{2,3,4}`。
+- 旧数据与旧 agent 答案备份：`benchmark_v3/_archive/_pre_bw_20261009/dataset_d{2,3,4}`。
 
 ### 新 gate（决定性的表）
 | 口径 | 新（带宽修复 + CNN 0.882） | 旧（带宽修前，菜单噪声） | 门限 |
@@ -277,11 +279,11 @@ seed 逐位相同(d3 vs d4) = False
 - 本文件所有 **D2/D3/D4 agent 指标（含 D2×S2 0.48、D3 0.40、D4 0.24）均跑在带宽修前数据 + 泄漏修复后的工具上 → 对现行数据不再有效**，需逐档重取（API 纪律：只允许点状重跑）。
 - **⚠️ 更正（2026-10-10）：当时把 D1 当“逐位恒等”跳过重放，这是错的。** 波形带限改的是 19 类生成器的**波形合成方式**，D1 同样受影响；D1 盘上 IQ 仍是 09-27 老代码产物，而仪器现场合成的目标参考是新代码产物 → 参考直减减不干净，残差里留下**目标自身**（干净样本 `matched_energy_fraction = 0.000`，正常应 ≈1.0；门控峰 5~6 个、相干度 0.98~0.997）→ 考生看到满屏“疑似源”后大量拒答。后果：D1 在 10-10 的两跑（加固 prompt 0.56 / 原 prompt 0.48，拒答 29/24）**量的是坏数据，作废**；D1 已补重放换装（50 样本 31 秒，见文末补充）。
 - 按文件时间戳，D1 的 `answers_S0_agent_layer1` 跑在 **2026-10-09 11:17→11:53**，早于带宽修复提交（`683c88e`，19:15:06）→ **那个 0.96 是“盘上数据与运行时参考同源”时测的，仍然有效**，只是口径属“带宽修复前”。
-- CNN 已因训练分布变化重训：**val_acc 0.843 → 0.882**（第一轮 25×300、第二轮 40×500）；旧权重留在 `rad_classifier/checkpoint_pre_bw_20261009.pt` 与 `checkpoint_bw_20261009.pt`。
+- CNN 已因训练分布变化重训：**val_acc 0.843 → 0.882**（第一轮 25×300、第二轮 40×500）；旧权重留在 `rad_classifier/checkpoint_archive/_pre_bw_20261009.pt` 与 `checkpoint_bw_20261009.pt`。
 - 机器可读版与完整证据链：`benchmark_v3/dataset_d2/BASELINE.json` 的 `bw_fix_2026_10_09` 块（含 `gate_effect` / `evidence` / `artifacts`）。
 
 ### 已知未决（2026-10-10 复查）
-1. ~~**gate 的 `_agent_cache` 依赖（测量卫生）**~~ **已修**：gate 改用私有 `_gate_cache/<sid>/` 并盖来源指纹（工具源码 + checkpoint + 数据根 md5，指纹变即整目录重建）；验收 = 连续两次 `python -u oracle16.py` 输出**逐字节相同**（`_gate_d2_hygiene_run3.txt` == `_run4.txt`）。旧现象（同一 checkpoint 下清缓存 GT=0.746 [53/71]/129 簇 ↔ 读 API 期缓存 0.613 [49/80]/142 簇）不再出现。
+1. ~~**gate 的 `_agent_cache` 依赖（测量卫生）**~~ **已修**：gate 改用私有 `_gate_cache/<sid>/` 并盖来源指纹（工具源码 + checkpoint + 数据根 md5，指纹变即整目录重建）；验收 = 连续两次 `python -u oracle16.py` 输出**逐字节相同**（`benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` == `_run4.txt`）。旧现象（同一 checkpoint 下清缓存 GT=0.746 [53/71]/129 簇 ↔ 读 API 期缓存 0.613 [49/80]/142 簇）不再出现。
 2. ~~**7 个样本的 `station_a` 目标参考不可用**~~ **已定性并修**：d2_00006/15/19/33/35/43/45 的 station_a 目标链路**本来就是 0 径**（`truth.json` 的 target `path_count=0`、`channel_target_station_a.npz` 的 `delays_s` 为空），RT 判定该站完全看不到目标 → 该站原始 IQ 本就不含目标分量，带限原始 IQ 即残差（与 `strip_target_all_stations` 的降级约定一致）。现 `oracle16.py::_target_ref_state(cap)` 显式区分 `ok`/`invisible`/`missing`：`invisible` 现场按整通带 ±0.45fs 重建并落盘、**计入分母**（GT 切片口径 → **0.550 [44/80]**）；`missing`（链路文件缺失，属数据异常）才跳过。旧代码在参考缺失时报错跳过 → 分母 71（0.563 [40/71]）；而工具聚类的降级路径会把**按候选带限**的原始 IQ 写进同名 `resid_station_a.npy`，热缓存下被 gt-slice 当成真残差读走 → 分母回到 80 但口径不同（0.613 [49/80] 即此污染值）。
 3. `BASELINE.json` 的 **`HEAD` 版本本身就是非法 JSON**（`agent_full_50` 后缺逗号，`892ebdf` 引入）—— 本轮已修，但说明要加“改完就 `json.load` 校验”的习惯。
 
@@ -309,13 +311,13 @@ seed 逐位相同(d3 vs d4) = False
 
 处置（零 API）：旧 D1 与其全部答案/报告原样备份到 `benchmark_v3/_stale_d1_wavefix_20261010/dataset_d1`（作证据留档，含 `_agent_cache`、`answers_S0_agent_{layer1,noneg,revert}`、`eval_report_S0.json`）；重放数据装入 `benchmark_v3/dataset_d1`（50 样本、31.3 秒，`regen_noise.py --src ../dataset_d1 --difficulty d1`；**D1 是纯热噪，噪声底逐位不变 −106.94 dBm**）。
 
-新增脚本（均只读，已提交）：`benchmark_v3/adapters/_diag_d1_evidence.py`（门控/旧宽带峰清单 vs GT，并列出三次 agent 跑的报数与拒答）、`benchmark_v3/adapters/_probe_d1_refmatch.py` 与通用版 `benchmark_v3/adapters/_probe_refmatch.py`（测 `matched_energy_fraction`，支持指定数据集/样本/站）、`benchmark_v3/adapters/_probe_targetvis.py`（四档逐站目标链路状态）、`benchmark_v3/adapters/_an_zeropath_impact.py`。
+新增脚本（均只读，已提交）：`benchmark_v3/adapters/diag/_diag_d1_evidence.py`（门控/旧宽带峰清单 vs GT，并列出三次 agent 跑的报数与拒答）、`benchmark_v3/adapters/diag/_probe_d1_refmatch.py` 与通用版 `benchmark_v3/adapters/diag/_probe_refmatch.py`（测 `matched_energy_fraction`，支持指定数据集/样本/站）、`benchmark_v3/adapters/diag/_probe_targetvis.py`（四档逐站目标链路状态）、`benchmark_v3/adapters/diag/_an_zeropath_impact.py`。
 
 ### 2. 0-path 站（目标被楼挡住）到底值不值得修
 
-四档逐站实测目标链路状态：**D1 四站全 ok（200/200）**；**D2 `station_a` invisible 7/50**；**D3 20/50（40%）**；**D4 17/50（34%）**（`_probe_targetvis.txt`）。这些站上 `estimate_band_occupancy_by_correlation` 直接返回 `{"error": "target reference not available for station '...'"}`，但**聚类路径本身有降级**（零径 ⇒ 原始带限 IQ 即残差，`oracle16._target_ref_state` 也已显式区分 `ok`/`invisible`/`missing`，见「已知未决」第 2 条）。
+四档逐站实测目标链路状态：**D1 四站全 ok（200/200）**；**D2 `station_a` invisible 7/50**；**D3 20/50（40%）**；**D4 17/50（34%）**（`benchmark_v3/evidence/_probe_targetvis.txt`）。这些站上 `estimate_band_occupancy_by_correlation` 直接返回 `{"error": "target reference not available for station '...'"}`，但**聚类路径本身有降级**（零径 ⇒ 原始带限 IQ 即残差，`oracle16._target_ref_state` 也已显式区分 `ok`/`invisible`/`missing`，见「已知未决」第 2 条）。
 
-把“目标在本站是否 0 径”与三档 agent 实测命中率对齐（`benchmark_v3/_an_zeropath_impact.txt`）：
+把“目标在本站是否 0 径”与三档 agent 实测命中率对齐（`benchmark_v3/evidence/_an_zeropath_impact.txt`）：
 
 | 档 | 主站目标可见 → detection | 主站目标 0 径 → detection |
 |---|---|---|

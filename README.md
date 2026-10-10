@@ -122,7 +122,7 @@ python run_bailian_deepseek.py dataset --model deepseek-v3.2 --max-samples 50 --
 # ── V3（当前版本）
 cd benchmark_v3
 python smoke_test.py                              # 生成样本 + 验证工具链可消费
-python eval_v3.py _v3test --offline               # 离线验证 v3 评分管道（应满分）
+cd adapters; python -u eval_dataset.py ../dataset_d1    # 离线验证评分管道：GT 回放应全 1.0
 
 # ── V3 数据集：评分与审计
 cd adapters

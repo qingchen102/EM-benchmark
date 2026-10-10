@@ -5,7 +5,7 @@
 > **这份报告回答四个问题**：各档数据跑出来效果如何？场景是否有意义、有多样性？仅就仿真而言它是不是一个合格 benchmark？这一长段时间到底干了什么？
 >
 > **数据来源**：全部为本机实测，不是转述文档。审计脚本（只读，零 API）：
-> `benchmark_v3/adapters/_audit_datasets.py`、`_audit_d34_check.py`、`_audit_crosslevel.py`、`_audit_gaps.py`，
+> `benchmark_v3/adapters/diag/legacy/_audit_datasets.py`、`_audit_d34_check.py`、`_audit_crosslevel.py`、`_audit_gaps.py`，
 > 原始输出 `benchmark_v3/adapters/_audit_*.txt`。
 > **关键前提**：工具代码 `benchmark_v3/adapters/capture_tools.py` 于 **2026-10-08 14:28** 有一次判据重建
 > （D1 虚警根因修复）。**早于这个时间的 agent 答案，度量的是旧仪器。** 本报告对每一条数字都标了这一点。
@@ -221,7 +221,7 @@ D2 gate **tool-view**（把工具真实产出的候选簇交给分类器）：
 ## 附：本轮交付物清单
 
 - 本报告 `benchmark_v3/docs/BENCHMARK_STATUS_2026-10-08.md`
-- 审计脚本（只读）：`benchmark_v3/adapters/_audit_datasets.py`、`_audit_d34_check.py`、`_audit_crosslevel.py`、`_audit_gaps.py`、`_diag_d1_position.py`
+- 审计脚本（只读）：`benchmark_v3/adapters/diag/legacy/_audit_datasets.py`、`_audit_d34_check.py`、`_audit_crosslevel.py`、`_audit_gaps.py`、`_diag_d1_position.py`
 - 审计原始输出：`benchmark_v3/adapters/_audit_*.txt`
 - D2 全量重评报告：`benchmark_v3/dataset_d2/eval_report_S2_agent_full.json`
 - `benchmark_v3/dataset_d2/BASELINE.json` 入库（`.gitignore` 加负向例外）

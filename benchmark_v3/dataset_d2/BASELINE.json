@@ -1,12 +1,13 @@
 {
  "timestamp": "2026-10-09",
  "dataset_version": "QA2-config (deep-overlap quota, seed0 92000, |du|>=2/M, min_vis=3) + noise_menu_2026_10_08（四档按站配方菜单 + frozen-channel 重放） + bw_fix_2026_10_09（波形带限修复 → 四档重放换装 + CNN 重训 0.882）",
- "snapshot_ref": "dataset_d2_meta_qa2",
+ "snapshot_ref": "dataset_d2_meta_qa2（该中间目录已于 2026-10-11 大清理删除，见下）",
+ "cleanup_2026_10_11": "仓库大清理：删除全部一次性目录与 _tmp_* 脚本（约 25 GB）。**本文件其它历史字段里出现的 `_regen_d34/`、`_regen_noise/`、`_regen_bw/`、`_regen_d1_wavefix/`、`_old_noise_profile_20261010/`、`_stale_d1_wavefix_20261010/`、`_old_dataset_d{1..4}_fs2M/`、`dataset_d2_meta_qa2/`、`_ab_d2/`、`_probe_d4/`、`_smoke_menu_d2/`、`_v3test/` 路径已不存在**（保留原字符串只为记录当时的血统）；仅 `benchmark_v3/_archive/_pre_bw_20261009/`（8 GB）与 `_archive/_pre_noise_20261010/` 保留作跨版本对账。诊断脚本统一在 `benchmark_v3/adapters/diag/`（当代可用）与 `diag/legacy/`（旧轮次），它们的原始输出统一在 `benchmark_v3/evidence/`；布局见 `benchmark_v3/adapters/diag/README.md`。现行回归只需三个入口：`regen_noise.py`（重放/换装）、`eval_dataset.py`（GT 回放与对答案）、`rad_cls/oracle16.py`（仪器 gate）。",
  "config": {
   "generator": "gen_dataset.py QA 三约束（>=3站LoS可见 |Δu|>=2/M 有符号u 共享可见站 |Δu|>=2/M 对间判据）",
   "clustering": "band-aware u-NMS(>0.85 同频带合并) + 40m 位置 NMS + perp_rms/deflation/triads 排序 + per-candidate 提取集(top-K=2)；**定带用宽带 legacy 峰**（见 tool_change_2026_10_08）",
   "extraction": "全 own(K=1) 恢复→联合 LS 复活(频带重叠+去相关双条件)→per-candidate top-K=2",
-  "cnn": "RadCNN 19 类。**2026-10-09 已因波形带限修复重训**（`rad_cls/train16.py --epochs 40 --n-per-class 500` → best val_acc **0.882**）；带宽修前版 `checkpoint_pre_bw_20261009.pt`（0.864）、第一轮 `checkpoint_bw_20261009.pt`（0.843）、现行冻结副本 `checkpoint_bw882_20261009.pt`（0.882）。训练分布 `rad_cls/data_gen16.py:gen_wave16` 已改统一入口 `generate_emitter(..., bandwidth_normalized=bw)`，否则会重演「训练全带宽、评测带限」的滤波不匹配。",
+  "cnn": "RadCNN 19 类。**2026-10-09 已因波形带限修复重训**（`rad_cls/train16.py --epochs 40 --n-per-class 500` → best val_acc **0.882**）；带宽修前版 `checkpoint_archive/_pre_bw_20261009.pt`（0.864）、第一轮 `checkpoint_bw_20261009.pt`（0.843）、现行冻结副本 `checkpoint_bw882_20261009.pt`（0.882）。训练分布 `rad_cls/data_gen16.py:gen_wave16` 已改统一入口 `generate_emitter(..., bandwidth_normalized=bw)`，否则会重演「训练全带宽、评测带限」的滤波不匹配。",
   "harness": "evaluator_v2 最后一轮 tool_choice=none + 消息注入",
   "pairing": "match() 两段配对（位置优先 ≤50m + 频偏兜底 gate=0.45MHz）",
   "tolerances": "FREQ_TOL=0.02(40kHz) / POS_GATE_M=50 / DOA_TOL_DEG=10（已注册口径，未改动）"
@@ -31,9 +32,9 @@
   "cost": "冻结信道重放、不用重跑 RT：d2 67.2s / d3 64.7s / d4 77.8s（150 样本 ~3.3 min）。D1 未重放（纯热噪、逐位恒等）。",
   "gate_effect": "仪器侧实质变好：召回 0.510 → **0.653**、假簇 0.612 → **0.540**、e2e 0.245 → **0.286**、条件 0.480 → 0.438（唯一未过门限项）。",
   "artifacts": {
-   "pre_backup": "benchmark_v3/_pre_bw_20261009/dataset_d{2,3,4}（带宽修前数据 + 旧 agent 答案 + 旧 _agent_cache）",
+   "pre_backup": "benchmark_v3/_archive/_pre_bw_20261009/dataset_d{2,3,4}（带宽修前数据 + 旧 agent 答案 + 旧 _agent_cache）",
    "regen_out": "benchmark_v3/_regen_bw/dataset_d{2,3,4} → 已换装为现行 benchmark_v3/dataset_d{2,3,4}",
-   "gate_log": "benchmark_v3/_gate_d2_newcnn_newdata_20261009.txt / _gate_d2_newcnn_20261009.txt / _gate_d2_oldcnn_20261009.txt（受控 A/B）"
+   "gate_log": "benchmark_v3/evidence/_gate_d2_newcnn_newdata_20261009.txt / benchmark_v3/evidence/_gate_d2_newcnn_20261009.txt / benchmark_v3/evidence/_gate_d2_oldcnn_20261009.txt（受控 A/B）"
   }
  },
  "tool_change_2026_10_08": {
@@ -73,7 +74,7 @@
   "measurement_method": "零输入 receive() 复现同一份噪声实现（种子只由 seed/rx.id/阵元号 决定），与平台解析式吻合到 0.05 dB（D1：-106.95/-106.93 实测 vs -106.94 解析 vs -106.90 旧真值）。D4 开 IMD3 时零输入是噪声下界/SNR 上界。",
   "verification": "_verify_noise_regen.py：D1 max|Δ|=0.000e+00（逐位恒等）/ -0.04 dB；D2 2.636e-04 / +5.41 dB；D3 1.358e-04 / +9.62 dB；D4 1.277e-04 / +9.62 dB；四档总功率只变 +0.00~+0.05 dB。索引 snr_db_range/inr_db_range 与真值逐位一致（d1 [22.85,25.89] / d2 [22.18,24.5] / d3 [-7.25,1.11] / d4 [-8.54,-0.65]）。",
   "baseline_json_maintenance": "必须重算 run_summary.json 的 hashes（cityrf.audit.audit_run 会逐条核对，否则 replay_scenario 拒绝该样本）。",
-  "backup": "加噪前四档在 benchmark_v3/_pre_noise_20261010/dataset_d{1..4}（含各自 _agent_cache），可秒级回滚；.gitignore 已排除。",
+  "backup": "加噪前四档在 benchmark_v3/_archive/_pre_noise_20261010/dataset_d{1..4}（含各自 _agent_cache），可秒级回滚；.gitignore 已排除。",
   "label_note": "本节原键名 noise_profiles_2026_10_10 —— 实际构造于 2026-10-08 夜（本轮工作的日期标签曾写成 10-10，2026-10-09 更正）。它是**已被替换**的旧均匀档位（每档一个固定档、对所有站相同），保留作历史对照：六根受控对照显示它损失 GT切片 −0.224 / 条件 −0.092 / e2e −0.102（见 noise_menus_2026_10_09）。"
  },
  "noise_menus_2026_10_09": {
@@ -116,7 +117,7 @@
    "colored/impulse/phase 三个开关**不受 noise_enabled 总开关管辖**（共模白噪在 `if n0:` 内，n0=0 时自动关）→ 造“无噪声参考”时只关总开关会漏三项。run_capture_agent._build_target_reference 已修为**只关加性四项、保留 phase 与 IMD3**：数据与参考走同一台接收机、同一时刻，相位误差是**共享乘性项**，关掉反而在残差里留目标残影（A 模型实测：D2 召回崩到 0.173）。"
   ],
   "verdict_table_2026_10_08": {
-   "method": "同一份 d2 + 官方 gate，六根受控对照（adapters/_ab_model_c.py，零 API；日志 benchmark_v3/_ab_d2/_driver5.log）",
+   "method": "同一份 d2 + 官方 gate，六根受控对照（adapters/diag/_ab_model_c.py，零 API；日志 benchmark_v3/_ab_d2/_driver5.log）",
    "rows": [
     "R0_pre_noise 无噪声：GT切片 0.738 [59/80] / 召回 0.561 / 假簇 0.623 / 条件 0.473 / e2e 0.265",
     "R1_full_profile 旧均匀档位（colored 0 dB + phase 1.0° + ρ0.2）：GT切片 0.514 [38/74] / 0.429 / 0.656 / 条件 0.381 / e2e 0.163",
@@ -131,7 +132,7 @@
  },
  "cnn_retrain": "**【2026-10-09 更新：已重训，本项原结论作废】**原判断「不需要重训」建立在 BW/SNR 口径未变的前提上；2026-10-09 的波形带限修复**改了训练分布**（`rad_cls/data_gen16.py:gen_wave16` 现在传 `bandwidth_normalized`），必须重训。两轮：25 轮×300 → val_acc 0.843；40 轮×500 → **0.882**（gate clean 0.878 PASS，首次过预注册 0.85）。受控 A/B：旧 CNN 在新合成分布上 clean 只有 0.620；新 CNN 配旧宽带回波数据 GT 切片只有 0.474（配新数据 0.563）→ **权重与数据必须配对**。若后续 kind 指标异常，优先回查此处。",
   "artifacts": {
-   "pre_noise_backup": "benchmark_v3/_pre_noise_20261010/dataset_d{1..4}（目录名带创建时的 10-10 标签，实际备份于 2026-10-08/09 夜；与 _regen_d34 的 iq_station_a.npy 逐字节相同）",
+   "pre_noise_backup": "benchmark_v3/_archive/_pre_noise_20261010/dataset_d{1..4}（目录名带创建时的 10-10 标签，实际备份于 2026-10-08/09 夜；与 _regen_d34 的 iq_station_a.npy 逐字节相同）",
    "old_uniform_backup": "benchmark_v3/_old_noise_profile_20261010/dataset_d{2,3,4}（换装前的旧档位数据 + 旧 _agent_cache）",
    "new_data": "benchmark_v3/_regen_noise/dataset_d{2,3,4} → 已换装为现行 benchmark_v3/dataset_d{2,3,4}；D1 未重放（已是纯热噪、逐位恒等）",
    "ab_logs": "benchmark_v3/_ab_d2/（_driver5.log = 六根判决表；_gate_new_d2_live.log = 现行数据官方 gate）"
@@ -173,9 +174,9 @@
   "e2e_detect_x_kind": 0.286,
   "clean_16class": 0.878,
   "gt_slice": 0.55,
-  "note": "**【2026-10-10 最终可复现口径：带宽修复后数据 + 重训 CNN 0.882 + gate 私有缓存】**（`cd benchmark_v3/adapters/rad_cls && python oracle16.py`；产物 `benchmark_v3/_gate_d2_hygiene_run3.txt` / `_run4.txt`，**两次连续运行逐字节相同**）。判定：**clean PASS（0.878 ≥ 0.85）/ GT-slice PASS（0.550）/ tool-view FAIL** —— 唯一未过的门限是**条件分类 0.438 < 0.50（差 6.2pp）**；召回 0.653 与假簇 0.540 均已过自己的 0.5 门限。分母：clean [1001/1140]、GT 切片 [44/80]、召回 [64/98]、假簇 [75/139]、条件 [28/64]、可解子集 [63/92]、e2e 0.286。相对带宽修前（0.510/0.612/0.480）：召回 +14.3pp、假簇 −7.2pp、e2e +4.1pp。**GT 切片口径修正（2026-10-10）**：d2_00006/15/19/33/35/43/45 的 station_a 目标链路本来就是 **0 径**（`truth.json` 的 target `path_count=0`、`channel_target_station_a.npz` 的 `delays_s` 为空）——RT 判定该站完全看不到目标，此时该站原始 IQ 不含目标分量，带限原始 IQ 即残差（与 `strip_target_all_stations` 的降级约定一致）。旧代码在参考缺失时报错跳过 → 分母 71（0.563 [40/71]）；而工具聚类的降级路径会把**按候选带限**的原始 IQ 写进同名 `resid_station_a.npy`，热缓存下被 gt-slice 读到 → 分母回到 80 但口径不同（0.613 [49/80] 的污染值）。现已改为显式判 `ref_state` 并现场按整通带 ±0.45fs 重建，**冷/热缓存两跑一致**。"
+  "note": "**【2026-10-10 最终可复现口径：带宽修复后数据 + 重训 CNN 0.882 + gate 私有缓存】**（`cd benchmark_v3/adapters/rad_cls && python oracle16.py`；产物 `benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` / `_run4.txt`，**两次连续运行逐字节相同**）。判定：**clean PASS（0.878 ≥ 0.85）/ GT-slice PASS（0.550）/ tool-view FAIL** —— 唯一未过的门限是**条件分类 0.438 < 0.50（差 6.2pp）**；召回 0.653 与假簇 0.540 均已过自己的 0.5 门限。分母：clean [1001/1140]、GT 切片 [44/80]、召回 [64/98]、假簇 [75/139]、条件 [28/64]、可解子集 [63/92]、e2e 0.286。相对带宽修前（0.510/0.612/0.480）：召回 +14.3pp、假簇 −7.2pp、e2e +4.1pp。**GT 切片口径修正（2026-10-10）**：d2_00006/15/19/33/35/43/45 的 station_a 目标链路本来就是 **0 径**（`truth.json` 的 target `path_count=0`、`channel_target_station_a.npz` 的 `delays_s` 为空）——RT 判定该站完全看不到目标，此时该站原始 IQ 不含目标分量，带限原始 IQ 即残差（与 `strip_target_all_stations` 的降级约定一致）。旧代码在参考缺失时报错跳过 → 分母 71（0.563 [40/71]）；而工具聚类的降级路径会把**按候选带限**的原始 IQ 写进同名 `resid_station_a.npy`，热缓存下被 gt-slice 读到 → 分母回到 80 但口径不同（0.613 [49/80] 的污染值）。现已改为显式判 `ref_state` 并现场按整通带 ±0.45fs 重建，**冷/热缓存两跑一致**。"
 ,
-  "determinism_2026_10_10": "gate 测量卫生两处修复：① 缓存命名空间从 agent 运行遗留的 `_agent_cache/<sid>/` 换为 gate 私有 `_gate_cache/<sid>/`，并盖来源指纹（capture_tools.py / run_capture_agent.py / data_gen16.py 的 md5 + checkpoint md5 + 数据根），指纹变即整目录重建（`oracle16.py` 的 `GATE_CACHE` / `_STAMP_FILES` / `ensure_gate_cache()`）；② gt-slice 的 station_a 参考可用性显式判定（`oracle16.py` 的 `_target_ref_state(cap)` → 'ok' / 'invisible' / 'missing'），`invisible`（0 径）现场按整通带 ±0.45fs 用带限原始 IQ 当残差并落盘，`missing`（链路文件缺失，属数据异常）才跳过。验收：连续两次 `python -u oracle16.py` 输出**逐字节相同**（`_gate_d2_hygiene_run3.txt` == `_run4.txt`）。此前同一 checkpoint 会因缓存新旧给出 GT 切片 0.746 [53/71] / 0.563 [40/71] / 0.613 [49/80] 三个不同数值。",
+  "determinism_2026_10_10": "gate 测量卫生两处修复：① 缓存命名空间从 agent 运行遗留的 `_agent_cache/<sid>/` 换为 gate 私有 `_gate_cache/<sid>/`，并盖来源指纹（capture_tools.py / run_capture_agent.py / data_gen16.py 的 md5 + checkpoint md5 + 数据根），指纹变即整目录重建（`oracle16.py` 的 `GATE_CACHE` / `_STAMP_FILES` / `ensure_gate_cache()`）；② gt-slice 的 station_a 参考可用性显式判定（`oracle16.py` 的 `_target_ref_state(cap)` → 'ok' / 'invisible' / 'missing'），`invisible`（0 径）现场按整通带 ±0.45fs 用带限原始 IQ 当残差并落盘，`missing`（链路文件缺失，属数据异常）才跳过。验收：连续两次 `python -u oracle16.py` 输出**逐字节相同**（`benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` == `_run4.txt`）。此前同一 checkpoint 会因缓存新旧给出 GT 切片 0.746 [53/71] / 0.563 [40/71] / 0.613 [49/80] 三个不同数值。",
   "_history_2026_10_09_pre_bw": {
    "recall_all_visible": 0.51,
    "false_cluster_rate": 0.612,
@@ -185,7 +186,7 @@
    "clean_16class": 0.86,
    "gt_slice": 0.746,
    "raw": "clean 0.860 [980/1140] / GT切片 0.746 [53/71] / 召回 0.510 [50/98] / 假簇 0.612 [79/129] / 条件 0.480 [24/50] / e2e 0.245 / 可解子集 0.543 [50/92]",
-   "note": "**带宽修前**的数据（菜单噪声 + 旧 CNN 0.864）+ 清缓存口径，测于 2026-10-08/09 夜。该数据已在换装时备份到 `benchmark_v3/_pre_bw_20261009/`。与本节新值之差 = 波形带限 + CNN 重训的联合效果（不是噪声菜单所致——噪声菜单的 A/B 已单独做过）。"
+   "note": "**带宽修前**的数据（菜单噪声 + 旧 CNN 0.864）+ 清缓存口径，测于 2026-10-08/09 夜。该数据已在换装时备份到 `benchmark_v3/_archive/_pre_bw_20261009/`。与本节新值之差 = 波形带限 + CNN 重训的联合效果（不是噪声菜单所致——噪声菜单的 A/B 已单独做过）。"
   },
   "_history_2026_10_08": {
    "recall_all_visible": 0.561,
@@ -228,7 +229,7 @@
     "verdict": "clean PASS / GT-slice PASS / tool-view FAIL"
    }
   },
-  "reverified_2026_10_09": "同日在两套数据上各跑一次 oracle16.py 复核（_gate_d2_postnoise.txt / _gate_d2_prenoise.txt）：postnoise = 0.510/0.612/0.480/0.543/0.245（= 现 `_history_2026_10_09_pre_bw`，逐位相同）、prenoise = 0.561/0.623/0.473/0.591/0.265（= `_history_2026_10_08`，逐位相同）→ 噪声菜单没有动到 gate 口径。gate 不走 evaluator_v2，故与峰清单泄漏无关。**（该复核早于带宽修复；带宽修复后口径见本节顶层值。）**"
+  "reverified_2026_10_09": "同日在两套数据上各跑一次 oracle16.py 复核（benchmark_v3/evidence/_gate_d2_postnoise.txt / benchmark_v3/evidence/_gate_d2_prenoise.txt）：postnoise = 0.510/0.612/0.480/0.543/0.245（= 现 `_history_2026_10_09_pre_bw`，逐位相同）、prenoise = 0.561/0.623/0.473/0.591/0.265（= `_history_2026_10_08`，逐位相同）→ 噪声菜单没有动到 gate 口径。gate 不走 evaluator_v2，故与峰清单泄漏无关。**（该复核早于带宽修复；带宽修复后口径见本节顶层值。）**"
  },
  "agent_full_50": {
   "answers_dir": "answers_S2_agent_full",
@@ -238,7 +239,7 @@
   "pos_hits": 0.459,
   "intent_hits": 0.682,
   "pairing": "修正后两段配对（位置优先）",
-  "note": "**【2026-10-09 更正】这 0.86 不是模型能力，是工具返回值泄漏的产物。**capture_tools.estimate_band_occupancy_by_correlation 为 D1 虚警根治同时返回两条清单（对外门控版 residual_peaks / 仅供聚类内部定带的 residual_peaks_legacy），而 evaluator_v2.py:367-372 把工具返回值整体 json.dumps 回灌给模型 → agent 直接抄旧宽带清单：本目录 answers_S2_agent_full 的答案频率与 legacy 清单前两名逐位相同（d2_00001 −678400/520100、d2_00009 661200/−207700、d2_00000 328300/−483200，见 benchmark_v3/_an_d2_oldnew_trace.txt）。泄漏已由 52a2f42 修复（capture_tools.AGENT_HIDDEN_KEYS + _agent_facing）。**【2026-10-09 夜补充】本行答案还跑在带宽修前的数据上；D2 数据已重放换装，本行不再对现行数据有效（见 bw_fix_2026_10_09）。**"
+  "note": "**【2026-10-09 更正】这 0.86 不是模型能力，是工具返回值泄漏的产物。**capture_tools.estimate_band_occupancy_by_correlation 为 D1 虚警根治同时返回两条清单（对外门控版 residual_peaks / 仅供聚类内部定带的 residual_peaks_legacy），而 evaluator_v2.py:367-372 把工具返回值整体 json.dumps 回灌给模型 → agent 直接抄旧宽带清单：本目录 answers_S2_agent_full 的答案频率与 legacy 清单前两名逐位相同（d2_00001 −678400/520100、d2_00009 661200/−207700、d2_00000 328300/−483200，见 benchmark_v3/evidence/_an_d2_oldnew_trace.txt）。泄漏已由 52a2f42 修复（capture_tools.AGENT_HIDDEN_KEYS + _agent_facing）。**【2026-10-09 夜补充】本行答案还跑在带宽修前的数据上；D2 数据已重放换装，本行不再对现行数据有效（见 bw_fix_2026_10_09）。**"
  },
  "closed_lines": [
   "频偏精测（三估计器+oracle 带切 42% 全撞墙——方向-频率解耦）",
@@ -293,19 +294,19 @@
    "intent_hits": 0.768,
    "spoof_fa": 0.0
   },
-  "note": "数据层已排除：聚类 A/B 上 K 33/50 相同、ΣK 119→109；全量证据 A/B 上门控峰条数相同 43/50、逐条强度差 ≤1.0 dB 41/50、时频指纹 ≤5% 41/50（见 _diag_d2_cluster_ab.txt / _diag_d2_evidence_magnitude.txt）。真瓶颈是仪器缺「同源并合」：estimate_sources_by_spatial_clustering 的 K = len(sources) 与 GT 源数精确匹配仅 13/50（旧数据）/ 16/50（新数据），而 prompt 却要求照抄 K；agent 的应对是拒答（layer1b 50 样本里 15 个把 num_interferers 写成被禁哨兵 -1，再被 run_capture_agent._sanitize 静默清成 0）。注意：layer1 与 layer1b 都跑在泄漏修复（capture_tools.py mtime 14:04）之前（layer1 12:02–13:14、layer1b 13:41–14:16）；**修复后的 D2 从未跑过 agent**。layer1b 与 layer1 的唯一差别是去掉事件日志 prompt 段落，结果同为 0.48 → 段落不是变量。eval_report_S2.json 现为 layer1b 的报告（layer1 的同名报告已被覆盖）。**【2026-10-09 夜补充】本节讨论的数据与答案已在带宽修复换装时备份到 `_pre_bw_20261009/`；现行数据集上 D2 也从未跑过 agent。**"
+  "note": "数据层已排除：聚类 A/B 上 K 33/50 相同、ΣK 119→109；全量证据 A/B 上门控峰条数相同 43/50、逐条强度差 ≤1.0 dB 41/50、时频指纹 ≤5% 41/50（见 benchmark_v3/evidence/_diag_d2_cluster_ab.txt / benchmark_v3/evidence/_diag_d2_evidence_magnitude.txt）。真瓶颈是仪器缺「同源并合」：estimate_sources_by_spatial_clustering 的 K = len(sources) 与 GT 源数精确匹配仅 13/50（旧数据）/ 16/50（新数据），而 prompt 却要求照抄 K；agent 的应对是拒答（layer1b 50 样本里 15 个把 num_interferers 写成被禁哨兵 -1，再被 run_capture_agent._sanitize 静默清成 0）。注意：layer1 与 layer1b 都跑在泄漏修复（capture_tools.py mtime 14:04）之前（layer1 12:02–13:14、layer1b 13:41–14:16）；**修复后的 D2 从未跑过 agent**。layer1b 与 layer1 的唯一差别是去掉事件日志 prompt 段落，结果同为 0.48 → 段落不是变量。eval_report_S2.json 现为 layer1b 的报告（layer1 的同名报告已被覆盖）。**【2026-10-09 夜补充】本节讨论的数据与答案已在带宽修复换装时备份到 `_archive/_pre_bw_20261009/`；现行数据集上 D2 也从未跑过 agent。**"
  },
  "agent_baselines_all_levels_2026_10_09": {
   "n_per_level": 50,
   "note": "四档注册口径基线（各 50 样本）。D1 是 S0 单站、D2–D4 是 S2 四站，detection 口径不同。freq_aes 的归一化基数恒为 2e6（eval_dataset.py:127/205/229），四档容差均 ±40 kHz；早前把 freq_aes 乘采集带宽得到的 kHz 值全部偏大 2 倍。",
-  "stale_2026_10_09": "**D2/D3/D4 三行答案跑在「带宽修前」的数据 + 泄漏修复前的工具上，对现行 dataset_d{2,3,4} 不再有效**：三档数据已在 2026-10-09 夜因波形带限修复重放换装（旧数据与旧答案备份在 benchmark_v3/_pre_bw_20261009/）。D1 未重放（逐位恒等）故 D1 行对现行数据仍有效。仪器侧同日实质变好（gate 召回 0.510 → 0.653、假簇 0.612 → 0.540）；agent 侧在现行数据上**尚无基线**，需按点状重跑纪律另行申请。**【2026-10-09 深夜更正】D2 已在现行数据上补跑（见 rows 的 `D2_S2_bwfix_2026_10_09`：detection 0.44、拒答 20/50）；D3/D4 仍无现行基线。**",
+  "stale_2026_10_09": "**D2/D3/D4 三行答案跑在「带宽修前」的数据 + 泄漏修复前的工具上，对现行 dataset_d{2,3,4} 不再有效**：三档数据已在 2026-10-09 夜因波形带限修复重放换装（旧数据与旧答案备份在 benchmark_v3/_archive/_pre_bw_20261009/）。D1 未重放（逐位恒等）故 D1 行对现行数据仍有效。仪器侧同日实质变好（gate 召回 0.510 → 0.653、假簇 0.612 → 0.540）；agent 侧在现行数据上**尚无基线**，需按点状重跑纪律另行申请。**【2026-10-09 深夜更正】D2 已在现行数据上补跑（见 rows 的 `D2_S2_bwfix_2026_10_09`：detection 0.44、拒答 20/50）；D3/D4 仍无现行基线。**",
   "stale_2026_10_10_update": "**现行四档口径（2026-10-10）**：D1×S0 0.96（48/50，拒答 0）/ D2×S2 0.44（拒答 20，排除后 0.733）/ D3×S2 0.46（拒答 16，排除后 0.618）/ D4×S2 0.22（拒答 18，排除后 0.344）。① D1 曾按「逐位恒等」跳过波形带限重放——**该判断是错的**（见 d1_wavefix_2026_10_10），已补换装并在新数据上重取；② D3/D4 的现行数据基线与历史（带宽修复前）数字接近，但答案目录/数据血统已不同，勿混用；③ **“难度梯度单调”在现行数据上不再成立**（D3 0.46 略高于 D2 0.44，差距在单次 50 样本 ±0.2 的运行不确定度内）。**（2026-10-10 夜更正）拒答修复后四档为 D1 0.92 / D2 0.54 / D3 0.48 / D4 0.36，拒答全为 0**；上列数字是修复前口径。",
   "refusal_fix_2026_10_10_update": "**拒答已结构性修好（2026-10-10）**：拒答不是数据/证据问题，而是**答案契约里有一个被明令禁止、却又没有合法替代的「不确定表达位」**——模型在「TOOL BUDGET EXHAUSTED」被迫作答轮与 repair 轮写 `num_interferers = -1`，`_has_final_answer` 判其非法 → 进 repair → 仍写 -1 → 回退把它交出去，`_sanitize` 再静默清成 0（于是「拒答」被记成「判定无干扰」）。证据：D2 20/20、D3 16/16、D4 18/18 的拒答样本 round_log 长度恒为 11 且末项 phase==repair；拒答与工具证据无判别力。两次失败尝试：① 只在 prompt 里明令禁止 -1 → **反噬**（D2 noneg 拒答 20→24、detection 0.44→0.38；D1 更早那次 0.96→0.56）；② 「sources 字段缺失」假设被 `_tmp_srckeys.py` 证伪（4/4 样本字段齐全）。修法是结构性的：答案不再有计数字段（`interferers` 列表由模型交、计数由 harness 派生），validator 改成「测到候选却交空列表即判无效」→ 触发 repair 轮逼提交。D2×S2 实测：**拒答 0/50、detection 0.54、within1 0.77**。详见 README.private.md §34。",
   "rows": {
    "D1_S0": {"answers_dir": "dataset_d1/answers_S0_agent_layer1", "detection_hit": 0.96, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0068, "doa_hits": 0.48, "intent": 0.93},
    "D1_S0_wavefix_2026_10_10": {"answers_dir": "dataset_d1/answers_S0_agent_wavefix", "date": "2026-10-10", "note": "在重放后的现行 D1 数据上重取（原 prompt）。与 layer1（带宽修复前）逐项一致 → D1 修复在现行数据上站得住；无可辨识拒答。", "detection_hit": 0.96, "detection_within1": 0.98, "detect_abs_err": 0.04, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0063, "doa_hits": 0.48, "doa_aes": 63.49, "abstain_n": 0},
    "D2_S2": {"answers_dir": "dataset_d2/answers_S2_agent_layer1", "detection_hit": 0.48, "kind_hits": 0.4821, "freq_hits": 0.2143, "freq_aes": 0.1787, "pos_hits": 0.5357, "pos_errs": 232.0, "intent": 0.768, "spoof_fa": 0.0},
-   "D2_S2_bwfix_2026_10_09": {"answers_dir": "dataset_d2/answers_S2_agent_bwfix", "note": "带宽修复后重放换装 + 工具泄漏修复后、prompt 未加固的 D2 跑。S1 与 S2 逐项相同；S0=0.36。**其报告已被同名的 noneg 报告覆盖**，存档见 `dataset_d2/_eval_report_S2_bwfix_20261009.json`（layer1 的记录在 `_pre_bw_20261009/dataset_d2/`）。", "detection_hit": 0.44, "within1": 0.5, "detect_abs_err": 1.0, "kind_hits": 0.36, "freq_hits": 0.3, "freq_aes": 0.096, "pos_hits": 0.72, "pos_errs": 212.13, "intent": 0.58, "spoof_fa": 0.0, "abstain_n": 20, "abstain_rate": 0.4, "detection_hit_excl_abstain": 0.733, "detection_denom_excl_abstain": 30},
+   "D2_S2_bwfix_2026_10_09": {"answers_dir": "dataset_d2/answers_S2_agent_bwfix", "note": "带宽修复后重放换装 + 工具泄漏修复后、prompt 未加固的 D2 跑。S1 与 S2 逐项相同；S0=0.36。**其报告已被同名的 noneg 报告覆盖**，存档见 `dataset_d2/_eval_report_S2_bwfix_20261009.json`（layer1 的记录在 `_archive/_pre_bw_20261009/dataset_d2/`）。", "detection_hit": 0.44, "within1": 0.5, "detect_abs_err": 1.0, "kind_hits": 0.36, "freq_hits": 0.3, "freq_aes": 0.096, "pos_hits": 0.72, "pos_errs": 212.13, "intent": 0.58, "spoof_fa": 0.0, "abstain_n": 20, "abstain_rate": 0.4, "detection_hit_excl_abstain": 0.733, "detection_denom_excl_abstain": 30},
    "D2_S2_noneg_2026_10_10": {"answers_dir": "dataset_d2/answers_S2_agent_noneg", "note": "**prompt 加固后（禁负哨兵措辞改硬）的 D2 点状重跑**，与 `D2_S2_bwfix_2026_10_09` 是同一套数据/工具/权重，唯一变量是 prompt。结论：**加固没有改变该模型的行为**（拒答 20→19、detection 0.44→0.44）→ D2 的真实水平就是“注册口径 0.44 / 排除拒答 0.71”。报告 `dataset_d2/eval_report_S2.json`（当前盘上就是本次）；S1 与 S2 逐项相同，S0=0.38。", "detection_hit": 0.44, "within1": 0.5192, "detect_abs_err": 0.94, "kind_hits": 0.4259, "freq_hits": 0.2963, "freq_aes": 0.0895, "pos_hits": 0.7037, "pos_errs": 198.2391, "intent": 0.611, "spoof_fa": 0.0, "abstain_n": 19, "abstain_rate": 0.38, "detection_hit_excl_abstain": 0.71, "detection_denom_excl_abstain": 31},
    "D2_S2_fix2_2026_10_10": {"answers_dir": "dataset_d2/answers_S2_agent_fix2", "date": "2026-10-10", "note": "**结构性反拒答修复后的 D2 点状重跑**（答案契约去掉 num_interferers 字段、计数由 len(interferers) 派生；validator 改为「测到候选不得交空列表」否则触发 repair 轮）。与 bwfix/noneg 同一套数据/工具/权重，唯一变量是答案契约与 prompt。结论：**拒答 20/50 → 0/50**（答案字段与 _run_log 负哨兵均为 0），detection 0.44 → **0.54**、within1 0.50 → 0.77，kind/freq/pos/intent 基本不动（0.357/0.310/0.679/0.571）——模型从此报出真实测量，其余轴不再被拒答一起清零。计数分布 {1:14, 2:27, 3:9}（GT {1:2, 2:48}，无一例 0）。S1 与 S2 逐项相同；S0=0.42。报告 `dataset_d2/eval_report_S2.json`，存档 `dataset_d2/_eval_report_S2_fix2_50.json`。", "detection_hit": 0.54, "detection_within1": 0.77, "detect_abs_err": 0.46, "kind_hits": 0.3571, "freq_hits": 0.3095, "freq_aes": 0.0834, "pos_hits": 0.6786, "pos_errs": 211.242, "intent": 0.571, "spoof_fa": 0.0, "abstain_n": 0, "abstain_rate": 0.0, "count_field_invalid_n": 0, "low_conf_n": 38},
    "D1_S0_fix2_2026_10_10": {"answers_dir": "dataset_d1/answers_S0_agent_fix2", "date": "2026-10-10", "note": "拒答修复（答案契约改版、计数由列表派生）后的 D1 重跑。拒答 0/50、计数字段写坏 0/50；计数分布 {0:25,1:23,2:2}（GT {0:23,1:27}）→ 有 2 例把无干扰样本报成 1 个源，这是 detection 0.96→0.92 的全部来源。DOA 0.48→0.28（前后瓣镜像猜中率本就随配对波动）、kind 0.60→0.56、freq 0.96 不变（12.4 kHz）。", "detection_hit": 0.92, "detection_within1": 0.96, "detect_abs_err": 0.08, "kind_hits": 0.56, "freq_hits": 0.96, "freq_aes": 0.0062, "doa_hits": 0.28, "doa_aes": 73.7012, "abstain_n": 0, "count_field_invalid_n": 0},
@@ -333,7 +334,7 @@
   },
   "reading": "拒答率随难度上升（现行数据：D1 0% → D3 32% → D4 36% → D2 40%）。D1 是单站且半数样本真值本就是 0，说明模型有能力遵守「必须给 0..3」的契约，只是在证据含糊时违约。D2 带宽修后：22 次未命中里 20 次是拒答，排除后 detection 0.733，与仪器「可解子集」上限 0.685 同量级 → 题面与仪器站得住，丢的分主要在答案契约。",
   "prompt_hardening_2026_10_10": "prompt 里禁负哨兵的措辞从「is discarded」改为「parsed as 0 and scored as a WRONG answer; there is no re-ask / no clarification round」，并新增「num_interferers MUST be a NON-NEGATIVE integer」规则与 Round 7+ 自检句。**实测结果（D2 点状重跑 `answers_S2_agent_noneg`）：拒答 19/50（对照 20/50）、detection 0.44（对照 0.44）→ 加固无效，该模型在难样本上仍会写 -1。** 附一个测量教训：用 PowerShell 正则数 `_run_log.json` 里的负哨兵会得到 0（该字段是字符串里的转义 JSON，文件里是 `\\\"num_interferers\\\": -1`，闭引号前有反斜杠），**必须用 JSON 解析后统计**；另：加固 prompt 对 D1 造成 0.96→0.56（拒答 29/50），但根因是 D1 数据失配（见 `d1_wavefix_2026_10_10`），非 prompt 本身。",
-  "artifacts": {"script": "benchmark_v3/adapters/_an_abstain.py", "report": "benchmark_v3/_abstain_report.txt", "audit_raw": "benchmark_v3/_an_abstain.txt"}
+  "artifacts": {"script": "benchmark_v3/adapters/diag/_an_abstain.py", "report": "benchmark_v3/evidence/_abstain_report.txt", "audit_raw": "benchmark_v3/evidence/_an_abstain.txt"}
  },
  "d1_wavefix_2026_10_10": {
   "what": "D1 波形带限回归（自伤）：2026-10-09 19:15 提交波形带限（683c88e）时把 D1 当「逐位恒等」跳过重放 → 盘上 D1 的 IQ（09-27 老代码产物）与运行时现场合成的目标参考（新代码产物）不再逐位一致 → 参考直减减不干净、残差里剩下目标自身 → 干净样本 matched_energy_fraction=0.000（正常应 ≈1.0）、门控峰 5~6 个（coherence 0.98~0.997）→ 考生看到满屏疑似源后大量拒答。",
@@ -355,8 +356,8 @@
    "reading": "0-path 报错**不拖后腿**（这些样本反而打得更好）→ 不值得为它单独修 + 重跑 D2/D3/D4（省约 3 小时 API）；反面对照更有价值：主站目标可见的样本拒答更多（D4 15/33 vs 3/17），指向「目标残余/多径让主站证据自相矛盾」。"
   },
   "artifacts": {
-   "scripts": ["benchmark_v3/adapters/_diag_d1_evidence.py", "benchmark_v3/adapters/_probe_refmatch.py", "benchmark_v3/adapters/_probe_d1_refmatch.py", "benchmark_v3/adapters/_probe_targetvis.py", "benchmark_v3/adapters/_an_zeropath_impact.py"],
-   "reports": ["benchmark_v3/_diag_d1_evidence_newIQ.txt", "benchmark_v3/_diag_d1_evidence_staleIQ.txt", "benchmark_v3/_probe_refmatch.txt", "benchmark_v3/_probe_targetvis.txt", "benchmark_v3/_an_zeropath_impact.txt"]
+   "scripts": ["benchmark_v3/adapters/diag/_diag_d1_evidence.py", "benchmark_v3/adapters/diag/_probe_refmatch.py", "benchmark_v3/adapters/diag/_probe_d1_refmatch.py", "benchmark_v3/adapters/diag/_probe_targetvis.py", "benchmark_v3/adapters/diag/_an_zeropath_impact.py"],
+   "reports": ["benchmark_v3/evidence/_diag_d1_evidence_newIQ.txt", "benchmark_v3/evidence/_diag_d1_evidence_staleIQ.txt", "benchmark_v3/evidence/_probe_refmatch.txt", "benchmark_v3/evidence/_probe_targetvis.txt", "benchmark_v3/evidence/_an_zeropath_impact.txt"]
   }
  },
  "refusal_fix_2026_10_10": {
@@ -367,6 +368,6 @@
   "ab_12_samples": {"bwfix": [0.333, 8], "fix1_prompt_only": [0.417, 6], "fix2_structural": [0.417, 0], "note": "同 12 样本：detection 与拒答数；计数分布 bwfix {0:8,1:1,2:3} → fix2 {1:5,2:4,3:3}"},
   "d2_full50": {"detection_hit": 0.54, "detection_within1": 0.77, "abstain_n": 0, "count_dist": {"1": 14, "2": 27, "3": 9}, "gt_dist": {"1": 2, "2": 48}, "low_conf_n": 38, "kind_hits": 0.3571, "freq_hits": 0.3095, "pos_hits": 0.6786, "intent": 0.571},
   "four_levels_fix2": {"d1_s0": {"detection_hit": 0.92, "abstain_n": 0, "was": 0.96}, "d2_s2": {"detection_hit": 0.54, "abstain_n": 0, "was": 0.44}, "d3_s2": {"detection_hit": 0.48, "abstain_n": 0, "was": 0.46}, "d4_s2": {"detection_hit": 0.36, "abstain_n": 0, "was": 0.22}, "note": "四档拒答全部归零；D2/D3/D4 分别 +10 / +2 / +14 pp，D1 −4 pp（计数改由列表派生后，有 2 例无干扰样本被报成 1 个源）。所有答案从此携带真实测量，kind/freq/空间轴不再被拒答一并清零。"},
-  "artifacts": {"scripts": ["benchmark_v3/adapters/_an_abstain_why.py", "benchmark_v3/adapters/_an_refuse_evidence.py", "benchmark_v3/adapters/_an_d2_tooltrace.py", "benchmark_v3/adapters/_check_sanitize.py", "benchmark_v3/adapters/_check_antirefuse.py", "benchmark_v3/adapters/_cmp_d2_abstain.py"], "reports": ["benchmark_v3/_cmp12.txt", "benchmark_v3/_fix2_50_summary.txt", "benchmark_v3/_check_sanitize.txt", "benchmark_v3/_check_antirefuse.txt", "benchmark_v3/_an_refuse_evidence.txt", "benchmark_v3/dataset_d2/_eval_report_S2_fix2_50.json"]}
+  "artifacts": {"scripts": ["benchmark_v3/adapters/diag/_an_abstain_why.py", "benchmark_v3/adapters/diag/_an_refuse_evidence.py", "benchmark_v3/adapters/diag/_an_d2_tooltrace.py", "benchmark_v3/adapters/diag/_check_sanitize.py", "benchmark_v3/adapters/diag/_check_antirefuse.py", "benchmark_v3/adapters/diag/_cmp_d2_abstain.py"], "reports": ["benchmark_v3/evidence/_cmp12.txt", "benchmark_v3/evidence/_fix2_50_summary.txt", "benchmark_v3/evidence/_check_sanitize.txt", "benchmark_v3/evidence/_check_antirefuse.txt", "benchmark_v3/evidence/_an_refuse_evidence.txt", "benchmark_v3/dataset_d2/_eval_report_S2_fix2_50.json"]}
  }
 }

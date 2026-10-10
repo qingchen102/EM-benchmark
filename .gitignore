@@ -1,74 +1,55 @@
-# 含百炼 API Key，切勿提交到远程仓库
+# ── 密钥与带 Key 的运行脚本（绝不入库）
 run_v32.ps1
 run_capture_agent.ps1
-# Agent 运行缓存（归一化 IQ，体积大，可随时删除重生成）
-benchmark_v3/dataset_d*/_agent_cache/
-# 训练模型权重（二进制，非代码，可重训）
-benchmark_v3/adapters/rad_cls/rad_classifier/
-# 旧数据集备份 / 重生成中间产物（大体积，仅本地留存，非代码）
-benchmark_v3/_old_dataset_*/
-benchmark_v3/_regen_d34/
-benchmark_v3/_probe_d*/
-# 加噪重生成（2026-10-08/09 夜）：旧数据备份 + 中间产物
-benchmark_v3/_pre_noise_20261010/
-benchmark_v3/_regen_noise/
-benchmark_v3/_old_noise_profile_20261010/
-benchmark_v3/_smoke_menu_d2/
-benchmark_v3/adapters/_probe_peaks_cache/
-benchmark_v3/_smoke_regen_wiring/
-# 带宽重生成（2026-10-09 夜）：带宽修好前的数据集备份 + 冻结信道重放中间产物
-benchmark_v3/_pre_bw_20261009/
-benchmark_v3/_regen_bw/
-# D1 波形带限回归（2026-10-10 发现）：D1 盘上 IQ 是 09-27 生成，19:15 的波形带限提交后
-# 运行时合成的目标参考与其不再逐位匹配（残差=目标自身，干净样本报 4~6 个假峰）。
-# 旧 D1（含旧答案/报告，作证据留档）与重放中间产物都只留本地
-benchmark_v3/_stale_d1_wavefix_20261010/
-benchmark_v3/_regen_d1_*/
-# 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
-benchmark_v3/_api_*
-benchmark_v3/adapters/_verify_cache/
-# 损失分解变体（2026-10-08/09 夜，零 API 消融：单旋钮重放 + 官方 gate；单档数据 GB 级故整目录排除）
-benchmark_v3/_ab_d2/
-# 汇报 PPT 分析残留（含他人 PPT 原文）
-_ppt_dump.txt
-_ppt_ref_dump.txt
-# 旧 agent 缓存备份（清缓存重建时留档）
-benchmark_v3/dataset_d*/_agent_cache_pre_*/
-# 数据集主体不入库（GB 级 IQ/缓存），但基线数字必须入库——它是“防前态过期”核心机制
+
+# ── 数据集主体不入库（GB 级 IQ/缓存），但基线数字必须入库——它是"防前态过期"核心机制
 benchmark_v3/dataset_d*/*
 !benchmark_v3/dataset_d*/BASELINE.json
-# 私人笔记与开发日志，勿提交/上传
+benchmark_v3/dataset_d*/_agent_cache/
+benchmark_v3/dataset_d*/_agent_cache_pre_*/
+
+# ── 训练权重（二进制，非代码，可重训）
+benchmark_v3/adapters/rad_cls/rad_classifier/
+benchmark_v3/adapters/rad_cls/checkpoint*
+
+# ── 跨版本数据快照（唯一保留的旧数据，8 GB；不需要时 `Remove-Item -Recurse -Force benchmark_v3\_archive`）
+benchmark_v3/_archive/
+
+# ── 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
+benchmark_v3/_api_*
+_api_*
+
+# ── 私人笔记与开发日志，勿提交/上传
 /README.private.md
 /开发日志.md
-_dryrun.log
 .workbuddy/
-__pycache__/
-*.pyc
-# 编辑器/工具残留（2026-10-08/09 夜）
 .zcode/
-_dump_ppt.py
-_dump_ref.py
-# 平台融合 DEMO 运行输出（非代码）
-benchmark_v3/_fusion_*/
-# Office 锁文件
-~$*.pptx
-# v1/v2 数据集输出（非代码）
+.zcodeignore
+
+# ── 临时脚本 / 临时目录 / 渲染校验残留（仓库根一律 _tmp_*）
+_tmp_*
+_verify/
+
+# ── 一次性文本补丁（断言已失效、payload 乱码，只留本地）
+benchmark_v3/adapters/diag/legacy/_rebuild_extract.py
+benchmark_v3/adapters/diag/legacy/_rewrite_cluster.py
+benchmark_v3/evidence/_extract_fn.txt
+_dryrun.log
+
+# ── 平台与数据集的运行输出（非代码）
 benchmark_v1/*/dataset*/
-# 汇报 PPT 工程（2026-10-09）：只入库图表工厂 projects/make_figs_v3.py 与产物 projects/figs_v3/
-_tmp_pptmaster_probe/
-_proposal_text.txt
-_ppt_ref_style.txt
-_ppt_slide_text.txt
+benchmark_v3/_fusion_*/
+
+# ── 汇报 PPT 工程：只入库图表工厂 projects/make_figs_v3.py 与产物 projects/figs_v3/
 projects/srtp_*/
-# 汇报 PPT 工程派生件（2026-10-09）：images/ 是 projects/figs_v3 的副本，svg_final/ 由 finalize_svg 生成
 projects/ppt/*/images/
 projects/ppt/*/svg_final/
-# 临时渲染/检查产物
-_tmp_*
-# deck 派生物（2026-10-10）：exports/ 是每次导出的 pptx，backup/ 是 ppt-master 的中间备份；成品另存为 projects/ppt/v3_benchmark_progress_<date>.pptx
 projects/ppt/*/exports/
 projects/ppt/*/backup/
 projects/ppt/*/validation/em_benchmark_v3_*.report.json
 projects/ppt/*/.svg_final.candidate-*/
-# deck 渲染校验残留（2026-10-10）：LibreOffice/PyMuPDF 截图与 PDF 缓存
-_verify/
+
+# ── 其它
+__pycache__/
+*.pyc
+~$*.pptx
