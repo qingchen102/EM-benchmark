@@ -68,3 +68,4 @@ _tmp_*
 projects/ppt/*/exports/
 projects/ppt/*/backup/
 projects/ppt/*/validation/em_benchmark_v3_*.report.json
+projects/ppt/*/.svg_final.candidate-*/
