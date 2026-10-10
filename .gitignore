@@ -67,3 +67,8 @@ projects/ppt/电磁大模型基准测试集.pptx
 # ── 汇报 PPT 与出图（本人内部材料，只留本地）
 projects/
 docs/ppt-master/
+
+# ── 编译产物与缓存（非代码，不应入库）
+__pycache__/
+*.pyc
+.pytest_cache/
