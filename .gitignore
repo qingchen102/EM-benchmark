@@ -53,3 +53,13 @@ projects/ppt/*/.svg_final.candidate-*/
 __pycache__/
 *.pyc
 ~$*.pptx
+
+# ── 本人材料与他方材料（留在本地，不入库；如需入库删掉对应行即可）
+study/
+deck_render.py
+benchmark_v2/阶段整理.pptx
+docs/diagrams/
+docs/低空电磁信号基准v3-汇报讲解手册.md
+projects/ppt/srtp_v3_report_ppt169_20261010/
+projects/ppt/zju_radar_deck_template/
+projects/ppt/电磁大模型基准测试集.pptx
