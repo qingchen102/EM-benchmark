@@ -72,3 +72,9 @@ docs/ppt-master/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# ── v1/v2 实验产物（图片/表格/数据/权重，移出仓库，只留本地）
+benchmark_v1/result.xlsx
+benchmark_v1/**/*.png
+benchmark_v2/dataset/*.npy
+benchmark_v2/mod_classifier/*.pt
