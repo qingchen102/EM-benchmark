@@ -99,7 +99,6 @@ EM-benchmark/                        # 仓库根
 │   ├── 城市低空电磁信号仿真平台/      # 并入的物理级射频仿真工作台（Sionna RT + 城市 LoD1 几何）
 │   ├── docs/                        # 场景设计规范 / 全档现状报告 / 开源信号模型资料汇编
 │   └── dataset_d{1..4}/             # 四档数据集（各 50 样本；IQ 不入库，BASELINE.json 入库）
-├── projects/                        # 汇报与出图（图表工厂、PPT 工程）
 └── study/                           # 学习 / 自学材料
 ```
 
@@ -153,7 +152,6 @@ python adapters/cityrf_source.py simple           # 单站回归：1 目标 + 2 
 | `benchmark_v3/docs/BENCHMARK_STATUS_2026-10-09.md` | 全档现状报告：D1–D4 逐字段实测、合格性判定、缺口清单 |
 | `benchmark_v3/docs/开源信号模型资料汇编.md` | 开源信号模型 / 数据集的调研与口径对照 |
 | `benchmark_v3/城市低空电磁信号仿真平台/README.md` | 物理仿真平台独立文档（启动 / 能力 / 限制） |
-| `projects/` | 汇报图表工厂（`make_figs_v3.py` + `figs_v3/`）与 PPT 工程 |
 
 ---
 
