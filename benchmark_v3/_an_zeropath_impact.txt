@@ -1,0 +1,32 @@
+==============================================================================
+0-path 站（目标 0 径 → 该站残差工具返回 error）对 agent 命中率的代价
+==============================================================================
+判据：capture/private/channel_target_<st>.npz 缺=missing；delays_s.size==0=invisible
+detect = 报数与 GT 完全一致（注册口径 detection_hit）
+
+--- d1 × S0（answers_S0_agent_revert，n=50，主站=station_a）---
+    station_a=ok           n=50  detect=0/50=0.000  拒答=0   平均报数=nan  平均GT=0.54
+    station_a=invisible    n=0
+    station_a=missing      n=0
+
+--- d2 × S2（answers_S2_agent_bwfix，n=50，主站=station_a）---
+    station_a=ok           n=43  detect=18/43=0.419  拒答=0   平均报数=0.98  平均GT=1.95
+    station_a=invisible    n=7   detect=4/7=0.571  拒答=0   平均报数=1.71  平均GT=2.00
+    station_a=missing      n=0
+    其中station_a不可用的 7 个样本里，四站全不可用 1 个（这些样本仪器无残差工具可用，但题目答案仍由 GT/其他工具决定）
+    其中 GT>0（确实有干扰可答）7 个，其 detect=4/7
+
+--- d3 × S2（answers_S2_agent_bwfix，n=50，主站=station_a）---
+    station_a=ok           n=30  detect=12/30=0.400  拒答=10  平均报数=0.77  平均GT=1.40
+    station_a=invisible    n=20  detect=11/20=0.550  拒答=6   平均报数=0.80  平均GT=1.35
+    station_a=missing      n=0
+    其中station_a不可用的 20 个样本里，四站全不可用 2 个（这些样本仪器无残差工具可用，但题目答案仍由 GT/其他工具决定）
+    其中 GT>0（确实有干扰可答）18 个，其 detect=9/18
+
+--- d4 × S2（answers_S2_agent_bwfix，n=50，主站=station_a）---
+    station_a=ok           n=33  detect=4/33=0.121  拒答=15  平均报数=1.09  平均GT=2.61
+    station_a=invisible    n=17  detect=7/17=0.412  拒答=3   平均报数=1.53  平均GT=2.29
+    station_a=missing      n=0
+    其中station_a不可用的 17 个样本里，四站全不可用 2 个（这些样本仪器无残差工具可用，但题目答案仍由 GT/其他工具决定）
+    其中 GT>0（确实有干扰可答）17 个，其 detect=7/17
+

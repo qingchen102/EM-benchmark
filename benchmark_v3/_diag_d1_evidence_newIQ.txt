@@ -1,0 +1,62 @@
+d1_00000  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00001  GT=0  门控峰=0  旧宽带峰=2  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00002  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00003  GT=1  门控峰=2  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00004  GT=1  门控峰=2  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00005  GT=1  门控峰=3  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00006  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00007  GT=1  门控峰=1  旧宽带峰=5  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00008  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00009  GT=0  门控峰=0  旧宽带峰=6  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00010  GT=1  门控峰=2  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00011  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00012  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00013  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00014  GT=1  门控峰=3  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00015  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00016  GT=1  门控峰=2  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00017  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00018  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00019  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00020  GT=0  门控峰=0  旧宽带峰=6  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00021  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00022  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00023  GT=0  门控峰=0  旧宽带峰=2  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00024  GT=1  门控峰=3  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00025  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00026  GT=0  门控峰=0  旧宽带峰=3  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00027  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00028  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00029  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00030  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00031  GT=1  门控峰=3  旧宽带峰=3  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00032  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00033  GT=1  门控峰=2  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00034  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00035  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00036  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00037  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00038  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00039  GT=1  门控峰=0  旧宽带峰=5  覆盖GT 0/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00040  GT=1  门控峰=0  旧宽带峰=6  覆盖GT 0/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00041  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00042  GT=1  门控峰=2  旧宽带峰=5  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00043  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00044  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+d1_00045  GT=0  门控峰=0  旧宽带峰=6  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00046  GT=0  门控峰=0  旧宽带峰=5  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00047  GT=0  门控峰=0  旧宽带峰=6  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00048  GT=0  门控峰=0  旧宽带峰=4  覆盖GT 0/0 vs 0/0  layer1=None  noneg=None  revert=None
+d1_00049  GT=1  门控峰=1  旧宽带峰=6  覆盖GT 1/1 vs 1/1  layer1=None  noneg=None  revert=None
+
+========== 汇总 ==========
+n = 50 样本（S0 = 仅 station_a）
+峰数 == GT 数：门控 38/50   旧宽带 0/50
+两条清单峰数相同的样本：1/50
+GT 源覆盖：门控 25/27   旧宽带 27/27
+GT 数分布 {1: 27, 0: 23}
+门控峰数分布 {0: 25, 1: 15, 2: 6, 3: 4}
+旧宽带峰数分布 {2: 2, 3: 2, 4: 7, 5: 12, 6: 27}
+layer1(旧工具+原prompt): 报数==GT 0/50  拒答 0  报数==门控峰数 0  报数==旧宽带峰数 0
+noneg(现工具+加固prompt): 报数==GT 0/50  拒答 0  报数==门控峰数 0  报数==旧宽带峰数 0
+revert(现工具+原prompt): 报数==GT 0/50  拒答 0  报数==门控峰数 0  报数==旧宽带峰数 0

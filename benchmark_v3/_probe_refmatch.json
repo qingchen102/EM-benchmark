@@ -1,0 +1,24 @@
+[
+ {
+  "sid": "d3_00027",
+  "gt_n": 0,
+  "refs": [
+   "station_d"
+  ],
+  "matched": null,
+  "floor": null,
+  "n_gated": 0,
+  "n_legacy": 0,
+  "peaks": []
+ },
+ {
+  "sid": "d3_00032",
+  "gt_n": 0,
+  "refs": [],
+  "matched": null,
+  "floor": null,
+  "n_gated": 0,
+  "n_legacy": 0,
+  "peaks": []
+ }
+]

@@ -299,15 +299,19 @@
   "n_per_level": 50,
   "note": "四档注册口径基线（各 50 样本）。D1 是 S0 单站、D2–D4 是 S2 四站，detection 口径不同。freq_aes 的归一化基数恒为 2e6（eval_dataset.py:127/205/229），四档容差均 ±40 kHz；早前把 freq_aes 乘采集带宽得到的 kHz 值全部偏大 2 倍。",
   "stale_2026_10_09": "**D2/D3/D4 三行答案跑在「带宽修前」的数据 + 泄漏修复前的工具上，对现行 dataset_d{2,3,4} 不再有效**：三档数据已在 2026-10-09 夜因波形带限修复重放换装（旧数据与旧答案备份在 benchmark_v3/_pre_bw_20261009/）。D1 未重放（逐位恒等）故 D1 行对现行数据仍有效。仪器侧同日实质变好（gate 召回 0.510 → 0.653、假簇 0.612 → 0.540）；agent 侧在现行数据上**尚无基线**，需按点状重跑纪律另行申请。**【2026-10-09 深夜更正】D2 已在现行数据上补跑（见 rows 的 `D2_S2_bwfix_2026_10_09`：detection 0.44、拒答 20/50）；D3/D4 仍无现行基线。**",
+  "stale_2026_10_10_update": "**现行四档口径（2026-10-10）**：D1×S0 0.96（48/50，拒答 0）/ D2×S2 0.44（拒答 20，排除后 0.733）/ D3×S2 0.46（拒答 16，排除后 0.618）/ D4×S2 0.22（拒答 18，排除后 0.344）。① D1 曾按「逐位恒等」跳过波形带限重放——**该判断是错的**（见 d1_wavefix_2026_10_10），已补换装并在新数据上重取；② D3/D4 的现行数据基线与历史（带宽修复前）数字接近，但答案目录/数据血统已不同，勿混用；③ **“难度梯度单调”在现行数据上不再成立**（D3 0.46 略高于 D2 0.44，差距在单次 50 样本 ±0.2 的运行不确定度内）。",
   "rows": {
    "D1_S0": {"answers_dir": "dataset_d1/answers_S0_agent_layer1", "detection_hit": 0.96, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0068, "doa_hits": 0.48, "intent": 0.93},
+   "D1_S0_wavefix_2026_10_10": {"answers_dir": "dataset_d1/answers_S0_agent_wavefix", "date": "2026-10-10", "note": "在重放后的现行 D1 数据上重取（原 prompt）。与 layer1（带宽修复前）逐项一致 → D1 修复在现行数据上站得住；无可辨识拒答。", "detection_hit": 0.96, "detection_within1": 0.98, "detect_abs_err": 0.04, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0063, "doa_hits": 0.48, "doa_aes": 63.49, "abstain_n": 0},
    "D2_S2": {"answers_dir": "dataset_d2/answers_S2_agent_layer1", "detection_hit": 0.48, "kind_hits": 0.4821, "freq_hits": 0.2143, "freq_aes": 0.1787, "pos_hits": 0.5357, "pos_errs": 232.0, "intent": 0.768, "spoof_fa": 0.0},
    "D2_S2_bwfix_2026_10_09": {"answers_dir": "dataset_d2/answers_S2_agent_bwfix", "note": "带宽修复后重放换装 + 工具泄漏修复后、prompt 未加固的 D2 跑。S1 与 S2 逐项相同；S0=0.36。**其报告已被同名的 noneg 报告覆盖**，存档见 `dataset_d2/_eval_report_S2_bwfix_20261009.json`（layer1 的记录在 `_pre_bw_20261009/dataset_d2/`）。", "detection_hit": 0.44, "within1": 0.5, "detect_abs_err": 1.0, "kind_hits": 0.36, "freq_hits": 0.3, "freq_aes": 0.096, "pos_hits": 0.72, "pos_errs": 212.13, "intent": 0.58, "spoof_fa": 0.0, "abstain_n": 20, "abstain_rate": 0.4, "detection_hit_excl_abstain": 0.733, "detection_denom_excl_abstain": 30},
    "D2_S2_noneg_2026_10_10": {"answers_dir": "dataset_d2/answers_S2_agent_noneg", "note": "**prompt 加固后（禁负哨兵措辞改硬）的 D2 点状重跑**，与 `D2_S2_bwfix_2026_10_09` 是同一套数据/工具/权重，唯一变量是 prompt。结论：**加固没有改变该模型的行为**（拒答 20→19、detection 0.44→0.44）→ D2 的真实水平就是“注册口径 0.44 / 排除拒答 0.71”。报告 `dataset_d2/eval_report_S2.json`（当前盘上就是本次）；S1 与 S2 逐项相同，S0=0.38。", "detection_hit": 0.44, "within1": 0.5192, "detect_abs_err": 0.94, "kind_hits": 0.4259, "freq_hits": 0.2963, "freq_aes": 0.0895, "pos_hits": 0.7037, "pos_errs": 198.2391, "intent": 0.611, "spoof_fa": 0.0, "abstain_n": 19, "abstain_rate": 0.38, "detection_hit_excl_abstain": 0.71, "detection_denom_excl_abstain": 31},
+   "D3_S2_bwfix_2026_10_10": {"answers_dir": "dataset_d3/answers_S2_agent_bwfix", "date": "2026-10-10", "note": "现行数据（带宽修复后）上的 D3 首个 agent 基线。", "detection_hit": 0.46, "detection_within1": 0.66, "kind_hits": 0.4444, "freq_hits": 0.2778, "freq_aes": 0.0857, "pos_hits": 0.4722, "pos_errs": 457.4, "abstain_n": 16, "abstain_rate": 0.32, "detection_hit_excl_abstain": 0.618, "detection_denom_excl_abstain": 34},
+   "D4_S2_bwfix_2026_10_10": {"answers_dir": "dataset_d4/answers_S2_agent_bwfix", "date": "2026-10-10", "note": "现行数据（带宽修复后）上的 D4 首个 agent 基线。", "detection_hit": 0.22, "detection_within1": 0.39, "kind_hits": 0.2241, "freq_hits": 0.1724, "freq_aes": 0.1233, "pos_hits": 0.2759, "pos_errs": 693.2, "abstain_n": 18, "abstain_rate": 0.36, "detection_hit_excl_abstain": 0.344, "detection_denom_excl_abstain": 32},
    "D3_S2": {"answers_dir": "dataset_d3/answers_S2_agent_layer1", "detection_hit": 0.4, "kind_hits": 0.3721, "freq_hits": 0.0465, "freq_aes": 0.1371, "pos_hits": 0.3721, "pos_errs": 533.89, "intent": 0.814},
    "D4_S2": {"answers_dir": "dataset_d4/answers_S2_agent_layer1", "detection_hit": 0.24, "kind_hits": 0.26, "freq_hits": 0.1, "freq_aes": 0.1642, "pos_hits": 0.32, "pos_errs": 643.57, "intent": 0.76, "spoof_hit": 0.2, "spoof_fa": 0.2, "oracle_assoc_pairs": 55, "P_kind_assoc": 0.218, "P_intent_assoc": 0.764, "freq_ae_oracle": 0.205}
   },
-  "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 的 DOA 0.48 是单站前后瓣镜像上限、kind 0.60 是 tone/noise 仪器盲区；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。"
+  "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）（**2026-10-10 更正**：该单调性只在带宽修复前口径成立；现行数据四档为 0.96 / 0.44 / 0.46 / 0.22，D3 略高于 D2、差距在单次 50 样本 ±0.2 的运行不确定度内）且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 的 DOA 0.48 是单站前后瓣镜像上限、kind 0.60 是 tone/noise 仪器盲区；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。"
  },
  "abstain_2026_10_09": {
   "what": "把「模型写了被禁负哨兵 -1」这件事从 detection 里单列出来：runner 的 _sanitize 现在返回 abstained 标志，eval_dataset 新增 abstain_n / abstain_rate / detection_hit_excl_abstain / detection_denom_excl_abstain（注册口径 detection_hit 未改动）。",
@@ -317,10 +321,36 @@
    "D2_S2 带宽修前": {"n": 50, "detection_hit": 0.48, "abstain_n": 4, "excl_abstain": 0.522, "caveat": "_run_log.json 只含续跑末轮 15 条 → abstain_n 是下界（拒答样本必 detection=0，移出分母只会让比率上升）"},
    "D2_S2 带宽修后": {"n": 50, "detection_hit": 0.44, "abstain_n": 20, "abstain_rate": 0.4, "excl_abstain": 0.733},
    "D3_S2 带宽修前": {"n": 50, "detection_hit": 0.4, "abstain_n": 10, "excl_abstain": 0.475},
-   "D4_S2 带宽修前": {"n": 50, "detection_hit": 0.24, "abstain_n": 15, "excl_abstain": 0.343}
+   "D4_S2 带宽修前": {"n": 50, "detection_hit": 0.24, "abstain_n": 15, "excl_abstain": 0.343},
+   "D3_S2 带宽修后（现行数据）": {"n": 50, "detection_hit": 0.46, "abstain_n": 16, "abstain_rate": 0.32, "excl_abstain": 0.618},
+   "D4_S2 带宽修后（现行数据）": {"n": 50, "detection_hit": 0.22, "abstain_n": 18, "abstain_rate": 0.36, "excl_abstain": 0.344}
   },
-  "reading": "拒答率随难度单调上升（D1 0% → D3 20% → D4 30% → D2 40%）。D1 是单站且半数样本真值本就是 0，说明模型有能力遵守「必须给 0..3」的契约，只是在证据含糊时违约。D2 带宽修后：22 次未命中里 20 次是拒答，排除后 detection 0.733，与仪器「可解子集」上限 0.685 同量级 → 题面与仪器站得住，丢的分主要在答案契约。",
-  "prompt_hardening_2026_10_10": "prompt 里禁负哨兵的措辞从「is discarded」改为「parsed as 0 and scored as a WRONG answer; there is no re-ask / no clarification round」，并新增「num_interferers MUST be a NON-NEGATIVE integer」规则与 Round 7+ 自检句。**实测结果（D2 点状重跑 `answers_S2_agent_noneg`）：拒答 19/50（对照 20/50）、detection 0.44（对照 0.44）→ 加固无效，该模型在难样本上仍会写 -1。** 附一个测量教训：用 PowerShell 正则数 `_run_log.json` 里的负哨兵会得到 0（该字段是字符串里的转义 JSON，文件里是 `\\\"num_interferers\\\": -1`，闭引号前有反斜杠），**必须用 JSON 解析后统计**。"
+  "reading": "拒答率随难度上升（现行数据：D1 0% → D3 32% → D4 36% → D2 40%）。D1 是单站且半数样本真值本就是 0，说明模型有能力遵守「必须给 0..3」的契约，只是在证据含糊时违约。D2 带宽修后：22 次未命中里 20 次是拒答，排除后 detection 0.733，与仪器「可解子集」上限 0.685 同量级 → 题面与仪器站得住，丢的分主要在答案契约。",
+  "prompt_hardening_2026_10_10": "prompt 里禁负哨兵的措辞从「is discarded」改为「parsed as 0 and scored as a WRONG answer; there is no re-ask / no clarification round」，并新增「num_interferers MUST be a NON-NEGATIVE integer」规则与 Round 7+ 自检句。**实测结果（D2 点状重跑 `answers_S2_agent_noneg`）：拒答 19/50（对照 20/50）、detection 0.44（对照 0.44）→ 加固无效，该模型在难样本上仍会写 -1。** 附一个测量教训：用 PowerShell 正则数 `_run_log.json` 里的负哨兵会得到 0（该字段是字符串里的转义 JSON，文件里是 `\\\"num_interferers\\\": -1`，闭引号前有反斜杠），**必须用 JSON 解析后统计**；另：加固 prompt 对 D1 造成 0.96→0.56（拒答 29/50），但根因是 D1 数据失配（见 `d1_wavefix_2026_10_10`），非 prompt 本身。",
   "artifacts": {"script": "benchmark_v3/adapters/_an_abstain.py", "report": "benchmark_v3/_abstain_report.txt", "audit_raw": "benchmark_v3/_an_abstain.txt"}
+ },
+ "d1_wavefix_2026_10_10": {
+  "what": "D1 波形带限回归（自伤）：2026-10-09 19:15 提交波形带限（683c88e）时把 D1 当「逐位恒等」跳过重放 → 盘上 D1 的 IQ（09-27 老代码产物）与运行时现场合成的目标参考（新代码产物）不再逐位一致 → 参考直减减不干净、残差里剩下目标自身 → 干净样本 matched_energy_fraction=0.000（正常应 ≈1.0）、门控峰 5~6 个（coherence 0.98~0.997）→ 考生看到满屏疑似源后大量拒答。",
+  "impact": "D1 在 2026-10-10 的两跑（加固 prompt 0.56 / 原 prompt 0.48，拒答 29/24）量的是坏数据，**作废**。`answers_S0_agent_layer1` 的 0.96 跑在 10-09 11:17→11:53，早于 19:15 的提交 → **该值有效**，口径为「带宽修复前」。",
+  "new_d1_baseline": {"answers_dir": "dataset_d1/answers_S0_agent_wavefix", "date": "2026-10-10", "detection_hit": 0.96, "detection_within1": 0.98, "detect_abs_err": 0.04, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0063, "doa_hits": 0.48, "doa_aes": 63.49, "abstain_n": 0, "verdict": "与 layer1（带宽修复前、旧 IQ）逐项一致 → 0.96 是 D1 的真实水平，不是旧数据的偶然；D1 修复在现行数据上成立。"},
+  "fix": "用 frozen-channel 重放换装 D1（`regen_noise.py --src ../dataset_d1 --difficulty d1`，50/50 共 31.3s；D1 纯热噪 → 噪声底逐位不变 -106.94 dBm）；旧 D1 与全部答案/报告备份在 `benchmark_v3/_stale_d1_wavefix_20261010/dataset_d1`（含 `_agent_cache`、`answers_S0_agent_{layer1,noneg,revert}`）。重跑答案目录 `dataset_d1/answers_S0_agent_wavefix`。",
+  "evidence": {
+   "matched_energy_fraction_old_d1_clean": [0.0, 0.0, 0.0],
+   "matched_energy_fraction_new_d1_clean": [0.997, 0.999],
+   "matched_energy_fraction_d2_control": [0.998, 0.978],
+   "new_d1_clean_gated_peaks": 0,
+   "new_d1_tone_sample": "GT tone 591.9 kHz → 门控峰恰 1 个：(590.0 kHz, over 19.4 dB, coh 0.785)",
+   "new_d1_instrument_audit": {"n": 50, "peaks_eq_gt": 38, "gt_source_covered_gated": 25, "gt_total": 27, "gated_peak_hist": {"0": 25, "1": 15, "2": 6, "3": 4}, "legacy_peak_hist_old": {"2": 2, "3": 2, "4": 7, "5": 12, "6": 27}},
+   "data_provenance_md5": "现场重放 vs 盘上 IQ：d1..d4 × {00000,00001} × 4 站 = 32/32 SAME → 现盘上四档都是当前代码产物"
+  },
+  "zeropath_audit": {
+   "what": "四档逐站目标链路状态（`_probe_targetvis.py`）：D1 四站全 ok（200/200）；D2 station_a invisible 7/50；D3 20/50（40%）；D4 17/50（34%）——这些站上 `estimate_band_occupancy_by_correlation` 返回 error（聚类路径与 `oracle16._target_ref_state` 均有降级）。",
+   "detection_by_station_a_state": {"D2_S2": {"ok": [0.419, 43], "invisible": [0.571, 7]}, "D3_S2": {"ok": [0.4, 30], "invisible": [0.55, 20]}, "D4_S2": {"ok": [0.121, 33], "invisible": [0.412, 17]}},
+   "reading": "0-path 报错**不拖后腿**（这些样本反而打得更好）→ 不值得为它单独修 + 重跑 D2/D3/D4（省约 3 小时 API）；反面对照更有价值：主站目标可见的样本拒答更多（D4 15/33 vs 3/17），指向「目标残余/多径让主站证据自相矛盾」。"
+  },
+  "artifacts": {
+   "scripts": ["benchmark_v3/adapters/_diag_d1_evidence.py", "benchmark_v3/adapters/_probe_refmatch.py", "benchmark_v3/adapters/_probe_d1_refmatch.py", "benchmark_v3/adapters/_probe_targetvis.py", "benchmark_v3/adapters/_an_zeropath_impact.py"],
+   "reports": ["benchmark_v3/_diag_d1_evidence_newIQ.txt", "benchmark_v3/_diag_d1_evidence_staleIQ.txt", "benchmark_v3/_probe_refmatch.txt", "benchmark_v3/_probe_targetvis.txt", "benchmark_v3/_an_zeropath_impact.txt"]
+  }
  }
 }

@@ -19,6 +19,11 @@ benchmark_v3/_smoke_regen_wiring/
 # 带宽重生成（2026-10-09 夜）：带宽修好前的数据集备份 + 冻结信道重放中间产物
 benchmark_v3/_pre_bw_20261009/
 benchmark_v3/_regen_bw/
+# D1 波形带限回归（2026-10-10 发现）：D1 盘上 IQ 是 09-27 生成，19:15 的波形带限提交后
+# 运行时合成的目标参考与其不再逐位匹配（残差=目标自身，干净样本报 4~6 个假峰）。
+# 旧 D1（含旧答案/报告，作证据留档）与重放中间产物都只留本地
+benchmark_v3/_stale_d1_wavefix_20261010/
+benchmark_v3/_regen_d1_*/
 # 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
 benchmark_v3/_api_*
 benchmark_v3/adapters/_verify_cache/

@@ -240,8 +240,6 @@ Output ONLY valid JSON with schema:
                   "doa_deg": <world azimuth, deg>, "position_m": [<x_m>, <y_m>]}, ...]}
 Rules:
 - num_interferers must equal the number of entries in interferers.
-- num_interferers MUST be a NON-NEGATIVE integer. It is parsed literally: a negative
-  value (e.g. -1) is read as 0 and scored as a WRONG answer; there is no re-ask.
 - ALWAYS include every key per interferer (doa_deg / position_m best effort even
   when only one station is available).
 - HARD TOOL BUDGET — you have at most 10 rounds and you MUST follow this recipe.
@@ -286,8 +284,7 @@ Rules:
     Round 7+: NO MORE TOOL CALLS. Write the final JSON answer NOW — the
               classify items already contain every field the answer schema
               needs. If evidence is partial, still answer with your best
-              estimates for the bands you measured. Before emitting, check that
-              num_interferers is a non-negative integer (0 is a valid answer).
+              estimates for the bands you measured.
 - REPORT ONLY MEASURED BANDS: report exactly the merged coherent residual bands
   you measured (or the classifier candidates), nothing else. Do not invent a band
   from a spectral lobe of the wideband target (the target is at ~0 Hz and is
@@ -295,10 +292,9 @@ Rules:
   same emitter twice under two nearby frequencies. If the measurement shows no
   coherent band, num_interferers = 0 is the correct answer.
 - NEVER use a negative num_interferers (e.g. -1) or any sentinel to signal
-  "not sure": it is parsed as 0 and recorded as a WRONG answer (there is no
-  clarification round). If the evidence is partial, commit to the bands you
-  measured; if unsure of the kind, use the closest catalog match. Reporting too
-  few interferers is still a real attempt; -1 is a guaranteed miss.
+  "not sure" — that is an invalid answer and will be discarded. If unsure of
+  the count, report the peaks you measured; if unsure of the kind, use the
+  closest catalog match.
 - CO-CHANNEL RESOLUTION: when the wideband target overlaps the interferers (spectrum
   is one fused blob around 0 Hz), FIRST call estimate_band_occupancy_by_correlation
   on a station. If band_occupied_beyond_target is true, re-run

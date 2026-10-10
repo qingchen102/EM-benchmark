@@ -1,0 +1,32 @@
+
+=== d1: 50 样本 ===
+   station_a  ok  50  invisible   0  missing   0
+   station_b  ok  50  invisible   0  missing   0
+   station_c  ok  50  invisible   0  missing   0
+   station_d  ok  50  invisible   0  missing   0
+   station_a 不可用: 0/50  []
+   四站全不可用:    0/50
+
+=== d2: 50 样本 ===
+   station_a  ok  43  invisible   7  missing   0
+   station_b  ok  44  invisible   6  missing   0
+   station_c  ok  46  invisible   4  missing   0
+   station_d  ok  44  invisible   6  missing   0
+   station_a 不可用: 7/50  ['d2_00006', 'd2_00015', 'd2_00019', 'd2_00033', 'd2_00035', 'd2_00043', 'd2_00045']
+   四站全不可用:    1/50
+
+=== d3: 50 样本 ===
+   station_a  ok  30  invisible  20  missing   0
+   station_b  ok  36  invisible  14  missing   0
+   station_c  ok  30  invisible  20  missing   0
+   station_d  ok  28  invisible  22  missing   0
+   station_a 不可用: 20/50  ['d3_00000', 'd3_00009', 'd3_00012', 'd3_00013', 'd3_00014', 'd3_00016', 'd3_00017', 'd3_00019', 'd3_00021', 'd3_00023', 'd3_00025', 'd3_00026']
+   四站全不可用:    2/50
+
+=== d4: 50 样本 ===
+   station_a  ok  33  invisible  17  missing   0
+   station_b  ok  32  invisible  18  missing   0
+   station_c  ok  30  invisible  20  missing   0
+   station_d  ok  35  invisible  15  missing   0
+   station_a 不可用: 17/50  ['d4_00000', 'd4_00002', 'd4_00003', 'd4_00006', 'd4_00008', 'd4_00009', 'd4_00010', 'd4_00011', 'd4_00012', 'd4_00014', 'd4_00015', 'd4_00021']
+   四站全不可用:    2/50

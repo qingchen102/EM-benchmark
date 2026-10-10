@@ -1,0 +1,2158 @@
+[
+ {
+  "sid": "d1_00000",
+  "gt_n": 1,
+  "gt_f": [
+   591898.1026524251
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -820.1,
+   760.0,
+   -70.1,
+   320.0,
+   -470.1,
+   -720.1
+  ],
+  "legacy_f": [
+   591.9,
+   -348.1,
+   837.1,
+   839.0,
+   842.0,
+   -843.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     590000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 6,
+    "abstained": false,
+    "freqs": [
+     -820100.0,
+     -720100.0,
+     -470100.0,
+     -70100.0,
+     320000.0,
+     760000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00001",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   820.0,
+   -480.1,
+   -780.1,
+   -60.1,
+   160.0
+  ],
+  "legacy_f": [
+   338.0,
+   -338.0,
+   829.8,
+   828.6,
+   830.8,
+   -833.5
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 5,
+    "abstained": false,
+    "freqs": [
+     820000.0,
+     -480100.0,
+     -780100.0,
+     -60100.0,
+     160000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00002",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   10.0,
+   -440.1,
+   -720.1,
+   760.0,
+   850.0,
+   -780.1
+  ],
+  "legacy_f": [
+   214.8,
+   -440.1,
+   787.5,
+   -808.0,
+   821.7,
+   -826.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 4,
+    "abstained": false,
+    "freqs": [
+     10000.0,
+     -440100.0,
+     -720100.0,
+     760000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00003",
+  "gt_n": 1,
+  "gt_f": [
+   622106.6248084544
+  ],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -800.1,
+   20.0,
+   770.0,
+   -10.1,
+   110.0
+  ],
+  "legacy_f": [
+   -218.1,
+   219.0,
+   823.7,
+   834.0,
+   837.0,
+   -844.0
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     630000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00004",
+  "gt_n": 1,
+  "gt_f": [
+   620345.8217575873
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -510.1,
+   100.0,
+   50.0,
+   -760.1,
+   790.0,
+   830.0
+  ],
+  "legacy_f": [
+   -279.2,
+   428.8,
+   -817.6,
+   822.6,
+   -820.8,
+   829.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     640000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00005",
+  "gt_n": 1,
+  "gt_f": [
+   664264.5748865453
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   630.0,
+   660.0,
+   700.0,
+   -840.1,
+   -510.1,
+   -680.1
+  ],
+  "legacy_f": [
+   673.3,
+   -497.9,
+   -819.3,
+   -831.2,
+   -834.2,
+   -835.7
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     630000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00006",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -810.1,
+   820.0,
+   -750.1,
+   300.0,
+   420.0,
+   -20.1
+  ],
+  "legacy_f": [
+   151.8,
+   -352.2,
+   817.3,
+   -822.4,
+   -827.8,
+   828.0
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 4,
+    "abstained": false,
+    "freqs": [
+     -810100.0,
+     -20100.0,
+     300000.0,
+     820000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00007",
+  "gt_n": 1,
+  "gt_f": [
+   582108.3112941874
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   60.0,
+   750.0,
+   -800.1,
+   -690.1,
+   -420.1,
+   -750.1
+  ],
+  "legacy_f": [
+   582.1,
+   87.3,
+   225.4,
+   -158.8,
+   -352.8,
+   -237.7
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     580000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00008",
+  "gt_n": 1,
+  "gt_f": [
+   597847.8634299632
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   800.0,
+   -780.1,
+   470.0,
+   380.0,
+   -290.1,
+   -430.1
+  ],
+  "legacy_f": [
+   -382.6,
+   157.5,
+   835.5,
+   -835.0,
+   -839.6,
+   834.7
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     590000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00009",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   281.3,
+   -25.8,
+   852.4,
+   -852.7,
+   853.7,
+   -853.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00010",
+  "gt_n": 1,
+  "gt_f": [
+   647826.7031397795
+  ],
+  "gated_n": 2,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   630.0,
+   570.0
+  ],
+  "legacy_f": [
+   650.3,
+   -125.5,
+   -837.1,
+   841.4,
+   840.0,
+   -841.5
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     630000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     630000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     630000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00011",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 5,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   -520.9,
+   318.4,
+   851.5,
+   -852.0,
+   -853.0
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00012",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 4,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   -687.3,
+   648.6,
+   -853.2,
+   855.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00013",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 4,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   483.5,
+   -670.7,
+   854.0,
+   -853.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00014",
+  "gt_n": 1,
+  "gt_f": [
+   -662696.7094441232
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -680.1,
+   780.0,
+   -650.1,
+   480.0,
+   -810.1,
+   390.0
+  ],
+  "legacy_f": [
+   -672.9,
+   71.0,
+   827.7,
+   826.9,
+   829.2,
+   -837.5
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -680100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00015",
+  "gt_n": 1,
+  "gt_f": [
+   661263.6214793291
+  ],
+  "gated_n": 1,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   660.0
+  ],
+  "legacy_f": [
+   661.3,
+   -534.8,
+   829.7,
+   -826.9,
+   833.3,
+   828.3
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     660000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     660000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     660000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00016",
+  "gt_n": 1,
+  "gt_f": [
+   682250.5019115694
+  ],
+  "gated_n": 2,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   650.0,
+   690.0
+  ],
+  "legacy_f": [
+   667.9,
+   -492.0,
+   -817.7,
+   821.1,
+   821.6,
+   -818.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     650000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     650000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     650000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00017",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -720.1,
+   20.0,
+   700.0,
+   -790.1,
+   750.0,
+   790.0
+  ],
+  "legacy_f": [
+   421.6,
+   -134.5,
+   -451.6,
+   815.1,
+   -823.2,
+   826.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 3,
+    "abstained": false,
+    "freqs": [
+     -720100.0,
+     -20000.0,
+     700000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00018",
+  "gt_n": 1,
+  "gt_f": [
+   -629359.1508987631
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -800.1,
+   740.0,
+   770.0,
+   -120.1,
+   -740.1,
+   -770.1
+  ],
+  "legacy_f": [
+   -629.4,
+   -431.2,
+   -86.6,
+   88.7,
+   14.5,
+   767.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -630100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00019",
+  "gt_n": 1,
+  "gt_f": [
+   -699075.0888272637
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   10.0,
+   60.0,
+   750.0,
+   -670.1,
+   -820.1,
+   -50.1
+  ],
+  "legacy_f": [
+   171.1,
+   -477.2,
+   -838.6,
+   839.9,
+   843.1,
+   -839.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -680100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00020",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -810.1,
+   770.0,
+   850.0,
+   -660.1,
+   -780.1,
+   470.0
+  ],
+  "legacy_f": [
+   -153.7,
+   157.8,
+   829.3,
+   -832.5,
+   -834.8,
+   -837.1
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00021",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 5,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   646.2,
+   -142.6,
+   849.5,
+   851.5,
+   -851.1
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00022",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 4,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   642.2,
+   -76.6,
+   850.8,
+   851.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00023",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -750.1,
+   790.0,
+   850.0,
+   -830.1,
+   -350.1,
+   730.0
+  ],
+  "legacy_f": [
+   409.1,
+   -167.4,
+   -830.1,
+   829.3,
+   835.8,
+   -837.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 4,
+    "abstained": false,
+    "freqs": [
+     790000.0,
+     -750100.0,
+     -830100.0,
+     -350100.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00024",
+  "gt_n": 1,
+  "gt_f": [
+   672886.7552653352
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -10.1,
+   -700.1,
+   -830.1,
+   810.0,
+   -60.1,
+   420.0
+  ],
+  "legacy_f": [
+   360.2,
+   -58.0,
+   -827.2,
+   836.9,
+   -838.0,
+   -839.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     700000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00025",
+  "gt_n": 1,
+  "gt_f": [
+   603719.849538595
+  ],
+  "gated_n": 1,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   600.0
+  ],
+  "legacy_f": [
+   603.7,
+   -526.7,
+   828.8,
+   826.3,
+   830.4,
+   -828.7
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     600000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     600000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     600000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00026",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -770.1,
+   460.0,
+   -470.1,
+   -330.1,
+   30.0
+  ],
+  "legacy_f": [
+   -417.2,
+   270.1,
+   829.4,
+   -833.6,
+   831.5,
+   834.2
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00027",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -780.1,
+   440.0,
+   -750.1,
+   -830.1,
+   -400.1,
+   700.0
+  ],
+  "legacy_f": [
+   112.3,
+   -310.7,
+   -843.1,
+   842.5,
+   -847.4,
+   -844.7
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00028",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   360.0,
+   -780.1,
+   -680.1,
+   70.0,
+   -750.1,
+   810.0
+  ],
+  "legacy_f": [
+   -493.7,
+   71.9,
+   -838.5,
+   839.5,
+   840.3,
+   838.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00029",
+  "gt_n": 1,
+  "gt_f": [
+   -701196.8477732735
+  ],
+  "gated_n": 1,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -720.1
+  ],
+  "legacy_f": [
+   -716.7,
+   358.3,
+   848.0,
+   -849.2,
+   849.4,
+   -850.1
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -720100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -720100.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -720100.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00030",
+  "gt_n": 1,
+  "gt_f": [
+   -644470.9692382292
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -30.1,
+   800.0,
+   -60.1,
+   -340.1,
+   220.0,
+   640.0
+  ],
+  "legacy_f": [
+   -644.5,
+   91.7,
+   -136.0,
+   753.5,
+   -823.3,
+   826.2
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -640100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00031",
+  "gt_n": 1,
+  "gt_f": [
+   678109.3510402835
+  ],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   30.0,
+   530.0,
+   450.0,
+   70.0,
+   410.0
+  ],
+  "legacy_f": [
+   30.0,
+   -108.7,
+   849.6,
+   -850.0,
+   -852.5,
+   852.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     700000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00032",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 5,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   -320.1,
+   620.0,
+   -851.1,
+   849.7,
+   -852.0
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00033",
+  "gt_n": 1,
+  "gt_f": [
+   -660021.0557024752
+  ],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   800.0,
+   -470.1,
+   710.0,
+   -770.1,
+   -820.1
+  ],
+  "legacy_f": [
+   -98.3,
+   326.7,
+   -827.0,
+   -832.7,
+   833.2,
+   -838.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -700100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00034",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 4,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   625.3,
+   -37.9,
+   851.9,
+   -851.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00035",
+  "gt_n": 1,
+  "gt_f": [
+   -667748.5031437258
+  ],
+  "gated_n": 1,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -670.1
+  ],
+  "legacy_f": [
+   -667.7,
+   552.3,
+   -547.3,
+   -486.5,
+   -306.6,
+   682.3
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -670100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -670100.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -670100.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00036",
+  "gt_n": 1,
+  "gt_f": [
+   -673753.8501731704
+  ],
+  "gated_n": 4,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -810.1,
+   -210.1,
+   800.0,
+   310.0
+  ],
+  "legacy_f": [
+   -49.5,
+   60.9,
+   -822.8,
+   -831.4,
+   832.5,
+   835.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -680100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00037",
+  "gt_n": 1,
+  "gt_f": [
+   638566.0974765756
+  ],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   640.0,
+   -510.1,
+   -470.1,
+   30.0,
+   770.0
+  ],
+  "legacy_f": [
+   638.6,
+   -174.2,
+   -834.9,
+   -832.4,
+   -838.0,
+   -836.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     640000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00038",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -10.1,
+   -750.1,
+   790.0,
+   -500.1,
+   -50.1,
+   -650.1
+  ],
+  "legacy_f": [
+   -40.2,
+   23.9,
+   -848.8,
+   -846.5,
+   848.8,
+   851.1
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00039",
+  "gt_n": 1,
+  "gt_f": [
+   -641816.7936634757
+  ],
+  "gated_n": 0,
+  "legacy_n": 5,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 1,
+  "gated_f": [],
+  "legacy_f": [
+   -641.8,
+   620.4,
+   -844.1,
+   843.2,
+   -844.5
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00040",
+  "gt_n": 1,
+  "gt_f": [
+   -592008.2558252641
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -790.1,
+   790.0,
+   -830.1,
+   200.0,
+   -630.1,
+   -740.1
+  ],
+  "legacy_f": [
+   -592.0,
+   108.6,
+   -836.7,
+   834.7,
+   833.2,
+   839.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00041",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -450.1,
+   40.0,
+   -510.1,
+   -820.1,
+   710.0,
+   -780.1
+  ],
+  "legacy_f": [
+   -126.0,
+   383.7,
+   827.8,
+   837.0,
+   835.1,
+   842.2
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 4,
+    "abstained": false,
+    "freqs": [
+     -450100.0,
+     -820100.0,
+     40000.0,
+     710000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00042",
+  "gt_n": 1,
+  "gt_f": [
+   640354.2226872658
+  ],
+  "gated_n": 2,
+  "legacy_n": 5,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   620.0,
+   700.0
+  ],
+  "legacy_f": [
+   641.4,
+   -202.0,
+   -835.8,
+   836.2,
+   837.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     620000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     620000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     620000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00043",
+  "gt_n": 1,
+  "gt_f": [
+   689479.8145343203
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   690.0,
+   -770.1,
+   820.0,
+   -190.1,
+   730.0,
+   -350.1
+  ],
+  "legacy_f": [
+   689.5,
+   -21.6,
+   213.7,
+   52.9,
+   419.0,
+   73.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     690000.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00044",
+  "gt_n": 1,
+  "gt_f": [
+   -694090.6315700214
+  ],
+  "gated_n": 1,
+  "legacy_n": 6,
+  "gt_cov_gated": 1,
+  "gt_cov_legacy": 1,
+  "gated_f": [
+   -710.1
+  ],
+  "legacy_f": [
+   -704.9,
+   430.9,
+   825.8,
+   -830.2,
+   824.1,
+   -829.9
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -710100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -710100.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -710100.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00045",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 5,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   780.0,
+   -800.1,
+   440.0,
+   -840.1,
+   -20.1
+  ],
+  "legacy_f": [
+   214.5,
+   -502.5,
+   -821.1,
+   -829.6,
+   831.6,
+   -831.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 5,
+    "abstained": false,
+    "freqs": [
+     780000.0,
+     -800100.0,
+     440000.0,
+     -840100.0,
+     -20100.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00046",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 0,
+  "legacy_n": 5,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [],
+  "legacy_f": [
+   -529.1,
+   664.4,
+   -853.1,
+   852.7,
+   -854.8
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   }
+  }
+ },
+ {
+  "sid": "d1_00047",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   780.0,
+   -790.1,
+   810.0,
+   -490.1,
+   -820.1,
+   590.0
+  ],
+  "legacy_f": [
+   -172.4,
+   420.8,
+   834.9,
+   -848.4,
+   -846.2,
+   -845.4
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 4,
+    "abstained": false,
+    "freqs": [
+     780000.0,
+     -790100.0,
+     -490100.0,
+     590000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00048",
+  "gt_n": 0,
+  "gt_f": [],
+  "gated_n": 2,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   -790.1,
+   780.0
+  ],
+  "legacy_f": [
+   4.6,
+   -216.8,
+   841.3,
+   -843.8,
+   -841.5,
+   846.6
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 0,
+    "abstained": false,
+    "freqs": []
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 2,
+    "abstained": false,
+    "freqs": [
+     -790100.0,
+     780000.0
+    ]
+   },
+   "revert(现工具+原prompt)": {
+    "n": 2,
+    "abstained": false,
+    "freqs": [
+     -790100.0,
+     780000.0
+    ]
+   }
+  }
+ },
+ {
+  "sid": "d1_00049",
+  "gt_n": 1,
+  "gt_f": [
+   -685875.4787797118
+  ],
+  "gated_n": 6,
+  "legacy_n": 6,
+  "gt_cov_gated": 0,
+  "gt_cov_legacy": 0,
+  "gated_f": [
+   430.0,
+   820.0,
+   -260.1,
+   730.0,
+   100.0,
+   10.0
+  ],
+  "legacy_f": [
+   -69.1,
+   446.6,
+   827.0,
+   -833.0,
+   837.3,
+   839.2
+  ],
+  "runs": {
+   "layer1(旧工具+原prompt)": {
+    "n": 1,
+    "abstained": false,
+    "freqs": [
+     -700100.0
+    ]
+   },
+   "noneg(现工具+加固prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   },
+   "revert(现工具+原prompt)": {
+    "n": 0,
+    "abstained": true,
+    "freqs": []
+   }
+  }
+ }
+]
