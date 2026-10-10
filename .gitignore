@@ -37,8 +37,9 @@ benchmark_v3/dataset_d*/_agent_cache_pre_*/
 # 数据集主体不入库（GB 级 IQ/缓存），但基线数字必须入库——它是“防前态过期”核心机制
 benchmark_v3/dataset_d*/*
 !benchmark_v3/dataset_d*/BASELINE.json
-# 私人笔记，勿提交/上传
+# 私人笔记与开发日志，勿提交/上传
 /README.private.md
+/开发日志.md
 _dryrun.log
 .workbuddy/
 __pycache__/
