@@ -14,7 +14,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 import eval_dataset as ed  # noqa: E402
 
 ROOT = (HERE.parent / "dataset_d2").resolve()

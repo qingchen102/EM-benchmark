@@ -20,7 +20,7 @@ import sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = os.path.dirname(os.path.dirname(HERE))   # benchmark_v3（脚本在 adapters/diag/ 下）
 FS = 4e6
 PASS_HZ = 810e3
 NEW_ROOT = os.path.join(ROOT, "_regen_bw")

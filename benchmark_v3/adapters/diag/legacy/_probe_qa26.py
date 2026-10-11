@@ -3,6 +3,8 @@
 # 假设：occ.interferer() 恒返回 None → 位置从不更新 → 80 次空转后抛错。
 import os
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_dataset as G  # noqa: E402

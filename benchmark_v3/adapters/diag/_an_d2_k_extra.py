@@ -23,12 +23,12 @@ import numpy as np
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 import capture_tools as ct  # noqa: E402
 import eval_dataset as ed  # noqa: E402
 import run_capture_agent as rca  # noqa: E402
 
-ROOT = (HERE / "..").resolve()
+ROOT = HERE.parent.parent          # benchmark_v3
 D2 = ROOT / "dataset_d2"
 STATIONS = ["station_a", "station_b", "station_c", "station_d"]
 POS_M = 50.0

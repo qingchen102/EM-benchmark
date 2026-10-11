@@ -6,6 +6,8 @@
 #       "≥3 站 LoS" 几乎不可达（代码注释假设的 21% 是 D1/D2 几何下的数）。
 import os
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_dataset as G  # noqa: E402

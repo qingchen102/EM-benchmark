@@ -192,10 +192,12 @@ Available measurement tools (per station):
   (shifted to candidate band center + RMS normalized) — feed directly to radiator
   identification. Needs >= 3 stations.
 - classify_extracted_waveform(station="station_a"): classify each candidate's
-  extracted waveform (CNN over 19 radiators) and return READY-TO-COPY answer
-  fields per candidate: {freq_offset_hz, kind, intent, is_spoof, position_xy_m,
-  confidence}. Call this AFTER extract_source_waveforms, then write the final
-  JSON answer directly from these items — no further measurement needed.
+  extracted waveform (CNN over 19 radiators) and return per-candidate measured
+  fields: {freq_offset_hz, kind, position_xy_m, confidence}. It does NOT provide
+  intent or is_spoof — you must judge those yourself (see Intent classification
+  below). Call this AFTER extract_source_waveforms; it collapses R05-R10 into one
+  round, so the final JSON answer can be built from these items plus your own
+  intent/is_spoof judgement.
 
 Measurement-to-answer mapping:
 - freq_offset_hz  <- analyze_spectrum_station sources_candidates freq_offset_hz (Hz,

@@ -5,7 +5,8 @@
  B 对外工具 `TOOL_FUNCTIONS[...]` 的返回值**不再**含该键，且 residual_peaks 逐条不变；
  C `estimate_sources_by_spatial_clustering(on_residual=True)` 的 K / 候选数与改前一致
    （d2_00001 / d2_00002 的记录值：K=5/cand=5、K=2/cand=2）。
-另扫一遍：所有对外工具的返回值都不含 AGENT_HIDDEN_KEYS。
+另扫一遍：所有对外工具的返回值都不含 AGENT_HIDDEN_KEYS（顶层）与 AGENT_HIDDEN_ITEM_KEYS
+（interferers[*] 逐条目，如 classify_extracted_waveform 的 intent / is_spoof）。
 """
 from __future__ import annotations
 
@@ -20,13 +21,16 @@ import numpy as np
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+HERE = Path(__file__).resolve().parent          # benchmark_v3/adapters/diag
+ADAPTERS = HERE.parent                         # benchmark_v3/adapters（capture_tools 所在）
+sys.path.insert(0, str(ADAPTERS))
 import capture_tools as ct  # noqa: E402
 import run_capture_agent as rca  # noqa: E402
 
-ROOT = (HERE / "..").resolve()
-EXPECT = {"d2_00001": (5, 5), "d2_00002": (2, 2)}
+ROOT = ADAPTERS.parent                         # benchmark_v3（数据集根）
+EXPECT = {"d2_00001": (5, 5), "d2_00002": (1, 1)}   # 2026-10-11 现行数据（带宽修复 + 换装后）
+# 带宽修复前的记录值是 (5,5) / (2,2)；d2_00002 的 K 从 2 降到 1 属已知变化，
+# 不是本次 _agent_facing 改动造成（见 evidence/_diag_d2_cluster_ab.txt）。
 bad = 0
 
 
@@ -49,6 +53,12 @@ def main() -> int:
     global bad
     cache = Path(tempfile.mkdtemp(prefix="_chk_hidden_"))
     fn_name = "estimate_band_occupancy_by_correlation"
+    from em_signal_simulator_v3.emitters import INTENT as _EMITTER_INTENT
+    same_table = ct.INTENT_OF == _EMITTER_INTENT
+    print(f"意图表单一来源：capture_tools.INTENT_OF == emitters.INTENT -> {same_table}"
+          f"（{len(ct.INTENT_OF)} 键）")
+    bad += (not same_table)
+    print(f"逐条目剥字段常量 AGENT_HIDDEN_ITEM_KEYS = {ct.AGENT_HIDDEN_ITEM_KEYS}")
     for sid in EXPECT:
         ctx_for(sid, cache)
         raw = ct.estimate_band_occupancy_by_correlation("station_a")
@@ -76,8 +86,17 @@ def main() -> int:
             continue
         if isinstance(out, dict):
             hit = [k for k in ct.AGENT_HIDDEN_KEYS if k in out]
+            items = out.get("interferers")
+            if isinstance(items, list):
+                for it in items:
+                    if isinstance(it, dict):
+                        hit += [k for k in ct.AGENT_HIDDEN_ITEM_KEYS if k in it]
             if hit:
                 found.append((name, hit))
+            if name == "classify_extracted_waveform":
+                keys = sorted(items[0]) if items else []
+                print(f"  [classify 实测] items={len(items) if isinstance(items, list) else 'n/a'} "
+                      f"首条字段={keys}（应无 intent / is_spoof）")
     print(f"全表扫描：仍泄漏内部字段的工具 = {found or '无'}")
     print(f"=== 结论：{'全部通过' if bad == 0 and not found else '有问题'} ===")
     return 0 if bad == 0 and not found else 1

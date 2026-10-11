@@ -16,6 +16,8 @@ from __future__ import annotations
 
 import json
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 from pathlib import Path
 
 import numpy as np

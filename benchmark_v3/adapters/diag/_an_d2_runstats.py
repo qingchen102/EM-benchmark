@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT = (Path(__file__).resolve().parent / "..").resolve()
+ROOT = Path(__file__).resolve().parents[2]   # benchmark_v3
 D2 = ROOT / "dataset_d2"
 NEG = re.compile(r'"num_interferers"\s*:\s*-')
 

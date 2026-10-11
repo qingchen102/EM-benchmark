@@ -1,6 +1,8 @@
 """对已有 answers 目录用（修正后的）评分口径重算——不调 API。"""
 import json
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 import numpy as np
 from pathlib import Path
 

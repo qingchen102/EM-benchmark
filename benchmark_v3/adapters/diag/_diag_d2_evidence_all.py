@@ -21,7 +21,7 @@ import numpy as np
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 _PLAT = HERE.parent / "城市低空电磁信号仿真平台" / "src"
 if str(_PLAT) not in sys.path:
     sys.path.insert(0, str(_PLAT))

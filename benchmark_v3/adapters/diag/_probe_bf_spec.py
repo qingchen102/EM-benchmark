@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 import _diag_d2_extract as dx  # noqa: E402
 
 B = HERE.parent

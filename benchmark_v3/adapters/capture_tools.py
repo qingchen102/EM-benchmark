@@ -40,7 +40,8 @@ import tools_v2  # noqa: E402  v2 五件工具核心（零改复用）
 from cityrf.baselines.spatial import band_covariance, mdl_rank  # noqa: E402
 from cityrf.baselines.checked_signal import signal_block, select_band  # noqa: E402
 from cityrf.baselines.checked_features import template_residual  # noqa: E402
-from em_signal_simulator_v3.emitters import EMITTERS  # noqa: E402
+from em_signal_simulator_v3.emitters import (  # noqa: E402
+    EMITTERS, INTENT as INTENT_OF)   # 意图表唯一来源：与答案键（gen_dataset.py）同一张
 
 # ---------------- 残差峰判据（2026-10-08 重修，D1/S0 虚警根治） ----------------
 # 机理（本轮实测）：target_reference 直减后的残差在通带内有一层**平坦 ~-88 dB** 的
@@ -777,20 +778,17 @@ def _load_cnn():
     return _CNN_CACHE
 
 
-INTENT_OF = {
-    "Chirp_jam": "malicious", "Noise_jam": "malicious", "Tone_jam": "malicious",
-    "GNSS_jam": "malicious", "GNSS_spoof": "malicious",
-    "Bluetooth_FHSS": "incidental", "WiFi_burst": "incidental",
-    "Microwave": "incidental", "Zigbee": "incidental", "DECT": "incidental",
-    "VFD_noise": "incidental", "Corona": "incidental", "Welder": "incidental",
-    "LTE_QPSK": "benign", "UAV_video_OFDM": "benign", "TV_broadcast": "benign",
-    "GPS_DSSS": "benign", "Radar_pulsed_LFM": "benign", "UAV_RC_hopping": "benign",
-}
+# 意图表：统一到 emitters.INTENT（见文件头 import），本文件不再自带副本。
+# 历史教训：这份副本曾与答案键不一致（Bluetooth_FHSS / WiFi_burst：副本 incidental、
+# 真值 benign）——工具代填的 intent 会与评分口径冲突。单一来源后二者恒等。
 
 
 def classify_extracted_waveform(station: str = "station_a", **_) -> dict:
     """对 extract_source_waveforms 落盘的每候选 CNN-ready 波形做体制分类，
-    返回可直接拼进最终答案的 JSON 片段（freq/kind/intent/is_spoof/position）。
+    返回可直接拼进最终答案的 JSON 片段（freq/kind/position/confidence）。
+    注意：intent 与 is_spoof 仍在本函数内部计算（下游/诊断要用），但**对外工具表**
+    经 _agent_facing 剥掉——它们是 kind 的确定性查表值，给出去就等于把 T3 意图轴与
+    欺骗轴变成“照抄工具”。Agent 侧的题面要求就是自己从 kind + 行为推出来。
     2026-10-03 新增：agent 实测 10 轮全耗在测量上、一次都没作答——本工具把
     "R05-R10 逐源分类"压成一轮，且把候选板→答案字段的映射在工具内完成。"""
     ctx = _ctx()
@@ -1651,6 +1649,11 @@ def estimate_sources_by_spatial_clustering(freq_offset_hz: float | None = None,
 # 一条 850 kHz 宽、46~80 dB 的旧口径宽带。实测后果：D2/S2 的 detection 0.86 → 0.48。
 # 这里在**对外工具表**这一层剥掉内部字段，函数本身与聚类内部调用都不变。
 AGENT_HIDDEN_KEYS = ("residual_peaks_legacy",)
+# 逐条目（interferers[*]）要剥掉的内部字段：intent / is_spoof 都不是测量结果，
+# 而是 kind 的确定性查表值（INTENT_OF[kind]；is_spoof = (kind == "GNSS_spoof")）。
+# 实测（diag/_an_intent_axis.py）：不剥时 Agent 的 intent 就是照抄工具
+# （D2/D3/D4 = 98.9% / 88.1% / 91.6%），T3 两轴退化成“体制轴的下游换算”。
+AGENT_HIDDEN_ITEM_KEYS = ("intent", "is_spoof")
 
 
 def _agent_facing(fn):
@@ -1661,6 +1664,12 @@ def _agent_facing(fn):
         if isinstance(out, dict):
             for key in AGENT_HIDDEN_KEYS:
                 out.pop(key, None)
+            items = out.get("interferers")
+            if isinstance(items, list):
+                for it in items:
+                    if isinstance(it, dict):
+                        for key in AGENT_HIDDEN_ITEM_KEYS:
+                            it.pop(key, None)
         return out
 
     return wrapper
@@ -1678,7 +1687,8 @@ TOOL_FUNCTIONS = {
     "analyze_time_frequency_station": analyze_time_frequency_station,
     "estimate_sources_by_spatial_clustering": estimate_sources_by_spatial_clustering,
     "extract_source_waveforms": extract_source_waveforms,
-    "classify_extracted_waveform": classify_extracted_waveform,
+    "classify_extracted_waveform":
+        _agent_facing(classify_extracted_waveform),
 }
 
 TOOL_SCHEMAS = [

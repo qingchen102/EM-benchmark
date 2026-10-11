@@ -11,6 +11,8 @@
 # 从而判断"是放宽阈值"还是"放宽布点环"更有效。
 import os
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 from collections import Counter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

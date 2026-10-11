@@ -9,6 +9,7 @@
 """
 import sys as _sys, pathlib as _pl
 _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[2]))
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 import sys
 from pathlib import Path
 

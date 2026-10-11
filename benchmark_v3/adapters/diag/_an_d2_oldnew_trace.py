@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT = (Path(__file__).resolve().parent / "..").resolve()
+ROOT = Path(__file__).resolve().parents[2]   # benchmark_v3
 OLD = ROOT / "_pre_noise_20261010" / "dataset_d2" / "answers_S2_agent_full" / "_run_log.json"
 NEW = ROOT / "dataset_d2" / "answers_S2_agent_layer1" / "_run_log.json"
 

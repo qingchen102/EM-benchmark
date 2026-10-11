@@ -17,7 +17,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-data = json.loads((HERE.parent / "_diag_d2_evidence_all.json").read_text(encoding="utf-8"))
+data = json.loads((HERE.parent.parent / "evidence" / "_diag_d2_evidence_all.json").read_text(encoding="utf-8"))
 TOL_KHZ = 5.0
 BIG_DB = 1.0
 
@@ -82,7 +82,7 @@ for r in rows:
                f"{r['lgo']:>4}→{r['lgn']:<5} {g('duty_cycle')} {g('frame_power_cv')} "
                f"{g('burst_count_per_window')} {g('hop_channel_count')}")
 
-path = HERE.parent / "_diag_d2_evidence_magnitude.txt"
+path = HERE.parent.parent / "evidence" / "_diag_d2_evidence_magnitude.txt"
 path.write_text("\n".join(out) + "\n", encoding="utf-8")
 print("\n".join(out[:12]))
 print(f"\n写出 {path}")

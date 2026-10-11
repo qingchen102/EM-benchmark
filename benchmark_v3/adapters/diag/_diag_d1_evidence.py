@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import sys as _sys, pathlib as _pl
 _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[2]))
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 import json
 import sys
 import tempfile
@@ -24,8 +25,8 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-_V3 = HERE.parent
-for _p in (str(HERE), str(_V3 / "simulation"),
+_V3 = HERE.parent.parent            # benchmark_v3（脚本在 adapters/diag/ 下）
+for _p in (str(HERE.parent), str(_V3 / "simulation"),
            str(_V3 / "城市低空电磁信号仿真平台" / "src")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
@@ -144,7 +145,7 @@ def main(n_samples: int) -> None:
                 print(f"   {r['sid']}  GT={r['gt_n']} 门控峰={r['gated_n']} "
                       f"旧宽带峰={r['legacy_n']} 覆盖GT={r['gt_cov_gated']}/{r['gt_n']}")
 
-    (_V3 / "_diag_d1_evidence.json").write_text(
+    (_V3 / "evidence" / "_diag_d1_evidence.json").write_text(
         json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
 
 

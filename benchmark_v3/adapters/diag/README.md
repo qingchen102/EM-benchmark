@@ -45,3 +45,19 @@ benchmark_v3/evidence/               # 所有脚本的原始输出（.txt / .jso
 | `_check_noise_landed.py` | 噪声档位落盘审计（配方、实测底 vs 解析抬升、派生 INR/SNR） |
 | `_diag_d2_rank.py` | D2 窄带特征值秩枚举（第九条证伪路线） |
 | `_an_abstain_why.py` | 拒答取证：从 `_run_log.json` 的 `raw_output` 里回溯模型原文的负数哨兵 |
+
+## 迁移后的路径语义（2026-10-11 补）
+
+把脚本从 `adapters/` 下沉到 `adapters/diag/` 会让脚本里原有的 `HERE` / `parents[N]` 含义整体偏移一级。判据很固定：
+
+```
+file = benchmark_v3/adapters/diag/xxx.py
+HERE              = .../adapters/diag          # 脚本自己所在目录
+HERE.parent       = .../adapters              # 生产模块（capture_tools / run_capture_agent / eval_dataset …）
+HERE.parent.parent= .../benchmark_v3          # 数据集（dataset_d1..d4）、平台源码、simulation/
+证据文件（.txt/.json 输出与输入）= benchmark_v3/evidence/
+```
+
+- 归位时已批量修正 91 个脚本（规则：`str(HERE)`→`str(HERE.parent)`、`ROOT = (HERE / "..").resolve()`→`HERE.parent.parent`、`parents[N]`→`parents[N+1]`、缺 adapters 路径的补一行），另单独修正 `_diag_d1_evidence.py`、`_an_v3_constraints.py`、`_check_noise_plan.py`、`_check_bw_regen.py`、`_an_d2_evidence_magnitude.py`。
+- **若某个脚本仍报** `ModuleNotFoundError: No module named 'capture_tools'` **或去找** `adapters/dataset_d*/`**，说明它还没改干净**：按上面的对照表改它自己的 `HERE`/`parents[N]`/证据路径即可，不要改生产模块。
+- 判据与结论示例（本区脚本的原始输出）都在 `benchmark_v3/evidence/`，文件名带 `_` 前缀；脚本内引用它们时用 `HERE.parent.parent / "evidence" / ...`。

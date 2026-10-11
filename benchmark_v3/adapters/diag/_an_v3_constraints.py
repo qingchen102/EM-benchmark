@@ -18,12 +18,12 @@ from pathlib import Path
 
 import numpy as np
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
+ROOT = HERE.parent.parent          # benchmark_v3（脚本在 adapters/diag/ 下）
 PLAT = ROOT / "城市低空电磁信号仿真平台" / "src"
 if str(PLAT) not in sys.path:
     sys.path.insert(0, str(PLAT))
-if str(HERE) not in sys.path:
-    sys.path.insert(0, str(HERE))
+if str(HERE.parent) not in sys.path:
+    sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 import gen_dataset as gd  # noqa: E402  （取 COARSE 粗类映射）
 FS = 4.0e6
 PASS_HZ = 0.405 * FS     # 接收机通带半宽（RX_FRAC = 0.45*0.9 → ±810 kHz）

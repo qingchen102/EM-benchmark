@@ -17,6 +17,8 @@ import json
 import os
 from pathlib import Path
 import sys
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
 from collections import Counter
 
 import numpy as np

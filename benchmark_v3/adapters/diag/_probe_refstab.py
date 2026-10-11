@@ -19,7 +19,7 @@ import numpy as np
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 sys.path.insert(0, str(HERE / "rad_cls"))
 
 import run_capture_agent as rca  # noqa: E402

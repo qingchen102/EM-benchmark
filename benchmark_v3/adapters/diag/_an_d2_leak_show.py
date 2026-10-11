@@ -17,11 +17,11 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))  # adapters（迁移后 HERE 下沉一级）
 import capture_tools as ct  # noqa: E402
 import run_capture_agent as rca  # noqa: E402
 
-ROOT = (HERE / "..").resolve()
+ROOT = HERE.parent.parent          # benchmark_v3
 
 
 def main() -> int:

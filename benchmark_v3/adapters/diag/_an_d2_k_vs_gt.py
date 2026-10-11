@@ -10,7 +10,7 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT = (Path(__file__).resolve().parent / "..").resolve()
+ROOT = Path(__file__).resolve().parents[2]   # benchmark_v3
 SRC = ROOT / "_diag_d2_cluster_ab.json"
 
 
