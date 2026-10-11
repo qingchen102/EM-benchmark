@@ -32,11 +32,14 @@ class NoThinkDeepSeekAgent(OpenAICompatibleAgent):
     """继承官方 agent，强制关闭思考模式（无推理）。"""
 
     def _create(self, **kwargs):
-        # extra_body 透传百炼的非标准参数 enable_thinking
+        # extra_body 透传非标准参数（两个都发，不认识的一方会忽略）：
+        #   enable_thinking=False   百炼直连（DashScope）的关思考开关
+        #   thinking.type=disabled  本地中转站（OpenAI 兼容网关）的关思考开关
+        # 注意：关掉思考后不再传 reasoning_effort（两者冲突）
         extra = dict(kwargs.pop("extra_body") or {}) if kwargs.get("extra_body") else {}
         extra["enable_thinking"] = False
+        extra["thinking"] = {"type": "disabled"}
         kwargs["extra_body"] = extra
-        # 注意：关掉思考后不再传 reasoning_effort（两者冲突）
         return self.client.chat.completions.create(**kwargs)
 
 
@@ -44,7 +47,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="用百炼 DeepSeek（无推理）跑 evaluator_v2 主流程")
     parser.add_argument("dataset_dir")
-    parser.add_argument("--model", default="deepseek-v3.2")
+    parser.add_argument("--model", default="deepseek-v4.1-flash")   # v3.2 于 2026-10-11 从百炼下架
     parser.add_argument(
         "--base-url",
         default=os.getenv("OPENAI_BASE_URL",
@@ -74,8 +77,9 @@ def main():
     report["agent_info"] = {
         "model": args.model,
         "enable_thinking": False,
+        "thinking_disabled": True,
         "base_url": args.base_url,
-        "note": "百炼 DeepSeek 无推理模式，通过 extra_body enable_thinking=False 实现",
+        "note": "无推理模式：extra_body 同时发 enable_thinking=False（百炼直连）与 thinking.type=disabled（中转站）",
     }
 
     with open(args.output, "w", encoding="utf-8") as f:

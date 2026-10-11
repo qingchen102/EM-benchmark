@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import re
 import sys
+import time
 import sys as _sys
 import pathlib as _pl
 
@@ -25,8 +26,10 @@ from pathlib import Path
 from openai import OpenAI
 
 ROOT = Path(__file__).resolve().parents[3]          # 仓库根（本文件在 benchmark_v3/adapters/diag/）
-BASE = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-MODELS = ["deepseek-v4.1-flash", "deepseek-v4-flash-0731", "deepseek-v4-pro"]
+# 可选参数：base_url [模型1,模型2,…]（默认百炼直连 + 三个候选）
+BASE = sys.argv[1] if len(sys.argv) > 1 else "https://dashscope.aliyuncs.com/compatible-mode/v1"
+MODELS = (sys.argv[2].split(",") if len(sys.argv) > 2
+          else ["deepseek-v4.1-flash", "deepseek-v4-flash-0731", "deepseek-v4-pro"])
 PROMPT = "1+1=? 只回答数字，不要别的。"
 
 
@@ -44,6 +47,7 @@ def probe(cli: OpenAI, model: str, nothink: bool) -> None:
     if nothink:
         kw["extra_body"] = {"enable_thinking": False}
     tag = "nothink" if nothink else "plain  "
+    t0 = time.time()
     try:
         r = cli.chat.completions.create(**kw)
     except Exception as e:                                    # noqa: BLE001
@@ -53,7 +57,8 @@ def probe(cli: OpenAI, model: str, nothink: bool) -> None:
     reason = getattr(ch, "reasoning_content", None)
     txt = (ch.content or "").strip().replace("\n", " ")
     print(f"{model:24s} {tag} OK   reasoning_content={'有' if reason else '无'}"
-          f"({len(reason or '')}字)  out_tok={r.usage.completion_tokens}  text={txt[:60]!r}")
+          f"({len(reason or '')}字)  out_tok={r.usage.completion_tokens}"
+          f"  {time.time() - t0:.1f}s  text={txt[:60]!r}")
 
 
 def main() -> None:
