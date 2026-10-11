@@ -128,9 +128,9 @@
     "现行数据（菜单，phase 0.01° + 按站 colored/impulse/correlated）：GT切片 0.746 [53/71] / 0.510 / 0.612 / 条件 0.480 / e2e 0.245 / 可解 0.543（官方 gate，_gate_new_d2_live.log）"
    ],
    "conclusion": "旧档位损失 GT切片 −0.224 / 条件 −0.092 / e2e −0.102；换成菜单档位后与无噪声只差 ±2pp（假簇率反而改善 6.5pp）。伤害**几乎全部来自 phase**，且随步长单调：1.0° → GT切片 0.463 FAIL、召回 0.429、条件 0.310（单项即最坏，比旧全档位还差）；0.2° → GT切片回到 0.738 但召回 −8pp（0.480）、假簇 +6.8pp（0.691）；0.01° → 落在噪声内。根因：平台 `phase_noise_deg` 是**每采样点**相位步长（1.0° → 10 ms 内积分 200° RMS、瞬时频偏随机游走 ±MHz）。colored 0 dB 几乎无害（条件 0.471 vs 无噪声 0.473）。→ **噪声是真实性/时域结构旋钮，不是难度旋钮**；调节旋钮时**优先控 phase**。",
-  "denominator_caveat": "GT 切片的可见性筛查（pr − nz >= 3.0）改读**逐站实测底**后，噪声越重的档被排除的“临界可见”条目越多（80 → 77 → 74 → 71）；排除的不是随机样本而是临界点，**跨配方/跨版本比较必须带分母**。"
- },
- "cnn_retrain": "**【2026-10-09 更新：已重训，本项原结论作废】**原判断「不需要重训」建立在 BW/SNR 口径未变的前提上；2026-10-09 的波形带限修复**改了训练分布**（`rad_cls/data_gen16.py:gen_wave16` 现在传 `bandwidth_normalized`），必须重训。两轮：25 轮×300 → val_acc 0.843；40 轮×500 → **0.882**（gate clean 0.878 PASS，首次过预注册 0.85）。受控 A/B：旧 CNN 在新合成分布上 clean 只有 0.620；新 CNN 配旧宽带回波数据 GT 切片只有 0.474（配新数据 0.563）→ **权重与数据必须配对**。若后续 kind 指标异常，优先回查此处。",
+   "denominator_caveat": "GT 切片的可见性筛查（pr − nz >= 3.0）改读**逐站实测底**后，噪声越重的档被排除的“临界可见”条目越多（80 → 77 → 74 → 71）；排除的不是随机样本而是临界点，**跨配方/跨版本比较必须带分母**。"
+  },
+  "cnn_retrain": "**【2026-10-09 更新：已重训，本项原结论作废】**原判断「不需要重训」建立在 BW/SNR 口径未变的前提上；2026-10-09 的波形带限修复**改了训练分布**（`rad_cls/data_gen16.py:gen_wave16` 现在传 `bandwidth_normalized`），必须重训。两轮：25 轮×300 → val_acc 0.843；40 轮×500 → **0.882**（gate clean 0.878 PASS，首次过预注册 0.85）。受控 A/B：旧 CNN 在新合成分布上 clean 只有 0.620；新 CNN 配旧宽带回波数据 GT 切片只有 0.474（配新数据 0.563）→ **权重与数据必须配对**。若后续 kind 指标异常，优先回查此处。",
   "artifacts": {
    "pre_noise_backup": "benchmark_v3/_archive/_pre_noise_20261010/dataset_d{1..4}（目录名带创建时的 10-10 标签，实际备份于 2026-10-08/09 夜；与 _regen_d34 的 iq_station_a.npy 逐字节相同）",
    "old_uniform_backup": "benchmark_v3/_old_noise_profile_20261010/dataset_d{2,3,4}（换装前的旧档位数据 + 旧 _agent_cache）",
@@ -174,8 +174,7 @@
   "e2e_detect_x_kind": 0.286,
   "clean_16class": 0.878,
   "gt_slice": 0.55,
-  "note": "**【2026-10-10 最终可复现口径：带宽修复后数据 + 重训 CNN 0.882 + gate 私有缓存】**（`cd benchmark_v3/adapters/rad_cls && python oracle16.py`；产物 `benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` / `_run4.txt`，**两次连续运行逐字节相同**）。判定：**clean PASS（0.878 ≥ 0.85）/ GT-slice PASS（0.550）/ tool-view FAIL** —— 唯一未过的门限是**条件分类 0.438 < 0.50（差 6.2pp）**；召回 0.653 与假簇 0.540 均已过自己的 0.5 门限。分母：clean [1001/1140]、GT 切片 [44/80]、召回 [64/98]、假簇 [75/139]、条件 [28/64]、可解子集 [63/92]、e2e 0.286。相对带宽修前（0.510/0.612/0.480）：召回 +14.3pp、假簇 −7.2pp、e2e +4.1pp。**GT 切片口径修正（2026-10-10）**：d2_00006/15/19/33/35/43/45 的 station_a 目标链路本来就是 **0 径**（`truth.json` 的 target `path_count=0`、`channel_target_station_a.npz` 的 `delays_s` 为空）——RT 判定该站完全看不到目标，此时该站原始 IQ 不含目标分量，带限原始 IQ 即残差（与 `strip_target_all_stations` 的降级约定一致）。旧代码在参考缺失时报错跳过 → 分母 71（0.563 [40/71]）；而工具聚类的降级路径会把**按候选带限**的原始 IQ 写进同名 `resid_station_a.npy`，热缓存下被 gt-slice 读到 → 分母回到 80 但口径不同（0.613 [49/80] 的污染值）。现已改为显式判 `ref_state` 并现场按整通带 ±0.45fs 重建，**冷/热缓存两跑一致**。"
-,
+  "note": "**【2026-10-10 最终可复现口径：带宽修复后数据 + 重训 CNN 0.882 + gate 私有缓存】**（`cd benchmark_v3/adapters/rad_cls && python oracle16.py`；产物 `benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` / `_run4.txt`，**两次连续运行逐字节相同**）。判定：**clean PASS（0.878 ≥ 0.85）/ GT-slice PASS（0.550）/ tool-view FAIL** —— 唯一未过的门限是**条件分类 0.438 < 0.50（差 6.2pp）**；召回 0.653 与假簇 0.540 均已过自己的 0.5 门限。分母：clean [1001/1140]、GT 切片 [44/80]、召回 [64/98]、假簇 [75/139]、条件 [28/64]、可解子集 [63/92]、e2e 0.286。相对带宽修前（0.510/0.612/0.480）：召回 +14.3pp、假簇 −7.2pp、e2e +4.1pp。**GT 切片口径修正（2026-10-10）**：d2_00006/15/19/33/35/43/45 的 station_a 目标链路本来就是 **0 径**（`truth.json` 的 target `path_count=0`、`channel_target_station_a.npz` 的 `delays_s` 为空）——RT 判定该站完全看不到目标，此时该站原始 IQ 不含目标分量，带限原始 IQ 即残差（与 `strip_target_all_stations` 的降级约定一致）。旧代码在参考缺失时报错跳过 → 分母 71（0.563 [40/71]）；而工具聚类的降级路径会把**按候选带限**的原始 IQ 写进同名 `resid_station_a.npy`，热缓存下被 gt-slice 读到 → 分母回到 80 但口径不同（0.613 [49/80] 的污染值）。现已改为显式判 `ref_state` 并现场按整通带 ±0.45fs 重建，**冷/热缓存两跑一致**。",
   "determinism_2026_10_10": "gate 测量卫生两处修复：① 缓存命名空间从 agent 运行遗留的 `_agent_cache/<sid>/` 换为 gate 私有 `_gate_cache/<sid>/`，并盖来源指纹（capture_tools.py / run_capture_agent.py / data_gen16.py 的 md5 + checkpoint md5 + 数据根），指纹变即整目录重建（`oracle16.py` 的 `GATE_CACHE` / `_STAMP_FILES` / `ensure_gate_cache()`）；② gt-slice 的 station_a 参考可用性显式判定（`oracle16.py` 的 `_target_ref_state(cap)` → 'ok' / 'invisible' / 'missing'），`invisible`（0 径）现场按整通带 ±0.45fs 用带限原始 IQ 当残差并落盘，`missing`（链路文件缺失，属数据异常）才跳过。验收：连续两次 `python -u oracle16.py` 输出**逐字节相同**（`benchmark_v3/evidence/_gate_d2_hygiene_run3.txt` == `_run4.txt`）。此前同一 checkpoint 会因缓存新旧给出 GT 切片 0.746 [53/71] / 0.563 [40/71] / 0.613 [49/80] 三个不同数值。",
   "_history_2026_10_09_pre_bw": {
    "recall_all_visible": 0.51,
@@ -303,71 +302,799 @@
   "stale_2026_10_10_update": "**现行四档口径（2026-10-10）**：D1×S0 0.96（48/50，拒答 0）/ D2×S2 0.44（拒答 20，排除后 0.733）/ D3×S2 0.46（拒答 16，排除后 0.618）/ D4×S2 0.22（拒答 18，排除后 0.344）。① D1 曾按「逐位恒等」跳过波形带限重放——**该判断是错的**（见 d1_wavefix_2026_10_10），已补换装并在新数据上重取；② D3/D4 的现行数据基线与历史（带宽修复前）数字接近，但答案目录/数据血统已不同，勿混用；③ **“难度梯度单调”在现行数据上不再成立**（D3 0.46 略高于 D2 0.44，差距在单次 50 样本 ±0.2 的运行不确定度内）。**（2026-10-10 夜更正）拒答修复后四档为 D1 0.92 / D2 0.54 / D3 0.48 / D4 0.36，拒答全为 0**；上列数字是修复前口径。",
   "refusal_fix_2026_10_10_update": "**拒答已结构性修好（2026-10-10）**：拒答不是数据/证据问题，而是**答案契约里有一个被明令禁止、却又没有合法替代的「不确定表达位」**——模型在「TOOL BUDGET EXHAUSTED」被迫作答轮与 repair 轮写 `num_interferers = -1`，`_has_final_answer` 判其非法 → 进 repair → 仍写 -1 → 回退把它交出去，`_sanitize` 再静默清成 0（于是「拒答」被记成「判定无干扰」）。证据：D2 20/20、D3 16/16、D4 18/18 的拒答样本 round_log 长度恒为 11 且末项 phase==repair；拒答与工具证据无判别力。两次失败尝试：① 只在 prompt 里明令禁止 -1 → **反噬**（D2 noneg 拒答 20→24、detection 0.44→0.38；D1 更早那次 0.96→0.56）；② 「sources 字段缺失」假设被 `_tmp_srckeys.py` 证伪（4/4 样本字段齐全）。修法是结构性的：答案不再有计数字段（`interferers` 列表由模型交、计数由 harness 派生），validator 改成「测到候选却交空列表即判无效」→ 触发 repair 轮逼提交。D2×S2 实测：**拒答 0/50、detection 0.54、within1 0.77**。详见 README.private.md §34。",
   "rows": {
-   "D1_S0": {"answers_dir": "dataset_d1/answers_S0_agent_layer1", "detection_hit": 0.96, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0068, "doa_hits": 0.48, "intent": 0.93},
-   "D1_S0_wavefix_2026_10_10": {"answers_dir": "dataset_d1/answers_S0_agent_wavefix", "date": "2026-10-10", "note": "在重放后的现行 D1 数据上重取（原 prompt）。与 layer1（带宽修复前）逐项一致 → D1 修复在现行数据上站得住；无可辨识拒答。", "detection_hit": 0.96, "detection_within1": 0.98, "detect_abs_err": 0.04, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0063, "doa_hits": 0.48, "doa_aes": 63.49, "abstain_n": 0},
-   "D2_S2": {"answers_dir": "dataset_d2/answers_S2_agent_layer1", "detection_hit": 0.48, "kind_hits": 0.4821, "freq_hits": 0.2143, "freq_aes": 0.1787, "pos_hits": 0.5357, "pos_errs": 232.0, "intent": 0.768, "spoof_fa": 0.0},
-   "D2_S2_bwfix_2026_10_09": {"answers_dir": "dataset_d2/answers_S2_agent_bwfix", "note": "带宽修复后重放换装 + 工具泄漏修复后、prompt 未加固的 D2 跑。S1 与 S2 逐项相同；S0=0.36。**其报告已被同名的 noneg 报告覆盖**，存档见 `dataset_d2/_eval_report_S2_bwfix_20261009.json`（layer1 的记录在 `_archive/_pre_bw_20261009/dataset_d2/`）。", "detection_hit": 0.44, "within1": 0.5, "detect_abs_err": 1.0, "kind_hits": 0.36, "freq_hits": 0.3, "freq_aes": 0.096, "pos_hits": 0.72, "pos_errs": 212.13, "intent": 0.58, "spoof_fa": 0.0, "abstain_n": 20, "abstain_rate": 0.4, "detection_hit_excl_abstain": 0.733, "detection_denom_excl_abstain": 30},
-   "D2_S2_noneg_2026_10_10": {"answers_dir": "dataset_d2/answers_S2_agent_noneg", "note": "**prompt 加固后（禁负哨兵措辞改硬）的 D2 点状重跑**，与 `D2_S2_bwfix_2026_10_09` 是同一套数据/工具/权重，唯一变量是 prompt。结论：**加固没有改变该模型的行为**（拒答 20→19、detection 0.44→0.44）→ D2 的真实水平就是“注册口径 0.44 / 排除拒答 0.71”。报告 `dataset_d2/eval_report_S2.json`（当前盘上就是本次）；S1 与 S2 逐项相同，S0=0.38。", "detection_hit": 0.44, "within1": 0.5192, "detect_abs_err": 0.94, "kind_hits": 0.4259, "freq_hits": 0.2963, "freq_aes": 0.0895, "pos_hits": 0.7037, "pos_errs": 198.2391, "intent": 0.611, "spoof_fa": 0.0, "abstain_n": 19, "abstain_rate": 0.38, "detection_hit_excl_abstain": 0.71, "detection_denom_excl_abstain": 31},
-   "D2_S2_fix2_2026_10_10": {"answers_dir": "dataset_d2/answers_S2_agent_fix2", "date": "2026-10-10", "note": "**结构性反拒答修复后的 D2 点状重跑**（答案契约去掉 num_interferers 字段、计数由 len(interferers) 派生；validator 改为「测到候选不得交空列表」否则触发 repair 轮）。与 bwfix/noneg 同一套数据/工具/权重，唯一变量是答案契约与 prompt。结论：**拒答 20/50 → 0/50**（答案字段与 _run_log 负哨兵均为 0），detection 0.44 → **0.54**、within1 0.50 → 0.77，kind/freq/pos/intent 基本不动（0.357/0.310/0.679/0.571）——模型从此报出真实测量，其余轴不再被拒答一起清零。计数分布 {1:14, 2:27, 3:9}（GT {1:2, 2:48}，无一例 0）。S1 与 S2 逐项相同；S0=0.42。报告 `dataset_d2/eval_report_S2.json`，存档 `dataset_d2/_eval_report_S2_fix2_50.json`。", "detection_hit": 0.54, "detection_within1": 0.77, "detect_abs_err": 0.46, "kind_hits": 0.3571, "freq_hits": 0.3095, "freq_aes": 0.0834, "pos_hits": 0.6786, "pos_errs": 211.242, "intent": 0.571, "spoof_fa": 0.0, "abstain_n": 0, "abstain_rate": 0.0, "count_field_invalid_n": 0, "low_conf_n": 38},
-   "D1_S0_fix2_2026_10_10": {"answers_dir": "dataset_d1/answers_S0_agent_fix2", "date": "2026-10-10", "note": "拒答修复（答案契约改版、计数由列表派生）后的 D1 重跑。拒答 0/50、计数字段写坏 0/50；计数分布 {0:25,1:23,2:2}（GT {0:23,1:27}）→ 有 2 例把无干扰样本报成 1 个源，这是 detection 0.96→0.92 的全部来源。DOA 0.48→0.28（前后瓣镜像猜中率本就随配对波动）、kind 0.60→0.56、freq 0.96 不变（12.4 kHz）。", "detection_hit": 0.92, "detection_within1": 0.96, "detect_abs_err": 0.08, "kind_hits": 0.56, "freq_hits": 0.96, "freq_aes": 0.0062, "doa_hits": 0.28, "doa_aes": 73.7012, "abstain_n": 0, "count_field_invalid_n": 0},
-   "D3_S2_fix2_2026_10_10": {"answers_dir": "dataset_d3/answers_S2_agent_fix2", "date": "2026-10-10", "note": "拒答修复后的 D3 重跑：拒答 16/50 → 0/50，detection 0.46 → 0.48。计数分布 {0:2,1:32,2:13,3:3}（GT {0:2,1:27,2:21}）。注：两个 GT=0 样本（d3_00027/d3_00032）报空列表是**正确答案**，被旧规则误标成拒答，已用 _fix_abstain_flag.py 改正标志并刷新报告。", "detection_hit": 0.48, "detection_within1": 0.74, "detect_abs_err": 0.52, "kind_hits": 0.4151, "freq_hits": 0.2075, "freq_aes": 0.0855, "pos_hits": 0.434, "pos_errs": 509.6261, "intent": 0.774, "spoof_fa": 0.0, "abstain_n": 0, "count_field_invalid_n": 0, "low_conf_n": 32},
-   "D4_S2_fix2_2026_10_10": {"answers_dir": "dataset_d4/answers_S2_agent_fix2", "date": "2026-10-10", "note": "拒答修复后的 D4 重跑：拒答 18/50 → 0/50，detection 0.22 → 0.36、within1 0.39 → 0.64。计数分布 {1:15,2:27,3:6,4:2}（GT {2:25,3:25}）——有 2 例报 4，超出 prompt 的 0..3 契约（仪器 max_sources=6），是下一处可收口的契约张力。", "detection_hit": 0.36, "detection_within1": 0.64, "detect_abs_err": 0.72, "kind_hits": 0.2809, "freq_hits": 0.2022, "freq_aes": 0.1176, "pos_hits": 0.2809, "pos_errs": 619.9408, "intent": 0.596, "spoof_fa": 0.088, "abstain_n": 0, "count_field_invalid_n": 0},
-   "D3_S2_bwfix_2026_10_10": {"answers_dir": "dataset_d3/answers_S2_agent_bwfix", "date": "2026-10-10", "note": "现行数据（带宽修复后）上的 D3 首个 agent 基线。", "detection_hit": 0.46, "detection_within1": 0.66, "kind_hits": 0.4444, "freq_hits": 0.2778, "freq_aes": 0.0857, "pos_hits": 0.4722, "pos_errs": 457.4, "abstain_n": 16, "abstain_rate": 0.32, "detection_hit_excl_abstain": 0.618, "detection_denom_excl_abstain": 34},
-   "D4_S2_bwfix_2026_10_10": {"answers_dir": "dataset_d4/answers_S2_agent_bwfix", "date": "2026-10-10", "note": "现行数据（带宽修复后）上的 D4 首个 agent 基线。", "detection_hit": 0.22, "detection_within1": 0.39, "kind_hits": 0.2241, "freq_hits": 0.1724, "freq_aes": 0.1233, "pos_hits": 0.2759, "pos_errs": 693.2, "abstain_n": 18, "abstain_rate": 0.36, "detection_hit_excl_abstain": 0.344, "detection_denom_excl_abstain": 32},
-   "D3_S2": {"answers_dir": "dataset_d3/answers_S2_agent_layer1", "detection_hit": 0.4, "kind_hits": 0.3721, "freq_hits": 0.0465, "freq_aes": 0.1371, "pos_hits": 0.3721, "pos_errs": 533.89, "intent": 0.814},
-   "D4_S2": {"answers_dir": "dataset_d4/answers_S2_agent_layer1", "detection_hit": 0.24, "kind_hits": 0.26, "freq_hits": 0.1, "freq_aes": 0.1642, "pos_hits": 0.32, "pos_errs": 643.57, "intent": 0.76, "spoof_hit": 0.2, "spoof_fa": 0.2, "oracle_assoc_pairs": 55, "P_kind_assoc": 0.218, "P_intent_assoc": 0.764, "freq_ae_oracle": 0.205}
+   "D1_S0": {
+    "answers_dir": "dataset_d1/answers_S0_agent_layer1",
+    "detection_hit": 0.96,
+    "kind_hits": 0.6,
+    "freq_hits": 0.96,
+    "freq_aes": 0.0068,
+    "doa_hits": 0.48,
+    "intent": 0.93
+   },
+   "D1_S0_wavefix_2026_10_10": {
+    "answers_dir": "dataset_d1/answers_S0_agent_wavefix",
+    "date": "2026-10-10",
+    "note": "在重放后的现行 D1 数据上重取（原 prompt）。与 layer1（带宽修复前）逐项一致 → D1 修复在现行数据上站得住；无可辨识拒答。",
+    "detection_hit": 0.96,
+    "detection_within1": 0.98,
+    "detect_abs_err": 0.04,
+    "kind_hits": 0.6,
+    "freq_hits": 0.96,
+    "freq_aes": 0.0063,
+    "doa_hits": 0.48,
+    "doa_aes": 63.49,
+    "abstain_n": 0
+   },
+   "D2_S2": {
+    "answers_dir": "dataset_d2/answers_S2_agent_layer1",
+    "detection_hit": 0.48,
+    "kind_hits": 0.4821,
+    "freq_hits": 0.2143,
+    "freq_aes": 0.1787,
+    "pos_hits": 0.5357,
+    "pos_errs": 232.0,
+    "intent": 0.768,
+    "spoof_fa": 0.0
+   },
+   "D2_S2_bwfix_2026_10_09": {
+    "answers_dir": "dataset_d2/answers_S2_agent_bwfix",
+    "note": "带宽修复后重放换装 + 工具泄漏修复后、prompt 未加固的 D2 跑。S1 与 S2 逐项相同；S0=0.36。**其报告已被同名的 noneg 报告覆盖**，存档见 `dataset_d2/_eval_report_S2_bwfix_20261009.json`（layer1 的记录在 `_archive/_pre_bw_20261009/dataset_d2/`）。",
+    "detection_hit": 0.44,
+    "within1": 0.5,
+    "detect_abs_err": 1.0,
+    "kind_hits": 0.36,
+    "freq_hits": 0.3,
+    "freq_aes": 0.096,
+    "pos_hits": 0.72,
+    "pos_errs": 212.13,
+    "intent": 0.58,
+    "spoof_fa": 0.0,
+    "abstain_n": 20,
+    "abstain_rate": 0.4,
+    "detection_hit_excl_abstain": 0.733,
+    "detection_denom_excl_abstain": 30
+   },
+   "D2_S2_noneg_2026_10_10": {
+    "answers_dir": "dataset_d2/answers_S2_agent_noneg",
+    "note": "**prompt 加固后（禁负哨兵措辞改硬）的 D2 点状重跑**，与 `D2_S2_bwfix_2026_10_09` 是同一套数据/工具/权重，唯一变量是 prompt。结论：**加固没有改变该模型的行为**（拒答 20→19、detection 0.44→0.44）→ D2 的真实水平就是“注册口径 0.44 / 排除拒答 0.71”。报告 `dataset_d2/eval_report_S2.json`（当前盘上就是本次）；S1 与 S2 逐项相同，S0=0.38。",
+    "detection_hit": 0.44,
+    "within1": 0.5192,
+    "detect_abs_err": 0.94,
+    "kind_hits": 0.4259,
+    "freq_hits": 0.2963,
+    "freq_aes": 0.0895,
+    "pos_hits": 0.7037,
+    "pos_errs": 198.2391,
+    "intent": 0.611,
+    "spoof_fa": 0.0,
+    "abstain_n": 19,
+    "abstain_rate": 0.38,
+    "detection_hit_excl_abstain": 0.71,
+    "detection_denom_excl_abstain": 31
+   },
+   "D2_S2_fix2_2026_10_10": {
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2",
+    "date": "2026-10-10",
+    "note": "**结构性反拒答修复后的 D2 点状重跑**（答案契约去掉 num_interferers 字段、计数由 len(interferers) 派生；validator 改为「测到候选不得交空列表」否则触发 repair 轮）。与 bwfix/noneg 同一套数据/工具/权重，唯一变量是答案契约与 prompt。结论：**拒答 20/50 → 0/50**（答案字段与 _run_log 负哨兵均为 0），detection 0.44 → **0.54**、within1 0.50 → 0.77，kind/freq/pos/intent 基本不动（0.357/0.310/0.679/0.571）——模型从此报出真实测量，其余轴不再被拒答一起清零。计数分布 {1:14, 2:27, 3:9}（GT {1:2, 2:48}，无一例 0）。S1 与 S2 逐项相同；S0=0.42。报告 `dataset_d2/eval_report_S2.json`，存档 `dataset_d2/_eval_report_S2_fix2_50.json`。",
+    "detection_hit": 0.54,
+    "detection_within1": 0.77,
+    "detect_abs_err": 0.46,
+    "kind_hits": 0.3571,
+    "freq_hits": 0.3095,
+    "freq_aes": 0.0834,
+    "pos_hits": 0.6786,
+    "pos_errs": 211.242,
+    "intent": 0.571,
+    "spoof_fa": 0.0,
+    "abstain_n": 0,
+    "abstain_rate": 0.0,
+    "count_field_invalid_n": 0,
+    "low_conf_n": 38
+   },
+   "D1_S0_fix2_2026_10_10": {
+    "answers_dir": "dataset_d1/answers_S0_agent_fix2",
+    "date": "2026-10-10",
+    "note": "拒答修复（答案契约改版、计数由列表派生）后的 D1 重跑。拒答 0/50、计数字段写坏 0/50；计数分布 {0:25,1:23,2:2}（GT {0:23,1:27}）→ 有 2 例把无干扰样本报成 1 个源，这是 detection 0.96→0.92 的全部来源。DOA 0.48→0.28（前后瓣镜像猜中率本就随配对波动）、kind 0.60→0.56、freq 0.96 不变（12.4 kHz）。",
+    "detection_hit": 0.92,
+    "detection_within1": 0.96,
+    "detect_abs_err": 0.08,
+    "kind_hits": 0.56,
+    "freq_hits": 0.96,
+    "freq_aes": 0.0062,
+    "doa_hits": 0.28,
+    "doa_aes": 73.7012,
+    "abstain_n": 0,
+    "count_field_invalid_n": 0
+   },
+   "D3_S2_fix2_2026_10_10": {
+    "answers_dir": "dataset_d3/answers_S2_agent_fix2",
+    "date": "2026-10-10",
+    "note": "拒答修复后的 D3 重跑：拒答 16/50 → 0/50，detection 0.46 → 0.48。计数分布 {0:2,1:32,2:13,3:3}（GT {0:2,1:27,2:21}）。注：两个 GT=0 样本（d3_00027/d3_00032）报空列表是**正确答案**，被旧规则误标成拒答，已用 _fix_abstain_flag.py 改正标志并刷新报告。",
+    "detection_hit": 0.48,
+    "detection_within1": 0.74,
+    "detect_abs_err": 0.52,
+    "kind_hits": 0.4151,
+    "freq_hits": 0.2075,
+    "freq_aes": 0.0855,
+    "pos_hits": 0.434,
+    "pos_errs": 509.6261,
+    "intent": 0.774,
+    "spoof_fa": 0.0,
+    "abstain_n": 0,
+    "count_field_invalid_n": 0,
+    "low_conf_n": 32
+   },
+   "D4_S2_fix2_2026_10_10": {
+    "answers_dir": "dataset_d4/answers_S2_agent_fix2",
+    "date": "2026-10-10",
+    "note": "拒答修复后的 D4 重跑：拒答 18/50 → 0/50，detection 0.22 → 0.36、within1 0.39 → 0.64。计数分布 {1:15,2:27,3:6,4:2}（GT {2:25,3:25}）——有 2 例报 4，超出 prompt 的 0..3 契约（仪器 max_sources=6），是下一处可收口的契约张力。",
+    "detection_hit": 0.36,
+    "detection_within1": 0.64,
+    "detect_abs_err": 0.72,
+    "kind_hits": 0.2809,
+    "freq_hits": 0.2022,
+    "freq_aes": 0.1176,
+    "pos_hits": 0.2809,
+    "pos_errs": 619.9408,
+    "intent": 0.596,
+    "spoof_fa": 0.088,
+    "abstain_n": 0,
+    "count_field_invalid_n": 0
+   },
+   "D3_S2_bwfix_2026_10_10": {
+    "answers_dir": "dataset_d3/answers_S2_agent_bwfix",
+    "date": "2026-10-10",
+    "note": "现行数据（带宽修复后）上的 D3 首个 agent 基线。",
+    "detection_hit": 0.46,
+    "detection_within1": 0.66,
+    "kind_hits": 0.4444,
+    "freq_hits": 0.2778,
+    "freq_aes": 0.0857,
+    "pos_hits": 0.4722,
+    "pos_errs": 457.4,
+    "abstain_n": 16,
+    "abstain_rate": 0.32,
+    "detection_hit_excl_abstain": 0.618,
+    "detection_denom_excl_abstain": 34
+   },
+   "D4_S2_bwfix_2026_10_10": {
+    "answers_dir": "dataset_d4/answers_S2_agent_bwfix",
+    "date": "2026-10-10",
+    "note": "现行数据（带宽修复后）上的 D4 首个 agent 基线。",
+    "detection_hit": 0.22,
+    "detection_within1": 0.39,
+    "kind_hits": 0.2241,
+    "freq_hits": 0.1724,
+    "freq_aes": 0.1233,
+    "pos_hits": 0.2759,
+    "pos_errs": 693.2,
+    "abstain_n": 18,
+    "abstain_rate": 0.36,
+    "detection_hit_excl_abstain": 0.344,
+    "detection_denom_excl_abstain": 32
+   },
+   "D3_S2": {
+    "answers_dir": "dataset_d3/answers_S2_agent_layer1",
+    "detection_hit": 0.4,
+    "kind_hits": 0.3721,
+    "freq_hits": 0.0465,
+    "freq_aes": 0.1371,
+    "pos_hits": 0.3721,
+    "pos_errs": 533.89,
+    "intent": 0.814
+   },
+   "D4_S2": {
+    "answers_dir": "dataset_d4/answers_S2_agent_layer1",
+    "detection_hit": 0.24,
+    "kind_hits": 0.26,
+    "freq_hits": 0.1,
+    "freq_aes": 0.1642,
+    "pos_hits": 0.32,
+    "pos_errs": 643.57,
+    "intent": 0.76,
+    "spoof_hit": 0.2,
+    "spoof_fa": 0.2,
+    "oracle_assoc_pairs": 55,
+    "P_kind_assoc": 0.218,
+    "P_intent_assoc": 0.764,
+    "freq_ae_oracle": 0.205
+   },
+   "D1_S0_fix2_mech_2026_10_11": {
+    "answers_dir": "dataset_d1/answers_S0_agent_fix2_mech",
+    "slevel": "S0",
+    "n": 50,
+    "detection_hit": 0.92,
+    "detection_within1": 0.95,
+    "detect_abs_err": 0.1,
+    "kind_hits": 0.8519,
+    "freq_hits": 0.963,
+    "freq_aes": 0.0052,
+    "doa_hits": 0.6667,
+    "doa_aes": 25.833,
+    "mech_accuracy": 0.815,
+    "mech_pairs": 27,
+    "spoof_fa": 0.0,
+    "note": "注册口径（新题面 + relay + global:deepseek-v4.1-flash + 开思考）。意图轴在 D1 不计分（真值 kind 是 legacy tone/noise）；机理轴是出题侧注入的单类 adjacent（基线 1.000，无判别力）。"
+   },
+   "D2_S2_fix2_mech_2026_10_11": {
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2_mech",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.88,
+    "detection_within1": 0.94,
+    "detect_abs_err": 0.12,
+    "kind_hits": 0.3656,
+    "freq_hits": 0.3656,
+    "freq_aes": 0.073,
+    "pos_hits": 0.6989,
+    "pos_errs": 148.8421,
+    "intent": 0.57,
+    "intent_pairs": 93,
+    "mech_accuracy": 0.516,
+    "mech_pairs": 93,
+    "spoof_fa": 0.0,
+    "note": "注册口径。计数轴仍低于同分母常数基线（0.88 vs 0.96）、意图低于 0.806、机理仅 +0.011 —— 见 axis_baselines_2026_10_12。"
+   },
+   "D3_S2_fix2_mech_2026_10_11": {
+    "answers_dir": "dataset_d3/answers_S2_agent_fix2_mech",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.48,
+    "detection_within1": 0.73,
+    "detect_abs_err": 0.54,
+    "kind_hits": 0.4483,
+    "freq_hits": 0.2586,
+    "freq_aes": 0.0731,
+    "pos_hits": 0.5517,
+    "pos_errs": 560.0902,
+    "intent": 0.776,
+    "intent_pairs": 58,
+    "mech_accuracy": 0.655,
+    "mech_pairs": 58,
+    "spoof_fa": 0.0,
+    "note": "注册口径。计数 −0.06 / 意图 +0.02 vs 同分母常数基线。"
+   },
+   "D4_S2_fix2_mech_2026_10_12": {
+    "answers_dir": "dataset_d4/answers_S2_agent_fix2_mech",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.52,
+    "detection_within1": 0.74,
+    "detect_abs_err": 0.52,
+    "kind_hits": 0.449,
+    "freq_hits": 0.2551,
+    "freq_aes": 0.1056,
+    "pos_hits": 0.2755,
+    "pos_errs": 681.0241,
+    "intent": 0.878,
+    "intent_pairs": 98,
+    "mech_accuracy": 0.469,
+    "mech_pairs": 98,
+    "spoof_hit": 0.571,
+    "spoof_fa": 0.304,
+    "note": "注册口径。计数 +0.02、意图 −0.03、机理 +0.04 vs 同分母常数基线；欺骗虚警 0.304（首个非零档）。"
+   }
   },
-  "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）（**2026-10-10 更正**：该单调性只在带宽修复前口径成立；现行数据四档在**拒答修复后**为 0.92 / 0.54 / 0.48 / 0.36（修复前 0.96 / 0.44 / 0.46 / 0.22，当时 D3≈D2 的差距在单次 50 样本 ±0.2 的运行不确定度内））且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 的 DOA 0.48 是单站前后瓣镜像上限、kind 0.60 是 tone/noise 仪器盲区；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。"
+  "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）（**2026-10-10 更正**：该单调性只在带宽修复前口径成立；现行数据四档在**拒答修复后**为 0.92 / 0.54 / 0.48 / 0.36（修复前 0.96 / 0.44 / 0.46 / 0.22，当时 D3≈D2 的差距在单次 50 样本 ±0.2 的运行不确定度内））且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 在 10-10 旧 wavefix 臂上量到 DOA 0.48 / kind 0.60，当时读作「单站前后瓣镜像上限」与「tone/noise 仪器盲区」——**该论断对注册臂不成立**（注册臂 D1：DOA 0.667、kind 0.852，且三口径 kind 分母完全一致）；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。 **2026-10-12 更正**：开思考 + relay + `global:deepseek-v4.1-flash` 后四档注册基线为 0.92 / 0.88 / 0.48 / 0.52（rows 的 `*_fix2_mech_*` 四条）；但按同分母常数基线体检，D2–D4 的计数轴仍不高于「永远答众数」、意图轴在 D2 低于多数类，真正的判别力集中在载频轴与空间轴 —— 见 axis_baselines_2026_10_12 与 arm_attribution_2026_10_12。"
  },
  "abstain_2026_10_09": {
   "what": "把「模型写了被禁负哨兵 -1」这件事从 detection 里单列出来：runner 的 _sanitize 现在返回 abstained 标志，eval_dataset 新增 abstain_n / abstain_rate / detection_hit_excl_abstain / detection_denom_excl_abstain（注册口径 detection_hit 未改动）。",
   "why": "负哨兵被 _sanitize 清成 0，于是在 detection 上与「判定无干扰」不可区分且必然判错 —— 不单列就无法回答「模型是不会检，还是不愿答」。",
   "superseded_2026_10_10": "**本节口径已被拒答修复取代（2026-10-10）**：答案契约去掉 num_interferers、计数由 len(interferers) 派生，四档拒答全部归零（D2 20→0、D3 16→0、D4 18→0、D1 0→0）；下列 measured 是修复前口径，保留作对照。见 refusal_fix_2026_10_10。",
   "measured": {
-   "D1_S0": {"n": 50, "detection_hit": 0.96, "abstain_n": 0},
-   "D2_S2 带宽修前": {"n": 50, "detection_hit": 0.48, "abstain_n": 4, "excl_abstain": 0.522, "caveat": "_run_log.json 只含续跑末轮 15 条 → abstain_n 是下界（拒答样本必 detection=0，移出分母只会让比率上升）"},
-   "D2_S2 带宽修后": {"n": 50, "detection_hit": 0.44, "abstain_n": 20, "abstain_rate": 0.4, "excl_abstain": 0.733},
-   "D3_S2 带宽修前": {"n": 50, "detection_hit": 0.4, "abstain_n": 10, "excl_abstain": 0.475},
-   "D4_S2 带宽修前": {"n": 50, "detection_hit": 0.24, "abstain_n": 15, "excl_abstain": 0.343},
-   "D3_S2 带宽修后（现行数据）": {"n": 50, "detection_hit": 0.46, "abstain_n": 16, "abstain_rate": 0.32, "excl_abstain": 0.618},
-   "D4_S2 带宽修后（现行数据）": {"n": 50, "detection_hit": 0.22, "abstain_n": 18, "abstain_rate": 0.36, "excl_abstain": 0.344}
+   "D1_S0": {
+    "n": 50,
+    "detection_hit": 0.96,
+    "abstain_n": 0
+   },
+   "D2_S2 带宽修前": {
+    "n": 50,
+    "detection_hit": 0.48,
+    "abstain_n": 4,
+    "excl_abstain": 0.522,
+    "caveat": "_run_log.json 只含续跑末轮 15 条 → abstain_n 是下界（拒答样本必 detection=0，移出分母只会让比率上升）"
+   },
+   "D2_S2 带宽修后": {
+    "n": 50,
+    "detection_hit": 0.44,
+    "abstain_n": 20,
+    "abstain_rate": 0.4,
+    "excl_abstain": 0.733
+   },
+   "D3_S2 带宽修前": {
+    "n": 50,
+    "detection_hit": 0.4,
+    "abstain_n": 10,
+    "excl_abstain": 0.475
+   },
+   "D4_S2 带宽修前": {
+    "n": 50,
+    "detection_hit": 0.24,
+    "abstain_n": 15,
+    "excl_abstain": 0.343
+   },
+   "D3_S2 带宽修后（现行数据）": {
+    "n": 50,
+    "detection_hit": 0.46,
+    "abstain_n": 16,
+    "abstain_rate": 0.32,
+    "excl_abstain": 0.618
+   },
+   "D4_S2 带宽修后（现行数据）": {
+    "n": 50,
+    "detection_hit": 0.22,
+    "abstain_n": 18,
+    "abstain_rate": 0.36,
+    "excl_abstain": 0.344
+   }
   },
   "reading": "拒答率随难度上升（现行数据：D1 0% → D3 32% → D4 36% → D2 40%）。D1 是单站且半数样本真值本就是 0，说明模型有能力遵守「必须给 0..3」的契约，只是在证据含糊时违约。D2 带宽修后：22 次未命中里 20 次是拒答，排除后 detection 0.733，与仪器「可解子集」上限 0.685 同量级 → 题面与仪器站得住，丢的分主要在答案契约。",
   "prompt_hardening_2026_10_10": "prompt 里禁负哨兵的措辞从「is discarded」改为「parsed as 0 and scored as a WRONG answer; there is no re-ask / no clarification round」，并新增「num_interferers MUST be a NON-NEGATIVE integer」规则与 Round 7+ 自检句。**实测结果（D2 点状重跑 `answers_S2_agent_noneg`）：拒答 19/50（对照 20/50）、detection 0.44（对照 0.44）→ 加固无效，该模型在难样本上仍会写 -1。** 附一个测量教训：用 PowerShell 正则数 `_run_log.json` 里的负哨兵会得到 0（该字段是字符串里的转义 JSON，文件里是 `\\\"num_interferers\\\": -1`，闭引号前有反斜杠），**必须用 JSON 解析后统计**；另：加固 prompt 对 D1 造成 0.96→0.56（拒答 29/50），但根因是 D1 数据失配（见 `d1_wavefix_2026_10_10`），非 prompt 本身。",
-  "artifacts": {"script": "benchmark_v3/adapters/diag/_an_abstain.py", "report": "benchmark_v3/evidence/_abstain_report.txt", "audit_raw": "benchmark_v3/evidence/_an_abstain.txt"}
+  "artifacts": {
+   "script": "benchmark_v3/adapters/diag/_an_abstain.py",
+   "report": "benchmark_v3/evidence/_abstain_report.txt",
+   "audit_raw": "benchmark_v3/evidence/_an_abstain.txt"
+  }
  },
  "d1_wavefix_2026_10_10": {
   "what": "D1 波形带限回归（自伤）：2026-10-09 19:15 提交波形带限（683c88e）时把 D1 当「逐位恒等」跳过重放 → 盘上 D1 的 IQ（09-27 老代码产物）与运行时现场合成的目标参考（新代码产物）不再逐位一致 → 参考直减减不干净、残差里剩下目标自身 → 干净样本 matched_energy_fraction=0.000（正常应 ≈1.0）、门控峰 5~6 个（coherence 0.98~0.997）→ 考生看到满屏疑似源后大量拒答。",
   "impact": "D1 在 2026-10-10 的两跑（加固 prompt 0.56 / 原 prompt 0.48，拒答 29/24）量的是坏数据，**作废**。`answers_S0_agent_layer1` 的 0.96 跑在 10-09 11:17→11:53，早于 19:15 的提交 → **该值有效**，口径为「带宽修复前」。",
-  "new_d1_baseline": {"answers_dir": "dataset_d1/answers_S0_agent_wavefix", "date": "2026-10-10", "detection_hit": 0.96, "detection_within1": 0.98, "detect_abs_err": 0.04, "kind_hits": 0.6, "freq_hits": 0.96, "freq_aes": 0.0063, "doa_hits": 0.48, "doa_aes": 63.49, "abstain_n": 0, "verdict": "与 layer1（带宽修复前、旧 IQ）逐项一致 → 0.96 是 D1 的真实水平，不是旧数据的偶然；D1 修复在现行数据上成立。"},
+  "new_d1_baseline": {
+   "answers_dir": "dataset_d1/answers_S0_agent_wavefix",
+   "date": "2026-10-10",
+   "detection_hit": 0.96,
+   "detection_within1": 0.98,
+   "detect_abs_err": 0.04,
+   "kind_hits": 0.6,
+   "freq_hits": 0.96,
+   "freq_aes": 0.0063,
+   "doa_hits": 0.48,
+   "doa_aes": 63.49,
+   "abstain_n": 0,
+   "verdict": "与 layer1（带宽修复前、旧 IQ）逐项一致 → 0.96 是 D1 的真实水平，不是旧数据的偶然；D1 修复在现行数据上成立。"
+  },
   "fix": "用 frozen-channel 重放换装 D1（`regen_noise.py --src ../dataset_d1 --difficulty d1`，50/50 共 31.3s；D1 纯热噪 → 噪声底逐位不变 -106.94 dBm）；旧 D1 与全部答案/报告备份在 `benchmark_v3/_stale_d1_wavefix_20261010/dataset_d1`（含 `_agent_cache`、`answers_S0_agent_{layer1,noneg,revert}`）。重跑答案目录 `dataset_d1/answers_S0_agent_wavefix`。",
   "evidence": {
-   "matched_energy_fraction_old_d1_clean": [0.0, 0.0, 0.0],
-   "matched_energy_fraction_new_d1_clean": [0.997, 0.999],
-   "matched_energy_fraction_d2_control": [0.998, 0.978],
+   "matched_energy_fraction_old_d1_clean": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_energy_fraction_new_d1_clean": [
+    0.997,
+    0.999
+   ],
+   "matched_energy_fraction_d2_control": [
+    0.998,
+    0.978
+   ],
    "new_d1_clean_gated_peaks": 0,
    "new_d1_tone_sample": "GT tone 591.9 kHz → 门控峰恰 1 个：(590.0 kHz, over 19.4 dB, coh 0.785)",
-   "new_d1_instrument_audit": {"n": 50, "peaks_eq_gt": 38, "gt_source_covered_gated": 25, "gt_total": 27, "gated_peak_hist": {"0": 25, "1": 15, "2": 6, "3": 4}, "legacy_peak_hist_old": {"2": 2, "3": 2, "4": 7, "5": 12, "6": 27}},
+   "new_d1_instrument_audit": {
+    "n": 50,
+    "peaks_eq_gt": 38,
+    "gt_source_covered_gated": 25,
+    "gt_total": 27,
+    "gated_peak_hist": {
+     "0": 25,
+     "1": 15,
+     "2": 6,
+     "3": 4
+    },
+    "legacy_peak_hist_old": {
+     "2": 2,
+     "3": 2,
+     "4": 7,
+     "5": 12,
+     "6": 27
+    }
+   },
    "data_provenance_md5": "现场重放 vs 盘上 IQ：d1..d4 × {00000,00001} × 4 站 = 32/32 SAME → 现盘上四档都是当前代码产物"
   },
   "zeropath_audit": {
    "what": "四档逐站目标链路状态（`_probe_targetvis.py`）：D1 四站全 ok（200/200）；D2 station_a invisible 7/50；D3 20/50（40%）；D4 17/50（34%）——这些站上 `estimate_band_occupancy_by_correlation` 返回 error（聚类路径与 `oracle16._target_ref_state` 均有降级）。",
-   "detection_by_station_a_state": {"D2_S2": {"ok": [0.419, 43], "invisible": [0.571, 7]}, "D3_S2": {"ok": [0.4, 30], "invisible": [0.55, 20]}, "D4_S2": {"ok": [0.121, 33], "invisible": [0.412, 17]}},
+   "detection_by_station_a_state": {
+    "D2_S2": {
+     "ok": [
+      0.419,
+      43
+     ],
+     "invisible": [
+      0.571,
+      7
+     ]
+    },
+    "D3_S2": {
+     "ok": [
+      0.4,
+      30
+     ],
+     "invisible": [
+      0.55,
+      20
+     ]
+    },
+    "D4_S2": {
+     "ok": [
+      0.121,
+      33
+     ],
+     "invisible": [
+      0.412,
+      17
+     ]
+    }
+   },
    "reading": "0-path 报错**不拖后腿**（这些样本反而打得更好）→ 不值得为它单独修 + 重跑 D2/D3/D4（省约 3 小时 API）；反面对照更有价值：主站目标可见的样本拒答更多（D4 15/33 vs 3/17），指向「目标残余/多径让主站证据自相矛盾」。"
   },
   "artifacts": {
-   "scripts": ["benchmark_v3/adapters/diag/_diag_d1_evidence.py", "benchmark_v3/adapters/diag/_probe_refmatch.py", "benchmark_v3/adapters/diag/_probe_d1_refmatch.py", "benchmark_v3/adapters/diag/_probe_targetvis.py", "benchmark_v3/adapters/diag/_an_zeropath_impact.py"],
-   "reports": ["benchmark_v3/evidence/_diag_d1_evidence_newIQ.txt", "benchmark_v3/evidence/_diag_d1_evidence_staleIQ.txt", "benchmark_v3/evidence/_probe_refmatch.txt", "benchmark_v3/evidence/_probe_targetvis.txt", "benchmark_v3/evidence/_an_zeropath_impact.txt"]
+   "scripts": [
+    "benchmark_v3/adapters/diag/_diag_d1_evidence.py",
+    "benchmark_v3/adapters/diag/_probe_refmatch.py",
+    "benchmark_v3/adapters/diag/_probe_d1_refmatch.py",
+    "benchmark_v3/adapters/diag/_probe_targetvis.py",
+    "benchmark_v3/adapters/diag/_an_zeropath_impact.py"
+   ],
+   "reports": [
+    "benchmark_v3/evidence/_diag_d1_evidence_newIQ.txt",
+    "benchmark_v3/evidence/_diag_d1_evidence_staleIQ.txt",
+    "benchmark_v3/evidence/_probe_refmatch.txt",
+    "benchmark_v3/evidence/_probe_targetvis.txt",
+    "benchmark_v3/evidence/_an_zeropath_impact.txt"
+   ]
   }
  },
  "refusal_fix_2026_10_10": {
   "what": "拒答（abstention）的结构性修复：答案契约去掉 num_interferers 计数字段、计数由 len(interferers) 派生；run_capture_agent.py 新增 has_final_answer_capture（测到候选却交空列表 → 判无效 → 触发 repair 轮）与 _EVIDENCE 工具证据记录器；_sanitize 以列表为准并区分 abstained / count_field_invalid；eval_dataset.py 新增 count_field_invalid_n/rate 口径。",
   "why": "四档里 D2 40%、D3 32%、D4 36% 的样本被记成「判定无干扰」实为拒答：模型在被迫作答轮与 repair 轮写被禁哨兵 -1，被 _sanitize 的 max(0, ·) 静默清成 0。用户 user m07712：「一半的题目都拒答，这会不会太离谱了，你修一下」。",
-  "mechanism": {"repair_round": "benchmark_v2/evaluator_v2.py:203-211 _has_final_answer 判 -1 非法 → :374-393 repair 轮（temperature=0.2, seed=42）→ 仍写 -1 → 回退交出该 -1", "round_log": "拒答样本长度恒 11、末项 phase==repair；D2 20/20 / D3 16/16 / D4 18/18 全部走过 repair，未拒答仅 3/1/1", "no_evidence_signal": "_an_refuse_evidence.py：len(candidates) 与门控峰数在拒答/未拒答间几乎同分布", "no_prose": "拒答原文只有 {\"num_interferers\": -1, \"interferers\": []}，没有任何解释文本"},
-  "failed_attempts": {"prompt_hardening_backfires": "D2 answers_S2_agent_noneg 拒答 20→24、detection 0.44→0.38；D1 answers_S0_agent_noneg 0.96→0.56（撤回后回到 0.96）", "sources_field_missing_hypothesis": "被 _tmp_srckeys.py 证伪（4/4 样本 keys 含 sources）；真结论是仪器 K=len(sources) 本身不可靠（d2_00002/00003 给 1 而 GT=2，d2_00001 给 5 而 GT=2），故 prompt 里 num_interferers <- K 是错误指令"}, 
-  "ab_12_samples": {"bwfix": [0.333, 8], "fix1_prompt_only": [0.417, 6], "fix2_structural": [0.417, 0], "note": "同 12 样本：detection 与拒答数；计数分布 bwfix {0:8,1:1,2:3} → fix2 {1:5,2:4,3:3}"},
-  "d2_full50": {"detection_hit": 0.54, "detection_within1": 0.77, "abstain_n": 0, "count_dist": {"1": 14, "2": 27, "3": 9}, "gt_dist": {"1": 2, "2": 48}, "low_conf_n": 38, "kind_hits": 0.3571, "freq_hits": 0.3095, "pos_hits": 0.6786, "intent": 0.571},
-  "four_levels_fix2": {"d1_s0": {"detection_hit": 0.92, "abstain_n": 0, "was": 0.96}, "d2_s2": {"detection_hit": 0.54, "abstain_n": 0, "was": 0.44}, "d3_s2": {"detection_hit": 0.48, "abstain_n": 0, "was": 0.46}, "d4_s2": {"detection_hit": 0.36, "abstain_n": 0, "was": 0.22}, "note": "四档拒答全部归零；D2/D3/D4 分别 +10 / +2 / +14 pp，D1 −4 pp（计数改由列表派生后，有 2 例无干扰样本被报成 1 个源）。所有答案从此携带真实测量，kind/freq/空间轴不再被拒答一并清零。"},
-  "artifacts": {"scripts": ["benchmark_v3/adapters/diag/_an_abstain_why.py", "benchmark_v3/adapters/diag/_an_refuse_evidence.py", "benchmark_v3/adapters/diag/_an_d2_tooltrace.py", "benchmark_v3/adapters/diag/_check_sanitize.py", "benchmark_v3/adapters/diag/_check_antirefuse.py", "benchmark_v3/adapters/diag/_cmp_d2_abstain.py"], "reports": ["benchmark_v3/evidence/_cmp12.txt", "benchmark_v3/evidence/_fix2_50_summary.txt", "benchmark_v3/evidence/_check_sanitize.txt", "benchmark_v3/evidence/_check_antirefuse.txt", "benchmark_v3/evidence/_an_refuse_evidence.txt", "benchmark_v3/dataset_d2/_eval_report_S2_fix2_50.json"]}
+  "mechanism": {
+   "repair_round": "benchmark_v2/evaluator_v2.py:203-211 _has_final_answer 判 -1 非法 → :374-393 repair 轮（temperature=0.2, seed=42）→ 仍写 -1 → 回退交出该 -1",
+   "round_log": "拒答样本长度恒 11、末项 phase==repair；D2 20/20 / D3 16/16 / D4 18/18 全部走过 repair，未拒答仅 3/1/1",
+   "no_evidence_signal": "_an_refuse_evidence.py：len(candidates) 与门控峰数在拒答/未拒答间几乎同分布",
+   "no_prose": "拒答原文只有 {\"num_interferers\": -1, \"interferers\": []}，没有任何解释文本"
+  },
+  "failed_attempts": {
+   "prompt_hardening_backfires": "D2 answers_S2_agent_noneg 拒答 20→24、detection 0.44→0.38；D1 answers_S0_agent_noneg 0.96→0.56（撤回后回到 0.96）",
+   "sources_field_missing_hypothesis": "被 _tmp_srckeys.py 证伪（4/4 样本 keys 含 sources）；真结论是仪器 K=len(sources) 本身不可靠（d2_00002/00003 给 1 而 GT=2，d2_00001 给 5 而 GT=2），故 prompt 里 num_interferers <- K 是错误指令"
+  },
+  "ab_12_samples": {
+   "bwfix": [
+    0.333,
+    8
+   ],
+   "fix1_prompt_only": [
+    0.417,
+    6
+   ],
+   "fix2_structural": [
+    0.417,
+    0
+   ],
+   "note": "同 12 样本：detection 与拒答数；计数分布 bwfix {0:8,1:1,2:3} → fix2 {1:5,2:4,3:3}"
+  },
+  "d2_full50": {
+   "detection_hit": 0.54,
+   "detection_within1": 0.77,
+   "abstain_n": 0,
+   "count_dist": {
+    "1": 14,
+    "2": 27,
+    "3": 9
+   },
+   "gt_dist": {
+    "1": 2,
+    "2": 48
+   },
+   "low_conf_n": 38,
+   "kind_hits": 0.3571,
+   "freq_hits": 0.3095,
+   "pos_hits": 0.6786,
+   "intent": 0.571
+  },
+  "four_levels_fix2": {
+   "d1_s0": {
+    "detection_hit": 0.92,
+    "abstain_n": 0,
+    "was": 0.96
+   },
+   "d2_s2": {
+    "detection_hit": 0.54,
+    "abstain_n": 0,
+    "was": 0.44
+   },
+   "d3_s2": {
+    "detection_hit": 0.48,
+    "abstain_n": 0,
+    "was": 0.46
+   },
+   "d4_s2": {
+    "detection_hit": 0.36,
+    "abstain_n": 0,
+    "was": 0.22
+   },
+   "note": "四档拒答全部归零；D2/D3/D4 分别 +10 / +2 / +14 pp，D1 −4 pp（计数改由列表派生后，有 2 例无干扰样本被报成 1 个源）。所有答案从此携带真实测量，kind/freq/空间轴不再被拒答一并清零。"
+  },
+  "artifacts": {
+   "scripts": [
+    "benchmark_v3/adapters/diag/_an_abstain_why.py",
+    "benchmark_v3/adapters/diag/_an_refuse_evidence.py",
+    "benchmark_v3/adapters/diag/_an_d2_tooltrace.py",
+    "benchmark_v3/adapters/diag/_check_sanitize.py",
+    "benchmark_v3/adapters/diag/_check_antirefuse.py",
+    "benchmark_v3/adapters/diag/_cmp_d2_abstain.py"
+   ],
+   "reports": [
+    "benchmark_v3/evidence/_cmp12.txt",
+    "benchmark_v3/evidence/_fix2_50_summary.txt",
+    "benchmark_v3/evidence/_check_sanitize.txt",
+    "benchmark_v3/evidence/_check_antirefuse.txt",
+    "benchmark_v3/evidence/_an_refuse_evidence.txt",
+    "benchmark_v3/dataset_d2/_eval_report_S2_fix2_50.json"
+   ]
+  }
+ },
+ "count_axis_baseline_2026_10_12": {
+  "what": "检测计数轴必须先减掉「常数多数类基线」再读。注册口径要求报数与真值完全相等，而当前四档的可见源数分布很集中，「永远答多数类」即可拿到 0.50–0.96。",
+  "tool": "benchmark_v3/adapters/diag/_count_axis_baseline.py（零 API、只读；按 index.json 的 observation_subsets 逐 S 级统计真值可见源数分布与常数基线，并对该档所有 answers_* 臂重算 detection）",
+  "evidence": "benchmark_v3/evidence/count_axis_baseline.txt",
+  "d2_s2": {
+   "gt_dist": {
+    "1": 2,
+    "2": 48
+   },
+   "entropy_bits": 0.24,
+   "majority_baseline": 0.96,
+   "arms": {
+    "bwfix": 0.44,
+    "fix1": 0.38,
+    "fix2": 0.54,
+    "noneg": 0.44,
+    "fix2_mech": 0.88,
+    "nomech": 0.92
+   },
+   "verdict": "全部臂低于常数基线；0.88–0.92 是塌成多数类，不是能力提升"
+  },
+  "other_levels": {
+   "d1_s0": {
+    "gt_dist": {
+     "0": 23,
+     "1": 27
+    },
+    "entropy_bits": 1.0,
+    "majority_baseline": 0.54,
+    "best_arm": 0.96
+   },
+   "d2_s0": {
+    "gt_dist": {
+     "0": 4,
+     "1": 12,
+     "2": 34
+    },
+    "majority_baseline": 0.68,
+    "best_arm": 0.66
+   },
+   "d3_s2": {
+    "gt_dist": {
+     "0": 2,
+     "1": 27,
+     "2": 21
+    },
+    "entropy_bits": 1.19,
+    "majority_baseline": 0.54,
+    "best_arm": 0.48
+   },
+   "d4_s2": {
+    "gt_dist": {
+     "2": 25,
+     "3": 25
+    },
+    "entropy_bits": 1.0,
+    "majority_baseline": 0.5,
+    "best_arm": 0.52
+   }
+  },
+  "conclusion": "只有 D1×S0 的计数轴真有判别力（0.96 比常数 0.54 高 42pp，且熵 1.0 无退化）；D2 因为 48/50 个样本恰好 2 个源，基线高达 0.96，所有臂都低于它；D3/D4 同样不高于常数。因此 D2–D4 的 detection 只能当「是否塌成多数类」的指标看。",
+  "fix_proposal": "下一版数据加一条 QA 约束：每档可见源数至少覆盖 3 个取值、最大类占比 <= 50%（只改出题分布，不改判分口径——计数轴本身仍要求完全相等）",
+  "where_documented": [
+   "benchmark_v3/README.md §6.1",
+   "开发日志.md 2026-10-12（续一）"
+  ]
+ },
+ "arm_attribution_2026_10_12": {
+  "what": "D2×S2 detection 的四臂受控归因：拆开「题面段落 / 端点与模型 / 思考开关」三个变量。",
+  "table": [
+   {
+    "arm": "fix2",
+    "prompt": "旧（无机理段）",
+    "endpoint_model": "dashscope deepseek-v3.2",
+    "thinking": false,
+    "detection_hit": 0.54,
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2",
+    "report": "dataset_d2/_eval_report_S2_fix2_50.json"
+   },
+   {
+    "arm": "nothink",
+    "prompt": "新（含机理段）",
+    "endpoint_model": "relay global:deepseek-v4.1-flash",
+    "thinking": false,
+    "detection_hit": 0.66,
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2_mech_nothink",
+    "report": "dataset_d2/_eval_report_S2_nothink_20261012.json"
+   },
+   {
+    "arm": "fix2_mech",
+    "prompt": "新（含机理段）",
+    "endpoint_model": "relay global:deepseek-v4.1-flash",
+    "thinking": true,
+    "detection_hit": 0.88,
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2_mech",
+    "report": "dataset_d2/_eval_report_S2_fix2_mech_20261011.json"
+   },
+   {
+    "arm": "nomech",
+    "prompt": "旧（无机理段，DSH_NO_MECH_AXIS=1）",
+    "endpoint_model": "relay global:deepseek-v4.1-flash",
+    "thinking": true,
+    "detection_hit": 0.92,
+    "answers_dir": "dataset_d2/answers_S2_agent_fix2_nomech",
+    "report": "dataset_d2/_eval_report_S2_nomech_20261012.json"
+   }
+  ],
+  "conclusion": "同题面同端点下开思考 +0.22（0.66→0.88）；同关思考下换端点/模型 +0.12（0.54→0.66）；题面机理段 −0.04（0.92→0.88，噪声量级）。⇒ 早前报告的 0.44 / 0.54 是「关思考 + 弱端点」口径，不是题目上限。",
+  "thinking_effect_is_only_the_count": "开↔关思考：计数 0.88 vs 0.66，而 kind 0.366/0.326、freq 0.366/0.349、pos 0.699/0.663、intent 0.570/0.616、mech 0.516/0.512 全在噪声内 —— 思考开关只改「报几个」，几乎不改其它轴。",
+  "decision": "注册配置 = 新题面 + relay + global:deepseek-v4.1-flash + 开思考；四档注册答案目录 answers_S{0,2}_agent_fix2_mech。",
+  "artifacts": [
+   "benchmark_v3/_api_nomech_dataset_d2.log",
+   "benchmark_v3/_api_nothink_dataset_d2.log",
+   "benchmark_v3/evidence/arm_comparison_d2.txt"
+  ]
+ },
+ "axis_baselines_2026_10_12": {
+  "what": "逐轴「平凡预测器（常数基线）」体检：把每条轴的常数基线算出来；臂得分只有明显高于它，才说明该轴在本档有判别力。零 API、只读。",
+  "tool": "benchmark_v3/adapters/diag/_axis_baselines.py",
+  "evidence": [
+   "benchmark_v3/evidence/axis_baselines.txt",
+   "benchmark_v3/evidence/axis_baselines_arm_answers_S2_agent_fix2_mech.txt",
+   "benchmark_v3/evidence/axis_baselines_arm_mech_d1.txt",
+   "benchmark_v3/evidence/axis_baselines_arm_mech_all.txt",
+   "benchmark_v3/evidence/kind_denominator_check.txt"
+  ],
+  "arm": "answers_S{0,2}_agent_fix2_mech（注册口径）",
+  "table_legend": "每个轴 = [臂得分, 同分母常数基线, 差值]；空间轴 D1 = DOA（S0 单站）、D2–D4 = 定位 ≤50 m。",
+  "table": {
+   "D1_S0": {
+    "count": [
+     0.92,
+     0.54,
+     0.38
+    ],
+    "kind": [
+     0.852,
+     0.593,
+     0.259
+    ],
+    "freq": [
+     0.963,
+     0.0,
+     0.963
+    ],
+    "space": [
+     0.667,
+     0.148,
+     0.519
+    ],
+    "intent": null,
+    "mech": [
+     0.815,
+     1.0,
+     -0.185
+    ]
+   },
+   "D2_S2": {
+    "count": [
+     0.88,
+     0.96,
+     -0.08
+    ],
+    "kind": [
+     0.366,
+     0.161,
+     0.204
+    ],
+    "freq": [
+     0.366,
+     0.0,
+     0.366
+    ],
+    "space": [
+     0.699,
+     0.0,
+     0.699
+    ],
+    "intent": [
+     0.57,
+     0.806,
+     -0.237
+    ],
+    "mech": [
+     0.516,
+     0.505,
+     0.011
+    ]
+   },
+   "D3_S2": {
+    "count": [
+     0.48,
+     0.54,
+     -0.06
+    ],
+    "kind": [
+     0.448,
+     0.379,
+     0.069
+    ],
+    "freq": [
+     0.259,
+     0.0,
+     0.259
+    ],
+    "space": [
+     0.552,
+     0.0,
+     0.552
+    ],
+    "intent": [
+     0.776,
+     0.759,
+     0.017
+    ],
+    "mech": [
+     0.655,
+     0.603,
+     0.052
+    ]
+   },
+   "D4_S2": {
+    "count": [
+     0.52,
+     0.5,
+     0.02
+    ],
+    "kind": [
+     0.449,
+     0.429,
+     0.02
+    ],
+    "freq": [
+     0.255,
+     0.0,
+     0.255
+    ],
+    "space": [
+     0.276,
+     0.0,
+     0.276
+    ],
+    "intent": [
+     0.878,
+     0.908,
+     -0.031
+    ],
+    "mech": [
+     0.469,
+     0.429,
+     0.041
+    ]
+   }
+  },
+  "conclusion": [
+   "载频轴与空间轴的常数基线恒为 0.000（真值频偏不会恰好在 0 Hz、干扰不会与目标同址）→ 这两条轴真有判别力（差值 +0.26 ~ +0.96）。",
+   "计数轴只有 D1 有判别力（0.920 vs 0.540，+0.38）；D2 −0.08、D3 −0.06、D4 +0.02 —— D2–D4 的计数轴低于或贴着「永远答众数」（D2 众数 2 占 48/50 = 0.96）。",
+   "意图轴：D2 −0.24、D4 −0.03、D3 +0.02 → 分类轴必须减常数基线再读；D4 的 0.878 不能算能力（多数类 malicious 就有 0.908）。",
+   "机理轴：+0.011 / +0.052 / +0.041 → 机理题面在本版数据上没有可测增益；D1 的机理是出题侧注入的单类 adjacent（基线 1.000），本就不该计分。",
+   "建议：注册报告给每条分类轴同时附「同分母常数基线」与差值（下一步加 *_above_baseline 列）。"
+  ],
+  "denominator_note": "本工具的臂口径 = 配对成功对（GT 侧最近邻）；canonical 报告 = match() 默认门槛的 pairs。D1 两者完全一致（27 对 / 23 命中 = 0.852）；D2 gated/ungated/GT 侧 = 0.366/0.358/0.337、D3 = 0.448/0.458/0.377、D4 = 0.449/0.447/0.400 → 差 0.00–0.05，见 evidence/kind_denominator_check.txt。",
+  "fix_proposal_for_next_data": "第 4 条 QA 约束：每档可见源数覆盖 ≥3 个取值、最大类占比 ≤50%（只改出题分布，不动判分口径），让计数轴与分类轴都留有判别空间。"
  }
 }

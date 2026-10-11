@@ -1,0 +1,37 @@
+
+====================================================================================
+dataset_d2   样本 50   S 级子集 ['S0', 'S1', 'S2']   答案臂 8
+====================================================================================
+
+[S0] 用站 ['station_a']   真值可见源数分布 {0: 4, 1: 12, 2: 34}   均值 1.60
+  常数多数类基线（永远答 2） = 0.680   计数熵 = 1.16 bit（理论最大 1.58）
+    answers_S2_agent_bwfix                     detection_hit = 0.360 (n=50)   相对常数基线 -0.320  ← 低于常数基线
+    answers_S2_agent_fix1                      detection_hit = 0.340 (n=50)   相对常数基线 -0.340  ← 低于常数基线
+    answers_S2_agent_fix2                      detection_hit = 0.420 (n=50)   相对常数基线 -0.260  ← 低于常数基线
+    answers_S2_agent_fix2_12                   detection_hit = 0.250 (n=12)   相对常数基线 -0.430（跑中/不完整）
+    answers_S2_agent_fix2_mech                 detection_hit = 0.660 (n=50)   相对常数基线 -0.020  ← 低于常数基线
+    answers_S2_agent_fix2_mech_nothink         detection_hit = 0.250 (n=4)   相对常数基线 -0.430（跑中/不完整）
+    answers_S2_agent_nomech                    detection_hit = 0.700 (n=50)   相对常数基线 +0.020
+    answers_S2_agent_noneg                     detection_hit = 0.380 (n=50)   相对常数基线 -0.300  ← 低于常数基线
+
+[S1] 用站 ['station_a', 'station_b', 'station_c']   真值可见源数分布 {1: 2, 2: 48}   均值 1.96
+  常数多数类基线（永远答 2） = 0.960   计数熵 = 0.24 bit（理论最大 1.00）
+    answers_S2_agent_bwfix                     detection_hit = 0.440 (n=50)   相对常数基线 -0.520  ← 低于常数基线
+    answers_S2_agent_fix1                      detection_hit = 0.380 (n=50)   相对常数基线 -0.580  ← 低于常数基线
+    answers_S2_agent_fix2                      detection_hit = 0.540 (n=50)   相对常数基线 -0.420  ← 低于常数基线
+    answers_S2_agent_fix2_12                   detection_hit = 0.417 (n=12)   相对常数基线 -0.543（跑中/不完整）
+    answers_S2_agent_fix2_mech                 detection_hit = 0.880 (n=50)   相对常数基线 -0.080  ← 低于常数基线
+    answers_S2_agent_fix2_mech_nothink         detection_hit = 0.750 (n=4)   相对常数基线 -0.210（跑中/不完整）
+    answers_S2_agent_nomech                    detection_hit = 0.920 (n=50)   相对常数基线 -0.040  ← 低于常数基线
+    answers_S2_agent_noneg                     detection_hit = 0.440 (n=50)   相对常数基线 -0.520  ← 低于常数基线
+
+[S2] 用站 ['station_a', 'station_b', 'station_c', 'station_d']   真值可见源数分布 {1: 2, 2: 48}   均值 1.96
+  常数多数类基线（永远答 2） = 0.960   计数熵 = 0.24 bit（理论最大 1.00）
+    answers_S2_agent_bwfix                     detection_hit = 0.440 (n=50)   相对常数基线 -0.520  ← 低于常数基线
+    answers_S2_agent_fix1                      detection_hit = 0.380 (n=50)   相对常数基线 -0.580  ← 低于常数基线
+    answers_S2_agent_fix2                      detection_hit = 0.540 (n=50)   相对常数基线 -0.420  ← 低于常数基线
+    answers_S2_agent_fix2_12                   detection_hit = 0.417 (n=12)   相对常数基线 -0.543（跑中/不完整）
+    answers_S2_agent_fix2_mech                 detection_hit = 0.880 (n=50)   相对常数基线 -0.080  ← 低于常数基线
+    answers_S2_agent_fix2_mech_nothink         detection_hit = 0.750 (n=4)   相对常数基线 -0.210（跑中/不完整）
+    answers_S2_agent_nomech                    detection_hit = 0.920 (n=50)   相对常数基线 -0.040  ← 低于常数基线
+    answers_S2_agent_noneg                     detection_hit = 0.440 (n=50)   相对常数基线 -0.520  ← 低于常数基线

@@ -340,7 +340,7 @@ D2/D3/D4 分别有 **20 / 16 / 18 个样本（40% / 32% / 36%）** 经 `_sanitiz
 ### 机制（零成本取证：`_an_abstain_why.py` / `_an_refuse_evidence.py`）
 - 答案契约原来要求模型写 `num_interferers`，而 prompt 又明令禁止用 −1 之类的哨兵表达「不确定」→ 模型在「TOOL BUDGET EXHAUSTED」被迫作答轮与 repair 轮写 `num_interferers = -1`；`benchmark_v2/evaluator_v2.py:203-211` 的 `_has_final_answer` 判它非法 → 进 repair 轮（`:374-393`）→ 仍写 −1 → 回退把它交出去 → `run_capture_agent._sanitize` 的 `max(0, ·)` 静默清成 **0**。
 - 证据：拒答样本的 `round_log` 长度恒为 **11** 且末项 `phase == "repair"`（D2 20/20、D3 16/16、D4 18/18）；拒答与未拒答样本在「候选数 / 门控峰数」上几乎同分布 → **拒答与证据强度无关**。
-- 两次失败尝试：① 只在 prompt 里明令禁止 −1 → **反噬**（D2 拒答 20→24、detection 0.44→0.38；D1 更早那次 0.96→0.56，已撤回）；② 「工具漏了 `sources` 字段」的假设被 `_tmp_srckeys.py` 证伪（4/4 样本字段齐全，真问题是仪器 `K = len(sources)` 不可靠）。
+- 两次失败尝试：① 只在 prompt 里明令禁止 −1 → **反噬**（D2 拒答 20→24、detection 0.44→0.38；D1 更早那次 0.96→0.56，已撤回）；② 「工具漏了 `sources` 字段」的假设被 `_probe_srckeys.py` 证伪（4/4 样本字段齐全，真问题是仪器 `K = len(sources)` 不可靠）。
 
 ### 修法（结构性，不是措辞）
 - 答案契约去掉计数字段：模型只交 `interferers` 列表，**计数由 harness 派生 `len(...)`**；

@@ -1,0 +1,20 @@
+﻿[D1/S0] answers_S0_agent_fix2_mech
+  pred 条目 32 | 可见 GT 27
+  官方 gated   pairs=27  kind 命中=23  → 0.852
+  官方 ungated pairs=27  kind 命中=23  → 0.852
+  诊断 GT 侧   pairs=27  kind 命中=23  → 0.852
+[D2/S2] answers_S2_agent_fix2_mech
+  pred 条目 98 | 可见 GT 98
+  官方 gated   pairs=93  kind 命中=34  → 0.366
+  官方 ungated pairs=95  kind 命中=34  → 0.358
+  诊断 GT 侧   pairs=98  kind 命中=33  → 0.337
+[D3/S2] answers_S2_agent_fix2_mech
+  pred 条目 76 | 可见 GT 69
+  官方 gated   pairs=58  kind 命中=26  → 0.448
+  官方 ungated pairs=59  kind 命中=27  → 0.458
+  诊断 GT 侧   pairs=69  kind 命中=26  → 0.377
+[D4/S2] answers_S2_agent_fix2_mech
+  pred 条目 107 | 可见 GT 125
+  官方 gated   pairs=98  kind 命中=44  → 0.449
+  官方 ungated pairs=103  kind 命中=46  → 0.447
+  诊断 GT 侧   pairs=125  kind 命中=50  → 0.400
