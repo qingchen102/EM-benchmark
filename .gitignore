@@ -63,6 +63,7 @@ docs/低空电磁信号基准v3-汇报讲解手册.md
 projects/ppt/srtp_v3_report_ppt169_20261010/
 projects/ppt/zju_radar_deck_template/
 projects/ppt/电磁大模型基准测试集.pptx
+tools/                       # PPT deck 质检脚本（本人内部工具）
 
 # ── 汇报 PPT 与出图（本人内部材料，只留本地）
 projects/
