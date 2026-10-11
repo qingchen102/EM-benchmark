@@ -40,7 +40,12 @@ RESERVED_UNUSED = ("jam",)                                    # §7 里有、当
 
 # ---- 物理常量（与 gen_dataset.py 对齐）--------------------------------------
 TARGET_BW_HZ = 1e6          # gen_dataset.TGT_BANDWIDTH_HZ：目标组件带宽
-RX_HALF_HZ = 0.45 * 0.9 * 4e6   # gen_dataset.RX_FRAC * FS_HZ = ±810 kHz 接收通带
+# 2026-10-12 修正：RX_FRAC 是**全带宽**占 fs 的比例（gen_dataset.py:241 `rx_bw = fs * RX_FRAC`
+# = 1.62 MHz），平台接收机 FIR 以 `rx.bandwidth_hz / 2` 为截止（cityrf/receiver.py:83）
+# → 真实半通带 = ±810 kHz。旧写法漏了 /2（值 1.62 MHz，与注释差 2×），属潜伏 bug：
+# 四档现有真值里 0 个源落在 (810 kHz, 1.62 MHz]，故标签逐位不变（证据
+# benchmark_v3/evidence/mech_passband_check_2026-10-12.txt）。
+RX_HALF_HZ = 0.45 * 0.9 * 4e6 / 2.0   # = ±810 kHz 接收通带（半带宽）
 
 # ---- 类别集合 ---------------------------------------------------------------
 SPOOF_KINDS = ("GNSS_spoof",)

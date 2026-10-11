@@ -1,0 +1,23 @@
+mechanism.RX_HALF_HZ = 810000 Hz（修正后）  修正前的值 = 1620000 Hz
+
+dataset_d1 S0：GT 干扰 27
+  现值   ： adjacent=27
+  半通带 ： adjacent=27
+  |f0| > 810 kHz 的源： 0
+
+dataset_d2 S2：GT 干扰 98
+  现值   ： adjacent=12  co_channel=48  pulse=38
+  半通带 ： adjacent=12  co_channel=48  pulse=38
+  |f0| > 810 kHz 的源： 0
+
+dataset_d3 S2：GT 干扰 69
+  现值   ： adjacent=18  co_channel=40  pulse=11
+  半通带 ： adjacent=18  co_channel=40  pulse=11
+  |f0| > 810 kHz 的源： 0
+
+dataset_d4 S2：GT 干扰 125
+  现值   ： adjacent=26  co_channel=43  pulse=6  spoof=50
+  半通带 ： adjacent=26  co_channel=43  pulse=6  spoof=50
+  |f0| > 810 kHz 的源： 0
+
+翻转样本数： 0

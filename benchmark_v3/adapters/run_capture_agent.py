@@ -350,15 +350,53 @@ EVENT_LOG_PROMPT_CAPTURE = (
 _EVENT_LOG_ANCHOR = "  with wrong parameters); otherwise false\n"
 
 
-def system_prompt_for(events) -> str:
-    """带事件日志段落的 system prompt；无事件时返回基础 prompt（逐字等于公开层之前）。"""
-    if not events:
-        return SYSTEM_PROMPT_CAPTURE
-    out = SYSTEM_PROMPT_CAPTURE.replace(
-        _EVENT_LOG_ANCHOR, _EVENT_LOG_ANCHOR + EVENT_LOG_PROMPT_CAPTURE, 1)
-    assert out != SYSTEM_PROMPT_CAPTURE, "event-log anchor missing in SYSTEM_PROMPT_CAPTURE"
+# —— 机理轴对照开关（2026-10-12，诊断专用，不改变已注册题面）——
+# 机理这一问是随 5cd795a 与计数契约一起进 prompt 的，而同一轮重跑还同时换了模型/中转站
+# 与思考开关，三个变量叠在一起无法归因。DSH_NO_MECH_AXIS=1 时把机理的四段文字逐字剔除，
+# 还原 5cd795a^ 的题面，用来跑“旧题面 + 当前模型”的对照臂。
+# 逐字等价性由 diag/_check_prompt_mech.py 对着 git 里的 5cd795a^ / HEAD 断言（md5 级）。
+_MECH_AXIS_SEGMENTS = (
+    (  # 段 1：old 行[84:84] -> new 行[84:92]
+        '- mechanism       <- judged by YOU from the measurement, not looked up. Exactly one of:\n  "co_channel" = its occupied band overlaps the cooperative link\'s own band (same-channel\n                 collision; the usual ISM coexistence case, spectrum fuses around 0 Hz);\n  "adjacent"   = in the receiver passband but outside the link\'s band (adjacent-channel\n                 leakage: a separate peak away from 0 Hz);\n  "pulse"      = broadband impulsive emission with low duty cycle (welder / VFD /\n                 corona / pulsed radar time-domain fingerprint);\n  "spoof"      = GNSS-like structure with wrong parameters (then also is_spoof=true).\n',
+        '',
+    ),
+    (  # 段 2：old 行[97:97] -> new 行[105:106]
+        '                  "mechanism": "co_channel|adjacent|pulse|spoof",\n',
+        '',
+    ),
+    (  # 段 3：old 行[103:103] -> new 行[112:116]
+        '- EVERY interferer MUST carry "mechanism" with one of the four values above: it is a\n  graded axis (T2) and no tool provides it. Decide it from what you measured: co_channel\n  vs adjacent by whether the band overlaps the link\'s own band (~0 Hz, ±500 kHz); pulse\n  from the time-domain fingerprint; spoof from GNSS-like structure with wrong parameters.\n',
+        '',
+    ),
+    (  # 段 4：old 行[153:155] -> new 行[166:168]
+        '              classify items already contain freq/kind/position — you still add your own\n              mechanism and intent/is_spoof judgement. If evidence is partial, still answer with your best\n',
+        '              classify items already contain every field the answer schema\n              needs. If evidence is partial, still answer with your best\n',
+    ),
+)
+
+_NO_MECH_AXIS = os.environ.get("DSH_NO_MECH_AXIS", "").strip() not in ("", "0", "false")
+
+
+def prompt_without_mech_axis(prompt: str) -> str:
+    """把机理四段文字逐字剔除，还原 5cd795a^ 的题面（对照臂用，见 _MECH_AXIS_SEGMENTS）。"""
+    out = prompt
+    for new, old in _MECH_AXIS_SEGMENTS:
+        assert new in out, "mechanism segment missing in system prompt"
+        out = out.replace(new, old, 1)
     return out
 
+
+def system_prompt_for(events) -> str:
+    """带事件日志段落的 system prompt；无事件时返回基础 prompt（逐字等于公开层之前）。
+
+    DSH_NO_MECH_AXIS=1 时先剥掉机理段落（对照臂，见 _MECH_AXIS_SEGMENTS）。
+    """
+    base = prompt_without_mech_axis(SYSTEM_PROMPT_CAPTURE) if _NO_MECH_AXIS else SYSTEM_PROMPT_CAPTURE
+    if not events:
+        return base
+    out = base.replace(_EVENT_LOG_ANCHOR, _EVENT_LOG_ANCHOR + EVENT_LOG_PROMPT_CAPTURE, 1)
+    assert out != base, "event-log anchor missing in SYSTEM_PROMPT_CAPTURE"
+    return out
 
 REPAIR_PROMPT_CAPTURE = (
     "Your previous reply did not contain a valid final JSON answer. Reply NOW with "
@@ -711,7 +749,11 @@ def main() -> None:
     args = ap.parse_args()
 
     base_url = args.base_url or "https://dashscope.aliyuncs.com/compatible-mode/v1"
-    agent_cls = NoThinkDeepSeekAgent if "dashscope" in base_url else ev2.OpenAICompatibleAgent
+    no_think = os.environ.get("DSH_NO_THINK", "").strip() not in ("", "0", "false")
+    agent_cls = (NoThinkDeepSeekAgent if ("dashscope" in base_url or no_think)
+                 else ev2.OpenAICompatibleAgent)
+    print(f"[agent] {agent_cls.__name__}  model={args.model}  base_url={base_url}"
+          f"  no_think={no_think}  no_mech_axis={_NO_MECH_AXIS}", flush=True)
     agent = agent_cls(model=args.model, base_url=base_url, api_key=args.api_key)
 
     run(Path(args.dataset_root), args.slevel,
