@@ -56,7 +56,7 @@ LLVM CPU 后端是当前验证路径；CUDA 后端还需要可用的 CUDA/OptiX/
 
 ## 2. 工作台怎么用
 
-1. **选择示例**：包括自由空间、慕尼黑复合干扰、三组展示场景和四组复杂场景配置。
+1. **选择示例**：内置自由空间、慕尼黑复合干扰、三组展示场景（`three_scenes/`）、四组复杂场景（`complex/`），以及本课题四档基准数据集场景（`examples/benchmark_v3/`：D1 物流航线基线·单站 / D2 居民区共存·四站 / D3 城市峡谷多径·四站 / D4 对抗演习·四站）。新增预设只需把合法的 Scenario JSON 放进 `examples/` 的任意子目录（详见 §10）。
 2. **布置设备**：左侧选择发射源或监测站；可新增、复制、删除。2D 地图可直接拖动设备更改 X/Y；高度 Z 在右侧编辑。
 3. **设置波形**：发射源可叠加多个成分。每个成分支持调制、频偏、带宽、符号率、权重、相位和脉冲门控等设置。
 4. **设置接收机**：配置阵列中心、Yaw/Pitch/Roll、十字阵或矩形阵、间距、调谐、接收带宽、噪声、增益和软限幅。可将阵列规格同步到所有站。
@@ -80,7 +80,7 @@ LLVM CPU 后端是当前验证路径；CUDA 后端还需要可用的 CUDA/OptiX/
 
 | 项目 | 当前实现 |
 |---|---|
-| 时间 | 静态快照，0 < 时长 ≤ 50 ms；不含运动、多普勒或长时流式 |
+| 时间 | 静态快照，0 < 时长 ≤ **500 ms**（`Propagation.duration_s` 校验上限 `le=0.5`）；不含运动、多普勒或长时流式 |
 | 源/站数量 | 1–32 个发射设备、1–16 个接收站 |
 | 波形 | tone、noise、BPSK、QPSK、FSK、OFDM、chirp；每源 1–16 成分 |
 | 发射端 | 单端口，各向同性、垂直极化；位置、朝向、平台 ID、名义功率 |
@@ -137,8 +137,9 @@ python -c "from webui.results import build_preview; build_preview('runs/my_rt/ca
 src/cityrf/              仿真核心、公开观测、重放、审计
   baselines/            检测、空间处理、定位、反射/多径及校验接口
   legacy/               已迁入的旧信号算法及 schema
-examples/               基础、三场景、复杂场景配置
+examples/               基础、三场景、复杂场景，以及 benchmark_v3/ 四档基准预设（D1–D4）
 priors/munich_geometry/  原生慕尼黑三角网格与来源元数据
+priors/hangzhou_geometry/ 自建杭州城市场景（scene.xml、网格、占用地形），由 tools/build_city_scene.py 生成
 webui/
   server.py             FastAPI、配置/作业/下载接口
   worker.py             独立仿真作业入口
@@ -210,7 +211,7 @@ RUN_RT_TESTS=1 python -m pytest -q tests/test_rt.py
 ## 9. 预设/自由信号源与自定义城市地图（2026-09 新增）
 
 **信号源**：发射源面板可选两种模式——
-- **预设 · v3 辐射体**：16 种低空辐射体（蓝牙跳频/图传/雷达脉冲/GNSS 压制/微波炉…），调制与时域结构由预设给出，功率/频偏/带宽/脉冲仍可调；
+- **预设 · v3 辐射体**：**19 类**低空辐射体（蓝牙跳频/图传/雷达脉冲/GNSS 压制/微波炉/电焊/变频器/电晕…），调制与时域结构由预设给出，功率/频偏/带宽/脉冲仍可调；
 - **自由 · 调制+参数**：13 种波形（原生 7 种 + v2 基带 gfsk/16qam/64qam/ook/fhss/lfm），参数任意组合。
 分发实现在 `src/cityrf/waveforms.py` 的 `generate()`（`Emitter.preset` 字段命中 v3 辐射体池即用其生成器）。
 
@@ -221,3 +222,26 @@ RUN_RT_TESTS=1 python -m pytest -q tests/test_rt.py
 python tools/build_city_scene.py --name hangzhou --bbox 30.270,120.120,30.278,120.130
 ```
 从 OSM Overpass 下载建筑轮廓、按 levels×3 m 拉伸成 LoD1 盒子，产出 `priors/<name>_geometry/scene.xml`（RT 用，ITU 混凝土材质）与 `webui/assets/<name>_mesh.*`（地图显示）。网页右上角下拉切换城市网格，**同时把 `Propagation.scene` 切到对应场景文件**。数据 © OpenStreetMap contributors (ODbL)。已内置杭州西湖东 1 km²（181 栋、3104 面）。
+
+## 10. 传播场景 / 射线深度 / 保护频带（2026-10 补充）
+
+### `Propagation.scene` 的三种取值
+- `munich`：内置慕尼黑完整城市（38,936 个三角面）；
+- `empty`：空场景（无建筑）；
+- **自定义 Mitsuba 场景文件路径**，例如 `priors/hangzhou_geometry/scene.xml`（`tools/build_city_scene.py` 的产物）。
+
+该字段**只在 `backend = sionna_rt` 时生效**；`free_space` / `tapped` 后端不使用建筑，改场景不会改变仿真结果（页面会同步提示）。页内有两个联动入口：右上角**城市网格**下拉（换地图显示）与「信道与传播 → **传播场景**」（换 RT 场景），任一处改动都会同步另一处与地图标题。若下拉里出现「（不在枚举中，保留原值）」，说明该场景文件当前没有被识别为内置网格，原值仍会照常保存。
+
+### 最大路径交互深度 `max_depth`
+范围 **0–10，默认 3**：Sionna RT 中每条射线**最多与建筑发生多少次交互**（反射 / 绕射 / 透射合计），`0` 表示只计算直达径。深度每加 1，候选路径与计算量近似翻倍，并受「每源路径预算」（`samples_per_src`、`max_num_paths_per_src`）约束——所以它直接影响求解时间，而不是只影响精度。
+
+### 任务与保护频带 `tasks`
+一条 `Task` 声明「某个合作源应在哪个频率窗口内被保护」：`receiver_ids`（参与站点）、`desired_emitter_ids`（合作源）、`protected_center_offset_hz`（窗口中心，相对参考载频，默认 0）、`protected_bandwidth_hz`（窗口宽度，默认 100 kHz，必须为正）。它**只决定公开观测（`public/observations.json`）里哪些合作源先验可见**，不改变波形、不参与信道求解。本课题四档基准场景的 `tasks` 均为空（只用发射源与监测站描述环境），因此载入这些预设时该面板显示为空态提示。
+
+### 运行产物与新增预设
+- `runs/`：每次运行一个子目录（IQ、真值、日志，可冻结信道重放）；`user_scenarios/`：网页「保存配置」的去处；
+- `priors/<name>_geometry/`：RT 场景（`scene.xml`、`mesh.npz`、`geometry.json`、`occupancy.npz`）；`webui/assets/<name>_mesh.*`：网页地图网格；
+- 新增预设 = 把合法的 Scenario JSON 放进 `examples/` 的任意子目录。`/api/bootstrap` 会对每个文件做 `Scenario` 校验，**校验失败的文件会被静默忽略**（下拉里看不到）——新增后请确认它出现在「示例场景」列表里，必要时用 `python simulate.py validate --config <文件>` 定位问题。
+
+## 11. 变更记录
+- **2026-10**：新增本课题四档基准数据集预设（`examples/benchmark_v3/`，D1–D4）；「传播场景」下拉补齐自定义城市场景、并与右上角城市网格双向联动，修复「切换传播场景看起来没有反应」；为 `scene` 三义、`max_depth`、`Task` 保护频带补页面提示与 §10 说明；更正时长上限（50 ms → **500 ms**）与辐射体数量（16 → **19 类**）。

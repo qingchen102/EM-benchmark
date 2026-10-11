@@ -1,4 +1,4 @@
-import {SceneMap} from './map.js?v=hz3';
+import {SceneMap} from './map.js?v=hz4';
 import {plot} from './charts.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],clone=o=>structuredClone(o);
 let config,boot,selected={type:'global'},currentRun=null,resultTab='spectra',poll=null,runData=null,toastTimer;
@@ -12,8 +12,8 @@ const specs={
  role:['设备角色'],power_dbm:['名义发射功率 · dBm',1,'组合参考波形功率；门控、滤波后平均功率可能下降'],rf_offset_hz:['相对参考载频 · MHz',1e-6,'该设备自己的射频，不再强行都放在参考载频上'],velocity_mps:['速度 · m/s',1,'X/Y/Z；短窗内按径向速度产生多普勒'],kind:['波形类型'],weight:['成分功率权重'],offset_hz:['中心偏移 · kHz',.001],bandwidth_hz:['带宽 · kHz',.001,'发射端为带限参数；不等同于实测 99% 占用带宽'],symbol_rate_hz:['符号率 · ksym/s',.001,'用于 BPSK/QPSK/FSK；OFDM 内部速率由带宽决定'],phase_rad:['初相 · °',180/Math.PI],pulse_period_s:['脉冲周期 · ms',1000,'留空为连续发射；占空比仅在周期非空时生效'],duty_cycle:['占空比',1,'0 < duty ≤ 1'],pulse_start_s:['脉冲起点 · ms',1000],chirp_period_s:['扫频周期 · ms',1000],
  geometry_type:['阵列几何'],num_rows:['矩形阵行数'],num_cols:['矩形阵列数'],horizontal_elements:['十字阵水平臂阵元数'],vertical_elements:['十字阵垂直臂阵元数'],vertical_spacing_wavelengths:['垂直间距 · λ'],horizontal_spacing_wavelengths:['水平间距 · λ'],pattern:['天线方向图'],polarization:['极化'],gain_error_std_db:['阵元增益误差 · dB',1,'0 表示各阵元幅度一致'],phase_error_std_deg:['阵元相位误差 · °',1,'0 表示各阵元相位校准'],tuning_offset_hz:['调谐偏移 · kHz',.001],
  noise_figure_db:['噪声系数 · dB'],temperature_k:['温度 · K'],noise_enabled:['热噪声（白噪声）'],colored_noise_enabled:['有色/带限底噪'],colored_noise_db:['有色噪声相对热噪声 · dB'],colored_bandwidth_hz:['有色噪声带宽 · kHz',.001],impulse_noise_enabled:['脉冲/冲击噪声'],impulse_rate_hz:['脉冲出现率 · 次/秒'],impulse_power_db:['脉冲相对热噪声 · dB'],impulse_width_us:['脉冲宽度 · μs'],phase_noise_enabled:['本振相位噪声'],phase_noise_deg:['相位噪声步进 · °/样点'],correlated_noise_enabled:['阵元相关噪声'],noise_correlation:['阵元噪声相关系数',1,'0 完全独立，1 各阵元同一份噪声'],imd3_enabled:['三阶互调'],iip3_dbm:['输入三阶截点 · dBm',1,'越小，强信号产生的互调越明显'],gain_db:['固定增益 · dB'],soft_limit_input_dbm:['输入软限幅阈值 · dBm',1,'留空关闭非线性压缩'],filter_taps:['接收滤波器抽头数',1,'17–1025 之间的奇数'],
- backend:['传播后端'],rt_variant:['RT 计算设备'],scene:['传播场景'],max_depth:['最大路径交互深度'],samples_per_src:['每源射线采样数'],max_num_paths_per_src:['每源路径预算'],los:['直达路径'],specular_reflection:['镜面反射'],diffuse_reflection:['漫反射'],refraction:['折射'],diffraction:['绕射'],tap_delays_s:['抽头时延 · μs',1e6],tap_gains_real:['抽头增益实部'],tap_gains_imag:['抽头增益虚部'],
- receiver_ids:['参与监测站 ID'],desired_emitter_ids:['合作 / 受保护发射源 ID'],protected_center_offset_hz:['保护频带中心 · kHz',.001],protected_bandwidth_hz:['保护带宽 · kHz',.001],instruction:['分析任务说明']
+backend:['传播后端',1,'sionna_rt 走真实城市射线追踪（慢）；free_space / tapped 不考虑建筑（快），此时传播场景不影响结果。'],rt_variant:['RT 计算设备',1,'CUDA 需机器上有可用 GPU 与 OptiX 运行时。'],scene:['传播场景',1,'仅 Sionna RT 使用：munich = 内置慕尼黑；自定义城市 = priors/<城市>_geometry/scene.xml（如杭州）；empty = 无建筑空场景。与右上角城市网格下拉联动。'],max_depth:['最大路径交互深度',1,'每条射线最多与建筑交互几次（镜面反射 / 绕射 / 折射）。0 = 只算直达；默认 3；每加 1 计算量近似翻倍，实际路径数还受「每源路径预算」限制。'],samples_per_src:['每源射线采样数',1,'发射的射线条数：越多越不容易漏掉弱路径，也越慢。'],max_num_paths_per_src:['每源路径预算',1,'每条源-站链路保留的最大路径数，超出按功率截断。'],los:['直达路径',1,'关闭后只保留反射 / 绕射等多径。'],specular_reflection:['镜面反射'],diffuse_reflection:['漫反射',1,'开启漫反射模型，通常显著变慢。'],refraction:['折射'],diffraction:['绕射',1,'开启后建筑边缘会产生绕射路径，代价明显增加。'],tap_delays_s:['抽头时延 · μs',1e6],tap_gains_real:['抽头增益实部'],tap_gains_imag:['抽头增益虚部'],
+receiver_ids:['参与监测站 ID',1,'只有列表里的站参与该任务，并出现在公开观测里。'],desired_emitter_ids:['合作 / 受保护发射源 ID',1,'声明「应当正常占用保护频带」的合作源；它们会作为已知先验出现在公开观测中。'],protected_center_offset_hz:['保护频带中心 · kHz',.001,'保护频带 = 该任务声明合作源应占用的频率窗口，用于把「受保护业务」与「未知占用」分开；只影响公开元数据，不改变仿真波形。'],protected_bandwidth_hz:['保护带宽 · kHz',.001,'保护频带宽度（默认 100 kHz）。'],instruction:['分析任务说明',1,'给分析方（或 Agent）的自然语言任务描述，会写进公开观测。']
 };
 const enums={role:{communication:'通信源',interference:'干扰源',background:'背景源'},kind:{tone:'单音 Tone',noise:'带限噪声',bpsk:'BPSK',qpsk:'QPSK',fsk:'FSK',ofdm:'OFDM',chirp:'线性扫频 Chirp'},backend:{sionna_rt:'Sionna RT · 真实城市',free_space:'自由空间 · 不考虑建筑',tapped:'指定多径抽头 · 不考虑建筑'},rt_variant:{llvm_ad_mono_polarized:'LLVM · CPU',cuda_ad_mono_polarized:'CUDA · GPU（需 OptiX）'},scene:{munich:'慕尼黑完整城市',empty:'空场景'},geometry_type:{cross:'十字阵',rectangular:'矩形面阵'},pattern:{iso:'各向同性'},polarization:{V:'垂直极化'}};
 let map;
@@ -21,6 +21,7 @@ try{map=new SceneMap($('#map'),select,(type,index,pos,final)=>{if(pos){config[ty
 function select(type,index){selected={type,index};renderInspector();refresh(false);}
 function changed(obj,key,value){
  const prev=obj[key];obj[key]=value;
+ if(key==='scene'&&obj===config.propagation)attempt(()=>applyScene(value));
  if(key==='geometry_type'){
   if(value==='cross'){obj.num_rows=null;obj.num_cols=null;obj.horizontal_elements=8;obj.vertical_elements=8;}
   else{obj.horizontal_elements=null;obj.vertical_elements=null;obj.num_rows=4;obj.num_cols=4;}
@@ -29,6 +30,18 @@ function changed(obj,key,value){
  if(key==='id'&&selected.type!=='tasks')for(const task of config.tasks)for(const k of ['receiver_ids','desired_emitter_ids'])task[k]=task[k].map(v=>v===prev?value:v);
  refresh(false);
 }
+const CITY_SCENE=/^priors\/([A-Za-z0-9_-]+)_geometry\//;
+const PRESET_LABELS={'benchmark_v3/d1_logistics_airway.json':'D1 · 物流航线基线（单站）','benchmark_v3/d2_residential_coexistence.json':'D2 · 居民区共存（四站）','benchmark_v3/d3_urban_canyon.json':'D3 · 城市峡谷多径（四站）','benchmark_v3/d4_adversarial_contest.json':'D4 · 对抗演习（四站）'};
+function sceneForMesh(id){return id==='munich'?'munich':`priors/${id}_geometry/scene.xml`}
+function meshForScene(scene){if(scene==='munich')return 'munich';const m=CITY_SCENE.exec(scene||'');return m?m[1]:null}
+function sceneOptions(meshes){const out={munich:'慕尼黑完整城市',empty:'空场景 · 无建筑'};for(const m of meshes||[]){const v=sceneForMesh(m.id);if(!(v in out))out[v]=`${m.name} · 自定义城市场景`}return out}
+async function applyScene(scene,notify=true){
+ if(!config)return;config.propagation.scene=scene;
+ const id=meshForScene(scene),ms=$('#mesh-select');
+ if(id&&ms&&[...ms.options].some(o=>o.value===id)&&ms.value!==id){ms.value=id;await map?.load(id);const m=(boot?.meshes||[]).find(x=>x.id===id);if(m)$('#scene-title').textContent=`${m.name} · 城市电磁空间`}
+ if(selected.type==='propagation')renderInspector();else refresh(false);
+ if(notify)toast(id?`传播场景已切到 ${id}：地图网格与 RT 场景同步`:'传播场景已更新为「空场景」：Sionna RT 不使用建筑');
+}
 function field(parent,obj,key){
  const value=obj[key],[title,scale=1,baseHint]=specs[key]||[key];const hint=key==='bandwidth_hz'&&obj.frontend?'接收滤波器带宽，必须满足采样带宽约束':baseHint;const label=document.createElement('label');label.className='form-field';const span=document.createElement('span');span.textContent=title;label.append(span);parent.append(label);
  if(typeof value==='boolean'){
@@ -36,7 +49,7 @@ function field(parent,obj,key){
  }else if(key==='position_m'||key==='orientation_rad'){
   const box=document.createElement('div');box.className='tuple';const names=key==='position_m'?['X','Y','Z']:['Yaw','Pitch','Roll'];value.forEach((v,i)=>{const l=document.createElement('label');l.textContent=names[i];const input=document.createElement('input');input.type='number';input.step='any';input.value=+(v*scale).toFixed(4);input.setAttribute('aria-label',`${title} ${names[i]}`);input.oninput=()=>{if(input.value!==''&&Number.isFinite(input.valueAsNumber)){obj[key][i]=input.valueAsNumber/scale;refresh(false)}};l.append(input);box.append(l)});label.append(box);
  }else if(enums[key]){
-  const input=document.createElement('select');for(const [v,t]of Object.entries(enums[key]))input.add(new Option(t,v));input.value=value;input.onchange=()=>changed(obj,key,input.value);label.append(input);
+  const input=document.createElement('select');for(const [v,t]of Object.entries(enums[key]))input.add(new Option(t,v));if(![...input.options].some(o=>o.value===String(value)))input.add(new Option(`${value}（不在枚举中，保留原值）`,String(value)));input.value=value;input.onchange=()=>changed(obj,key,input.value);label.append(input);
  }else if(Array.isArray(value)){
   const input=document.createElement('input');input.value=value.map(v=>typeof v==='number'?+(v*scale).toPrecision(8):v).join(', ');input.placeholder='逗号分隔';input.onchange=()=>{let v=input.value.split(',').map(s=>s.trim()).filter(Boolean);if(key.startsWith('tap_')){v=v.map(Number).map(x=>x/scale);if(!v.every(Number.isFinite)){toast('请输入逗号分隔的数值');return}}changed(obj,key,v)};label.append(input);
  }else{
@@ -57,6 +70,7 @@ function renderInspector(){
  if(type==='propagation'){
   for(const k of ['backend','scene','rt_variant','max_depth','samples_per_src','max_num_paths_per_src','los','specular_reflection','diffuse_reflection','refraction','diffraction'])field(form,config.propagation,k);
   group(form,'指定抽头后端参数',config.propagation,['tap_delays_s','tap_gains_real','tap_gains_imag']);note(form,'地图上的虚线只表示 TX/RX 配对，不代表求得的射线路径。RT 端点需在地图范围内且无遮挡天空。');
+  note(form,'传播场景（scene）只对 Sionna RT 后端生效，并与右上角城市网格下拉联动：切场景会把地图网格一起切过去。自由空间 / 抽头后端不使用建筑，改场景不会影响仿真结果。');
  }
  if(type==='emitters'){
   const d=config.emitters[index];if(!d)return select('global');for(const k of ['id','role','platform_id','position_m','velocity_mps','orientation_rad','power_dbm','rf_offset_hz'])field(form,d,k);
@@ -95,6 +109,7 @@ function renderInspector(){
   group(form,'接收机前端',d.frontend,Object.keys(d.frontend));const a=document.createElement('div');a.className='form-actions';button(a,'复制监测站',()=>duplicate('receivers',index));button(a,'删除监测站',()=>remove('receivers',index),'danger');form.append(a);
  }
  if(type==='tasks'){
+  if(!config.tasks.length)note(form,'当前场景没有配置保护任务（tasks 为空）。D1–D4 基准数据集的场景就是这样：只用发射源与监测站描述物理环境，不声明受保护业务，所以公开观测里不会出现合作源先验。点下方「＋ 添加保护任务」可添加一条。');
   config.tasks.forEach((t,i)=>{const box=document.createElement('div');box.className='component';for(const k of Object.keys(t))field(box,t,k);button(box,'删除任务',()=>{config.tasks.splice(i,1);renderInspector()},'danger');form.append(box)});
   button(form,'＋ 添加保护任务',()=>{const t=clone(boot.defaults.task);t.id='task_'+(config.tasks.length+1);t.receiver_ids=config.receivers.map(x=>x.id);t.desired_emitter_ids=[config.emitters[0].id];config.tasks.push(t);renderInspector()});note(form,'任务定义公开合作源和保护频带。未配置任务时，公开观测不暴露未知源位置和干扰数量。ID 列表以逗号分隔。');
  }
@@ -134,7 +149,7 @@ $$('[data-panel]').forEach(b=>b.onclick=()=>select(b.dataset.panel));
 $$('[data-result]').forEach(b=>b.onclick=()=>{resultTab=b.dataset.result;$$('[data-result]').forEach(x=>x.classList.toggle('active',x===b));renderResults()});
 $('#view-2d').onclick=()=>mode('2d');$('#view-3d').onclick=()=>mode('3d');function mode(m){map?.setMode(m);$('.compass').innerHTML=m==='2d'?'Y<br>↑':'Z ↑';$('#view-2d').classList.toggle('active',m==='2d');$('#view-3d').classList.toggle('active',m==='3d');$('#map-help').textContent=m==='2d'?'拖动设备调整 X/Y · 滚轮缩放 · 高度在属性中设置':'拖动旋转 · 滚轮缩放 · 点击设备编辑';}
 $('#reset-view').onclick=()=>map?.reset();$('#buildings').onchange=e=>map?.toggleBuildings(e.target.checked);$('#links').onchange=e=>{if(map)map.showLinks=e.target.checked;refresh(false);if(e.target.checked)toast('虚线仅表示布站配对，不是 RT 反射路径。')};$('#labels').onchange=e=>{if(map)map.showLabels=e.target.checked;refresh(false)};
-$('#preset').onchange=()=>{config=clone(boot.presets.find(p=>p.id===$('#preset').value).config);select('global');map?.reset();toast('已载入场景配置。下方保留所选历史运行结果。')};
+$('#preset').onchange=()=>{config=clone(boot.presets.find(p=>p.id===$('#preset').value).config);select('global');attempt(()=>applyScene(config.propagation.scene,false));toast('已载入场景配置（地图网格已按该场景切换）。下方保留所选历史运行结果。')};
 $('#add-tx').onclick=()=>{const d=clone(boot.defaults.emitter);d.id=uniqueId('tx_');config.emitters.push(d);select('emitters',config.emitters.length-1)};$('#add-rx').onclick=()=>{const d=clone(boot.defaults.receiver);d.id=uniqueId('rx_');d.antenna=clone(config.receivers[0].antenna);config.receivers.push(d);select('receivers',config.receivers.length-1)};
 $('#validate').onclick=()=>attempt(async()=>{const r=await api('validate',config);$('#validation-result').textContent=`配置有效\n\n每通道 ${r.num_samples.toLocaleString()} 个采样\nIQ 输出 ${r.resources.iq_output_mb.toFixed(1)} MB\n预计 DSP 工作内存 ${r.resources.estimated_dsp_working_mb.toFixed(1)} MB\n\n${r.warnings.join('\n')}`;$('#validation-dialog').showModal()});$('#close-validation').onclick=()=>$('#validation-dialog').close();
 async function saved(){const data=await api('scenarios');$('#saved-list').replaceChildren();for(const s of data)button($('#saved-list'),s.config.name,()=>{config=clone(s.config);select('global');map?.reset()});}
@@ -145,4 +160,4 @@ $('#run').onclick=()=>attempt(async()=>{$('#run').disabled=true;try{const r=awai
 $('#run-select').onchange=()=>{currentRun=$('#run-select').value;attempt(loadRun)};
 let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(resultTab==='spectra')renderResults()},200)});
 attempt(async()=>{boot=await api('bootstrap');if(boot.kinds)enums.kind=Object.fromEntries(boot.kinds.map(k=>[k.name,k.label]));$('#runtime').textContent=boot.runtime.wsl_rt?'● DSP + WSL Sionna RT 就绪':boot.runtime.native_rt?'● DSP + Sionna RT 就绪':'● DSP 就绪 / RT 未安装';
- if(boot.meshes?.length){const ms=$('#mesh-select');ms.innerHTML=boot.meshes.map(m=>`<option value="${esc(m.id)}">${esc(m.name)} · ${(m.triangle_count/1000).toFixed(1)}k 面</option>`).join('');ms.value=boot.meshes[0].id;ms.onchange=()=>attempt(async()=>{await map.load(ms.value);const m=boot.meshes.find(x=>x.id===ms.value);$('#scene-title').textContent=`${m.name} · 城市电磁空间`;config.propagation.scene=ms.value==='munich'?'munich':`priors/${ms.value}_geometry/scene.xml`;refresh(false);toast(`已切换到 ${m.name}：地图显示与 RT 传播场景同步更新`)});}$('#preset').innerHTML=boot.presets.map(p=>`<option value="${esc(p.id)}">${esc(p.label)}</option>`).join('');const initial=boot.presets.find(p=>p.id==='three_scenes/case01.json')||boot.presets[0];$('#preset').value=initial.id;config=clone(initial.config);refresh();map?.reset();await Promise.all([loadRuns(),saved()]);});
+ if(boot.meshes?.length){const ms=$('#mesh-select');ms.innerHTML=boot.meshes.map(m=>`<option value="${esc(m.id)}">${esc(m.name)} · ${(m.triangle_count/1000).toFixed(1)}k 面</option>`).join('');ms.value=boot.meshes[0].id;ms.onchange=()=>attempt(()=>applyScene(sceneForMesh(ms.value)));}enums.scene=sceneOptions(boot.meshes);$('#preset').innerHTML=boot.presets.map(p=>`<option value="${esc(p.id)}">${esc(PRESET_LABELS[p.id]||p.label)}</option>`).join('');const initial=boot.presets.find(p=>p.id==='three_scenes/case01.json')||boot.presets[0];$('#preset').value=initial.id;config=clone(initial.config);refresh();attempt(()=>applyScene(config.propagation.scene,false));await Promise.all([loadRuns(),saved()]);});

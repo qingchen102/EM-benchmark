@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.2",
+  "name": "D4 对抗演习 · 四站",
+  "seed": 72000,
+  "duration_s": 0.01,
+  "sample_rate_hz": 4000000.0,
+  "carrier_frequency_hz": 2400000000.0,
+  "max_working_mb": 4096,
+  "emitters": [
+    {
+      "id": "target",
+      "position_m": [
+        927.8398168529743,
+        -1408.6568496657155,
+        61.61498518414924
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "platform_id": null,
+      "role": "communication",
+      "power_dbm": 2.342702674474746,
+      "rf_offset_hz": 0.0,
+      "velocity_mps": [
+        27.887875984303882,
+        3.6746457899266787,
+        0.0
+      ],
+      "preset": "LTE_QPSK",
+      "components": [
+        {
+          "kind": "noise",
+          "weight": 1.0,
+          "offset_hz": 0.0,
+          "bandwidth_hz": 1000000.0,
+          "symbol_rate_hz": 25000.0,
+          "phase_rad": 0.0,
+          "pulse_period_s": null,
+          "duty_cycle": 1.0,
+          "pulse_start_s": 0.0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "interferer_1",
+      "position_m": [
+        669.3178448218564,
+        -742.3846496289299,
+        32.72350596554456
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "platform_id": null,
+      "role": "interference",
+      "power_dbm": 15.47,
+      "rf_offset_hz": 0.0,
+      "velocity_mps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "preset": "Tone_jam",
+      "components": [
+        {
+          "kind": "noise",
+          "weight": 1.0,
+          "offset_hz": 163706.77280960325,
+          "bandwidth_hz": 767341.900986578,
+          "symbol_rate_hz": 25000.0,
+          "phase_rad": 0.0,
+          "pulse_period_s": null,
+          "duty_cycle": 1.0,
+          "pulse_start_s": 0.0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "interferer_2",
+      "position_m": [
+        1025.9150756688198,
+        -617.1798822927752,
+        48.500212548876064
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "platform_id": null,
+      "role": "interference",
+      "power_dbm": 12.34,
+      "rf_offset_hz": 0.0,
+      "velocity_mps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "preset": "GNSS_spoof",
+      "components": [
+        {
+          "kind": "noise",
+          "weight": 1.0,
+          "offset_hz": -685317.3342358724,
+          "bandwidth_hz": 155097.29837004977,
+          "symbol_rate_hz": 25000.0,
+          "phase_rad": 0.0,
+          "pulse_period_s": null,
+          "duty_cycle": 1.0,
+          "pulse_start_s": 0.0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    }
+  ],
+  "receivers": [
+    {
+      "id": "station_a",
+      "position_m": [
+        -286.17848374632183,
+        -812.6687055367846,
+        5.410238292588624
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "rectangular",
+        "num_rows": 1,
+        "num_cols": 8,
+        "horizontal_elements": null,
+        "vertical_elements": null,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V",
+        "gain_error_std_db": 0.0,
+        "phase_error_std_deg": 0.0
+      },
+      "tuning_offset_hz": 0.0,
+      "bandwidth_hz": 1620000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290.0,
+        "noise_enabled": true,
+        "colored_noise_enabled": false,
+        "colored_noise_db": 0.0,
+        "colored_bandwidth_hz": 200000.0,
+        "impulse_noise_enabled": false,
+        "impulse_rate_hz": 200.0,
+        "impulse_power_db": 20.0,
+        "impulse_width_us": 5.0,
+        "phase_noise_enabled": true,
+        "phase_noise_deg": 0.01,
+        "correlated_noise_enabled": true,
+        "noise_correlation": 0.05,
+        "imd3_enabled": true,
+        "iip3_dbm": 5.517665877774441,
+        "gain_db": 0.0,
+        "soft_limit_input_dbm": null,
+        "filter_taps": 129
+      }
+    },
+    {
+      "id": "station_b",
+      "position_m": [
+        694.2955897127615,
+        -409.7515606726083,
+        10.523003748010627
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "rectangular",
+        "num_rows": 1,
+        "num_cols": 8,
+        "horizontal_elements": null,
+        "vertical_elements": null,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V",
+        "gain_error_std_db": 0.0,
+        "phase_error_std_deg": 0.0
+      },
+      "tuning_offset_hz": 0.0,
+      "bandwidth_hz": 1620000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290.0,
+        "noise_enabled": true,
+        "colored_noise_enabled": false,
+        "colored_noise_db": 0.0,
+        "colored_bandwidth_hz": 200000.0,
+        "impulse_noise_enabled": false,
+        "impulse_rate_hz": 200.0,
+        "impulse_power_db": 20.0,
+        "impulse_width_us": 5.0,
+        "phase_noise_enabled": true,
+        "phase_noise_deg": 0.01,
+        "correlated_noise_enabled": false,
+        "noise_correlation": 0.3,
+        "imd3_enabled": true,
+        "iip3_dbm": 12.158287463458446,
+        "gain_db": 0.0,
+        "soft_limit_input_dbm": null,
+        "filter_taps": 129
+      }
+    },
+    {
+      "id": "station_c",
+      "position_m": [
+        387.87532735209106,
+        906.2765264417225,
+        13.702376950864249
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "rectangular",
+        "num_rows": 1,
+        "num_cols": 8,
+        "horizontal_elements": null,
+        "vertical_elements": null,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V",
+        "gain_error_std_db": 0.0,
+        "phase_error_std_deg": 0.0
+      },
+      "tuning_offset_hz": 0.0,
+      "bandwidth_hz": 1620000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290.0,
+        "noise_enabled": true,
+        "colored_noise_enabled": false,
+        "colored_noise_db": 0.0,
+        "colored_bandwidth_hz": 200000.0,
+        "impulse_noise_enabled": false,
+        "impulse_rate_hz": 200.0,
+        "impulse_power_db": 20.0,
+        "impulse_width_us": 5.0,
+        "phase_noise_enabled": true,
+        "phase_noise_deg": 0.01,
+        "correlated_noise_enabled": true,
+        "noise_correlation": 0.05,
+        "imd3_enabled": true,
+        "iip3_dbm": 14.45632229032183,
+        "gain_db": 0.0,
+        "soft_limit_input_dbm": null,
+        "filter_taps": 129
+      }
+    },
+    {
+      "id": "station_d",
+      "position_m": [
+        -1152.8931149335592,
+        61.8732037190611,
+        12.627315229133096
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "antenna": {
+        "geometry_type": "rectangular",
+        "num_rows": 1,
+        "num_cols": 8,
+        "horizontal_elements": null,
+        "vertical_elements": null,
+        "vertical_spacing_wavelengths": 0.5,
+        "horizontal_spacing_wavelengths": 0.5,
+        "pattern": "iso",
+        "polarization": "V",
+        "gain_error_std_db": 0.0,
+        "phase_error_std_deg": 0.0
+      },
+      "tuning_offset_hz": 0.0,
+      "bandwidth_hz": 1620000.0,
+      "frontend": {
+        "noise_figure_db": 5.0,
+        "temperature_k": 290.0,
+        "noise_enabled": true,
+        "colored_noise_enabled": false,
+        "colored_noise_db": 0.0,
+        "colored_bandwidth_hz": 200000.0,
+        "impulse_noise_enabled": true,
+        "impulse_rate_hz": 200.0,
+        "impulse_power_db": 25.0,
+        "impulse_width_us": 5.0,
+        "phase_noise_enabled": true,
+        "phase_noise_deg": 0.01,
+        "correlated_noise_enabled": false,
+        "noise_correlation": 0.3,
+        "imd3_enabled": true,
+        "iip3_dbm": 11.273142736563663,
+        "gain_db": 0.0,
+        "soft_limit_input_dbm": null,
+        "filter_taps": 129
+      }
+    }
+  ],
+  "propagation": {
+    "backend": "sionna_rt",
+    "rt_variant": "llvm_ad_mono_polarized",
+    "scene": "priors/hangzhou_geometry/scene.xml",
+    "max_depth": 3,
+    "samples_per_src": 100000,
+    "max_num_paths_per_src": 100000,
+    "los": true,
+    "specular_reflection": true,
+    "diffuse_reflection": false,
+    "refraction": false,
+    "diffraction": false,
+    "tap_delays_s": [
+      0.0
+    ],
+    "tap_gains_real": [
+      1.0
+    ],
+    "tap_gains_imag": [
+      0.0
+    ]
+  },
+  "tasks": []
+}
