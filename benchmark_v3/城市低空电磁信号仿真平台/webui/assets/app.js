@@ -16,8 +16,8 @@ backend:['传播后端',1,'sionna_rt 走真实城市射线追踪（慢）；free
 receiver_ids:['参与监测站 ID',1,'只有列表里的站参与该任务，并出现在公开观测里。'],desired_emitter_ids:['合作 / 受保护发射源 ID',1,'声明「应当正常占用保护频带」的合作源；它们会作为已知先验出现在公开观测中。'],protected_center_offset_hz:['保护频带中心 · kHz',.001,'保护频带 = 该任务声明合作源应占用的频率窗口，用于把「受保护业务」与「未知占用」分开；只影响公开元数据，不改变仿真波形。'],protected_bandwidth_hz:['保护带宽 · kHz',.001,'保护频带宽度（默认 100 kHz）。'],instruction:['分析任务说明',1,'给分析方（或 Agent）的自然语言任务描述，会写进公开观测。']
 };
 const enums={role:{communication:'通信源',interference:'干扰源',background:'背景源'},kind:{tone:'单音 Tone',noise:'带限噪声',bpsk:'BPSK',qpsk:'QPSK',fsk:'FSK',ofdm:'OFDM',chirp:'线性扫频 Chirp'},backend:{sionna_rt:'Sionna RT · 真实城市',free_space:'自由空间 · 不考虑建筑',tapped:'指定多径抽头 · 不考虑建筑'},rt_variant:{llvm_ad_mono_polarized:'LLVM · CPU',cuda_ad_mono_polarized:'CUDA · GPU（需 OptiX）'},scene:{munich:'慕尼黑完整城市',empty:'空场景'},geometry_type:{cross:'十字阵',rectangular:'矩形面阵'},pattern:{iso:'各向同性'},polarization:{V:'垂直极化'}};
-let map;
-try{map=new SceneMap($('#map'),select,(type,index,pos,final)=>{if(pos){config[type][index].position_m=pos;refresh(false)}if(final)renderInspector()});await map.load('munich').catch(e=>toast('地图网格加载失败：'+e.message));}catch(e){$('#map').textContent='WebGL 不可用；仍可编辑配置和运行。'+e.message;}
+let map,loadedMesh=null;
+try{map=new SceneMap($('#map'),select,(type,index,pos,final)=>{if(pos){config[type][index].position_m=pos;refresh(false)}if(final)renderInspector()});await map.load('munich').then(()=>{loadedMesh='munich'}).catch(e=>toast('地图网格加载失败：'+e.message));}catch(e){$('#map').textContent='WebGL 不可用；仍可编辑配置和运行。'+e.message;}
 function select(type,index){selected={type,index};renderInspector();refresh(false);}
 function changed(obj,key,value){
  const prev=obj[key];obj[key]=value;
@@ -37,10 +37,20 @@ function meshForScene(scene){if(scene==='munich')return 'munich';const m=CITY_SC
 function sceneOptions(meshes){const out={munich:'慕尼黑完整城市',empty:'空场景 · 无建筑'};for(const m of meshes||[]){const v=sceneForMesh(m.id);if(!(v in out))out[v]=`${m.name} · 自定义城市场景`}return out}
 async function applyScene(scene,notify=true){
  if(!config)return;config.propagation.scene=scene;
- const id=meshForScene(scene),ms=$('#mesh-select');
- if(id&&ms&&[...ms.options].some(o=>o.value===id)&&ms.value!==id){ms.value=id;await map?.load(id);const m=(boot?.meshes||[]).find(x=>x.id===id);if(m)$('#scene-title').textContent=`${m.name} · 城市电磁空间`}
+ const id=meshForScene(scene),ms=$('#mesh-select');let loaded=null,warn=null;
+ if(id){
+  const has=!!ms&&[...ms.options].some(o=>o.value===id);
+  if(!has)warn=`服务端 assets 里没有 ${id}_mesh.json，地图保持当前网格`;
+  else{
+   if(ms.value!==id)ms.value=id;
+   if(loadedMesh!==id){try{await map?.load(id);loadedMesh=id}catch(e){warn=`地图网格 ${id} 加载失败：${e.message}`}}
+   const m=(boot?.meshes||[]).find(x=>x.id===id);
+   if(m&&!warn){$('#scene-title').textContent=`${m.name} · 城市电磁空间`;loaded=m.name}
+  }
+ }
  if(selected.type==='propagation')renderInspector();else refresh(false);
- if(notify)toast(id?`传播场景已切到 ${id}：地图网格与 RT 场景同步`:'传播场景已更新为「空场景」：Sionna RT 不使用建筑');
+ if(warn)toast('传播场景 '+scene+'：'+warn);
+ else if(notify)toast(id?`传播场景已切到 ${id}：地图网格已换成「${loaded||id}」`:'传播场景已更新为「空场景」：Sionna RT 不使用建筑');
 }
 function field(parent,obj,key){
  const value=obj[key],[title,scale=1,baseHint]=specs[key]||[key];const hint=key==='bandwidth_hz'&&obj.frontend?'接收滤波器带宽，必须满足采样带宽约束':baseHint;const label=document.createElement('label');label.className='form-field';const span=document.createElement('span');span.textContent=title;label.append(span);parent.append(label);

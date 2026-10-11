@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "name": "D1 物流航线基线 · 单站",
+  "name": "D1 物流航线基线 · 单站（样本 d1_00000）",
   "seed": 31000,
   "duration_s": 0.01,
   "sample_rate_hz": 4000000.0,

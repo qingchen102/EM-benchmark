@@ -1,7 +1,7 @@
 {
   "schema_version": "1.2",
-  "name": "D2 居民区共存 · 四站",
-  "seed": 92000,
+  "name": "D2 居民区共存 · 四站（样本 d2_00017）",
+  "seed": 92017,
   "duration_s": 0.01,
   "sample_rate_hz": 4000000.0,
   "carrier_frequency_hz": 2400000000.0,
@@ -10,9 +10,9 @@
     {
       "id": "target",
       "position_m": [
-        -1417.967205293913,
-        -1946.7823186012188,
-        46.20798785305619
+        1704.6128363167136,
+        612.084741133252,
+        41.810405944744176
       ],
       "orientation_rad": [
         0.0,
@@ -21,7 +21,7 @@
       ],
       "platform_id": null,
       "role": "communication",
-      "power_dbm": 13.354784132162035,
+      "power_dbm": 11.094827575978846,
       "rf_offset_hz": 0.0,
       "velocity_mps": [
         0.0,
@@ -47,9 +47,9 @@
     {
       "id": "interferer_1",
       "position_m": [
-        -1732.4199371291857,
-        -2133.0082944295523,
-        36.180863452505406
+        2136.1060662298937,
+        301.85967663376476,
+        48.16114124997259
       ],
       "orientation_rad": [
         0.0,
@@ -58,20 +58,57 @@
       ],
       "platform_id": null,
       "role": "interference",
-      "power_dbm": 1.07,
+      "power_dbm": 4.46,
       "rf_offset_hz": 0.0,
       "velocity_mps": [
         0.0,
         0.0,
         0.0
       ],
-      "preset": "Zigbee",
+      "preset": "DECT",
       "components": [
         {
           "kind": "noise",
           "weight": 1.0,
-          "offset_hz": 369913.69725980365,
-          "bandwidth_hz": 315730.474111604,
+          "offset_hz": 242015.39860861198,
+          "bandwidth_hz": 478443.86031819636,
+          "symbol_rate_hz": 25000.0,
+          "phase_rad": 0.0,
+          "pulse_period_s": null,
+          "duty_cycle": 1.0,
+          "pulse_start_s": 0.0,
+          "chirp_period_s": 0.001
+        }
+      ]
+    },
+    {
+      "id": "interferer_2",
+      "position_m": [
+        1419.5611763577408,
+        975.7883033325895,
+        36.849171782038354
+      ],
+      "orientation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "platform_id": null,
+      "role": "interference",
+      "power_dbm": 4.5,
+      "rf_offset_hz": 0.0,
+      "velocity_mps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "preset": "WiFi_burst",
+      "components": [
+        {
+          "kind": "noise",
+          "weight": 1.0,
+          "offset_hz": -205685.93343540392,
+          "bandwidth_hz": 456023.96858092514,
           "symbol_rate_hz": 25000.0,
           "phase_rad": 0.0,
           "pulse_period_s": null,
@@ -86,9 +123,9 @@
     {
       "id": "station_a",
       "position_m": [
-        -1200.7769900219803,
-        -2188.5640954625524,
-        7.4275654985254205
+        1316.0316858451329,
+        745.1074167661841,
+        11.654252930695783
       ],
       "orientation_rad": [
         0.0,
@@ -114,8 +151,8 @@
         "noise_figure_db": 5.0,
         "temperature_k": 290.0,
         "noise_enabled": true,
-        "colored_noise_enabled": false,
-        "colored_noise_db": 0.0,
+        "colored_noise_enabled": true,
+        "colored_noise_db": -8.0,
         "colored_bandwidth_hz": 200000.0,
         "impulse_noise_enabled": false,
         "impulse_rate_hz": 200.0,
@@ -135,9 +172,9 @@
     {
       "id": "station_b",
       "position_m": [
-        -1009.8515472698251,
-        -1824.6075147049662,
-        10.681906687800561
+        1674.7824352567548,
+        326.6240326550734,
+        12.543904555730553
       ],
       "orientation_rad": [
         0.0,
@@ -163,8 +200,8 @@
         "noise_figure_db": 5.0,
         "temperature_k": 290.0,
         "noise_enabled": true,
-        "colored_noise_enabled": false,
-        "colored_noise_db": 0.0,
+        "colored_noise_enabled": true,
+        "colored_noise_db": -8.0,
         "colored_bandwidth_hz": 200000.0,
         "impulse_noise_enabled": false,
         "impulse_rate_hz": 200.0,
@@ -184,9 +221,9 @@
     {
       "id": "station_c",
       "position_m": [
-        -1728.2047100103339,
-        -1758.9788830204095,
-        14.248369080128791
+        1991.5883599471063,
+        654.5963008144164,
+        7.833420860973035
       ],
       "orientation_rad": [
         0.0,
@@ -233,9 +270,9 @@
     {
       "id": "station_d",
       "position_m": [
-        -1635.8503461614787,
-        -2215.609619140625,
-        14.739716163954192
+        1666.8085239986813,
+        905.2489773779314,
+        13.077396869248672
       ],
       "orientation_rad": [
         0.0,
@@ -261,8 +298,8 @@
         "noise_figure_db": 5.0,
         "temperature_k": 290.0,
         "noise_enabled": true,
-        "colored_noise_enabled": true,
-        "colored_noise_db": -8.0,
+        "colored_noise_enabled": false,
+        "colored_noise_db": 0.0,
         "colored_bandwidth_hz": 200000.0,
         "impulse_noise_enabled": false,
         "impulse_rate_hz": 200.0,

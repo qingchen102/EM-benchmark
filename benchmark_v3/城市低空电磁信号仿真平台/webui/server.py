@@ -14,7 +14,7 @@ import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"src"))
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
@@ -25,6 +25,9 @@ from cityrf.runner import estimate_resources
 RUNS=ROOT/"runs"
 SCENARIOS=ROOT/"user_scenarios"
 app=FastAPI(title="城市低空电磁信号仿真平台",version="0.3.0")
+# 壳页与引导数据一律不缓存：否则浏览器会继续用旧的 index.html / app.js，
+# 表现为“切了示例场景但地图和代码还是老的”（2026-10-11 实测到这个现象）。
+NO_STORE={"Cache-Control":"no-store, must-revalidate","Pragma":"no-cache"}
 app.add_middleware(TrustedHostMiddleware,allowed_hosts=["127.0.0.1","localhost","testserver"])
 LOCK=threading.Lock()
 ACTIVE=set()
@@ -122,7 +125,8 @@ def _mesh_list():
 
 
 @app.get("/api/bootstrap")
-def bootstrap():
+def bootstrap(response: Response):
+    response.headers.update(NO_STORE)
     global RUNTIME
     if RUNTIME is None:RUNTIME=runtime_info()
     presets=[]
@@ -244,7 +248,9 @@ def download(jid,filename):
 
 app.mount("/assets",StaticFiles(directory=ROOT/"webui/assets"),name="assets")
 @app.get("/")
-def index():return FileResponse(ROOT/"webui/index.html")
+def index():return FileResponse(ROOT/"webui/index.html",headers=NO_STORE)
+@app.get("/index.html",include_in_schema=False)
+def index_alias():return FileResponse(ROOT/"webui/index.html",headers=NO_STORE)
 
 
 if __name__=="__main__":

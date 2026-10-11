@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "name": "D3 城市峡谷多径 · 四站",
+  "name": "D3 城市峡谷多径 · 四站（样本 d3_00000）",
   "seed": 64003,
   "duration_s": 0.01,
   "sample_rate_hz": 4000000.0,
