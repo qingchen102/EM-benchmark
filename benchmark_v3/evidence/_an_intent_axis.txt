@@ -1,0 +1,49 @@
+== ① 两张表是否一致 ==
+capture_tools.INTENT_OF: 19 键   emitters.INTENT: 19 键   差异 2 项
+   ! Bluetooth_FHSS: emitters=benign  capture_tools=incidental
+   ! WiFi_burst: emitters=benign  capture_tools=incidental
+   值域: ['benign', 'incidental', 'malicious']
+
+== d1×S0  (answers_S0_agent_fix2) ==
+   答案文件 50 个；答案条目 27 条
+   ② GT: intent == INTENT[kind]  27/27  ← 生成期就是查表
+   ③ Agent: intent == INTENT_OF[自己报的 kind]  0/27 = 0.0%   （未填 intent 0 条）
+       例外 d1_00000 kind=tone 填=incidental 表值=None
+       例外 d1_00003 kind=noise 填=incidental 表值=None
+       例外 d1_00004 kind=noise 填=incidental 表值=None
+       例外 d1_00005 kind=tone 填=incidental 表值=None
+       例外 d1_00007 kind=tone 填=malicious 表值=None
+       例外 d1_00008 kind=tone 填=incidental 表值=None
+   报告轴: kind_hits=0.56  intent_accuracy=None  n=50
+
+== d2×S2  (answers_S2_agent_fix2) ==
+   答案文件 50 个；答案条目 95 条
+   ② GT: intent == INTENT[kind]  98/98  ← 生成期就是查表
+   ③ Agent: intent == INTENT_OF[自己报的 kind]  94/95 = 98.9%   （未填 intent 0 条）
+       例外 d2_00042 kind=QPSK 填=benign 表值=None
+   报告轴: kind_hits=0.3571  intent_accuracy=0.571  n=50
+
+== d3×S2  (answers_S2_agent_fix2) ==
+   答案文件 50 个；答案条目 67 条
+   ② GT: intent == INTENT[kind]  69/69  ← 生成期就是查表
+   ③ Agent: intent == INTENT_OF[自己报的 kind]  59/67 = 88.1%   （未填 intent 0 条）
+       例外 d3_00002 kind=tone 填=malicious 表值=None
+       例外 d3_00002 kind=tone 填=malicious 表值=None
+       例外 d3_00008 kind=Microwave 填=malicious 表值=incidental
+       例外 d3_00033 kind=sweep_jammer 填=malicious 表值=None
+       例外 d3_00034 kind=tone 填=malicious 表值=None
+       例外 d3_00034 kind=tone 填=malicious 表值=None
+   报告轴: kind_hits=0.4151  intent_accuracy=0.774  n=50
+
+== d4×S2  (answers_S2_agent_fix2) ==
+   答案文件 50 个；答案条目 95 条
+   ② GT: intent == INTENT[kind]  125/125  ← 生成期就是查表
+   ③ Agent: intent == INTENT_OF[自己报的 kind]  87/95 = 91.6%   （未填 intent 0 条）
+       例外 d4_00007 kind=Bluetooth 填=benign 表值=None
+       例外 d4_00014 kind=jammer_sweep 填=malicious 表值=None
+       例外 d4_00014 kind=gnss_spoofer 填=malicious 表值=None
+       例外 d4_00023 kind=GPS_DSSS 填=malicious 表值=benign
+       例外 d4_00023 kind=GPS_DSSS 填=malicious 表值=benign
+       例外 d4_00033 kind=GNSS_spoofer 填=malicious 表值=None
+   报告轴: kind_hits=0.2809  intent_accuracy=0.596  n=50
+
