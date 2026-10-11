@@ -40,6 +40,7 @@ for _p in (str(_V2), str(_V2 / "simulation"), str(_V3 / "simulation"),
 import capture_tools  # noqa: E402
 import evaluator_v2 as ev2  # noqa: E402
 import eval_dataset  # noqa: E402
+import mechanism as mk  # noqa: E402  （机理四值域：co_channel/adjacent/pulse/spoof）
 from em_signal_simulator_v3.emitters import EMITTERS, generate_emitter  # noqa: E402
 from run_bailian_deepseek import NoThinkDeepSeekAgent  # noqa: E402
 from cityrf.config import Scenario  # noqa: E402
@@ -226,6 +227,14 @@ Measurement-to-answer mapping:
   NOT an interferer — never report one of its spectral lobes or the filter edges as
   an interferer.
 - intent / is_spoof <- judged from the identified kind and its measured behaviour
+- mechanism       <- judged by YOU from the measurement, not looked up. Exactly one of:
+  "co_channel" = its occupied band overlaps the cooperative link's own band (same-channel
+                 collision; the usual ISM coexistence case, spectrum fuses around 0 Hz);
+  "adjacent"   = in the receiver passband but outside the link's band (adjacent-channel
+                 leakage: a separate peak away from 0 Hz);
+  "pulse"      = broadband impulsive emission with low duty cycle (welder / VFD /
+                 corona / pulsed radar time-domain fingerprint);
+  "spoof"      = GNSS-like structure with wrong parameters (then also is_spoof=true).
 
 Intent classification (answer for EACH interferer):
 - "malicious": deliberately hostile emitter (jamming / spoofing / ECM: sweep or
@@ -239,12 +248,17 @@ Intent classification (answer for EACH interferer):
 
 Output ONLY valid JSON with schema:
 {"interferers": [{"freq_offset_hz": <Hz>, "kind": "<exact catalog name>",
+                  "mechanism": "co_channel|adjacent|pulse|spoof",
                   "intent": "malicious|incidental|benign", "is_spoof": <bool>,
                   "doa_deg": <world azimuth, deg>, "position_m": [<x_m>, <y_m>]}, ...],
  "confidence": "high|low"}
 Rules:
 - There is NO num_interferers field: the harness sets the count to len(interferers).
   Do not output any count, sentinel or placeholder.
+- EVERY interferer MUST carry "mechanism" with one of the four values above: it is a
+  graded axis (T2) and no tool provides it. Decide it from what you measured: co_channel
+  vs adjacent by whether the band overlaps the link's own band (~0 Hz, ±500 kHz); pulse
+  from the time-domain fingerprint; spoof from GNSS-like structure with wrong parameters.
 - The interferers list MUST NOT be empty when you measured candidates: if
   estimate_sources_by_spatial_clustering / extract_source_waveforms /
   classify_extracted_waveform returned any candidate, list the ones you judge real
@@ -295,8 +309,8 @@ Rules:
             residual peak frequency, kind from the template match, doa from the
             DOA scan.
     Round 7+: NO MORE TOOL CALLS. Write the final JSON answer NOW — the
-              classify items already contain every field the answer schema
-              needs. If evidence is partial, still answer with your best
+              classify items already contain freq/kind/position — you still add your own
+              mechanism and intent/is_spoof judgement. If evidence is partial, still answer with your best
               estimates for the bands you measured and set "confidence": "low".
               Never leave the interferers list empty after extracting candidates.
 - REPORT ONLY MEASURED BANDS: report exactly the merged coherent residual bands
@@ -452,6 +466,9 @@ def _sanitize(pred: dict) -> dict:
             continue
         it: dict = {"freq_offset_hz": _to_f(p.get("freq_offset_hz"), 0.0) or 0.0,
                     "kind": str(p.get("kind", "")).strip()}
+        mech = str(p.get("mechanism", "")).strip().lower()
+        if mech in mk.MECHANISMS:              # 四值域之外一律丢弃，不替模型猜
+            it["mechanism"] = mech
         intent = str(p.get("intent", "")).strip().lower()
         if intent in INTENTS:
             it["intent"] = intent

@@ -4,7 +4,7 @@
   1. 计数合法            -> n = 计数
   2. 计数坏 + 有条目      -> n = len(条目)，count_field_invalid=True（旧代码会清成 0）
   3. 计数坏 + 空条目      -> abstained=True（真拒答）
-另外检查 confidence 透传与 schema 字段完整性。
+另外检查 confidence 透传、机理字段（mechanism）四值域透传/丢弃，与 schema 字段完整性。
 
 用法：python -X utf8 _check_sanitize.py
 """
@@ -62,6 +62,7 @@ REQUIRED_KEYS = ("num_interferers", "interferers", "abstained", "count_field_inv
 
 def main() -> int:
     bad = 0
+    total = len(CASES)
     for case in CASES:
         name, pred, exp = case[:3]
         cand = case[3] if len(case) > 3 else 0
@@ -82,7 +83,22 @@ def main() -> int:
               % (sorted(out), out.get("num_interferers"), out.get("abstained"),
                  out.get("count_field_invalid"), out.get("confidence"),
                  len(out.get("interferers") or [])))
-    print("\n%d/%d passed" % (len(CASES) - bad, len(CASES)))
+    # 机理字段（2026-10-11 新增轴）：四值域内保留，域外/缺失一律丢弃（不替模型猜）
+    for mech, want in (("co_channel", "co_channel"), ("ADJACENT", "adjacent"),
+                       ("jam", None), (None, None)):
+        total += 1
+        item = dict(IT)
+        if mech is not None:
+            item["mechanism"] = mech
+        rca._reset_evidence()
+        out = rca._sanitize({"interferers": [item]})
+        got = out["interferers"][0].get("mechanism") if out["interferers"] else None
+        ok = got == want
+        if not ok:
+            bad += 1
+        print(("PASS " if ok else "FAIL ") + "mechanism_%s" % (mech,))
+        print("      expect=%r got=%r" % (want, got))
+    print("\n%d/%d passed" % (total - bad, total))
     return 1 if bad else 0
 
 

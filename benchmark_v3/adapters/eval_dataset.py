@@ -8,7 +8,9 @@
     DOA    仅 S0（单站视角）：|Δ|≤10° 命中率 + MAE —— T1
     定位   仅 S1/S2（多站）：50 m 门限命中率 + MAE —— T1
     意图   敌我意图 malicious/incidental/benign（贪心匹配对上）—— T3
-    欺骗   is_spoof 专项：GT 侧 = (kind=="GNSS_spoof")，仅 D4 有正分母 —— T3
+   欺骗   is_spoof 专项：GT 侧 = (kind=="GNSS_spoof")，仅 D4 有正分母 —— T3
+   机理   干扰怎么进来的：co_channel(同频) / adjacent(邻道) / pulse(脉冲) / spoof(欺骗)
+           —— T2；GT 侧现场派生（真值无该字段时按 kind+频偏+带宽算，见 mechanism.py）
 
 意图 GT 口径：真值 `intent` 字段优先；缺省时按 kind 查 INTENT 映射（16 辐射体
 确定性映射）。D1 free 模式的 tone/noise 不在映射内 → 不计入意图轴分母。
@@ -20,6 +22,7 @@
                       "position_m": [x, y],                    # S1/S2 评定位
                       "kind": "...",                           # T2 体制/溯源
                       "intent": "malicious|incidental|benign", # T3 意图（可选）
+                     "mechanism": "co_channel|adjacent|pulse|spoof", # T2 机理（可选）
                      "is_spoof": bool}, ...]}                 # T3 欺骗（可选）
 （2026-10-11 起：**Agent 侧不再输出 `num_interferers`** —— 契约里没有计数字段，runner 用
 `len(interferers)` 派生（见 run_capture_agent.py 的 has_final_answer_capture / _sanitize）。
@@ -49,6 +52,11 @@ if str(_V3SIM) not in sys.path:
     sys.path.insert(0, str(_V3SIM))
 
 from em_signal_simulator_v3.emitters import EMITTERS, INTENT  # noqa: E402
+
+_ADAPTERS = Path(__file__).resolve().parent
+if str(_ADAPTERS) not in sys.path:
+    sys.path.insert(0, str(_ADAPTERS))
+import mechanism as mk  # noqa: E402  （机理轴：四值域 co_channel/adjacent/pulse/spoof）
 
 FREQ_TOL = 0.02          # 归一化容差（v2 口径）
 DOA_TOL_DEG = 10.0
@@ -103,6 +111,16 @@ def gt_intent(ifw: dict) -> str | None:
     return ifw.get("intent") or INTENT.get(ifw["kind"])
 
 
+def gt_mechanism(ifw: dict) -> str:
+    """干扰机理 GT：真值 mechanism 字段优先；缺省按 kind+频偏+带宽现场派生（四值域）。
+
+    现场派生而不回写数据集，使四档旧数据立刻可评，且不与出题侧真值文件耦合。
+    派生规则与边界见 mechanism.py；越界（既不同频也不在通带内）会显式报错。
+    """
+    return ifw.get("mechanism") or mk.derive(ifw["kind"], ifw["freq_offset_hz"],
+                                             float(ifw.get("bandwidth_hz") or 0.0))
+
+
 def offline_answer(truth: dict, stations: list[str]) -> dict:
     """理想答案：只含该 S 级可见的干扰；字段按该 S 级任务给出（含 T2/T3 轴）。"""
     gts = gt_at_slevel(truth, stations)
@@ -111,6 +129,7 @@ def offline_answer(truth: dict, stations: list[str]) -> dict:
         s0 = gt["per_station"]["s0"]
         a = {"freq_offset_hz": gt["freq_offset_hz"], "kind": gt["kind"],
              "position_m": [gt["position_m"][0], gt["position_m"][1]],
+             "mechanism": gt_mechanism(gt),
              "is_spoof": gt["kind"] == SPOOF_KIND}
         intent = gt_intent(gt)
         if intent:
@@ -132,6 +151,8 @@ def score_answer(ans: dict, gt_list: list[dict], slevel: str) -> dict:
             if slevel != "S0" or "doa_deg" in p]          # S0 答案须含 doa 字段
     pairs = match(pred, gt_list)
     r["kind_hits"] = [int(p.get("kind") == g["kind"]) for p, g in pairs]
+    r["mech_hits"] = [int(str(p.get("mechanism", "")).strip().lower() == gt_mechanism(g))
+                      for p, g in pairs]
     by_gt: dict[str, list] = {}
     for p, g in pairs:
         df = abs(p.get("freq_offset_hz", 0) - g["freq_offset_hz"]) / 2e6
@@ -356,6 +377,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
         abst_flags = m.pop("abstain", [])
         cfi_flags = m.pop("cfi", [])
         intent_hits = m.pop("intent_hits", [])
+        mech_hits = m.pop("mech_hits", [])
         intent_by_gt = m.pop("intent_by_gt", None)
         s_gt = m.pop("spoof_gt", [])
         s_hit = m.pop("spoof_hits", [])
@@ -381,6 +403,9 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
         if intent_hits:
             row["intent_accuracy"] = round(float(np.mean(intent_hits)), 3)
             row["intent_pairs"] = len(intent_hits)
+        if mech_hits:
+            row["mech_accuracy"] = round(float(np.mean(mech_hits)), 3)
+            row["mech_pairs"] = len(mech_hits)
         if intent_by_gt:
             row["intent_by_gt"] = intent_by_gt
         if sum(s_gt):
