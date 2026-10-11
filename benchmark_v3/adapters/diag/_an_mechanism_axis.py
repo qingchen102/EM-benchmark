@@ -40,7 +40,7 @@ EVIDENCE_MAP = (
      "detect_time_domain_station（duty/edge/PAPR）", "工具在；脉冲型辐射体 4 类（Welder/VFD_noise/Corona/Radar_pulsed_LFM）"),
     ("spoof", "GNSS 类结构 + 参数错误（伪距/星历不自洽）",
      "identify_modulation_features / CNN 体制分类", "只有 kind 层面的间接证据（CNN 判 GNSS_spoof）；无参数级判据"),
-    ("jam", "兜底：带内但频带信息缺失/类别未知", "—", "仅作兜底，不应作为主答案"),
+    ("jam", "（保留但不启用）兜底：带内但频带信息缺失/类别未知", "—", "仅兜底，不作为主答案；当前四值域里没有它"),
     ("blocking/imd/harmonic", "窗外强源前端注入 → 灵敏度塌方 / 三阶互调产物",
      "平台无此能力（前端注入未实现）", "**零正样本**：当前前端口 −79 dBm 量级，比 IIP3 低 60+ dB"),
 )

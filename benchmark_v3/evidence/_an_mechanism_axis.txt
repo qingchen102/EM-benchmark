@@ -4,32 +4,32 @@
 [d4] 样本 50，干扰源 125：{'co_channel': 43, 'spoof': 50, 'pulse': 6, 'adjacent': 26}
 
 == ① 机理普查（派生）× 现行真值标签（annotate 前快照）==
-  spoof         50 个源，涉及 50 样本，≥3 站可见   50
-              现行标签: spoof=50
-              辐射体:   GNSS_spoof×50
-  pulse         55 个源，涉及 49 样本，≥3 站可见   55
-              现行标签: 无事件表·未标注=38, 事件表未含此源=17
-              辐射体:   Corona×22, VFD_noise×19, Welder×14
   co_channel   131 个源，涉及 104 样本，≥3 站可见  131
               现行标签: jam=61, 无事件表·未标注=48, 事件表未含此源=22
               辐射体:   Chirp_jam×28, Zigbee×21, Microwave×18, Tone_jam×18, Noise_jam×15, DECT×14
   adjacent      83 个源，涉及 80 样本，≥3 站可见   83
               现行标签: 无事件表·未标注=39, jam=37, 事件表未含此源=7
               辐射体:   Noise_jam×17, noise×16, tone×11, Chirp_jam×11, Tone_jam×9, WiFi_burst×6
+  pulse         55 个源，涉及 49 样本，≥3 站可见   55
+              现行标签: 无事件表·未标注=38, 事件表未含此源=17
+              辐射体:   Corona×22, VFD_noise×19, Welder×14
+  spoof         50 个源，涉及 50 样本，≥3 站可见   50
+              现行标签: spoof=50
+              辐射体:   GNSS_spoof×50
 
 == ② 每类典型实例 ==
-  spoof       d4_00000/interferer_2 kind=GNSS_spoof f0=-685kHz bw=155kHz overlap=0kHz legacy=spoof
-  spoof       d4_00001/interferer_2 kind=GNSS_spoof f0=+407kHz bw=309kHz overlap=247kHz legacy=spoof
-  spoof       d4_00002/interferer_2 kind=GNSS_spoof f0=-632kHz bw=119kHz overlap=0kHz legacy=spoof
-  pulse       d2_00002/interferer_2 kind=Corona f0=+135kHz bw=703kHz overlap=703kHz legacy=无事件表·未标注
-  pulse       d2_00003/interferer_1 kind=VFD_noise f0=+327kHz bw=404kHz overlap=375kHz legacy=无事件表·未标注
-  pulse       d2_00003/interferer_2 kind=Corona f0=-142kHz bw=782kHz overlap=749kHz legacy=无事件表·未标注
   co_channel  d2_00000/interferer_1 kind=Zigbee f0=+370kHz bw=316kHz overlap=288kHz legacy=无事件表·未标注
   co_channel  d2_00001/interferer_2 kind=Bluetooth_FHSS f0=-176kHz bw=607kHz overlap=607kHz legacy=无事件表·未标注
   co_channel  d2_00002/interferer_1 kind=Microwave f0=+186kHz bw=702kHz overlap=665kHz legacy=无事件表·未标注
   adjacent    d1_00000/interferer_1 kind=tone f0=+592kHz bw=0kHz overlap=0kHz legacy=无事件表·未标注
   adjacent    d1_00003/interferer_1 kind=noise f0=+622kHz bw=116kHz overlap=0kHz legacy=无事件表·未标注
   adjacent    d1_00004/interferer_1 kind=noise f0=+620kHz bw=127kHz overlap=0kHz legacy=无事件表·未标注
+  pulse       d2_00002/interferer_2 kind=Corona f0=+135kHz bw=703kHz overlap=703kHz legacy=无事件表·未标注
+  pulse       d2_00003/interferer_1 kind=VFD_noise f0=+327kHz bw=404kHz overlap=375kHz legacy=无事件表·未标注
+  pulse       d2_00003/interferer_2 kind=Corona f0=-142kHz bw=782kHz overlap=749kHz legacy=无事件表·未标注
+  spoof       d4_00000/interferer_2 kind=GNSS_spoof f0=-685kHz bw=155kHz overlap=0kHz legacy=spoof
+  spoof       d4_00001/interferer_2 kind=GNSS_spoof f0=+407kHz bw=309kHz overlap=247kHz legacy=spoof
+  spoof       d4_00002/interferer_2 kind=GNSS_spoof f0=-632kHz bw=119kHz overlap=0kHz legacy=spoof
 
 == ③ co_channel / adjacent 边界体检（重叠占干扰带宽的百分比）==
   co_channel  n=131  中位  100.0%  p10   66.8%  最小   53.3%
@@ -54,13 +54,13 @@
       工具: identify_modulation_features / CNN 体制分类
       现状: 只有 kind 层面的间接证据（CNN 判 GNSS_spoof）；无参数级判据
   · jam
-      判据: 兜底：带内但频带信息缺失/类别未知
+      判据: （保留但不启用）兜底：带内但频带信息缺失/类别未知
       工具: —
-      现状: 仅作兜底，不应作为主答案
+      现状: 仅兜底，不作为主答案；当前四值域里没有它
   · blocking/imd/harmonic
       判据: 窗外强源前端注入 → 灵敏度塌方 / 三阶互调产物
       工具: 平台无此能力（前端注入未实现）
       现状: **零正样本**：当前前端口 −79 dBm 量级，比 IIP3 低 60+ dB
 
-派生域（5）：('spoof', 'pulse', 'co_channel', 'adjacent', 'jam')
+派生域（4）：('co_channel', 'adjacent', 'pulse', 'spoof')
 未覆盖（3，零正样本）：('blocking', 'imd', 'harmonic')
