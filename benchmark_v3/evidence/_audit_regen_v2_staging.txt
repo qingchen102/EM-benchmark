@@ -1,0 +1,70 @@
+﻿
+=== dataset_d1  (D:\srtp\EM-benchmark\benchmark_v3\_regen_v2\dataset_d1) ===
+  index 样本 100 | 磁盘目录 100 | 子集 {'S0': ['station_a'], 'S1': ['station_a', 'station_b', 'station_c'], 'S2': ['station_a', 'station_b', 'station_c', 'station_d']}
+  IQ 单站字节：a=256012800  b=256012800  c=256012800  d=256012800
+  公开层 cooperative_sources：有 100   |  事件日志条数分布 0:100
+  0-path station_a  ok 100  invisible   0  missing   0
+  0-path station_b  ok 100  invisible   0  missing   0
+  0-path station_c  ok 100  invisible   0  missing   0
+  0-path station_d  ok 100  invisible   0  missing   0
+  [QA4 d1] 样本 100  源 51
+    源数：0源 49个(49%)  1源 51个(51%)
+    机理：adjacent 51(100.0%)
+    意图：benign 100.0%
+    QA4(a) 机理 ≥3 值且最大类≤55%（计划 50% + 允差 5）: FAIL
+    QA4(b) 源数 ≥3 值且最大类≤55%（计划 50% + 允差）: FAIL
+    QA4(c) 意图最大类≤75%: FAIL
+  QA4：D1 豁免（0/1 源、legacy tone/noise 不计意图轴）
+
+=== dataset_d2  (D:\srtp\EM-benchmark\benchmark_v3\_regen_v2\dataset_d2) ===
+  index 样本 100 | 磁盘目录 100 | 子集 {'S0': ['station_a'], 'S1': ['station_a', 'station_b', 'station_c'], 'S2': ['station_a', 'station_b', 'station_c', 'station_d']}
+  IQ 单站字节：a=256012800  b=256012800  c=256012800  d=256012800
+  公开层 cooperative_sources：有 100   |  事件日志条数分布 0:100
+  0-path station_a  ok  90  invisible  10  missing   0
+  0-path station_b  ok  89  invisible  11  missing   0
+  0-path station_c  ok  87  invisible  13  missing   0
+  0-path station_d  ok  93  invisible   7  missing   0
+  [QA4 d2] 样本 100  源 185
+    源数：1源 35个(35%)  2源 45个(45%)  3源 20个(20%)
+    机理：adjacent 46(24.9%)  co_channel 83(44.9%)  pulse 56(30.3%)
+    意图：benign 25.9%  incidental 74.1%
+    QA4(a) 机理 ≥3 值且最大类≤50%（计划 45% + 允差 5）: PASS
+    QA4(b) 源数 ≥3 值且最大类≤50%（计划 45% + 允差）: PASS
+    QA4(c) 意图最大类≤75%: PASS
+
+=== dataset_d3  (D:\srtp\EM-benchmark\benchmark_v3\_regen_v2\dataset_d3) ===
+  index 样本 100 | 磁盘目录 100 | 子集 {'S0': ['station_a'], 'S1': ['station_a', 'station_b', 'station_c'], 'S2': ['station_a', 'station_b', 'station_c', 'station_d']}
+  IQ 单站字节：a=256012800  b=256012800  c=256012800  d=256012800
+  公开层 cooperative_sources：有 100   |  事件日志条数分布 0:33  1:46  2:20  3:1
+  0-path station_a  ok  70  invisible  30  missing   0
+  WARN station_a 不可用 30/100（>25%）
+  0-path station_b  ok  66  invisible  34  missing   0
+  0-path station_c  ok  66  invisible  34  missing   0
+  0-path station_d  ok  62  invisible  38  missing   0
+  [QA4 d3] 样本 100  源 195
+    源数：1源 30个(30%)  2源 45个(45%)  3源 25个(25%)
+    机理：adjacent 59(30.3%)  co_channel 97(49.7%)  pulse 39(20.0%)
+    意图：benign 15.4%  incidental 39.0%  malicious 45.6%
+    QA4(a) 机理 ≥3 值且最大类≤55%（计划 50% + 允差 5）: PASS
+    QA4(b) 源数 ≥3 值且最大类≤50%（计划 45% + 允差）: PASS
+    QA4(c) 意图最大类≤75%: PASS
+
+=== dataset_d4  (D:\srtp\EM-benchmark\benchmark_v3\_regen_v2\dataset_d4) ===
+  index 样本 100 | 磁盘目录 100 | 子集 {'S0': ['station_a'], 'S1': ['station_a', 'station_b', 'station_c'], 'S2': ['station_a', 'station_b', 'station_c', 'station_d']}
+  IQ 单站字节：a=256012800  b=256012800  c=256012800  d=256012800
+  公开层 cooperative_sources：有 100   |  事件日志条数分布 0:7  1:31  2:47  3:13  4:2
+  0-path station_a  ok  63  invisible  37  missing   0
+  WARN station_a 不可用 37/100（>25%）
+  0-path station_b  ok  60  invisible  40  missing   0
+  0-path station_c  ok  67  invisible  33  missing   0
+  0-path station_d  ok  66  invisible  34  missing   0
+  [QA4 d4] 样本 100  源 285
+    源数：2源 35个(35%)  3源 45个(45%)  4源 20个(20%)
+    机理：adjacent 57(20.0%)  co_channel 86(30.2%)  pulse 57(20.0%)  spoof 85(29.8%)
+    意图：benign 8.1%  incidental 31.6%  malicious 60.4%
+    QA4(a) 机理 ≥3 值且最大类≤35%（计划 30% + 允差 5）: PASS
+    QA4(b) 源数 ≥3 值且最大类≤50%（计划 45% + 允差）: PASS
+    QA4(c) 意图最大类≤75%: PASS
+
+============================================================
+总判定：全部通过

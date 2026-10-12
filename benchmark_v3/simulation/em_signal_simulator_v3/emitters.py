@@ -234,9 +234,9 @@ def gen_welder(rng, length, bw=0.30):
         pos += gap
         n_arcs = int(rng.integers(3, 9))                 # 簇内弧段数
         for _ in range(n_arcs):
-            d = int(rng.integers(30, 160))               # 单弧段（强宽带）
             if pos >= length:
                 break
+            d = min(int(rng.integers(30, 160)), length - pos)   # 末段裁到剩余长度（2026-10-12 修广播形状不一致）
             seg = (rng.standard_normal(d) + 1j * rng.standard_normal(d))
             x[pos:pos + d] += seg * rng.uniform(0.6, 1.0)
             pos += d + int(rng.integers(10, 60))         # 弧段间隔（引弧间隙）

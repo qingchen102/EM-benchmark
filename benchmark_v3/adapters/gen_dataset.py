@@ -38,6 +38,8 @@ from cityrf.config import (Antenna, Component, Emitter, Frontend,  # noqa: E402
 from cityrf.runner import run_scenario  # noqa: E402
 from em_signal_simulator_v3.emitters import INTENT  # noqa: E402  # 敌我意图映射（T3 答案轴）
 import evidence_layer  # noqa: E402  # 受害者层公开视图（规范 v1.0 §7）
+import dataset_plan as dp  # noqa: E402  # 机理/源数配额计划器（docs/机理配额与重生成方案.md）
+import mechanism as mk  # noqa: E402  # 机理派生：计划与真值一致性自校
 
 FS_HZ = 4e6                          # 全难度统一采集带宽（2026-09-28：D2–D4 对齐 D1，
                                      # 目标 1 MHz 不再被通带拦腰截断；Hz 域物理量不变）
@@ -235,7 +237,8 @@ class Placer:
         return out
 
 
-def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1") -> dict:
+def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
+                 plan: dict | None = None) -> dict:
     rng = np.random.default_rng(seed)
     fs = FS_HZ
     rx_bw = fs * RX_FRAC
@@ -257,6 +260,17 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1") -> di
             if ifp is not None:
                 interferers.append({"kind": INTERFERERS[int(rng.integers(len(INTERFERERS)))],
                                     "pos": ifp, "mode": "free"})
+    elif plan is not None:                 # 配额计划（2026-10-12）：先定机理，再定 kind 与频偏档
+        for src in plan["sources"]:
+            ifp = None
+            for _try in range(20):             # free_point 偶发失败重试——兜底不丢源（丢源会破源数配额）
+                ifp = occ.interferer(rng, tgt, d_low=250, d_high=800)
+                if ifp is not None:
+                    break
+            if ifp is None:
+                raise RuntimeError(f"干扰 {src['kind']} 布点 20 次失败（采样域过挤）")
+            interferers.append({"kind": str(src["kind"]), "pos": ifp, "mode": "preset",
+                                "tier": int(src["tier"]), "want_mech": str(src["mechanism"])})
     elif difficulty == "d2":              # D2：固定 2 个共存辐射体（QA 布点四步
         # 落地后 3 源拥挤需 3 对约束同时成立、生成效率崩——留高难子档或移 D3）
         for kind in rng.choice(COEX, size=2, replace=False):
@@ -291,7 +305,9 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1") -> di
         """按难度抽 (频偏, 带宽)。D1：Hz 域显式分离；D2–D4：混合重叠度三档
         （场景 v1.0 定死：深/部分/分离各约 1/3，模拟现实 ISM 全频段散布）。"""
         if diff_in != "d1":
-            ov_mode = int(rng_in.integers(0, 3))
+            # 配额计划指定了档位则照用（机理由档位决定，不可在 QA 重抽中被改掉）
+            ov_mode = (int(rng_in.integers(0, 3)) if ifw_in.get("tier") is None
+                       else int(ifw_in["tier"]))
             if ov_mode == 0:      # 深重叠：中心 40–200k（目标带内），bw 400–800k
                 ifw_in["offset_hz"] = float(rng_in.choice([-1, 1]) * rng_in.uniform(40e3, 200e3))
                 ifw_in["bandwidth_hz"] = float(rng_in.uniform(400e3, 800e3))
@@ -354,6 +370,17 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1") -> di
                 _draw_ifw_freq(ifw, difficulty, rng)
     else:
         raise RuntimeError(f"QA 约束 2 (|Δu|≥2/M) 60 次重抽仍不满足: {last_bad}")
+
+    if plan is not None:
+        # 计划与派生必须一致：不一致说明档位/池映射有 bug（或 QA 重抽改掉了机理）→ 当作 QA 失败重抽
+        if len(interferers) != int(plan["count"]):
+            raise RuntimeError(f"源数不符：计划 {plan['count']} 实得 {len(interferers)}")
+        for ifw in interferers:
+            got = mk.derive(ifw["kind"], ifw["offset_hz"], ifw["bandwidth_hz"])
+            if got != ifw["want_mech"]:
+                raise RuntimeError(
+                    f"机理自校失败：{ifw['kind']} 计划 {ifw['want_mech']} 实得 {got}"
+                    f"（f0={ifw['offset_hz']:.0f}Hz bw={ifw['bandwidth_hz']:.0f}Hz）")
 
     ems = [Emitter(id="target", role="communication", position_m=tgt,
                    power_dbm=tgt_power, preset=tgt_name,
@@ -546,6 +573,10 @@ def main() -> None:
                          "配合 --count 用一个大候选池凑满 --want 条（与 --resume 互斥）")
     ap.add_argument("--want", type=int, default=None,
                     help="需要凑满的样本数（默认 = --count）")
+    ap.add_argument("--plan-seed", type=int, default=dp.PLAN_SEED,
+                    help="机理/源数配额计划的随机种子（计划与候选 seed 无关、可按槽位复现）")
+    ap.add_argument("--no-plan", action="store_true",
+                    help="退回旧口径：机理由重叠度档位+池成员资格间接产生（只用于复现历史数据）")
     args = ap.parse_args()
     if args.qa_skip and args.resume:
         # 跳过候选会让 seed↔槽位映射不可复原（候选序号从 0 重来、已消费的 seed 会被重复使用）
@@ -583,6 +614,10 @@ def main() -> None:
                           "noise": "thermal only"},
              "samples": []}
     want = args.want or args.count
+    plan_all = None
+    if not args.no_plan and args.difficulty in dp.MECH_QUOTA:
+        plan_all = dp.plan_dataset(args.difficulty, want, INTENT, seed=args.plan_seed)
+        print(dp.format_summary(plan_all, INTENT, args.difficulty))
     accepted = 0
     cand = 0
     while cand < args.count and accepted < want:
@@ -601,7 +636,8 @@ def main() -> None:
         spec = None
         for attempt in range(6):             # RT 偶发越界/遮挡/QA坏几何 → 整样本重采样
             try:
-                spec = build_sample(accepted, seed + 1000 * attempt, placer, args.difficulty)
+                spec = build_sample(accepted, seed + 1000 * attempt, placer, args.difficulty,
+                                    plan_all[accepted] if plan_all is not None else None)
             except RuntimeError as e:        # QA 约束不满足=该目标几何下可见区稀缺
                 if attempt == 5:
                     spec = None
@@ -673,6 +709,18 @@ def main() -> None:
     print(f"完成 {accepted} 条（候选池 {cand}）："
           f"SNR {min(a for a,_ in snr_all):.0f}~{max(b for _,b in snr_all):.0f} dB，"
           f"含干扰 {n_if} 条 / 无干扰 {accepted-n_if} 条；S0/S1/S2 由 station_subsets 切分。")
+    if plan_all is not None:
+        # QA 约束 4 普查（零 API 自检）：机理/可见源数/意图三项，越界即报错，不静默放行。
+        truths = []
+        for i in range(accepted):
+            p = out_root / f"{args.difficulty}_{i:05d}" / "capture" / "private" / "d1_truth.json"
+            if p.exists():
+                truths.append(json.loads(p.read_text(encoding="utf-8")))
+        ok4, lines4 = dp.audit_truths(truths, INTENT, args.difficulty)
+        for _ln in lines4:
+            print(_ln)
+        if not ok4:
+            raise RuntimeError("QA 约束 4（难度平衡）未达标：见上方普查表")
     if accepted < want:
         raise RuntimeError(f"候选池用尽（{args.count} 个）只凑到 {accepted}/{want} 条；"
                            f"加大 --count 重跑")

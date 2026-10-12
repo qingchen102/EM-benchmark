@@ -159,6 +159,8 @@ def gate_gt_slice(model):
             print(f"    [gt-slice] {s['id']} station_a 目标链路文件缺失 → 跳过（不计入分母）")
             continue
         resid_p = GATE_CACHE / s["id"] / "resid_station_a.npy"
+        resid_p.parent.mkdir(parents=True, exist_ok=True)   # 2026-10-12 修：冷缓存 + station_a 不可见时
+        # 该分支直接 np.save（不经过 ToolContext），原先会 FileNotFoundError：d2_00007
         resid = None
         if ref_state == "invisible":
             # 目标在该站 0 径（被建筑完全遮挡）：原始 IQ 不含目标分量，带限原始 IQ 即残差。

@@ -1,0 +1,64 @@
+﻿
+
+########## dataset_d1 ##########
+== 统计 ==
+  samples: 100
+  sep_ok: 51
+  inr_ok: 204
+  inr_low_stations: 0
+  iso_ok: 100
+  iq_ok: 100
+== 问题按代码 ==
+  无 ✅
+EXIT_d1=0
+
+########## dataset_d2 ##########
+usage: audit_dataset.py [-h] [--d2] root
+audit_dataset.py: error: unrecognized arguments: - - d 2
+EXIT_d2=2
+
+########## dataset_d3 ##########
+usage: audit_dataset.py [-h] [--d2] root
+audit_dataset.py: error: unrecognized arguments: - - d 2
+EXIT_d3=2
+
+########## dataset_d4 ##########
+usage: audit_dataset.py [-h] [--d2] root
+audit_dataset.py: error: unrecognized arguments: - - d 2
+EXIT_d4=2
+
+########## dataset_d2 ##########
+== 统计 ==
+  samples: 100
+  sep_ok: 0
+  inr_ok: 615
+  inr_low_stations: 125
+  iso_ok: 100
+  iq_ok: 100
+== 问题按代码 ==
+  无 ✅
+EXIT_d2=0
+
+########## dataset_d3 ##########
+== 统计 ==
+  samples: 100
+  sep_ok: 0
+  inr_ok: 604
+  inr_low_stations: 176
+  iso_ok: 100
+  iq_ok: 100
+== 问题按代码 ==
+  无 ✅
+EXIT_d3=0
+
+########## dataset_d4 ##########
+== 统计 ==
+  samples: 100
+  sep_ok: 0
+  inr_ok: 874
+  inr_low_stations: 266
+  iso_ok: 100
+  iq_ok: 100
+== 问题按代码 ==
+  无 ✅
+EXIT_d4=0
