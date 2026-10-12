@@ -22,7 +22,9 @@ import json
 import os
 import sys
 import sys as _sys, pathlib as _pl
-_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1]))  # adapters
+_ADP = _pl.Path(__file__).resolve().parents[2]        # adapters（脚本移到 diag/legacy 后修正）
+_sys.path.insert(0, str(_ADP))
+_sys.path.insert(0, str(_ADP / "rad_cls"))
 from collections import Counter
 from pathlib import Path
 
@@ -37,8 +39,8 @@ import run_capture_agent as rca     # noqa: E402
 import oracle16                     # noqa: E402
 from data_gen16 import CLS_IDX      # noqa: E402
 
-ROOT = os.path.dirname(HERE)
-D2 = os.path.join(ROOT, "dataset_d2")
+ROOT = os.path.dirname(str(_ADP))                 # benchmark_v3/
+D2 = os.path.abspath(os.environ.get("DSH_D2_ROOT") or os.path.join(ROOT, "dataset_d2"))
 OUT = os.path.join(HERE, "_diag_d2_extract.json")
 MATCH_M = 50.0
 C = 299792458.0

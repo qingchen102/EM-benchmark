@@ -172,6 +172,76 @@ def _residual_bands(resid: np.ndarray, fs: float, rx_half: float) -> list[dict]:
     return bands[:PEAK_MAX_N]
 
 
+def _residual_bands_support(resid: np.ndarray, fs: float, rx_half: float,
+                            merge_gap_hz: float = 90e3,
+                            grid_hz: float = 5e3) -> list[dict]:
+    """B 法（实验，2026-10-12）：相干支撑连通域定带。
+
+    与 _residual_bands 同一套判据（局部中位底 + 窄窗空间相干），但：
+      * 去掉 10 kHz 固定网格（改用 5 kHz 网格），不再可能“跨过”纯音谱线；
+      * 去掉最小长度限制；
+      * 允许跨“相干仍然 ≥ 门限”的谷合并（间隙 ≤ merge_gap_hz）。
+
+    受控 A/B（同一份残差、station_a）：D1 带覆盖 90.2%→98.0% 且多余带 31→0，
+    D2 覆盖 37.1%→67.7%、多余带 220→82，两档干净样本虚警恒 0。
+    由 DSH_PEAK_BANDS_B=1 启用（默认关，只替换聚类侧的“共道支持带”）。
+    证据：benchmark_v3/evidence/_sweep_step_edges.txt、_diag_d2_off_B_{new,old}50.txt。
+    """
+    n = resid.shape[-1]
+    f = np.fft.fftfreq(n, 1 / fs)
+    inb = np.where((f >= -rx_half) & (f <= rx_half))[0]
+    if inb.size == 0:
+        return []
+    order = inb[np.argsort(f[inb])]
+    fs_bin = fs / n
+    X = np.fft.fft(resid, axis=-1)
+    db = 10 * np.log10((np.abs(X) ** 2).mean(axis=0)[order] + 1e-30)
+    k = max(int(round(PEAK_FLOOR_WIN_HZ / fs_bin)) | 1, 5)
+    if k >= db.size:
+        k = max((db.size // 2) | 1, 5)
+    from scipy.ndimage import median_filter
+    over = db - median_filter(db, size=k, mode="nearest")
+    f_s = f[order]
+    step = max(int(round(grid_hz / fs_bin)), 1)
+    centers = f_s[::step]
+    g_over = over[::step][:centers.size]
+    coh = np.array([_band_coherence(resid, fs, float(c), PEAK_COH_WIN_HZ)
+                    for c in centers])
+    sup = (g_over >= PEAK_OVER_DB) & np.isfinite(coh) & (coh >= PEAK_COH_MIN)
+    idx = np.where(sup)[0]
+    if idx.size == 0:
+        return []
+    runs: list[list[int]] = [[int(idx[0]), int(idx[0])]]
+    for i in idx[1:]:
+        i = int(i)
+        if i - runs[-1][1] <= 1:
+            runs[-1][1] = i
+        else:
+            runs.append([i, i])
+    merged = [list(runs[0])]
+    for a, b in runs[1:]:
+        _pa, pb = merged[-1]
+        gap = float(centers[a] - centers[pb])
+        gap_coh = float(np.median(coh[pb:a + 1])) if a > pb else 1.0
+        if gap <= merge_gap_hz and gap_coh >= PEAK_COH_MIN:
+            merged[-1][1] = b
+        else:
+            merged.append([a, b])
+    bands: list[dict] = []
+    for a, b in merged:
+        seg = g_over[a:b + 1]
+        best = a + int(np.argmax(seg))
+        lo = float(centers[a]) - PEAK_COH_WIN_HZ
+        hi = float(centers[b]) + PEAK_COH_WIN_HZ
+        bands.append({"freq_offset_hz": round(float(centers[best]), 0),
+                      "over_floor_db": round(float(seg.max()), 1),
+                      "bandwidth_hz": round(hi - lo, 0),
+                      "band_hz": [round(lo, 0), round(hi, 0)],
+                      "coherence": round(float(coh[best]), 3)})
+    bands.sort(key=lambda p: -p["over_floor_db"])
+    return bands[:PEAK_MAX_N]
+
+
 def _peak_selector():
     """峰判据选择：默认新判据；DSH_PEAK_LEGACY=1 切回旧判据做 A/B。"""
     import os
@@ -1013,8 +1083,13 @@ def estimate_band_occupancy_by_correlation(station: str = "station_a",
     # 下游 per-candidate 提取集的"同组"判据依赖 band_hz 宽度（频带重叠=共道伙伴），
     # 0.6 相干门控后的 40~60 kHz 窄带会让真实共道伙伴判不出重叠（D2 召回实测
     # 54%→36%）。对 agent 的**对外峰清单**只暴露门控后的 residual_peaks。
-    legacy_peaks = (_residual_peaks_legacy(residual_iq, ctx.fs, rx_half)
-                    if peaks is not None else [])
+    import os as _os
+    if _os.environ.get("DSH_PEAK_BANDS_B") == "1":
+        # 实验（2026-10-12）：聚类侧“共道支持带”换成相干支撑连通域（B 法）。
+        legacy_peaks = _residual_bands_support(residual_iq, ctx.fs, rx_half)
+    else:
+        legacy_peaks = (_residual_peaks_legacy(residual_iq, ctx.fs, rx_half)
+                        if peaks is not None else [])
     noise_floor_db = round(floor_db, 1)
     band_occupied = len(peaks) > 0
     return {

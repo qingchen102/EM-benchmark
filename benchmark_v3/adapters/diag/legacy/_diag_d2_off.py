@@ -28,24 +28,68 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-sys.path.insert(0, os.path.join(HERE, "rad_cls"))
+_ADP = os.path.dirname(os.path.dirname(HERE))        # adapters/（脚本移到 diag/legacy 后修正）
+sys.path.insert(0, _ADP)
+sys.path.insert(0, os.path.join(_ADP, "rad_cls"))
 
 import capture_tools as ct          # noqa: E402
 import run_capture_agent as rca     # noqa: E402
 import oracle16                     # noqa: E402
 import _diag_d2_extract as dx       # noqa: E402
+sys.path.insert(0, os.path.dirname(HERE))          # diag/（B 法实验脚本）
+import _sweep_step_edges as sse     # noqa: E402  B 法：相干支撑连通域定带
 from data_gen16 import CLS_IDX      # noqa: E402
 
 D2 = dx.D2
 MATCH_M = dx.MATCH_M
-OUT = os.path.join(HERE, "_diag_d2_off.json")
+OUT = os.path.abspath(os.environ.get("DSH_OFF_OUT") or os.path.join(HERE, "_diag_d2_off.json"))
 
 VARIANTS = ["a0_base_nm", "a1_true_nm", "a2_gated_nm", "a3_cent_nm", "a4_bf_nm",
             "a5_cs_nm", "a6_cs4_nm", "a7_base_mk", "a8_true_mk", "a9_shift0_mk",
             "a10_shift0_nm", "a11_cs4cm_mk", "a12_cs4cm_nm",
             "b1_true_nm", "b7_base_mk", "b8_true_mk", "b9_shift0_mk", "b11_cs4cm_mk",
             "a13_db_cent_mk", "a14_db_zero_mk", "a15_db_true_mk",
-            "b13_db_cent_mk", "b15_db_true_mk", "a16_db50_cent_mk"]
+            "b13_db_cent_mk", "b15_db_true_mk", "a16_db50_cent_mk",
+            "B_base_mk", "B_cent_mk", "B_true_mk", "B_shift0_mk", "B_base_nm"]
+
+# ---- B 法（相干支撑连通域）作为掩蔽带：本轮受控 A/B 的候选（2026-10-12）----
+B_GRID_HZ = 5e3            # 相干曲线的采样网格（0.6 MHz 只算 ~700 个中心点）
+_B_CACHE: dict = {}
+B_STAT = {"pairs": 0, "no_bands": 0, "no_overlap": 0}
+
+
+def b_bands(sid: str, resid, fs: float, rx_half: float):
+    """逐样本缓存：B 法在 station_a 残差上给出的"相干支撑连通域"带。"""
+    if sid not in _B_CACHE:
+        try:
+            f, over, _sm, X = sse._prep(resid, fs, rx_half)
+            f_full = np.fft.fftfreq(resid.shape[1], 1.0 / fs)
+            centers = np.arange(float(f[0]), float(f[-1]) + B_GRID_HZ, B_GRID_HZ)
+            coh = np.nan_to_num(np.interp(
+                f, centers, sse._coh_curve(X, f_full, centers, ct.PEAK_COH_WIN_HZ)), nan=0.0)
+            _B_CACHE[sid] = sse.bands_support(f, over, coh)
+        except Exception as exc:               # 实验性：失败即回落组带
+            print(f"  [B] {sid} 计算失败：{type(exc).__name__}: {exc}")
+            _B_CACHE[sid] = []
+    return _B_CACHE[sid]
+
+
+def b_band_for(band_hz, bands):
+    """给候选的 band_hz 挑重叠最大的 B 带；全无重叠则按中心最近挑。"""
+    if not bands:
+        return None
+    lo, hi = float(band_hz[0]), float(band_hz[1])
+    best, best_ov = None, 0.0
+    for b in bands:
+        blo, bhi = b["band_hz"]
+        ov = max(0.0, min(hi, float(bhi)) - max(lo, float(blo)))
+        if ov > best_ov:
+            best, best_ov = b, ov
+    if best is not None:
+        return best
+    B_STAT["no_overlap"] += 1
+    c = 0.5 * (lo + hi)
+    return min(bands, key=lambda b: abs(0.5 * (b["band_hz"][0] + b["band_hz"][1]) - c))
 
 
 def centroid_hz(w, fs, half_hz=400e3):
@@ -334,6 +378,15 @@ def main(n_samples=50):
             bc = db_cand[2] if db_cand else None
             bg = db_gt[2] if db_gt else None
             b50 = db50[2] if db50 else None
+            bands_b = b_bands(sid, resid, fs, fs * 0.45)
+            B_STAT["pairs"] += 1
+            _bb_band = b_band_for(cand[k]["band_hz"], bands_b)
+            if _bb_band is None:
+                B_STAT["no_bands"] += 1
+                band_b = (lo_g, hi_g)
+            else:
+                band_b = (float(_bb_band["band_hz"][0]), float(_bb_band["band_hz"][1]))
+            b_cent = 0.5 * (band_b[0] + band_b[1])
 
             plans = [
                 ("a0_base_nm", poses_cand, True, row_k, cand_c, False),
@@ -360,6 +413,12 @@ def main(n_samples=50):
                 ("b13_db_cent_mk", poses_gt, False, 0, bg, True, _bb(db_gt)),
                 ("b15_db_true_mk", poses_gt, False, 0, f0, True, _bb(db_gt)),
                 ("a16_db50_cent_mk", poses_cand, True, row_k, b50, True, _bb(db50)),
+                # B 法（相干支撑连通域）作为掩蔽带，其余与 a7/a8/a9/a0 一一对齐
+                ("B_base_mk", poses_cand, True, row_k, cand_c, True, band_b),
+                ("B_cent_mk", poses_cand, True, row_k, b_cent, True, band_b),
+                ("B_true_mk", poses_cand, True, row_k, f0, True, band_b),
+                ("B_shift0_mk", poses_cand, True, row_k, 0.0, True, band_b),
+                ("B_base_nm", poses_cand, True, row_k, cand_c, False, band_b),
             ]
             for spec in plans:
                 name, poses, horz, row, shift, mask = spec[:6]
@@ -380,7 +439,9 @@ def main(n_samples=50):
                               "gated": off_gated, "cent": off_cent,
                               "db_lo": db_cand[0] if db_cand else None,
                               "db_hi": db_cand[1] if db_cand else None,
-                              "db_c": bc, "bg": bg, "b50": b50})
+                              "db_c": bc, "bg": bg, "b50": b50,
+                              "b_lo": band_b[0], "b_hi": band_b[1],
+                              "b_c": b_cent})
         print(f"  {sid} 认领 {len(used_k)}  累计 {n_pair}")
 
     print("=" * 78)
@@ -390,7 +451,9 @@ def main(n_samples=50):
         c, n = acc[v]
         e = np.median(err[v]) / 1e3 if err[v] else float("nan")
         print(f"  {v:20s} {c:4d}/{n:<4d} = {c / max(n, 1):.3f}   {e:18.1f}")
-    json.dump({"n": n_pair, "acc": acc,
+    print(f"[B] 认领对 {B_STAT['pairs']}  无 B 带→回落组带 {B_STAT['no_bands']}  "
+          f"无重叠→按中心挑 {B_STAT['no_overlap']}")
+    json.dump({"n": n_pair, "acc": acc, "b_stat": dict(B_STAT),
                "err_med_khz": {v: (float(np.median(err[v])) / 1e3 if err[v] else None)
                                for v in VARIANTS},
                "freq_rows": freq_rows},

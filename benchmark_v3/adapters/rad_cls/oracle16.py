@@ -44,7 +44,13 @@ D2_ROOT = Path(os.environ.get("DSH_D2_ROOT") or (_HERE.parent.parent / "dataset_
 # 切片 0.746 [53/71]/129 簇 ↔ 0.613 [49/80]/142 簇，分母在 71/78/80 间漂）。缓存只是
 # 记忆化，换命名空间在语义上等价 → gate 用自己的 `_gate_cache/<sid>/`，并盖一枚来源
 # 指纹（工具源码 + checkpoint），指纹一变就整目录重建，杜绝“陈旧缓存静默改分母”。
-GATE_CACHE = D2_ROOT / "_gate_cache"
+def _cache_tag() -> str:
+    """实验开关必须各自独立缓存：指纹只看文件内容，环境变量变化不会触发重建。"""
+    import os as _os
+    return "_b" if _os.environ.get("DSH_PEAK_BANDS_B") == "1" else ""
+
+
+GATE_CACHE = D2_ROOT / ("_gate_cache" + _cache_tag())
 _STAMP_FILES = (_ADAPTERS / "capture_tools.py",
                 _ADAPTERS / "run_capture_agent.py",
                 _HERE / "data_gen16.py")
@@ -58,6 +64,7 @@ def ensure_gate_cache() -> None:
     """gate 私有的缓存命名空间；来源指纹变了就整目录重建（自愈，不靠人手清缓存）。"""
     stamp = {"files": {p.name: _md5(p) for p in _STAMP_FILES},
              "checkpoint": _md5(_HERE / "rad_classifier" / "checkpoint.pt"),
+             "tag": _cache_tag(),
              "root": str(D2_ROOT)}
     sp = GATE_CACHE / "_stamp.json"
     old = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
