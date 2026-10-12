@@ -324,6 +324,7 @@ def gate_tool_view(model, n_samples=50):
     n_cand = 0
     n_src = 0
     src_recall_n = 0
+    tv_kind = {}                       # GT kind -> [命中, 认领数]（tool-view 条件分类的构成分解）
     per_rows = []
     fs_s = None
     for s in idx["samples"][:n_samples]:
@@ -427,8 +428,12 @@ def gate_tool_view(model, n_samples=50):
             # bfw 缓存已由工具落盘为 CNN-ready 口径（变频到候选带中心+RMS 归一）
             wk = np.load(wf).astype(np.complex64)
             pred = _pred(model, [wk])[0]
-            cond_c += int(pred == CLS_IDX[vis_gts[i_g][0]["kind"]])
+            _k = vis_gts[i_g][0]["kind"]
+            cond_c += int(pred == CLS_IDX[_k])
             cond_t += 1
+            _acc = tv_kind.setdefault(_k, [0, 0])
+            _acc[0] += int(pred == CLS_IDX[_k])
+            _acc[1] += 1
         # review checklist（2026-10-03 第 4 次同形状 bug 后立规）：任何新增计数/
         # 分母一律写进 per_rows、循环外求和——不允许在带 continue 的主循环里累加。
         ans_d_sample = sum(1 for g, ns in vis_gts if ns >= 3)
@@ -461,6 +466,11 @@ def gate_tool_view(model, n_samples=50):
           f"（trio 硬上限），与全可见口径并列报")
     src_recall = src_recall_n / max(recall_d, 1)
     print(f"    [次要] sources 门槛栏: 召回 {src_recall:.3f}  簇数 {n_src}")
+    if tv_kind:
+        print("    [构成] tool-view 认领候选按 GT 体制分解（命中/认领）:")
+        for _k in sorted(tv_kind, key=lambda z: -tv_kind[z][1]):
+            _c, _n = tv_kind[_k]
+            print(f"        {_k:<16} {_c}/{_n}  ({_c / _n:.3f})")
     ok = recall >= GATE_TOOLVIEW and cond >= GATE_TOOLVIEW
     return ok, {"recall": recall, "far": far, "cond_acc": cond, "e2e": e2e,
                 "src_recall": src_recall, "per_rows": per_rows}
