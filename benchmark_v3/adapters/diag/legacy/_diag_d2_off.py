@@ -50,7 +50,9 @@ VARIANTS = ["a0_base_nm", "a1_true_nm", "a2_gated_nm", "a3_cent_nm", "a4_bf_nm",
             "b1_true_nm", "b7_base_mk", "b8_true_mk", "b9_shift0_mk", "b11_cs4cm_mk",
             "a13_db_cent_mk", "a14_db_zero_mk", "a15_db_true_mk",
             "b13_db_cent_mk", "b15_db_true_mk", "a16_db50_cent_mk",
-            "B_base_mk", "B_cent_mk", "B_true_mk", "B_shift0_mk", "B_base_nm"]
+            "B_base_mk", "B_cent_mk", "B_true_mk", "B_shift0_mk", "B_base_nm",
+            "a17_gtband_truecar_mk", "a18_gtband_candc_mk", "a19_gtband2_truecar_mk",
+            "b17_gtband_truecar_mk"]
 
 # ---- B 法（相干支撑连通域）作为掩蔽带：本轮受控 A/B 的候选（2026-10-12）----
 B_GRID_HZ = 5e3            # 相干曲线的采样网格（0.6 MHz 只算 ~700 个中心点）
@@ -387,6 +389,11 @@ def main(n_samples=50):
             else:
                 band_b = (float(_bb_band["band_hz"][0]), float(_bb_band["band_hz"][1]))
             b_cent = 0.5 * (band_b[0] + band_b[1])
+            # “理想带边”上限实验：把掩蔽带直接换成真值宣告的每源带宽（±5 kHz 余量）；
+            # gt_band2 = ±1×带宽，用来逼近跳频/噪声源实测展宽（fig_emit_bw 里最大 24×）。
+            gt_bw = float(g["bandwidth_hz"])
+            gt_band = (f0 - gt_bw / 2 - 5e3, f0 + gt_bw / 2 + 5e3)
+            gt_band2 = (f0 - gt_bw, f0 + gt_bw)
 
             plans = [
                 ("a0_base_nm", poses_cand, True, row_k, cand_c, False),
@@ -419,6 +426,11 @@ def main(n_samples=50):
                 ("B_true_mk", poses_cand, True, row_k, f0, True, band_b),
                 ("B_shift0_mk", poses_cand, True, row_k, 0.0, True, band_b),
                 ("B_base_nm", poses_cand, True, row_k, cand_c, False, band_b),
+                # 理想带边（真值带宽）——你提的“只切真源那一段”的天花板
+                ("a17_gtband_truecar_mk", poses_cand, True, row_k, f0, True, gt_band),
+                ("a18_gtband_candc_mk", poses_cand, True, row_k, cand_c, True, gt_band),
+                ("a19_gtband2_truecar_mk", poses_cand, True, row_k, f0, True, gt_band2),
+                ("b17_gtband_truecar_mk", poses_gt, False, 0, f0, True, gt_band),
             ]
             for spec in plans:
                 name, poses, horz, row, shift, mask = spec[:6]

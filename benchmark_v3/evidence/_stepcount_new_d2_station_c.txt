@@ -1,0 +1,37 @@
+# root=D:\srtp\EM-benchmark\benchmark_v3\dataset_d2  station=station_c  判据: |d|>=0.35 dB/kHz, coh>=0.8, NMS 25 kHz
+sid          n_gt gt_edge   raw outside  kept   每源 kept
+d2_00000        2       4   182     178     4   2.0
+d2_00001        1       2   122     120     4   4.0
+d2_00002        2       4   141     122     2   1.0
+d2_00003        1       2    98      98     3   3.0
+d2_00004        2       4    54      48     3   1.5
+d2_00005        2       4    88      88     3   1.5
+d2_00006     跳过 RuntimeError: target reference not available for station 'station_c'
+d2_00007        2       4   245     218     6   3.0
+d2_00008        2       4    77      77     5   2.5
+d2_00009        2       4    46      46     2   1.0
+d2_00010        3       6   144     135     6   2.0
+d2_00011        2       4   106     100     2   1.0
+d2_00012        1       2   112     108     4   4.0
+d2_00013        1       2    52      52     2   2.0
+d2_00014        3       6   187      23     2   0.7
+d2_00015        2       4   187     178     5   2.5
+d2_00016     跳过 RuntimeError: target reference not available for station 'station_c'
+d2_00017        2       4   126     126     2   1.0
+d2_00018        2       4   186     176     5   2.5
+d2_00019        1       2    18      18     4   4.0
+d2_00020        2       4   192     187     5   2.5
+d2_00021        1       2    59      34     2   2.0
+d2_00022        2       4   160     154     4   2.0
+d2_00023        2       4    60      55     3   1.5
+d2_00024     跳过 RuntimeError: target reference not available for station 'station_c'
+d2_00025        2       4   297     284     6   3.0
+d2_00026        2       4   116      94     4   2.0
+d2_00027        3       6   189     148     3   1.0
+
+== 汇总（25 个有干扰样本） ==
+源数 n_gt: 均值 1.88  GT 边数均值 3.8
+raw 强阶跃: 均值 129.8（= 69.0/源）
+outside 真边界候选: 均值 114.7（= 61.0/源）
+kept 接受边: 均值 3.6（= 1.9/源）
+kept 与 GT 边数（±1 内算准）: 准 14/25  偏多 5  偏少 6
