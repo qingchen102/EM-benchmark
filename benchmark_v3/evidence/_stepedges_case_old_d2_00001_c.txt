@@ -1,0 +1,32 @@
+== dataset_d2/d2_00001 @ station_c ==
+  GT DECT           f=   -674.9k  bw=   129.6k  真边    -739.7k /    -610.1k
+  GT Bluetooth_FHSS f=   -176.5k  bw=   606.9k  真边    -479.9k /     127.0k
+  -- |d| 局部极大 top12（max|d|=0.793 dB/kHz，平滑 50k，接受阈 0.35 dB/kHz + 边处相干≥0.8 + 外侧相干<0.8）--
+        -720.6k  |d|= 0.79  coh=0.985  out=(0.201,0.998)
+        -715.6k  |d|= 0.79  coh=0.993  out=(0.183,0.988)
+        -466.8k  |d|= 0.76  coh=0.969  out=(0.211,0.994)
+        -720.3k  |d|= 0.76  coh=0.985  out=(0.198,0.998)
+        -631.7k  |d|= 0.76  coh=0.988  out=(0.988,0.191)
+        -726.6k  |d|= 0.76  coh=0.988  out=(0.209,0.996)
+        -722.3k  |d|= 0.76  coh=0.987  out=(0.211,0.998)
+        -463.5k  |d|= 0.75  coh=0.987  out=(0.210,0.994)
+         118.9k  |d|= 0.75  coh=0.953  out=(0.998,0.329)
+        -629.8k  |d|= 0.75  coh=0.986  out=(0.998,0.200)
+         107.4k  |d|= 0.74  coh=0.985  out=(0.998,0.383)
+        -634.7k  |d|= 0.74  coh=0.994  out=(0.988,0.199)
+  -- C 法接受的 6 条边（阶跃 dB/kHz，边处相干，外侧相干）--
+        -720.6k  step= 0.79  coh=0.985  out=(0.20055287246043355,0.9977123128834189)   <= DECT下沿
+        -466.8k  step= 0.76  coh=0.969  out=(0.2106089243405418,0.9942050327914776)   <= Bluetooth_FHSS下沿
+        -631.7k  step= 0.76  coh=0.988  out=(0.9882112345891023,0.19087326312981917)   <= DECT上沿
+         118.9k  step= 0.75  coh=0.953  out=(0.9979892293894416,0.32867320124676913)   <= Bluetooth_FHSS上沿
+          88.8k  step= 0.46  coh=0.998  out=(0.9984576154235916,0.5705549229078426)   <= Bluetooth_FHSS上沿
+        -440.3k  step= 0.42  coh=0.996  out=(0.41630245367339125,0.9932402443363179)   <= Bluetooth_FHSS下沿
+  -- C 法返回的带 --
+     {'freq_offset_hz': -683900.0, 'over_floor_db': 39.8, 'bandwidth_hz': 94900.0, 'band_hz': [-723600.0, -628700.0], 'edge_step_db_per_khz': 0.79}
+     {'freq_offset_hz': -443700.0, 'over_floor_db': 15.7, 'bandwidth_hz': 32500.0, 'band_hz': [-469800.0, -437300.0], 'edge_step_db_per_khz': 0.76}
+  -- A 法（现行）返回的带 --
+     {'freq_offset_hz': -660100.0, 'over_floor_db': 35.8, 'bandwidth_hz': 116000.0, 'band_hz': [-733100.0, -617100.0], 'coherence': 0.998}
+     {'freq_offset_hz': -440100.0, 'over_floor_db': 10.5, 'bandwidth_hz': 6000.0, 'band_hz': [-443100.0, -437100.0], 'coherence': 0.996}
+     {'freq_offset_hz': 80000.0, 'over_floor_db': 10.1, 'bandwidth_hz': 6000.0, 'band_hz': [77000.0, 83000.0], 'coherence': 0.999}
+     {'freq_offset_hz': -200100.0, 'over_floor_db': 9.0, 'bandwidth_hz': 6000.0, 'band_hz': [-203100.0, -197100.0], 'coherence': 0.999}
+     {'freq_offset_hz': 20000.0, 'over_floor_db': 8.8, 'bandwidth_hz': 6000.0, 'band_hz': [17000.0, 23000.0], 'coherence': 0.998}

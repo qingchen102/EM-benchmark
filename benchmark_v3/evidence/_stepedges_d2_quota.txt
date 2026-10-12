@@ -1,0 +1,110 @@
+  d2_00000 GT=2  A:cov=1/ex=4/w=6.0k  B:cov=2/ex=1/w=81.3k  C:cov=0/ex=0/w=0.0k
+  d2_00001 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=146.2k  C:cov=1/ex=1/w=70.5k
+  d2_00002 GT=2  A:cov=1/ex=2/w=6.0k  B:cov=1/ex=4/w=72.0k  C:cov=0/ex=0/w=0.0k
+  d2_00003 GT=1  A:cov=1/ex=1/w=51.0k  B:cov=1/ex=0/w=174.6k  C:cov=1/ex=0/w=152.3k
+  d2_00004 GT=2  A:cov=2/ex=3/w=6.0k  B:cov=1/ex=1/w=198.7k  C:cov=0/ex=0/w=0.0k
+  d2_00005 GT=2  A:cov=2/ex=0/w=116.0k  B:cov=2/ex=0/w=160.5k  C:cov=2/ex=1/w=81.2k
+  d2_00006 GT=1  A:cov=0/ex=5/w=6.0k  B:cov=1/ex=0/w=769.7k  C:cov=0/ex=0/w=0.0k
+  d2_00007 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00008 GT=2  A:cov=1/ex=3/w=11.0k  B:cov=1/ex=2/w=175.1k  C:cov=1/ex=1/w=82.3k
+  d2_00009 GT=2  A:cov=0/ex=0/w=0.0k  B:cov=1/ex=2/w=57.5k  C:cov=0/ex=0/w=0.0k
+  d2_00010 GT=3  A:cov=1/ex=2/w=16.0k  B:cov=2/ex=4/w=78.8k  C:cov=0/ex=0/w=0.0k
+  d2_00011 GT=2  A:cov=1/ex=4/w=16.0k  B:cov=1/ex=1/w=105.3k  C:cov=1/ex=0/w=141.0k
+  d2_00012 GT=1  A:cov=1/ex=1/w=36.0k  B:cov=1/ex=0/w=136.6k  C:cov=1/ex=1/w=57.9k
+  d2_00013 GT=1  A:cov=0/ex=5/w=6.0k  B:cov=1/ex=0/w=422.4k  C:cov=0/ex=1/w=33.3k
+  d2_00014 GT=3  A:cov=0/ex=4/w=6.0k  B:cov=1/ex=2/w=105.1k  C:cov=0/ex=0/w=0.0k
+  d2_00015 GT=2  A:cov=1/ex=1/w=31.0k  B:cov=1/ex=0/w=117.9k  C:cov=0/ex=0/w=0.0k
+  d2_00016 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00017 GT=2  A:cov=2/ex=0/w=136.0k  B:cov=2/ex=0/w=145.3k  C:cov=2/ex=1/w=78.9k
+  d2_00018 GT=2  A:cov=0/ex=2/w=6.0k  B:cov=2/ex=0/w=795.3k  C:cov=0/ex=0/w=0.0k
+  d2_00019 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00020 GT=2  A:cov=1/ex=3/w=31.0k  B:cov=1/ex=3/w=153.2k  C:cov=1/ex=0/w=87.5k
+  d2_00021 GT=1  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d2_00022 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00023 GT=2  A:cov=2/ex=4/w=16.0k  B:cov=1/ex=3/w=94.0k  C:cov=1/ex=1/w=47.1k
+  d2_00024 GT=1  A:cov=1/ex=3/w=6.0k  B:cov=1/ex=0/w=335.2k  C:cov=0/ex=0/w=0.0k
+  d2_00025 GT=2  A:cov=2/ex=2/w=6.0k  B:cov=2/ex=0/w=288.0k  C:cov=1/ex=0/w=117.2k
+  d2_00026 GT=2  A:cov=0/ex=3/w=36.0k  B:cov=2/ex=2/w=123.1k  C:cov=0/ex=1/w=31.3k
+  d2_00027 GT=3  A:cov=0/ex=0/w=0.0k  B:cov=2/ex=0/w=781.1k  C:cov=0/ex=0/w=0.0k
+  d2_00028 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=161.1k  C:cov=1/ex=1/w=70.5k
+  d2_00029 GT=2  A:cov=1/ex=2/w=26.0k  B:cov=1/ex=2/w=107.1k  C:cov=1/ex=0/w=123.7k
+  d2_00030 GT=1  A:cov=0/ex=4/w=11.0k  B:cov=1/ex=0/w=479.4k  C:cov=0/ex=0/w=0.0k
+  d2_00031 GT=1  A:cov=1/ex=0/w=86.0k  B:cov=1/ex=0/w=106.6k  C:cov=0/ex=0/w=0.0k
+  d2_00032 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00033 GT=2  A:cov=0/ex=5/w=26.0k  B:cov=1/ex=4/w=78.6k  C:cov=0/ex=0/w=0.0k
+  d2_00034 GT=1  A:cov=0/ex=2/w=11.0k  B:cov=1/ex=0/w=471.9k  C:cov=0/ex=0/w=0.0k
+  d2_00035 GT=2  A:cov=2/ex=3/w=16.0k  B:cov=1/ex=1/w=82.7k  C:cov=1/ex=0/w=91.3k
+  d2_00036 GT=1  A:cov=0/ex=3/w=16.0k  B:cov=1/ex=0/w=474.4k  C:cov=0/ex=0/w=0.0k
+  d2_00037 GT=2  A:cov=1/ex=4/w=36.0k  B:cov=2/ex=0/w=302.9k  C:cov=1/ex=3/w=38.2k
+  d2_00038 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00039 GT=2  A:cov=2/ex=2/w=21.0k  B:cov=2/ex=0/w=239.8k  C:cov=0/ex=0/w=0.0k
+  d2_00040 GT=1  A:cov=0/ex=4/w=6.0k  B:cov=1/ex=0/w=678.9k  C:cov=0/ex=1/w=32.8k
+  d2_00041 GT=2  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=3/w=130.2k  C:cov=0/ex=0/w=0.0k
+  d2_00042 GT=3  A:cov=2/ex=4/w=11.0k  B:cov=2/ex=0/w=219.7k  C:cov=0/ex=0/w=0.0k
+  d2_00043 GT=2  A:cov=0/ex=4/w=11.0k  B:cov=1/ex=3/w=33.1k  C:cov=0/ex=1/w=34.7k
+  d2_00044 GT=2  A:cov=1/ex=1/w=76.0k  B:cov=2/ex=1/w=142.0k  C:cov=1/ex=1/w=66.8k
+  d2_00045 GT=2  A:cov=0/ex=4/w=6.0k  B:cov=0/ex=5/w=13.7k  C:cov=0/ex=1/w=59.0k
+  d2_00046 GT=1  A:cov=1/ex=1/w=56.0k  B:cov=1/ex=0/w=164.0k  C:cov=1/ex=2/w=35.7k
+  d2_00047 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=149.5k  C:cov=1/ex=0/w=107.7k
+  d2_00048 GT=1  A:cov=1/ex=3/w=41.0k  B:cov=1/ex=0/w=436.4k  C:cov=0/ex=1/w=35.1k
+  d2_00049 GT=2  A:cov=1/ex=1/w=56.0k  B:cov=2/ex=0/w=293.9k  C:cov=1/ex=2/w=39.2k
+  d2_00050 GT=3  A:cov=0/ex=4/w=6.0k  B:cov=0/ex=2/w=95.1k  C:cov=0/ex=0/w=0.0k
+  d2_00051 GT=3  A:cov=1/ex=0/w=116.0k  B:cov=1/ex=0/w=144.5k  C:cov=1/ex=1/w=71.9k
+  d2_00052 GT=1  A:cov=0/ex=1/w=6.0k  B:cov=1/ex=0/w=438.3k  C:cov=0/ex=0/w=0.0k
+  d2_00053 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=140.1k  C:cov=1/ex=1/w=69.1k
+  d2_00054 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00055 GT=2  A:cov=1/ex=5/w=16.0k  B:cov=1/ex=2/w=134.8k  C:cov=1/ex=1/w=97.5k
+  d2_00056 GT=2  A:cov=0/ex=4/w=6.0k  B:cov=1/ex=0/w=347.8k  C:cov=0/ex=0/w=0.0k
+  d2_00057 GT=3  A:cov=1/ex=5/w=11.0k  B:cov=3/ex=0/w=445.9k  C:cov=1/ex=0/w=103.7k
+  d2_00058 GT=3  A:cov=1/ex=5/w=6.0k  B:cov=2/ex=1/w=107.0k  C:cov=0/ex=0/w=0.0k
+  d2_00059 GT=1  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=0/w=791.2k  C:cov=0/ex=0/w=0.0k
+  d2_00060 GT=2  A:cov=1/ex=3/w=16.0k  B:cov=2/ex=0/w=245.8k  C:cov=1/ex=3/w=34.3k
+  d2_00061 GT=2  A:cov=0/ex=4/w=11.0k  B:cov=1/ex=2/w=85.4k  C:cov=0/ex=0/w=0.0k
+  d2_00062 GT=1  A:cov=0/ex=2/w=31.0k  B:cov=1/ex=0/w=453.9k  C:cov=0/ex=0/w=0.0k
+  d2_00063 GT=1  A:cov=0/ex=2/w=6.0k  B:cov=0/ex=2/w=25.4k  C:cov=0/ex=0/w=0.0k
+  d2_00064 GT=3  A:cov=0/ex=6/w=6.0k  B:cov=2/ex=3/w=34.1k  C:cov=0/ex=0/w=0.0k
+  d2_00065 GT=1  A:cov=1/ex=1/w=56.0k  B:cov=1/ex=0/w=193.4k  C:cov=1/ex=0/w=138.7k
+  d2_00066 GT=2  A:cov=0/ex=6/w=6.0k  B:cov=2/ex=0/w=392.4k  C:cov=0/ex=0/w=0.0k
+  d2_00067 GT=1  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=0/w=396.3k  C:cov=0/ex=1/w=32.6k
+  d2_00068 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00069 GT=1  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=0/w=458.3k  C:cov=0/ex=0/w=0.0k
+  d2_00070 GT=3  A:cov=1/ex=1/w=61.0k  B:cov=2/ex=5/w=35.7k  C:cov=1/ex=0/w=131.5k
+  d2_00071 GT=2  A:cov=1/ex=2/w=6.0k  B:cov=1/ex=0/w=283.7k  C:cov=0/ex=1/w=36.2k
+  d2_00072 GT=1  A:cov=0/ex=1/w=36.0k  B:cov=0/ex=3/w=24.9k  C:cov=0/ex=1/w=38.0k
+  d2_00073 GT=3  A:cov=1/ex=4/w=6.0k  B:cov=2/ex=1/w=158.1k  C:cov=1/ex=1/w=86.6k
+  d2_00074 GT=3  A:cov=0/ex=0/w=0.0k  B:cov=2/ex=0/w=439.6k  C:cov=0/ex=0/w=0.0k
+  d2_00075 GT=2  A:cov=2/ex=1/w=96.0k  B:cov=2/ex=0/w=146.2k  C:cov=2/ex=1/w=85.5k
+  d2_00076 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00077 GT=2  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=2/w=200.2k  C:cov=0/ex=0/w=0.0k
+  d2_00078 GT=2  A:cov=1/ex=2/w=6.0k  B:cov=2/ex=0/w=343.6k  C:cov=1/ex=0/w=120.6k
+  d2_00079 跳过：RuntimeError: target reference not available for station 'station_a'
+  d2_00080 GT=1  A:cov=0/ex=2/w=6.0k  B:cov=1/ex=0/w=547.7k  C:cov=0/ex=0/w=0.0k
+  d2_00081 GT=2  A:cov=1/ex=4/w=16.0k  B:cov=1/ex=2/w=135.4k  C:cov=1/ex=0/w=166.2k
+  d2_00082 GT=3  A:cov=1/ex=2/w=6.0k  B:cov=2/ex=1/w=333.8k  C:cov=1/ex=1/w=58.0k
+  d2_00083 GT=1  A:cov=0/ex=6/w=6.0k  B:cov=1/ex=0/w=469.4k  C:cov=0/ex=1/w=36.2k
+  d2_00084 GT=3  A:cov=0/ex=1/w=6.0k  B:cov=0/ex=2/w=104.7k  C:cov=0/ex=0/w=0.0k
+  d2_00085 GT=3  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=1/w=47.5k  C:cov=0/ex=0/w=0.0k
+  d2_00086 GT=3  A:cov=0/ex=2/w=6.0k  B:cov=1/ex=2/w=127.8k  C:cov=0/ex=0/w=0.0k
+  d2_00087 GT=2  A:cov=0/ex=6/w=6.0k  B:cov=2/ex=0/w=380.6k  C:cov=0/ex=0/w=0.0k
+  d2_00088 GT=3  A:cov=2/ex=3/w=6.0k  B:cov=2/ex=1/w=468.4k  C:cov=0/ex=0/w=0.0k
+  d2_00089 GT=1  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=0/w=395.7k  C:cov=0/ex=1/w=31.5k
+  d2_00090 GT=2  A:cov=0/ex=1/w=26.0k  B:cov=2/ex=0/w=679.5k  C:cov=0/ex=0/w=0.0k
+  d2_00091 GT=3  A:cov=1/ex=4/w=6.0k  B:cov=2/ex=2/w=103.8k  C:cov=1/ex=1/w=57.3k
+  d2_00092 GT=2  A:cov=1/ex=3/w=11.0k  B:cov=1/ex=2/w=59.4k  C:cov=0/ex=0/w=0.0k
+  d2_00093 GT=1  A:cov=1/ex=2/w=16.0k  B:cov=1/ex=0/w=170.7k  C:cov=1/ex=1/w=75.9k
+  d2_00094 GT=1  A:cov=1/ex=2/w=16.0k  B:cov=1/ex=0/w=311.4k  C:cov=0/ex=0/w=0.0k
+  d2_00095 GT=2  A:cov=1/ex=3/w=11.0k  B:cov=1/ex=1/w=133.9k  C:cov=0/ex=0/w=0.0k
+  d2_00096 GT=2  A:cov=1/ex=1/w=21.0k  B:cov=2/ex=0/w=211.7k  C:cov=0/ex=0/w=0.0k
+  d2_00097 GT=2  A:cov=2/ex=2/w=16.0k  B:cov=2/ex=0/w=227.6k  C:cov=1/ex=0/w=137.8k
+  d2_00098 GT=2  A:cov=0/ex=2/w=16.0k  B:cov=1/ex=1/w=175.8k  C:cov=0/ex=0/w=0.0k
+  d2_00099 GT=1  A:cov=1/ex=1/w=31.0k  B:cov=1/ex=0/w=178.2k  C:cov=1/ex=0/w=142.3k
+
+== dataset_d2 @ station_a（n=100）==
+
+== 干净样本 0 / 有干扰样本 90 / 跳过 10 ==
+判据                         虚警带        覆盖     覆盖%     多余带      带中位宽_kHz      GT中位宽_kHz
+A 现行（10k 网格）                 0    62/167    37.1%     220          11.0          401.7
+B 相干支撑连通域                    0   113/167    67.7%      82         170.7          401.7
+C 谱阶跃边                       0    37/167    22.2%      37          70.5          401.7
+
+C 法边的定位（GT 带宽 ≥20 kHz 的源）：真边 334 条、被接受边命中 233 条（69.8%），命中边中位 |Δ边| = 19.1 kHz

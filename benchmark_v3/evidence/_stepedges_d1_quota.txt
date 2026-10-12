@@ -1,0 +1,110 @@
+  d1_00000 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00001 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00002 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00003 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=212.8k  C:cov=1/ex=0/w=179.7k
+  d1_00004 GT=1  A:cov=1/ex=2/w=16.0k  B:cov=1/ex=0/w=222.1k  C:cov=1/ex=0/w=144.3k
+  d1_00005 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00006 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=15.8k  C:cov=0/ex=0/w=0.0k
+  d1_00007 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00008 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00009 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00010 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00011 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00012 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00013 GT=1  A:cov=1/ex=0/w=146.0k  B:cov=1/ex=0/w=165.5k  C:cov=1/ex=2/w=32.8k
+  d1_00014 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00015 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=25.1k  C:cov=0/ex=0/w=0.0k
+  d1_00016 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00017 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=20.4k  C:cov=0/ex=0/w=0.0k
+  d1_00018 GT=1  A:cov=1/ex=0/w=96.0k  B:cov=1/ex=0/w=195.8k  C:cov=1/ex=0/w=115.8k
+  d1_00019 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=8.4k  C:cov=0/ex=0/w=0.0k
+  d1_00020 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00021 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00022 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00023 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=23.9k  C:cov=0/ex=0/w=0.0k
+  d1_00024 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00025 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00026 GT=1  A:cov=0/ex=0/w=0.0k  B:cov=1/ex=0/w=10.6k  C:cov=0/ex=0/w=0.0k
+  d1_00027 GT=1  A:cov=1/ex=1/w=56.0k  B:cov=1/ex=0/w=163.8k  C:cov=1/ex=2/w=38.6k
+  d1_00028 GT=1  A:cov=1/ex=1/w=51.0k  B:cov=1/ex=0/w=159.7k  C:cov=1/ex=2/w=31.2k
+  d1_00029 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00030 GT=1  A:cov=1/ex=3/w=6.0k  B:cov=1/ex=0/w=216.2k  C:cov=1/ex=0/w=129.5k
+  d1_00031 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00032 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=160.3k  C:cov=1/ex=1/w=69.2k
+  d1_00033 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=161.4k  C:cov=1/ex=0/w=125.7k
+  d1_00034 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00035 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00036 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=187.8k  C:cov=1/ex=1/w=74.0k
+  d1_00037 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00038 GT=1  A:cov=1/ex=0/w=146.0k  B:cov=1/ex=0/w=198.3k  C:cov=1/ex=0/w=139.8k
+  d1_00039 GT=1  A:cov=1/ex=3/w=6.0k  B:cov=1/ex=0/w=221.7k  C:cov=1/ex=0/w=149.3k
+  d1_00040 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00041 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00042 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00043 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00044 GT=1  A:cov=1/ex=1/w=71.0k  B:cov=1/ex=0/w=190.2k  C:cov=1/ex=0/w=137.8k
+  d1_00045 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=169.9k  C:cov=1/ex=1/w=76.1k
+  d1_00046 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=28.5k  C:cov=0/ex=0/w=0.0k
+  d1_00047 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=23.6k  C:cov=0/ex=0/w=0.0k
+  d1_00048 GT=1  A:cov=1/ex=0/w=136.0k  B:cov=1/ex=0/w=160.4k  C:cov=1/ex=1/w=64.5k
+  d1_00049 GT=1  A:cov=1/ex=0/w=26.0k  B:cov=1/ex=0/w=41.3k  C:cov=1/ex=0/w=53.2k
+  d1_00050 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00051 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00052 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00053 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00054 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=7.9k  C:cov=0/ex=0/w=0.0k
+  d1_00055 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=38.9k  C:cov=1/ex=0/w=50.0k
+  d1_00056 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=26.5k  C:cov=0/ex=0/w=0.0k
+  d1_00057 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00058 GT=1  A:cov=1/ex=0/w=146.0k  B:cov=1/ex=0/w=187.1k  C:cov=1/ex=2/w=35.1k
+  d1_00059 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=23.8k  C:cov=0/ex=0/w=0.0k
+  d1_00060 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00061 GT=1  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00062 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00063 GT=1  A:cov=1/ex=2/w=6.0k  B:cov=1/ex=0/w=209.6k  C:cov=1/ex=0/w=147.7k
+  d1_00064 GT=1  A:cov=0/ex=0/w=0.0k  B:cov=1/ex=0/w=8.6k  C:cov=0/ex=0/w=0.0k
+  d1_00065 GT=1  A:cov=1/ex=2/w=6.0k  B:cov=1/ex=0/w=221.5k  C:cov=1/ex=0/w=164.9k
+  d1_00066 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00067 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00068 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=177.5k  C:cov=1/ex=2/w=31.4k
+  d1_00069 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00070 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=13.1k  C:cov=0/ex=0/w=0.0k
+  d1_00071 GT=1  A:cov=1/ex=0/w=46.0k  B:cov=1/ex=0/w=55.6k  C:cov=1/ex=0/w=56.0k
+  d1_00072 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00073 GT=1  A:cov=1/ex=2/w=26.0k  B:cov=1/ex=0/w=233.2k  C:cov=1/ex=0/w=147.5k
+  d1_00074 GT=1  A:cov=1/ex=0/w=106.0k  B:cov=1/ex=0/w=154.1k  C:cov=1/ex=2/w=34.7k
+  d1_00075 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00076 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00077 GT=1  A:cov=1/ex=1/w=16.0k  B:cov=1/ex=0/w=223.1k  C:cov=1/ex=0/w=158.9k
+  d1_00078 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00079 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00080 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00081 GT=1  A:cov=0/ex=0/w=0.0k  B:cov=1/ex=0/w=9.3k  C:cov=0/ex=0/w=0.0k
+  d1_00082 GT=1  A:cov=1/ex=4/w=6.0k  B:cov=1/ex=0/w=224.6k  C:cov=0/ex=0/w=0.0k
+  d1_00083 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00084 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00085 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=19.8k  C:cov=0/ex=0/w=0.0k
+  d1_00086 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00087 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00088 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00089 GT=1  A:cov=1/ex=5/w=6.0k  B:cov=1/ex=0/w=242.4k  C:cov=1/ex=0/w=208.5k
+  d1_00090 GT=1  A:cov=1/ex=0/w=16.0k  B:cov=1/ex=0/w=40.7k  C:cov=0/ex=0/w=0.0k
+  d1_00091 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=19.5k  C:cov=0/ex=0/w=0.0k
+  d1_00092 GT=1  A:cov=0/ex=3/w=6.0k  B:cov=1/ex=0/w=224.3k  C:cov=1/ex=0/w=159.4k
+  d1_00093 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00094 GT=1  A:cov=1/ex=0/w=126.0k  B:cov=1/ex=0/w=150.7k  C:cov=1/ex=2/w=36.6k
+  d1_00095 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=14.0k  C:cov=0/ex=0/w=0.0k
+  d1_00096 GT=1  A:cov=1/ex=1/w=16.0k  B:cov=1/ex=0/w=240.0k  C:cov=0/ex=0/w=0.0k
+  d1_00097 GT=0  A:cov=0/ex=0/w=0.0k  B:cov=0/ex=0/w=0.0k  C:cov=0/ex=0/w=0.0k
+  d1_00098 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=23.5k  C:cov=0/ex=0/w=0.0k
+  d1_00099 GT=1  A:cov=1/ex=0/w=6.0k  B:cov=1/ex=0/w=7.4k  C:cov=0/ex=0/w=0.0k
+
+== dataset_d1 @ station_a（n=100）==
+
+== 干净样本 49 / 有干扰样本 51 ==
+判据                         虚警带        覆盖     覆盖%     多余带      带中位宽_kHz      GT中位宽_kHz
+A 现行（10k 网格）                 0    46/51     90.2%      31          16.0           87.2
+B 相干支撑连通域                    0    50/51     98.0%       0         156.9           87.2
+C 谱阶跃边                       0    28/51     54.9%      18          96.0           87.2
+
+C 法边的定位（GT 带宽 ≥20 kHz 的源）：真边 54 条、被接受边命中 54 条（100.0%），命中边中位 |Δ边| = 9.8 kHz
