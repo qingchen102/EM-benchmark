@@ -12,8 +12,10 @@ benchmark_v3/dataset_d*/_agent_cache_pre_*/
 benchmark_v3/adapters/rad_cls/rad_classifier/
 benchmark_v3/adapters/rad_cls/checkpoint*
 
-# ── 跨版本数据快照（唯一保留的旧数据，8 GB；不需要时 `Remove-Item -Recurse -Force benchmark_v3\_archive`）
+# ── 跨版本数据快照与暂存产物（旧档备份 + 新档暂存，GB 级；不需要时 Remove-Item -Recurse -Force）
 benchmark_v3/_archive/
+benchmark_v3/_pre_*/
+benchmark_v3/_regen*/
 
 # ── 全量 API 运行日志（包装脚本会回显含 Key 的命令行，绝对不能入库）
 benchmark_v3/_api_*

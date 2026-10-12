@@ -1,0 +1,72 @@
+﻿== _regen_v2/d1_00061  GT=1  matched=0.987  floor=-128.3 dB  rx_half=1800k ==
+  GT tone f=    648.7k bw=     0.1k power=4.82dBm
+  -- 真源 648.7k 附近（步长 5k，窗口 300k）--
+         618.7k  over=  -1.0 dB  coh=0.213  门限 over≥8.0 / coh≥0.6
+         623.7k  over=  -1.1 dB  coh=0.189  门限 over≥8.0 / coh≥0.6
+         628.7k  over=  -3.1 dB  coh=0.200  门限 over≥8.0 / coh≥0.6
+         633.7k  over=  -0.4 dB  coh=0.200  门限 over≥8.0 / coh≥0.6
+         638.7k  over=  -0.8 dB  coh=0.188  门限 over≥8.0 / coh≥0.6
+         643.7k  over=   1.3 dB  coh=0.214  门限 over≥8.0 / coh≥0.6
+         648.7k  over=  55.1 dB  coh=0.431  门限 over≥8.0 / coh≥0.6  <= 真源
+         653.7k  over=   2.0 dB  coh=0.202  门限 over≥8.0 / coh≥0.6
+         658.7k  over=  -0.3 dB  coh=0.186  门限 over≥8.0 / coh≥0.6
+         663.7k  over=  -3.8 dB  coh=0.201  门限 over≥8.0 / coh≥0.6
+         668.7k  over=  -2.1 dB  coh=0.187  门限 over≥8.0 / coh≥0.6
+         673.7k  over=   2.3 dB  coh=0.197  门限 over≥8.0 / coh≥0.6
+         678.7k  over=   2.4 dB  coh=0.209  门限 over≥8.0 / coh≥0.6
+  -- 门控判据返回 --
+  -- 旧判据返回 --
+     {'freq_offset_hz': 648700.0, 'over_floor_db': 96.3, 'bandwidth_hz': 849900.0, 'band_hz': [0.0, 849800.0]}
+     {'freq_offset_hz': -668600.0, 'over_floor_db': 45.6, 'bandwidth_hz': 852100.0, 'band_hz': [-852100.0, -100.0]}
+     {'freq_offset_hz': 850200.0, 'over_floor_db': 13.7, 'bandwidth_hz': 2300.0, 'band_hz': [850000.0, 852200.0]}
+== _regen_v2/d1_00026  GT=1  matched=0.873  floor=-123.7 dB  rx_half=1800k ==
+  GT tone f=    576.6k bw=     0.1k power=12.36dBm
+  -- 真源 576.6k 附近（步长 5k，窗口 300k）--
+         546.6k  over=  -1.1 dB  coh=0.196  门限 over≥8.0 / coh≥0.6
+         551.6k  over=  -1.9 dB  coh=0.204  门限 over≥8.0 / coh≥0.6
+         556.6k  over=   1.0 dB  coh=0.215  门限 over≥8.0 / coh≥0.6
+         561.6k  over=   0.9 dB  coh=0.232  门限 over≥8.0 / coh≥0.6
+         566.6k  over=   2.6 dB  coh=0.287  门限 over≥8.0 / coh≥0.6
+         571.6k  over=  -0.6 dB  coh=0.555  门限 over≥8.0 / coh≥0.6
+         576.6k  over=  60.4 dB  coh=0.899  门限 over≥8.0 / coh≥0.6  <= 真源
+         581.6k  over=   1.9 dB  coh=0.529  门限 over≥8.0 / coh≥0.6
+         586.6k  over=  -2.0 dB  coh=0.281  门限 over≥8.0 / coh≥0.6
+         591.6k  over=   1.6 dB  coh=0.259  门限 over≥8.0 / coh≥0.6
+         596.6k  over=  -1.1 dB  coh=0.208  门限 over≥8.0 / coh≥0.6
+         601.6k  over=   1.0 dB  coh=0.207  门限 over≥8.0 / coh≥0.6
+         606.6k  over=   1.9 dB  coh=0.179  门限 over≥8.0 / coh≥0.6
+  -- 门控判据返回 --
+  -- 旧判据返回 --
+     {'freq_offset_hz': 576600.0, 'over_floor_db': 97.2, 'bandwidth_hz': 845100.0, 'band_hz': [0.0, 845000.0]}
+     {'freq_offset_hz': -525000.0, 'over_floor_db': 41.4, 'bandwidth_hz': 845700.0, 'band_hz': [-845700.0, -100.0]}
+     {'freq_offset_hz': 845600.0, 'over_floor_db': 12.8, 'bandwidth_hz': 1000.0, 'band_hz': [845200.0, 846100.0]}
+     {'freq_offset_hz': 847200.0, 'over_floor_db': 12.3, 'bandwidth_hz': 900.0, 'band_hz': [846500.0, 847300.0]}
+     {'freq_offset_hz': 847600.0, 'over_floor_db': 11.5, 'bandwidth_hz': 500.0, 'band_hz': [847500.0, 847900.0]}
+     {'freq_offset_hz': -846400.0, 'over_floor_db': 11.1, 'bandwidth_hz': 700.0, 'band_hz': [-846500.0, -845900.0]}
+== _regen_v2/d1_00092  GT=1  matched=0.874  floor=-113.2 dB  rx_half=1800k ==
+  GT noise f=    668.0k bw=   164.9k power=4.87dBm
+  -- 真源 668.0k 附近（步长 5k，窗口 300k）--
+         638.0k  over=   6.4 dB  coh=0.993  门限 over≥8.0 / coh≥0.6
+         643.0k  over=  10.2 dB  coh=0.987  门限 over≥8.0 / coh≥0.6
+         648.0k  over= -17.7 dB  coh=0.970  门限 over≥8.0 / coh≥0.6
+         653.0k  over=   9.9 dB  coh=0.993  门限 over≥8.0 / coh≥0.6
+         658.0k  over=   2.1 dB  coh=0.992  门限 over≥8.0 / coh≥0.6
+         663.0k  over=   8.5 dB  coh=0.979  门限 over≥8.0 / coh≥0.6
+         668.0k  over=  12.3 dB  coh=0.984  门限 over≥8.0 / coh≥0.6  <= 真源
+         673.0k  over=   8.8 dB  coh=0.990  门限 over≥8.0 / coh≥0.6
+         678.0k  over=   4.9 dB  coh=0.992  门限 over≥8.0 / coh≥0.6
+         683.0k  over=  12.7 dB  coh=0.988  门限 over≥8.0 / coh≥0.6
+         688.0k  over=   7.8 dB  coh=0.992  门限 over≥8.0 / coh≥0.6
+         693.0k  over= -11.6 dB  coh=0.995  门限 over≥8.0 / coh≥0.6
+         698.0k  over=   4.9 dB  coh=0.996  门限 over≥8.0 / coh≥0.6
+  -- 门控判据返回 --
+     {'freq_offset_hz': 730000.0, 'over_floor_db': 13.5, 'bandwidth_hz': 6000.0, 'band_hz': [727000.0, 733000.0], 'coherence': 0.992}
+     {'freq_offset_hz': 620000.0, 'over_floor_db': 10.5, 'bandwidth_hz': 26000.0, 'band_hz': [607000.0, 633000.0], 'coherence': 0.984}
+     {'freq_offset_hz': 580000.0, 'over_floor_db': 8.0, 'bandwidth_hz': 6000.0, 'band_hz': [577000.0, 583000.0], 'coherence': 0.961}
+  -- 旧判据返回 --
+     {'freq_offset_hz': 678900.0, 'over_floor_db': 63.0, 'bandwidth_hz': 833400.0, 'band_hz': [0.0, 833300.0]}
+     {'freq_offset_hz': -147600.0, 'over_floor_db': 31.3, 'bandwidth_hz': 830800.0, 'band_hz': [-830800.0, -100.0]}
+     {'freq_offset_hz': 833800.0, 'over_floor_db': 14.0, 'bandwidth_hz': 2300.0, 'band_hz': [833500.0, 835700.0]}
+     {'freq_offset_hz': -833900.0, 'over_floor_db': 12.9, 'bandwidth_hz': 1000.0, 'band_hz': [-834000.0, -833100.0]}
+     {'freq_offset_hz': -831200.0, 'over_floor_db': 12.8, 'bandwidth_hz': 1000.0, 'band_hz': [-831900.0, -831000.0]}
+     {'freq_offset_hz': -832600.0, 'over_floor_db': 12.4, 'bandwidth_hz': 900.0, 'band_hz': [-832900.0, -832100.0]}

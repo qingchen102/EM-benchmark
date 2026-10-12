@@ -38,13 +38,25 @@ for _p in (str(HERE), str(_V3 / "simulation"),
 import capture_tools as ct        # noqa: E402
 import run_capture_agent as rca   # noqa: E402
 
-D1 = _V3 / "dataset_d1"
+D1 = ((_V3 / "dataset_d1") if len(sys.argv) < 2 else Path(sys.argv[1]).resolve())
 SIDS = ["d1_00001", "d1_00020", "d1_00045",     # GT=0（干净）
         "d1_00000", "d1_00003", "d1_00043"]     # GT=1
 
 
+def _pick(root: Path, n_each: int = 3) -> list[str]:
+    """换数据集根时自动选样：前 n_each 个干净样本 + 前 n_each 个含干扰样本。"""
+    idx = json.loads((root / "index.json").read_text(encoding="utf-8"))
+    clean, dirty = [], []
+    for s in idx["samples"]:
+        t = json.loads((root / s["id"] / "capture" / "private" / "d1_truth.json"
+                        ).read_text(encoding="utf-8"))
+        (dirty if (t.get("interferers") or []) else clean).append(s["id"])
+    return clean[:n_each] + dirty[:n_each]
+
 def main() -> None:
-    for sid in SIDS:
+    sids = (SIDS if len(sys.argv) > 2 else
+            (_pick(D1) if D1 != (_V3 / "dataset_d1") else SIDS))
+    for sid in sids:
         cap = D1 / sid / "capture" / "public"
         priv = D1 / sid / "capture" / "private"
         obs = json.loads((cap / "observations.json").read_text(encoding="utf-8"))

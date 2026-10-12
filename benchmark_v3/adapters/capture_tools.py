@@ -53,8 +53,13 @@ from em_signal_simulator_v3.emitters import (  # noqa: E402
 # 定阈依据 `_diag_bands_v2.py`：D1 12 样本上 0 虚警、GT 全覆盖（真 band coh 中位 0.97，
 # 假 band 一个都没有；旧判据在干净样本上产生 50 个假峰）。
 PEAK_OVER_DB = 8.0          # 候选带需高于局部底的门限（dB）
-PEAK_COH_MIN = 0.6          # 候选带中心 ±20k 的空间相干门限
-PEAK_COH_WIN_HZ = 20e3      # 相干量测窗（±）
+PEAK_COH_MIN = 0.6          # 候选带中心 ±PEAK_COH_WIN_HZ 的空间相干门限
+# 相干量测窗（±）。2026-10-12 由 20 kHz 收窄到 3 kHz：新代数据逐样本取证（`diag/_probe_d1_peakmiss.py`）
+# 显示真源峰高出局部门限 60 dB 却因 coh=0.39 被拒——±20 kHz 窗内约 3200 个 bin 一起做协方差，
+# 纯音只占 1~8 个 bin，其相干能量被窗内**非相干失配底**稀释；窗收窄就减少稀释（失配底 λ1/Σλ 恒≈1/M）。
+# 扫描证据 `diag/_sweep_d1_cohwin.py`（`evidence/_sweep_cohwin_{newgen,oldgen}.txt`）：
+# 新代 D1 真源覆盖 78.4%→90.2%、旧代 92.6%→100%，两代干净样本虚警恒 0、多余峰数不变、带中位宽收紧。
+PEAK_COH_WIN_HZ = 3e3       # 相干量测窗（±）
 PEAK_FLOOR_WIN_HZ = 300e3   # 局部底的中位滤波窗
 PEAK_STEP_HZ = 10e3         # 占用曲线的扫描步长
 PEAK_MAX_N = 6              # 单站最多返回带数

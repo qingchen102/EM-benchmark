@@ -1,0 +1,58 @@
+﻿== 16 ����������� oracle��gate: clean0.85/slice0.5/toolview0.5��==
+  clean (��������, ѵ��ͬ��·): 0.877  [1000/1140]  gate=0.85
+  GT��Ƭ (GTλ��LS��ȡ�����): 0.472  [75/159]  gate=0.5
+    [gt-slice] �ھ�˵����10 ������ station_a Ŀ�� 0 �����ô���ԭʼ IQ ���в�빤�߽���Լ��һ�£���0 ������Ŀ����·�ļ�ȱʧ�����������������ĸ��
+== �ж�: clean PASS | GT��Ƭ FAIL
+== clean �������� ==
+  �������� (GT�� �� pred��, ����/����=����):
+       Bluet  WiFi_  Micro  Zigbe   DECT  LTE_Q  UAV_v  UAV_R  Radar  GPS_D  GNSS_  GNSS_  TV_br  Chirp  Noise  Tone_  Welde  VFD_n  Coron
+  Bluetooth_FH     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  WiFi_burst        0     52      0      1      0      0      0      0      0      0      0      0      0      0      0      0      3      0      4
+  Microwave         0      0     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Zigbee            0      0      0     58      0      0      0      0      0      0      0      0      0      0      0      0      0      0      2
+  DECT              0      0      0      0     60      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  LTE_QPSK          0      0      0      0      0     59      0      0      0      0      0      0      0      0      1      0      0      0      0
+  UAV_video_OF      0      0      0      0      0      0     31      1      0      0      0      0     25      0      3      0      0      0      0
+  UAV_RC_hoppi      0      0      0      0      0      0      0     59      0      0      0      0      0      0      1      0      0      0      0
+  Radar_pulsed      0      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0      0      0      0
+  GPS_DSSS          0      0      0      0      0      0      0      0      0     60      0      0      0      0      0      0      0      0      0
+  GNSS_jam          0      0      1      0      0      0      0      0      0      0     58      0      0      0      0      0      0      1      0
+  GNSS_spoof        0      0      0      0      0      0      0      0      0      4      0     56      0      0      0      0      0      0      0
+  TV_broadcast      0      0      0      0      0      0     38      0      0      0      0      0     21      0      1      0      0      0      0
+  Chirp_jam         0      0      0      0      0      0      0      0      0      0      0      0      0     60      0      0      0      0      0
+  Noise_jam         0      0      0      0      0      4      0      0      0      0      0      0      0      0     55      0      1      0      0
+  Tone_jam          0      0      0      0      0      1      0      0      0      0      0      0      0      0     11     45      3      0      0
+  Welder            0     22      0      1      0      0      0      0      0      0      0      0      0      0      1      2     29      0      5
+  VFD_noise         0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      1     59      0
+  Corona            0      0      0      0      0      0      0      0      0      0      0      0      0      0      2      0      0      0     58
+== GT��Ƭ �������� ==
+  �������� (GT�� �� pred��, ����/����=����):
+       Bluet  WiFi_  Micro  Zigbe   DECT  LTE_Q  UAV_v  UAV_R  Radar  GPS_D  GNSS_  GNSS_  TV_br  Chirp  Noise  Tone_  Welde  VFD_n  Coron
+  Bluetooth_FH      9      0      0      0      3      0      0      0      0      5      0      0      0      0      0      0      0      0      1
+  WiFi_burst        0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      2     12      0     10
+  Microwave         0      0     17      0      0      0      0      0      0      0      0      0      0      0      0      0      1      0      0
+  Zigbee            0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      3     13      0     12
+  DECT              0      0      0      0     20      0      0      0      0      0      0      0      0      0      0      1      0      0      2
+  LTE_QPSK          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  UAV_video_OF      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  UAV_RC_hoppi      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Radar_pulsed      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GPS_DSSS          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GNSS_jam          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  GNSS_spoof        0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  TV_broadcast      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Chirp_jam         0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Noise_jam         0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Tone_jam          0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      0
+  Welder            0      8      1      0      0      0      0      0      0      0      0      0      0      0      0      0      5      0      3
+  VFD_noise         0      0      2      0      0      0      0      0      0      0      0      0      1      0      0      0      2     11      0
+  Corona            0      0      0      0      0      0      0      0      0      0      0      0      0      0      0      1      1      0     13
+  tool-view (������·, ǰ50����, ��ָ��=candidates):
+    per-source �ٻ� : 0.709  [61/86]
+    �ٴ���          : 0.479  [56/117 ��]
+    ��������׼ȷ��  : 0.246  [15/61]
+    �˵���/����     : 0.174  (gate: �ٻء�0.5 �� ������0.5)
+    [�ɽ��Ӽ��ٻ�   : 0.718  [61/85] ���� ��ĸ=��3վ�ɼ���trio Ӳ���ޣ�����ȫ�ɼ��ھ����б�
+    [��Ҫ] sources �ż���: �ٻ� 0.709  ���� 116
+== �ж�: tool-view FAIL
+δ��꣺�����빤���䣬�ص�ѵ�����Σ����ӱ���/epoch/������

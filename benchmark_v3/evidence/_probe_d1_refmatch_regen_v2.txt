@@ -1,0 +1,25 @@
+﻿
+=== d1_00000  GT=0  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.991   floor = -131.0 dB   门控峰 0 / 旧宽带峰 4
+
+=== d1_00001  GT=0  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.985   floor = -130.3 dB   门控峰 0 / 旧宽带峰 4
+
+=== d1_00002  GT=0  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.996   floor = -128.9 dB   门控峰 0 / 旧宽带峰 6
+
+=== d1_00003  GT=1  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.736   floor = -104.4 dB   门控峰 1 / 旧宽带峰 6
+    PK    -620.1k  over= 19.6 dB  coh=0.999  bw=  160.0k
+    GT      noise f=   -644.0k bw=  132.8k
+
+=== d1_00004  GT=1  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.901   floor = -112.7 dB   门控峰 3 / 旧宽带峰 6
+    PK    -640.1k  over= 12.8 dB  coh=0.99  bw=   50.0k
+    PK    -600.1k  over= 10.5 dB  coh=0.989  bw=   60.0k
+    PK    -720.1k  over= 10.4 dB  coh=0.987  bw=   50.0k
+    GT      noise f=   -660.0k bw=  161.7k
+
+=== d1_00006  GT=1  refs_stations=['station_a', 'station_b', 'station_c', 'station_d'] ===
+    matched_energy_fraction = 0.246   floor = -117.7 dB   门控峰 0 / 旧宽带峰 6
+    GT       tone f=    578.4k bw=    0.1k
