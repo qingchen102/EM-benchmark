@@ -573,6 +573,83 @@
     "spoof_hit": 0.571,
     "spoof_fa": 0.304,
     "note": "注册口径。计数 +0.02、意图 −0.03、机理 +0.04 vs 同分母常数基线；欺骗虚警 0.304（首个非零档）。"
+   },
+   "D1_S0_quota_2026_10_12": {
+    "answers_dir": "dataset_d1/answers_S0_agent_quota",
+    "slevel": "S0",
+    "n": 50,
+    "detection_hit": 0.96,
+    "detection_within1": 0.96,
+    "detect_abs_err": 0.08,
+    "kind_hits": 0.9583,
+    "freq_hits": 1.0,
+    "freq_aes": 0.0054,
+    "doa_hits": 0.625,
+    "doa_aes": 26.2458,
+    "mech_accuracy": 0.583,
+    "mech_pairs": 24,
+    "spoof_fa": 0.0,
+    "note": "**配额数据（D1 也重生成 100，本行评前 50）**，注册口径。计数 +0.44 vs 同分母常数基线（真值 0/1 源已做成 49/51 平衡）；机理轴是出题侧单类 adjacent（基线 1.000，本不该计分）；D1 真值 kind 为 legacy tone/noise，不进意图分母。同批仪器侧改了门控相干窗（PEAK_COH_WIN_HZ 20k→3k），D1 门控真源覆盖 0.804→0.922。"
+   },
+   "D2_S2_quota_2026_10_12": {
+    "answers_dir": "dataset_d2/answers_S2_agent_quota",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.6,
+    "detection_within1": 0.79,
+    "detect_abs_err": 0.42,
+    "kind_hits": 0.2911,
+    "freq_hits": 0.481,
+    "freq_aes": 0.0598,
+    "pos_hits": 0.7089,
+    "pos_errs": 195.4319,
+    "intent": 0.595,
+    "intent_pairs": 79,
+    "mech_accuracy": 0.468,
+    "mech_pairs": 79,
+    "spoof_fa": 0.0,
+    "note": "**配额数据（100 样本，本行评前 50）**，注册口径。计数**首次高于**同分母常数基线（+0.08）——旧数据源数 `{1:2,2:48}` 使基线高达 0.96，那时的 0.88 其实低于平凡解；意图 −0.14 仍低于多数类。"
+   },
+   "D3_S2_quota_2026_10_12": {
+    "answers_dir": "dataset_d3/answers_S2_agent_quota",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.7,
+    "detection_within1": 0.85,
+    "detect_abs_err": 0.3,
+    "kind_hits": 0.3953,
+    "freq_hits": 0.2209,
+    "freq_aes": 0.1001,
+    "pos_hits": 0.3953,
+    "pos_errs": 584.3643,
+    "intent": 0.651,
+    "intent_pairs": 86,
+    "mech_accuracy": 0.593,
+    "mech_pairs": 86,
+    "spoof_fa": 0.0,
+    "note": "**配额数据（100 样本，本行评前 50）**，注册口径。六条轴全部高于同分母常数基线（计数 +0.14 / 体制 +0.16 / 载频 +0.22 / 空间 +0.40 / 意图 +0.13 / 机理 +0.12）；多站三档里计分数最高，但仪器侧 tool-view 召回只有 0.372、假簇 0.602。"
+   },
+   "D4_S2_quota_2026_10_12": {
+    "answers_dir": "dataset_d4/answers_S2_agent_quota",
+    "slevel": "S2",
+    "n": 50,
+    "detection_hit": 0.52,
+    "detection_within1": 0.74,
+    "detect_abs_err": 0.52,
+    "kind_hits": 0.3962,
+    "freq_hits": 0.2642,
+    "freq_aes": 0.0986,
+    "pos_hits": 0.2736,
+    "pos_errs": 652.9868,
+    "intent": 0.698,
+    "intent_pairs": 106,
+    "mech_accuracy": 0.519,
+    "mech_pairs": 106,
+    "spoof_hit": 0.515,
+    "spoof_gt_total": 33,
+    "spoof_fa": 0.178,
+    "note": "**配额数据（100 样本，本行评前 50）**，注册口径。计数与常数基线**完全持平**（0.52 vs 0.52，真值 `{2:19,3:26,4:5}`）→ D4 计数轴本批没有判别力；机理轴增益最大（+0.18）、意图仅 +0.02；欺骗虚警 0.178、命中 0.515。"
+  
    }
   },
   "reading": "难度梯度单调（0.96 → 0.48 → 0.40 → 0.24）（**2026-10-10 更正**：该单调性只在带宽修复前口径成立；现行数据四档在**拒答修复后**为 0.92 / 0.54 / 0.48 / 0.36（修复前 0.96 / 0.44 / 0.46 / 0.22，当时 D3≈D2 的差距在单次 50 样本 ±0.2 的运行不确定度内））且“全报 0”拿不到分（D4 报 0 即正确的样本仅 6%）。D1 在 10-10 旧 wavefix 臂上量到 DOA 0.48 / kind 0.60，当时读作「单站前后瓣镜像上限」与「tone/noise 仪器盲区」——**该论断对注册臂不成立**（注册臂 D1：DOA 0.667、kind 0.852，且三口径 kind 分母完全一致）；D2–D4 的低分主要来自仪器（定位偏 ±100~644 m 撞 50 m 门限、共道带未在频率上分流），不是题目本身不可解。 **2026-10-12 更正**：开思考 + relay + `global:deepseek-v4.1-flash` 后四档注册基线为 0.92 / 0.88 / 0.48 / 0.52（rows 的 `*_fix2_mech_*` 四条）；但按同分母常数基线体检，D2–D4 的计数轴仍不高于「永远答众数」、意图轴在 D2 低于多数类，真正的判别力集中在载频轴与空间轴 —— 见 axis_baselines_2026_10_12 与 arm_attribution_2026_10_12。"
@@ -1096,5 +1173,61 @@
   ],
   "denominator_note": "本工具的臂口径 = 配对成功对（GT 侧最近邻）；canonical 报告 = match() 默认门槛的 pairs。D1 两者完全一致（27 对 / 23 命中 = 0.852）；D2 gated/ungated/GT 侧 = 0.366/0.358/0.337、D3 = 0.448/0.458/0.377、D4 = 0.449/0.447/0.400 → 差 0.00–0.05，见 evidence/kind_denominator_check.txt。",
   "fix_proposal_for_next_data": "第 4 条 QA 约束：每档可见源数覆盖 ≥3 个取值、最大类占比 ≤50%（只改出题分布，不动判分口径），让计数轴与分类轴都留有判别空间。"
+ },
+ "quota_dataset_2026_10_12": {
+  "what": "按 `benchmark_v3/docs/机理配额与重生成方案.md` 把四档重生成到**各 100 样本**（seed0 d1 42000 / d2 43000 / d3 44000 / d4 45000；生成器 `dataset_plan.py` + `gen_dataset.py` 接线，含机理自校与运行末尾 QA4 普查）；旧档（各 50 样本 + 全部答案/报告/缓存）整体备份在 `benchmark_v3/_pre_quota_20261012/`。随后按注册口径（新机理题面 + relay 7863 + 开思考 + `global:deepseek-v4.1-flash`）点状重跑四档**各前 50 样本**。",
+  "why": "旧数据的机理与源数都不是抽样维度（D1 单类 adjacent、D2 源数 `{1:2,2:48}`、D2 机理 co48/pulse38/adj12），导致计数轴与机理轴没有判别空间；配额化后每档机理 ≥3 值且最大类 ≤ 计划值+5pp（D2 45%+、D3 50%+、D4 spoof/co 各 30%+），意图最大类 ≤75%。",
+  "table": {
+   "D1_S0": {
+    "count": [0.96, 0.52, 0.44],
+    "kind": [0.9583, 0.625, 0.3333],
+    "freq": [1.0, 0.0, 1.0],
+    "space": [0.625, 0.042, 0.583],
+    "intent": null,
+    "mech": [0.583, 1.0, -0.417]
+   },
+   "D2_S2": {
+    "count": [0.6, 0.52, 0.08],
+    "kind": [0.2911, 0.215, 0.0761],
+    "freq": [0.481, 0.0, 0.481],
+    "space": [0.7089, 0.0, 0.7089],
+    "intent": [0.595, 0.734, -0.139],
+    "mech": [0.468, 0.456, 0.012]
+   },
+   "D3_S2": {
+    "count": [0.7, 0.56, 0.14],
+    "kind": [0.3953, 0.233, 0.1623],
+    "freq": [0.2209, 0.0, 0.2209],
+    "space": [0.3953, 0.0, 0.3953],
+    "intent": [0.651, 0.523, 0.128],
+    "mech": [0.593, 0.477, 0.116]
+   },
+   "D4_S2": {
+    "count": [0.52, 0.52, 0.0],
+    "kind": [0.3962, 0.311, 0.0852],
+    "freq": [0.2642, 0.0, 0.2642],
+    "space": [0.2736, 0.0, 0.2736],
+    "intent": [0.698, 0.679, 0.019],
+    "mech": [0.519, 0.34, 0.179]
+   }
+  },
+  "reading": [
+   "四档 detection（注册口径、n=50）：**0.96 / 0.60 / 0.70 / 0.52**。与旧档（0.92 / 0.88 / 0.48 / 0.52）相比 D2 掉了 28 pp、D3 涨 22 pp —— **但 D2 的下跌是数据变难而非能力退步**：旧档常数基线 0.96 时 0.88 低于平凡解，新档基线 0.52 时 0.60 高于平凡解。",
+   "梯度不再单调：D3（0.70）> D2（0.60）> D4（0.52）。D3 是唯一「六条轴全部高于同分母基线」的多站档；D4 的计数轴与「永远答 3」完全持平。",
+   "载频轴与空间轴的基线恒为 0 → 判别力主要落在这两条轴（D2 空间 +0.71 为全表最大）。",
+   "仪器侧同批口径（同一数据集、同一代码，零 API）：clean 四档均 0.877；GT 切片 D2 0.472 FAIL / D3 0.551 PASS / D4 0.378 FAIL；tool-view 召回 D2 0.709 / D3 0.372 / D4 0.206，假簇 D2 0.479 / D3 0.602 / D4 0.736 → 三档 tool-view 全 FAIL。"
+  ],
+  "caveats": [
+   "**每档只评了前 50 个样本**（数据集是 100），四档均为 n=50；表中数字不可与 n=100 口径混用。",
+   "D1 与 D2/D3/D4 的仪表口径不同：D1 是单站 + legacy tone/noise，只能用相干门控口径（虚警/覆盖/频率命中），不能走 19 类分类器三视角（`tone`/`noise` 不在 `data_gen16.CLS_IDX`）。",
+   "D1 本批同时改了门控相干窗（`PEAK_COH_WIN_HZ` 20k→3k，覆盖 0.804→0.922、虚警恒 0、多余峰数不变），故 D1 与旧档的仪器能力不可直接逐位比较（agent 侧数字仍是同一题面下的可比提升）。",
+   "D2–D4 的 tool-view 段只覆盖前 50 个样本（`oracle16.py` 既有口径）。"
+  ],
+  "artifacts": [
+   "答案：`benchmark_v3/dataset_d{1,2,3,4}/answers_S{0,2}_agent_quota/`；canonical 报告：同目录 `eval_report_S{0,2}.json`。",
+   "逐轴基线：`benchmark_v3/evidence/axis_baselines_arm_answers_S2_agent_quota.txt`（D3/D4 共名，D3 另存 `_axbase_d3_quota.txt`、D4 为 `_axbase_d4_quota.txt`）与 D1 的 `axis_baselines_arm_answers_S0_agent_quota.txt`。",
+   "仪表三视角：`evidence/_gate_d2_quota100_coh3k.txt` / `_gate_d3_quota100_coh3k.txt` / `_gate_d4_quota100_coh3k.txt`；D1 门控：`_d1_gate_regen_v2_coh3k.txt`（新档 47/51）与 `_d1_gate_oldgen_coh3k.txt`（旧档 27/27）。",
+   "生成与验收：`docs/机理配额与重生成方案.md`、`diag/_audit_regen_v2.py`、`evidence/_audit_regen_v2_staging.txt`、`_api_quota_d{1,2,3,4}.log`。"
+  ]
  }
 }

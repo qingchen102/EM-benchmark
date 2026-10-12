@@ -1,0 +1,15 @@
+﻿干净样本虚警形态统计（零 API，只读）  dataset_d1/answers_S0_agent_fix2_mech  S 级 = S0
+============================================================================================
+已评样本            50/50
+干净样本（GT=0）    23
+其中报非空（虚警）  4    虚警率 17.4%
+同源签名（DOA+位置一致） 1    占虚警 25%
+报出的 kind 分布    {'noise': 5}
+报出的 mechanism    {'adjacent': 4, 'co_channel': 1}
+
+逐样本（仅列干净却报非空的）：
+  d1_00001: 报 2 条  [同源签名: DOA/位置一致]  noise@652800.0/adjacent, noise@-664400.0/adjacent
+  d1_00017: 报 1 条  [条目不自洽]  noise@679600.0/adjacent
+  d1_00023: 报 1 条  [条目不自洽]  noise@0.0/co_channel
+  d1_00048: 报 1 条  [条目不自洽]  noise@687600.0/adjacent
+[已写入] D:\srtp\EM-benchmark\benchmark_v3\evidence\_probe_clean_fa_d1.txt
