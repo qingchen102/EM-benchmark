@@ -19,6 +19,7 @@
     python -X utf8 diag/_axis_baselines.py d2                  # 只跑 D2
     python -X utf8 diag/_axis_baselines.py d2 --arm answers_S2_agent_fix2_mech
     python -X utf8 diag/_axis_baselines.py --arm answers_S2_agent_fix2_mech   # 四档都找这个目录名
+    python -X utf8 diag/_axis_baselines.py d1 --root ../_pre_quota_20261012      # 指定数据集根（目录下含 dataset_dX/）
 
 输出：benchmark_v3/evidence/axis_baselines.txt（给了 --arm 时另写 axis_baselines_arm_<name>.txt）
 """
@@ -283,13 +284,19 @@ def arm_vs_baseline(root: Path, sids: list[str], slevel: str, stations: list[str
 
 def main(argv: list[str]) -> int:
     arm = None
+    root_arg = None
     args = []
     it = iter(argv)
     for a in it:
         if a == "--arm":
             arm = next(it, None)
+        elif a == "--root":
+            root_arg = next(it, None)
         else:
             args.append(a)
+    base_dir = Path(root_arg).expanduser() if root_arg else None
+    if base_dir is not None and not base_dir.is_absolute():
+        base_dir = (Path.cwd() / base_dir).resolve()
     decks = [a for a in args if not a.startswith("-")] or list(DEFAULTS)
     out: list[str] = [
         "逐轴「平凡预测器（常数基线）」体检 —— 零 API，只读（diag/_axis_baselines.py）",
@@ -300,7 +307,10 @@ def main(argv: list[str]) -> int:
         "两者分母不同（差 1–3 pp）。--arm 模式下的基线已统一为同分母。",
     ]
     for deck in decks:
-        root = _V3 / f"dataset_{deck}"
+        root = (base_dir / f"dataset_{deck}") if base_dir is not None else (_V3 / f"dataset_{deck}")
+        if not (root / "index.json").is_file():
+            out += ["", "=" * 78, f"（跳过）{root} 无 index.json", "=" * 78, ""]
+            continue
         idx = json.loads((root / "index.json").read_text(encoding="utf-8"))
         sids = [s["id"] for s in idx["samples"]]
         subsets = idx["observation_subsets"]
@@ -318,6 +328,8 @@ def main(argv: list[str]) -> int:
     text = "\n".join(out) + "\n"
     print(text, end="")
     name = "axis_baselines.txt" if not arm else f"axis_baselines_arm_{arm}.txt"
+    if base_dir is not None:
+        name = name.replace(".txt", f"_{base_dir.name}.txt")
     dst = _V3 / "evidence" / name
     dst.write_text(text, encoding="utf-8")
     print(f"[已写入] {dst}")
