@@ -1229,5 +1229,48 @@
    "仪表三视角：`evidence/_gate_d2_quota100_coh3k.txt` / `_gate_d3_quota100_coh3k.txt` / `_gate_d4_quota100_coh3k.txt`；D1 门控：`_d1_gate_regen_v2_coh3k.txt`（新档 47/51）与 `_d1_gate_oldgen_coh3k.txt`（旧档 27/27）。",
    "生成与验收：`docs/机理配额与重生成方案.md`、`diag/_audit_regen_v2.py`、`evidence/_audit_regen_v2_staging.txt`、`_api_quota_d{1,2,3,4}.log`。"
   ]
- }
+  },
+  "slevel_runs_2026_10_14": {
+   "what": "观测档（S0 单站 / S1 三站 / S2 四站）真跑矩阵：D2/D3/D4 在 S0 与 S1 各**独立作答**一次，与既有 S2 臂在同一批共同样本上对比（官方 eval_dataset 口径、同一题面与模型；空间轴在 S0 是 DOA（度）、在 S1/S2 是定位误差（米），两者不可横向比）。",
+   "why": "此前 21 个 answers_* 目录里只有 D1×S0 与 D2/D3/D4×S2（证据 evidence/_s_level_runs.txt）；S0/S1 的旧数字是把 4 站答案按更小可见性子集**重打分**得到的，不是真跑。用户 10-13 要求补真跑 S0/S1。",
+   "table": {
+    "D1": {
+     "note": "单站题（设计如此）：S0=S1=S2=0.960；S1/S2 只多出定位栏 0.083。",
+     "baseline": {"S0": 0.54, "S1": 0.54, "S2": 0.54}
+    },
+    "D2": {
+     "baseline": {"S0": 0.48, "S1": 0.52, "S2": 0.52},
+     "S0": {"n": 46, "det": 0.543, "within1": 0.772, "kind": 0.181, "freq": 0.431, "freq_ae": 0.06, "space": 0.542, "space_ae": 49.364, "intent": 0.722, "mech": 0.5},
+     "S1": {"n": 50, "det": 0.62, "within1": 0.81, "kind": 0.325, "freq": 0.5, "freq_ae": 0.062, "space": 0.425, "space_ae": 428.496, "intent": 0.65, "mech": 0.475},
+     "S2": {"n": 50, "det": 0.6, "within1": 0.79, "kind": 0.291, "freq": 0.481, "freq_ae": 0.06, "space": 0.709, "space_ae": 195.432, "intent": 0.595, "mech": 0.468}
+    },
+    "D3": {
+     "baseline": {"S0": 0.44, "S1": 0.56, "S2": 0.56},
+     "S0": {"n": 42, "det": 0.667, "within1": 0.821, "kind": 0.239, "freq": 0.179, "freq_ae": 0.095, "space": 0.492, "space_ae": 48.657, "intent": 0.791, "mech": 0.642},
+     "S1": {"n": 50, "det": 0.62, "within1": 0.8, "kind": 0.259, "freq": 0.148, "freq_ae": 0.106, "space": 0.272, "space_ae": 792.415, "intent": 0.58, "mech": 0.568},
+     "S2": {"n": 50, "det": 0.7, "within1": 0.85, "kind": 0.395, "freq": 0.221, "freq_ae": 0.1, "space": 0.395, "space_ae": 584.364, "intent": 0.651, "mech": 0.593}
+    },
+    "D4": {
+     "baseline": {"S0": 0.36, "S1": 0.52, "S2": 0.52},
+     "S0": {"n": 44, "det": 0.455, "within1": 0.67, "kind": 0.39, "freq": 0.295, "freq_ae": 0.095, "space": 0.526, "space_ae": 42.998, "intent": 0.705, "mech": 0.484},
+     "S1": {"n": 50, "det": 0.44, "within1": 0.7, "kind": 0.211, "freq": 0.221, "freq_ae": 0.109, "space": 0.144, "space_ae": 1032.895, "intent": 0.692, "mech": 0.317},
+     "S2": {"n": 50, "det": 0.52, "within1": 0.74, "kind": 0.396, "freq": 0.264, "freq_ae": 0.099, "space": 0.274, "space_ae": 652.987, "intent": 0.698, "mech": 0.519}
+    }
+   },
+   "reading": [
+    "**多站增益不单调**：D2 0.543→0.620→0.600；D3 0.667→0.620→0.700；D4 0.455→0.440→0.520。此前「S0→S1 增益 = 多站价值」的说法在 D3/D4 上不成立（那只是重打分的分母效应）。",
+    "**减掉各自同分母基线后的净增益**：D2 +6.3 / +10.0 / +8.0 pp；D3 +22.7 / +6.0 / +14.0 pp；D4 +9.5 / −8.0 / ±0.0 pp ⇒ 单站臂的净增益往往最大；D4 的 S2 与「永远答 3」完全持平。多站不是自动更强，`detection_hit` 在四站口径下更容易被平凡解贴近。",
+    "**第四站的价值在定位**：S1→S2 定位误差三档全部下降（D2 428→195 m、D3 792→584 m、D4 1033→653 m），而检测计数在 S1/S2 之间基本持平（只 D3 +8 pp）。",
+    "S1→S2 只在 D3/D4 抬体制（0.259→0.395、0.211→0.396）；意图/机理不随站数改善（由数据配方决定）。",
+    "空间轴基线恒 0（真判别力）；四档 instrument clean 均 0.877。",
+    "**模型路由混淆（待消）**：受用户 global 额度限制，只有 D2×S0 与 D4×S1 全程走 `global:deepseek-v4.1-flash`；D2×S1 / D3×S1 / D4×S0 全程走 `cn:deepseek-v4.1-flash`；**D3×S0 前 3 个样本（d3_00000–00002）走 global、其余 47 个走 cn**且这 3 个未被剔出评估集（S2 注册臂全部是 global）。逐段自证见 `evidence/_slevel_routes.txt`。同一中转站、同一模型名，但端点前缀不同；本轮归因曾量到端点/模型差异可达 +12 pp，因此跨观测档 1~2 pp 的差异不应过度解读。**如需干净矩阵，应用 global 把四条 cn 臂重跑（或先做 10 样本 crossover 对照）。**"
+   ],
+   "artifacts": [
+    "对比工具：`benchmark_v3/adapters/diag/_cmp_slevel_arms.py`（把各臂共同已答样本复制到临时目录后调用官方 `eval_dataset.evaluate`）；证据 `evidence/_cmp_slevel_arms.txt`。",
+    "答案：`benchmark_v3/dataset_d{2,3,4}/answers_S{0,1}_agent_quota/`；报告：同目录 `eval_report_S{0,1}.json`（文件名带观测档，不覆盖 S2 canonical）。",
+    "作业日志：`_api_quota_slevel_d{2,3,4}_S{0,1}.log`（D4×S1 用 global 模型、其余按用户限额用 cn）。",
+    "图：`projects/figs_v3/fig_slevel_compare.png`（每档三柱 + 同分母基线红线）、`fig_obs_views.png`（四档 × 观测档五轴）。",
+    "口径审计：`evidence/_s_level_runs.txt`（21 个 answers_* 目录的 slevel 盘点）；S0 可见性：`evidence/_s0_visibility.txt`。"
+   ]
+  }
 }
