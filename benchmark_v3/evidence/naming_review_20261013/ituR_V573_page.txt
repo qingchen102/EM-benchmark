@@ -1,0 +1,4 @@
+﻿URL: https://www.itu.int/rec/R-REC-V.573/en
+STATUS: 200
+TITLE: V.573 : Radiocommunication vocabulary
+LEN: 12185

@@ -1,0 +1,11 @@
+﻿DOI: 10.1109/IEEESTD.2019.8657413
+TITLE: 
+IEEE Standard Definitions of Terms for Radio Wave Propagation
+CONTAINER: 
+
+PUBLISHER: 
+IEEE
+TYPE: 
+standard
+ISSUED: 
+{"value":[null],"Count":1}

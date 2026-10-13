@@ -1,0 +1,15 @@
+﻿QUERY: measurement receiver vs spectrum analyzer monitoring
+URL: https://api.openalex.org/works?search=measurement%20receiver%20vs%20spectrum%20analyzer%20monitoring&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+9086
+
+- [2021] A True Optoelectronic Spectrum Analyzer for Millimeter Waves With Hz Resolution | DOI=https://doi.org/10.1109/access.2021.3105030 | cites=14 | src=IEEE Access
+- [2019] Internet of Things Spectrum Monitoring and Localization | DOI= | cites=0 | src=Digital WPI
+- [2021] Quantum Technologies Impact on Electromagnetic Spectrum Monitoring | DOI=https://doi.org/10.2478/bsaft-2021-0024 | cites=0 | src=Scientific Bulletin
+- [2026] Design and Performance Evaluation of a Portable Software-Defined Satellite Signal Analyzer for Real-Time Radio Frequency Monitoring | DOI=https://doi.org/10.38124/ijisrt/26sep191 | cites=0 | src=International Journal of Innovative Science and Research Technology (IJISRT)
+- [2023] A New Monitor and Control Power Supply PCB for Biasing LNAs of Large Radio Telescopes Receivers | DOI=https://doi.org/10.1109/access.2023.3280323 | cites=3 | src=IEEE Access
+- [2026] A broadband silicon photonic-integrated-circuit based RF spectrum analyzer with 10 MHz spectral resolution | DOI=https://doi.org/10.1038/s44172-026-00746-w | cites=0 | src=Communications Engineering
+- [2023] Quantum scaling atomic superheterodyne receiver | DOI=https://doi.org/10.1140/epjqt/s40507-023-00198-7 | cites=13 | src=EPJ Quantum Technology
+- [2018] Bandwidth-Efficient Blind Nonlinear Compensation of RF Receiver Employing Folded-Spectrum Sub-Nyquist Sampling Technique | DOI=https://doi.org/10.1587/transcom.2018ebp3100 | cites=7 | src=IEICE Transactions on Communications
+- [2018] A Comparison between the Compass Fundus Perimeter and the Humphrey Field Analyzer | DOI=https://doi.org/10.1016/j.ophtha.2018.08.010 | cites=59 | src=Ophthalmology
+- [2023] Mag-Auth: Authenticating Wireless Transmitters and Receivers on the Receiver Side via Magnetic Emissions | DOI=https://doi.org/10.1145/3558482.3590198 | cites=8 | src=ACM Conference on Security and Privacy in Wireless and Mobile Networks (WiSec)

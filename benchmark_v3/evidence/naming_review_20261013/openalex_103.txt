@@ -1,0 +1,15 @@
+﻿QUERY: spectrum monitoring receiver test procedure measurement
+URL: https://api.openalex.org/works?search=spectrum%20monitoring%20receiver%20test%20procedure%20measurement&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+36660
+
+- [2019] Spectrum Monitoring Network: Tradeoffs, Results, and Future Directions | DOI= | cites=0 | src=
+- [2022] Demonstration of the Capability of 1U CubeSat for Measurement of the Energy Spectrum on LEO | DOI=https://doi.org/10.3390/electronics11203390 | cites=1 | src=Electronics
+- [2018] End-to-End Learning From Spectrum Data: A Deep Learning Approach for Wireless Signal Identification in Spectrum Monitoring Applications | DOI=https://doi.org/10.1109/access.2018.2818794 | cites=364 | src=IEEE Access
+- [2018] Novel OSNR Measurement Techniques Based on Optical Spectrum Analysis and Their Application to Coherent-Detection Systems | DOI=https://doi.org/10.1109/jlt.2018.2878744 | cites=22 | src=Journal of Lightwave Technology
+- [2019] Internet of Things Spectrum Monitoring and Localization | DOI= | cites=0 | src=Digital WPI
+- [2018] Optical efficiency measurement of solar receiver tubes: A testbed and case studies | DOI=https://doi.org/10.1016/j.csite.2018.06.002 | cites=23 | src=Case Studies in Thermal Engineering
+- [2023] TESTING GNSS RECEIVER ROBUSTNESS FOR JAMMING | DOI=https://doi.org/10.55676/asi.v4i2.64 | cites=7 | src=Aviation and Security Issues
+- [2018] Spectrum Monitoring Algorithms for Wireless and Satellite Communications | DOI= | cites=0 | src=Open Repository and Bibliography (University of Luxembourg)
+- [2020] Design and Implementation of a Test Fixture for ELF Schumann Resonance Magnetic Antenna Receiver and Magnetic Permeability Measurements | DOI=https://doi.org/10.3390/electronics9010171 | cites=11 | src=Electronics
+- [2020] Experimental validation of a dual-receiver radar architecture for snowpack monitoring | DOI=https://doi.org/10.1017/s1759078720000112 | cites=8 | src=International Journal of Microwave and Wireless Technologies

@@ -1,0 +1,5 @@
+﻿TITLE.SEARCH: measuring receivers CISPR radio disturbance
+URL: https://api.openalex.org/works?filter=title.search:measuring%20receivers%20CISPR%20radio%20disturbance&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=8
+COUNT: 
+0
+

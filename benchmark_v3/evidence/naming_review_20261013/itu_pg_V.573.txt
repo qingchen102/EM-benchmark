@@ -1,0 +1,6 @@
+﻿PAGE: https://www.itu.int/rec/R-REC-V.573/en
+TITLE: V.573 : Radiocommunication vocabulary
+PDFLINKS:
+
+DMSLINKS:
+

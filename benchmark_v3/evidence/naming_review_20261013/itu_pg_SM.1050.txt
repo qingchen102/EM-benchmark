@@ -1,0 +1,6 @@
+﻿PAGE: https://www.itu.int/rec/R-REC-SM.1050/en
+TITLE: SM.1050 : Tasks of a monitoring service
+PDFLINKS:
+
+DMSLINKS:
+

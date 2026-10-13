@@ -1,0 +1,15 @@
+﻿QUERY: emitter localization passive radio frequency emitter
+URL: https://api.openalex.org/works?search=emitter%20localization%20passive%20radio%20frequency%20emitter&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+11297
+
+- [2021] Design and Enhancement of Localization System for Radio Frequency Emitters Based on DOA Techniques and Triangulation Centroid Algorithm | DOI=https://doi.org/10.1109/aca52198.2021.9626814 | cites=1 | src=
+- [2018] A Guide of Fingerprint Based Radio Emitter Localization Using Multiple Sensors | DOI=https://doi.org/10.1587/transcom.2017nei0004 | cites=12 | src=IEICE Transactions on Communications
+- [2022] Reconfigurable Intelligent Surface-Aided Emitter Localization | DOI=https://doi.org/10.1109/jsen.2022.3209983 | cites=14 | src=IEEE Sensors Journal
+- [2018] Passive Vector Sensing for Non-Cooperative Emitter Localization in Indoor Environments | DOI=https://doi.org/10.3390/electronics7120442 | cites=8 | src=Electronics
+- [2023] Passive Radio Localization System Using Channel Impulse Response and Deep Learning | DOI=https://doi.org/10.1109/ieecon56657.2023.10126633 | cites=2 | src=International Electrical Engineering Congress (iEECON)
+- [2020] Geolocation of a Radio Frequency Emitter using a Single Low Earth Satellite | DOI= | cites=0 | src=eScholarship (California Digital Library)
+- [2019] Multipath Exploitation in Emitter Localization for Irregular Terrains | DOI=https://doi.org/10.13164/re.2019.0473 | cites=9 | src=Radioengineering
+- [2019] Distributed Passive Sensor Network for the Geolocation of RF Emitters | DOI=https://doi.org/10.13016/gmnf-u4wb | cites=0 | src=University Libraries (University of Maryland)
+- [2023] Data Collection in Ducting Conditions for Emitter Localization with a Single Receiver | DOI=https://doi.org/10.1109/usnc-ursi52151.2023.10237654 | cites=2 | src=IEEE International Symposium on Antennas and Propagation and USNC-URSI Radio Science Meeting (AP-S/URSI)
+- [2026] Beyond GNSS: A Survey and Tutorial on Satellite-Based Radio Frequency (RF) Geolocation and Emitter Fingerprinting | DOI=https://doi.org/10.36227/techrxiv.176827281.16626683/v1 | cites=0 | src=

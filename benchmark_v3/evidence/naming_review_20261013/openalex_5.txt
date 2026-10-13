@@ -1,0 +1,15 @@
+﻿QUERY: cooperative spectrum sensing sensor node
+URL: https://api.openalex.org/works?search=cooperative%20spectrum%20sensing%20sensor%20node&filter=from_publication_date:2020-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+15492
+
+- [2024] Optimal Node Selection for Cooperative Spectrum Sensing in Cognitive Radio Sensor Networks with Energy Harvesting | DOI=https://doi.org/10.5829/ije.2024.37.05b.02 | cites=4 | src=International Journal of Engineering
+- [2023] An Efficient Cooperative Spectrum Sensing for Cognitive Wireless Sensor Networks | DOI=https://doi.org/10.1109/access.2023.3336654 | cites=27 | src=IEEE Access
+- [2020] Secure Cooperative Spectrum Sensing Strategy Based on Reputation Mechanism for Cognitive Wireless Sensor Networks | DOI=https://doi.org/10.1109/access.2020.3009466 | cites=33 | src=IEEE Access
+- [2020] Soft Decision Cooperative Spectrum Sensing With Entropy Weight Method for Cognitive Radio Sensor Networks | DOI=https://doi.org/10.1109/access.2020.3001006 | cites=24 | src=IEEE Access
+- [2020] Energy-Efficient Cooperative Spectrum Sensing Strategy for Cognitive Wireless Sensor Networks Based on Particle Swarm Optimization | DOI=https://doi.org/10.1109/access.2020.3037707 | cites=36 | src=IEEE Access
+- [2020] Energy-Efficient Cooperative Spectrum Sensing Based on Stochastic Programming in Dynamic Cognitive Radio Sensor Networks | DOI=https://doi.org/10.1109/access.2020.3046466 | cites=18 | src=IEEE Access
+- [2020] An Enhanced Cooperative Spectrum Sensing Scheme Against SSDF Attack Based on Dempster-Shafer Evidence Theory for Cognitive Wireless Sensor Networks | DOI=https://doi.org/10.1109/access.2020.3026738 | cites=25 | src=IEEE Access
+- [2023] Lifetime Enhancement of Cognitive Radio Sensor Network using Cooperative spectrum sensing techniques | DOI=https://doi.org/10.1109/vitecon58111.2023.10157107 | cites=3 | src=
+- [2024] Evaluating Cooperative Spectrum Sensing A Hardware-in-the-Loop Approach | DOI=https://doi.org/10.1109/dyspan60163.2024.10632743 | cites=4 | src=IEEE International Symposium on Dynamic Spectrum Access Networks
+- [2020] Energy-efficient sensor selection for multi-channel cooperative spectrum sensing based on game theory | DOI=https://doi.org/10.1007/s12652-020-02651-2 | cites=8 | src=Journal of Ambient Intelligence and Humanized Computing

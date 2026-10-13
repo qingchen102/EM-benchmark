@@ -1,0 +1,15 @@
+﻿QUERY: distributed cooperative spectrum sensing sensor network
+URL: https://api.openalex.org/works?search=distributed%20cooperative%20spectrum%20sensing%20sensor%20network&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+24997
+
+- [2019] Analysis and evaluation of distributed cooperative spectrum sensing techniques in cognitive radio sensor networks | DOI= | cites=0 | src=INFLIBNET
+- [2018] Over-the-Air Computation for Cooperative Wideband Spectrum Sensing and Performance Analysis | DOI=https://doi.org/10.1109/tvt.2018.2866539 | cites=40 | src=IEEE Transactions on Vehicular Technology
+- [2023] An Efficient Cooperative Spectrum Sensing for Cognitive Wireless Sensor Networks | DOI=https://doi.org/10.1109/access.2023.3336654 | cites=27 | src=IEEE Access
+- [2022] Federated learning for distributed spectrum sensing in NextG communication networks | DOI=https://doi.org/10.1117/12.2622935 | cites=16 | src=
+- [2022] SpecKriging: GNN-Based Secure Cooperative Spectrum Sensing | DOI=https://doi.org/10.1109/twc.2022.3181064 | cites=26 | src=IEEE Transactions on Wireless Communications
+- [2020] Augmentation the Lifetime of the Optimal Cooperative Spectrum Sensing Sensor Network | DOI=https://doi.org/10.33832/ijast.2019.134.02 | cites=0 | src=International Journal of Advanced Science and Technology
+- [2024] Less sample‐cooperative spectrum sensing against large‐scale Byzantine attack in cognitive wireless sensor networks | DOI=https://doi.org/10.1002/ett.5015 | cites=2 | src=Transactions on Emerging Telecommunications Technologies
+- [2020] Statistical Analysis of Lifetime in Wireless Cognitive Sensor Network for Multi-Channel Cooperative Spectrum Sensing | DOI=https://doi.org/10.1109/jsen.2020.3021459 | cites=15 | src=IEEE Sensors Journal
+- [2020] Secure Cooperative Spectrum Sensing Strategy Based on Reputation Mechanism for Cognitive Wireless Sensor Networks | DOI=https://doi.org/10.1109/access.2020.3009466 | cites=33 | src=IEEE Access
+- [2020] Energy-efficient sensor selection for multi-channel cooperative spectrum sensing based on game theory | DOI=https://doi.org/10.1007/s12652-020-02651-2 | cites=8 | src=Journal of Ambient Intelligence and Humanized Computing

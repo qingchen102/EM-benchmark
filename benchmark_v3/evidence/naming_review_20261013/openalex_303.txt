@@ -1,0 +1,13 @@
+﻿TITLE.SEARCH: cognitive receiver
+URL: https://api.openalex.org/works?filter=title.search:cognitive%20receiver&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=8
+COUNT: 
+324
+
+- [2016] A cognitive receiver for indoor positioning | DOI= | type=article | cites=0 | src=
+- [2008] Robust switching blind equalizer for wireless cognitive receivers | DOI=https://doi.org/10.1109/twc.2008.060642 | type=article | cites=30 | src=IEEE Transactions on Wireless Communications
+- [2014] Robust Spectrum Sensing for Noncircular Signal in Multiantenna Cognitive Receivers | DOI=https://doi.org/10.1109/tsp.2014.2371776 | type=article | cites=43 | src=IEEE Transactions on Signal Processing
+- [2009] Bayesian Inference for Multiple Antenna Cognitive Receivers | DOI=https://doi.org/10.1109/wcnc.2009.4917609 | type=conference-paper | cites=5 | src=IEEE Wireless Communications and Networking Conference
+- [2007] Detecting the Number of Transmit Antennas with Unauthorized or Cognitive Receivers in MIMO Systems | DOI=https://doi.org/10.1109/milcom.2007.4455298 | type=conference-paper | cites=50 | src=IEEE Military Communications Conference (MILCOM)
+- [2008] Multiple Antenna Cognitive Receivers and Signal Detection | DOI= | type=preprint | cites=1 | src=arXiv (Cornell University)
+- [2024] A 77GHz COGNITIVE RECEIVER IN 22nm FDSOI CMOS | DOI= | type=dissertation | cites=0 | src=TSpace (University of Toronto)
+- [2009] Bayesian Inference for Multiple Antenna Cognitive Receivers | DOI= | type=article | cites=0 | src=

@@ -1,0 +1,11 @@
+﻿TITLE.SEARCH: Radio monitoring receivers
+URL: https://api.openalex.org/works?filter=title.search:Radio%20monitoring%20receivers&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+39
+
+- [2008] Digital Down Converter(DDC) in Radio Monitoring Receivers | DOI= | type=article | cites=1 | src=Transactions of Beijing Institute of Technology
+- [2009] Radio Receiver Applications for Radio Monitoring System | DOI=https://doi.org/10.1007/978-0-387-98100-0_3 | type=book-chapter | cites=0 | src=Lecture notes in electrical engineering
+- [2017] Design of wideband matrix-parallel receiver for radio monitoring and radio intelligence | DOI=https://doi.org/10.21293/1818-0442-2017-20-3-105-113 | type=article | cites=1 | src=Proceedings of Tomsk State University of Control Systems and Radioelectronics
+- [2007] Superconducting Integrated Receivers for Radio Astronomy and Atmospheric Monitoring | DOI= | type=article | cites=0 | src=
+- [2022] Study of capabilities of SDR receivers for monitoring radio networks | DOI=https://doi.org/10.31673/2409-7292.2022.040005 | type=article | cites=0 | src=Modern information security
+- [2024] Analysis of the Possibility of Using an Autocorrelation Receiver in Radio Monitoring Tools | DOI=https://doi.org/10.1109/elcon61730.2024.10468296 | type=conference-paper | cites=2 | src=

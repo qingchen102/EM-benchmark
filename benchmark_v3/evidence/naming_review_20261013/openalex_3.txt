@@ -1,0 +1,15 @@
+﻿QUERY: disturbance source electromagnetic interference
+URL: https://api.openalex.org/works?search=disturbance%20source%20electromagnetic%20interference&filter=from_publication_date:2020-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+20034
+
+- [2024] Electromagnetic Disturbance Source Modeling Scheme and its Interference Estimation of Medium–Low-Speed Maglev Train Interior | DOI=https://doi.org/10.1007/s40864-024-00226-4 | cites=2 | src=Urban Rail Transit
+- [2023] Introduction to Electromagnetic Interference and Electromagnetic Compatibility | DOI=https://doi.org/10.1201/9781003362951-1 | cites=0 | src=CRC Press eBooks
+- [2025] Electromagnetic Interference Analysis, Modeling, and Suppression of High-Power Pulse Drive Source | DOI=https://doi.org/10.1109/tps.2025.3585722 | cites=3 | src=IEEE Transactions on Plasma Science
+- [2022] Predictive Modeling for Detection of Source of Electromagnetic Disturbances in Inductive Wireless Charging of Electric Vehicles | DOI=https://doi.org/10.1080/03772063.2022.2027278 | cites=6 | src=IETE Journal of Research
+- [2024] Electromagnetic Interference from Solar Photovoltaic Systems: A Review | DOI=https://doi.org/10.3390/electronics14010031 | cites=9 | src=Electronics
+- [2022] Research on overvoltage and electromagnetic disturbance characteristic of AIS isolating switch | DOI=https://doi.org/10.1049/icp.2022.0448 | cites=1 | src=IET conference proceedings.
+- [2020] THE CHANGE OF CARDIOSTIMULATION DEVICE PROGRAMMING DUE TO DETECTION OF ELECTROMAGNETIC INTERFERENCE | DOI=https://doi.org/10.14311/ctj.2020.2.04 | cites=6 | src=Lékař a technika - Clinician and Technology
+- [2020] Incidence of Inappropriate Subcutaneous Implantable Cardioverter Defibrillator Discharges Related to Electromagnetic Interferences | DOI=https://doi.org/10.47275/2690-862x-108 | cites=2 | src=International Journal of Integrative Cardiology
+- [2020] Electromagnetic Immunity Performance of Intelligent Electronic Equipment in Smart Substation’s Electromagnetic Environment | DOI=https://doi.org/10.3390/en13051130 | cites=23 | src=Energies
+- [2021] Model and Validation of the Electromagnetic Interference Produced by Power Transmission Lines in Robotic Systems | DOI=https://doi.org/10.1109/icstcc52150.2021.9607293 | cites=8 | src=International Conference on System Theory, Control and Computing (ICSTCC)

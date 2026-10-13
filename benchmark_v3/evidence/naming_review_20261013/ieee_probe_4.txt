@@ -1,0 +1,8 @@
+﻿URL: https://standards.ieee.org/standard/211-2018.html
+STATUS: 200
+FINALURL: https://standards.ieee.org/ieee/211/6669/
+designation: IEEE 211-2018
+title: IEEE SA - IEEE Standard Definitions of Terms for Radio Wave Propagation
+Status: Active Standard
+Society: IEEE Antennas and Propagation Society
+LEN: 110499

@@ -1,0 +1,6 @@
+﻿PAGE: https://www.itu.int/rec/R-REC-SM.1536/en
+TITLE: SM.1536 : Frequency channel occupancy measurements
+PDFLINKS:
+
+DMSLINKS:
+

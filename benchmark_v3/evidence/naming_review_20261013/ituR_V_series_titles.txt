@@ -1,0 +1,79 @@
+﻿URL: https://www.itu.int/rec/R-REC-V/en
+STATUS: 200
+
+Vocabulary and related subjects
+var lang_version = null;
+var MenuLinkedBy='AllWebMenus [4]', awmBN='624'; awmAltUrl='';
+awmBuildMenu();
+Français
+Español
+Home
+:
+ITU-R
+:
+Publications
+:
+Recommendations
+: V Series
+Recently posted
+-
+Search Recommendations
+Vocabulary and related subjects
+RSS Feed
+V.430
+Use of the international system of units (SI)
+V.431
+Nomenclature of the frequency and wavelength bands used in telecommunications
+V.461
+Graphical symbols and rules for the preparation of documentation in telecommunications
+Note -  Suppressed on 17/08/2015 (CACE/749)
+V.573
+Radiocommunication vocabulary
+V.574
+Use of the decibel and the neper in telecommunications
+V.607
+Terms and symbols for information quantities in telecommunications
+Note - Suppressed on 19/10/07 (RA-07). Replaced by the ITU-R Database
+V.608
+Letter symbols for telecommunications
+Note - Suppressed on 06/06/03 (RA-03)
+V.662
+Terms and definitions
+Note -  Suppressed on 17/08/2015 (CACE/749)
+V.663
+Use of certain terms linked with physical quantities
+Note -  Suppressed on 17/08/2015 (CACE/749)
+V.664
+Adoption of the CCITT Specification and Description Language (SDL)
+Note - Suppressed (WRC-2000)
+V.665
+Traffic intensity unit
+V.666
+Abbreviations and initials used in telecommunications
+Note -  Suppressed on 17/08/2015 (CACE/749)
+V.2130
+Guidelines for the preparation of terms and definitions
+V.2500
+Test
+Top
+-
+Feedback
+-
+Contact us
+-
+Copyright © ITU
+2008 All Rights Reserved
+Contact for this page :
+ITU-R Web coordinator
+Updated : 2025-11-07
+//
+var _tag=new WebTrends();
+_tag.dcsGetId();
+//
+//
+_tag.dcsCustom=function(){
+// Add custom parameters here.
+//_tag.DCSext.param_name=param_value;
+}
+_tag.dcsCollect();
+//

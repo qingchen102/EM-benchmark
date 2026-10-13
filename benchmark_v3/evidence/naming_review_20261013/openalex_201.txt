@@ -1,0 +1,11 @@
+﻿TITLE.SEARCH: IEEE Standard Definitions of Terms for Radio Wave Propagation
+URL: https://api.openalex.org/works?filter=title.search:IEEE%20Standard%20Definitions%20of%20Terms%20for%20Radio%20Wave%20Propagation&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+8
+
+- [2016] IEEE Standard Definitions of Terms for Radio Wave Propagation | DOI=https://doi.org/10.1109/ieeestd.1969.7370739 | type=standard | cites=20 | src=
+- [1997] IEEE Standard Definitions of Terms for Radio Wave Propagation | DOI=https://doi.org/10.1109/ieeestd.1998.87897 | type=standard | cites=11 | src=
+- [1969] IEEE standard definitions of terms for radio wave propagation | DOI=https://doi.org/10.1109/tap.1969.1139448 | type=article | cites=8 | src=IRE Transactions on Antennas and Propagation
+- [2018] IEEE Standard Definitions of Terms for Radio Wave Propagation | DOI=https://doi.org/10.1109/ieeestd.2019.8657413 | type=standard | cites=6 | src=
+- [1990] IEEE Standard Definitions of Terms for Radio Wave Propagation | DOI=https://doi.org/10.1109/ieeestd.1991.101057 | type=standard | cites=1 | src=
+- [1976] IEEE standard definitions of terms for radio wave propagation | DOI=https://doi.org/10.1109/ieeestd.1977.120942 | type=standard | cites=1 | src=

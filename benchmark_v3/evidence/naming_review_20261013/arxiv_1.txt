@@ -1,0 +1,29 @@
+﻿QUERY: all:"spectrum monitoring" AND all:receiver
+URL: https://export.arxiv.org/api/query?search_query=all%3A%22spectrum%20monitoring%22%20AND%20all%3Areceiver&max_results=8&sortBy=relevance
+TOTAL: 
+17
+
+TITLE: Semantic Communication for Distributed Spectrum Monitoring over Unreliable Links
+  ID: http://arxiv.org/abs/2609.05791v1 | PUB: 2026-09-05T01:00:20Z | AUTHORS: Samer Lahoud, Kinda Khawam
+  SUMMARY(first 300): Distributed spectrum monitoring relies on spatially separated receivers to infer the state of the radio environment. A central task is to determine how many emitters are active and where they are located. Sensors typically report over shared unreliable links, where contention, fading, or energy limi
+TITLE: Realtime Spectrum Monitoring via Reinforcement Learning -- A Comparison Between Q-Learning and Heuristic Methods
+  ID: http://arxiv.org/abs/2307.05763v1 | PUB: 2023-07-11T19:40:02Z | AUTHORS: Tobias Braun, Tobias Korzyzkowske, Larissa Putzar, Jan Mietzner, Peter A. Hoeher
+  SUMMARY(first 300): Due to technological advances in the field of radio technology and its availability, the number of interference signals in the radio spectrum is continuously increasing. Interference signals must be detected in a timely fashion, in order to maintain standards and keep emergency frequencies open. To 
+TITLE: Spectrum Monitoring Using Energy Ratio Algorithm For OFDM-Based Cognitive Radio Networks
+  ID: http://arxiv.org/abs/1506.06213v1 | PUB: 2015-06-20T09:07:11Z | AUTHORS: Abdelmohsen Ali, Walaa Hamouda
+  SUMMARY(first 300): This paper presents a spectrum monitoring algorithm for Orthogonal Frequency Division Multiplexing (OFDM) based cognitive radios by which the primary user reappearance can be detected during the secondary user transmission. The proposed technique reduces the frequency with which spectrum sensing mus
+TITLE: In a One-Bit Rush: Low-Latency Wireless Spectrum Monitoring with Binary Sensor Arrays
+  ID: http://arxiv.org/abs/1802.03180v2 | PUB: 2018-02-09T09:35:52Z | AUTHORS: Manuel S. Stein, Michael Fauß
+  SUMMARY(first 300): Detecting the presence of a random wireless source with minimum latency utilizing an array of radio sensors is considered. The problem is studied under the constraint that the analog-to-digital conversion at each sensor is restricted to reading the sign of the analog received signal. We formulate th
+TITLE: Arbitrary Instantaneous Bandwidth Microwave Receiver via Scalable Rydberg Vapor Cell Array with Stark Comb
+  ID: http://arxiv.org/abs/2509.26026v1 | PUB: 2025-09-30T09:58:12Z | AUTHORS: Yuechun Jiao, Yuwen Yin, Yunhui He, Jinlian Hu, Cheng Lu, Jingxu Bai, Zhengyang Bai, Weibin Li, Suotang Jia, Jianming Zhao
+  SUMMARY(first 300): Rydberg atoms have great potential for microwave (MW) measurements due to their high sensitivity, broad carrier bandwidth, and traceability. However, the narrow instantaneous bandwidth of the MW receiver limits its applications. Improving the instantaneous bandwidth of the receiver is an ongoing cha
+TITLE: Electrosense+: Crowdsourcing Radio Spectrum Decoding using IoT Receivers
+  ID: http://arxiv.org/abs/1811.12265v3 | PUB: 2018-11-29T15:49:33Z | AUTHORS: Roberto Calvo-Palomino, Héctor Cordobés, Markus Engel, Markus Fuchs, Pratiksha Jain, Marc Liechti, Sreeraj Rajendran, Matthias Schäfer, Bertold Van den Bergh, Sofie Pollin, Domenico Giustiniano, Vincent Lenders
+  SUMMARY(first 300): Web spectrum monitoring systems based on crowdsourcing have recently gained popularity. These systems are however limited to applications of interest for governamental organizationsor telecom providers, and only provide aggregated information about spectrum statistics. Theresult is that there is a l
+TITLE: Out-of-Zone Signal Leakage Sensing in Radio Dynamic Zones
+  ID: http://arxiv.org/abs/2111.09490v1 | PUB: 2021-11-18T02:57:25Z | AUTHORS: Sung Joon Maeng, İsmail Güvenç, Mihail L. Sichitiu, Ozgur Ozdemir
+  SUMMARY(first 300): Radio dynamic zones (RDZs) are geographically bounded areas where novel advanced wireless technologies can be developed, tested, and improved, without the concern of interfering to other incumbent radio technologies nearby the RDZ. In order to operate an RDZ, use of a real-time spectrum monitoring s
+TITLE: Convolutional Neural Networks for Space-Time Block Coding Recognition
+  ID: http://arxiv.org/abs/1910.09952v2 | PUB: 2019-10-19T02:09:13Z | AUTHORS: Wenjun Yan, Qing Ling, Limin Zhang
+  SUMMARY(first 300): We apply the latest advances in machine learning with deep neural networks to the tasks of radio modulation recognition, channel coding recognition, and spectrum monitoring. This paper first proposes an identification algorithm for space-time block coding of a signal. The feature between spatial mul

@@ -1,0 +1,13 @@
+﻿TITLE.SEARCH: CISPR 16-1-1
+URL: https://api.openalex.org/works?filter=title.search:CISPR%2016-1-1&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=8
+COUNT: 
+38
+
+- [2019] Specifying the Waveforms for the Calibration of CISPR 16-1-1 Measuring Receivers | DOI=https://doi.org/10.1109/temc.2019.2923813 | type=article | cites=20 | src=IEEE Transactions on Electromagnetic Compatibility
+- [2018] Waveform Approach for Assessing Conformity of CISPR 16-1-1 Measuring Receivers | DOI=https://doi.org/10.1109/tim.2018.2794941 | type=article | cites=28 | src=IEEE Transactions on Instrumentation and Measurement
+- [2018] Inconsistency in CISPR 16-1-1 Performance Tests for Disturbance Analysers | DOI=https://doi.org/10.1109/emceurope.2018.8485159 | type=conference-paper | cites=2 | src=
+- [2009] Calibration of the Spectral Density of CISPR (16–1–1) Impulse Generators | DOI=https://doi.org/10.1002/9780470611371.ch43 | type=other | cites=0 | src=
+- [2019] On the alleged inconsistency in CISPR 16-1-1 performance tests for disturbance analyzers | DOI=https://doi.org/10.1109/isemc.2019.8825259 | type=conference-paper | cites=2 | src=IEEE International Symposium on Electromagnetic Compatibility, Signal & Power Integrity (EMC+SIPI)
+- [2008] A Real-Time Time-Domain EMI Measurement System for Full-Compliance Measurements According to CISPR 16-1-1 | DOI=https://doi.org/10.1109/temc.2008.918980 | type=article | cites=80 | src=IEEE Transactions on Electromagnetic Compatibility
+- [2016] Hidden aspects in CISPR 16-1-1 full compliant fast fourier transform EMI receivers | DOI=https://doi.org/10.1109/emceurope.2016.7739159 | type=conference-paper | cites=13 | src=International Symposium on Electromagnetic Compatibility - EMC Europe (EMC Europe)
+- [2025] Alternative waveforms for calibration of EMI receivers according to CISPR 16-1-1 ed. 4 | DOI=https://doi.org/10.5281/zenodo.17779464 | type=dataset | cites=0 | src=Zenodo (CERN European Organization for Nuclear Research)

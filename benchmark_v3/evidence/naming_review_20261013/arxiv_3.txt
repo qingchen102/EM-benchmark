@@ -1,0 +1,29 @@
+﻿QUERY: all:"cooperative spectrum sensing"
+URL: https://export.arxiv.org/api/query?search_query=all%3A%22cooperative%20spectrum%20sensing%22&max_results=8&sortBy=relevance
+TOTAL: 
+75
+
+TITLE: Adaptive Intelligent Cooperative Spectrum Sensing In Cognitive Radio
+  ID: http://arxiv.org/abs/1301.0785v1 | PUB: 2013-01-04T18:08:30Z | AUTHORS: Dilip S Aldar
+  SUMMARY(first 300): Radio Spectrum is most precious and scarce resource and must be utilized efficiently and effectively. Cognitive radio is the promising solutions for the optimum utilization of the scared natural resource. The spectrum owned by the primary user should be shared among the secondary user, but primary u
+TITLE: Cooperative Spectrum Sensing Scheduling in Multi-channel Cognitive Radio Networks: A broad perspective
+  ID: http://arxiv.org/abs/1711.02313v1 | PUB: 2017-11-07T06:57:45Z | AUTHORS: Prakash Chauhan, Sanjib K. Deka, Monisha Devi, Nityananda Sarma
+  SUMMARY(first 300): Cooperative spectrum sensing has been proven to improve sensing performance of cognitive users in presence of spectral diversity. For multi-channel CRN (MC-CRN), designing a cooperative spectrum sensing scheme becomes quite challenging as it needs an optimal sensing scheduling scheme, which schedule
+TITLE: Cooperative spectrum sensing over unreliable reporting channel
+  ID: http://arxiv.org/abs/1106.3940v1 | PUB: 2011-06-20T15:24:01Z | AUTHORS: Amanda de Paula, Cristiano Panazio
+  SUMMARY(first 300): This article aims to analyze a cooperative spectrum sensing scheme using a centralized approach with unreliable reporting channel. The spectrum sensing is applied to a cognitive radio system, where each cognitive radio performs a simple energy detection and send the decision to a fusion center throu
+TITLE: An Efficient Technique for Protecting Location Privacy of Cooperative Spectrum Sensing Users
+  ID: http://arxiv.org/abs/1807.06005v1 | PUB: 2018-07-15T16:42:31Z | AUTHORS: Mohamed Grissa, Attila Yavuz, Bechir Hamdaoui
+  SUMMARY(first 300): Cooperative spectrum sensing, despite its effectiveness in enabling dynamic spectrum access, suffers from location privacy threats, merely because secondary users (SUs)' sensing reports that need to be shared with a fusion center to make spectrum availability decisions are highly correlated to the u
+TITLE: A Cooperative Spectrum Sensing Scheme Based on Compressive Sensing for Cognitive Radio Networks
+  ID: http://arxiv.org/abs/1912.04935v1 | PUB: 2019-12-10T19:15:45Z | AUTHORS: Fatima Salahdine, Elias Ghribi, Naima Kaabouch
+  SUMMARY(first 300): In this paper, a cooperative spectrum sensing scheme based on compressive sensing is proposed. In this scheme, secondary users (SUs) are organized in clusters. In each cluster, SUs forward their compressed signals to the cluster head. Then, the cluster heads report the local sensing data to the fusi
+TITLE: Distributed Cooperative Spectrum Sensing in Mobile Ad Hoc Networks with Cognitive Radios
+  ID: http://arxiv.org/abs/1104.5539v1 | PUB: 2011-04-29T02:32:13Z | AUTHORS: F. Richard Yu, Helen Tang, Minyi Huang, Peter Mason, Zhiqiang Li
+  SUMMARY(first 300): In cognitive radio mobile ad hoc networks (CR-MANETs), secondary users can cooperatively sense the spectrum to detect the presence of primary users. In this chapter, we propose a fully distributed and scalable cooperative spectrum sensing scheme based on recent advances in consensus algorithms. In t
+TITLE: Preserving the Location Privacy of Secondary Users in Cooperative Spectrum Sensing
+  ID: http://arxiv.org/abs/1806.00916v1 | PUB: 2018-06-04T01:36:48Z | AUTHORS: Mohamed Grissa, Attila A. Yavuz, Bechir Hamdaoui
+  SUMMARY(first 300): Cooperative spectrum sensing, despite its effectiveness in enabling dynamic spectrum access, suffers from location privacy threats, merely because secondary users (SUs)' sensing reports that need to be shared with a fusion center to make spectrum availability decisions are highly correlated to the u
+TITLE: On the Performance of Cooperative Spectrum Sensing under Quantization
+  ID: http://arxiv.org/abs/1109.3272v2 | PUB: 2011-09-15T07:06:55Z | AUTHORS: Weijia Han, Jiandong Li, Zan Li, Yan Zhang, Qin Liu
+  SUMMARY(first 300): In cognitive radio, the cooperative spectrum sensing (CSS) plays a key role in determining the performance of secondary networks. However, there have not been feasible approaches that can analytically calculate the performance of CSS with regard to the multi-level quantization. In this paper, we not

@@ -1,0 +1,2 @@
+﻿URL: https://www.ecfr.gov/api/versioner/v1/full/2024-01-01/title-47/chapter-I/subchapter-A/part-15/subpart-A/section-15.3.json
+ERROR: 远程服务器返回错误: (406) 不可接受。

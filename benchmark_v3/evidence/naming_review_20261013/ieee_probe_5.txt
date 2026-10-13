@@ -1,0 +1,8 @@
+﻿URL: https://standards.ieee.org/standard/145-2013.html
+STATUS: 200
+FINALURL: https://standards.ieee.org/ieee/145/4705/
+designation: IEEE 145-2013
+title: IEEE SA - IEEE Standard for Definitions of Terms for Antennas
+Status: Inactive-Reserved Standard
+Society: IEEE Antennas and Propagation Society
+LEN: 106716

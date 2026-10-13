@@ -1,0 +1,29 @@
+﻿QUERY: all:"emitter localization"
+URL: https://export.arxiv.org/api/query?search_query=all%3A%22emitter%20localization%22&max_results=8&sortBy=relevance
+TOTAL: 
+28
+
+TITLE: Training Neural Networks to Approach the Optimum Bayes Estimator in Dense Multi-Emitter Localization
+  ID: http://arxiv.org/abs/2609.20465v1 | PUB: 2026-09-17T14:25:49Z | AUTHORS: Yi Sun, Mona Sharifi, Muzna Yumman
+  SUMMARY(first 300): We train neural networks on synthesized frames to approach the optimum Bayes estimator for dense emitter localization. The result justifies the future work on training neural networks to achieve high-throughput large-FOV super spatiotemporal resolution SMLM.
+TITLE: Measurement Testbed for Radar and Emitter Localization of UAV at 3.75 GHz
+  ID: http://arxiv.org/abs/2210.07168v2 | PUB: 2022-10-13T16:44:13Z | AUTHORS: Julia Beuster, Carsten Andrich, Michael Döbereiner, Steffen Schieler, Maximilian Engelhardt, Christian Schneider, Reiner Thomä
+  SUMMARY(first 300): This paper presents an experimental measurement platform for the research and development of unmanned aerial vehicles (UAVs) localization algorithms using radio emission and reflectivity. We propose a cost-effective, flexible testbed made from commercial off-the-shelf (COTS) devices to allow academi
+TITLE: A Guide of Fingerprint Based Radio Emitter Localization using Multiple Sensors
+  ID: http://arxiv.org/abs/1804.02124v1 | PUB: 2018-04-06T03:50:29Z | AUTHORS: Tao Yu, Azril Haniz, Kentaro Sano, Ryosuke Iwata, Ryouta Kosaka, Yusuke Kuki, Gia Khanh Tran, Jun-Ichi Takada, Kei Sakaguchi
+  SUMMARY(first 300): Location information is essential to varieties of applications. It is one of the most important context to be detected by wireless distributed sensors, which is a key technology in Internet-of-Things. Fingerprint-based methods, which compare location unique fingerprints collected beforehand with the
+TITLE: High precision wavefront control in point spread function engineering for single emitter localization
+  ID: http://arxiv.org/abs/1802.06584v2 | PUB: 2018-02-19T11:02:50Z | AUTHORS: Marijn Siemons, Christiaan Hulleman, Rasmus Thorsen, Carlas Smith, Sjoerd Stallinga
+  SUMMARY(first 300): Point Spread Function (PSF) engineering is used in single emitter localization to measure the emitter position in 3D and possibly other parameters such as the emission color or dipole orientation as well. Advanced PSF models such as spline fits to experimental PSFs or the vectorial PSF model can be 
+TITLE: Spatially Distributed Task-Oriented Compression for Multi-Emitter Localization and Characterization with Spectral Overlap
+  ID: http://arxiv.org/abs/2606.01446v2 | PUB: 2026-05-31T20:47:30Z | AUTHORS: H. Nazim Bicer, J. Nicholas Laneman
+  SUMMARY(first 300): Radio frequency spectrum awareness requires the ability to detect, localize, and characterize emitters in dense and contested wireless environments. In this work, we propose a task-oriented distributed compression framework for joint multi-emitter localization and characterization using spatially di
+TITLE: Machine Learning-based Near-field Emitter Location Sensing via Grouped Hybrid Analog and Digital XL-MIMO Receive Array
+  ID: http://arxiv.org/abs/2406.09695v3 | PUB: 2024-06-14T03:42:18Z | AUTHORS: Jiatong Bai, Yifan Li, Feng Shu, Kang Wei, Cunhua Pan, Yongpeng Wu, Yaoliang Song, Jiangzhou Wang
+  SUMMARY(first 300): As a green MIMO structure, the partially-connected hybrid analog and digital (PC-HAD) structure has been widely used in the far-field (FF) scenario for it can significantly reduce the hardware cost and complexity of large-scale or extremely large-scale MIMO (XL-MIMO) array. Recently, near-field (NF)
+TITLE: Spatially Intelligent Patrol Routes for Concealed Emitter Localization by Robot Swarms
+  ID: http://arxiv.org/abs/2510.14018v1 | PUB: 2025-10-15T18:55:42Z | AUTHORS: Adam Morris, Timothy Pelham, Edmund R. Hunt
+  SUMMARY(first 300): This paper introduces a method for designing spatially intelligent robot swarm behaviors to localize concealed radio emitters. We use differential evolution to generate geometric patrol routes that localize unknown signals independently of emitter parameters, a key challenge in electromagnetic surve
+TITLE: Closed-form Single UAV-aided Emitter Localization and Trajectory Design Using Doppler and TOA Measurements
+  ID: http://arxiv.org/abs/2510.01778v1 | PUB: 2025-10-02T08:09:24Z | AUTHORS: Samaneh Motie, Hadi Zayyani, Mohammad Salman, Hasan Abu Hilal
+  SUMMARY(first 300): In this paper, a single Unmanned-Aerial-Vehicle (UAV)-aided localization algorithm which uses both Doppler and Time of Arrival (ToA) measurements is presented. In contrast to Doppler-based localization algorithms which are based on non-convex functions, exploiting ToA measurements in a Least-Square 

@@ -1,0 +1,4 @@
+﻿URL: https://webstore.iec.ch/en/publication/67908
+STATUS: 200
+TITLE: IEC 61010-2-202:2020 RLV | IEC
+LEN: 442049

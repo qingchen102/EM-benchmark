@@ -1,0 +1,11 @@
+﻿TITLE.SEARCH: Tasks of a monitoring service
+URL: https://api.openalex.org/works?filter=title.search:Tasks%20of%20a%20monitoring%20service&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+29
+
+- [2021] Dynamic Time Tracking and Task Monitoring Agent Service | DOI=https://doi.org/10.1109/ictai53825.2021.9673299 | type=conference-paper | cites=4 | src=International Conference on Technological Advancements and Innovations (ICTAI)
+- [2020] Monitoring Call activity and Service Task Invocations for BPMN | DOI=https://doi.org/10.1145/3399871.3399884 | type=conference-paper | cites=1 | src=Asia Service Sciences and Software Engineering Conference (ASSE)
+- [2010] Monitoring Choice Task Attribute Attendance in Nonmarket Valuation of Multiple Park Management Services: Does It Matter? | DOI=https://doi.org/10.3368/le.86.4.817 | type=article | cites=133 | src=Land Economics
+- [2015] Integrating task planning, execution and monitoring for a domestic service robot | DOI=https://doi.org/10.1515/itit-2014-1064 | type=article | cites=2 | src=it - Information Technology
+- [2023] Service Task Status: creation and monitoring of the MUON reject list | DOI= | type=conference-paper | cites=0 | src=HAL (Le Centre pour la Communication Scientifique Directe)
+- [2019] Modeling the web service solutions for operational tasks of environmental monitoring of the urban environment | DOI=https://doi.org/10.15862/18inor419 | type=article | cites=0 | src=Russian journal of resources conservation and recycling

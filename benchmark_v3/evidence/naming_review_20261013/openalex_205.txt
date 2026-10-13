@@ -1,0 +1,5 @@
+﻿TITLE.SEARCH: Radiocommunication vocabulary
+URL: https://api.openalex.org/works?filter=title.search:Radiocommunication%20vocabulary&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+0
+

@@ -84,3 +84,10 @@ benchmark_v1/result.xlsx
 benchmark_v1/**/*.png
 benchmark_v2/dataset/*.npy
 benchmark_v2/mod_classifier/*.pt
+
+# —— 第三方标准全文快照（版权物；只留本地。引用与结论见 docs/辐射体与仪器的标准命名与定义.md §6）
+benchmark_v3/evidence/naming_review_20261013/3gpp_38104_plaintext.txt
+benchmark_v3/evidence/naming_review_20261013/etsi_30334502_plaintext.txt
+benchmark_v3/evidence/naming_review_20261013/ituR_SM_series_raw.html
+benchmark_v3/evidence/naming_review_20261013/radio_regulations_2.html
+benchmark_v3/evidence/naming_review_20261013/ecfr_15_3_defs.txt

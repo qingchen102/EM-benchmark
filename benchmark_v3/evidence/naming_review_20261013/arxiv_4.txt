@@ -1,0 +1,29 @@
+﻿QUERY: all:"disturbance source"
+URL: https://export.arxiv.org/api/query?search_query=all%3A%22disturbance%20source%22&max_results=8&sortBy=relevance
+TOTAL: 
+17
+
+TITLE: The Source of Disturbance Matters: External, Internal, and Control-Generated Noise in Adaptive Regulation
+  ID: http://arxiv.org/abs/2609.26428v1 | PUB: 2026-09-22T13:53:00Z | AUTHORS: Veronique Ziegler
+  SUMMARY(first 300): Adaptive regulation can itself perturb the state it is intended to stabilize. In replicated simulations of an adaptive agent, we compare external disturbance, persistent internally generated disturbance, and control-generated disturbance under regulation-first and disturbance-first ordering. Persist
+TITLE: Forced Oscillation Source Location via Multivariate Time Series Classification
+  ID: http://arxiv.org/abs/1711.03601v1 | PUB: 2017-11-08T18:22:46Z | AUTHORS: Yao Meng, Zhe Yu, Di Shi, Desong Bian, Zhiwei Wang
+  SUMMARY(first 300): Precisely locating low-frequency oscillation sources is the prerequisite of suppressing sustained oscillation, which is an essential guarantee for the secure and stable operation of power grids. Using synchrophasor measurements, a machine learning method is proposed to locate the source of forced os
+TITLE: Propagation Stability Concepts for Network Synchronization Processes
+  ID: http://arxiv.org/abs/2210.04370v1 | PUB: 2022-10-09T23:02:35Z | AUTHORS: Sandip Roy, Subir Sarker, Mengran Xue
+  SUMMARY(first 300): A notion of disturbance propagation stability is defined for dynamical network processes, in terms of decrescence of an input-output energy metric along cutsets away from the disturbance source. A characterization of the disturbance propagation notion is developed for a canonical model for synchroni
+TITLE: Characterization of disturbance sources for LISA: torsion pendulum results
+  ID: http://arxiv.org/abs/gr-qc/0412103v1 | PUB: 2004-12-21T15:25:50Z | AUTHORS: L. Carbone, A. Cavalleri, R. Dolesi, C. D. Hoyle, M. Hueller, S. Vitale, W. J. Weber
+  SUMMARY(first 300):  A torsion pendulum allows ground-based investigation of the purity of free-fall for the LISA test masses inside their capacitive position sensor. This paper presents recent improvements in our torsion pendulum facility that have both increased the pendulum sensitivity and allowed detailed character
+TITLE: Boundary controllability and source reconstruction in a viscoelastic string under external traction
+  ID: http://arxiv.org/abs/1206.3034v1 | PUB: 2012-06-14T08:26:39Z | AUTHORS: Luciano Pandolfi
+  SUMMARY(first 300): Treatises on vibrations devote large space to study the dynamical behavior of an elastic system subject to known external tractions. In fact, usually a "system" is not an isolated body but it is part of a chain of mechanisms which disturb the "system" for example due to the periodic rotation of shaf
+TITLE: The use of GPS-arrays in detecting shock-acoustic waves generated during rocket launchings
+  ID: http://arxiv.org/abs/physics/0007043v1 | PUB: 2000-07-13T23:51:36Z | AUTHORS: E. L. Afraimovich, E. A. Kosogorov, N. P. Perevalova, A. V. Plotnikov
+  SUMMARY(first 300):  This paper is concerned with the form and dynamics of shock-acoustic waves (SAW) generated during rocket launchings. We have developed a method for determining SAW parameters (including angular characteristics of the wave vector, and the SAW phase velocity, as well as the direction towards the sour
+TITLE: Multi-Point Method using Effective Demodulation and Decomposition Techniques allowing Identification of Disturbing Loads in Power Grids
+  ID: http://arxiv.org/abs/2311.07129v2 | PUB: 2023-11-13T07:51:20Z | AUTHORS: Piotr Kuwałek, Grzegorz Wiczyński
+  SUMMARY(first 300): The paper presents an innovative approach to identifying voltage fluctuation sources in power networks, also considering the localization understood as the indication of supply points of disturbing loads. The presented approach considers disturbance sources that change their operating state with a f
+TITLE: GustPilot: A Hierarchical DRL-INDI Framework for Wind-Resilient Quadrotor Navigation
+  ID: http://arxiv.org/abs/2603.19966v2 | PUB: 2026-03-20T14:06:11Z | AUTHORS: Amir Atef Habel, Roohan Ahmed Khan, Fawad Mehboob, Clement Fortin, Dzmitry Tsetserukou
+  SUMMARY(first 300): Wind disturbances remain a key barrier to reliable autonomous navigation for lightweight quadrotors, where the rapidly varying airflow can destabilize both planning and tracking. This paper introduces GustPilot, a hierarchical wind-resilient navigation stack in which a deep reinforcement learning (D

@@ -1,0 +1,11 @@
+﻿TITLE.SEARCH: Specification for radio disturbance and immunity measuring apparatus and methods
+URL: https://api.openalex.org/works?filter=title.search:Specification%20for%20radio%20disturbance%20and%20immunity%20measuring%20apparatus%20and%20methods&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+96
+
+- [2021] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/30389546 | type=standard | cites=34 | src=
+- [2015] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/30230479 | type=standard | cites=4 | src=
+- [2005] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/03201167u | type=standard | cites=3 | src=
+- [2010] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/30187039 | type=standard | cites=3 | src=
+- [2013] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/30176262 | type=standard | cites=2 | src=
+- [2015] Specification for radio disturbance and immunity measuring apparatus and methods | DOI=https://doi.org/10.3403/03201128u | type=standard | cites=2 | src=

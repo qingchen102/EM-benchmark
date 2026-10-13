@@ -1,0 +1,15 @@
+﻿QUERY: cognitive radio receiver spectrum sensing
+URL: https://api.openalex.org/works?search=cognitive%20radio%20receiver%20spectrum%20sensing&filter=from_publication_date:2020-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+11000
+
+- [2021] Multi-Dimensional Small-Scale Cooperative Spectrum Sensing Approach for Cognitive Radio Receivers | DOI=https://doi.org/10.1109/access.2021.3082870 | cites=8 | src=IEEE Access
+- [2020] The Combined Effect of Various Receiver Nonlinearities on Spectrum Sensing in Cognitive Radio Systems | DOI=https://doi.org/10.12720/jcm.15.4.350-358 | cites=5 | src=Journal of Communications
+- [2023] Eigenvalue-Based Spectrum Sensing Under Correlated Noise for Multi-dimensional Cognitive Radio Receiver | DOI=https://doi.org/10.1007/s11277-023-10765-x | cites=4 | src=Wireless Personal Communications
+- [2022] Selecting a Receiver for Wideband Spectrum Sensing in Cognitive Radio Systems Based on an Assessment of the Signal Environment Complexity | DOI=https://doi.org/10.1007/978-3-030-97777-1_30 | cites=3 | src=Lecture notes in computer science
+- [2021] Spectrum Sensing for Cognitive Radio: Recent Advances and Future Challenge | DOI=https://doi.org/10.3390/s21072408 | cites=236 | src=Sensors
+- [2021] Deep Learning for Spectrum Sensing in Cognitive Radio | DOI=https://doi.org/10.3390/sym13010147 | cites=85 | src=Symmetry
+- [2020] Simultaneous Power Harvesting and Cyclostationary Spectrum Sensing in Cognitive Radios | DOI=https://doi.org/10.1109/access.2020.2981878 | cites=24 | src=IEEE Access
+- [2025] Experimental Evaluation of Spectrum Sensing for Cognitive Radio IoT | DOI=https://doi.org/10.1109/icscc66177.2025.11233809 | cites=1 | src=International Conference on Smart Computing and Communications (ICSCC)
+- [2022] Intelligent Reflecting Surfaces and Spectrum Sensing for Cognitive Radio Networks | DOI=https://doi.org/10.1109/tccn.2022.3171212 | cites=47 | src=IEEE Transactions on Cognitive Communications and Networking
+- [2021] Effect of random sampling on spectrum sensing for cognitive radio networks | DOI=https://doi.org/10.12928/telkomnika.v19i4.20399 | cites=2 | src=TELKOMNIKA (Telecommunication Computing Electronics and Control)

@@ -1,0 +1,6 @@
+﻿PAGE: https://www.itu.int/rec/R-REC-SM.2039/en
+TITLE: SM.2039 : Spectrum monitoring evolution
+PDFLINKS:
+
+DMSLINKS:
+

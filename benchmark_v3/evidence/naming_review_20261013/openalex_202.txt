@@ -1,0 +1,11 @@
+﻿TITLE.SEARCH: IEEE Standard for Definitions of Terms for Antennas
+URL: https://api.openalex.org/works?filter=title.search:IEEE%20Standard%20for%20Definitions%20of%20Terms%20for%20Antennas&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=6
+COUNT: 
+10
+
+- [2013] IEEE Standard for Definitions of Terms for Antennas | DOI=https://doi.org/10.1109/ieeestd.2014.6758443 | type=standard | cites=70 | src=
+- [2025] IEEE Standard for Definitions of Terms for Antennas | DOI=https://doi.org/10.1109/ieeestd.2025.11459445 | type=standard | cites=2 | src=
+- [2026] IEEE Standard 145-2025: IEEE Standard for Definitions of Terms for Antennas [Stand on Standards] | DOI=https://doi.org/10.1109/map.2026.3703311 | type=article | cites=0 | src=IEEE Antennas and Propagation Magazine
+- [2020] Revision of IEEE Standard 145-2013: IEEE Standard for Definitions of Terms for Antennas [Stand on Standards] | DOI=https://doi.org/10.1109/map.2020.2983956 | type=article | cites=5 | src=IEEE Antennas and Propagation Magazine
+- [1969] IEEE standard definitions of terms for antennas | DOI=https://doi.org/10.1109/tap.1969.1139442 | type=article | cites=245 | src=IRE Transactions on Antennas and Propagation
+- [1982] IEEE Standard Definitions of Terms for Antennas | DOI=https://doi.org/10.1109/ieeestd.1983.82386 | type=standard | cites=33 | src=

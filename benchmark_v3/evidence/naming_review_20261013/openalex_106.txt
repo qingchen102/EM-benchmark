@@ -1,0 +1,6 @@
+﻿QUERY: unintentional radiator incidental emitter electromagnetic compatibility
+URL: https://api.openalex.org/works?search=unintentional%20radiator%20incidental%20emitter%20electromagnetic%20compatibility&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+1
+
+- [2023] Criteria for Determining the Safety of Wireless Technologies at Nuclear Power Plants | DOI=https://doi.org/10.2172/2404623 | cites=1 | src=

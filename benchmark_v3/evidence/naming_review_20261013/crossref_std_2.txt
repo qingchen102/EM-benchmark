@@ -1,0 +1,11 @@
+﻿DOI: 10.1109/IEEESTD.2014.6758443
+TITLE: 
+IEEE Standard for Definitions of Terms for Antennas
+CONTAINER: 
+
+PUBLISHER: 
+IEEE
+TYPE: 
+standard
+ISSUED: 
+{"value":[null],"Count":1}

@@ -1,0 +1,7 @@
+﻿URL: https://www.etsi.org/deliver/etsi_en/303300_303399/30334502/
+STATUS: 200
+LEN: 755
+
+<html><head><title>www.etsi.org - /deliver/etsi_en/303300_303399/30334502/</title></head><body><H1>www.etsi.org - /deliver/etsi_en/303300_303399/30334502/</H1><hr>
+
+<pre><A HREF="/deliver/etsi_en/303300_303399/">[To Parent Directory]</A><br><br> 11/4/2019  3:24 PM        &lt;dir&gt; <A HREF="/deliver/etsi_en/303300_303399/30334502/01.01.00_20/">01.01.00_20</A><br>  2/7/2020 12:01 PM        &lt;dir&gt; <A HREF="/deliver/etsi_en/303300_303399/30334502/01.01.01_60/">01.01.01_60</A><br> 9/21/2021  1:24 PM        &lt;dir&gt; <A HREF="/deliver/etsi_en/303300_303399/30334502/01.02.00_20/">01.02.00_20</A><br>12/23/2021 11:01 AM        &lt;dir&gt; <A HREF="/deliver/etsi_en/303300_303399/30334502/01.02.01_60/">01.02.01_60</A><br></pre><hr></body></html>

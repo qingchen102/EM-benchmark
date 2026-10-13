@@ -1,0 +1,15 @@
+﻿QUERY: radio wave propagation terminology definitions
+URL: https://api.openalex.org/works?search=radio%20wave%20propagation%20terminology%20definitions&filter=from_publication_date:2020-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+2099
+
+- [2020] Behavior of radio waves in an office environment | DOI= | cites=0 | src=LUTPub (LUT University)
+- [2023] Polarization of fast radio bursts: radiation mechanisms and propagation effects | DOI=https://doi.org/10.1093/mnras/stad1072 | cites=42 | src=Monthly Notices of the Royal Astronomical Society
+- [2021] Radio navigation systems: definitions and classifications | DOI=https://doi.org/10.1017/s0373463321000369 | cites=13 | src=Journal of Navigation
+- [2024] EARTHQUAKE PREDICTION USING SHORT RADIO WAVES | DOI=https://doi.org/10.29013/ejtns-24-1-16-29 | cites=0 | src=European Journal of Technical and Natural Sciences
+- [2020] From Wave Propagation to Spin Dynamics: Mathematical and Computational Aspects | DOI= | cites=2 | src=UNM’s Digital Repository (University of New Mexico)
+- [2023] Radio Systems Engineering, Revised First Edition | DOI=https://doi.org/10.21061/radiosystemsengineering-revised1st | cites=2 | src=Virginia Tech Publishing eBooks
+- [2021] Signal propagation modeling in complex, three-dimensional environments | DOI=https://doi.org/10.21079/11681/40321 | cites=2 | src=
+- [2024] Radio Propagation Measurements and Statistical Channel Models for Outdoor Urban Microcells in Open Squares and Streets at 142, 73, and 28 GHz | DOI=https://doi.org/10.1109/tap.2024.3366581 | cites=45 | src=IEEE Transactions on Antennas and Propagation
+- [2021] Energy analysis and discretization of the time-domain equivalent fluid model for wave propagation in rigid porous media | DOI=https://doi.org/10.1016/j.jcp.2021.110888 | cites=12 | src=Journal of Computational Physics
+- [2020] Exploring a large dataset : typical behavior of UHF signal propagation | DOI= | cites=0 | src=Jyväskylä University Digital Archive (University of Jyväskylä)

@@ -1,0 +1,123 @@
+﻿ITU-R SM SERIES RECOMMENDATION LIST (from https://www.itu.int/rec/R-REC-SM/en)
+
+SM.182 : Automatic monitoring of occupancy of the radio-frequency spectrum
+SM.239 : Spurious emissions from sound and television broadcast receivers
+SM.326 : Determination and measurement of the power of amplitude-modulated radio transmitters
+SM.328 : Spectra and bandwidth of emissions
+SM.329 : Unwanted emissions in the spurious domain
+SM.331 : Noise and sensitivity of receivers
+SM.332 : Selectivity of receivers
+SM.337 : Frequency and distance separations
+SM.377 : Accuracy of frequency measurements at stations for international monitoring
+SM.378 : Field-strength measurements at monitoring stations
+SM.433 : Methods for the measurement of radio interference and the determination of tolerable levels of interference
+SM.443 : Bandwidth measurement at monitoring stations
+SM.508 : Use of radio-noise data in spectrum utilization studies
+SM.575 : Protection of fixed monitoring stations against interference from nearby or strong transmitters
+SM.667 : National spectrum management data
+SM.668 : Electronic exchange of information for spectrum management purposes
+SM.669 : Protection ratios for spectrum sharing investigations
+SM.847 : Determination of the coordination area of an earth station operating with a geostationary space station and using the same frequency band as a system in a terrestrial service
+SM.848 : Determination of the coordination area of a transmitting earth station using the same frequency band as receiving earth stations in bidirectionally allocated frequency bands
+SM.849 : Determination of the coordination area for earth stations operating with non-geostationary spacecraft in bands shared with terrestrial services
+SM.850 : Coordination areas using predetermined coordination distances
+SM.851 : Sharing between the broadcasting service and the fixed and/or mobile services in the VHF and UHF bands
+SM.852 : Sensitivity of radio receivers for class of emissions F3E
+SM.853 : Necessary bandwidth
+SM.854 : Direction finding and location determination at monitoring stations
+SM.855 : Multi-service telecommunication systems
+SM.856 : New spectrally efficient techniques and systems
+SM.1009 : Compatibility between the sound-broadcasting service in the band of about 87-108 MHz and the aeronautical services in the band 108-137 MHz
+SM.1045 : Frequency tolerance of transmitters
+SM.1046 : Definition of spectrum use and efficiency of a radio system
+SM.1047 : National spectrum management
+SM.1048 : Design guidelines for a basic automated spectrum management system (BASMS)
+SM.1049 : A method of spectrum management to be used for aiding frequency assignment for terrestrial services in border areas
+SM.1050 : Tasks of a monitoring service
+SM.1051 : Priority of identifying and eliminating harmful interference in the frequency band 406-406.1 MHz and monitoring in the adjacent frequency bands 405.9 406 MHz and 406.1-406.2 MHz
+SM.1052 : Automatic identification of radio stations
+SM.1053 : Methods of improving HF direction-finding accuracy at fixed stations
+SM.1054 : Monitoring of radio emissions from spacecraft at monitoring stations
+SM.1055 : The use of spread spectrum techniques
+SM.1056 : Limitation of radiation from industrial, scientific and medical (ISM) equipment
+SM.1131 : Factors to consider in allocating spectrum on a worldwide basis
+SM.1132 : General principles and methods for sharing between radiocommunication services or between radio stations
+SM.1133 : Spectrum utilization of broadly defined services
+SM.1134 : Intermodulation interference calculations in the land-mobile service
+SM.1135 : SINPO and SINPFEMO codes
+SM.1138 : Determination of necessary bandwidths including examples for their calculation and associated examples for the designation of emissions
+SM.1139 : International monitoring system
+SM.1140 : Test procedures for measuring aeronautical receiver characteristics used for determining compatibility between the sound-broadcasting service in the band of about 87-108 MHz and the aeronautical services in the band 108-118 MHz
+SM.1235 : Performance functions for digital modulation systems in an interference environment
+SM.1265 : National alternative allocation methods
+SM.1266 : Adaptive MF/HF systems
+SM.1267 : Collection and publication of monitoring data to assist frequency assignment for geostationary satellite systems
+SM.1268 : Method of measuring the maximum frequency deviation of  FM broadcast emissions at monitoring stations
+SM.1269 : Classification of direction finding bearings
+SM.1270 : Additional information for monitoring purposes related to classification and designation of emission
+SM.1271 : Efficient spectrum utilization using probabilistic methods
+SM.1370 : Design guidelines for developing automated spectrum management systems
+SM.1392 : Essential requirements for a spectrum monitoring system for developing countries
+SM.1393 : Common formats for the exchange of information between monitoring stations
+SM.1394 : Common format for Memorandum of Understanding between the agreeing countries regarding cooperation in spectrum monitoring matters
+SM.1413 : Radiocommunication Data Dictionary for notification and coordination purposes
+SM.1446 : Definition and measurement of intermodulation products in transmitter using frequency, phase, or complex modulation techniques
+SM.1447 : Monitoring of the radio coverage of land mobile networks to verify compliance with a given licence
+SM.1448 : Determination of the coordination area around an earth station in the frequency bands between 100 MHz and 105 GHz
+SM.1535 : The protection of safety services from unwanted emissions
+SM.1536 : Frequency channel occupancy measurements
+SM.1537 : Automation and integration of spectrum monitoring systems with automated spectrum management
+SM.1538 : Technical and operating parameters and spectrum requirements for short range radiocommunication devices
+SM.1539 : Variation of the boundary between the out-of-band and spurious domains required for the application of Recommendations ITU-R SM.1541 and ITU-R SM.329
+SM.1540 : Unwanted emissions in the out-of-band domain falling into adjacent allocated bands
+SM.1541 : Unwanted emissions in the out-of-band domain
+SM.1542 : The protection of passive services from unwanted emissions
+SM.1598 : Methods of radio direction finding and location on time division multiple access and code division multiple access signals
+SM.1599 : Determination of the geographical and frequency distribution of the spectrum utilization factor for frequency planning purposes
+SM.1600 : Technical identification of digital signals
+SM.1603 : Spectrum redeployment as a method of national spectrum management
+SM.1604 : Guidelines for an upgraded spectrum management system for developing countries
+SM.1633 : Compatibility analysis between a passive service and an active service allocated in adjacent and nearby bands
+SM.1681 : Measuring of low-level emissions from space stations at monitoring earth stations using noise reduction techniques
+SM.1682 : Methods for measurements on digital broadcasting signals
+SM.1708 : Field-strength measurements along a route with geographical coordinate registrations
+SM.1723 : Mobile spectrum monitoring unit
+SM.1751 : An additional methodology for the evaluation of the effect of interference between radiocommunication networks operating in a shared frequency band
+SM.1752 : Limits for unwanted emissions under free-space condition
+SM.1753 : Methods for measurements of radio noise
+SM.1754 : Measurement techniques of ultra-wideband transmissions
+SM.1755 : Characteristics of ultra-wideband technology
+SM.1756 : Framework for the introduction of devices using ultra-wideband technology
+SM.1757 : Impact of devices using ultra-wideband technology on systems operating within radiocommunication services
+SM.1792 : Measuring sideband emissions of T-DAB and DVB-T transmitters for monitoring purposes
+SM.1793 : Measuring frequency channel occupancy using the technique used for frequency band measurement
+SM.1794 : Wideband instantaneous bandwidth spectrum monitoring systems
+SM.1809 : Standard data exchange format for frequency band registrations and measurements at monitoring stations
+SM.1836 : Test procedure for measuring the properties of the IF filter of radio monitoring receivers
+SM.1837 : Test procedure for measuring the 3rd order intercept point (IP3) level of radio monitoring receivers
+SM.1838 : Test procedure for measuring the noise figure of radio monitoring receivers
+SM.1839 : Test procedure for measuring the scanning speed of radio monitoring receivers
+SM.1840 : Test procedure for measuring the sensitivity of radio monitoring receivers using analogue-modulated signals
+SM.1875 : DVB-T/T2 coverage measurements and verification of planning criteria
+SM.1879 : The impact of power line high data rate telecommunication systems on radiocommunication systems below 470 MHz
+SM.1880 : Spectrum occupancy measurement and evaluation
+SM.1896 : Frequency ranges for global or regional harmonization of short-range devices
+SM.2028 : Protection distance calculation between inductive systems and radiocommunication services using frequencies below 30 MHz
+SM.2039 : Spectrum monitoring evolution
+SM.2060 : Test procedure for measuring direction finder accuracy
+SM.2061 : Test procedure for measuring direction finder immunity against multi-path propagation
+SM.2080 : Precision of time information in output data of monitoring receivers
+SM.2093 : Methods for measurements of indoor radio environment
+SM.2096 : Test procedure for measuring direction finder sensitivity in the VHF/UHF frequency range
+SM.2097 : On-site accuracy measurements of a fixed DF system
+SM.2103 : Global harmonization of short-range devices categories
+SM.2104 : Guidelines for narrow-band wireless home networking transceivers - Specification of spectrum related components
+SM.2110 : Guidance on frequency ranges for operation of non-beam wireless power transmission for electric vehicles
+SM.2117 : Data format definition for exchanging stored I/Q data for the purpose of spectrum monitoring
+SM.2129 : Guidance on frequency ranges for the operation of non-beam wireless power transmission for mobile and portable devices
+SM.2138 : Test procedure for measuring monitoring system field strength measurement accuracy in the VHF/UHF frequency range
+SM.2139 : Test procedure for determining the accuracy of TDOA systems
+SM.2140 : Performance evaluation of mobile direction finders in operational environment
+SM.2149 : Guidance on supplementary elements on the use of Appendix 10 of the Radio Regulations to convey information related to harmful interference to space radiocommunication services
+SM.2151 : Guidance on frequency ranges for operation of wireless power transmission via radio frequency beam for mobile/portable devices and sensor networks
+SM.2152 : Complementing current radio frequency delivery mechanisms using optical wireless communication Top - Feedback - Contact us - Copyright © ITU 2008 All Rights Reserved Contact for this page : Updated : 2026-09-21 // var _tag=new WebTrends(); _tag.dcsGetId(); // // _tag.dcsCustom=function(){ // Add custom parameters here. //_tag.DCSext.param_name=param_value; } _tag.dcsCollect(); //

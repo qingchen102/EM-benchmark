@@ -1,0 +1,5 @@
+﻿TITLE.SEARCH: emitter definition radio frequency source radiating
+URL: https://api.openalex.org/works?filter=title.search:emitter%20definition%20radio%20frequency%20source%20radiating&select=title,publication_year,doi,type,cited_by_count,primary_location&per-page=8
+COUNT: 
+0
+

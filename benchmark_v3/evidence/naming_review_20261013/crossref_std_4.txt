@@ -1,0 +1,11 @@
+﻿DOI: 10.3403/30230479
+TITLE: 
+Specification for radio disturbance and immunity measuring apparatus and methods
+CONTAINER: 
+
+PUBLISHER: 
+BSI British Standards
+TYPE: 
+standard
+ISSUED: 
+{"value":[null],"Count":1}

@@ -1,0 +1,15 @@
+﻿QUERY: radiator definition electromagnetic radiation terminology
+URL: https://api.openalex.org/works?search=radiator%20definition%20electromagnetic%20radiation%20terminology&filter=from_publication_date:2018-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+165
+
+- [2020] Generalized Current Green's Function Formalism for Electromagnetic Radiation by Coupled Conducting-Dielectric Systems | DOI=https://doi.org/10.36227/techrxiv.11859234.v1 | cites=0 | src=
+- [2018] INFRA (Inflatable Radiator) The development of an actively controllable, inflatable and deployable HiPeR radiator breadboard model | DOI= | cites=0 | src=Research Repository (Delft University of Technology)
+- [2023] Searches for continuous-wave gravitational radiation | DOI=https://doi.org/10.1007/s41114-023-00044-3 | cites=128 | src=Living Reviews in Relativity
+- [2018] Brain Storm Optimization for Electromagnetic Applications | DOI= | cites=2 | src=eScholarship (California Digital Library)
+- [2019] Open-Source Software for Electromagnetic Scattering Simulation: The Case of Antenna Design | DOI=https://doi.org/10.3390/electronics8121506 | cites=24 | src=Electronics
+- [2019] Shaping Electromagnetic Waves with Flexible and Continuous Control of the Beam Directions Using Holography and Convolution Theorem | DOI=https://doi.org/10.1038/s41598-019-48301-2 | cites=22 | src=Scientific Reports
+- [2022] Enhancement of Electromagnetic Interference Control Techniques Using Printed Circuit Boards Design : Review | DOI=https://doi.org/10.21608/aujst.2022.260919 | cites=1 | src=Aswan University Journal of Sciences and Technology/Aswan University Journal of Sciences and Technology 
+- [2022] Initial state QED radiation aspects for future $e^+e^-$ colliders | DOI=https://doi.org/10.3204/pubdb-2022-01673 | cites=12 | src=DESY Publication Database (PUBDB) (Deutsches Elektronen-Synchrotron)
+- [2021] Designing an event display for the Transition Radiation Detector in ALICE | DOI= | cites=0 | src=CERN Document Server (European Organization for Nuclear Research)
+- [2021] Collisional redistribution of hydrogen line radiation in low- and moderate-density magnetized plasmas | DOI=https://doi.org/10.1103/physreve.103.053209 | cites=0 | src=Physical review. E

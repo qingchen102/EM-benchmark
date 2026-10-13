@@ -1,0 +1,15 @@
+﻿QUERY: spectrum monitoring receiver
+URL: https://api.openalex.org/works?search=spectrum%20monitoring%20receiver&filter=from_publication_date:2020-01-01&select=title,publication_year,doi,cited_by_count,primary_location&per-page=10
+COUNT: 
+83235
+
+- [2025] Optimization of multi-satellite constellations for GNSS spectrum monitoring applications via AOA-TDOA receivers in LEO | DOI=https://doi.org/10.1016/j.pes.2025.100123 | cites=2 | src=Progress in Engineering Science
+- [2024] Non Intrusive Optical Performance Monitoring in Fiber Optic Networks Using Coherent Receivers as Spectrum Analyzers | DOI=https://doi.org/10.1109/icton62926.2024.10647829 | cites=1 | src=International Conference on Transparent Optical Networks
+- [2023] Abnormal errors of measuring carrier frequency of a signal in RF spectrum monitoring wideband receivers. Part 1. Expressions for estimating the probabilities of abnormal errors | DOI=https://doi.org/10.18127/j20700784-202305-02 | cites=0 | src=Achievements of Modern Radioelectronics
+- [2023] Abnormal errors of measuring carrier frequency of a signal in RF spectrum monitoring wideband receivers. Part 2. Quantifying the effectiveness of ways to reduce abnormal errors | DOI=https://doi.org/10.18127/j20700784-202307-02 | cites=0 | src=Achievements of Modern Radioelectronics
+- [2022] Measurements of IP3 and P1dB for Spectrum Monitoring with Software Defined Radios | DOI=https://doi.org/10.23919/eucap53622.2022.9769373 | cites=2 | src=European Conference on Antennas and Propagation
+- [2024] Spectrum Resolved SNR Monitoring of In-Service Channel | DOI=https://doi.org/10.1364/ofc.2024.m3i.6 | cites=0 | src=Optical Fiber Communication Conference
+- [2020] Electrosense+: Crowdsourcing radio spectrum decoding using IoT receivers | DOI=https://doi.org/10.1016/j.comnet.2020.107231 | cites=19 | src=Computer Networks
+- [2021] Spectrum Mobility in Cognitive Radio Networks Using Spectrum Prediction and Monitoring Techniques | DOI=https://doi.org/10.1002/9781119665458.ch7 | cites=2 | src=
+- [2022] Improvement of Signal Reception Reliability at Satellite Spectrum Monitoring System | DOI=https://doi.org/10.1109/access.2022.3206953 | cites=9 | src=IEEE Access
+- [2021] Radio Spectrum Monitoring and Surveillance System in the VHF/UHF Frequency Band | DOI=https://doi.org/10.1109/telfor52709.2021.9653314 | cites=3 | src=Telecommunications Forum (TELFOR)

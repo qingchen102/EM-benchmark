@@ -1,0 +1,6 @@
+﻿URL: https://www.itu.int/rec/R-REC-SM/en
+STATUS: 
+200
+LEN: 
+49781
+
