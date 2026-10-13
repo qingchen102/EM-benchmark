@@ -1,0 +1,35 @@
+== 全树的 answers_* 目录（名字里的 S 即当时的 --slevel） ==
+  benchmark_v3/_pre_quota_20261012/dataset_d1/answers_S0_agent_fix2
+  benchmark_v3/_pre_quota_20261012/dataset_d1/answers_S0_agent_fix2_mech
+  benchmark_v3/_pre_quota_20261012/dataset_d1/answers_S0_agent_wavefix
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_bwfix
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_fix1
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_fix2
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_fix2_12
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_fix2_mech
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_fix2_mech_nothink
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_nomech
+  benchmark_v3/_pre_quota_20261012/dataset_d2/answers_S2_agent_noneg
+  benchmark_v3/_pre_quota_20261012/dataset_d3/answers_S2_agent_bwfix
+  benchmark_v3/_pre_quota_20261012/dataset_d3/answers_S2_agent_fix2
+  benchmark_v3/_pre_quota_20261012/dataset_d3/answers_S2_agent_fix2_mech
+  benchmark_v3/_pre_quota_20261012/dataset_d4/answers_S2_agent_bwfix
+  benchmark_v3/_pre_quota_20261012/dataset_d4/answers_S2_agent_fix2
+  benchmark_v3/_pre_quota_20261012/dataset_d4/answers_S2_agent_fix2_mech
+  benchmark_v3/dataset_d1/answers_S0_agent_quota
+  benchmark_v3/dataset_d2/answers_S2_agent_quota
+  benchmark_v3/dataset_d3/answers_S2_agent_quota
+  benchmark_v3/dataset_d4/answers_S2_agent_quota
+  合计 21 个；按档统计 {'S0': 4, 'S2': 17}
+
+== 所有 _api_*.log 的运行命令行 ==
+  _api_mech_dataset_d1.log                 slevel=S0   n=-    answers=answers_S0_agent_fix2_mech
+  _api_mech_dataset_d2.log                 slevel=S2   n=-    answers=answers_S2_agent_fix2_mech
+  _api_mech_dataset_d3.log                 slevel=S2   n=-    answers=answers_S2_agent_fix2_mech
+  _api_mech_dataset_d4.log                 slevel=S2   n=-    answers=answers_S2_agent_fix2_mech
+  _api_nomech_dataset_d2.log               slevel=S2   n=-    answers=answers_S2_agent_nomech
+  _api_nothink_dataset_d2.log              slevel=S2   n=-    answers=answers_S2_agent_fix2_mech_nothink
+  _api_quota_d1.log                        slevel=S0   n=50   answers=answers_S0_agent_quota
+  _api_quota_d2.log                        slevel=S2   n=50   answers=answers_S2_agent_quota
+  _api_quota_d3.log                        slevel=S2   n=50   answers=answers_S2_agent_quota
+  _api_quota_d4.log                        slevel=S2   n=50   answers=answers_S2_agent_quota
