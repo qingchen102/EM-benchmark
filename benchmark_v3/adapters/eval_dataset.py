@@ -106,6 +106,22 @@ def gt_at_slevel(truth: dict, stations: list[str]) -> list[dict]:
     return out
 
 
+def sample_counts_for_slevel(truth: dict, gt_list: list[dict]) -> bool:
+    """该样本在该观测档下是否计入分母（2026-10-13 拍板）。
+
+    两种「真值源数为 0」必须区别对待：
+      * 真值里**根本没有干扰源**（真·干净样本，D1 的设计样本，占其一半）
+        → **计入**：报 0 正是题目要考的事。
+      * 真值里有源、但该子集内一个都不可见（实测 S0：D2 7/100、D3 14/100、
+        D4 12/100 —— 源被城市几何挡住，station_a 物理上收不到）
+        → **不计入**：该样本在这条轴上不度量任何能力（报 0 即对，只会把
+          detection_hit 抬到常数基线之上）。证据 benchmark_v3/evidence/_s0_visibility.txt。
+    """
+    if gt_list:
+        return True
+    return not truth.get("interferers")
+
+
 def gt_intent(ifw: dict) -> str | None:
     """敌我意图 GT：真值 intent 字段优先，缺省按 kind 查 INTENT 映射。"""
     return ifw.get("intent") or INTENT.get(ifw["kind"])
@@ -320,6 +336,7 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
     subsets = idx["observation_subsets"]
     abstain_ids = _load_abstain_ids(answers_dir)
     matrix: dict[str, dict] = {s: {} for s in subsets}
+    excluded: dict[str, int] = {s: 0 for s in subsets}   # 该档被剔除的「有源但零可见」样本数
     unknown_kinds: set[str] = set()
     assoc_pool: dict = {}
 
@@ -349,6 +366,9 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
                     assoc_pool.setdefault(k, []).append(v)
         for slevel, stations in subsets.items():
             gt_list = gt_at_slevel(truth, stations)
+            if not sample_counts_for_slevel(truth, gt_list):
+                excluded[slevel] += 1
+                continue
             ans = ans_obj if ans_obj is not None else offline_answer(truth, stations)
             r = score_answer(ans, gt_list, slevel)
             m = matrix[slevel]
@@ -372,6 +392,9 @@ def evaluate(root: str | Path, answers_dir: str | Path | None) -> dict:
     report = {}
     for slevel, m in matrix.items():
         row = {"n": len(next(iter(m.values()))) if m else 0}
+        if excluded.get(slevel):
+            row["excluded_zero_visible_n"] = excluded[slevel]
+            row["n_total_seen"] = row["n"] + excluded[slevel]
         # T3 池化指标：先取出原始计数，报告里写成比率（分母为 0 的级别不出现）
         det_hits = m.pop("detection_hit", [])
         abst_flags = m.pop("abstain", [])
