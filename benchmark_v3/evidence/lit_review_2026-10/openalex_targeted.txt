@@ -1,0 +1,47 @@
+﻿# OpenAlex title+abstract search (from 2024-01-01)
+
+## duty cycle signal detection spectrum
+- [2025] Regulatory-Aware Synthetic Spectrum Generation for LoRa and IEEE 802.15.4g Coexistence | HAL (Le Centre pour la Communication Scientifique Directe) | cites=0 | https://doi.org/10.5281/zenodo.18036025
+- [2026] SpecSentry: Micro-power Wideband Spectrum Surveillance for Ephemeral Transmissions | International Conference on Mobile Systems, Applications, and Services | cites=1 | https://doi.org/10.1145/3745756.3809244
+- [2026] Edge CA-CFAR Data Reduction for Bandwidth-Efficient Real-Time Wideband Spectrum Sensing on Low-Cost SDRs | Sensors | cites=0 | https://doi.org/10.3390/s26144468
+- [2025] Hybrid deep learning based spectrum sharing strategy for cognitive radio based IoT in 5G environment | CRC Press eBooks | cites=1 | https://doi.org/10.1201/9781003530176-44
+- [2026] Research and development of methods for detection and recognition of unmanned aerial vehicles |  | cites=0 | https://doi.org/10.20334/2026-045-m
+- [2025] Efficient Deep Wavelet Gaussian Markov Dempster–Shafer Network-Based Spectrum Sensing at Very Low SNR in Cognitive Radio Networks | Sensors | cites=1 | https://doi.org/10.3390/s25237361
+
+## burst signal detection spectrogram deep learning
+- [2025] Spatio-temporal deep learning for epileptic seizure detection in clinical EEG data | International Conference on Artificial Intelligence and Signal Processing (AISP) | cites=0 | https://doi.org/10.1109/aisp68263.2025.11396284
+- [2026] "DroneRFz and DroneRFB: An Extension RF Spectrogram Dataset for Drone Recognition Across Diverse Electromagnetic Environments" | IEEE DataPort | cites=0 | https://doi.org/10.21227/2hd1-ge27
+- [2026] Deep Learning for Resilient Spectrum Sharing: Physics-Guided Interference Mapping and Low-SINR Radar Detection in the CBRS Band | Underline Science Inc. | cites=0 | https://doi.org/10.48448/60h6-9574
+- [2026] Adaptive Multi-Resolution RF Classification Using CNN-BiLSTM Noise-Aware Curriculum Learning | International Conference on Artificial Intelligence and Machine Learning Applications Theme: Healthcare and Internet of Things (AIMLA) | cites=0 | https://doi.org/10.1109/aimla67915.2026.11522354
+- [2026] An open reproducible framework for CNN-based cetacean vocalization detection in passive acoustic monitoring | Open Research Europe | cites=0 | https://doi.org/10.12688/openreseurope.24335.2
+- [2026] An open reproducible framework for CNN-based cetacean vocalization detection in passive acoustic monitoring | Open Research Europe | cites=0 | https://doi.org/10.12688/openreseurope.24335.1
+
+## intermittent signal detection cognitive radio
+- [2025] Enhanced Detection of Intermittent Primary User Signals for Cognitive Radio-IoT Networks with Markov-Chain Modeled BPSK | International Conference on Wireless and Mobile Computing, Networking and Communications (WiMob) | cites=0 | https://doi.org/10.1109/wimob66857.2025.11257527
+- [2025] FPGA Based Enhanced Spectrum Sensing Using Matched Filter Detection in Cognitive Radio Systems | IEEE International Conference on Technology, Engineering, Management for Societal Impact using Marketing, Entrepreneurship and Talent (TEMSMET) | cites=0 | https://doi.org/10.1109/temsmet65536.2025.11467247
+- [2026] Lightweight Deep Learning-Based Spectrum Sensing Under Dynamic PU Activity in Cognitive Radio | IEEE Open Journal of the Communications Society | cites=1 | https://doi.org/10.1109/ojcoms.2026.3698785
+- [2025] Efficient Deep Wavelet Gaussian Markov Dempster–Shafer Network-Based Spectrum Sensing at Very Low SNR in Cognitive Radio Networks | Sensors | cites=1 | https://doi.org/10.3390/s25237361
+
+## energy detection low duty cycle
+- [2024] Intelligent Duty Cycling Management and Wake-up for Energy Harvesting IoT Networks with Correlated Activity | 2018 52nd Asilomar Conference on Signals, Systems, and Computers | cites=9 | https://doi.org/10.1109/ieeeconf60004.2024.10942799
+- [2025] CEDAR: A Communication Protocol for Collaborative Event Detection and Reporting in Duty-Cycled Underwater Acoustic Networks | Telecommunications Forum (TELFOR) | cites=1 | https://doi.org/10.1109/telfor67910.2025.11314246
+- [2025] Distributed Fault Detection for Multirate Network Systems Over WSNs With Random Multiple Time Delays Under Improved Low-Duty-Cycle Scheduling | IEEE Sensors Journal | cites=1 | https://doi.org/10.1109/jsen.2025.3634608
+- [2026] Thermal cut-off, not frequency throttling: Duty-cycle scheduling and a dataset-integrity audit for on-farm edge disease detection in durian | Smart Agricultural Technology | cites=0 | https://doi.org/10.1016/j.atech.2026.102526
+- [2026] Asynchronous Low Duty-Cycling for Reduced Event-Reporting Delay in Underwater Acoustic Sensor Networks | IEEE Access | cites=0 | https://doi.org/10.1109/access.2026.3654655
+- [2025] Low-Power LoRa End-Device for Real-Time Direction Detection | International Conference on Signal Processing and Intelligent Systems (ICSPIS) | cites=0 | https://doi.org/10.1109/icspis68676.2025.11551731
+
+## transient detection radio frequency machine learning
+- [2024] SRF Cavity Instability Detection with Machine Learning at CEBAF |  | cites=0 | https://doi.org/10.2172/2368510
+- [2025] Enhancing the SPANDAK Pipeline: Multibeam RFI Mitigation and Integration of Machine Learning for FRB Detection |  | cites=0 | https://doi.org/10.26624/elbb3581
+- [2025] SRF cavity instability detection with machine learning at CEBAF |  | cites=0 | https://doi.org/10.2172/3383083
+- [2024] SRF cavity instability detection with machine learning at CEBAF | OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information) | cites=0 | https://doi.org/10.18429/jacow-ipac2024-tups69
+- [2026] SRF cavity instability detection with machine learning at CEBAF | JACOW | cites=0 | https://doi.org/10.18429/jacow-napac2025-tucn03
+- [2026] AI in UK Radio Astronomy |  | cites=0 | https://doi.org/10.1117/12.3104973
+
+## single source time-frequency point underdetermined separation
+- [2026] Robustness Enhancement of Underdetermined Blind Source Separation for Magnetic Signals With Continuous Wavelet Transform | Journal of Geophysical Research Space Physics | cites=0 | https://doi.org/10.1029/2026ja035785
+- [2024] Exploiting Time–Frequency Sparsity for Dual-Sensor Blind Source Separation | Electronics | cites=1 | https://doi.org/10.3390/electronics13071227
+
+## low SNR burst detection matched filter spectrogram
+
+## spectrum occupancy measurement bursty emitter detection

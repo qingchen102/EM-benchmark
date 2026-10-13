@@ -1,0 +1,71 @@
+﻿# OpenAlex (from 2024-01-01)
+
+## low duty cycle burst signal detection
+- [2026] Role of Duty Cycle in Burst-Modulated Synthetic Jet Flow Control | AIAA Journal | cites=0 | https://doi.org/10.2514/1.j065199
+- [2026] Low-energy Radio Bursts from Magnetar XTE J1810−197: Implications for Fast Radio Bursts | The Astrophysical Journal | cites=2 | https://doi.org/10.3847/1538-4357/ae279f
+- [2026] Spiking Neural Dedispersion: A Neuromorphic Fast Radio Burst Detection Pipeline | arXiv (Cornell University) | cites=0 | https://doi.org/10.48550/arxiv.2606.15361
+- [2026] e-Callisto Catalog of Solar Radio Bursts: Solar Cycle 24 | Research Square | cites=0 | https://doi.org/10.21203/rs.3.rs-10502147/v1
+- [2026] Airtime-budgeted quantum-resistant rekeying for duty-cycle-limited low-power wide-area uplinks | International Journal of Communication and Information Technology | cites=0 | https://doi.org/10.33545/2707661x.2026.v7.i3a.217
+- [2024] A fast radio burst localized at detection to an edge-on galaxy using very-long-baseline interferometry | Nature Astronomy | cites=31 | https://doi.org/10.1038/s41550-024-02357-x
+- [2024] Expected Gamma-Ray Burst Detection Rates and Redshift Distributions for the BlackCAT CubeSat Mission | The Astrophysical Journal | cites=3 | https://doi.org/10.3847/1538-4357/ad4f8b
+- [2024] Impact of noise transients on gravitational-wave burst detection efficiency of the BayesWave pipeline with multidetector networks | Physical review. D/Physical review. D. | cites=2 | https://doi.org/10.1103/physrevd.109.082002
+
+## burst detection deep learning spectrum
+- [2025] Automated Detection and Classification of Solar Radio Bursts Using e-CALLISTO Spectrum Data and YOLO V11 Deep Learning Model |  | cites=0 | https://doi.org/10.52202/083095-0044
+- [2026] Frabjous : Deep learning Fast Radio Burst morphologies | Publications of the Astronomical Society of Australia | cites=0 | https://doi.org/10.1017/pasa.2026.10191
+- [2026] Automated Solar Radio Burst Detection Using Deep Learning on Augmented e-Callisto Data | arXiv (Cornell University) | cites=0 | https://doi.org/10.48550/arxiv.2607.26014
+- [2025] Frabjous: Deep Learning Fast Radio Burst Morphologies | arXiv (Cornell University) | cites=0 | https://doi.org/10.48550/arxiv.2507.14854
+- [2025] Early Leak and Burst Detection in Water Pipeline Networks Using Machine Learning Approaches | Water | cites=10 | https://doi.org/10.3390/w17142164
+- [2025] Spectrum Sensing and Waveform Classification with Deep Learning | International Journal for Research in Applied Science and Engineering Technology | cites=0 | https://doi.org/10.22214/ijraset.2025.72961
+- [2026] A neuroscientist’s guide to neural burst detection | Imaging Neuroscience | cites=0 | https://doi.org/10.1162/imag.a.1226
+- [2025] Deep learning and computer vision in plant disease detection: a comprehensive review of techniques, models, and trends in precision agriculture | Artificial Intelligence Review | cites=468 | https://doi.org/10.1007/s10462-024-11100-x
+
+## frequency hopping signal detection deep learning
+- [2026] A Survey on Deep Learning Methods for UAV Frequency-Hopping Signal Detection | Transactions on Computer Science and Intelligent Systems Research | cites=0 | https://doi.org/10.62051/xejec676
+- [2024] Intelligent Receiver for Frequency Hopping Signals Using Deep Learning | International Journal of Electrical and Electronic Engineering & Telecommunications | cites=0 | https://doi.org/10.18178/ijeetc.13.5.366-373
+- [2024] Study on Frequency Hopping Signal Detection and Identification Based on YoLov3 | Lecture notes in electrical engineering | cites=1 | https://doi.org/10.1007/978-981-97-7770-9_10
+- [2025] Detection of Frequency Hopping Signals Based on YOLOv5 in Complex Environments | International Conference on Neural Networks, Information and Communication Engineering (NNICE) | cites=0 | https://doi.org/10.1109/nnice64954.2025.11063951
+- [2025] A Compressive Sampling And Deep Learning-Based Algorithm For Wideband Signal Detection | International Journal of Environmental Sciences | cites=0 | https://doi.org/10.64252/6hmer022
+- [2024] Drone RF Signal Detection and Fingerprinting: UAVSig Dataset and Deep Learning Approach | IEEE Military Communications Conference (MILCOM) | cites=13 | https://doi.org/10.1109/milcom61039.2024.10773837
+- [2026] Frequency-hopping signal detection for anti-drone systems: Summary, challenges, and future prospects | Physical Communication | cites=1 | https://doi.org/10.1016/j.phycom.2026.103127
+- [2024] A Small-Object Detection Based Scheme for Multiplexed Frequency Hopping Recognition in Complex Electromagnetic Interference | IEEE Communications Letters | cites=7 | https://doi.org/10.1109/lcomm.2024.3363167
+
+## co-channel multi-source carrier frequency estimation
+- [2024] Joint Wideband Spectrum Sensing and Carrier Frequency Estimation in the Multi-Path Propagation Environment Based on Sub-Nyquist Sampling | Electronics | cites=0 | https://doi.org/10.3390/electronics13214282
+- [2025] Semi-Blind Methods for Channel Estimation and Data Recovery in Multi-carrier Communication | Research Publication Repository of King Fahd University of Petroleum and Minerals (King Fahd University of Petroleum and Minerals) | cites=0 | 
+- [2024] Subspace Blind Channel Estimation Methods in OFDM Systems under Multi-path Channels | Research Square | cites=2 | https://doi.org/10.21203/rs.3.rs-3792522/v1
+- [2024] Circular RIS-Enabled Channel Estimation and Localization for Multi-User ISAC Systems | IEEE Transactions on Wireless Communications | cites=21 | https://doi.org/10.1109/twc.2024.3353858
+- [2024] Adaptive Joint Carrier and DOA Estimations of FHSS Signals Based on Knowledge-Enhanced Compressed Measurements and Deep Learning | Entropy | cites=4 | https://doi.org/10.3390/e26070544
+- [2025] Model-Based Learning for Multi-Antenna Multi-Frequency Location-to-Channel Mapping | IEEE Journal of Selected Topics in Signal Processing | cites=5 | https://doi.org/10.1109/jstsp.2025.3549952
+- [2025] Parallel IRS-Assisted Channel Estimation Based on Frequency Shifting | IEEE Transactions on Vehicular Technology | cites=1 | https://doi.org/10.1109/tvt.2025.3563460
+- [2025] Channel Estimation in UAV-Assisted OFDM Systems by Leveraging LoS and Echo Sensing with Carrier Aggregation | Sensors | cites=3 | https://doi.org/10.3390/s25206392
+
+## spectral kurtosis transient detection
+- [2025] EKBD-MK: Entropy-Kurtosis Bilateral Discernment With Maximum Kurtosis Blind Deconvolution for Fault Diagnosis in Wind Turbine Systems | ASCE-ASME Journal of Risk and Uncertainty in Engineering Systems Part B Mechanical Engineering | cites=2 | https://doi.org/10.1115/1.4069528
+- [2024] Order Tracking on Cyclic Kurtosis for Damage Detection of Bearing Faults | European Signal Processing Conference (EUSIPCO) | cites=0 | https://doi.org/10.23919/eusipco63174.2024.10715356
+- [2026] Novel Fault Diagnosis Technology Based on Integrated Spectral Kurtosis for Gearboxes | Sensors | cites=1 | https://doi.org/10.3390/s26072185
+- [2025] A Novel Fault Diagnosis Method for Rolling Bearings Based on Spectral Kurtosis and LS-SVM | Electronics | cites=12 | https://doi.org/10.3390/electronics14142790
+- [2024] Spectral-Kurtosis and Image-Embedding Approach for Target Classification in Micro-Doppler Signatures | Electronics | cites=8 | https://doi.org/10.3390/electronics13020376
+- [2026] A hybrid hilbert–huang and integrated kurtosis framework for automated leak detection and characterisation in pipeline systems | Measurement | cites=0 | https://doi.org/10.1016/j.measurement.2026.122324
+- [2024] MULTIPATH DETECTION BY FREQUENCY DOMAIN KURTOSIS ESTIMATION |  | cites=0 | https://doi.org/10.25144/20164
+- [2024] Interference detection in radio astronomy: applying Shapiro–Wilks normality test, spectral entropy, and spectral relative entropy | RAS Techniques and Instruments | cites=1 | https://doi.org/10.1093/rasti/rzae035
+
+## off-grid sparse Bayesian line spectrum estimation
+- [2024] Enhancing Off-Grid One-Bit DOA Estimation with Learning-Based Sparse Bayesian Approach for Non-Uniform Sparse Array | 2018 52nd Asilomar Conference on Signals, Systems, and Computers | cites=3 | https://doi.org/10.1109/ieeeconf60004.2024.10942609
+- [2025] Off-Grid Sparse Bayesian Learning for Channel Estimation and Localization in RIS-Assisted MIMO-OFDM Under NLoS | Sensors | cites=5 | https://doi.org/10.3390/s25134140
+- [2024] An Off-Grid Compressive Sensing Algorithm Based on Sparse Bayesian Learning for RFPA Radar | Remote Sensing | cites=9 | https://doi.org/10.3390/rs16020403
+- [2024] Velocity Estimation of Passive Target Based on Sparse Bayesian Learning Cross-Spectrum | Sensors | cites=1 | https://doi.org/10.3390/s24216989
+- [2026] Off-grid Variational Bayesian Parameter Estimation for Fractional Delay-Doppler OTFS-ISAC | arXiv (Cornell University) | cites=0 | https://doi.org/10.48550/arxiv.2607.17001
+- [2024] DOA Estimation Method for Vector Hydrophones Based on Sparse Bayesian Learning | Sensors | cites=8 | https://doi.org/10.3390/s24196439
+- [2026] Data-aided Channel Estimation and Sensing With Sparse Bayesian Learning for AFDM-ISAC System | arXiv (Cornell University) | cites=0 | 
+- [2024] A New Sparse Bayesian Learning-Based Direction of Arrival Estimation Method with Array Position Errors | Mathematics | cites=4 | https://doi.org/10.3390/math12040545
+
+## single channel blind source separation frequency estimation
+- [2025] A Single-channel Blind Source Separation Method based on Modulation Parameter Estimation and Signal Reconstruction | IEEE Information Technology and Mechatronics Engineering Conference (ITOEC) | cites=0 | https://doi.org/10.1109/itoec63606.2025.10968377
+- [2025] A Survey on Single-Channel Blind Source Separation in Communications |  | cites=0 | https://doi.org/10.36227/techrxiv.174494865.59517175/v1
+- [2025] Blind source separation of single-channel mixtures via multi-encoder autoencoders | Neurocomputing | cites=5 | https://doi.org/10.1016/j.neucom.2025.131008
+- [2026] Open-Set Single-Channel Blind Source Separation: Per-Source Modulation Detection is SNR-Dependent | SSRN Electronic Journal | cites=0 | https://doi.org/10.2139/ssrn.7357277
+- [2026] Sequential Detection-Based Iterative Blind Separation for Single-Channel Co-Frequency Signals | arXiv (Cornell University) | cites=0 | https://doi.org/10.48550/arxiv.2609.11280
+- [2025] On the Kalman Filter Parameter Estimation Methods for Blind Source Separation | Journal of Communication and Information Systems | cites=0 | https://doi.org/10.14209/jcis.2025.01
+- [2024] Exploiting Time–Frequency Sparsity for Dual-Sensor Blind Source Separation | Electronics | cites=1 | https://doi.org/10.3390/electronics13071227
+- [2025] Blind Separation and Feature-Guided Modulation Recognition for Single-Channel Mixed Signals | Electronics | cites=3 | https://doi.org/10.3390/electronics14204103
