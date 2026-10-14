@@ -13,6 +13,8 @@
   d6 = 卡 7  电力线巡检       电晕/变频器簇（Corona/VFD/Welder）+ 少量单音
   d7 = 卡 3  蜂群/灯光秀      同质 UAV_video_OFDM 多实例（**分选题**，源数 3–5）
   d8 = 卡 10 滨水/江面        开阔近水面（低多径）+ ISM 共存源
+  d9 = 卡 12 应急救援        蜂窝过载 + 中继链路 + 救援对讲机（拥挤共道）
+  d10 = 卡 4  大型活动安保     手机上行潮 + 对讲机 + 安保反制（共道为主）
 
 `tier` 是**预设难度等级**（1 最易 … 4 最难，与 D1–D4 对齐），属主观预设，跑分后按实测调整。
 `note` 记录该档与场景卡原文的差距（哪些能力还没实现、用什么替代）。
@@ -80,10 +82,34 @@ SCENES: dict[str, dict] = {
         force_tier=None,
         note="开阔近水面（低多径）；水面色片未入 RT（D-16 待定），暂以地面镜面近似",
     ),
+    "d9": dict(
+        card="卡 12 应急救援",
+        tier=3,
+        pool=("LTE_QPSK", "DECT", "Tone_jam", "UAV_video_OFDM"),
+        n_src=(1, 3),
+        target="UAV_video_OFDM",
+        nlos=True,
+        tgt_power=(0, 10),
+        noise="d3",
+        force_tier=None,
+        note="灾区瓦砾多径 + 交叠共道；动态剧本（§9-1 时间剧本）未实现，窗内用共道拥挤近似",
+    ),
+    "d10": dict(
+        card="卡 4 大型活动安保",
+        tier=3,
+        pool=("LTE_QPSK", "DECT", "Tone_jam", "Noise_jam", "Chirp_jam"),
+        n_src=(2, 3),
+        target="UAV_video_OFDM",
+        nlos=False,
+        tgt_power=(10, 20),
+        noise="d2",
+        force_tier=None,
+        note="瞄准层（aim_at）与手机潮换载频未实现；aimed 合法性属答题键问题（§10.1 D-12），本轮不做",
+    ),
 }
 
 # 档位 → 场景 id（便于脚本遍历；顺序 = 建议生成顺序）
-SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8")
+SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8", "d9", "d10")
 
 
 def tier_label(scene_id: str) -> str:
