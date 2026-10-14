@@ -14,9 +14,11 @@ _HERE = pathlib.Path(__file__).resolve().parent
 _V3 = _HERE.parents[1]           # benchmark_v3
 
 TIER = {"d1": "T1", "d2": "T2", "d3": "T3", "d4": "T4",
-        "d5": "T3", "d6": "T2", "d7": "T4", "d8": "T2"}
+        "d5": "T3", "d6": "T2", "d7": "T4", "d8": "T2",
+        "d9": "T3", "d10": "T3", "d11": "T3"}
 NAME = {"d1": "物流航线", "d2": "居民区共存", "d3": "城市峡谷", "d4": "对抗演习",
-        "d5": "卡11 建筑工地", "d6": "卡7 电力线", "d7": "卡3 蜂群", "d8": "卡10 滨水"}
+        "d5": "卡11 建筑工地", "d6": "卡7 电力线", "d7": "卡3 蜂群", "d8": "卡10 滨水",
+        "d9": "卡12 应急救援", "d10": "卡4 大型活动安保", "d11": "卡5 机场净空"}
 COLS = [("detection_hit", "检测计数"), ("detection_within1", "±1"),
         ("kind_hits", "体制"), ("freq_hits", "载频"),
         ("pos_hits", "定位"), ("doa_hits", "DOA"),
@@ -24,7 +26,7 @@ COLS = [("detection_hit", "检测计数"), ("detection_within1", "±1"),
 
 
 def main(argv: list[str]) -> int:
-    decks, slevel = ["d2", "d3", "d4", "d5", "d6", "d7", "d8"], "S2"
+    decks, slevel = ["d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10", "d11"], "S2"
     for i, a in enumerate(argv[1:]):
         if a == "--slevel":
             slevel = argv[i + 2]
@@ -55,7 +57,8 @@ def main(argv: list[str]) -> int:
         if blk.get("excluded_zero_visible_n"):
             print(f"       （{slevel} 剔除零可见样本 {blk['excluded_zero_visible_n']} / 共见 "
                   f"{blk.get('n_total_seen', '?')}）")
-    print("\n注：d5–d8 的难度等级为预设值（跑分后调整）；定位/DOA 两列互斥（S0 出 DOA，S1/S2 出定位）。")
+    print("\n注：d5–d11 的难度等级为预设值（跑分后调整）；定位/DOA 两列互斥（S0 出 DOA，S1/S2 出定位）；"
+          "d11 只生成未跑分（gate 定向矩阵硬编码 2.4 GHz、CNN 未在 5.8 GHz 重训）。")
     return 0
 
 
