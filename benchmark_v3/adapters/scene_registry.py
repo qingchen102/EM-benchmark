@@ -94,6 +94,30 @@ SCENES: dict[str, dict] = {
         force_tier=None,
         note="灾区瓦砾多径 + 交叠共道；动态剧本（§9-1 时间剧本）未实现，窗内用共道拥挤近似",
     ),
+    "d11": dict(
+        card="卡 5 机场/起降场净空",
+        tier=3,
+        carrier_hz=5.8e9,                  # 场景载频 = 5.8 GHz（FPV 图传档）
+        backend="free_space",              # 逐源载频只支持自由空间后端
+        imd3=True,                         # 前端非线性：互调（阻塞的另一半见 soft_limit）
+        iip3_dbm=(5, 15),
+        soft_limit_dbm=0.0,                # tanh 软限幅：窗外强源推爆前端（阻塞机理）
+        pool=("UAV_video_OFDM", "WiFi_burst"),
+        # 窗外强源：到站端口 +6 dBm（1 MW 级雷达在数百米处的量级；软限幅门限 0 dBm、
+        # IIP3 5–15 dBm ⇒ 前端被压进非线性区，阻塞与互调才真的发生）
+        always=(("Radar_pulsed_LFM", 1.09e9, 6.0),),
+        n_src=(0, 1),
+        target="UAV_video_OFDM",
+        nlos=False,
+        tgt_power=(10, 20),
+        noise="d2",
+        force_tier=None,
+        note=("换载频首例（破 D-2）：场景 5.8 GHz，1090 MHz 监视雷达是**窗外强源**——"
+              "离散基带里它的像落在 Nyquist 被通道滤波器压掉，证据只剩前端压缩与互调产物，"
+              "因此「雷达脉冲掩蔽」在本模型里体现为灵敏度塌方而非窗内脉冲峰。"
+              "本轮只生成、不跑分：评分侧 oracle16 的 GT 切片导向矩阵硬编码 2.4 GHz，"
+              "非 2.4 GHz 档要先修 gate；CNN 也未在 5.8 GHz 上重训。"),
+    ),
     "d10": dict(
         card="卡 4 大型活动安保",
         tier=3,
@@ -109,7 +133,15 @@ SCENES: dict[str, dict] = {
 }
 
 # 档位 → 场景 id（便于脚本遍历；顺序 = 建议生成顺序）
-SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8", "d9", "d10")
+SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8", "d9", "d10", "d11")
+
+# 新增字段（2026-10-14，为卡 5 的换载频/窗外强源加的，全部可选、默认不改既有行为）
+#   carrier_hz       场景载频覆盖（None/缺省 = 2.4 GHz）
+#   backend          强制传播后端（"free_space"）；逐源载频只支持 free_space
+#   imd3/iip3_dbm/soft_limit_dbm  前端非线性（互调 + tanh 软限幅 = 阻塞）
+#   always           每样本必含的源，池项三态："Kind" | ("Kind", 载频) | ("Kind", 载频, 端口功率 dBm)
+#                    带载频的源=窗外强源：基带偏移固定 0、窄带；功率按端口功率反推；
+#                    不参与 QA 约束 1（窗内可见性）
 
 
 def tier_label(scene_id: str) -> str:

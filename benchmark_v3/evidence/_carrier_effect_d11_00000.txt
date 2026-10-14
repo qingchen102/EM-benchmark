@@ -1,0 +1,8 @@
+﻿场景载频 5.80 GHz   目标 UAV_video_OFDM @15.0 dBm   窗外源 Radar_pulsed_LFM 1.090 GHz @99.9 dBm
+前端：imd3=True iip3=5.1 dBm soft_limit=0.0
+
+                           总功率(dB)        带外底噪中位(dB)      带内能量(dB)      带内/带外(dB)
+A 有窗外强源                     -111.6            -113.8         -29.1           84.6
+B 移除窗外源                     -118.4            -117.1         -28.4           88.7
+
+结论：窗内底噪抬升 +3.3 dB（A − B）

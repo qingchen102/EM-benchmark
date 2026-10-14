@@ -68,8 +68,10 @@ def run_scenario(config: Scenario, output, *, frozen_links=None):
             rel=np.array(tx.velocity_mps)
             radial=float(np.dot(rel,np.array(rx.position_m)-np.array(tx.position_m))
                          /max(np.linalg.norm(np.array(rx.position_m)-np.array(tx.position_m)),1e-6))
-            doppler=radial/299792458.*s.carrier_frequency_hz
-            shift=tx.rf_offset_hz+doppler
+            fc_tx=float(tx.carrier_hz) if tx.carrier_hz else s.carrier_frequency_hz
+            doppler=radial/299792458.*fc_tx
+            # 异载频源的频移 = 与场景载频之差；这就是「窗外强源」的表示方式。
+            shift=(fc_tx-s.carrier_frequency_hz)+tx.rf_offset_hz+doppler
             if shift:
                 t=(np.arange(arrival.shape[1])-rx_guard)/s.sample_rate_hz
                 arrival=arrival*np.exp(1j*2*np.pi*shift*t)

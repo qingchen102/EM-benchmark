@@ -38,6 +38,12 @@ class SionnaRTBackend:
         p=scenario.propagation
         scene=_load_scene(p.scene)
         scene.frequency=scenario.carrier_frequency_hz
+        # 逐源载频在 RT 后端不支持：Sionna RT 一次只跑一个频率，异载频源的
+        # 路径与相位会算错。卡 5 因此限定 free_space（见 scene_registry.backend）。
+        _odd=[e.id for e in scenario.emitters
+              if e.carrier_hz and abs(float(e.carrier_hz)-scenario.carrier_frequency_hz)>1.0]
+        if _odd:
+            raise ValueError(f"sionna_rt 不支持逐源载频（{_odd}）；该档请用 free_space 后端")
         scene.tx_array=rt.PlanarArray(num_rows=1,num_cols=1,pattern="iso",polarization="V")
         spec=scenario.receivers[0].antenna
         pattern=rt.PlanarArray(num_rows=1,num_cols=1,pattern=spec.pattern,

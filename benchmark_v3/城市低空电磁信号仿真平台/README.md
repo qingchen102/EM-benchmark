@@ -244,5 +244,6 @@ python tools/build_city_scene.py --name hangzhou --bbox 30.270,120.120,30.278,12
 - 新增预设 = 把合法的 Scenario JSON 放进 `examples/` 的任意子目录。`/api/bootstrap` 会对每个文件做 `Scenario` 校验，**校验失败的文件会被静默忽略**（下拉里看不到）——新增后请确认它出现在「示例场景」列表里，必要时用 `python simulate.py validate --config <文件>` 定位问题。
 
 ## 11. 变更记录
+- **2026-10-14**：新增**逐发射源载频** `Emitter.carrier_hz`——自由空间后端按源自身载频算波长与路径损耗（`channels.FreeSpaceBackend`），`runner` 按 `(carrier_hz − 场景载频) + rf_offset_hz + doppler` 施加频移；Sionna RT 后端遇异载频源时**显式报错**（RT 一次只跑一个频率）。发射功率 schema 上限 80 → **130 dBm**（1 MW 级监视雷达可完整落入非线性区）。首个用例 d11「机场/起降场净空」：5.8 GHz 场景 + 1090 MHz 窗外强源（端口 +6 dBm），实测窗内底噪抬升 3.3 dB（前端压缩/互调）。
 - **2026-10**：新增本课题四档基准数据集预设（`examples/benchmark_v3/`，D1–D4）；「传播场景」下拉补齐自定义城市场景、并与右上角城市网格双向联动，修复「切换传播场景看起来没有反应」；为 `scene` 三义、`max_depth`、`Task` 保护频带补页面提示与 §10 说明；更正时长上限（50 ms → **500 ms**）与辐射体数量（16 → **19 类**）。
 - **2026-10-11**：① 网格联动改成"说真话"——旧实现只在条件全部满足时才 `load`，不满足时静默跳过却照样 toast「已切换」，现在缺网格/加载失败都会显式提示，并用 `loadedMesh` 记住真正加载过的网格（失败不置位，下次仍会重试）；② `/`、`/index.html`、`/api/bootstrap` 三个响应都加 `Cache-Control: no-store, must-revalidate` + `Pragma: no-cache`，`index.html` 里脚本版本提升到 `?v=hz5`——旧壳页会被浏览器缓存，导致"改了页面却看不到变化"的假故障；③ D2 演示样本从 `d2_00000`（设备全落空地）换成 `d2_00017`（落在密集街区，四站均有真实多径），四个预设名字里都带上样本号；④ 上述联动逻辑有零依赖自测 `webui/_check_scene_switch.mjs`（`node webui/_check_scene_switch.mjs`，18 项断言）。

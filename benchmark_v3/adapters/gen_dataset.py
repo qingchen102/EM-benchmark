@@ -244,6 +244,8 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
     fs = FS_HZ
     rx_bw = fs * RX_FRAC
     _scene = srg.SCENES.get(difficulty)
+    # 场景载频可被 registry 覆盖（卡 5 = 5.8 GHz FPV 档）；默认仍是 2.4 GHz。
+    _sc_fc = float(_scene["carrier_hz"]) if (_scene and _scene.get("carrier_hz")) else CARRIER
     if difficulty in ("d3", "d4") or (_scene is not None and _scene["nlos"]):
         stations = occ.stations_center(rng, n=4)     # 监测网固定环布覆盖区
         tgt = occ.target_nlos(rng, stations) or occ.target(rng)  # 低 SNR 物理来源：楼后 NLoS
@@ -289,12 +291,25 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                 raise RuntimeError(f"干扰 {kind} 布点 20 次失败（采样域过挤）")
     elif _scene is not None:                # 新增场景（卡 3/7/10/11）：参数重排，不新增机理
         n_src = int(rng.integers(_scene["n_src"][0], _scene["n_src"][1] + 1))
-        for _i in range(n_src):
-            kind = str(rng.choice(_scene["pool"]))
+        picks = list(_scene.get("always") or ())
+        picks += [_scene["pool"][int(rng.integers(len(_scene["pool"])))] for _ in range(n_src)]
+        for pick in picks:
+            # 池项三态："Kind" | ("Kind", 载频) | ("Kind", 载频, 到站端口功率 dBm)
+            if isinstance(pick, (tuple, list)):
+                kind, fc_src = str(pick[0]), float(pick[1])
+                port_dbm = float(pick[2]) if len(pick) > 2 else None
+            else:
+                kind, fc_src, port_dbm = str(pick), None, None
             ifp = occ.interferer(rng, tgt, d_low=250, d_high=800)
             if ifp is None:
                 continue
             slot = {"kind": kind, "pos": ifp, "mode": "preset"}
+            if fc_src is not None:
+                slot["carrier_hz"] = fc_src
+            if port_dbm is not None:
+                # 窗外强源不按 INR 反推功率：直接定「到站端口功率」，
+                # 否则它只能到噪声上方十几 dB，压不动前端。
+                slot["port_dbm"] = port_dbm
             if _scene["force_tier"] is not None:
                 slot["tier"] = int(_scene["force_tier"])
             interferers.append(slot)
@@ -319,6 +334,14 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
     def _draw_ifw_freq(ifw_in, diff_in, rng_in):
         """按难度抽 (频偏, 带宽)。D1：Hz 域显式分离；D2–D4：混合重叠度三档
         （场景 v1.0 定死：深/部分/分离各约 1/3，模拟现实 ISM 全频段散布）。"""
+        if ifw_in.get("carrier_hz"):
+            # 窗外强源（卡 5）：基带偏移固定 0、窄带。离散基带里它的像在
+            # (carrier_hz − 场景载频) mod fs = 正好 Nyquist，被通道滤波器压掉
+            # （实测 |H(fs/2)| ≈ −75 dB），只留下它对前端 IMD3/软限幅的贡献——
+            # 这正是「窗外强源 → 窗内阻塞/互调」在离散基带模型里能如实表示的部分。
+            ifw_in["offset_hz"] = 0.0
+            ifw_in["bandwidth_hz"] = 100e3
+            return
         if diff_in != "d1":
             # 配额计划指定了档位则照用（机理由档位决定，不可在 QA 重抽中被改掉）
             ov_mode = (int(rng_in.integers(0, 3)) if ifw_in.get("tier") is None
@@ -354,6 +377,10 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
     # 逐干扰独立重抽可见性（单点 ≥3 站 LoS 21%，整组重抽 4.4%/轮太低——
     # 60 轮有 6.6% 全败概率；独立重抽单干扰 5 次内收敛）；对间 |Δu| 整组判。
     for ifw in interferers:
+        if ifw.get("carrier_hz"):
+            # 窗外强源本就不该在窗内可见：它的证据是前端效应（阻塞/互调），
+            # 不是谱峰。对它做「≥3 站可见」检查没有物理意义。
+            continue
         for _try in range(80):
             if _n_visible_stations(ifw["pos"], stations, occ_core) >= 3:
                 break
@@ -366,8 +393,14 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
     for _ in range(60):
         for ifw in interferers:
             d_max = max(dist(ifw["pos"], s) for s in stations)
-            desired_inr = float(rng.uniform(8, 15) if difficulty == "d2" else rng.uniform(8, 20))
-            ifw["power_dbm"] = round(min(desired_inr + noise_dbm(rx_bw) + fspl_db(d_max), 33.0), 2)
+            fc_src = float(ifw.get("carrier_hz") or _sc_fc)
+            if ifw.get("port_dbm") is not None:
+                # 窗外强源：由到站端口功率反推发射功率（按自身载频算 FSPL）
+                ifw["power_dbm"] = round(ifw["port_dbm"] + fspl_db(d_max, fc_src), 2)
+            else:
+                desired_inr = float(rng.uniform(8, 15) if difficulty == "d2" else rng.uniform(8, 20))
+                ifw["power_dbm"] = round(
+                    min(desired_inr + noise_dbm(rx_bw) + fspl_db(d_max, fc_src), 33.0), 2)
             _draw_ifw_freq(ifw, difficulty, rng)
         bad = _unidentifiable_pair(interferers, tgt, tgt_name, stations, occ=occ_core)
         if bad is None:
@@ -409,6 +442,7 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                                offset_hz=ifw["offset_hz"])]
         ems.append(Emitter(id=f"interferer_{j + 1}", role="interference",
                            position_m=ifw["pos"], power_dbm=ifw["power_dbm"],
+                           carrier_hz=ifw.get("carrier_hz"),
                            preset=ifw["kind"] if ifw["mode"] == "preset" else None,
                            components=comps))
     rxs = [Receiver(id=f"station_{chr(ord('a') + i)}", position_m=s,
@@ -416,7 +450,8 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                     antenna=Antenna(geometry_type="rectangular", num_rows=1, num_cols=8))
            for i, s in enumerate(stations)]
 
-    if difficulty == "d1":
+    if difficulty == "d1" or (_scene is not None and _scene.get("backend") == "free_space"):
+        # 卡 5：逐源载频只支持 free_space（RT 后端一次只跑一个频率）
         prop = Propagation(backend="free_space")
     else:                                  # D2+：城市真实建筑 RT（多径+遮挡）
         prop = Propagation(backend="sionna_rt",
@@ -429,8 +464,16 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
             r.frontend.correlated_noise_enabled = True
             r.frontend.noise_correlation = 0.3
         ems[0].velocity_mps = (float(rng.uniform(-30, 30)), float(rng.uniform(-30, 30)), 0.0)
+    if _scene is not None and _scene.get("imd3"):
+        # 卡 5/卡 8 的物理：前端非线性（互调）+ 软限幅（阻塞）。
+        # 窗外强源在通道滤波器之前就参与这两级 ⇒ 窗内底噪抬升 + 互调产物落窗内。
+        for r in rxs:
+            r.frontend.imd3_enabled = True
+            r.frontend.iip3_dbm = float(rng.uniform(*_scene.get("iip3_dbm", (5, 15))))
+            if _scene.get("soft_limit_dbm") is not None:
+                r.frontend.soft_limit_input_dbm = float(_scene["soft_limit_dbm"])
     sc = Scenario(name=f"{difficulty}_{idx:05d}", seed=seed, duration_s=DURATION,
-                  sample_rate_hz=fs, carrier_frequency_hz=CARRIER,
+                  sample_rate_hz=fs, carrier_frequency_hz=_sc_fc,
                   max_working_mb=4096, emitters=ems, receivers=rxs, propagation=prop)
 
     # ---- GT：几何 + 物理推导功率 ----
@@ -450,13 +493,15 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
         ps = {}
         for i, s in enumerate(stations):
             d = dist(ifw["pos"], s)
-            pr = ifw["power_dbm"] - fspl_db(d)
+            pr = ifw["power_dbm"] - fspl_db(d, float(ifw.get("carrier_hz") or _sc_fc))
             ps[f"s{i}"] = {"dist_m": round(d, 1), "doa_deg": round(az_deg(ifw["pos"], s), 2),
                            "pr_dbm": round(pr, 2), "inr_db": round(pr - nz, 2)}
         rec = {"kind": ifw["kind"], "role": "interferer", "mode": ifw["mode"],
                "power_dbm": ifw["power_dbm"], "position_m": list(ifw["pos"]),
                "freq_offset_hz": ifw["offset_hz"],
-               "bandwidth_hz": ifw["bandwidth_hz"], "per_station": ps}
+               "bandwidth_hz": ifw["bandwidth_hz"],
+               "carrier_hz": float(ifw["carrier_hz"]) if ifw.get("carrier_hz") else None,
+               "per_station": ps}
         if ifw["mode"] == "preset":
             rec["intent"] = INTENT[ifw["kind"]]   # T3 敌我意图答案轴（16 辐射体确定性映射）
         ifw_gts.append(rec)

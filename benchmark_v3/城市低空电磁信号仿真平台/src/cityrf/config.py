@@ -93,8 +93,16 @@ class Emitter(Spec):
     orientation_rad: tuple[float,float,float] = (0,0,0)
     platform_id: str | None = None
     role: Literal["communication", "interference", "background"] = "communication"
-    power_dbm: float = Field(default=0, ge=-100, le=80)
+    # 上限 130 dBm：卡 5 的窗外强源是 1 MW 级监视雷达（+90 dBm 量级），
+    # 80 dBm 的旧上限会把它卡在完全线性区、阻塞效应做不出来。
+    power_dbm: float = Field(default=0, ge=-100, le=130)
     rf_offset_hz: float = 0
+    # 本发射源的绝对载频。None = 与场景 carrier_frequency_hz 同频。
+    # 非 None 时：自由空间信道按该频率算波长/路径损耗，接收机在天线口看到
+    # (carrier_hz - 场景载频) 的频移 ⇒ 可表示「窗外异载频强源」（卡 5/卡 8）。
+    # 注意：基带离散表示的频率是模 fs 的，真正起作用的是它在通带外的位置
+    # （被通道滤波器抑制）与它对前端 IMD3/软限幅的贡献。
+    carrier_hz: float | None = Field(default=None, ge=1e8, le=1e11)
     velocity_mps: tuple[float,float,float] = (0,0,0)
     # 预设信号源：填 v3 辐射体名（如 "Bluetooth_FHSS"）时，generate 用该辐射体生成真实时域信号；
     # None 表示自由模式，用 components 里的调制与参数。

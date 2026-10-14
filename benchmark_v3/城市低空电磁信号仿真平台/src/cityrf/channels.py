@@ -71,14 +71,17 @@ def element_offsets(rx, fc):
 class FreeSpaceBackend:
     def solve(self, scenario):
         links=[]
-        wavelength=C0/scenario.carrier_frequency_hz
         for tx in scenario.emitters:
+            # 逐源载频：异载频源（窗外强源）必须用自身波长算 FSPL 与阵元相位，
+            # 否则 5.8 GHz 场景里的 1090 MHz 源会被算错 14.5 dB。
+            fc_tx=float(tx.carrier_hz) if tx.carrier_hz else scenario.carrier_frequency_hz
+            wavelength=C0/fc_tx
             for rx in scenario.receivers:
                 vector=np.array(tx.position_m)-np.array(rx.position_m)
                 distance=np.linalg.norm(vector)
                 direction=vector/distance
                 # Narrowband synthetic array: common delay, per-element carrier phase.
-                path_length=distance-element_offsets(rx,scenario.carrier_frequency_hz)@direction
+                path_length=distance-element_offsets(rx,fc_tx)@direction
                 gain=wavelength/(4*np.pi*distance)*np.exp(-2j*np.pi*path_length/wavelength)
                 # Co-polarized ideal isotropic scalar reference, no cross-polarization.
                 links.append(LinkChannel(tx.id,rx.id,gain[:,None],np.array([distance/C0]),
