@@ -91,11 +91,21 @@ MENUS: dict[str, tuple] = {
 
 DIFFICULTIES = ("d1", "d2", "d3", "d4")
 
+# 新增场景（卡 3/7/10/11）→ 复用哪个现有档位的噪声菜单（2026-10-14 试用批次）。
+# 只做别名，不新增配方：噪声菜单是“按站随机”的，场景差异不等于噪声差异。
+SCENE_ALIAS: dict[str, str] = {}
+try:  # 登记表缺席也不影响四档（生成器一侧会先报错）
+    from scene_registry import SCENES as _SC
+    SCENE_ALIAS = {sid: str(s["noise"]) for sid, s in _SC.items()}
+except Exception:  # pragma: no cover
+    SCENE_ALIAS = {}
+
 
 def _key(difficulty: str) -> str:
     k = str(difficulty).strip().lower()
+    k = SCENE_ALIAS.get(k, k)
     if k not in MENUS:
-        raise KeyError(f"未知难度档 {difficulty!r}，可选 {sorted(MENUS)}")
+        raise KeyError(f"未知难度档 {difficulty!r}，可选 {sorted(MENUS)} + 场景 {sorted(SCENE_ALIAS)}")
     return k
 
 

@@ -40,6 +40,7 @@ from em_signal_simulator_v3.emitters import INTENT  # noqa: E402  # 敌我意图
 import evidence_layer  # noqa: E402  # 受害者层公开视图（规范 v1.0 §7）
 import dataset_plan as dp  # noqa: E402  # 机理/源数配额计划器（docs/机理配额与重生成方案.md）
 import mechanism as mk  # noqa: E402  # 机理派生：计划与真值一致性自校
+import scene_registry as srg  # noqa: E402  # 新增场景（卡 3/7/10/11）的生成参数登记表
 
 FS_HZ = 4e6                          # 全难度统一采集带宽（2026-09-28：D2–D4 对齐 D1，
                                      # 目标 1 MHz 不再被通带拦腰截断；Hz 域物理量不变）
@@ -242,15 +243,18 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
     rng = np.random.default_rng(seed)
     fs = FS_HZ
     rx_bw = fs * RX_FRAC
-    if difficulty in ("d3", "d4"):
+    _scene = srg.SCENES.get(difficulty)
+    if difficulty in ("d3", "d4") or (_scene is not None and _scene["nlos"]):
         stations = occ.stations_center(rng, n=4)     # 监测网固定环布覆盖区
         tgt = occ.target_nlos(rng, stations) or occ.target(rng)  # 低 SNR 物理来源：楼后 NLoS
     else:
         tgt = occ.target(rng)
         stations = None                              # 依赖目标位置，稍后布设
-    tgt_name = TARGETS[int(rng.integers(len(TARGETS)))]
-    tgt_power = float(rng.uniform(10, 20) if difficulty in ("d1", "d2")
-                      else rng.uniform(0, 10))       # D3/D4：低功率上行/远距
+    tgt_name = (str(_scene["target"]) if _scene is not None
+                else TARGETS[int(rng.integers(len(TARGETS)))])
+    _pw = (_scene["tgt_power"] if _scene is not None else None)
+    tgt_power = float(rng.uniform(*_pw) if _pw is not None else
+                      (rng.uniform(10, 20) if difficulty in ("d1", "d2") else rng.uniform(0, 10)))
 
     interferers = []
     if difficulty == "d1":
@@ -283,6 +287,17 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                 interferers.append({"kind": str(kind), "pos": ifp, "mode": "preset"})
             else:
                 raise RuntimeError(f"干扰 {kind} 布点 20 次失败（采样域过挤）")
+    elif _scene is not None:                # 新增场景（卡 3/7/10/11）：参数重排，不新增机理
+        n_src = int(rng.integers(_scene["n_src"][0], _scene["n_src"][1] + 1))
+        for _i in range(n_src):
+            kind = str(rng.choice(_scene["pool"]))
+            ifp = occ.interferer(rng, tgt, d_low=250, d_high=800)
+            if ifp is None:
+                continue
+            slot = {"kind": kind, "pos": ifp, "mode": "preset"}
+            if _scene["force_tier"] is not None:
+                slot["tier"] = int(_scene["force_tier"])
+            interferers.append(slot)
     else:                                  # D3/D4：恶意干扰入场（电子对抗压制）
         mal = ["Chirp_jam", "Noise_jam", "Tone_jam"]
         kinds = [str(k) for k in rng.choice(mal, size=1, replace=False)]
@@ -562,7 +577,8 @@ def _index_entry(t: dict, out_name: str) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--difficulty", choices=["d1", "d2", "d3", "d4"], default="d1")
+    ap.add_argument("--difficulty", choices=["d1", "d2", "d3", "d4"] + list(srg.SCENE_IDS),
+                    default="d1", help="d1–d4 = 已有四档；d5–d8 = 新增场景（卡 11/7/3/10）")
     ap.add_argument("--count", type=int, default=50)
     ap.add_argument("--out", default=None)
     ap.add_argument("--seed0", type=int, default=31000)
@@ -593,7 +609,9 @@ def main() -> None:
 
     index = {"dataset": f"EM-interference {args.difficulty.upper()}",
              "difficulty": args.difficulty.upper() + {"d1": "(看得见)", "d2": "(挤得慌)",
-                                                      "d3": "(有人捣乱)", "d4": "(极限藏匿)"}[args.difficulty],
+                                                      "d3": "(有人捣乱)", "d4": "(极限藏匿)"}.get(
+                                                          args.difficulty,
+                                                          f"({srg.SCENES[args.difficulty]['card']})"),
              "scene_type": "urban", "scene": "hangzhou_downtown(footprint-validated)",
              "observation_subsets": STATION_SUBSETS,
              "envelope": {"target": ("合作无人机 10-20dBm @350-700m, 高30-80m"
