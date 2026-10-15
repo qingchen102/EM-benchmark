@@ -39,6 +39,7 @@ def audit(root: pathlib.Path, deck: str) -> bool:
     subs = idx["observation_subsets"]
     n_src, mech, intent, snr_lo, snr_hi = {}, {}, {}, [], []
     vis = {lv: 0 for lv in subs}
+    n_oow = 0
     n_visible_tot = 0
     iq_sizes, missing = set(), 0
     for s in idx["samples"]:
@@ -48,7 +49,11 @@ def audit(root: pathlib.Path, deck: str) -> bool:
             if not need.is_file():
                 missing += 1
         t = ed.load_truth(d, s["id"])
-        ifs = [g for g in t.get("interferers", []) if g.get("kind") in mk_all_kinds()]
+        # 窗外强源（D-25）不在答案键里：源数/机理/意图/SNR 统计均不计入，只单独计数，
+        # 避免污染该档的分布口径（它们没有窗内谱峰证据，偏移/带宽也不代表窗内语义）。
+        n_oow += len([g for g in t.get("interferers", []) if g.get("out_of_window")])
+        ifs = [g for g in t.get("interferers", [])
+               if g.get("kind") in mk_all_kinds() and not g.get("out_of_window")]
         n_src[len(ifs)] = n_src.get(len(ifs), 0) + 1
         for g in ifs:
             try:
@@ -58,9 +63,12 @@ def audit(root: pathlib.Path, deck: str) -> bool:
                 m = "未定义"
             mech[m] = mech.get(m, 0) + 1
         for g in t.get("interferers", []):
+            if g.get("out_of_window"):
+                continue
             it = g.get("intent") or INTENT.get(g.get("kind"), "?")
             intent[it] = intent.get(it, 0) + 1
-        for ent in [t.get("target") or {}] + list(t.get("interferers", [])):
+        for ent in ([t.get("target") or {}]
+                    + [g for g in t.get("interferers", []) if not g.get("out_of_window")]):
             for _st, rec in (ent.get("per_station") or {}).items():
                 if isinstance(rec, dict) and rec.get("snr_db") is not None:
                     snr_lo.append(float(rec["snr_db"]))
@@ -76,6 +84,8 @@ def audit(root: pathlib.Path, deck: str) -> bool:
     print(f"      源数分布 {_dist(n_src)}")
     print(f"      机理分布 {_dist(mech)}")
     print(f"      意图分布 {_dist(intent)}")
+    if n_oow:
+        print(f"      窗外强源 {n_oow} 个（D-25：不进答案键，不计入以上分布）")
     print(f"      可见源样本数 S0/S1/S2 = "
           + " / ".join(f"{vis[lv]}" for lv in subs))
     if snr_lo:
