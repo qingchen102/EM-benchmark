@@ -186,7 +186,10 @@ class Scenario(Spec):
     schema_version: Literal["1.2"] = "1.2"
     name: str = "static-city"
     seed: int = Field(default=42, ge=0, le=2147483647)
-    duration_s: float = Field(default=.05, gt=0, le=.5)
+    # 窗长上限：2026-10-14 由 0.5 s 放开到 10 s，供长窗题使用（需与 fs 保证整数样点）。
+    # 注意：辐射体生成器的“时基”目前仍是样点/每窗口径（见 emitter 时基体检），
+    # 长窗要拿到物理意义的事件率，还得先重写各生成器的驻留/频率（task: 长窗题）。
+    duration_s: float = Field(default=.05, gt=0, le=10.0)
     sample_rate_hz: float = Field(default=1e6, ge=10000, le=40e6)
     carrier_frequency_hz: float = Field(default=2.4e9, ge=1e8, le=1e11)
     max_working_mb: int = Field(default=2048, ge=64, le=65536)

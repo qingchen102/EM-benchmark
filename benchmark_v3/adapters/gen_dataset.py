@@ -47,7 +47,7 @@ FS_HZ = 4e6                          # 全难度统一采集带宽（2026-09-28�
 RX_FRAC = 0.45 * 0.9                 # 接收通带占 fs 比例（±810 kHz）
 TGT_BANDWIDTH_HZ = 1e6               # 目标组件带宽（物理量，不随数据集变）
 SEP_MARGIN_HZ = 50e3                 # 干扰-目标 / 干扰-通带边 保护间隔
-DURATION = 0.01                      # 10 ms 窗（4 MHz = 40k 采样/站）
+DURATION = 0.01                      # 10 ms 窗（4 MHz = 40k 采样/站）；可用 --duration 覆盖（长窗题）
 CARRIER = 2.4e9
 NF_DB = 5.0
 C = 299792458.0
@@ -474,7 +474,10 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                 r.frontend.soft_limit_input_dbm = float(_scene["soft_limit_dbm"])
     sc = Scenario(name=f"{difficulty}_{idx:05d}", seed=seed, duration_s=DURATION,
                   sample_rate_hz=fs, carrier_frequency_hz=_sc_fc,
-                  max_working_mb=4096, emitters=ems, receivers=rxs, propagation=prop)
+                  # 长窗题（2026-10-14）：平台的 DSP 估计 ≈ 样点数 × 1952 B，10 ms 窗只需 ~78 MB，
+                  # 而 1 s 窗 ~7.8 GB、10 s 窗 ~78 GB ⇒ 短窗沿用 4096，长窗放到平台上限 65536。
+                  max_working_mb=(4096 if DURATION <= 0.02 else 65536),
+                  emitters=ems, receivers=rxs, propagation=prop)
 
     # ---- GT：几何 + 物理推导功率 ----
     nz = noise_dbm(rx_bw)
@@ -642,7 +645,14 @@ def main() -> None:
                     help="机理/源数配额计划的随机种子（计划与候选 seed 无关、可按槽位复现）")
     ap.add_argument("--no-plan", action="store_true",
                     help="退回旧口径：机理由重叠度档位+池成员资格间接产生（只用于复现历史数据）")
+    ap.add_argument("--duration", type=float, default=None,
+                    help="窗长（秒），默认 0.01；长窗题用（平台 duration_s 上限已于 2026-10-14 放开到 10 s）。"
+                         "注意：辐射体时基尚未重写，长窗下事件率仍是旧的样点/每窗口径")
     args = ap.parse_args()
+    global DURATION
+    if args.duration is not None:
+        DURATION = float(args.duration)
+        print(f"[窗长] duration_s = {DURATION:g} s")
     if args.qa_skip and args.resume:
         # 跳过候选会让 seed↔槽位映射不可复原（候选序号从 0 重来、已消费的 seed 会被重复使用）
         ap.error("--qa-skip 与 --resume 互斥：跳过候选后候选序号↔槽位的映射不可复原")
@@ -660,7 +670,7 @@ def main() -> None:
              "difficulty": args.difficulty.upper() + {"d1": "(看得见)", "d2": "(挤得慌)",
                                                       "d3": "(有人捣乱)", "d4": "(极限藏匿)"}.get(
                                                           args.difficulty,
-                                                          f"({srg.SCENES[args.difficulty]['card']})"),
+                                                          f"({srg.SCENES.get(args.difficulty, {}).get('card', '?')})"),
              "scene_type": "urban", "scene": "hangzhou_downtown(footprint-validated)",
              "observation_subsets": STATION_SUBSETS,
              "envelope": {"target": ("合作无人机 10-20dBm @350-700m, 高30-80m"

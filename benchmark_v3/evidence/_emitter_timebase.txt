@@ -1,0 +1,11 @@
+fs=4 MHz  （40 000 样点 = 10 ms，4 000 000 = 1 s）
+类                    10 ms 事件   100 ms 事件    1 s 事件      每窗固定?
+Bluetooth_FHSS            609        6081     60858      否（随窗）
+UAV_RC_hopping            551        5543     55088      否（随窗）
+WiFi_burst                  4           1         1      是（每窗）
+DECT                       98          32         1      是（每窗）
+Welder                     61         102       958      否（随窗）
+Corona                      4          20       127      否（随窗）
+VFD_noise                 346         678         1      是（每窗）
+Microwave                 223         180         1      是（每窗）
+Tone_jam                    1           1         1      是（每窗）
