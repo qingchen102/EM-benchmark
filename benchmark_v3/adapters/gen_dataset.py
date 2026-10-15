@@ -47,6 +47,7 @@ FS_HZ = 4e6                          # 全难度统一采集带宽（2026-09-28�
 RX_FRAC = 0.45 * 0.9                 # 接收通带占 fs 比例（±810 kHz）
 TGT_BANDWIDTH_HZ = 1e6               # 目标组件带宽（物理量，不随数据集变）
 SEP_MARGIN_HZ = 50e3                 # 干扰-目标 / 干扰-通带边 保护间隔
+QA4_MIN_CENSUS = 10                 # QA4 配额普查的最少样本数（小批冒烟只告警）
 DURATION = 0.01                      # 10 ms 窗（4 MHz = 40k 采样/站）；可用 --duration 覆盖（长窗题）
 CARRIER = 2.4e9
 NF_DB = 5.0
@@ -797,7 +798,11 @@ def main() -> None:
         for _ln in lines4:
             print(_ln)
         if not ok4:
-            raise RuntimeError("QA 约束 4（难度平衡）未达标：见上方普查表")
+            # 小批冒烟（长窗题常用 1–4 条）时配额普查不具统计意义，只告警不判死。
+            if accepted < QA4_MIN_CENSUS:
+                print(f"[QA4] 仅 {accepted} 条样本 < {QA4_MIN_CENSUS}，配额普查不判死（长窗/冒烟模式）")
+            else:
+                raise RuntimeError("QA 约束 4（难度平衡）未达标：见上方普查表")
     if accepted < want:
         raise RuntimeError(f"候选池用尽（{args.count} 个）只凑到 {accepted}/{want} 条；"
                            f"加大 --count 重跑")
