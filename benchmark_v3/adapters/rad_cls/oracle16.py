@@ -218,7 +218,9 @@ def gate_gt_slice(model):
         fs = obs["receivers"][0]["sample_rate_hz"]
         rec = next(r for r in obs["receivers"] if r["receiver_id"] == "station_a")
         off = np.asarray(rec["element_offsets_world_m"], float)
-        gts = [g for g in truth["interferers"] if g["kind"] in CLS_IDX]
+        # 窗外强源（D-25）：窗内没有它的谱峰证据，不进 GT 列表（否则 d11/d12 必挂）
+        gts = [g for g in truth["interferers"]
+               if g["kind"] in CLS_IDX and not g.get("out_of_window")]
         if len(gts) < 1:
             continue
         # 可见性筛查（与 eval_dataset 的 interferer_visible_at 口径一致）：
@@ -367,7 +369,8 @@ def gate_tool_view(model, n_samples=50):
         # trio 类方法的硬上限（2026-10-03 天花板分解：≥3 站可见仅 47%）
         vis_gts = [(g, int(vis_count[i_g]))
                    for i_g, g in enumerate(truth["interferers"])
-                   if vis_count[i_g] >= 1 and g["kind"] in CLS_IDX]
+                   if vis_count[i_g] >= 1 and g["kind"] in CLS_IDX
+                   and not g.get("out_of_window")]
         # 2026-10-03 P0：主指标测 **candidates**（工具原始输出=稳定的能力刻度，
         # 不绑手调阈值）。先直接调聚类拿双栏；extract_source_waveforms 二次
         # 调用时聚类走 _result_cache，不重复计算。
