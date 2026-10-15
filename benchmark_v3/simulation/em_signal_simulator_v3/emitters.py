@@ -58,32 +58,76 @@ def band_limit(iq, bw, taper=BW_TAPER):
     return np.fft.ifft(np.fft.fft(x) * soft)
 
 
+# ---------------- 物理时基表（2026-10-14 时基重写） ----------------
+# 依据：benchmark_v3/docs/辐射体时基重写_物理依据与方案.md（逐类物理事实 + 标准原文摘句）。
+# 证据：evidence/_emitter_timebase.txt、_timebase_duty.txt、
+#       _bt_standard_hits.txt（Bluetooth Core Spec v5.4 Baseband Specification）、
+#       _dect_standard_hits.txt（ETSI EN 300 175-3 v2.9.1 p43/p296）。
+# 设计：事件数按物理速率随窗长缩放（n ≈ rate × T），事件时长取物理值，事件相位
+#       在事件周期内随机；tb_n_events 至少返回 1 = 该观测窗选取为"含至少一次事件"
+#       （否则源在窗内不可测、答案键失去良定义）。
+# 后果：≥100 ms 窗的 duty 与窗长无关（物理）；10 ms 窗因窗口选取 duty 被抬高。
+FS_HZ = 4.0e6
+TIMEBASE = {
+    # 类: (事件率 Hz, 单事件时长 s, 依据)
+    "Bluetooth_FHSS": (1600.0, 625e-6, "BT Core 5.4 Baseband：1600 hops/s、时隙 625 µs、79 RF 信道"),
+    "UAV_RC_hopping": (400.0, 1.4e-3, "跳频遥控量级 10²–10³ 跳/s（机型待核对，取 400）"),
+    "Zigbee": (10.0, 2.5e-3, "802.15.4 250 kb/s、最长帧 127 B ⇒ 单包 ≤4.25 ms；典型 100 ms 上报 ⇒ 10 包/s"),
+    "WiFi_burst": (9.8, 1.2e-3, "IEEE 802.11 默认 BeaconInterval=100 TU(102.4 ms) ⇒ 9.8 事件/s（条款号待核对）"),
+    "DECT": (100.0, 417e-6, "ETSI EN 300 175-3：帧长 10 ms（100 帧/s）；每帧 1–2 时隙，单时隙 416.7 µs"),
+    "Welder": (100.0, 8.0e-3, "工频半周期 100 Hz 电弧重燃（50 Hz 全波；CISPR 11 弧焊设备）"),
+    "Corona": (100.0, 2.0e-3, "电晕脉冲成组出现在工频半周期（100/120 Hz）"),
+    "VFD_noise": (8000.0, 3.0e-5, "变频器 PWM 载频 2–16 kHz（Sensors 2024, 10.3390/s24134148）"),
+    "Microwave": (100.0, 8.0e-3, "磁控管半波倍压 ⇒ 泄漏按 100 Hz 调幅（CISPR 11 ISM）"),
+}
+
+
+def _tb_dur(key, fs=FS_HZ):
+    """物理单事件时长 → 本窗采样点数。"""
+    return max(int(round(TIMEBASE[key][1] * fs)), 8)
+
+
+def tb_n_events(rng, length, key, fs=FS_HZ):
+    """本窗事件数 = 物理事件率 × 窗长（随机取整，至少 1；见上方设计说明）。"""
+    exp_n = TIMEBASE[key][0] * (length / float(fs))
+    n = int(np.floor(exp_n)) + (1 if rng.random() < (exp_n - np.floor(exp_n)) else 0)
+    return max(int(n), 1)
+
+
+# 蓝牙/遥控/日用/家电类的事件发生器全部改为"速率驱动"：
+# n = 物理事件率 × 窗长，相位在事件周期内均匀随机，事件时长 = 物理时长 × 抖动。
 # ---------------- 蓝牙类（v2 已证） ----------------
-def gen_bluetooth_fhss(rng, length, n_channels=12, dwell=(25, 60), ch_bw=0.045,
-                       band=0.55, gap=(3, 12)):
+def gen_bluetooth_fhss(rng, length, n_channels=12, ch_bw=0.045, band=0.55, fs=FS_HZ):
+    """蓝牙 BR/EDR：1600 hops/s、每时隙 625 µs（BT Core 5.4 Baseband）。"""
     x = np.zeros(length, dtype=complex)
-    pos, ch = 0, int(rng.integers(0, n_channels))
-    while pos < length:
-        d = min(int(rng.integers(*dwell)), length - pos)
+    n_hops = tb_n_events(rng, length, "Bluetooth_FHSS", fs)
+    hop_n = _tb_dur("Bluetooth_FHSS", fs)                 # 625 µs = 2500 点
+    ch = int(rng.integers(0, n_channels))
+    span = length / float(n_hops)
+    for k in range(n_hops):
+        d = min(max(int(hop_n * rng.uniform(0.7, 1.0)), 8), max(int(span), 8))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 8:
+            break
         seg = generate_baseband("GFSK", d, rng=rng, bandwidth_normalized=ch_bw)
         f = (ch - (n_channels - 1) / 2) / max(n_channels - 1, 1) * band
         x[pos:pos + d] += seg * np.exp(1j * 2.0 * np.pi * f * np.arange(d))
-        pos += d + int(rng.integers(*gap))
         ch = (ch + int(rng.integers(1, n_channels))) % n_channels
     return x
 
 
-def gen_wifi_burst(rng, length, n_packets=(2, 4), pkt=(120, 320), gap=(40, 140), pkt_bw=0.55):
+def gen_wifi_burst(rng, length, pkt_bw=0.55, fs=FS_HZ):
+    """802.11 突发包：事件率取信标周期 100 TU（≈9.8 事件/s，标准默认值）。"""
     x = np.zeros(length, dtype=complex)
-    pos = 0
-    for _ in range(int(rng.integers(*n_packets))):
-        d = min(int(rng.integers(*pkt)), length - pos)
+    n = tb_n_events(rng, length, "WiFi_burst", fs)
+    dur = _tb_dur("WiFi_burst", fs)                       # 1.2 ms
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(dur * rng.uniform(0.25, 1.0)), 40), max(int(span), 40))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
         if d < 40:
             break
         x[pos:pos + d] += generate_baseband("OFDM", d, rng=rng, bandwidth_normalized=pkt_bw)
-        pos += d + int(rng.integers(*gap))
-        if pos >= length:
-            break
     return x
 
 
@@ -93,17 +137,22 @@ def gen_uav_video_ofdm(rng, length, bw=0.60):
     return generate_baseband("OFDM", length, rng=rng, bandwidth_normalized=bw)
 
 
-def gen_uav_rc_hopping(rng, length, n_channels=4, dwell=(12, 30), ch_bw=0.02,
-                       band=0.30, gap=(8, 25)):
-    """遥控上行：窄带 GFSK 跳频，信道少/跳得快/带宽窄。"""
+def gen_uav_rc_hopping(rng, length, n_channels=4, ch_bw=0.02,
+                       band=0.30, fs=FS_HZ):
+    """遥控上行：窄带 GFSK 跳频，跳率量级 10²–10³ 跳/s（机型待核对，取 400）。"""
     x = np.zeros(length, dtype=complex)
-    pos, ch = 0, int(rng.integers(0, n_channels))
-    while pos < length:
-        d = min(int(rng.integers(*dwell)), length - pos)
+    n_hops = tb_n_events(rng, length, "UAV_RC_hopping", fs)
+    hop_n = _tb_dur("UAV_RC_hopping", fs)                 # 1.4 ms
+    ch = int(rng.integers(0, n_channels))
+    span = length / float(n_hops)
+    for k in range(n_hops):
+        d = min(max(int(hop_n * rng.uniform(0.6, 0.9)), 8), max(int(span), 8))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 8:
+            break
         seg = generate_baseband("GFSK", d, rng=rng, bandwidth_normalized=ch_bw)
         f = (ch - (n_channels - 1) / 2) / max(n_channels - 1, 1) * band
         x[pos:pos + d] += seg * np.exp(1j * 2.0 * np.pi * f * np.arange(d))
-        pos += d + int(rng.integers(*gap))
         ch = (ch + int(rng.integers(1, n_channels))) % n_channels
     return x
 
@@ -150,45 +199,53 @@ def gen_gnss_spoof(rng, length, bw=0.12):
 
 
 # ---------------- 城市日用/商用信号 ----------------
-def gen_microwave(rng, length, burst=(40, 120), gap=(60, 140), bw=0.30):
-    """家用/商用微波炉：2.4G 宽带间歇噪声（占空比约 50% 的磁控管辐射）。"""
+def gen_microwave(rng, length, bw=0.30, fs=FS_HZ):
+    """微波炉：磁控管半波倍压 ⇒ 泄漏按 100 Hz 调幅（周期 10 ms，导通 4–8 ms）。"""
     x = np.zeros(length, dtype=complex)
-    pos = 0
-    while pos < length:
-        d = min(int(rng.integers(*burst)), length - pos)
-        seg = rng.standard_normal(d) + 1j * rng.standard_normal(d)
-        # 宽带噪声近似高斯，无调制结构
-        x[pos:pos + d] += band_limit(seg, bw)
-        pos += d + int(rng.integers(*gap))
-        if pos >= length:
+    n = tb_n_events(rng, length, "Microwave", fs)
+    dur = _tb_dur("Microwave", fs)                        # 8 ms
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(dur * rng.uniform(0.5, 1.0)), 8), max(int(span), 8))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 8:
             break
+        seg = rng.standard_normal(d) + 1j * rng.standard_normal(d)
+        x[pos:pos + d] += band_limit(seg, bw)
     return x
 
 
-def gen_dect(rng, length, n_frames=3, frame=0.55, dwell_frame=0.4, bw=None):
-    """DECT 无绳电话：TDMA 帧突发（固定帧长 ~0.55，随机帧起始）。"""
+def gen_dect(rng, length, bw=None, fs=FS_HZ):
+    """DECT：10 ms 帧、100 帧/s；本帧内占据 1–2 个时隙（单时隙 416.7 µs）。"""
     x = np.zeros(length, dtype=complex)
-    for k in range(n_frames):
-        d = int(frame * length)
-        # GFSK 的 bandwidth_normalized 是赋形带宽，实测 OBW99 约为它的 0.55 倍
-        # （实测标定，见 _an_emit_bw.txt）→ 反向放大 1.8 倍才能让实测跟住请求值
-        g = 0.05 if bw is None else float(np.clip(bw * 1.8, BW_MIN, 0.45))
+    n = tb_n_events(rng, length, "DECT", fs)              # 10 ms 窗 = 1 帧；1 s = 100 帧
+    slot_n = _tb_dur("DECT", fs)                          # 416.7 µs = 1667 点
+    # GFSK 的 bandwidth_normalized 是赋形带宽，实测 OBW99 约为它的 0.55 倍
+    # （实测标定，见 _an_emit_bw.txt）→ 反向放大 1.8 倍才能让实测跟住请求值
+    g = 0.05 if bw is None else float(np.clip(bw * 1.8, BW_MIN, 0.45))
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(slot_n * rng.uniform(1.0, 2.0)), 40), max(int(span), 40))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 40:
+            break
         seg = generate_baseband("GFSK", d, rng=rng, bandwidth_normalized=g)
-        start = int(rng.integers(0, length // 8))
-        x[start:start + d] += seg if start + d <= length else seg[:length - start]
+        x[pos:pos + d] += seg
     return x
 
 
-def gen_zigbee(rng, length, n_pkt=(3, 6), pkt=(90, 220), gap=(40, 160), bw=0.02):
-    """Zigbee/LoRa（低占空比微功率遥测）：短时 QPSK 突发（包长需满足基带成形最小长度）。"""
+def gen_zigbee(rng, length, bw=0.02, fs=FS_HZ):
+    """Zigbee/802.15.4 遥测：单包空口 1–4.25 ms（250 kb/s、≤127 B），典型上报 10 包/s。"""
     x = np.zeros(length, dtype=complex)
-    pos = 0
-    for _ in range(int(rng.integers(*n_pkt))):
-        d = min(int(rng.integers(*pkt)), length - pos)
+    n = tb_n_events(rng, length, "Zigbee", fs)            # 10 ms 窗 = 1 包（窗口选取）；1 s = 10 包
+    dur = _tb_dur("Zigbee", fs)                           # 2.5 ms
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(dur * rng.uniform(0.4, 1.0)), 40), max(int(span), 40))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
         if d < 40:
             break
         x[pos:pos + d] += generate_baseband("QPSK", d, rng=rng, bandwidth_normalized=bw)
-        pos += d + int(rng.integers(*gap))
     return x
 
 
@@ -225,50 +282,51 @@ def gen_tone_jam(rng, length, bw=0.0):
 # ---------------- 脉冲噪声家族（工业无意辐射，场景卡 7/11/6） ----------------
 # 与 Microwave（间歇宽带 burst）的区别在时域结构：簇/周期/工频同步。
 
-def gen_welder(rng, length, bw=0.30):
-    """电焊机：弧光脉冲簇——簇内密集短弧段，簇间长静默（工件更换）。"""
+def gen_welder(rng, length, bw=0.30, fs=FS_HZ):
+    """电焊机：工频半周期 100 Hz 电弧重燃（每次导通 4–8 ms，宽带噪声）。"""
     x = np.zeros(length, dtype=complex)
-    pos = 0
-    while pos < length:
-        gap = int(rng.integers(1500, 5000))              # 簇间长静默
-        pos += gap
-        n_arcs = int(rng.integers(3, 9))                 # 簇内弧段数
-        for _ in range(n_arcs):
-            if pos >= length:
-                break
-            d = min(int(rng.integers(30, 160)), length - pos)   # 末段裁到剩余长度（2026-10-12 修广播形状不一致）
-            seg = (rng.standard_normal(d) + 1j * rng.standard_normal(d))
-            x[pos:pos + d] += seg * rng.uniform(0.6, 1.0)
-            pos += d + int(rng.integers(10, 60))         # 弧段间隔（引弧间隙）
+    n = tb_n_events(rng, length, "Welder", fs)
+    dur = _tb_dur("Welder", fs)                           # 8 ms
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(dur * rng.uniform(0.6, 1.0)), 8), max(int(span), 8))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 8:
+            break
+        seg = rng.standard_normal(d) + 1j * rng.standard_normal(d)
+        x[pos:pos + d] += seg * rng.uniform(0.6, 1.0)
     return band_limit(x, bw)
 
 
-def gen_vfd_noise(rng, length, bw=0.25):
-    """变频器/开关电源：周期性窄脉冲簇（开关频率稳定，谐波梳状谱）。"""
+def gen_vfd_noise(rng, length, bw=0.25, fs=FS_HZ):
+    """变频器/开关电源：PWM 载频 2–16 kHz（取 8 kHz），窄脉冲 + 谐波梳状谱。"""
     x = np.zeros(length, dtype=complex)
-    period = int(rng.integers(40, 120))                  # 开关周期（35–100 kHz）
-    pw = max(int(period * rng.uniform(0.05, 0.15)), 2)   # 脉宽
-    jitter = max(period // 20, 1)
-    pos = int(rng.integers(0, period))
-    while pos < length:
-        d = min(pw + int(rng.integers(-2, 3)), length - pos)
+    n = tb_n_events(rng, length, "VFD_noise", fs)         # 8 kHz ⇒ 1 s = 8000 个开关周期
+    period = length / float(n)
+    pw = max(int(period * rng.uniform(0.05, 0.15)), 2)    # 脉宽
+    for k in range(n):
+        d = min(max(pw + int(rng.integers(-2, 3)), 2), max(int(period), 2))
+        pos = int(round(k * period + rng.random() * max(period - d, 0.0)))
+        if d < 2:
+            continue
         x[pos:pos + d] += (rng.standard_normal(d) + 1j * rng.standard_normal(d)) \
             * rng.uniform(0.7, 1.0)
-        pos += period + int(rng.integers(-jitter, jitter + 1))
     return band_limit(x, bw)
 
 
-def gen_corona(rng, length, bw=0.20, fs=4e6):
-    """高压电晕放电：工频同步的间歇放电爆发（10ms 半周期内 1–2 段嘶嘶爆发）。"""
+def gen_corona(rng, length, bw=0.20, fs=FS_HZ):
+    """高压电晕：放电爆发成组出现在工频半周期（100 Hz，每组 0.6–2 ms）。"""
     x = np.zeros(length, dtype=complex)
-    half_cycle = int(fs / 100)                            # 100 Hz（工频倍频）
-    n_bursts = max(int(round(length / fs * 1e3 / 5)), 1)  # 每 ~5ms 一个放电段
-    centers = np.sort(rng.integers(0, length, size=n_bursts))
-    for c in centers:
-        d = int(rng.integers(200, 900))                   # 放电段长（50–225 µs）
-        s0, s1 = max(c - d // 2, 0), min(c + d // 2, length)
-        seg = (rng.standard_normal(s1 - s0) + 1j * rng.standard_normal(s1 - s0))
-        x[s0:s1] += seg * rng.uniform(0.5, 1.0)
+    n = tb_n_events(rng, length, "Corona", fs)
+    dur = _tb_dur("Corona", fs)                           # 2 ms
+    span = length / float(n)
+    for k in range(n):
+        d = min(max(int(dur * rng.uniform(0.3, 1.0)), 8), max(int(span), 8))
+        pos = int(round(k * span + rng.random() * max(span - d, 0.0)))
+        if d < 8:
+            break
+        seg = rng.standard_normal(d) + 1j * rng.standard_normal(d)
+        x[pos:pos + d] += seg * rng.uniform(0.5, 1.0)
     return band_limit(x, bw)
 
 
