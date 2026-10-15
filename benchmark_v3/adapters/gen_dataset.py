@@ -504,6 +504,10 @@ def build_sample(idx: int, seed: int, occ: Placer, difficulty: str = "d1",
                "per_station": ps}
         if ifw["mode"] == "preset":
             rec["intent"] = INTENT[ifw["kind"]]   # T3 敌我意图答案轴（16 辐射体确定性映射）
+        if ifw.get("carrier_hz"):
+            # 窗外强源（卡 5/卡 8）：载频在接收通带之外 —— 窗内没有它的谱峰证据，
+            # 它的作用是前端增益压缩/互调。按 D-25 不进答案键（否则该档必然欠报 1）。
+            rec["out_of_window"] = True
         ifw_gts.append(rec)
 
     envelope = ("近距合作目标+0/1简单干扰+视距+仅热噪声" if difficulty == "d1" else

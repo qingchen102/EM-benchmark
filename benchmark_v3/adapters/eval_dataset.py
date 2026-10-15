@@ -101,6 +101,8 @@ def gt_at_slevel(truth: dict, stations: list[str]) -> list[dict]:
     """该 S 级子集下可检测的干扰 GT 列表（RT 不可见 = 不计入）。"""
     out = []
     for j, ifw in enumerate(truth.get("interferers", [])):
+        if ifw.get("out_of_window"):
+            continue          # 窗外强源：窗内无谱峰证据，不进答案键（D-25）
         if interferer_visible_at(ifw, truth, stations, eid=f"interferer_{j + 1}"):
             out.append(ifw)
     return out
@@ -119,7 +121,8 @@ def sample_counts_for_slevel(truth: dict, gt_list: list[dict]) -> bool:
     """
     if gt_list:
         return True
-    return not truth.get("interferers")
+    # 「有源」只看窗内源：只带窗外强源的样本，在窗内就是干净样本（D-25）
+    return not [f for f in truth.get("interferers", []) if not f.get("out_of_window")]
 
 
 def gt_intent(ifw: dict) -> str | None:

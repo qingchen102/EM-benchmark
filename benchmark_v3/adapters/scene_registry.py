@@ -130,10 +130,37 @@ SCENES: dict[str, dict] = {
         force_tier=None,
         note="瞄准层（aim_at）与手机潮换载频未实现；aimed 合法性属答题键问题（§10.1 D-12），本轮不做",
     ),
+    "d12": dict(
+        card="卡 8 交通枢纽高空",
+        tier=4,                                # 预设最难：前端被压后仍要做因果排查
+        backend="free_space",                 # 逐源载频只支持自由空间后端（RT 一次只跑一个频率）
+        imd3=True,                             # 前端非线性：互调（阻塞的另一半见 soft_limit）
+        iip3_dbm=(5, 15),
+        soft_limit_dbm=0.0,                    # tanh 软限幅：强基站下行把前端推进压缩区
+        pool=("WiFi_burst", "Bluetooth_FHSS", "DECT", "Microwave"),
+        # 窗外强源 = 强基站下行：载频比场景载频高 1.3333 MHz（= fs/3，端口 +2 dBm）。
+        # 端口功率是扫出来的（`diag/_probe_imd_landing.py <样本> station_a <端口dBm>`）：
+        #   +10/+6/+4 dBm ⇒ 带内被互调再生谱占满（目标峰不再是目标，样本退化）
+        #   +2 dBm  ⇒ 目标峰 −6.9 dB、邻近底噪 +1.6 dB ⇒ **SNR 损失 5.3 dB**（干净的阻塞正样本）
+        #   0 dBm   ⇒ SNR 损失 1.8 dB（效果太弱）；−20 dBm ⇒ 0.2 dB（完全线性区）
+        always=(("LTE_QPSK", 2.4013333e9, 2.0),),
+        n_src=(2, 3),
+        target="UAV_video_OFDM",
+        nlos=False,
+        tgt_power=(10, 20),
+        noise="d2",
+        force_tier=None,
+        note=("卡 8 第三批落地（d12）：窗外强源 = 强基站下行（场景载频 +1.3333 MHz、端口 +2 dBm），"
+              "实测机制为**增益压缩（带内电平被压低）+ 宽带互调再生谱（底噪抬升）**，"
+              "合起来 SNR 损失约 5 dB；注意不是落成 DC 离散杂散（原以为 3Δ 折叠到 DC，实测 DC 段抬升反而低于其它段）。"
+              "这两个机理（阻塞 / 互调落窗内）在旧版 v3 里**故意不标**（端口功率比 IIP3 低 60+ dB、无正样本），本档是第一份正样本。"
+              "缺口：枢纽专用几何用现库城市几何近似；TDD 交叉时隙时间剧本未实现；"
+              "「假远程识别」仍缺（拟用窗内假图传重放替代）；RT 后端不支持逐源载频故用 free_space。"),
+    ),
 }
 
 # 档位 → 场景 id（便于脚本遍历；顺序 = 建议生成顺序）
-SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8", "d9", "d10", "d11")
+SCENE_IDS: tuple[str, ...] = ("d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12")
 
 # 新增字段（2026-10-14，为卡 5 的换载频/窗外强源加的，全部可选、默认不改既有行为）
 #   carrier_hz       场景载频覆盖（None/缺省 = 2.4 GHz）
