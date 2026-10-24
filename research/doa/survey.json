@@ -1,0 +1,3834 @@
+[
+  {
+    "tag": "spatial_smooth",
+    "year": 1985,
+    "title": "On spatial smoothing for direction-of-arrival estimation of coherent signals",
+    "venue": "IEEE Transactions on Acoustics Speech and Signal Processing",
+    "cited": 1897,
+    "doi": "https://doi.org/10.1109/tassp.1985.1164649"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 1988,
+    "title": "Focussing matrices for coherent signal-subspace processing",
+    "venue": "IEEE Transactions on Acoustics Speech and Signal Processing",
+    "cited": 493,
+    "doi": "https://doi.org/10.1109/29.1655"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2002,
+    "title": "A geometrically based model for line-of-sight multipath radio channels",
+    "venue": "IEEE Vehicular Technology Conference (VTC)",
+    "cited": 342,
+    "doi": "https://doi.org/10.1109/vetec.1996.501430"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2009,
+    "title": "Classical and Modern Direction-of-Arrival Estimation",
+    "venue": "",
+    "cited": 330,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2006,
+    "title": "TOPS: new DOA estimator for wideband signals",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 324,
+    "doi": "https://doi.org/10.1109/tsp.2006.872581"
+  },
+  {
+    "tag": "sparse",
+    "year": 2016,
+    "title": "Underdetermined DOA Estimation Under the Compressive Sensing Framework: A Review",
+    "venue": "IEEE Access",
+    "cited": 223,
+    "doi": "https://doi.org/10.1109/access.2016.2628869"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2011,
+    "title": "An Eigenstructure Method for Estimating DOA and Sensor Gain-Phase Errors",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 216,
+    "doi": "https://doi.org/10.1109/tsp.2011.2165064"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2002,
+    "title": "A stochastic multipath channel model including path directions for indoor environments",
+    "venue": "IEEE Journal on Selected Areas in Communications",
+    "cited": 208,
+    "doi": "https://doi.org/10.1109/jsac.2002.801218"
+  },
+  {
+    "tag": "sparse",
+    "year": 2015,
+    "title": "Low-Complexity Direction-of-Arrival Estimation Based on Wideband Co-Prime Arrays",
+    "venue": "IEEE/ACM Transactions on Audio Speech and Language Processing",
+    "cited": 178,
+    "doi": "https://doi.org/10.1109/taslp.2015.2436214"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1997,
+    "title": "High-resolution 3-D direction-of-arrival determination for urban mobile radio",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 177,
+    "doi": "https://doi.org/10.1109/8.564093"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2013,
+    "title": "A Unified Framework and Sparse Bayesian Perspective for Direction-of-Arrival Estimation in the Presence of Array Imperfections",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 171,
+    "doi": "https://doi.org/10.1109/tsp.2013.2262682"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1991,
+    "title": "Improved spatial smoothing techniques for DOA estimation of coherent signals",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 167,
+    "doi": "https://doi.org/10.1109/78.80975"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2020,
+    "title": "An Enhanced Spatial Smoothing Technique With ESPRIT Algorithm for Direction of Arrival Estimation in Coherent Scenarios",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 163,
+    "doi": "https://doi.org/10.1109/tsp.2020.2994514"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1994,
+    "title": "Direction finding of coherent signals via spatial smoothing for uniform circular arrays",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 162,
+    "doi": "https://doi.org/10.1109/8.299559"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2004,
+    "title": "Source Localization Using Vector Sensor Array in a Multipath Environment",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 157,
+    "doi": "https://doi.org/10.1109/tsp.2004.836456"
+  },
+  {
+    "tag": "sparse",
+    "year": 2015,
+    "title": "Compressive Covariance Sensing: Structure-based compressive sensing beyond sparsity",
+    "venue": "IEEE Signal Processing Magazine",
+    "cited": 153,
+    "doi": "https://doi.org/10.1109/msp.2015.2486805"
+  },
+  {
+    "tag": "uav",
+    "year": 2021,
+    "title": "Multi-UAV Cooperative Localization for Marine Targets Based on Weighted Subspace Fitting in SAGIN Environment",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 147,
+    "doi": "https://doi.org/10.1109/jiot.2021.3066504"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1988,
+    "title": "A high resolution direction-of-arrival algorithm for narrow-band coherent and incoherent sources",
+    "venue": "IEEE Transactions on Acoustics Speech and Signal Processing",
+    "cited": 147,
+    "doi": "https://doi.org/10.1109/29.1618"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 1993,
+    "title": "Direction finding for wide-band signals using an interpolated array",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 144,
+    "doi": "https://doi.org/10.1109/78.212735"
+  },
+  {
+    "tag": "sparse",
+    "year": 2011,
+    "title": "Direction-of-Arrival Estimation of Wideband Signals via Covariance Matrix Sparse Representation",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 138,
+    "doi": "https://doi.org/10.1109/tsp.2011.2159214"
+  },
+  {
+    "tag": "sparse",
+    "year": 2013,
+    "title": "Sparsity-Inducing Direction Finding for Narrowband and Wideband Signals Based on Array Covariance Vectors",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 128,
+    "doi": "https://doi.org/10.1109/twc.2013.071113.121305"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 1994,
+    "title": "Mutual coupling effects and their reduction in wideband direction of arrival estimation",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 124,
+    "doi": "https://doi.org/10.1109/7.328785"
+  },
+  {
+    "tag": "sparse",
+    "year": 2015,
+    "title": "Novel Wideband DOA Estimation Based on Sparse Bayesian Learning With Dirichlet Process Priors",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 123,
+    "doi": "https://doi.org/10.1109/tsp.2015.2481790"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2017,
+    "title": "CaSCADE: Compressed Carrier and DOA Estimation",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 120,
+    "doi": "https://doi.org/10.1109/tsp.2017.2664054"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "Efficient DOA Estimation Method for Reconfigurable Intelligent Surfaces Aided UAV Swarm",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 117,
+    "doi": "https://doi.org/10.1109/tsp.2022.3146791"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 1990,
+    "title": "Direction-of-arrival estimation for wide-band signals using the ESPRIT algorithm",
+    "venue": "IEEE Transactions on Acoustics Speech and Signal Processing",
+    "cited": 108,
+    "doi": "https://doi.org/10.1109/29.103067"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2014,
+    "title": "A Study of Wireless Indoor Positioning Based on Joint TDOA and DOA Estimation Using 2-D Matrix Pencil Algorithms and IEEE 802.11ac",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 107,
+    "doi": "https://doi.org/10.1109/twc.2014.2386869"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2001,
+    "title": "MIMO vector channel sounder measurement for smart antenna system evaluation",
+    "venue": "European Transactions on Telecommunications",
+    "cited": 107,
+    "doi": "https://doi.org/10.1002/ett.4460120508"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1997,
+    "title": "On spatial smoothing for two-dimensional direction-of-arrival estimation of coherent signals",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 106,
+    "doi": "https://doi.org/10.1109/78.599939"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2006,
+    "title": "Theoretical analyses of gain and phase error calibration with optimal implementation for linear equispaced array",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 103,
+    "doi": "https://doi.org/10.1109/tsp.2005.861892"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1994,
+    "title": "Efficient wideband source localization using beamforming invariance technique",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 103,
+    "doi": "https://doi.org/10.1109/78.286954"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1989,
+    "title": "General direction-of-arrival estimation: a signal subspace approach",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 102,
+    "doi": "https://doi.org/10.1109/7.18659"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2003,
+    "title": "On the geometry of isotropic arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 101,
+    "doi": "https://doi.org/10.1109/tsp.2003.811227"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2008,
+    "title": "Analysis of Multipath Propagation in Urban Environment Through Multidimensional Measurements and Advanced Ray Tracing Simulation",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 101,
+    "doi": "https://doi.org/10.1109/tap.2008.916893"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2000,
+    "title": "Wideband direction-of-arrival estimation of multiple chirp signals using spatial time-frequency distributions",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 101,
+    "doi": "https://doi.org/10.1109/97.844636"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2022,
+    "title": "RIS-Enabled SISO Localization Under User Mobility and Spatial-Wideband Effects",
+    "venue": "IEEE Journal of Selected Topics in Signal Processing",
+    "cited": 96,
+    "doi": "https://doi.org/10.1109/jstsp.2022.3175036"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2024,
+    "title": "SubspaceNet: Deep Learning-Aided Subspace Methods for DoA Estimation",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 96,
+    "doi": "https://doi.org/10.1109/tvt.2024.3496119"
+  },
+  {
+    "tag": "sparse",
+    "year": 2011,
+    "title": "Aliasing-Free Wideband Beamforming Using Sparse Signal Representation",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 94,
+    "doi": "https://doi.org/10.1109/tsp.2011.2140108"
+  },
+  {
+    "tag": "sparse",
+    "year": 2014,
+    "title": "Underdetermined DOA Estimation for Wideband Signals Using Robust Sparse Covariance Fitting",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 94,
+    "doi": "https://doi.org/10.1109/lsp.2014.2358084"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2008,
+    "title": "On Spatial Aliasing in Microphone Arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 90,
+    "doi": "https://doi.org/10.1109/tsp.2008.2010596"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 1986,
+    "title": "A vector space approach to direction finding in a coherent multipath environment",
+    "venue": "IRE Transactions on Antennas and Propagation",
+    "cited": 87,
+    "doi": "https://doi.org/10.1109/tap.1986.1143956"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2016,
+    "title": "A Sparse-Based Approach for DOA Estimation and Array Calibration in Uniform Linear Array",
+    "venue": "IEEE Sensors Journal",
+    "cited": 86,
+    "doi": "https://doi.org/10.1109/jsen.2016.2577712"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1999,
+    "title": "Localization of wideband signals using least-squares and total least-squares approaches",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 86,
+    "doi": "https://doi.org/10.1109/78.757209"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "IoMT-Net: Blockchain-Integrated Unauthorized UAV Localization Using Lightweight Convolution Neural Network for Internet of Military Things",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 86,
+    "doi": "https://doi.org/10.1109/jiot.2022.3176310"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2000,
+    "title": "Acoustic vector-sensor processing in the presence of a reflecting boundary",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 84,
+    "doi": "https://doi.org/10.1109/78.875455"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2014,
+    "title": "Doa estimation exploiting coprime arrays with sparse sensor spacing",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 84,
+    "doi": "https://doi.org/10.1109/icassp.2014.6854003"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2010,
+    "title": "Ice-sheet bed 3-D tomography",
+    "venue": "Journal of Glaciology",
+    "cited": 83,
+    "doi": "https://doi.org/10.3189/002214310791190811"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2019,
+    "title": "Coherent SVR Learning for Wideband Direction-of-Arrival Estimation",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 81,
+    "doi": "https://doi.org/10.1109/lsp.2019.2901641"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2012,
+    "title": "Bearing Estimation via Spatial Sparsity using Compressive Sensing",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 81,
+    "doi": "https://doi.org/10.1109/taes.2012.6178067"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2019,
+    "title": "Angle-Domain Aided UL/DL Channel Estimation for Wideband mmWave Massive MIMO Systems With Beam Squint",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 80,
+    "doi": "https://doi.org/10.1109/twc.2019.2915072"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2004,
+    "title": "Wideband MVDR beamforming for acoustic vector sensor linear array",
+    "venue": "IEE Proceedings - Radar Sonar and Navigation",
+    "cited": 80,
+    "doi": "https://doi.org/10.1049/ip-rsn:20040651"
+  },
+  {
+    "tag": "sparse",
+    "year": 2016,
+    "title": "PD Source Diagnosis and Localization in Industrial High-Voltage Insulation System via Multimodal Joint Sparse Representation",
+    "venue": "IEEE Transactions on Industrial Electronics",
+    "cited": 80,
+    "doi": "https://doi.org/10.1109/tie.2016.2520905"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2013,
+    "title": "Wideband Gaussian Source Processing Using a Linear Nested Array",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 78,
+    "doi": "https://doi.org/10.1109/lsp.2013.2281514"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2010,
+    "title": "ESPRIT-Like Two-Dimensional DOA Estimation for Coherent Signals",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 77,
+    "doi": "https://doi.org/10.1109/taes.2010.5545202"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2016,
+    "title": "Underdetermined wideband DOA estimation of off-grid sources employing the difference co-array concept",
+    "venue": "Signal Processing",
+    "cited": 76,
+    "doi": "https://doi.org/10.1016/j.sigpro.2016.07.022"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2005,
+    "title": "Robust auto-focusing wideband DOA estimation",
+    "venue": "Signal Processing",
+    "cited": 76,
+    "doi": "https://doi.org/10.1016/j.sigpro.2005.04.009"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2017,
+    "title": "Narrowband and Wideband Off-Grid Direction-of-Arrival Estimation via Sparse Bayesian Learning",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 75,
+    "doi": "https://doi.org/10.1109/joe.2017.2660278"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2003,
+    "title": "Propagation characteristics at 5 GHz in typical radio-LAN scenarios",
+    "venue": "IEEE Vehicular Technology Conference",
+    "cited": 72,
+    "doi": "https://doi.org/10.1109/vetec.1999.778043"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2018,
+    "title": "Joint Azimuth, Elevation, and Delay Estimation for 3-D Indoor Localization",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 69,
+    "doi": "https://doi.org/10.1109/tvt.2018.2794322"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Cooperative Localization of a GPS-Denied UAV Using Direction-of-Arrival Measurements",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 68,
+    "doi": "https://doi.org/10.1109/taes.2019.2942704"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "CRB Weighted Source Localization Method Based on Deep Neural Networks in Multi-UAV Network",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 68,
+    "doi": "https://doi.org/10.1109/jiot.2022.3150794"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2022,
+    "title": "Deep Learning-Aided Coherent Direction-of-Arrival Estimation With the FTMR Algorithm",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 68,
+    "doi": "https://doi.org/10.1109/tsp.2022.3144033"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2020,
+    "title": "Multimode W-Band and D-Band MIMO Scalable Radar Platform",
+    "venue": "IEEE Transactions on Microwave Theory and Techniques",
+    "cited": 68,
+    "doi": "https://doi.org/10.1109/tmtt.2020.3038532"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2005,
+    "title": "Coherent signal-subspace processing of acoustic vector sensor array for DOA estimation of wideband sources",
+    "venue": "Signal Processing",
+    "cited": 67,
+    "doi": "https://doi.org/10.1016/j.sigpro.2004.07.030"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2001,
+    "title": "Estimating parameters of multiple wideband polynomial-phase sources in sensor arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 67,
+    "doi": "https://doi.org/10.1109/78.969501"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2020,
+    "title": "Measurement and Characterization of an Indoor Industrial Environment at 3.7 and 28 GHz",
+    "venue": "European Conference on Antennas and Propagation",
+    "cited": 66,
+    "doi": "https://doi.org/10.23919/eucap48036.2020.9135943"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2018,
+    "title": "Space Time MUSIC: Consistent Signal Subspace Estimation for Wideband Sensor Arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 64,
+    "doi": "https://doi.org/10.1109/tsp.2018.2811746"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2019,
+    "title": "Low Complexity DOA Estimation for Wideband Off-Grid Sources Based on Re-Focused Compressive Sensing With Dynamic Dictionary",
+    "venue": "IEEE Journal of Selected Topics in Signal Processing",
+    "cited": 64,
+    "doi": "https://doi.org/10.1109/jstsp.2019.2932973"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2014,
+    "title": "Cumulants-Based Toeplitz Matrices Reconstruction Method for 2-D Coherent DOA Estimation",
+    "venue": "IEEE Sensors Journal",
+    "cited": 63,
+    "doi": "https://doi.org/10.1109/jsen.2014.2316798"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2006,
+    "title": "5.3-GHz MIMO Radio Channel Sounder",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "cited": 63,
+    "doi": "https://doi.org/10.1109/tim.2006.877724"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2014,
+    "title": "Precise Calibration of a GNSS Antenna Array for Adaptive Beamforming Applications",
+    "venue": "Sensors",
+    "cited": 61,
+    "doi": "https://doi.org/10.3390/s140609669"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Acoustic Source Localization From Multirotor UAVs",
+    "venue": "IEEE Transactions on Industrial Electronics",
+    "cited": 61,
+    "doi": "https://doi.org/10.1109/tie.2019.2949529"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2020,
+    "title": "DOA Estimation Based on ESPRIT Algorithm Method for Frequency Scanning LWA",
+    "venue": "IEEE Communications Letters",
+    "cited": 59,
+    "doi": "https://doi.org/10.1109/lcomm.2020.2988020"
+  },
+  {
+    "tag": "uav",
+    "year": 2021,
+    "title": "RFDOA-Net: An Efficient ConvNet for RF-Based DOA Estimation in UAV Surveillance Systems",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 58,
+    "doi": "https://doi.org/10.1109/tvt.2021.3114058"
+  },
+  {
+    "tag": "wideband_core",
+    "year": 2011,
+    "title": "Real Time High Accuracy 3-D PHAT-Based Sound Source Localization Using a Simple 4-Microphone Arrangement",
+    "venue": "IEEE Systems Journal",
+    "cited": 57,
+    "doi": "https://doi.org/10.1109/jsyst.2011.2176766"
+  },
+  {
+    "tag": "sparse",
+    "year": 2016,
+    "title": "Focused Compressive Sensing for Underdetermined Wideband DOA Estimation Exploiting High-Order Difference Coarrays",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 56,
+    "doi": "https://doi.org/10.1109/lsp.2016.2638880"
+  },
+  {
+    "tag": "sparse",
+    "year": 2021,
+    "title": "Direction of Arrival Estimation of Wideband Sources Using Sparse Linear Arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 56,
+    "doi": "https://doi.org/10.1109/tsp.2021.3094718"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2011,
+    "title": "Spatial smoothing for direction of arrival estimation of coherent signals in the presence of unknown mutual coupling",
+    "venue": "IET Signal Processing",
+    "cited": 56,
+    "doi": "https://doi.org/10.1049/iet-spr.2008.0100"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2015,
+    "title": "Calibrating Nested Sensor Arrays With Model Errors",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 55,
+    "doi": "https://doi.org/10.1109/tap.2015.2477411"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2013,
+    "title": "Joint Transmission and Reception Diversity Smoothing for Direction Finding of Coherent Targets in MIMO Radar",
+    "venue": "IEEE Journal of Selected Topics in Signal Processing",
+    "cited": 53,
+    "doi": "https://doi.org/10.1109/jstsp.2013.2285520"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2016,
+    "title": "Coherent Multipath Direction-of-Arrival Resolution Using Compressed Sensing",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 52,
+    "doi": "https://doi.org/10.1109/joe.2016.2576198"
+  },
+  {
+    "tag": "sparse",
+    "year": 2017,
+    "title": "Underdetermined DOA Estimation Method for Wideband Signals Using Joint Nonnegative Sparse Bayesian Learning",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 52,
+    "doi": "https://doi.org/10.1109/lsp.2017.2673850"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Real-Valued Sparse Bayesian Learning for Off-Grid Direction-of-Arrival (DOA) Estimation in Ocean Acoustics",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 52,
+    "doi": "https://doi.org/10.1109/joe.2020.2981102"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2010,
+    "title": "Blind Calibration for a Linear Array With Gain and Phase Error Using Independent Component Analysis",
+    "venue": "IEEE Antennas and Wireless Propagation Letters",
+    "cited": 51,
+    "doi": "https://doi.org/10.1109/lawp.2010.2104132"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2018,
+    "title": "Estimation of Direction of Arrival by Time Reversal for Low-Angle Targets",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 51,
+    "doi": "https://doi.org/10.1109/taes.2018.2828200"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2009,
+    "title": "Source Bearing and Steering-Vector Estimation using Partially Calibrated Arrays",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 51,
+    "doi": "https://doi.org/10.1109/taes.2009.5310304"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2019,
+    "title": "Source Resolvability of Spatial-Smoothing-Based Subspace Methods: A Hadamard Product Perspective",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 51,
+    "doi": "https://doi.org/10.1109/tsp.2019.2908142"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2022,
+    "title": "Structured Tensor Reconstruction for Coherent DOA Estimation",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 50,
+    "doi": "https://doi.org/10.1109/lsp.2022.3190768"
+  },
+  {
+    "tag": "sparse",
+    "year": 2018,
+    "title": "Wideband sparse spatial spectrum estimation using matrix filter with nulling in a strong interference environment",
+    "venue": "The Journal of the Acoustical Society of America",
+    "cited": 50,
+    "doi": "https://doi.org/10.1121/1.5042406"
+  },
+  {
+    "tag": "sparse",
+    "year": 2024,
+    "title": "Wideband Near-Field Integrated Sensing and Communication With Sparse Transceiver Design",
+    "venue": "IEEE Journal of Selected Topics in Signal Processing",
+    "cited": 50,
+    "doi": "https://doi.org/10.1109/jstsp.2024.3394970"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2003,
+    "title": "Radar measurement extraction in the presence of sea-surface multipath",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 50,
+    "doi": "https://doi.org/10.1109/taes.2003.1207266"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Deep‐learning‐based beamforming for rejecting interferences",
+    "venue": "IET Signal Processing",
+    "cited": 49,
+    "doi": "https://doi.org/10.1049/iet-spr.2019.0495"
+  },
+  {
+    "tag": "sparse",
+    "year": 2023,
+    "title": "Adaptive Grid Refinement Method for DOA Estimation via Sparse Bayesian Learning",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 49,
+    "doi": "https://doi.org/10.1109/joe.2023.3235055"
+  },
+  {
+    "tag": "sparse",
+    "year": 2017,
+    "title": "Non-Uniform Wavelet Sampling for RF Analog-to-Information Conversion",
+    "venue": "IEEE Transactions on Circuits and Systems I Regular Papers",
+    "cited": 48,
+    "doi": "https://doi.org/10.1109/tcsi.2017.2729779"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2016,
+    "title": "DOA Estimation Using Multipath Echo Power for MIMO Radar in Low-Grazing Angle",
+    "venue": "IEEE Sensors Journal",
+    "cited": 48,
+    "doi": "https://doi.org/10.1109/jsen.2016.2580621"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "A Review of Closed-Form Cramér-Rao Bounds for DOA Estimation in the Presence of Gaussian Noise Under a Unified Framework",
+    "venue": "IEEE Access",
+    "cited": 47,
+    "doi": "https://doi.org/10.1109/access.2020.3026203"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2015,
+    "title": "Coprime arrays and samplers for space-time adaptive processing",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 47,
+    "doi": "https://doi.org/10.1109/icassp.2015.7178394"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2007,
+    "title": "DOA Estimation for Coherent Sources in Unknown Nonuniform Noise Fields",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 46,
+    "doi": "https://doi.org/10.1109/taes.2007.4383611"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2012,
+    "title": "A Support Vector Machine MUSIC Algorithm",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 45,
+    "doi": "https://doi.org/10.1109/tap.2012.2209195"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2005,
+    "title": "Clusters extracted from measured propagation channels in macrocellular environments",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 44,
+    "doi": "https://doi.org/10.1109/tap.2005.859763"
+  },
+  {
+    "tag": "sparse",
+    "year": 2020,
+    "title": "Group Sparsity Based Localization for Far-Field and Near-Field Sources Based on Distributed Sensor Array Networks",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 43,
+    "doi": "https://doi.org/10.1109/tsp.2020.3037841"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2003,
+    "title": "A geometric air-to-ground radio channel model",
+    "venue": "",
+    "cited": 43,
+    "doi": "https://doi.org/10.1109/milcom.2002.1180518"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Abnormal Behavior Detection Scheme of UAV Using Recurrent Neural Networks",
+    "venue": "IEEE Access",
+    "cited": 41,
+    "doi": "https://doi.org/10.1109/access.2019.2934188"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "2D-DOA Estimation Auxiliary Localization of Anonymous UAV Using EMVS-MIMO Radar",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 40,
+    "doi": "https://doi.org/10.1109/jiot.2024.3351136"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2007,
+    "title": "Polarimetric angular smoothing algorithm for an electromagnetic vector-sensor array",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 40,
+    "doi": "https://doi.org/10.1049/iet-rsn:20050108"
+  },
+  {
+    "tag": "tops",
+    "year": 2016,
+    "title": "DOA estimation for wideband signals based on weighted Squared TOPS",
+    "venue": "EURASIP Journal on Wireless Communications and Networking",
+    "cited": 39,
+    "doi": "https://doi.org/10.1186/s13638-016-0743-9"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Location-Based Robust Beamforming Design for Cellular-Enabled UAV Communications",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 38,
+    "doi": "https://doi.org/10.1109/jiot.2020.3028853"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2007,
+    "title": "Method of direction-of-arrival estimation for uncorrelated, partially correlated and coherent sources",
+    "venue": "IET Microwaves Antennas & Propagation",
+    "cited": 37,
+    "doi": "https://doi.org/10.1049/iet-map:20070006"
+  },
+  {
+    "tag": "sparse",
+    "year": 2021,
+    "title": "Cramér-Rao Bound Analysis of Underdetermined Wideband DOA Estimation Under the Subband Model via Frequency Decomposition",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 37,
+    "doi": "https://doi.org/10.1109/tsp.2021.3088231"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2016,
+    "title": "Utilization of Multiple-Antenna Multicarrier Systems and NLOS Mitigation for Accurate Wireless Indoor Positioning",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 36,
+    "doi": "https://doi.org/10.1109/twc.2016.2585645"
+  },
+  {
+    "tag": "array_cal",
+    "year": 1994,
+    "title": "Array gain/phase calibration techniques for adaptive beamforming and direction finding",
+    "venue": "IEE Proceedings - Radar Sonar and Navigation",
+    "cited": 36,
+    "doi": "https://doi.org/10.1049/ip-rsn:19949538"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2019,
+    "title": "DOA Estimation for UCA in the Presence of Mutual Coupling via Error Model Equivalence",
+    "venue": "IEEE Wireless Communications Letters",
+    "cited": 36,
+    "doi": "https://doi.org/10.1109/lwc.2019.2944816"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Channel Estimation and Self-Positioning for UAV Swarm",
+    "venue": "IEEE Transactions on Communications",
+    "cited": 36,
+    "doi": "https://doi.org/10.1109/tcomm.2019.2933203"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2011,
+    "title": "A novel wideband DOA estimator based on Khatri–Rao subspace approach",
+    "venue": "Signal Processing",
+    "cited": 35,
+    "doi": "https://doi.org/10.1016/j.sigpro.2011.04.014"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2018,
+    "title": "A Unified Array Geometry Composed of Multiple Identical Subarrays With Hole-Free Difference Coarrays for Underdetermined DOA Estimation",
+    "venue": "IEEE Access",
+    "cited": 35,
+    "doi": "https://doi.org/10.1109/access.2018.2813313"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2022,
+    "title": "An Efficient Maximum-Likelihood-Like Algorithm for Near-Field Coherent Source Localization",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 35,
+    "doi": "https://doi.org/10.1109/tap.2022.3161269"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2018,
+    "title": "DOA Estimation for Underwater Wideband Weak Targets Based on Coherent Signal Subspace and Compressed Sensing",
+    "venue": "Sensors",
+    "cited": 34,
+    "doi": "https://doi.org/10.3390/s18030902"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2016,
+    "title": "Study of Terahertz Superresolution Imaging Scheme With Real-Time Capability Based on Frequency Scanning Antenna",
+    "venue": "IEEE Transactions on Terahertz Science and Technology",
+    "cited": 34,
+    "doi": "https://doi.org/10.1109/tthz.2016.2530945"
+  },
+  {
+    "tag": "uav",
+    "year": 2018,
+    "title": "Radar-Based High-Accuracy 3D Localization of UAVs for Landing in GNSS-Denied Environments",
+    "venue": "IEEE MTT-S International Conference on Microwaves for Intelligent Mobility (ICMIM)",
+    "cited": 33,
+    "doi": "https://doi.org/10.1109/icmim.2018.8443483"
+  },
+  {
+    "tag": "sparse",
+    "year": 2017,
+    "title": "Sparsity-aware DOA estimation of quasi-stationary signals using nested arrays",
+    "venue": "Signal Processing",
+    "cited": 33,
+    "doi": "https://doi.org/10.1016/j.sigpro.2017.09.029"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2022,
+    "title": "Self-Calibration of Acoustic Scalar and Vector Sensor Arrays",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 33,
+    "doi": "https://doi.org/10.1109/tsp.2022.3214383"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2012,
+    "title": "Robust beamforming for coherent signals based on the spatial-smoothing technique",
+    "venue": "Signal Processing",
+    "cited": 33,
+    "doi": "https://doi.org/10.1016/j.sigpro.2012.05.008"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1994,
+    "title": "Robust coherent signal-subspace processing for directions-of-arrival estimation of wideband sources",
+    "venue": "IEE Proceedings - Radar Sonar and Navigation",
+    "cited": 32,
+    "doi": "https://doi.org/10.1049/ip-rsn:19941234"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2012,
+    "title": "Joint DOD/DOA estimation in MIMO radar exploiting time-frequency signal representations",
+    "venue": "EURASIP Journal on Advances in Signal Processing",
+    "cited": 32,
+    "doi": "https://doi.org/10.1186/1687-6180-2012-102"
+  },
+  {
+    "tag": "sparse",
+    "year": 2022,
+    "title": "DOA Estimation for Heterogeneous Wideband Sources Based on Adaptive Space-Frequency Joint Processing",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 32,
+    "doi": "https://doi.org/10.1109/tsp.2022.3160802"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "BSBL-Based Auxiliary Vehicle Position Analysis in Smart City Using Distributed MEC and UAV-Deployed IoT",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 32,
+    "doi": "https://doi.org/10.1109/jiot.2022.3204986"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2023,
+    "title": "Direction-of-Arrival Estimation for Coherent Signals Exploiting Moving Coprime Array",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 31,
+    "doi": "https://doi.org/10.1109/lsp.2023.3261127"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2014,
+    "title": "Coherent sources direction finding and polarization estimation with various compositions of spatially spread polarized antenna arrays",
+    "venue": "Signal Processing",
+    "cited": 31,
+    "doi": "https://doi.org/10.1016/j.sigpro.2014.03.041"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1996,
+    "title": "The optimal focusing subspace for coherent signal subspace processing",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 31,
+    "doi": "https://doi.org/10.1109/78.489056"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2008,
+    "title": "A new framework for direction-of-arrival estimation",
+    "venue": "Proceedings of the IEEE Sensor Array and Multichannel Signal Processing Workshop",
+    "cited": 31,
+    "doi": "https://doi.org/10.1109/sam.2008.4606829"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Joint Features Extraction for Multiple Moving Targets Using (Ultra-)Wideband FMCW Signals in the Presence of Doppler Ambiguity",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 31,
+    "doi": "https://doi.org/10.1109/tsp.2020.3039565"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2020,
+    "title": "Deep Learning-Aided Spatial Discrimination for Multipath Mitigation",
+    "venue": "IEEE/ION Position Location and Navigation Symposium",
+    "cited": 31,
+    "doi": "https://doi.org/10.1109/plans46316.2020.9109935"
+  },
+  {
+    "tag": "sparse",
+    "year": 2014,
+    "title": "Group sparsity based wideband DOA estimation for co-prime arrays",
+    "venue": "",
+    "cited": 30,
+    "doi": "https://doi.org/10.1109/chinasip.2014.6889242"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2017,
+    "title": "Spatial smoothing based methods for direction-of-arrival estimation of coherent signals in nonuniform noise",
+    "venue": "Digital Signal Processing",
+    "cited": 30,
+    "doi": "https://doi.org/10.1016/j.dsp.2017.05.002"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Joint Spectrum, Carrier, and DOA Estimation With Beamforming MWC Sampling System",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "cited": 30,
+    "doi": "https://doi.org/10.1109/tim.2022.3147893"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2011,
+    "title": "DOA estimation of coherent signals for uniform linear arrays with mutual coupling",
+    "venue": "",
+    "cited": 30,
+    "doi": "https://doi.org/10.1109/iscas.2011.5937581"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2015,
+    "title": "DOA Estimation under Unknown Mutual Coupling and Multipath with Improved Effective Array Aperture",
+    "venue": "Sensors",
+    "cited": 30,
+    "doi": "https://doi.org/10.3390/s151229832"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "Joint Detections of Frequency and Direction of Arrival in Wideband Based on a Programmable Metasurface",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 29,
+    "doi": "https://doi.org/10.1109/tap.2023.3304386"
+  },
+  {
+    "tag": "sparse",
+    "year": 2019,
+    "title": "Underdetermined DOA Estimation for Wideband Signals via Joint Sparse Signal Reconstruction",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 29,
+    "doi": "https://doi.org/10.1109/lsp.2019.2937381"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1991,
+    "title": "Focusing filters for wide-band direction finding",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 29,
+    "doi": "https://doi.org/10.1109/78.80827"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2024,
+    "title": "Clutter Suppression, Time-Frequency Synchronization, and Sensing Parameter Association in Asynchronous Perceptive Vehicular Networks",
+    "venue": "IEEE Journal on Selected Areas in Communications",
+    "cited": 29,
+    "doi": "https://doi.org/10.1109/jsac.2024.3414581"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2009,
+    "title": "Direction-of-arrival estimation for uncorrelated and coherent signals with fewer sensors",
+    "venue": "IET Microwaves Antennas & Propagation",
+    "cited": 28,
+    "doi": "https://doi.org/10.1049/iet-map.2007.0361"
+  },
+  {
+    "tag": "sparse",
+    "year": 2018,
+    "title": "Underdetermined Wideband DOA Estimation for Off-Grid Sources with Coprime Array Using Sparse Bayesian Learning",
+    "venue": "Sensors",
+    "cited": 28,
+    "doi": "https://doi.org/10.3390/s18010253"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Continuous broadband lightning VHF mapping array using MUSIC algorithm",
+    "venue": "Atmospheric Research",
+    "cited": 27,
+    "doi": "https://doi.org/10.1016/j.atmosres.2019.104647"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2017,
+    "title": "Performance comparision of MUSIC and ESPRIT algorithms in presence of coherent signals for DoA estimation",
+    "venue": "2017 International conference of Electronics, Communication and Aerospace Technology (ICECA)",
+    "cited": 27,
+    "doi": "https://doi.org/10.1109/iceca.2017.8212844"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2021,
+    "title": "Single-Site 3-D Positioning in Multipath Environments Using DOA-Delay Measurements",
+    "venue": "IEEE Communications Letters",
+    "cited": 27,
+    "doi": "https://doi.org/10.1109/lcomm.2021.3078765"
+  },
+  {
+    "tag": "uav",
+    "year": 2023,
+    "title": "Multi-Stage RF Emitter Search and Geolocation With UAV: A Cognitive Learning-Based Method",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 26,
+    "doi": "https://doi.org/10.1109/tvt.2023.3235498"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2021,
+    "title": "Gridless Compressed Sensing Based Channel Estimation for UAV Wideband Communications With Beam Squint",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 26,
+    "doi": "https://doi.org/10.1109/tvt.2021.3103153"
+  },
+  {
+    "tag": "uav",
+    "year": 2021,
+    "title": "Fast and robust super-resolution DOA estimation for UAV swarms",
+    "venue": "Signal Processing",
+    "cited": 26,
+    "doi": "https://doi.org/10.1016/j.sigpro.2021.108187"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2012,
+    "title": "A Sub-Wavelength RF Source Tracking System for GPS-Denied Environments",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 26,
+    "doi": "https://doi.org/10.1109/tap.2012.2232036"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2022,
+    "title": "Multipath Ghost Target Identification for Automotive MIMO Radar",
+    "venue": "IEEE Vehicular Technology Conference",
+    "cited": 26,
+    "doi": "https://doi.org/10.1109/vtc2022-fall57202.2022.10012904"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Robust Wideband Adaptive Beamforming Based on Focusing Transformation and Steering Vector Compensation",
+    "venue": "IEEE Antennas and Wireless Propagation Letters",
+    "cited": 25,
+    "doi": "https://doi.org/10.1109/lawp.2020.3029950"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2018,
+    "title": "Accurate and Robust Localization Techniques for Wireless Sensor Networks",
+    "venue": "arXiv (Cornell University)",
+    "cited": 25,
+    "doi": "https://doi.org/10.48550/arxiv.1806.05765"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "Fast Wideband Beamforming Using Convolutional Neural Network",
+    "venue": "Remote Sensing",
+    "cited": 25,
+    "doi": "https://doi.org/10.3390/rs15030712"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 1992,
+    "title": "High resolution coherent source location using transmit/receive arrays",
+    "venue": "IEEE Transactions on Image Processing",
+    "cited": 25,
+    "doi": "https://doi.org/10.1109/83.128033"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2003,
+    "title": "Weighted spatial smoothing for direction-of-arrival estimation of coherent signals",
+    "venue": "Digest - IEEE Antennas and Propagation Society. International Symposium",
+    "cited": 24,
+    "doi": "https://doi.org/10.1109/aps.2002.1016735"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2014,
+    "title": "Gain and Phase Autocalibration of Large Uniform Rectangular Arrays for Underwater 3-D Sonar Imaging Systems",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 24,
+    "doi": "https://doi.org/10.1109/joe.2013.2266195"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2013,
+    "title": "Conditional Cramér–Rao Lower Bounds for DOA Estimation and Array Calibration",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 24,
+    "doi": "https://doi.org/10.1109/lsp.2013.2281972"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Complex-Valued Convolutional Neural Networks Design and its Application on UAV DOA Estimation in Urban Environments",
+    "venue": "Journal of Communications and Information Networks",
+    "cited": 24,
+    "doi": "https://doi.org/10.23919/jcin.2020.9130429"
+  },
+  {
+    "tag": "sparse",
+    "year": 2014,
+    "title": "Wideband DOA Estimation Based on Sparse Representation in 2-D Frequency Domain",
+    "venue": "IEEE Sensors Journal",
+    "cited": 24,
+    "doi": "https://doi.org/10.1109/jsen.2014.2339211"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Multiple emitters localization by UAV with nested linear array: System scheme and 2D-DOA estimation algorithm",
+    "venue": "China Communications",
+    "cited": 24,
+    "doi": "https://doi.org/10.23919/jcc.2020.03.010"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "Sound Source Localization for Unmanned Aerial Vehicles in Low Signal-to-Noise Ratio Environments",
+    "venue": "Remote Sensing",
+    "cited": 23,
+    "doi": "https://doi.org/10.3390/rs16111847"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Adaptive DOA estimation with low complexity for wideband signals of massive MIMO systems",
+    "venue": "Signal Processing",
+    "cited": 23,
+    "doi": "https://doi.org/10.1016/j.sigpro.2020.107702"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2021,
+    "title": "Joint spectrum sensing and DOA estimation with sub-Nyquist sampling",
+    "venue": "Signal Processing",
+    "cited": 23,
+    "doi": "https://doi.org/10.1016/j.sigpro.2021.108260"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2016,
+    "title": "DOA estimation algorithms for low‐angle targets with MIMO radar",
+    "venue": "Electronics Letters",
+    "cited": 23,
+    "doi": "https://doi.org/10.1049/el.2015.3355"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2012,
+    "title": "Coherent Source Direction-Finding using a Sparsely-Distributed Acoustic Vector-Sensor Array",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 23,
+    "doi": "https://doi.org/10.1109/taes.2012.6237621"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2021,
+    "title": "Super-Resolution DOA Estimation for Wideband Signals Using Non-Uniform Linear Arrays With No Focusing Matrix",
+    "venue": "IEEE Wireless Communications Letters",
+    "cited": 23,
+    "doi": "https://doi.org/10.1109/lwc.2021.3139568"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Calibration Nested Arrays for Underdetermined DOA Estimation Using Fourth-Order Cumulant",
+    "venue": "IEEE Communications Letters",
+    "cited": 22,
+    "doi": "https://doi.org/10.1109/lcomm.2020.3001936"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2018,
+    "title": "Direction-of-Arrival Estimation via Coarray With Model Errors",
+    "venue": "IEEE Access",
+    "cited": 22,
+    "doi": "https://doi.org/10.1109/access.2018.2873416"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2002,
+    "title": "DOA estimation with sensor gain, phase and position perturbations",
+    "venue": "IEEE National Aerospace and Electronics Conference (NAECON)",
+    "cited": 22,
+    "doi": "https://doi.org/10.1109/naecon.1993.290894"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Underwater Localization via Wideband Direction-of-Arrival Estimation Using Acoustic Arrays of Arbitrary Shape",
+    "venue": "Sensors",
+    "cited": 22,
+    "doi": "https://doi.org/10.3390/s20143862"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2006,
+    "title": "Weighted signal-subspace direction-finding of ultra-wideband sources",
+    "venue": "",
+    "cited": 21,
+    "doi": "https://doi.org/10.1109/wimob.2005.1512811"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2004,
+    "title": "DOA estimation for coherent sources in beamspace using spatial smoothing",
+    "venue": "",
+    "cited": 21,
+    "doi": "https://doi.org/10.1109/icics.2003.1292615"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2013,
+    "title": "Two-Dimensional DOA Estimation of Coherent Sources for Acoustic Vector-Sensor Array Using a Single Snapshot",
+    "venue": "Wireless Personal Communications",
+    "cited": 21,
+    "doi": "https://doi.org/10.1007/s11277-013-0997-z"
+  },
+  {
+    "tag": "sparse",
+    "year": 2021,
+    "title": "Super-resolution method for coherent DOA estimation of multiple wideband sources",
+    "venue": "Signal Processing",
+    "cited": 21,
+    "doi": "https://doi.org/10.1016/j.sigpro.2021.108249"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2013,
+    "title": "A Novel DOA Estimation Error Reduction Preprocessing Scheme of Correlated Waves for Khatri-Rao Product Extended-Array",
+    "venue": "IEICE Transactions on Communications",
+    "cited": 21,
+    "doi": "https://doi.org/10.1587/transcom.e96.b.2475"
+  },
+  {
+    "tag": "sparse",
+    "year": 2011,
+    "title": "Wideband DOA estimation from the sparse recovery perspective for the spatial-only modeling of array data",
+    "venue": "Signal Processing",
+    "cited": 21,
+    "doi": "https://doi.org/10.1016/j.sigpro.2011.12.002"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "A Multi-Sources DOA Localization Method Based on UAV Cluster Systems",
+    "venue": "IEEE Transactions on Vehicular Technology",
+    "cited": 21,
+    "doi": "https://doi.org/10.1109/tvt.2023.3348507"
+  },
+  {
+    "tag": "array_cal",
+    "year": 1995,
+    "title": "Direction-of-arrival estimates in the presence of wavelength, gain, and phase errors",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 21,
+    "doi": "https://doi.org/10.1109/78.365302"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2017,
+    "title": "Dual polarization beamforming algorithm for multipath mitigation in GNSS",
+    "venue": "Signal Processing",
+    "cited": 21,
+    "doi": "https://doi.org/10.1016/j.sigpro.2017.03.012"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2014,
+    "title": "An energy efficient DOA estimation algorithm for uncorrelated and coherent signals in virtual MIMO systems",
+    "venue": "Telecommunication Systems",
+    "cited": 21,
+    "doi": "https://doi.org/10.1007/s11235-014-9886-3"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Adaptive cascaded high-resolution source localization based on collaboration of multi-UAVs",
+    "venue": "China Communications",
+    "cited": 20,
+    "doi": "https://doi.org/10.23919/jcc.2020.04.015"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2008,
+    "title": "A Tree Structure One-Dimensional Based Algorithm for Estimating the Two-Dimensional Direction of Arrivals and Its Performance Analysis",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 20,
+    "doi": "https://doi.org/10.1109/tap.2007.912945"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2018,
+    "title": "Efficient DOA estimation of noncircular signals in the presence of multipath propagation",
+    "venue": "Signal Processing",
+    "cited": 20,
+    "doi": "https://doi.org/10.1016/j.sigpro.2018.03.001"
+  },
+  {
+    "tag": "sparse",
+    "year": 2024,
+    "title": "Wideband DOA Estimation With Frequency Decomposition via a Unified GS-WSpSF Framework",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 20,
+    "doi": "https://doi.org/10.1109/taes.2024.3351793"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2019,
+    "title": "Two‐dimensional DOA estimation for multi‐path environments by accurate separation of signals using k ‐medoids clustering",
+    "venue": "IET Communications",
+    "cited": 20,
+    "doi": "https://doi.org/10.1049/iet-com.2018.5798"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2018,
+    "title": "DOA estimation based on compressed sensing with gain/phase uncertainties",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 20,
+    "doi": "https://doi.org/10.1049/iet-rsn.2018.5087"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2020,
+    "title": "A Gridless Wideband DOA Estimation Based On Atomic Norm Minimization",
+    "venue": "Proceedings of the IEEE Sensor Array and Multichannel Signal Processing Workshop",
+    "cited": 20,
+    "doi": "https://doi.org/10.1109/sam48682.2020.9104308"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2019,
+    "title": "Joint Doppler and DOA estimation using (Ultra-)Wideband FMCW signals",
+    "venue": "Signal Processing",
+    "cited": 20,
+    "doi": "https://doi.org/10.1016/j.sigpro.2019.107259"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2024,
+    "title": "Through the wall human heart beat detection using single channel CW radar",
+    "venue": "Frontiers in Physiology",
+    "cited": 20,
+    "doi": "https://doi.org/10.3389/fphys.2024.1344221"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Critical Review of Basic Methods on DoA Estimation of EM Waves Impinging a Spherical Antenna Array",
+    "venue": "Electronics",
+    "cited": 20,
+    "doi": "https://doi.org/10.3390/electronics11020208"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 1993,
+    "title": "Robust high-resolution direction-of-arrival estimation via signal eigenvector domain",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 19,
+    "doi": "https://doi.org/10.1109/48.262299"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2022,
+    "title": "Simplified Spatial Smoothing for DOA Estimation of Coherent Signals",
+    "venue": "IEEE Transactions on Circuits & Systems II Express Briefs",
+    "cited": 19,
+    "doi": "https://doi.org/10.1109/tcsii.2022.3214321"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2013,
+    "title": "A PARALIND Decomposition-Based Coherent Two-Dimensional Direction of Arrival Estimation Algorithm for Acoustic Vector-Sensor Arrays",
+    "venue": "Sensors",
+    "cited": 19,
+    "doi": "https://doi.org/10.3390/s130405302"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "Federated Multi-Task Learning For THZ Wideband Channel And DOA Estimation",
+    "venue": "IEEE International Conference on Acoustics, Speech, and Signal Processing Workshops (ICASSPW)",
+    "cited": 19,
+    "doi": "https://doi.org/10.1109/icasspw59220.2023.10193511"
+  },
+  {
+    "tag": "array_cal",
+    "year": 1993,
+    "title": "Self-calibration of linear equi-spaced (LES) arrays",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 19,
+    "doi": "https://doi.org/10.1109/icassp.1993.319110"
+  },
+  {
+    "tag": "spatial_smooth",
+    "year": 2017,
+    "title": "DOA Estimation of Coherent Signals on Coprime Arrays Exploiting Fourth-Order Cumulants",
+    "venue": "Sensors",
+    "cited": 19,
+    "doi": "https://doi.org/10.3390/s17040682"
+  },
+  {
+    "tag": "uav",
+    "year": 2021,
+    "title": "DOA Estimation Based on Weighted l1-norm Sparse Representation for Low SNR Scenarios",
+    "venue": "Sensors",
+    "cited": 19,
+    "doi": "https://doi.org/10.3390/s21134614"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2015,
+    "title": "Altitude measurement of low‐angle target in complex terrain for very high‐frequency radar",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 19,
+    "doi": "https://doi.org/10.1049/iet-rsn.2014.0544"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2016,
+    "title": "Altitude measurement of low elevation target in complex terrain based on orthogonal matching pursuit",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 19,
+    "doi": "https://doi.org/10.1049/iet-rsn.2016.0468"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2010,
+    "title": "Lessons Learnt: The Development of a Robust Multi-Antenna GNSS Receiver",
+    "venue": "elib (German Aerospace Center)",
+    "cited": 18,
+    "doi": null
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2015,
+    "title": "Parameter Estimation Based on Fractional Power Spectrum Density in Bistatic MIMO Radar System Under Impulsive Noise Environment",
+    "venue": "Circuits Systems and Signal Processing",
+    "cited": 18,
+    "doi": "https://doi.org/10.1007/s00034-015-0203-5"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Simultaneous Multi-User MIMO Communications and Multi-Target Tracking with Full Duplex Radios",
+    "venue": "IEEE Globecom Workshops (GC Wkshps)",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/gcwkshps56602.2022.10008533"
+  },
+  {
+    "tag": "sparse",
+    "year": 2014,
+    "title": "Joint Estimation of TOA and DOA in IR‐UWB System Using Sparse Representation Framework",
+    "venue": "ETRI Journal",
+    "cited": 18,
+    "doi": "https://doi.org/10.4218/etrij.14.0113.0555"
+  },
+  {
+    "tag": "sparse",
+    "year": 2013,
+    "title": "A new subband information fusion method for wideband DOA estimation using sparse signal representation",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/icassp.2013.6638413"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2015,
+    "title": "Compressed sensing techniques for altitude estimation in multipath conditions",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/taes.2015.130841"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Gridless Underdetermined DOA Estimation of Wideband LFM Signals With Unknown Amplitude Distortion Based on Fractional Fourier Transform",
+    "venue": "IEEE Internet of Things Journal",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/jiot.2020.2999812"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Position-Based Beamforming Design for UAV Communications in LTE Networks",
+    "venue": "International Conference on Communications",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/icc.2019.8761505"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2021,
+    "title": "Machine Learning-Based Direction-of-Arrival Estimation Exploiting Distributed Sparse Arrays",
+    "venue": "2018 52nd Asilomar Conference on Signals, Systems, and Computers",
+    "cited": 18,
+    "doi": "https://doi.org/10.1109/ieeeconf53345.2021.9723401"
+  },
+  {
+    "tag": "uav",
+    "year": 2025,
+    "title": "UAV-Mounted SIM: A Hybrid Optical-Electronic Neural Network for DoA Estimation",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 17,
+    "doi": "https://doi.org/10.1109/icassp49660.2025.10890179"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Interferometric Doppler Velocity Sonar for Low Bias Long Range Estimation of Speed Over Seabed",
+    "venue": "IEEE Journal of Oceanic Engineering",
+    "cited": 17,
+    "doi": "https://doi.org/10.1109/joe.2021.3130662"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2012,
+    "title": "Self-Contained Antenna Array Calibration using GNSS Signals",
+    "venue": "NAVIGATION Journal of the Institute of Navigation",
+    "cited": 17,
+    "doi": "https://doi.org/10.1002/navi.16"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Newtonized orthogonal matching pursuit-based compressive spherical beamforming in spherical harmonic domain",
+    "venue": "Mechanical Systems and Signal Processing",
+    "cited": 17,
+    "doi": "https://doi.org/10.1016/j.ymssp.2022.109263"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2019,
+    "title": "Joint direction of arrival estimation and array calibration for coprime MIMO radar",
+    "venue": "Digital Signal Processing",
+    "cited": 17,
+    "doi": "https://doi.org/10.1016/j.dsp.2019.07.002"
+  },
+  {
+    "tag": "sparse",
+    "year": 2023,
+    "title": "Super-resolution Direction of Arrival Estimation Using a Minimum Mean-Square Error Framework",
+    "venue": "Signal Processing",
+    "cited": 16,
+    "doi": "https://doi.org/10.1016/j.sigpro.2023.109164"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Some of Problems of Direction Finding of Ground-Based Radars Using Monopulse Location System Installed on Unmanned Aerial Vehicle",
+    "venue": "Sensors",
+    "cited": 16,
+    "doi": "https://doi.org/10.3390/s20185186"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "A Gain and Phase Autocalibration Approach for Large-Scale Planar Antenna Arrays",
+    "venue": "IEEE Communications Letters",
+    "cited": 16,
+    "doi": "https://doi.org/10.1109/lcomm.2020.3047050"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Gunshot Airborne Surveillance with Rotary Wing UAV-Embedded Microphone Array",
+    "venue": "Sensors",
+    "cited": 16,
+    "doi": "https://doi.org/10.3390/s19194271"
+  },
+  {
+    "tag": "uav",
+    "year": 2023,
+    "title": "Robust Sparse Recovery Based Vehicles Location Estimation in Intelligent Transportation System",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "cited": 16,
+    "doi": "https://doi.org/10.1109/tits.2023.3266703"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2021,
+    "title": "Time-Domain Wideband DOA Estimation Under the Convolutional Sparse Coding Framework",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 16,
+    "doi": "https://doi.org/10.1109/lsp.2021.3134554"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Signal-domain Kalman filtering: An approach for maneuvering target surveillance with wideband radar",
+    "venue": "Signal Processing",
+    "cited": 16,
+    "doi": "https://doi.org/10.1016/j.sigpro.2020.107724"
+  },
+  {
+    "tag": "tops",
+    "year": 2010,
+    "title": "Resolution Improvement of Wideband Direction-of-Arrival Estimation \"Squared-TOPS\"",
+    "venue": "International Conference on Communications",
+    "cited": 16,
+    "doi": "https://doi.org/10.1109/icc.2010.5502480"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Calibrating Nonuniform Linear Arrays With Model Errors Using a Source at Unknown Location",
+    "venue": "IEEE Communications Letters",
+    "cited": 15,
+    "doi": "https://doi.org/10.1109/lcomm.2020.3015083"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "Compressed Sampling for Spectrum Measurement and DOA Estimation With Array Cooperative MWC",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "cited": 15,
+    "doi": "https://doi.org/10.1109/tim.2023.3291780"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2021,
+    "title": "Wideband DOA Estimation Based on Deep Residual Learning With Lyapunov Stability Analysis",
+    "venue": "IEEE Geoscience and Remote Sensing Letters",
+    "cited": 15,
+    "doi": "https://doi.org/10.1109/lgrs.2021.3090408"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2018,
+    "title": "Polarization Smoothing Generalized MUSIC Algorithm with Polarization Sensitive Array for Low Angle Estimation",
+    "venue": "Sensors",
+    "cited": 15,
+    "doi": "https://doi.org/10.3390/s18051534"
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2024,
+    "title": "Experimental Evaluation of an SDR-Based UAV Localization System",
+    "venue": "Sensors",
+    "cited": 15,
+    "doi": "https://doi.org/10.3390/s24092789"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "Geometry-Based UAV MIMO Channel Modeling and Pattern Optimization for Multimode Antennas",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/tap.2022.3191418"
+  },
+  {
+    "tag": "uav",
+    "year": 2015,
+    "title": "Target modeling, antenna array design and conventional beamforming algorithms for radar target DOA estimation",
+    "venue": "International Conference on Transparent Optical Networks",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/icton.2015.7193501"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2002,
+    "title": "Fast algorithm for gain and phase error calibration of linear equi-spaced (LES) array",
+    "venue": "",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/icosp.2000.894527"
+  },
+  {
+    "tag": "uav",
+    "year": 2022,
+    "title": "Acoustic Estimation of the Direction of Arrival of an Unmanned Aerial Vehicle Based on Frequency Tracking in the Time-Frequency Plane",
+    "venue": "Sensors",
+    "cited": 14,
+    "doi": "https://doi.org/10.3390/s22114021"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2016,
+    "title": "Sparse source localization using perturbed arrays via bi-affine modeling",
+    "venue": "Digital Signal Processing",
+    "cited": 14,
+    "doi": "https://doi.org/10.1016/j.dsp.2016.06.004"
+  },
+  {
+    "tag": "uav",
+    "year": 2015,
+    "title": "MISSION-ORIENTED SENSOR ARRAYS AND UAVs – A CASE STUDY ON ENVIRONMENTAL MONITORING",
+    "venue": "The international archives of the photogrammetry, remote sensing and spatial information sciences/International archives of the photogrammetry, remote sensing and spatial information sciences",
+    "cited": 14,
+    "doi": "https://doi.org/10.5194/isprsarchives-xl-1-w4-305-2015"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2022,
+    "title": "Target Height Measurement under Complex Multipath Interferences without Exact Knowledge on the Propagation Environment",
+    "venue": "Remote Sensing",
+    "cited": 14,
+    "doi": "https://doi.org/10.3390/rs14133099"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2022,
+    "title": "Low-Complexity 2D DOA Estimation and Self-Calibration for Uniform Rectangle Array with Gain-Phase Error",
+    "venue": "Remote Sensing",
+    "cited": 14,
+    "doi": "https://doi.org/10.3390/rs14133064"
+  },
+  {
+    "tag": "sparse",
+    "year": 2015,
+    "title": "Wideband DOA estimation for uniform linear arrays based on the co-array concept",
+    "venue": "European Signal Processing Conference (EUSIPCO)",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/eusipco.2015.7362902"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2024,
+    "title": "Joint Spectrum Sensing and DOA Estimation Based on a Resource-Efficient Sub-Nyquist Array Receiver",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/tsp.2024.3487256"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2023,
+    "title": "A Novel DOA Estimation for Low-Elevation Target Method Based on Multiscattering Center Equivalent Model",
+    "venue": "IEEE Geoscience and Remote Sensing Letters",
+    "cited": 14,
+    "doi": "https://doi.org/10.1109/lgrs.2023.3242977"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "Improved Underwater Single-Vector Acoustic DOA Estimation via Vector Convolution Preprocessing",
+    "venue": "Electronics",
+    "cited": 14,
+    "doi": "https://doi.org/10.3390/electronics13091796"
+  },
+  {
+    "tag": "sparse",
+    "year": 2016,
+    "title": "DOA Estimation With Enhanced DOFs by Exploiting Cyclostationarity",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 13,
+    "doi": "https://doi.org/10.1109/tsp.2016.2645542"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2004,
+    "title": "A new calibration algorithm for smart antenna arrays",
+    "venue": "",
+    "cited": 13,
+    "doi": "https://doi.org/10.1109/vetecs.2003.1207783"
+  },
+  {
+    "tag": "sparse",
+    "year": 2019,
+    "title": "Multiband grid-free compressive beamforming",
+    "venue": "Mechanical Systems and Signal Processing",
+    "cited": 13,
+    "doi": "https://doi.org/10.1016/j.ymssp.2019.106425"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "Joint Direction-of-Arrival and Time-of-Arrival Estimation With Ultra-Wideband Elliptical Arrays",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 13,
+    "doi": "https://doi.org/10.1109/twc.2023.3268949"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2017,
+    "title": "Time-Delay estimation via CPD-GEVD applied to tensor-based GNSS arrays with errors",
+    "venue": "IEEE International Workshop on Computational Advances in Multi-Sensor Adaptive Processing",
+    "cited": 13,
+    "doi": "https://doi.org/10.1109/camsap.2017.8313098"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2023,
+    "title": "A 23–37-GHz Autonomous 2-D MIMO Receiver Array With Rapid Full-FoV Spatial Filtering for Unknown Interference Suppression",
+    "venue": "IEEE Transactions on Microwave Theory and Techniques",
+    "cited": 13,
+    "doi": "https://doi.org/10.1109/tmtt.2023.3275180"
+  },
+  {
+    "tag": "sparse",
+    "year": 2017,
+    "title": "Efficient sparse representation method for wideband DOA estimation using focusing operation",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 13,
+    "doi": "https://doi.org/10.1049/iet-rsn.2017.0061"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Calibrating nested sensor arrays for DOA estimation utilizing continuous multiplication operator",
+    "venue": "Signal Processing",
+    "cited": 13,
+    "doi": "https://doi.org/10.1016/j.sigpro.2020.107674"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2019,
+    "title": "DOA Estimation for Highly Correlated and Coherent Multipath Signals with Ultralow SNRs",
+    "venue": "International Journal of Antennas and Propagation",
+    "cited": 13,
+    "doi": "https://doi.org/10.1155/2019/2837315"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Wideband modal orthogonality: A New approach for broadband DOA estimation",
+    "venue": "Signal Processing",
+    "cited": 13,
+    "doi": "https://doi.org/10.1016/j.sigpro.2020.107696"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2020,
+    "title": "Fractional Fourier transform based underwater multi-targets direction-of-arrival estimation using wideband linear chirps",
+    "venue": "Applied Acoustics",
+    "cited": 13,
+    "doi": "https://doi.org/10.1016/j.apacoust.2020.107477"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2024,
+    "title": "Advancements in wideband source localization with an acoustic vector sensor line array",
+    "venue": "Ocean Engineering",
+    "cited": 13,
+    "doi": "https://doi.org/10.1016/j.oceaneng.2024.117882"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2008,
+    "title": "Adaptive beamspace focusing for direction of arrival estimation of wideband signals",
+    "venue": "Signal Processing",
+    "cited": 12,
+    "doi": "https://doi.org/10.1016/j.sigpro.2008.02.006"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2024,
+    "title": "Wideband 2-D DoA Estimation With Uniform Circular Array",
+    "venue": "IEEE Sensors Journal",
+    "cited": 12,
+    "doi": "https://doi.org/10.1109/jsen.2024.3368447"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2007,
+    "title": "Maximum Likelihood Processing for Arrays with Partially Unknown Sensor Gains and Phases",
+    "venue": "International Conference on ITS Telecommunications",
+    "cited": 12,
+    "doi": "https://doi.org/10.1109/itst.2007.4295858"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2008,
+    "title": "Local and global calibration for high-resolution doa estimation in automotive radar",
+    "venue": "Proceedings of the IEEE Sensor Array and Multichannel Signal Processing Workshop",
+    "cited": 12,
+    "doi": "https://doi.org/10.1109/sam.2008.4606826"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2003,
+    "title": "High-resolution broadband beamforming using a doubly-steered coherent signal-subspace approach",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 12,
+    "doi": "https://doi.org/10.1109/icassp.1988.197195"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "A Fourth-Order Cumulant-Based Multi-Sources DOA Estimation in UAV Collaborative Systems",
+    "venue": "IEEE Signal Processing Letters",
+    "cited": 12,
+    "doi": "https://doi.org/10.1109/lsp.2024.3349680"
+  },
+  {
+    "tag": "sparse",
+    "year": 2024,
+    "title": "Multipath DOA based MIMO beamforming receiver scheme for high-rate underwater acoustic communications",
+    "venue": "Applied Acoustics",
+    "cited": 12,
+    "doi": "https://doi.org/10.1016/j.apacoust.2024.109994"
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2024,
+    "title": "COFFEE: Covariance Fitting and Focusing for Wideband Direction-of-Arrival Estimation",
+    "venue": "IEEE Transactions on Signal Processing",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/tsp.2024.3441059"
+  },
+  {
+    "tag": "tops",
+    "year": 2004,
+    "title": "Direction-of-arrival Estimation of Wideband Sources Using Sensor Arrays",
+    "venue": "UPT. Syiah Kuala University Library (Syiah Kuala University)",
+    "cited": 11,
+    "doi": null
+  },
+  {
+    "tag": "wideband_sota",
+    "year": 2022,
+    "title": "Wireless Channel Analysis Between 25 and 40 GHz in an Intra-Wagon Environment for 5G Using a Ray-Tracing Tool",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/tits.2022.3199159"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2025,
+    "title": "Multimodal UAV Target Detection Method Based on Acousto-Optical Hybridization",
+    "venue": "Drones",
+    "cited": 11,
+    "doi": "https://doi.org/10.3390/drones9090627"
+  },
+  {
+    "tag": "sparse",
+    "year": 2013,
+    "title": "DOA estimation of wideband signals based on slice-sparse representation",
+    "venue": "EURASIP Journal on Advances in Signal Processing",
+    "cited": 11,
+    "doi": "https://doi.org/10.1186/1687-6180-2013-18"
+  },
+  {
+    "tag": "sparse",
+    "year": 2021,
+    "title": "An off-grid wideband DOA estimation method with the variational Bayes expectation-maximization framework",
+    "venue": "Signal Processing",
+    "cited": 11,
+    "doi": "https://doi.org/10.1016/j.sigpro.2021.108423"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2001,
+    "title": "Broadband vector channel sounder for MIMO channel measurement",
+    "venue": "",
+    "cited": 11,
+    "doi": "https://doi.org/10.1049/ic:20010207"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2014,
+    "title": "Direction Finding with Gain/Phase Errors and Mutual Coupling Errors in the Presence of Auxiliary Sensors",
+    "venue": "Mathematical Problems in Engineering",
+    "cited": 11,
+    "doi": "https://doi.org/10.1155/2014/429426"
+  },
+  {
+    "tag": "uav",
+    "year": 2018,
+    "title": "Enhanced Direction of Arrival Estimation via Received Signal Strength of Directional Antennas",
+    "venue": "IEEE International Symposium on Signal Processing and Information Technology (ISSPIT)",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/isspit.2018.8642668"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2016,
+    "title": "Angle Estimation and Self-calibration Method for Bistatic MIMO Radar with Transmit and Receive Array Errors",
+    "venue": "Circuits Systems and Signal Processing",
+    "cited": 11,
+    "doi": "https://doi.org/10.1007/s00034-016-0365-9"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2017,
+    "title": "Time-delay estimation via procrustes estimation and Khatri-Rao factorization for GNSS multipath mitigation",
+    "venue": "International Conference on Signal Processing and Communication Systems",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/icspcs.2017.8270464"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "A Novel DOA Estimation Method of Several Sources for 5G Networks",
+    "venue": "International Conference on Electrical, Communication, and Computer Engineering (ICECCE)",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/icecce49384.2020.9179306"
+  },
+  {
+    "tag": "tops",
+    "year": 2019,
+    "title": "Fast detection and DOA estimation of the unknown wideband signal sources",
+    "venue": "International Journal of Communication Systems",
+    "cited": 11,
+    "doi": "https://doi.org/10.1002/dac.3968"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2019,
+    "title": "Gain-phase errors calibration of nested array for underdetermined direction of arrival estimation",
+    "venue": "AEU - International Journal of Electronics and Communications",
+    "cited": 11,
+    "doi": "https://doi.org/10.1016/j.aeue.2019.06.008"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Cooperative Relative UAV Attitude Estimation Using DoA and RF Polarization",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 11,
+    "doi": "https://doi.org/10.1109/taes.2019.2952701"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2016,
+    "title": "Joint antenna-array calibration and direction of arrival estimation for automotive radars",
+    "venue": "Proceedings of the IEEE National Radar Conference",
+    "cited": 10,
+    "doi": "https://doi.org/10.1109/radar.2016.7485216"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2018,
+    "title": "Single-Site Positioning Method Based on High-Resolution Estimation in VANET Localization",
+    "venue": "IEEE Access",
+    "cited": 10,
+    "doi": "https://doi.org/10.1109/access.2018.2872754"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2014,
+    "title": "A Bayesian Compressive Sensing Vehicular Location Method Based on Three-Dimensional Radio Frequency",
+    "venue": "International Journal of Distributed Sensor Networks",
+    "cited": 10,
+    "doi": "https://doi.org/10.1155/2014/483613"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2011,
+    "title": "Vehicular MIMO SAR imaging in multipath environments",
+    "venue": "",
+    "cited": 10,
+    "doi": "https://doi.org/10.1109/radar.2011.5960684"
+  },
+  {
+    "tag": "uav",
+    "year": 2018,
+    "title": "Successive DSPE-based coherently distributed sources parameters estimation for unmanned aerial vehicle equipped with antennas array",
+    "venue": "Physical Communication",
+    "cited": 10,
+    "doi": "https://doi.org/10.1016/j.phycom.2018.11.012"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2010,
+    "title": "DOA estimation and self-calibration algorithm for nonuniform linear array",
+    "venue": "International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS)",
+    "cited": 10,
+    "doi": "https://doi.org/10.1109/ispacs.2010.5704752"
+  },
+  {
+    "tag": "sparse",
+    "year": 2025,
+    "title": "An Off-Grid DOA Estimation Method via Fast Variational Sparse Bayesian Learning",
+    "venue": "Electronics",
+    "cited": 10,
+    "doi": "https://doi.org/10.3390/electronics14142781"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2018,
+    "title": "Blind Calibration for Acoustic Vector Sensor Arrays",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 10,
+    "doi": "https://doi.org/10.1109/icassp.2018.8462035"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2000,
+    "title": "Space-time estimation techniques for UTRA system",
+    "venue": "International Conference on 3G Mobile Communication Technologies (3G)",
+    "cited": 10,
+    "doi": "https://doi.org/10.1049/cp:20000058"
+  },
+  {
+    "tag": "tops",
+    "year": 2009,
+    "title": "SLFM: A new DOA estimator for wideband signals",
+    "venue": "",
+    "cited": 9,
+    "doi": "https://doi.org/10.1109/icemi.2009.5274122"
+  },
+  {
+    "tag": "uav",
+    "year": 2019,
+    "title": "Robust direction of arrival estimation approach for unmanned aerial vehicles at low signal‐to‐noise ratios",
+    "venue": "IET Signal Processing",
+    "cited": 9,
+    "doi": "https://doi.org/10.1049/iet-spr.2018.5275"
+  },
+  {
+    "tag": "uav",
+    "year": 2025,
+    "title": "Genetic Algorithm-Based Acoustic Array Optimization for Estimating UAV DOA Using Beamforming",
+    "venue": "Drones",
+    "cited": 9,
+    "doi": "https://doi.org/10.3390/drones9020149"
+  },
+  {
+    "tag": "uav",
+    "year": 2025,
+    "title": "Conformal Time-Modulated Metasurface With Customized Optical Transparency for Direction of Arrival Estimation",
+    "venue": "IEEE Transactions on Antennas and Propagation",
+    "cited": 9,
+    "doi": "https://doi.org/10.1109/tap.2025.3560124"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2012,
+    "title": "Distribution of the uplink multipaths’ arrival delay and azimuth‐elevation arrival angle because of ‘bad urban’ scatterers distributed cylindrically above the mobile",
+    "venue": "Transactions on Emerging Telecommunications Technologies",
+    "cited": 9,
+    "doi": "https://doi.org/10.1002/ett.2530"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2020,
+    "title": "Exploiting Cellular Signals for Navigation: 4G to 5G",
+    "venue": "eScholarship (California Digital Library)",
+    "cited": 9,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 1989,
+    "title": "Direction of arrival measurements at UHF",
+    "venue": "Electronics Letters",
+    "cited": 9,
+    "doi": "https://doi.org/10.1049/el:19890715"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "Virtual Multiantenna Array for Estimating the DOA of a Transmitter in UAV-assisted Networks",
+    "venue": "IEEE International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)",
+    "cited": 9,
+    "doi": "https://doi.org/10.1109/pimrc48278.2020.9217056"
+  },
+  {
+    "tag": "uav",
+    "year": 2023,
+    "title": "A Direction-of-Arrival Estimation System for UAV-Assisted Search and Rescue: Locating Mobile Phones to Improve the Survival Chance of Disaster Victims",
+    "venue": "IEEE Microwave Magazine",
+    "cited": 9,
+    "doi": "https://doi.org/10.1109/mmm.2022.3226548"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2018,
+    "title": "Fast Estimation Method of Space-Time Two-Dimensional Positioning Parameters Based on Hadamard Product",
+    "venue": "International Journal of Antennas and Propagation",
+    "cited": 9,
+    "doi": "https://doi.org/10.1155/2018/7306902"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2018,
+    "title": "DOA estimation for low angle targets using time reversal in frequency domain model",
+    "venue": "Proceedings of the IEEE National Radar Conference",
+    "cited": 9,
+    "doi": "https://doi.org/10.1109/radar.2018.8378755"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2020,
+    "title": "A Novel Method for DOA and Time Delay Joint Estimation in Multipath OFDM Environment",
+    "venue": "International Journal of Antennas and Propagation",
+    "cited": 9,
+    "doi": "https://doi.org/10.1155/2020/3952175"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2006,
+    "title": "The coherent signal-subspace method based on combined information processing of pressure and particle velocity using the acoustic vector sensor array",
+    "venue": "",
+    "cited": 8,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2009,
+    "title": "Array processing for RFID tag localization exploiting multi-frequency signals",
+    "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+    "cited": 8,
+    "doi": "https://doi.org/10.1117/12.819956"
+  },
+  {
+    "tag": "uav",
+    "year": 2021,
+    "title": "Positional Perturbations Analysis for Micro-UAV Array With Relative Position-Based Formation",
+    "venue": "IEEE Communications Letters",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/lcomm.2021.3086676"
+  },
+  {
+    "tag": "uav",
+    "year": 2024,
+    "title": "Time-Varying Angle Estimation of Multiple Unresolved Extended Targets via Monopulse Radar",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/taes.2024.3379315"
+  },
+  {
+    "tag": "uav",
+    "year": 2020,
+    "title": "RFEye in the Sky",
+    "venue": "IEEE Transactions on Mobile Computing",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/tmc.2020.3038886"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2024,
+    "title": "Iterative Calibration and Direction-of-Arrival Estimation for Uniform Circular Arrays Affected by Mutual Coupling",
+    "venue": "IEEE Sensors Letters",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/lsens.2024.3392010"
+  },
+  {
+    "tag": "uav",
+    "year": 2002,
+    "title": "Smart antenna system design for airborne GSM base-stations",
+    "venue": "Proceedings of the IEEE Sensor Array and Multichannel Signal Processing Workshop",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/sam.2000.878045"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2023,
+    "title": "A New Gain-Phase Error Pre-Calibration Method for Uniform Linear Arrays",
+    "venue": "Sensors",
+    "cited": 8,
+    "doi": "https://doi.org/10.3390/s23052544"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2002,
+    "title": "A computationally efficient self-calibrating direction-of-arrival estimator",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/icassp.1994.389745"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2023,
+    "title": "Single-Sample Direction-of-Arrival Estimation for Fast and Robust 3D Localization With Real Measurements from a Massive MIMO System",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/icassp49357.2023.10096647"
+  },
+  {
+    "tag": "uav",
+    "year": 2014,
+    "title": "Kalman-based attitude estimation for an UAV via an antenna array",
+    "venue": "International Conference on Signal Processing and Communication Systems",
+    "cited": 8,
+    "doi": "https://doi.org/10.1109/icspcs.2014.7021136"
+  },
+  {
+    "tag": "tops",
+    "year": 2021,
+    "title": "PESO: Probabilistic evaluation of subspaces orthogonality for wideband DOA estimation",
+    "venue": "Multidimensional Systems and Signal Processing",
+    "cited": 7,
+    "doi": "https://doi.org/10.1007/s11045-020-00757-6"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Digital Beamforming on Receive Array Calibration: Application to a Persistent X-Band Surface Surveillance Radar",
+    "venue": "IEEE Sensors Journal",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/jsen.2020.3037781"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2015,
+    "title": "Modifying MVDR Beamformer for Reducing Direction-of-Arrival Estimation Mismatch",
+    "venue": "Arabian Journal for Science and Engineering",
+    "cited": 7,
+    "doi": "https://doi.org/10.1007/s13369-015-1825-4"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2009,
+    "title": "Method for array gain and phase uncertainties calibration based on ISM and ESPRIT",
+    "venue": "Journal of Systems Engineering and Electronics",
+    "cited": 7,
+    "doi": null
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Gain-Phase Errors Calibration for a Linear Array Based on Blind Signal Separation",
+    "venue": "Sensors",
+    "cited": 7,
+    "doi": "https://doi.org/10.3390/s20154233"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2025,
+    "title": "Robust DOA Estimation for Movable Antenna Arrays With Partial Gain and Phase Errors",
+    "venue": "IEEE Wireless Communications Letters",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/lwc.2025.3630221"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2018,
+    "title": "An improved gain-phase error self-calibration method for robust DOA estimation",
+    "venue": "International Journal of Microwave and Wireless Technologies",
+    "cited": 7,
+    "doi": "https://doi.org/10.1017/s1759078718001575"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2017,
+    "title": "Self-contained Antenna Crosstalk and Phase Offset Calibration by Jointly Solving the Attitude Estimation and Calibration Problem",
+    "venue": "Proceedings of the Satellite Division's International Technical Meeting (Online)/Proceedings of the Satellite Division's International Technical Meeting (CD-ROM)",
+    "cited": 7,
+    "doi": "https://doi.org/10.33012/2017.15382"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "A Practical Calibration Method of Linear UHF Yagi Arrays for Ship Target Detection Application",
+    "venue": "IEEE Access",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/access.2020.2978663"
+  },
+  {
+    "tag": "array_cal",
+    "year": 2020,
+    "title": "Joint Angle Estimation and Array Calibration Using Eigenspace in Monostatic MIMO Radar",
+    "venue": "IEEE Access",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/access.2020.2977221"
+  },
+  {
+    "tag": "tops",
+    "year": 2016,
+    "title": "A Channelization-Based DOA Estimation Method for Wideband Signals",
+    "venue": "Sensors",
+    "cited": 7,
+    "doi": "https://doi.org/10.3390/s16071031"
+  },
+  {
+    "tag": "tops",
+    "year": 2018,
+    "title": "2-D DOA Estimation of Coherent Wideband Signals with Auxiliary-Vector Basis",
+    "venue": "IEEE International Conference on Communications workshops",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/iccw.2018.8403682"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2022,
+    "title": "Misspecified Cramér-Rao Bound for Multipath Model in MIMO Radar",
+    "venue": "Proceedings of the IEEE Sensor Array and Multichannel Signal Processing Workshop",
+    "cited": 7,
+    "doi": "https://doi.org/10.1109/sam53842.2022.9827857"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2017,
+    "title": "Two-dimensional direction-of-arrival estimation of coherently distributed noncircular signals via symmetric shift invariance",
+    "venue": "Acta Physica Sinica",
+    "cited": 7,
+    "doi": "https://doi.org/10.7498/aps.66.220701"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2005,
+    "title": "Robust wideband DOA estimation",
+    "venue": "IEEE/SP Workshop on Statistical Signal Processing (SSP)",
+    "cited": 6,
+    "doi": "https://doi.org/10.1109/ssp.2005.1628606"
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2023,
+    "title": "Performance evaluation of measurement based GPS denied 3D drone localization and tracking",
+    "venue": "IEEE Wireless Communications and Networking Conference",
+    "cited": 6,
+    "doi": "https://doi.org/10.1109/wcnc55385.2023.10118816"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2006,
+    "title": "SPC04-4: Distribution of \"Bad Urban\" Uplink Multipaths' Arrival Delay & Azimuth-Elevation Arrival Angles, with Scatterers Distributed Cylindrically Above the Mobile",
+    "venue": "Globecom",
+    "cited": 6,
+    "doi": "https://doi.org/10.1109/glocom.2006.553"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2006,
+    "title": "Performance of Smart Antenna Systems for Signal Detection and Estimation in Multipath Fading Environment",
+    "venue": "",
+    "cited": 6,
+    "doi": "https://doi.org/10.1109/innovations.2006.301876"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2010,
+    "title": "Dynamics of Multipath Variations in Urban Environment",
+    "venue": "",
+    "cited": 6,
+    "doi": null
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2009,
+    "title": "Fast Coherent Signal Subspace-Based Method for Bearing and Range of Buried Objects Estimation in the Presence of Colored Noise",
+    "venue": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+    "cited": 6,
+    "doi": "https://doi.org/10.1109/jstars.2009.2038285"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2002,
+    "title": "Joint spatiotemporal parameter estimation for DS-CDMA system in fast fading multipath channel",
+    "venue": "",
+    "cited": 5,
+    "doi": "https://doi.org/10.1109/vetecs.2001.944797"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2008,
+    "title": "New method for DOA estimation for the MIMO radar in low-angle tracking environment",
+    "venue": "Journal of Xidian University",
+    "cited": 5,
+    "doi": null
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2018,
+    "title": "Subspace-based Joint DOA, Delay and DFO Estimation for GNSS Multipath Signals",
+    "venue": "Proceedings of the Satellite Division's International Technical Meeting (Online)/Proceedings of the Satellite Division's International Technical Meeting (CD-ROM)",
+    "cited": 5,
+    "doi": "https://doi.org/10.33012/2018.15992"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2022,
+    "title": "Joint Estimation for Time Delay and Direction of Arrival in Reconfigurable Intelligent Surface with OFDM",
+    "venue": "Sensors",
+    "cited": 5,
+    "doi": "https://doi.org/10.3390/s22187083"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2016,
+    "title": "A novel precise angle measurement for meter-wave radar based on multipath cancellation",
+    "venue": "CIE International Conference on Radar (RADAR)",
+    "cited": 5,
+    "doi": "https://doi.org/10.1109/radar.2016.8059354"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2025,
+    "title": "Hybrid Signal Fusion for Target Detection in Distributed PA-MIMO Radar Systems on Moving Platforms",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 5,
+    "doi": "https://doi.org/10.1109/taes.2025.3562169"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2024,
+    "title": "Wideband Digital Array DOA Estimation Method Based on SPS-TOPS in the Present of Mutual Coupling",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 5,
+    "doi": "https://doi.org/10.1109/taes.2024.3378198"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2015,
+    "title": "Multi-antenna techniques for NLoS and spoofing detection using vehicular real signal captures in urban and road environments",
+    "venue": "PORTO@Iris",
+    "cited": 5,
+    "doi": null
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2020,
+    "title": "Localization and Tracking Bees Using a Battery-less Transmitter and an Autonomous Unmanned Aerial Vehicle",
+    "venue": "IEEE MTT-S International Microwave Symposium digest",
+    "cited": 4,
+    "doi": "https://doi.org/10.1109/ims30576.2020.9223950"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 1994,
+    "title": "Autofocusing technique for adaptive coherent signal-subspace transformation beamformers",
+    "venue": "IEE Proceedings - Radar Sonar and Navigation",
+    "cited": 4,
+    "doi": "https://doi.org/10.1049/ip-rsn:19949883"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2022,
+    "title": "GNSS multipath suppression technology based on postcorrelation and independent component analysis",
+    "venue": "PLoS ONE",
+    "cited": 4,
+    "doi": "https://doi.org/10.1371/journal.pone.0267216"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2016,
+    "title": "Focusing Operators and Tracking Moving Wideband Sources",
+    "venue": "Journal of Telecommunications and Information Technology",
+    "cited": 4,
+    "doi": "https://doi.org/10.26636/jtit.2016.4.762"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2015,
+    "title": "Direction of Arrival Estimation Using a Cluster of Beams in a Cone-Shaped Digital Array Radar",
+    "venue": "Sensor Signal Processing for Defence (SSPD)",
+    "cited": 4,
+    "doi": "https://doi.org/10.1109/sspd.2015.7288500"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2007,
+    "title": "DSP Based Implementation of Direction of Arrival for Wideband Sources",
+    "venue": "Proceedings of the IEEE National Radar Conference",
+    "cited": 4,
+    "doi": "https://doi.org/10.1109/radar.2007.374263"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2012,
+    "title": "DOA estimation of wideband signal sources by using PM-CSM on real antenna array",
+    "venue": "",
+    "cited": 4,
+    "doi": "https://doi.org/10.1109/csqrwc.2012.6295009"
+  },
+  {
+    "tag": "tops",
+    "year": 2015,
+    "title": "DOA estimation of coherent wideband signals based on extended TOPS algorithm",
+    "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+    "cited": 4,
+    "doi": "https://doi.org/10.1117/12.2205640"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2019,
+    "title": "Optimized Sonar Broadband Focused Beamforming Algorithm",
+    "venue": "Algorithms",
+    "cited": 3,
+    "doi": "https://doi.org/10.3390/a12020033"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2011,
+    "title": "On Array Calibration Technique for Multipath Reference Waves",
+    "venue": "IEICE Transactions on Communications",
+    "cited": 3,
+    "doi": "https://doi.org/10.1587/transcom.e94.b.1201"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2005,
+    "title": "Coherent signal subspace wideband optimal beamforming for acoustic vector-sensor array",
+    "venue": "",
+    "cited": 3,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2006,
+    "title": "Array Signal Processing Approaches to Ultrasound-Based Arterial Pulse Wave Velocity Estimation",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icassp.2005.1416471"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2023,
+    "title": "An Improved DOA Algorithm for Wideband Coherent Signals",
+    "venue": "IEEE International Conference on Mechatronics and Automation (ICMA)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icma57826.2023.10215698"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2006,
+    "title": "An Algorithm Based on Linear Preprocessing for Meter-Wave Radars to a Target at Low Altitude",
+    "venue": "Dianzi xuebao",
+    "cited": 3,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2018,
+    "title": "Research on LTE Positoning Algorithm under Multipath Environment",
+    "venue": "IEEE International Conference on Signal Processing, Communications and Computing (ICSPCC)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icspcc.2018.8567820"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2015,
+    "title": "Comparison of different wideband DOA estimation methods",
+    "venue": "IEEE International Conference on Computational Intelligence and Computing Research (ICCIC)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/iccic.2015.7435822"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2010,
+    "title": "DOA estimation for wideband sources using cross correlation transformation",
+    "venue": "",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/wocc.2010.5510662"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2022,
+    "title": "Low-Elevation Target DOA Estimation Based on Multi-Scattering Center Equivalent Model",
+    "venue": "Remote Sensing",
+    "cited": 3,
+    "doi": "https://doi.org/10.3390/rs14153533"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2023,
+    "title": "Model Order Estimation in the Presence of Multipath Interference Using Residual Convolutional Neural Networks",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/twc.2023.3339803"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2009,
+    "title": "Wideband direction of arrival estimation based on fourth-order cumulants",
+    "venue": "International Conference on Communications, Circuits and Systems",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icccas.2009.5250418"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2002,
+    "title": "A novel algorithm for wideband DOA estimates based on neural network",
+    "venue": "",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icnn.1997.614242"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2010,
+    "title": "Bearing detection of noised wideband sources for geolocation",
+    "venue": "",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/med.2010.5547812"
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2025,
+    "title": "3D TDOA-AOA Quaternion Based Acoustic SLAM for Drone Localization and Source Mapping",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/icassp49660.2025.10888106"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2017,
+    "title": "A new sparse subspace method for wideband DOA estimation",
+    "venue": "MTS/IEEE OCEANS Conference (OCEANS)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/oceanse.2017.8085018"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2025,
+    "title": "Ultra-short baseline underwater localization algorithm based on wideband compressed sensing",
+    "venue": "Digital Signal Processing",
+    "cited": 3,
+    "doi": "https://doi.org/10.1016/j.dsp.2025.105525"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2015,
+    "title": "DOA estimation for coherent and incoherent wideband sources via sparse representation of the focused array covariance vectors",
+    "venue": "IEEE China Summit and International Conference on Signal and Information Processing (ChinaSIP)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/chinasip.2015.7230433"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2021,
+    "title": "Direction of arrival estimation of airborne multiple‐input multiple‐output radar in multipath environment",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 3,
+    "doi": "https://doi.org/10.1049/rsn2.12099"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2014,
+    "title": "DOA estimation of IR-UWB signals using coherent signal processing",
+    "venue": "IEEE International Colloquium on Signal Processing and its Applications (CSPA)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/cspa.2014.6805766"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2007,
+    "title": "“Bad urban” uplink multipaths’ distribution in azimuth-elevation DOA, with scatterers modeled as inside a cylinder above the mobile & as more sparse with height",
+    "venue": "IEEE Region 10 Conference (TENCON)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/tencon.2007.4429068"
+  },
+  {
+    "tag": "tops",
+    "year": 2011,
+    "title": "Multiband waveform synthesis and detection for a wideband MIMO radar",
+    "venue": "IEEE International Conference on Microwaves, Communications, Antennas and Electronic Systems (COMCAS)",
+    "cited": 3,
+    "doi": "https://doi.org/10.1109/comcas.2011.6105884"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2007,
+    "title": "New wideband DOA estimation algorithm for planar arrays",
+    "venue": "International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS)",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/ispacs.2007.4445827"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2016,
+    "title": "Testing of a Multi-Antenna GNSS Receiver in DLR's Maritime Jamming Testbed",
+    "venue": "elib (German Aerospace Center)",
+    "cited": 2,
+    "doi": null
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2003,
+    "title": "Auto-focusing and tracking techniques for enhancement of coherent signal-subspace methods",
+    "venue": "IEEE SP Workshop on Statistical Signal and Array Processing (SSAP)",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/ssap.1992.246773"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2023,
+    "title": "A New Way of the Wideband Coherent Signals DOA Estimation on the Uniform Circular Array",
+    "venue": "International Conference on Frontiers of Electronics, Information and Computation Technologies",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/icfeict59519.2023.00035"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2024,
+    "title": "Low angle estimation in MIMO radar based on unitary ESPRIT under spatial smoothing",
+    "venue": "IET Radar Sonar & Navigation",
+    "cited": 2,
+    "doi": "https://doi.org/10.1049/rsn2.12619"
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2023,
+    "title": "Impact of carrier frequency offset and phase noise on the steering vector for 3D drone localization based on angle of arrival (AOA)",
+    "venue": "",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/icspcs58109.2023.10261139"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2014,
+    "title": "Novel method for joint parameter estimation based on FPSD in wideband bistatic MIMO radar system",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "cited": 2,
+    "doi": null
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2012,
+    "title": "2-D direction of arrival estimation for wideband signals based on Y-shaped array",
+    "venue": "Ha'erbin gongye daxue xuebao",
+    "cited": 2,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2019,
+    "title": "Improved FBMC/OQAM uplink performance using an antenna array in a highly frequency selective fading channel",
+    "venue": "Microwave and Optical Technology Letters",
+    "cited": 2,
+    "doi": "https://doi.org/10.1002/mop.32005"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2002,
+    "title": "Further results on wideband sensor array processing using a laboratory array testbed",
+    "venue": "Conference proceedings",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/mwscas.1993.343012"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2002,
+    "title": "Direct design of focusing filters for wideband direction finding",
+    "venue": "International Conference on Acoustics, Speech, and Signal Processing",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/icassp.1990.116201"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2023,
+    "title": "Direction of Arrival Estimation and Highlighting Characteristics of Testing Wideband Echoes from Multiple Autonomous Underwater Vehicles",
+    "venue": "Sensors",
+    "cited": 2,
+    "doi": "https://doi.org/10.3390/s23198318"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2025,
+    "title": "Parametric MIMO-OFDM Channel Estimation: A Quasi Neural Network Approach",
+    "venue": "IEEE Transactions on Communications",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/tcomm.2025.3594785"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2013,
+    "title": "Direction of Arrival Estimation for Vehicle-to-Person Communication Using Steerable Antennas",
+    "venue": "IEEE Vehicular Technology Conference",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/vtcfall.2013.6692160"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2016,
+    "title": "Direction of arrival estimation in urban multipath environments",
+    "venue": "European Conference on Antennas and Propagation",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/eucap.2016.7481308"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2017,
+    "title": "Retracted: Issues and mitigation of attenuation and direction of arrival in wellness protocol to wireless sensors and networks based smart building",
+    "venue": "2017 International conference of Electronics, Communication and Aerospace Technology (ICECA)",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/iceca.2017.8212757"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2004,
+    "title": "Two Novel Methods for Wideband Source Localization in the Presence of Unknown Nonuniform Noise",
+    "venue": "Radar Science and Technology",
+    "cited": 2,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2011,
+    "title": "Estimation of DOAs of EM Waves Emitted from Multiple Partial Discharge Sources in Free Space by Using Wideband Signal Subspace Methods",
+    "venue": "Journal of International Council on Electrical Engineering",
+    "cited": 2,
+    "doi": "https://doi.org/10.5370/jicee.2011.1.4.384"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2005,
+    "title": "Time Domain Implementations Of The Coherent Signal-subspace Transformations",
+    "venue": "2018 52nd Asilomar Conference on Signals, Systems, and Computers",
+    "cited": 2,
+    "doi": "https://doi.org/10.1109/acssc.1988.754607"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2020,
+    "title": "Joint 2-D angles and time delay estimation of coherent wideband signals",
+    "venue": "MATEC Web of Conferences",
+    "cited": 1,
+    "doi": "https://doi.org/10.1051/matecconf/202030901006"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2010,
+    "title": "A method for wideband direction-of-Arrival estimation based on toeplitz matrix",
+    "venue": "International Conference on Computer, Mechatronics, Control and Electronic Engineering",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/cmce.2010.5609842"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2004,
+    "title": "Joint estimation of propagation delay and direction of arrival of multipath signals",
+    "venue": "",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/vetecs.2003.1207598"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2023,
+    "title": "Direction of Arrival Estimation of Coherent Wideband Sources Using Nested Array",
+    "venue": "Sensors",
+    "cited": 1,
+    "doi": "https://doi.org/10.3390/s23156984"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 1999,
+    "title": "Linear prediction methods for scattered sources",
+    "venue": "IEEE Vehicular Technology Conference (VTC)",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/vetecf.1999.797060"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2018,
+    "title": "Spatial Differencing Reconstruction Based Low-Angle DOA Estimation with MIMO Radar",
+    "venue": "Xibei Gongye Daxue Xuebao/Journal of Northwestern Polytechnical University",
+    "cited": 1,
+    "doi": "https://doi.org/10.1051/jnwpu/20183610182"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2017,
+    "title": "Two-Dimension Coherent Multipath DOA Estimation without Spatial Smoothing in Massive MIMO Systems",
+    "venue": "Globecom",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/glocom.2017.8254891"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2014,
+    "title": "Passive wideband source localization based on cylindrical focused beamforming in shallow water",
+    "venue": "",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/oceans.2014.7003006"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2021,
+    "title": "Direction‐of‐arrival estimation using estimator banks in low‐angle tracking for S‐band radar",
+    "venue": "Microwave and Optical Technology Letters",
+    "cited": 1,
+    "doi": "https://doi.org/10.1002/mop.33020"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2025,
+    "title": "A Hybrid Signal DOA Estimation Method for Long-Range Radar",
+    "venue": "Proceedings of the IEEE National Radar Conference",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/radarconf2559087.2025.11204939"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2018,
+    "title": "Benefit of Joint DOA and Delay Estimation with Application to Indoor Localization in WiFi and 5G",
+    "venue": "arXiv (Cornell University)",
+    "cited": 1,
+    "doi": "https://doi.org/10.48550/arxiv.1804.00486"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2010,
+    "title": "Robust likelihood function for blind mobile terminal localization",
+    "venue": "",
+    "cited": 1,
+    "doi": null
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2024,
+    "title": "Quasi Neural Network assisted Channel Estimation for MIMO-OFDM",
+    "venue": "IEEE International Conference on Communication Technology (ICCT)",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/icct62411.2024.10946332"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2007,
+    "title": "Decorrelation Performance of Spatial Smoothing Preprocessing at Transmitter in the Presence of Multipath Coherent Waves",
+    "venue": "IEICE Transactions on Communications",
+    "cited": 1,
+    "doi": "https://doi.org/10.1093/ietcom/e90-b.9.2297"
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2023,
+    "title": "A Robust Iterative Method for Wideband DoA Estimation with a Uniform Circular Array",
+    "venue": "International Conference on Communications",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/icc45041.2023.10279130"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2024,
+    "title": "A Subspace-based Spatial and Temporal Multipath Mitigation for GPS Signal in Dynamic Enviroment",
+    "venue": "International Conference on Signal Processing",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/icsp62129.2024.10846695"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2009,
+    "title": "Adaptive Clutter Suppression in Passive Phased Array Radar",
+    "venue": "",
+    "cited": 1,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2024,
+    "title": "Altitude Measurement of Low-Angle Target Using Beamspace Based on Deep Neural Network",
+    "venue": "International Conference on Information Communication and Signal Processing (ICICSP)",
+    "cited": 1,
+    "doi": "https://doi.org/10.1109/icicsp62589.2024.10809232"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2000,
+    "title": "An Experimental Study of the DOA Estimation Using the Fast DOA Algorithm in Urban Area",
+    "venue": "",
+    "cited": 1,
+    "doi": null
+  },
+  {
+    "tag": "csm_focus",
+    "year": 2022,
+    "title": "Efficient Wideband DoA Estimation with a Robust Iterative Method for Uniform Circular Arrays",
+    "venue": "arXiv (Cornell University)",
+    "cited": 1,
+    "doi": "https://doi.org/10.48550/arxiv.2210.16768"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2013,
+    "title": "The Bi-directional Spatial Spectrum for MIMO Radar and Its Applications",
+    "venue": "DukeSpace (Duke University)",
+    "cited": 1,
+    "doi": null
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2010,
+    "title": "Colocated MIMO radar using compressive sensing",
+    "venue": "",
+    "cited": 1,
+    "doi": "https://doi.org/10.17918/etd-3448"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2025,
+    "title": "Tensor Methods for DoD and DoA Estimation for Bistatic MIMO RADAR in VANET",
+    "venue": "Research Square",
+    "cited": 0,
+    "doi": "https://doi.org/10.21203/rs.3.rs-8102383/v1"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2025,
+    "title": "Target Parameter with Gridless Doppler Estimation Using Low-Resolution ADCs in Beam-Squinted THz ISAC System",
+    "venue": "",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/spawc66079.2025.11143479"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2000,
+    "title": "SUPERRESOLUTION MEASUREMENT AND SIMULATION OF MOBILE VECTOR RADIO CHANNELS",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2026,
+    "title": "Target Induced Angle Grid Regularized Estimation for Ghost Identification in Automotive Radar",
+    "venue": "arXiv (Cornell University)",
+    "cited": 0,
+    "doi": "https://doi.org/10.48550/arxiv.2602.11441"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2024,
+    "title": "Two dimensional DOA estimation method for meter wave MIMO radar based on sparse circular array under low altitude",
+    "venue": "International Conference on Frontiers of Artificial Intelligence and Machine Learning (FAIML)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1145/3653644.3689170"
+  },
+  {
+    "tag": "lowangle",
+    "year": 1990,
+    "title": "The Use of Propagation Modellin in MUSIC and Madmum Likelihood for Loxdngle Tracking.",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2017,
+    "title": "Wideband Subspace Estimation Through Projection Matrix Smoothing",
+    "venue": "arXiv (Cornell University)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2005,
+    "title": "SYS7: CENS Systems-Infrastructure Overview",
+    "venue": "eScholarship (California Digital Library)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2017,
+    "title": "Two new MODE-based algorithms for 2D DOA estimation in large scale antenna array systems",
+    "venue": "IEEE/CIC International Conference on Communications in China (ICCC)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/iccchina.2017.8330456"
+  },
+  {
+    "tag": "tops",
+    "year": 2020,
+    "title": "Wideband Direction of Arrival Estimation of Optimal Covariance Based on Modified Squared TOPS",
+    "venue": "International Conference on Intelligent Computation Technology and Automation",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icicta51737.2020.00098"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2013,
+    "title": null,
+    "venue": "Transactions on Emerging Telecommunications Technologies",
+    "cited": 0,
+    "doi": "https://doi.org/10.1002/ett.v24.2"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2026,
+    "title": "Source separation and direction-of-arrival estimation for signals overlapping in time and frequency with a single acoustic vector sensor",
+    "venue": "The Journal of the Acoustical Society of America",
+    "cited": 0,
+    "doi": "https://doi.org/10.1121/10.0046765"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2022,
+    "title": "DOA Estimation for Coherent Multipath Signals with Covariance Matrix Reconstruction in Hybrid Massive Circular Array",
+    "venue": "Lecture notes in electrical engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.1007/978-981-16-9909-2_10"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2016,
+    "title": "Dizilim kusurları, model uyuşmazlıkları ve çok-yollu yansımaların olduğu durumda yön bulma.",
+    "venue": "OpenMETU (Middle East Technical University)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2025,
+    "title": "Direction-of-Arrival Estimation Meets Machine Learning: Bridging Model-Based Signal Processing and Data-Driven Inference",
+    "venue": "International Conference on Artificial Intelligence and Computer Engineering (ICAICE)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icaice68195.2025.11382527"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2026,
+    "title": "Direction of Arrival Estimation Based on Low-Rank Matrix Processing",
+    "venue": "Journal of Marine Science and Engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.3390/jmse14191790"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2005,
+    "title": "Direction of arrival and time delay measurements for multi-path signals using five-port reflectometers",
+    "venue": "Digest - IEEE Antennas and Propagation Society. International Symposium",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/aps.2005.1551667"
+  },
+  {
+    "tag": "tops",
+    "year": 2008,
+    "title": "Different wideband direction of arrival (DOA) estimation methods: an overview",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2015,
+    "title": "Development of Interference Mitigation Schemes in 4G Technology Using Smart Antennas",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2026,
+    "title": "Detection-aided enhanced reweighted atomic norm minimization method for target localization in UAV swarms under multipath environments",
+    "venue": "Signal Processing",
+    "cited": 0,
+    "doi": "https://doi.org/10.1016/j.sigpro.2026.110848"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2026,
+    "title": "Deep Learning-Based Direction-of-Arrival Estimation in Automotive MIMO Radars under Multipath Propagation",
+    "venue": "Journal of the Russian Universities Radioelectronics",
+    "cited": 0,
+    "doi": "https://doi.org/10.32603/1993-8985-2026-29-4-62-71"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2007,
+    "title": "Decorrelation Performance of Spatial Smoothing Preprocessing at Transmitter in the Presence of Multipath Coherent Waves(Smart Antennas, 2006 International Symposium on Antennas and Propagation)",
+    "venue": "Institutional Repositories DataBase (IRDB)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 1999,
+    "title": "d-MUSIC : an algorithm for single snapshot direction-of-arrival estimation",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2018,
+    "title": "Computationally Efficient Two-dimensional-DOA Estimation for Massive MIMO Uplink",
+    "venue": "International Conference on Signal Processing",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icsp.2018.8652413"
+  },
+  {
+    "tag": "tops",
+    "year": 2026,
+    "title": "Comparative Study of Wideband 2D Direction-of-Arrival Estimation Methods on Uniform Circular Arrays under Complex Environments",
+    "venue": "Circuits Systems and Signal Processing",
+    "cited": 0,
+    "doi": "https://doi.org/10.1007/s00034-026-03511-8"
+  },
+  {
+    "tag": "tops",
+    "year": 2023,
+    "title": "DOA Estimation for Incoherent Wideband Signals with Low Signal-to-noise Ratio",
+    "venue": "IEEE International Conference on Mechatronics and Automation (ICMA)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icma57826.2023.10215898"
+  },
+  {
+    "tag": "drone_loc",
+    "year": 2026,
+    "title": "Closed-Form 3D TDOA-AOA Source Localization with Quaternions",
+    "venue": "IEEE International Conference on Acoustics Speech and Signal Processing",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icassp55912.2026.11460671"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2003,
+    "title": "Cellular Communications Channels",
+    "venue": "",
+    "cited": 0,
+    "doi": "https://doi.org/10.1002/0471219282.eot109"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2011,
+    "title": "Auto-calibration angle estimation algorithm for VHF radar in the presence of mutual coupling",
+    "venue": "Chinese Journal of Radio Science",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2003,
+    "title": "Array processing of wide band signals with computation reduction in coherent and incoherent environment",
+    "venue": "IEEE Region 10 Conference (TENCON)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/tencon.1992.271874"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2013,
+    "title": "An Improved Three - dimensional MIMO channel Model based on GBSBEM",
+    "venue": "Journal of Engineering Science and Technology Review",
+    "cited": 0,
+    "doi": "https://doi.org/10.25103/jestr.065.11"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2026,
+    "title": "An Efficient Method of Electromagnetic Transmitters Localization in Multipath Environment",
+    "venue": "Communications of International Proceedings",
+    "cited": 0,
+    "doi": "https://doi.org/10.5171/2025.4634425"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2026,
+    "title": "Advanced Methods for Angular-based and Multimodal Localization in GNSS-denied Environments",
+    "venue": "FreiDok plus (Universitätsbibliothek Freiburg)",
+    "cited": 0,
+    "doi": "https://doi.org/10.6094/unifr/285661"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2026,
+    "title": "A review of direction of arrival estimation based learning models for uniform linear arrays: Methods, challenges, and trends",
+    "venue": "Computers & Electrical Engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.1016/j.compeleceng.2026.111552"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2000,
+    "title": "A pragmatic approach to adaptive antennas and space-time adaptive processing (STAP)",
+    "venue": "",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/isape.2000.894853"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2025,
+    "title": "A Novel Spherical-Like Structure for Receiving Base Station Signals in Urban Environments",
+    "venue": "IEEE International Symposium on Antennas and Propagation and North American Radio Science Meeting (AP-S/URSI)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/ap-s/cnc-usnc-ursi55537.2025.11266160"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2002,
+    "title": "A Novel Approach for Joint Angle and Delay Estimation in DS-CDMA Systems",
+    "venue": "Dianzi xuebao",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2012,
+    "title": "A new DOA estimation for wideband signals",
+    "venue": "Journal of Circuits and Systems",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2023,
+    "title": "A Method of a Small-Sized Robotic System Direction Finding Using a Mobile Observer in Rugged Topography Conditions",
+    "venue": "Saint Petersburg International Conference on Integrated Navigation Systems",
+    "cited": 0,
+    "doi": "https://doi.org/10.23919/icins51816.2023.10168328"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2002,
+    "title": "A Direction-of-Arrival Estimation Algorithm of Coherent Multipath Signals in Time-Varying Mobile Channel",
+    "venue": "Systems engineering and electronics",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2005,
+    "title": "Channel Modeling and Direction-of-Arrival Estimation in Mobile Multiple-Antenna Communication Systems",
+    "venue": "Universiti Putra Malaysia Institutional Repository (Universiti Putra Malaysia)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2026,
+    "title": "DOA Estimation for Low-Angle Targets Using Time–Frequency Deep Learning",
+    "venue": "IEEE Access",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/access.2026.3724163"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2006,
+    "title": "DOA Estimation of Coherent Waves by Using Spatial Smoothing Preprocessings in Transmitter",
+    "venue": "Institutional Repositories DataBase (IRDB)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2011,
+    "title": "DoA estimation of complex coherent signals based on temporal smoothing and reconstruction of Toeplitz matrix",
+    "venue": "Journal of Computer Applications",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2007,
+    "title": "Short Data Record DoA and Timing Estimation in Multipath DS/CDMA Systems",
+    "venue": "Conference proceedings - Canadian Conference on Electrical and Computer Engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/ccece.2007.193"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2007,
+    "title": "Semi-Blind Two-Dimensional Code Acquisition In Cdma Communications",
+    "venue": "",
+    "cited": 0,
+    "doi": "https://doi.org/10.5281/zenodo.1057156"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2026,
+    "title": "Robust Wideband 2-D DOA Estimation for Compact Uniform Circular Arrays in Shallow Water Doubly Spread Channels",
+    "venue": "IEEE Access",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/access.2026.3727596"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2026,
+    "title": "Robust Low-Angle Tracking via Covariance Matrix Reconstruction and Bernoulli Filter in a Dynamic Multipath Environment",
+    "venue": "IEEE Transactions on Aerospace and Electronic Systems",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/taes.2026.3693212"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2017,
+    "title": "Retraction Notice: Issues and mitigation of attenuation and direction of arrival in wellness protocol to wireless sensors and networks based smart building",
+    "venue": "2017 International conference of Electronics, Communication and Aerospace Technology (ICECA)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/iceca40510.2017.10702641"
+  },
+  {
+    "tag": "tops",
+    "year": 2012,
+    "title": "Research on the wideband DOA estimation with test of orthogonality of subspace based on beamspace",
+    "venue": "Signal Processing",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2023,
+    "title": "Performance Comparison of Several Algorithms for Localization of Wideband Sources",
+    "venue": "Journal of Telecommunications and Information Technology",
+    "cited": 0,
+    "doi": "https://doi.org/10.26636/jtit.2023.3.1359"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2025,
+    "title": "Performance Comparison of Music, Root-Music, And Esprit Algorithms for DOA Estimation Under Rayleigh Fading Channels",
+    "venue": "International Research Journal on Advanced Engineering Hub (IRJAEH)",
+    "cited": 0,
+    "doi": "https://doi.org/10.47392/irjaeh.2025.0556"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2011,
+    "title": "Performance Analysis of Adaptive GPS Signal Detection in Urban Interference Environment using the Monte Carlo Approach",
+    "venue": "InTech eBooks",
+    "cited": 0,
+    "doi": "https://doi.org/10.5772/14757"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2012,
+    "title": "Online tracking of coherent signals over multiple-input multiple-output code division multiple access communication channel using JADE–Capon method in conjunction with iterative space–time lifting preprocessing scheme",
+    "venue": "IET Wireless Sensor Systems",
+    "cited": 0,
+    "doi": "https://doi.org/10.1049/iet-wss.2011.0065"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2011,
+    "title": "On Array Calibration Technique for Multipath Reference Waves (Paper : Special Section on Antenna and Propagation Technologies Contributing to Diversification of Wireless Technologies)",
+    "venue": "Institutional Repositories DataBase (IRDB)",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2014,
+    "title": "OFDM BASED RADCOM SYSTEM WITH IMPROVED PERFORMANCE USING DIGITAL BEAMFORMING TECHNIQUE",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "cited": 0,
+    "doi": "https://doi.org/10.5281/zenodo.3497779"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2013,
+    "title": "Multi hypothesis parameter tracking in relative time of arrival",
+    "venue": "",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/sdf.2013.6698252"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2026,
+    "title": "Model-Driven Deep Learning DOA Estimation Methods Based on Sparse Parameter Estimation: A Review",
+    "venue": "Applied and Computational Engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.54254/2755-2721/2026.gu33273"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2003,
+    "title": "Microscopic Propagation Mechanisms Extracted from Measured DoA Data in an Urban Macrocellular Environment",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2002,
+    "title": "Maximum likelihood angle extractor in the presence of sea-surface multipath",
+    "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+    "cited": 0,
+    "doi": "https://doi.org/10.1117/12.478539"
+  },
+  {
+    "tag": "tops",
+    "year": 2016,
+    "title": "Low Computational Complexity Direction-of-Arrival Estimation of Wideband Signal Sources Based on Squared TOPS",
+    "venue": "IEICE Transactions on Fundamentals of Electronics Communications and Computer Sciences",
+    "cited": 0,
+    "doi": "https://doi.org/10.1587/transfun.e100.a.219"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2026,
+    "title": "Localization of Transmitting Devices in Multipath Environment Using MUSIC And Neural Networks",
+    "venue": "Communications of International Proceedings",
+    "cited": 0,
+    "doi": "https://doi.org/10.5171/2025.4634525"
+  },
+  {
+    "tag": "delay_angle",
+    "year": 2009,
+    "title": "Joint TOA/AOA positioning algorithm for OFDM",
+    "venue": "Computer Engineering and Applications Journal",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2020,
+    "title": "Improvement of positioning accuracy by rotating and switching GNSS antenna in multipath environment",
+    "venue": "The Proceedings of Conference of Kanto Branch",
+    "cited": 0,
+    "doi": "https://doi.org/10.1299/jsmekanto.2020.16e02"
+  },
+  {
+    "tag": "tops",
+    "year": 2012,
+    "title": "Improved TOPS about direction of arrival estimation for wideband signals (EI CONFERENCE)",
+    "venue": "",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "tops",
+    "year": 2011,
+    "title": "Improved TOPS about Direction of Arrival Estimation for Wideband Signals",
+    "venue": "Applied Mechanics and Materials",
+    "cited": 0,
+    "doi": "https://doi.org/10.4028/www.scientific.net/amm.105-107.2051"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2009,
+    "title": "Improved Algorithm for Meter-wave Radars to Target at Low Altitude",
+    "venue": "Jisuanji fangzhen",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2001,
+    "title": "High-resolution iterative DOA algorithm for W-CDMA space-time receiver structures",
+    "venue": "Newcastle University ePrints (Newcastle Univesity)",
+    "cited": 0,
+    "doi": "https://doi.org/10.25405/ncl.34651944"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2025,
+    "title": "Hierarchical Optimization-Based DOA Estimation for Low-Elevation Target in MIMO Radar Over Irregular Terrain",
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/tim.2025.3638937"
+  },
+  {
+    "tag": "lowangle",
+    "year": 2010,
+    "title": "Height Finding of Meter-wave Radar with Mutual Coupling Present at Low-Angle Environment",
+    "venue": "Signal Processing",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "lowangle",
+    "year": 2019,
+    "title": "Frequency Diversity in Low-Altitude Target DOA Estimation",
+    "venue": "IEEE International Conference on Signal, Information and Data Processing (ICSIDP)",
+    "cited": 0,
+    "doi": "https://doi.org/10.1109/icsidp47821.2019.9172977"
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2007,
+    "title": "Estimation of spatial signature and direction of arrivals for signals in coherent multipath environment",
+    "venue": "Chinese Journal of Radio Science",
+    "cited": 0,
+    "doi": null
+  },
+  {
+    "tag": "coherent_mp",
+    "year": 2026,
+    "title": "Embedded Mixture-Correntropy Spatial Smoothing for Robust DOA Estimation in Shallow-Water Underwater Acoustics",
+    "venue": "Journal of Marine Science and Engineering",
+    "cited": 0,
+    "doi": "https://doi.org/10.3390/jmse14100957"
+  },
+  {
+    "tag": "doppler_doa",
+    "year": 2013,
+    "title": "Spatiotemporal arrayed MIMO radar",
+    "venue": "Spiral (Imperial College London)",
+    "cited": 0,
+    "doi": "https://doi.org/10.25560/12637"
+  },
+  {
+    "tag": "urban_mp",
+    "year": 2026,
+    "title": "АПАРАТНО-ПРОГРАМНА РЕАЛІЗАЦІЯ АЛГОРИТМУ MUSIC У СИСТЕМІ РАДІОПЕЛЕНГАЦІЇ KERBEROSSDR З ОПТИМІЗАЦІЄЮ ФАЗОВОЇ КОГЕРЕНТНОСТІ",
+    "venue": "Herald of Khmelnytskyi National University Technical sciences",
+    "cited": 0,
+    "doi": "https://doi.org/10.31891/2307-5732-2026-363-58"
+  }
+]

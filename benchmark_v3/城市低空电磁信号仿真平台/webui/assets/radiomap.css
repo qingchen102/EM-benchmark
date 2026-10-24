@@ -1,0 +1,22 @@
+/* 电磁态势图（Radio Map）叠加层样式。
+   单独成一个文件，是因为 webui/assets/style.css 是整份压在一行里的写法，
+   在它内部插入规则既难维护、也容易误伤。 */
+
+/* 侧栏说明框里的换行（note() 会传多行文本） */
+.info-box{white-space:pre-line}
+
+.rm-legend{position:absolute;left:14px;bottom:14px;z-index:6;width:238px;padding:10px 12px;
+  background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:9px;
+  box-shadow:0 6px 18px rgba(38,53,72,.13);font-size:11px;color:#49566a;pointer-events:none}
+.rm-legend[hidden]{display:none}
+.rm-legend-title{font-weight:600;margin-bottom:6px;color:#263548}
+.rm-legend-bar{height:11px;border-radius:5px;border:1px solid #dfe5ec}
+.rm-legend-scale{display:flex;justify-content:space-between;font-size:10px;color:#7b889c;margin-top:3px}
+.rm-legend-meta{margin-top:6px;font-size:10px;line-height:1.5;color:#7b889c}
+
+.rm-tooltip{position:absolute;z-index:8;min-width:152px;max-width:210px;padding:8px 10px;
+  background:rgba(23,33,48,.93);color:#fff;border-radius:8px;font-size:11px;line-height:1.5;
+  pointer-events:none;box-shadow:0 8px 22px rgba(23,33,48,.28)}
+.rm-tooltip[hidden]{display:none}
+.rm-tooltip strong{display:block;font-size:14px;margin-bottom:3px}
+.rm-tooltip span{display:block;color:#c3ccd8}

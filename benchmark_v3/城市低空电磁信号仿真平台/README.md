@@ -4,38 +4,56 @@
 
 ## 1. 启动 Web UI
 
-### 当前这台 Windows 机器
+### 推荐：一条命令启动（Linux / WSL）
 
-在本目录打开 PowerShell：
+在本目录执行：
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python -m pip install -e ".[web,test]"
-.\start_webui.ps1
+```bash
+bash start.sh
 ```
 
-浏览器打开 **http://127.0.0.1:8765**。也可以直接运行：
+`start.sh` 依次完成：挑选 Python 3.12+ → 复用已有的 `.venv-rt`（没有就创建）→ 缺依赖时按需安装 → 端口被占用时自动后移 → 打开浏览器。把整个目录复制到另一台机器后，只要有 Python 3.12+，这条命令同样可用。
 
-```powershell
-.\.venv\Scripts\python -m webui.server --port 8765
+| 参数 | 作用 |
+|---|---|
+| `--rt` | 创建 / 使用 `.venv-rt` 并安装 Sionna RT（RT 传播与电磁态势图必需） |
+| `--port 8765` | 指定端口，默认 8765；被占用时自动往后试 20 个 |
+| `--no-browser` | 只启动服务，不打开浏览器 |
+| `--recreate` | 删除已有虚拟环境后重建（环境曾建在别的路径时用它） |
+| `--env DIR` | 直接使用 `DIR/bin/python` |
+
+浏览器打开 **http://127.0.0.1:8765**。不要双击 `webui/index.html`：页面需要本地 API。Three.js 已随项目保存，页面无需 CDN 或地图服务 token。服务只监听本机回环地址，不是多人远程服务。
+
+### 本目录自带 `.venv-rt`：网页服务与 Sionna RT 在同一环境
+
+本目录附带 `.venv-rt`（Python 3.12 + FastAPI + Uvicorn + Sionna RT 2.1.0 + Mitsuba）。在该环境里启动服务时，服务进程能直接探测到可用的 Sionna RT，**RT 作业作为子进程在本机执行，不需要再经 WSL 桥接**：
+
+```bash
+cd <本目录>
+./.venv-rt/bin/python -m webui.server --port 8765
 ```
 
-不要双击 `webui/index.html`：页面需要本地 API。Three.js 已随项目保存，页面无需 CDN 或地图服务 token。服务只监听本机回环地址，不是多人远程服务。
+### Windows 侧只跑网页服务（RT 交给 WSL）
 
-当前机器的 RT 运行环境已在 WSL：`/root/.venvs/static-city-rf/bin/python`。网页服务在 Windows 运行，Sionna RT 作业自动交给该 WSL Python；自由空间和抽头作业使用网页服务自身的 Python。子进程显式加载**本目录的 src/cityrf**，不会导入原 Agent 的代码。只是复用环境中的已安装依赖，不依赖旧项目目录。
-
-如果使用其他 WSL 环境，启动网页服务前设置：
+Windows 只装网页依赖时，服务会把 Sionna RT 作业交给 WSL 中的 Python 执行。指定那个 Python：
 
 ```powershell
 $env:CITYRF_WSL_PYTHON = '/path/to/your/venv/bin/python'
 python -m webui.server
 ```
 
-RT 环境需要 Sionna RT 2.1.0、NumPy、SciPy、Pydantic 和 Matplotlib。缺少 RT 时明确报错，**不会改用自由空间伪装成功**。Windows 与 WSL 环境各自安装依赖；依赖检测结果显示在页面顶栏。
+Windows 侧的最小环境：
 
-### 新机器 / 独立 Linux、WSL 环境
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -e '.[web,test]'
+.\start_webui.ps1
+```
 
-基础环境要求 Python 3.12+。在 WSL 或 Linux 的本项目目录执行：
+子进程显式加载**本目录的 src/cityrf**，不会导入原 Agent 的代码；只是复用环境中的已安装依赖，不依赖旧项目目录。RT 环境需要 Sionna RT 2.1.0、NumPy、SciPy、Pydantic 和 Matplotlib。缺少 RT 时明确报错，**不会改用自由空间伪装成功**。依赖检测结果显示在页面顶栏。
+### 手动创建 RT 环境（`tools/setup_rt.sh`）
+
+`start.sh --rt` 已覆盖这条路径；需要显式控制时，基础环境要求 Python 3.12+，在 WSL 或 Linux 的本项目目录执行：
 
 ```bash
 bash tools/setup_rt.sh
@@ -64,6 +82,7 @@ LLVM CPU 后端是当前验证路径；CUDA 后端还需要可用的 CUDA/OptiX/
 6. **配置任务**：指定合作源、参与站点和保护频带。这决定公开元数据里允许包含哪些合作源先验。
 7. **校验与运行**：校验显示采样数、IQ 大小、DSP 内存估算和约束；运行生成独立目录，界面自动显示进度与日志。目前每个服务串行执行一个作业。
 8. **查看结果**：逐站 Welch PSD / 时频图、逐源链路真值、日志和文件下载。修改配置不会改写旧结果；结果区域明确显示所属运行。
+9. **算电磁态势图**：在「电磁态势图」面板设置测量高度与网格，点「计算电磁态势图」，结果以热力图叠加在 3D 地图上，鼠标悬停可读逐格数值（详见 §11）。
 
 “保存配置”保存到 `user_scenarios/`；“导出 JSON”下载到浏览器；“导入 JSON”先经过后端校验。完整 JSON 面板支持所有 schema 字段，点击“校验并应用”后生效。
 
@@ -80,9 +99,9 @@ LLVM CPU 后端是当前验证路径；CUDA 后端还需要可用的 CUDA/OptiX/
 
 | 项目 | 当前实现 |
 |---|---|
-| 时间 | 静态快照，0 < 时长 ≤ **500 ms**（`Propagation.duration_s` 校验上限 `le=0.5`）；不含运动、多普勒或长时流式 |
+| 时间 | 静态快照，0 < 时长 ≤ **500 ms**（`Propagation.duration_s` 校验上限 `le=0.5`）；不做长时流式，也没有轨迹级动态目标。发射源支持 `velocity_mps` 给出的**径向多普勒**（在信道卷积之后乘到信号上），但多径结构在整段时长内视为冻结 |
 | 源/站数量 | 1–32 个发射设备、1–16 个接收站 |
-| 波形 | tone、noise、BPSK、QPSK、FSK、OFDM、chirp；每源 1–16 成分 |
+| 波形 | **13 种**成分：原生 tone、noise、BPSK、QPSK、FSK、OFDM、chirp，加上 v2 基带 gfsk、16QAM、64QAM、OOK、FHSS、LFM；每源 1–16 成分 |
 | 发射端 | 单端口，各向同性、垂直极化；位置、朝向、平台 ID、名义功率 |
 | 阵列 | 默认 8+8 十字阵，共16通道；矩形阵最多16阵元；十字双臂必须偶数 |
 | 接收链 | 热噪声、噪声系数、温度、tanh软限幅、调谐、FIR滤波、固定增益 |
@@ -107,10 +126,16 @@ python simulate.py run --config examples/free_space.json --output runs/my_free_s
 python simulate.py analyze --public runs/my_free_space/capture/public --output runs/my_free_space/overview.json
 ```
 
-RT 使用具备对应依赖的 Python，例如当前机器：
+RT 使用具备对应依赖的 Python。在本目录的 `.venv-rt` 里直接运行：
+
+```bash
+./.venv-rt/bin/python -m cityrf run --config examples/three_scenes/case02.json --output runs/my_rt/capture
+```
+
+若 RT 装在 WSL、而调用发生在 Windows 侧，把命令交给那个 Python（路径换成自己的）：
 
 ```powershell
-wsl --cd '/mnt/c/ZJU/杂项/项目/低空安全电磁大模型/城市低空电磁信号仿真平台' --exec env 'PYTHONPATH=/mnt/c/ZJU/杂项/项目/低空安全电磁大模型/城市低空电磁信号仿真平台/src' /root/.venvs/static-city-rf/bin/python -m cityrf run --config examples/three_scenes/case02.json --output runs/my_rt/capture
+wsl --cd '<本目录的 WSL 路径>' --exec env 'PYTHONPATH=<本目录的 WSL 路径>/src' '<wsl-python>' -m cityrf run --config examples/three_scenes/case02.json --output runs/my_rt/capture
 ```
 
 请先激活本项目虚拟环境，或将 `python` 换成 `.venv/Scripts/python.exe`。`simulate.py` 强制使用本目录源码，避免系统中已安装的旧 `cityrf` 干扰；在独立虚拟环境中也可使用 `python -m cityrf`。
@@ -134,7 +159,7 @@ python -c "from webui.results import build_preview; build_preview('runs/my_rt/ca
 ## 5. 文件结构与迁移范围
 
 ```text
-src/cityrf/              仿真核心、公开观测、重放、审计
+src/cityrf/              仿真核心、公开观测、重放、审计、电磁态势图
   baselines/            检测、空间处理、定位、反射/多径及校验接口
   legacy/               已迁入的旧信号算法及 schema
 examples/               基础、三场景、复杂场景，以及 benchmark_v3/ 四档基准预设（D1–D4）
@@ -144,10 +169,13 @@ webui/
   server.py             FastAPI、配置/作业/下载接口
   worker.py             独立仿真作业入口
   results.py            从公开混合 IQ 生成 PSD/STFT
+  radiomap_worker.py    电磁态势图作业入口
+  radiomap_report.py    电磁态势图 PNG 渲染
   index.html            页面
   assets/               页面样式、脚本、真实网格与本地 Three.js
 runs/example_case*/      三组原有已验证仿真产物
 runs/run_*/              网页新作业、配置快照、日志与采集结果
+radio_maps/map_*/        电磁态势图作业（请求、载荷、NPZ、PNG、日志）
 tests/                  物理、数组、算法与 API 测试
 tools/                  环境安装、地图导出、诊断脚本
 docs/import_manifest.json 复制时的来源与 SHA256
@@ -221,7 +249,7 @@ RUN_RT_TESTS=1 python -m pytest -q tests/test_rt.py
 ```powershell
 python tools/build_city_scene.py --name hangzhou --bbox 30.270,120.120,30.278,120.130
 ```
-从 OSM Overpass 下载建筑轮廓、按 levels×3 m 拉伸成 LoD1 盒子，产出 `priors/<name>_geometry/scene.xml`（RT 用，ITU 混凝土材质）与 `webui/assets/<name>_mesh.*`（地图显示）。网页右上角下拉切换城市网格，**同时把 `Propagation.scene` 切到对应场景文件**。数据 © OpenStreetMap contributors (ODbL)。已内置杭州西湖东 1 km²（181 栋、3104 面）。
+从 OSM Overpass 下载建筑轮廓，高度优先取 `height` / `building:levels`，缺失部分按占地分层合成（低层 5–12 m / 多层 9–24 m / 大型 15–35 m / 4% 塔楼 40–120 m），拉伸成 LoD1 盒子，产出 `priors/<name>_geometry/scene.xml`（RT 用）与 `webui/assets/<name>_mesh.*`（地图显示）。网页右上角下拉切换城市网格，**同时把 `Propagation.scene` 切到对应场景文件**。数据 © OpenStreetMap contributors (ODbL)。已内置杭州（30.25–30.29°N / 120.145–120.19°E，约 4.4 km × 4.3 km）：3,737 栋、73,313 三角面，其中 25 栋带 OSM 真实高度；建筑与地面统一使用 `itu-radio-material concrete`。
 
 ## 10. 传播场景 / 射线深度 / 保护频带（2026-10 补充）
 
@@ -243,7 +271,35 @@ python tools/build_city_scene.py --name hangzhou --bbox 30.270,120.120,30.278,12
 - `priors/<name>_geometry/`：RT 场景（`scene.xml`、`mesh.npz`、`geometry.json`、`occupancy.npz`）；`webui/assets/<name>_mesh.*`：网页地图网格；
 - 新增预设 = 把合法的 Scenario JSON 放进 `examples/` 的任意子目录。`/api/bootstrap` 会对每个文件做 `Scenario` 校验，**校验失败的文件会被静默忽略**（下拉里看不到）——新增后请确认它出现在「示例场景」列表里，必要时用 `python simulate.py validate --config <文件>` 定位问题。
 
-## 11. 变更记录
-- **2026-10-14**：新增**逐发射源载频** `Emitter.carrier_hz`——自由空间后端按源自身载频算波长与路径损耗（`channels.FreeSpaceBackend`），`runner` 按 `(carrier_hz − 场景载频) + rf_offset_hz + doppler` 施加频移；Sionna RT 后端遇异载频源时**显式报错**（RT 一次只跑一个频率）。发射功率 schema 上限 80 → **130 dBm**（1 MW 级监视雷达可完整落入非线性区）。首个用例 d11「机场/起降场净空」：5.8 GHz 场景 + 1090 MHz 窗外强源（端口 +6 dBm），实测窗内底噪抬升 3.3 dB（前端压缩/互调）。
+## 11. 电磁态势图（Radio Map）
+
+「电磁态势图」把某个水平面上的**接收功率空间分布**算成一张图：测量面上的每个格点都被当成一个各向同性接收机，逐格求解信道，得到该点的路径增益。它只使用发射源——监测站不参与求解，只用于叠加显示。
+
+- 物理内核是 Sionna RT 自带的 `RadioMapSolver`，与逐径仿真共用同一套场景、材质与射线开关。
+- 三个指标：**路径增益 · 最佳源**（dB）、**接收信号强度 · 全部源**（dBm）、**信干噪比 · 最佳源**（dB）；另有「最强发射源归属」图，标明每格由哪个源主导。
+- 网页操作：在「电磁态势图」面板设置测量高度（地面覆盖用 1.5 m，低空走廊常用 30 / 60 / 120 m）、网格尺寸、平面范围（留空 = 覆盖整个场景）、每源射线采样数与最大交互深度，点「计算电磁态势图」。结果以热力图叠加在 3D 地图上，鼠标悬停可读逐格数值与最强源；图例给出色标与本次求解的元信息；结果可下载 PNG 与 NPZ。
+- 叠加方式：热力图是贴在测量高度上的一张水平面，低角度看过去会被不透明的建筑挡掉，所以结果区提供两个选项——**透视建筑**（默认：建筑画成半透明、不写深度、排到热力图之后绘制，城市轮廓与热力图同时可见）与**贴地**（建筑不透明，严格按几何遮挡显示）。
+- 接口：`POST /api/radio-maps`（body 为 `{"scenario": …, "radio_map": …}`）、`GET /api/radio-maps`、`GET /api/radio-maps/{id}`、`GET /api/radio-maps/{id}/files/{name}`；产物落在 `radio_maps/map_<时间戳>_<随机>/`。
+
+### 代价与取舍（慕尼黑场景实测）
+
+| 设置 | 求解耗时 | 有效格点 |
+|---|---|---|
+| 3 源 / 5 m / 全场景 / 每源 1e7 采样，进程内**首次** | 约 10.5 s | 36,005 / 71,632（50.3%） |
+| 同上，同一进程内**第二次** | 约 2.9 s | 同上 |
+
+- **射线数是唯一的成本旋钮**。网格从 10 m 加密到 2 m，耗时几乎不变；每源采样数从 1e6 提到 1e8 则近似线性上升。被建筑遮挡的格点需要更多采样才可能求得路径，所以覆盖率随采样数上升，但会在真遮挡处饱和。
+- 每个新进程的第一次求解还要额外付**导入 Sionna RT + 场景加速结构 + JIT 编译**的开销。网页作业每次都在新进程里跑，所以首次等待明显长于上表的 10.5 s（平台内实测有过一次约 53 s）。
+- 结果是**水平平面**。多高度切片可以叠加比较，但它不等于三维场。
+- 这张图**没有频率维**：它是功率的空间分布，不是频谱。称「覆盖图 / 电磁态势图」是准确的，称「频谱地图」会被追问。
+- 测量面在每个格点假设各向同性接收，与 §3 中逐径仿真使用的实际阵列不是同一个口径。
+
+### 算法侧用法
+
+`PlanarRadioMap` / `MeshRadioMap` 还提供按指标反采样位置的能力（`sample_positions` / `sample_cells`）：可以按路径增益或 SINR 的区间约束、最小间距生成空间分布可控的采样点，用于数据集合成。
+
+## 12. 变更记录
+- **2026-10-14**（本课题）：新增**逐发射源载频** `Emitter.carrier_hz`——自由空间后端按源自身载频算波长与路径损耗（`channels.FreeSpaceBackend`），`runner` 按 `(carrier_hz − 场景载频) + rf_offset_hz + doppler` 施加频移；Sionna RT 后端遇异载频源时**显式报错**（RT 一次只跑一个频率）。同时把发射功率 schema 上限从 80 dBm 提到 **130 dBm**（1 MW 级监视雷达可完整落入非线性区）。首个用例 d11「机场/起降场净空」：5.8 GHz 场景 + 1090 MHz 窗外强源（端口 +6 dBm），实测窗口内底噪抬升 3.3 dB（前端压缩/互调）。
+- **2026-10-14**：新增**电磁态势图（Radio Map）**——后端 `src/cityrf/radiomap.py`（请求模型、测量平面、天空可见性校验、指标聚合、NPZ/JSON 导出）、作业入口 `webui/radiomap_worker.py`、图件渲染 `webui/radiomap_report.py`（系统找不到中文字体时自动回退英文标签）、四个 `/api/radio-maps` 接口；前端新增「电磁态势图」面板、地图热力图叠加层、色标图例与悬停读数，叠加层样式独立放在 `webui/assets/radiomap.css`；新增跨机器启动脚本 `start.sh`。同时把 README 改为对外版本，并修正 §3 中波形数量（7 → **13**）与「不含多普勒」的表述。
 - **2026-10**：新增本课题四档基准数据集预设（`examples/benchmark_v3/`，D1–D4）；「传播场景」下拉补齐自定义城市场景、并与右上角城市网格双向联动，修复「切换传播场景看起来没有反应」；为 `scene` 三义、`max_depth`、`Task` 保护频带补页面提示与 §10 说明；更正时长上限（50 ms → **500 ms**）与辐射体数量（16 → **19 类**）。
 - **2026-10-11**：① 网格联动改成"说真话"——旧实现只在条件全部满足时才 `load`，不满足时静默跳过却照样 toast「已切换」，现在缺网格/加载失败都会显式提示，并用 `loadedMesh` 记住真正加载过的网格（失败不置位，下次仍会重试）；② `/`、`/index.html`、`/api/bootstrap` 三个响应都加 `Cache-Control: no-store, must-revalidate` + `Pragma: no-cache`，`index.html` 里脚本版本提升到 `?v=hz5`——旧壳页会被浏览器缓存，导致"改了页面却看不到变化"的假故障；③ D2 演示样本从 `d2_00000`（设备全落空地）换成 `d2_00017`（落在密集街区，四站均有真实多径），四个预设名字里都带上样本号；④ 上述联动逻辑有零依赖自测 `webui/_check_scene_switch.mjs`（`node webui/_check_scene_switch.mjs`，18 项断言）。

@@ -2,9 +2,17 @@ import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 
 const colors={communication:0x367bf0,interference:0xe98942,background:0x8a78cd,receiver:0x129e87};
+// 与后端 cityrf.radiomap.RAMP_STOPS 保持一致，保证网页热力图与导出 PNG 同色。
+export const RAMP_STOPS=[[0.19,0.07,0.23],[0.27,0.31,0.71],[0.10,0.60,0.79],[0.10,0.84,0.60],[0.55,0.94,0.27],[0.93,0.79,0.20],[0.97,0.50,0.13],[0.80,0.16,0.08],[0.48,0.02,0.01]];
+export function rampColor(t){
+ const x=Math.max(0,Math.min(1,t))*(RAMP_STOPS.length-1);
+ const i=Math.min(Math.floor(x),RAMP_STOPS.length-2),f=x-i,a=RAMP_STOPS[i],b=RAMP_STOPS[i+1];
+ return [Math.round((a[0]+(b[0]-a[0])*f)*255),Math.round((a[1]+(b[1]-a[1])*f)*255),Math.round((a[2]+(b[2]-a[2])*f)*255)];
+}
+export function rampCss(t){const [r,g,b]=rampColor(t);return `rgb(${r},${g},${b})`;}
 export class SceneMap{
  constructor(container,onSelect,onMove){
-  this.el=container;this.onSelect=onSelect;this.onMove=onMove;this.mode='3d';this.items=[];this.showLinks=false;this.showLabels=true;
+  this.el=container;this.onSelect=onSelect;this.onMove=onMove;this.mode='3d';this.items=[];this.showLinks=false;this.showLabels=true;this.radioMap=null;this.radioMapData=null;this.radioMapMode='ghost';
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#edf1f6');
   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});this.renderer.setPixelRatio(Math.min(devicePixelRatio,2));container.append(this.renderer.domElement);
   this.renderer.outputColorSpace=THREE.SRGBColorSpace;
@@ -26,6 +34,7 @@ export class SceneMap{
   this.renderer.setAnimationLoop(()=>{this.controls.update();for(const o of this.devices.children){if(o.isSprite){const unit=this.camera.isPerspectiveCamera?2*this.camera.position.distanceTo(o.position)*Math.tan(this.camera.fov*Math.PI/360)/this.el.clientHeight:(this.camera.top-this.camera.bottom)/this.camera.zoom/this.el.clientHeight;o.scale.set(110*unit,24*unit,1);}}this.renderer.render(this.scene,this.camera)});
  }
  async load(meshId='munich'){
+  this.clearRadioMap();
   const [meta,buffer]=await Promise.all([fetch(`/assets/${meshId}_mesh.json`).then(r=>r.json()),fetch(`/assets/${meshId}_mesh.bin`).then(r=>r.arrayBuffer())]);
   const raw=new Float32Array(buffer),filtered=[];
   // Preserve all non-ground triangles, using the original world coordinates.
@@ -80,6 +89,71 @@ export class SceneMap{
    if(rx){const [yaw,pitch,roll]=d.orientation_rad;const dir=new THREE.Vector3(1,0,0).applyEuler(new THREE.Euler(roll,pitch,yaw,'ZYX'));this.devices.add(new THREE.ArrowHelper(dir,pos,27,col,6,3));}
   });
   if(this.showLinks)for(const tx of config.emitters)for(const rx of config.receivers){const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...tx.position_m),new THREE.Vector3(...rx.position_m)]),new THREE.LineDashedMaterial({color:0x91a5c4,dashSize:5,gapSize:4,transparent:true,opacity:.5}));line.computeLineDistances();this.links.add(line);}
+ }
+ setRadioMap(payload,metric){
+  this.clearRadioMap();
+  if(!payload||!payload.metrics||!payload.metrics[metric])return false;
+  const g=payload.grid,m=payload.metrics[metric],nx=g.nx,ny=g.ny,cell=g.cell_size_m;
+  if(!nx||!ny)return false;
+  const vmin=m.vmin===null?-140:m.vmin,vmax=m.vmax===null?-40:m.vmax,span=Math.max(vmax-vmin,1e-6);
+  const pixels=new Uint8Array(nx*ny*4);
+  for(let i=0;i<nx*ny;i++){
+   const v=m.data[i],p=i*4;
+   if(v===null||v===undefined||!Number.isFinite(v)){pixels[p+3]=0;continue}
+   const [r,gc,b]=rampColor((v-vmin)/span);
+   pixels[p]=r;pixels[p+1]=gc;pixels[p+2]=b;pixels[p+3]=214;
+  }
+  const texture=new THREE.DataTexture(pixels,nx,ny,THREE.RGBAFormat);
+  texture.flipY=false;texture.magFilter=THREE.LinearFilter;texture.minFilter=THREE.LinearFilter;
+  texture.colorSpace=THREE.SRGBColorSpace;texture.needsUpdate=true;
+  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(nx*cell,ny*cell),
+   new THREE.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false,side:THREE.DoubleSide}));
+  const [ox,oy]=g.origin_xy_m;
+  mesh.position.set(ox+nx*cell/2,oy+ny*cell/2,g.height_m);
+  mesh.renderOrder=6;
+  mesh.userData={radioMap:true};
+  this.radioMap=mesh;
+  this.radioMapData={payload,metric,nx,ny,cell,origin:g.origin_xy_m,height:g.height_m};
+  this.scene.add(mesh);
+  this.applyOverlayStyle();
+  return true;
+ }
+ clearRadioMap(){
+  if(this.radioMap){
+   this.scene.remove(this.radioMap);
+   this.radioMap.geometry.dispose();
+   this.radioMap.material.map?.dispose();
+   this.radioMap.material.dispose();
+   this.radioMap=null;this.radioMapData=null;
+  }
+  this.applyOverlayStyle();
+ }
+ toggleRadioMap(on){if(this.radioMap)this.radioMap.visible=on;this.applyOverlayStyle();}
+ setRadioMapMode(mode){this.radioMapMode=mode==='ground'?'ground':'ghost';this.applyOverlayStyle();}
+ applyOverlayStyle(){
+  // 热力图是贴在测量高度上的一张水平面：建筑不透明时，低角度看过去会被楼挡掉。
+  // 「透视建筑」把建筑改成半透明、不写深度、并排到热力图之后绘制，
+  // 于是热力图完整可见、城市轮廓也还在；「贴地」恢复严格遮挡。
+  const on=!!(this.radioMap&&this.radioMap.visible),ghost=on&&this.radioMapMode==='ghost';
+  if(this.buildings){
+   const b=this.buildings.material;
+   b.transparent=ghost;b.opacity=ghost?0.25:1;b.depthWrite=!ghost;b.needsUpdate=true;
+   this.buildings.renderOrder=ghost?8:0;
+  }
+  if(this.edges){this.edges.material.opacity=ghost?0.4:0.3;this.edges.renderOrder=ghost?9:0;}
+ }
+ toggleRadioMap(on){if(this.radioMap)this.radioMap.visible=on;}
+ pickRadioMap(e){
+  const d=this.radioMapData;
+  if(!d||!this.radioMap||!this.radioMap.visible)return null;
+  this.projectPointer(e);
+  const hit=this.ray.intersectObject(this.radioMap,false)[0];
+  if(!hit)return null;
+  const col=Math.floor((hit.point.x-d.origin[0])/d.cell),row=Math.floor((hit.point.y-d.origin[1])/d.cell);
+  if(col<0||row<0||col>=d.nx||row>=d.ny)return null;
+  const i=row*d.nx+col,metric=d.payload.metrics[d.metric],txIndex=d.payload.association.data[i];
+  return {x:hit.point.x,y:hit.point.y,row,col,value:metric.data[i],unit:metric.unit,label:metric.label,
+          txId:(txIndex===null||txIndex===undefined)?null:d.payload.association.tx_ids[txIndex]};
  }
  toggleBuildings(on){if(this.buildings)this.buildings.visible=on;if(this.edges)this.edges.visible=on;}
 }

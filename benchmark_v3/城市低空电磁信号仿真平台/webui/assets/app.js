@@ -1,7 +1,13 @@
-import {SceneMap} from './map.js?v=hz4';
+import {SceneMap,rampCss,RAMP_STOPS} from './map.js?v=hz7';
 import {plot} from './charts.js';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],clone=o=>structuredClone(o);
 let config,boot,selected={type:'global'},currentRun=null,resultTab='spectra',poll=null,runData=null,toastTimer;
+// —— 电磁态势图（Radio Map）状态 ——
+let radioJob=null,radioPayload=null,radioMetric='path_gain',radioPoll=null,radioStatusShown=null,radioHistory=[],radioHistoryLoaded=false,radioOverlayMode='ghost';
+const RM_STATUS={queued:'排队中',running:'计算中',complete:'已完成',failed:'失败',interrupted:'已中断'};
+const radioSpec={height_m:1.5,cell_size_m:5,size_m:null,samples_per_tx:10000000,max_depth:3,
+ los:true,specular_reflection:true,diffuse_reflection:false,refraction:false,diffraction:false,
+ metrics:['path_gain','rss','sinr']};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),5000);}
 async function api(path,data){const r=await fetch('/api/'+path,data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const json=await r.json();if(!r.ok)throw Error(typeof json.detail==='string'?json.detail:JSON.stringify(json.detail));return json;}
@@ -74,9 +80,10 @@ function button(parent,text,fn,cls=''){const b=document.createElement('button');
 function note(parent,text){const n=document.createElement('div');n.className='info-box';n.textContent=text;parent.append(n);}
 function renderInspector(){
  const form=$('#inspector-form');form.replaceChildren();const {type,index}=selected;
- const title={global:'全局采集参数',propagation:'信道与传播',emitters:'发射源属性',receivers:'监测站属性',tasks:'任务与保护频带',json:'完整 JSON 配置'}[type];$('#inspector-title').textContent=title;
- $('#inspector-description').textContent=type==='emitters'?'一个物理发射设备可以叠加多个波形成分。':type==='receivers'?'位置与朝向均写入观测元数据。':type==='propagation'?'显示范围不裁剪传播网格；RT 使用完整地图。':'编辑后请校验；每次运行保存独立配置快照。';
+ const title={global:'全局采集参数',propagation:'信道与传播',radiomap:'电磁态势图',emitters:'发射源属性',receivers:'监测站属性',tasks:'任务与保护频带',json:'完整 JSON 配置'}[type];$('#inspector-title').textContent=title;
+ $('#inspector-description').textContent=type==='emitters'?'一个物理发射设备可以叠加多个波形成分。':type==='receivers'?'位置与朝向均写入观测元数据。':type==='propagation'?'显示范围不裁剪传播网格；RT 使用完整地图。':type==='radiomap'?'在指定高度的水平面上逐格求解信道，得到功率的空间分布；结果直接叠在地图上。':'编辑后请校验；每次运行保存独立配置快照。';
  if(type==='global'){for(const k of ['name','seed','carrier_frequency_hz','sample_rate_hz','duration_s','max_working_mb'])field(form,config,k);note(form,'当前窗口采样点数 = 采样率 × 观测时长。例如 2 MS/s × 50 ms = 100000 点；跳频默认驻留只有几十个样点，窗口太短会看不到跳变，可把时长加到 100–500 ms。');}
+ if(type==='radiomap')renderRadioMapPanel(form);
  if(type==='propagation'){
   for(const k of ['backend','scene','rt_variant','max_depth','samples_per_src','max_num_paths_per_src','los','specular_reflection','diffuse_reflection','refraction','diffraction'])field(form,config.propagation,k);
   group(form,'指定抽头后端参数',config.propagation,['tap_delays_s','tap_gains_real','tap_gains_imag']);note(form,'地图上的虚线只表示 TX/RX 配对，不代表求得的射线路径。RT 端点需在地图范围内且无遮挡天空。');
@@ -128,6 +135,146 @@ function renderInspector(){
   button(form,'校验并应用 JSON',()=>attempt(async()=>{const data=await api('validate',JSON.parse(ta.value));config=data.config;refresh(true);toast('JSON 已校验并应用')}),'primary');note(form,'完整编辑入口与表单使用相同 Scenario schema。未知字段、非法带宽、重复 ID 会被后端拒绝。');
  }
 }
+function rmNumber(parent,key,title,hint,scale=1,min=null){
+ const label=document.createElement('label');label.className='form-field';
+ const span=document.createElement('span');span.textContent=title;label.append(span);
+ const input=document.createElement('input');input.type='number';input.step='any';
+ input.value=+(radioSpec[key]*scale).toPrecision(10);
+ input.onchange=()=>{const v=Number(input.value)/scale;
+  if(Number.isFinite(v)&&(min===null?v>0:v>=min))radioSpec[key]=v;
+  else input.value=+(radioSpec[key]*scale).toPrecision(10)};
+ label.append(input);
+ if(hint){const s=document.createElement('small');s.textContent=hint;label.append(s)}
+ parent.append(label);return input;
+}
+function rmToggle(parent,key,title){
+ const label=document.createElement('label');label.className='form-field check';
+ const span=document.createElement('span');span.textContent=title;label.append(span);
+ const input=document.createElement('input');input.type='checkbox';input.checked=radioSpec[key];
+ input.onchange=()=>{radioSpec[key]=input.checked};
+ label.append(input);parent.append(label);
+}
+function renderRadioMapPanel(form){
+ if(!radioHistoryLoaded){radioHistoryLoaded=true;attempt(async()=>{radioHistory=await api('radio-maps');if(selected.type==='radiomap')renderInspector()})}
+ note(form,'电磁态势图（Radio Map）在给定高度的水平面上逐格求解信道，给出功率的空间分布。它只使用发射源——测量面上的每个格点本身就是接收位置，监测站不参与求解。');
+ const plane=document.createElement('section');plane.className='form-group';
+ const ph=document.createElement('h3');ph.textContent='测量平面';plane.append(ph);
+ rmNumber(plane,'height_m','测量高度 · m','地面覆盖用 1.5 m；低空走廊常用 30 / 60 / 120 m。',1,-1000);
+ rmNumber(plane,'cell_size_m','网格尺寸 · m','分辨率几乎不影响求解耗时；越细，网页渲染与传输越重。');
+ const size=document.createElement('label');size.className='form-field';
+ const sspan=document.createElement('span');sspan.textContent='平面尺寸 · m';size.append(sspan);
+ const sbox=document.createElement('div');sbox.className='tuple';
+ const sIn=[];
+ for(const n of ['X','Y']){
+  const l=document.createElement('label');l.textContent=n;
+  const input=document.createElement('input');input.type='number';input.step='any';input.placeholder='整景';
+  if(radioSpec.size_m)input.value=+(radioSpec.size_m[sIn.length]).toPrecision(8);
+  sIn.push(input);l.append(input);sbox.append(l);
+ }
+ const syncSize=()=>{const a=Number(sIn[0].value),b=Number(sIn[1].value);
+  if(sIn[0].value===''&&sIn[1].value==='')radioSpec.size_m=null;
+  else if(Number.isFinite(a)&&a>0&&Number.isFinite(b)&&b>0)radioSpec.size_m=[a,b];
+  else toast('平面尺寸需要两个正数，或都留空表示整个场景')};
+ sIn.forEach(i=>i.onchange=syncSize);
+ size.append(sbox);const shint=document.createElement('small');shint.textContent='留空 = 覆盖整个场景，以场景中心为中心。';size.append(shint);
+ plane.append(size);
+rmNumber(plane,'samples_per_tx','每源射线采样数','射线数是唯一的成本旋钮：采样越多，被建筑遮挡的格点越可能求出路径，耗时也线性上升。每个新进程的第一次求解还要额外付导入与 JIT 编译开销（实测 3 源 / 5 m / 全场景：首次约 10 s 起，同一进程内再算约 3 s）。',1);
+ rmNumber(plane,'max_depth','最大交互深度','每条射线最多与建筑交互几次；0 = 只算直达。',1,0);
+ form.append(plane);
+ const flags=document.createElement('section');flags.className='form-group';
+ const fh=document.createElement('h3');fh.textContent='传播开关';flags.append(fh);
+ for(const [k,t] of [['los','直达路径'],['specular_reflection','镜面反射'],['diffuse_reflection','漫反射'],['refraction','折射'],['diffraction','绕射']])rmToggle(flags,k,t);
+ note(flags,'与逐径仿真的 Sionna RT 参数同义；发射源仍需通过天空可见性检查。');
+ form.append(flags);
+ const busy=!!(radioJob&&['running','queued'].includes(radioJob.status));
+ const actions=document.createElement('div');actions.className='form-actions';
+ const run=button(actions,busy?'◌ 计算中…':'▦ 计算电磁态势图',()=>attempt(startRadioMap),'primary');
+ run.disabled=busy||config.propagation.backend!=='sionna_rt';
+ form.append(actions);
+ if(config.propagation.backend!=='sionna_rt')note(form,'当前传播后端不是 Sionna RT，无法计算城市电磁态势。请到「信道与传播」把后端切到 Sionna RT。');
+ if(radioJob)note(form,`作业 ${radioJob.id} · ${RM_STATUS[radioJob.status]||radioJob.status}`+(radioJob.error?`\n${radioJob.error}`:'')+(radioJob.log&&radioJob.status!=='complete'?`\n${radioJob.log.slice(-500)}`:''));
+ if(radioPayload){
+  const res=document.createElement('section');res.className='form-group';
+  const rh=document.createElement('h3');rh.textContent='结果';res.append(rh);
+  const pick=document.createElement('select');
+  for(const name of Object.keys(radioPayload.metrics))pick.add(new Option(`${radioPayload.metrics[name].label} · ${radioPayload.metrics[name].unit}`,name));
+  pick.value=radioMetric;
+  pick.onchange=()=>{radioMetric=pick.value;applyRadioMap()};
+  const pl=document.createElement('label');pl.className='form-field';pl.append(document.createTextNode('显示指标'));pl.append(pick);res.append(pl);
+  const ov=document.createElement('select');
+  ov.add(new Option('透视建筑（推荐）· 建筑半透明，热力图完整可见','ghost'));
+  ov.add(new Option('贴地 · 建筑不透明，严格按几何遮挡','ground'));
+  ov.value=radioOverlayMode;
+  ov.onchange=()=>{radioOverlayMode=ov.value;map?.setRadioMapMode(radioOverlayMode)};
+  const ol=document.createElement('label');ol.className='form-field';ol.append(document.createTextNode('叠加方式'));ol.append(ov);res.append(ol);
+  note(res,'热力图是贴在测量高度上的一张水平面：低角度看过去，不透明的建筑会把它挡掉。「透视建筑」把建筑画成半透明、并排到热力图之后，城市轮廓和热力图能同时看清；「贴地」严格按几何遮挡显示。');
+  const g=radioPayload.grid,m=radioPayload.metrics[radioMetric];
+  note(res,`${g.ny}×${g.nx} 格 @ ${g.cell_size_m} m，高度 ${g.height_m} m；X ${g.x_min_m.toFixed(0)} ~ ${g.x_max_m.toFixed(0)} m，Y ${g.y_min_m.toFixed(0)} ~ ${g.y_max_m.toFixed(0)} m。\n有效格 ${m.valid_count.toLocaleString()} / ${m.total_count.toLocaleString()}，范围 ${m.min===null?'—':m.min.toFixed(1)} ~ ${m.max===null?'—':m.max.toFixed(1)} ${m.unit}。\n求解耗时 ${radioPayload.seconds.toFixed(2)} s。`);
+  const dl=document.createElement('div');dl.className='form-actions';
+  button(dl,'下载 PNG 图件',()=>rmDownload('radiomap.png'));
+  button(dl,'下载 NPZ 原始网格',()=>rmDownload('radiomap.npz'));
+  res.append(dl);form.append(res);
+ }
+ if(radioHistory.length){
+  const hist=document.createElement('select');hist.add(new Option('载入历史态势图…',''));
+  for(const j of radioHistory)hist.add(new Option(`${j.id} · ${RM_STATUS[j.status]||j.status}${j.height_m!==undefined?` · ${j.height_m} m`:''}`,j.id));
+  hist.onchange=()=>{if(hist.value)attempt(()=>loadRadioMap(hist.value))};
+  const hl=document.createElement('label');hl.className='form-field';hl.append(document.createTextNode('历史记录'));hl.append(hist);
+  form.append(hl);
+ }
+}
+function rmDownload(name){
+ if(!radioJob)return;
+ const a=document.createElement('a');a.href=`/api/radio-maps/${encodeURIComponent(radioJob.id)}/files/${name}`;a.download=name;a.click();
+}
+function applyRadioMap(){
+ if(!radioPayload)return;
+ const ok=map?.setRadioMap(radioPayload,radioMetric);
+ map?.setRadioMapMode(radioOverlayMode);
+ map?.toggleRadioMap($('#rm-overlay').checked);
+ renderRadioLegend();
+ if(!ok)toast('态势图数据为空，未绘制。');
+}
+function renderRadioLegend(){
+ const el=$('#rm-legend'),m=radioPayload&&radioPayload.metrics[radioMetric];
+ if(!m){el.hidden=true;return}
+ const vmin=m.vmin===null?-140:m.vmin,vmax=m.vmax===null?-40:m.vmax;
+ const stops=RAMP_STOPS.map((_,i)=>`${rampCss(i/(RAMP_STOPS.length-1))} ${Math.round(i/(RAMP_STOPS.length-1)*100)}%`).join(',');
+ el.innerHTML=`<div class="rm-legend-title">${esc(m.label)} · ${esc(m.unit)}</div>`+
+  `<div class="rm-legend-bar" style="background:linear-gradient(90deg,${stops})"></div>`+
+  `<div class="rm-legend-scale"><span>${vmin.toFixed(1)}</span><span>${vmax.toFixed(1)}</span></div>`+
+  `<div class="rm-legend-meta">高度 ${radioPayload.grid.height_m} m · 网格 ${radioPayload.grid.cell_size_m} m · `+
+  `覆盖 ${m.valid_count.toLocaleString()}/${m.total_count.toLocaleString()} 格 · 求解 ${radioPayload.seconds.toFixed(1)} s</div>`;
+ el.hidden=false;
+}
+async function startRadioMap(){
+ if(config.propagation.backend!=='sionna_rt')return toast('请先把传播后端切到 Sionna RT。');
+ const r=await api('radio-maps',{scenario:config,radio_map:{...radioSpec}});
+ radioJob={id:r.id,status:'running'};radioStatusShown='running';radioPayload=null;
+ map?.clearRadioMap();$('#rm-legend').hidden=true;
+ renderInspector();pollRadioMap();
+ toast('已启动态势图计算；完成后自动叠加到地图。');
+}
+async function pollRadioMap(){
+ clearTimeout(radioPoll);
+ if(!radioJob)return;
+ const data=await api('radio-maps/'+radioJob.id);
+ const changed=data.status!==radioStatusShown;
+ radioJob=data;radioStatusShown=data.status;
+ if(data.status==='complete'&&data.payload){
+  radioPayload=data.payload;
+  if(!radioPayload.metrics[radioMetric])radioMetric=Object.keys(radioPayload.metrics)[0];
+  applyRadioMap();radioHistory=await api('radio-maps');
+ }
+ if(changed&&selected.type==='radiomap')renderInspector();
+ if(['running','queued'].includes(data.status))radioPoll=setTimeout(()=>attempt(pollRadioMap),1500);
+}
+async function loadRadioMap(id){
+ const d=await api('radio-maps/'+id);radioJob=d;radioStatusShown=d.status;
+ if(d.payload){radioPayload=d.payload;if(!radioPayload.metrics[radioMetric])radioMetric=Object.keys(radioPayload.metrics)[0];applyRadioMap()}
+ else toast('该态势图没有可用结果：'+(d.error||RM_STATUS[d.status]||d.status));
+ if(selected.type==='radiomap')renderInspector();
+}
 function uniqueId(prefix){const ids=new Set([...config.emitters,...config.receivers].map(d=>d.id));let i=1;while(ids.has(prefix+i))i++;return prefix+i;}
 function duplicate(type,index){const d=clone(config[type][index]);d.id=uniqueId(type==='emitters'?'tx_':'rx_');d.position_m[0]+=20;config[type].push(d);select(type,config[type].length-1)}
 function remove(type,index){if(config[type].length===1)return toast('至少保留一个发射源与一个接收站');const id=config[type][index].id;config[type].splice(index,1);for(const t of config.tasks){t.receiver_ids=t.receiver_ids.filter(x=>x!==id);t.desired_emitter_ids=t.desired_emitter_ids.filter(x=>x!==id)}const n=config.tasks.length;config.tasks=config.tasks.filter(t=>t.receiver_ids.length&&t.desired_emitter_ids.length);select('global');toast('设备已移除'+(n!==config.tasks.length?'；已移除因此失效的保护任务':''));}
@@ -159,6 +306,21 @@ $$('[data-panel]').forEach(b=>b.onclick=()=>select(b.dataset.panel));
 $$('[data-result]').forEach(b=>b.onclick=()=>{resultTab=b.dataset.result;$$('[data-result]').forEach(x=>x.classList.toggle('active',x===b));renderResults()});
 $('#view-2d').onclick=()=>mode('2d');$('#view-3d').onclick=()=>mode('3d');function mode(m){map?.setMode(m);$('.compass').innerHTML=m==='2d'?'Y<br>↑':'Z ↑';$('#view-2d').classList.toggle('active',m==='2d');$('#view-3d').classList.toggle('active',m==='3d');$('#map-help').textContent=m==='2d'?'拖动设备调整 X/Y · 滚轮缩放 · 高度在属性中设置':'拖动旋转 · 滚轮缩放 · 点击设备编辑';}
 $('#reset-view').onclick=()=>map?.reset();$('#buildings').onchange=e=>map?.toggleBuildings(e.target.checked);$('#links').onchange=e=>{if(map)map.showLinks=e.target.checked;refresh(false);if(e.target.checked)toast('虚线仅表示布站配对，不是 RT 反射路径。')};$('#labels').onchange=e=>{if(map)map.showLabels=e.target.checked;refresh(false)};
+$('#rm-overlay').onchange=e=>map?.toggleRadioMap(e.target.checked);
+const mapStage=$('#map-stage'),rmTip=$('#rm-tooltip');
+mapStage.addEventListener('pointermove',e=>{
+ const hit=radioPayload?map?.pickRadioMap(e):null;
+ if(!hit){rmTip.hidden=true;return}
+ rmTip.innerHTML=`<strong>${hit.value===null||hit.value===undefined?'无覆盖':hit.value.toFixed(1)+' '+esc(hit.unit)}</strong>`+
+  `<span>${esc(hit.label)}</span>`+
+  `<span>X ${hit.x.toFixed(0)} m · Y ${hit.y.toFixed(0)} m · Z ${radioPayload.grid.height_m} m</span>`+
+  `<span>最强源：${hit.txId?esc(hit.txId):'无'}</span>`;
+ const r=mapStage.getBoundingClientRect();
+ rmTip.style.left=Math.min(e.clientX-r.left+16,r.width-210)+'px';
+ rmTip.style.top=Math.min(e.clientY-r.top+16,r.height-110)+'px';
+ rmTip.hidden=false;
+});
+mapStage.addEventListener('pointerleave',()=>{rmTip.hidden=true});
 $('#preset').onchange=()=>{config=clone(boot.presets.find(p=>p.id===$('#preset').value).config);select('global');attempt(()=>applyScene(config.propagation.scene,false));toast('已载入场景配置（地图网格已按该场景切换）。下方保留所选历史运行结果。')};
 $('#add-tx').onclick=()=>{const d=clone(boot.defaults.emitter);d.id=uniqueId('tx_');config.emitters.push(d);select('emitters',config.emitters.length-1)};$('#add-rx').onclick=()=>{const d=clone(boot.defaults.receiver);d.id=uniqueId('rx_');d.antenna=clone(config.receivers[0].antenna);config.receivers.push(d);select('receivers',config.receivers.length-1)};
 $('#validate').onclick=()=>attempt(async()=>{const r=await api('validate',config);$('#validation-result').textContent=`配置有效\n\n每通道 ${r.num_samples.toLocaleString()} 个采样\nIQ 输出 ${r.resources.iq_output_mb.toFixed(1)} MB\n预计 DSP 工作内存 ${r.resources.estimated_dsp_working_mb.toFixed(1)} MB\n\n${r.warnings.join('\n')}`;$('#validation-dialog').showModal()});$('#close-validation').onclick=()=>$('#validation-dialog').close();

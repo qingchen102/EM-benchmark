@@ -21,9 +21,10 @@ from pydantic import ValidationError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from cityrf.config import Scenario,Emitter,Receiver,Component,Task
 from cityrf.runner import estimate_resources
-
+from cityrf.radiomap import RadioMapRequest
 RUNS=ROOT/"runs"
 SCENARIOS=ROOT/"user_scenarios"
+RADIO_MAPS=ROOT/"radio_maps"
 app=FastAPI(title="城市低空电磁信号仿真平台",version="0.3.0")
 # 壳页与引导数据一律不缓存：否则浏览器会继续用旧的 index.html / app.js，
 # 表现为“切了示例场景但地图和代码还是老的”（2026-10-11 实测到这个现象）。
@@ -31,6 +32,7 @@ NO_STORE={"Cache-Control":"no-store, must-revalidate","Pragma":"no-cache"}
 app.add_middleware(TrustedHostMiddleware,allowed_hosts=["127.0.0.1","localhost","testserver"])
 LOCK=threading.Lock()
 ACTIVE=set()
+RADIO_ACTIVE=set()
 NAMES={"free_space":"自由空间 · 快速验证","munich":"慕尼黑 · 复合干扰",
        "case01":"场景 01 · 多站多目标","case02":"场景 02 · 建筑遮挡",
        "case03":"场景 03 · 同频波形仿冒","A":"复杂 A · 同频噪声与扫频",
@@ -83,6 +85,13 @@ def job_root(jid):
     if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}",jid):raise HTTPException(400,"Invalid run ID")
     p=(RUNS/jid).resolve()
     if not p.is_relative_to(RUNS.resolve()) or not p.is_dir():raise HTTPException(404,"Run not found")
+    return p
+
+
+def radio_root(jid):
+    if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}",jid):raise HTTPException(400,"Invalid job ID")
+    p=(RADIO_MAPS/jid).resolve()
+    if not p.is_relative_to(RADIO_MAPS.resolve()) or not p.is_dir():raise HTTPException(404,"Radio map not found")
     return p
 
 
@@ -242,6 +251,87 @@ def get_run(jid):
 @app.get("/api/runs/{jid}/files/{filename:path}")
 def download(jid,filename):
     root=job_root(jid);p=(root/filename).resolve()
+    if not p.is_relative_to(root) or not p.is_file() or p.suffix not in {".json",".npy",".npz",".png",".log"}:raise HTTPException(404)
+    return FileResponse(p,filename=p.name)
+
+
+def run_radio_job(jid,scenario,request):
+    root=radio_root(jid)
+    status=dict(id=jid,status="running",name=scenario.name,scene=scenario.propagation.scene,
+                height_m=request.height_m,cell_size_m=request.cell_size_m,started_at=time.time())
+    state=root/"job.json"
+    def save():
+        tmp=state.with_suffix('.tmp')
+        tmp.write_text(json.dumps(status,ensure_ascii=False),encoding="utf-8")
+        tmp.replace(state)
+    save()
+    try:
+        info=RUNTIME or runtime_info()
+        worker=ROOT/"webui/radiomap_worker.py"
+        if info["native_rt"]:command=[sys.executable,"-u",str(worker),str(root)]
+        else:
+            if not info["wsl_rt"]:raise RuntimeError("电磁态势图需要 Sionna RT 环境，请安装 rt 依赖或配置 CITYRF_WSL_PYTHON。")
+            command=["wsl","--exec",info["wsl_python"],"-u",wsl_path(worker),wsl_path(root)]
+        env=dict(os.environ,PYTHONIOENCODING="utf-8",PYTHONPATH=str(ROOT/"src"))
+        with (root/"worker.log").open("w",encoding="utf-8") as log:
+            code=subprocess.call(command,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
+        if code!=0:raise RuntimeError(f"态势图进程退出码 {code}，请查看运行日志。")
+        if not (root/"radiomap.json").exists():raise RuntimeError("态势图进程未产出结果文件。")
+        status["status"]="complete"
+        status["seconds"]=json.loads((root/"radiomap.json").read_text(encoding="utf-8")).get("seconds")
+    except Exception as e:
+        status.update(status="failed",error=str(e))
+        with (root/"worker.log").open("a",encoding="utf-8") as log:log.write(f"[failed] {e}\n")
+    finally:
+        status["finished_at"]=time.time();save()
+        with LOCK:RADIO_ACTIVE.discard(jid)
+
+
+@app.post("/api/radio-maps")
+def create_radio_map(data:dict):
+    scenario=validate(data.get("scenario"))
+    try:request=RadioMapRequest.model_validate(data.get("radio_map") or {})
+    except ValidationError as e:raise HTTPException(422,detail=str(e))
+    if scenario.propagation.backend!="sionna_rt":
+        raise HTTPException(422,"电磁态势图需要 Sionna RT 后端（sionna_rt）；自由空间与抽头后端不利用建筑。")
+    with LOCK:
+        if RADIO_ACTIVE:raise HTTPException(409,"已有态势图在计算，请等待完成。")
+        jid="map_"+time.strftime("%Y%m%d_%H%M%S")+"_"+uuid.uuid4().hex[:6]
+        root=RADIO_MAPS/jid;root.mkdir(parents=True)
+        (root/"request.json").write_text(json.dumps(dict(scenario=scenario.model_dump(),radio_map=request.model_dump()),ensure_ascii=False,indent=2),encoding="utf-8")
+        (root/"job.json").write_text(json.dumps(dict(id=jid,status="queued",name=scenario.name,scene=scenario.propagation.scene,height_m=request.height_m,cell_size_m=request.cell_size_m,started_at=time.time()),ensure_ascii=False),encoding="utf-8")
+        RADIO_ACTIVE.add(jid)
+    threading.Thread(target=run_radio_job,args=(jid,scenario,request),daemon=True).start()
+    return dict(id=jid)
+
+
+def radio_map_summary(p):
+    state=dict(id=p.name,status="unknown",name=p.name)
+    if (p/"job.json").exists():
+        try:state=json.loads((p/"job.json").read_text(encoding="utf-8"))
+        except json.JSONDecodeError:return dict(id=p.name,status="running",name=p.name)
+        if state["status"] in ("running","queued") and p.name not in RADIO_ACTIVE:
+            state.update(status="interrupted",error="服务曾重启；请检查日志后重新计算。")
+    return state
+
+
+@app.get("/api/radio-maps")
+def list_radio_maps():
+    return sorted([radio_map_summary(p) for p in RADIO_MAPS.iterdir() if p.is_dir()],key=lambda j:j.get("started_at",0),reverse=True) if RADIO_MAPS.exists() else []
+
+
+@app.get("/api/radio-maps/{jid}")
+def get_radio_map(jid):
+    p=radio_root(jid);data=radio_map_summary(p)
+    data["log"]=(p/"worker.log").read_text(encoding="utf-8",errors="replace")[-14000:] if (p/"worker.log").exists() else ""
+    if (p/"radiomap.json").exists():data["payload"]=json.loads((p/"radiomap.json").read_text(encoding="utf-8"))
+    data["files"]=[f.relative_to(p).as_posix() for f in p.rglob("*") if f.is_file() and f.suffix in {".json",".npy",".npz",".png",".log"}]
+    return data
+
+
+@app.get("/api/radio-maps/{jid}/files/{filename:path}")
+def download_radio_map(jid,filename):
+    root=radio_root(jid);p=(root/filename).resolve()
     if not p.is_relative_to(root) or not p.is_file() or p.suffix not in {".json",".npy",".npz",".png",".log"}:raise HTTPException(404)
     return FileResponse(p,filename=p.name)
 
